@@ -89,19 +89,33 @@ Expected Output JSON structure:
         }
     }
     
-    try:
-        response = requests.post(endpoint, json=payload, timeout=20)
-        response.raise_for_status()
-        
-        response_json = response.json()
-        candidates = response_json.get("candidates", [])
-        if candidates:
-            text_response = candidates[0]["content"]["parts"][0]["text"]
-            return json.loads(text_response)
-        return None
-    except Exception as e:
-        print(f"Error calling Gemini: {e}")
-        return None
+    import time
+    max_retries = 5
+    delay = 10
+    for attempt in range(max_retries):
+        try:
+            response = requests.post(endpoint, json=payload, timeout=20)
+            if response.status_code == 429:
+                print(f"[Warning] Gemini Rate Limit (429). Retrying in {delay}s... (Attempt {attempt+1}/{max_retries})")
+                time.sleep(delay)
+                delay *= 1.5
+                continue
+            response.raise_for_status()
+            
+            response_json = response.json()
+            candidates = response_json.get("candidates", [])
+            if candidates:
+                text_response = candidates[0]["content"]["parts"][0]["text"]
+                return json.loads(text_response)
+            return None
+        except Exception as e:
+            if attempt == max_retries - 1:
+                print(f"Error calling Gemini after {max_retries} attempts: {e}")
+                return None
+            print(f"[Warning] Exception in Gemini API call: {e}. Retrying in {delay}s...")
+            time.sleep(delay)
+            delay *= 1.5
+    return None
 
 def add_reference_to_db(metadata, ref_db_path="../references.json"):
     """Adds the extracted reference metadata to references.json database."""
