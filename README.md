@@ -23,7 +23,9 @@ WordAssistant/
 │   ├── format_checker.py        # Kiểm định định dạng file DOCX có chuẩn học thuật không
 │   ├── markdown_to_docx.py      # Build tài liệu từ Markdown + Citations + Footnotes
 │   ├── templates_generator.py   # Script tự động tạo lại các file templates
-│   └── citation_helper.py       # Tra cứu & xác thực trích dẫn thật qua Tavily và Gemini
+│   ├── citation_helper.py       # Tra cứu & xác thực trích dẫn thật qua Tavily và Gemini
+│   ├── docx_diff.py             # So sánh 2 tài liệu Word, xuất file so sánh
+│   └── docx_merge.py            # Gộp nhiều tệp tin Word chương thành một file
 ├── references.json              # Cơ sở dữ liệu trích dẫn của tài liệu (IEEE / APA)
 ├── requirements.txt             # Thư viện Python cần thiết
 ├── AGENTS.md                    # Luật lệ và tiêu chuẩn bắt buộc cho AI Agent
@@ -91,3 +93,15 @@ Công cụ sẽ quét toàn bộ tài liệu và đưa ra cảnh báo chi tiết
 python scripts/citation_helper.py "Attention Is All You Need Vaswani 2017"
 ```
 Script sẽ tự động tìm thông tin chính xác của bài viết trên internet và ghi thông tin chuẩn vào `references.json`. Agent chỉ cần sử dụng mã trích dẫn tương ứng (ví dụ: `[@vaswani2017attention]`) trong văn bản.
+
+### 4. So sánh Hai Tài Liệu (Diff)
+So sánh bản nháp của sinh viên với bản sửa của giảng viên hướng dẫn để xuất ra file docx chứa các tracked changes và file tóm tắt thay đổi:
+```bash
+python scripts/docx_diff.py draft.docx revised.docx compared_output
+```
+
+### 5. Gộp Nhiều Tài Liệu (Merge)
+Gộp nhiều file Word chương thành một file đồ án hoàn chỉnh thống nhất (tự động điều chỉnh các `paraId` để tránh xung đột cấu trúc):
+```bash
+python scripts/docx_merge.py full_report.docx chuong1.docx chuong2.docx chuong3.docx
+```
