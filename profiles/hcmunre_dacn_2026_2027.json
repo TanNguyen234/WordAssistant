@@ -1,0 +1,206 @@
+{
+  "id": "hcmunre_dacn_2026_2027",
+  "name": "HCMUNRE Faculty of IT - Do an chuyen nganh 2026-2027",
+  "version": 2,
+  "source_policy": "written-guidance-wins-over-sample-geometry",
+  "source_assets": [
+    "use_cases/hcmunre_dacn_2026_2027/assets/huong_dan_trinh_bay_dacn_2026_2027.docx",
+    "use_cases/hcmunre_dacn_2026_2027/assets/mau_de_cuong_do_an_chuyen_nganh.docx"
+  ],
+  "source_conflicts": [
+    {
+      "field": "page_number_start",
+      "normative": "introduction",
+      "sample_note": "chapter_1",
+      "resolution": "introduction",
+      "reason": "The written general rule is treated as normative."
+    }
+  ],
+  "variants": {
+    "report": {
+      "page": {
+        "size": "A4",
+        "width_cm": 21.0,
+        "height_cm": 29.7,
+        "margins_cm": {
+          "top": 2.0,
+          "bottom": 2.0,
+          "left": 3.0,
+          "right": 2.0
+        },
+        "one_sided": true
+      },
+      "typography": {
+        "body_font": "Times New Roman",
+        "body_size_pt": 13,
+        "line_spacing": 1.5,
+        "styles": {
+          "title": {
+            "size_pt": 18,
+            "bold": true,
+            "alignment": "center"
+          },
+          "heading1": {
+            "size_pt": 16,
+            "bold": true
+          },
+          "heading2": {
+            "size_pt": 14,
+            "bold": true
+          },
+          "heading3": {
+            "size_pt": 13,
+            "bold": true
+          }
+        }
+      },
+      "header_footer": {
+        "header_left": "topic",
+        "header_right": "supervisor",
+        "footer_left": "student",
+        "footer_right": "page_number",
+        "page_number_start": "introduction"
+      },
+      "front_matter": [
+        "cover",
+        "inner_cover",
+        "acknowledgements",
+        "declaration",
+        "supervisor_review",
+        "reviewer_review",
+        "work_schedule",
+        "abstract",
+        "table_of_contents",
+        "list_of_figures",
+        "list_of_tables",
+        "abbreviations"
+      ],
+      "section_blueprint": [
+        {
+          "title": "MỞ ĐẦU",
+          "level": 1
+        },
+        {
+          "title": "CHƯƠNG 1: TỔNG QUAN TÀI LIỆU",
+          "level": 1
+        },
+        {
+          "title": "CHƯƠNG 2: PHƯƠNG PHÁP THỰC HIỆN",
+          "level": 1
+        },
+        {
+          "title": "CHƯƠNG 3: CÀI ĐẶT THỬ NGHIỆM, KẾT QUẢ VÀ ĐÁNH GIÁ",
+          "level": 1
+        },
+        {
+          "title": "KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN",
+          "level": 1
+        },
+        {
+          "title": "PHỤ LỤC",
+          "level": 1
+        },
+        {
+          "title": "DANH MỤC TÀI LIỆU THAM KHẢO",
+          "level": 1
+        }
+      ],
+      "citations": {
+        "style": "hcmunre_numeric",
+        "in_text": "numeric_brackets",
+        "minimum_references": 10,
+        "prefer_primary_source": true,
+        "bibliography_order": "alphabetical_by_author"
+      }
+    },
+    "proposal": {
+      "page": {
+        "size": "official_template_8.5x11in",
+        "width_cm": 21.59,
+        "height_cm": 27.94,
+        "margins_cm": {
+          "top": 2.501,
+          "bottom": 2.0,
+          "left": 3.0,
+          "right": 1.501
+        },
+        "one_sided": true,
+        "provenance": "source-template-derived; proposal file does not state a conflicting written page rule"
+      },
+      "typography": {
+        "body_font": "Times New Roman",
+        "body_size_pt": 12,
+        "line_spacing": 1.15,
+        "styles": {
+          "title": {
+            "size_pt": 16,
+            "bold": true,
+            "alignment": "center"
+          },
+          "heading1": {
+            "size_pt": 14,
+            "bold": true
+          },
+          "heading2": {
+            "size_pt": 12,
+            "bold": true
+          }
+        }
+      },
+      "front_matter": [
+        "proposal_cover",
+        "proposal_title_page"
+      ],
+      "section_blueprint": [
+        {
+          "title": "I. MỞ ĐẦU",
+          "level": 1
+        },
+        {
+          "title": "1. Cơ sở khoa học và tính thực tiễn của đề tài",
+          "level": 2
+        },
+        {
+          "title": "2. Mục đích nghiên cứu",
+          "level": 2
+        },
+        {
+          "title": "3. Đối tượng và phạm vi nghiên cứu",
+          "level": 2
+        },
+        {
+          "title": "4. Phương pháp nghiên cứu",
+          "level": 2
+        },
+        {
+          "title": "5. Thời gian thực hiện",
+          "level": 2
+        },
+        {
+          "title": "6. Kết quả dự kiến đạt được",
+          "level": 2
+        },
+        {
+          "title": "II. NỘI DUNG",
+          "level": 1
+        },
+        {
+          "title": "III. DỰ KIẾN KẾ HOẠCH THỰC HIỆN",
+          "level": 1
+        },
+        {
+          "title": "IV. TÀI LIỆU THAM KHẢO",
+          "level": 1
+        },
+        {
+          "title": "V. CÁC CƠ QUAN, ĐƠN VỊ CẦN LIÊN HỆ",
+          "level": 1
+        }
+      ],
+      "citations": {
+        "style": "hcmunre_numeric"
+      },
+      "template_asset": "use_cases/hcmunre_dacn_2026_2027/assets/mau_de_cuong_do_an_chuyen_nganh.docx"
+    }
+  }
+}

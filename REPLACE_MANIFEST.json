@@ -1,0 +1,37 @@
+{
+  "strategy": "clean replacement",
+  "delete_from_v1_before_applying_v2": [
+    "src/agents.py",
+    "src/main.py",
+    "src/context_manager.py",
+    "src/document_profile.py",
+    "src/docx_indexer.py",
+    "scripts/markdown_to_docx.py",
+    "scripts/format_checker.py",
+    "scripts/citation_helper.py",
+    "scripts/docx_diff.py",
+    "scripts/docx_merge.py",
+    "references.json",
+    "final_essay.docx",
+    ".agents/skills/docx-academic-citations",
+    ".agents/skills/docx-academic-format",
+    ".agents/skills/docx-academic-outline",
+    ".agents/skills/docx-academic-writing",
+    ".agents/skills/docx-advanced-management",
+    ".agents/skills/docx-citation-verification",
+    ".agents/skills/docx-mcp-core"
+  ],
+  "keep_or_replace_with_v2": [
+    "README.md",
+    "AGENTS.md",
+    "GEMINI.md",
+    "pyproject.toml",
+    "src/wordassistant/",
+    "profiles/",
+    "use_cases/",
+    ".agents/skills/wordassistant/",
+    ".agents/rules/wordassistant.md",
+    "tests/",
+    "docs/"
+  ]
+}

@@ -1,29 +1,16 @@
-# API Keys and Secrets (CRITICAL)
-.env
-
-# Python Cache & Environments
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
 .venv/
-venv/
-env/
-ENV/
+.env
+__pycache__/
+*.py[cod]
 .pytest_cache/
-
-# Local testing output files
-output.docx
-output_*.docx
-sample_essay_*.docx
-*.log
-
-# Git sub-folders of dependencies
+*.egg-info/
+build/
+dist/
+.wordassistant/cache/
+.wordassistant/checkpoints/
+*.pdf
+*_edited.docx
 docx-mcp/
+output*.docx
+sample_essay*.docx
 
-# IDE settings
-.vscode/
-.idea/
-.project
-.pydevproject
-.settings/

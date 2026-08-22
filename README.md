@@ -1,107 +1,126 @@
-# WordAssistant - Academic Document System for Agents
+# WordAssistant 2.0
 
-Hệ thống **WordAssistant** cung cấp các kỹ năng (Skills) chuyên sâu và công cụ bổ trợ cho AI Agent trong việc khởi tạo, viết nội dung, quản lý trích dẫn và định dạng tự động tài liệu Microsoft Word (.docx) ở cấp độ học thuật (Tiểu luận, Đồ án chuyên ngành, Đồ án tốt nghiệp, Báo cáo thực tập) theo đúng quy chuẩn đại học Việt Nam.
+WordAssistant is a deterministic, profile-driven control plane for Microsoft Word (`.docx`) automation. It is designed so that **weak AI agents can use it without reading the whole repository, loading a 100–200 page document into context, or understanding OOXML internals**.
 
----
+HCMUNRE specialized-project reports/proposals are included as the first real use case. They are not hard-coded as the product boundary.
 
-## 📁 Cấu trúc Thư mục Dự án
+## 60-second setup
 
-```
-WordAssistant/
-├── .agents/
-│   └── skills/                  # Thư mục kỹ năng chuyên sâu cho Agent
-│       ├── docx-mcp-core/       # Skill cốt lõi tương tác với docx-mcp (OOXML rules)
-│       ├── docx-academic-outline/ # Skill cấu trúc đề cương đồ án Việt Nam
-│       ├── docx-academic-format/  # Skill căn lề, font, giãn dòng học thuật
-│       ├── docx-academic-citations/ # Skill quản lý trích dẫn IEEE/APA
-│       └── docx-citation-verification/ # Skill tìm kiếm & xác thực trích dẫn thật qua Tavily + Gemini
-├── templates/                   # Các file tài liệu Word mẫu đã được định hình
-│   ├── tieu_luan_template.docx
-│   ├── do_an_chuyen_nganh_template.docx
-│   └── do_an_tot_nghiep_template.docx
-├── scripts/                     # Các Python script tự động hóa bổ trợ
-│   ├── format_checker.py        # Kiểm định định dạng file DOCX có chuẩn học thuật không
-│   ├── markdown_to_docx.py      # Build tài liệu từ Markdown + Citations + Footnotes
-│   ├── templates_generator.py   # Script tự động tạo lại các file templates
-│   ├── citation_helper.py       # Tra cứu & xác thực trích dẫn thật qua Tavily và Gemini
-│   ├── docx_diff.py             # So sánh 2 tài liệu Word, xuất file so sánh
-│   └── docx_merge.py            # Gộp nhiều tệp tin Word chương thành một file
-├── references.json              # Cơ sở dữ liệu trích dẫn của tài liệu (IEEE / APA)
-├── requirements.txt             # Thư viện Python cần thiết
-├── AGENTS.md                    # Luật lệ và tiêu chuẩn bắt buộc cho AI Agent
-└── README.md                    # Tài liệu hướng dẫn sử dụng
+Windows PowerShell:
+
+```powershell
+./scripts/bootstrap.ps1
 ```
 
----
+Linux/macOS:
 
-## 🛠️ Hướng dẫn Cài đặt & Tích hợp
-
-### 1. Cài đặt Dependencies Python
 ```bash
-pip install -r requirements.txt
+./scripts/bootstrap.sh
 ```
 
-### 2. Tích hợp docx-mcp server vào AI Agent
-WordAssistant hoạt động cực kỳ hiệu quả khi kết hợp với MCP Server `docx-mcp` (được cung cấp tại https://github.com/TanNguyen234/docx-mcp).
+Or manually:
 
-**Đối với Claude Code**:
-Thêm MCP server trực tiếp bằng lệnh:
 ```bash
-claude mcp add docx-mcp -- uvx docx-mcp-server
+python -m pip install -e .
+wordassistant doctor --json
 ```
 
-**Đối với Claude Desktop / Cursor / VS Code**:
-Cấu hình file MCP settings của bạn:
-```json
-{
-  "mcpServers": {
-    "docx-mcp": {
-      "command": "uvx",
-      "args": ["docx-mcp-server"]
-    }
-  }
-}
-```
+Optional advanced Word/OOXML backend:
 
----
-
-## 🚀 Hướng dẫn Sử dụng
-
-### 1. Build Tài liệu từ Markdown và Citations
-Bạn viết nội dung báo cáo bằng Markdown (ví dụ: `sample_essay.md`) và khai báo nguồn tài liệu tham khảo trong `references.json`. Sau đó, chạy script:
 ```bash
-python scripts/markdown_to_docx.py sample_essay.md references.json output.docx
-```
-Script sẽ tự động:
-- Căn lề chuẩn A4 (Trái 3cm, Phải 2cm, Trên 2cm, Dưới 2cm).
-- Thiết lập font Times New Roman, cỡ chữ 13pt, line-spacing 1.5, space after 6pt.
-- Phân tích và tạo Heading 1, 2, 3 tự động bắt đầu trang mới cho mỗi Heading 1.
-- Định dạng bảng biểu, căn giữa, thiết lập viền và padding ô.
-- Đổi các thẻ trích dẫn dạng `[@cite_key]` thành số thứ tự `[1]`, `[2]` (nếu là chuẩn IEEE) hoặc `(Tác giả, Năm)` (nếu là chuẩn APA).
-- Tự động sinh danh mục **TÀI LIỆU THAM KHẢO** được định dạng chuẩn ở cuối trang.
-
-### 2. Kiểm định định dạng (Format Auditing)
-Để kiểm tra xem file Word có đạt chuẩn định dạng học thuật của Việt Nam hay không:
-```bash
-python scripts/format_checker.py output.docx
-```
-Công cụ sẽ quét toàn bộ tài liệu và đưa ra cảnh báo chi tiết nếu phát hiện lỗi về lề trang, font chữ không phải Times New Roman, cỡ chữ không chuẩn, giãn dòng sai hoặc căn lề không đều (Justify).
-
-### 3. Tìm kiếm & Xác thực Trích dẫn Thật (Citation Verification)
-Để tránh hiện tượng AI "bịa" trích dẫn, trước khi viết mã trích dẫn, hãy cho Agent chạy script tìm kiếm trực tuyến qua Tavily API và làm sạch metadata bằng Gemini API:
-```bash
-python scripts/citation_helper.py "Attention Is All You Need Vaswani 2017"
-```
-Script sẽ tự động tìm thông tin chính xác của bài viết trên internet và ghi thông tin chuẩn vào `references.json`. Agent chỉ cần sử dụng mã trích dẫn tương ứng (ví dụ: `[@vaswani2017attention]`) trong văn bản.
-
-### 4. So sánh Hai Tài Liệu (Diff)
-So sánh bản nháp của sinh viên với bản sửa của giảng viên hướng dẫn để xuất ra file docx chứa các tracked changes và file tóm tắt thay đổi:
-```bash
-python scripts/docx_diff.py draft.docx revised.docx compared_output
+python -m pip install -e ".[word]"
 ```
 
-### 5. Gộp Nhiều Tài Liệu (Merge)
-Gộp nhiều file Word chương thành một file đồ án hoàn chỉnh thống nhất (tự động điều chỉnh các `paraId` để tránh xung đột cấu trúc):
+## Stable agent-facing commands
+
 ```bash
-python scripts/docx_merge.py full_report.docx chuong1.docx chuong2.docx chuong3.docx
+wordassistant doctor --json
+wordassistant capabilities --json
+wordassistant profiles --json
+wordassistant init . --json
+wordassistant inspect file.docx --json
+wordassistant context file.docx --query "revise evaluation and error analysis" --max-tokens 8000 --json
+wordassistant scaffold output.docx --profile generic --variant default --title "Report" --json
+wordassistant replace file.docx --old "old text" --new "new text" --output revised.docx --json
+wordassistant validate file.docx --profile generic --variant default --json
+wordassistant render file.docx --json
+wordassistant evidence list .wordassistant/evidence.json --json
 ```
+
+`--section` exists as an optional precision override for `context`; agents do not need to discover or supply section IDs for normal use.
+
+## Long-document safety
+
+`inspect` builds a structural index from styles, outline levels, numbering, tables, typography and conservative legacy-DOCX heuristics. `context` ranks sections against the user's query and enforces a hard input budget. It therefore avoids the anti-pattern:
+
+```text
+200-page DOCX -> entire text -> LLM
+```
+
+and instead uses:
+
+```text
+DOCX -> structural sections -> query ranking -> bounded context -> AI agent
+```
+
+The real HCMUNRE guidance file is a regression fixture: it uses legacy/custom styles rather than Word Heading styles, so the detector explicitly handles that case. The included 200-section stress tests verify budgeted retrieval behavior.
+
+## Profiles and use cases
+
+Human-editable profiles live in `profiles/`. Package copies are synchronized by:
+
+```bash
+python scripts/sync_package_data.py
+python scripts/sync_package_data.py --check
+python scripts/release_check.py
+```
+
+HCMUNRE examples:
+
+```bash
+wordassistant scaffold report.docx \
+  --profile hcmunre_dacn_2026_2027 --variant report \
+  --title "TÊN ĐỀ TÀI" --student "..." --supervisor "..." --json
+
+wordassistant scaffold proposal.docx \
+  --profile hcmunre_dacn_2026_2027 --variant proposal --json
+```
+
+The report variant uses the written report guidance as normative. The proposal variant preserves the supplied official proposal template.
+
+## Advanced Word surface
+
+The base CLI deliberately exposes a small stable command set. This is intentional: weak agents should not preload 200+ low-level OOXML tools.
+
+`wordassistant capabilities --json` reports whether the optional `docx-mcp-server` backend is installed. That backend is the route for Word-native operations such as tracked changes, comments, footnotes/endnotes, bookmarks, fields/cross-references, charts, equations, content controls, protection and deep OOXML audit. Load it only when a task requires those capabilities.
+
+## Evidence policy
+
+The old mutable global `references.json` design is retired. A project workspace uses `.wordassistant/evidence.json`, and records require an ID, title, authors, year, absolute URL, and `verified_by` provenance. No unrelated fallback citation is allowed.
+
+## Quality gates
+
+Before delivery:
+
+1. `wordassistant validate ...`
+2. `wordassistant render ...`
+3. inspect the rendered PDF when layout matters.
+
+Repository verification:
+
+```bash
+python -m pip install -e ".[dev]"
+python -m pytest
+python -m compileall -q src
+python scripts/sync_package_data.py --check
+python scripts/release_check.py
+```
+
+## Agent integrations
+
+- `GEMINI.md`: compact Antigravity entrypoint.
+- `.agents/rules/wordassistant.md`: workspace rule.
+- `.agents/skills/wordassistant/SKILL.md`: one discoverable skill rather than many competing academic-only skills.
+- `AGENTS.md`: provider-neutral operating rules.
+
+See `docs/ARCHITECTURE.md`, `docs/MIGRATION_V1_TO_V2.md`, and `use_cases/hcmunre_dacn_2026_2027/README.md`.

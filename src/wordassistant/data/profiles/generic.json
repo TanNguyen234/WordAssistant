@@ -1,0 +1,36 @@
+{
+  "id": "generic",
+  "name": "Generic Word document",
+  "version": 1,
+  "source_policy": "user-profile-wins",
+  "variants": {
+    "default": {
+      "page": {
+        "size": "A4",
+        "width_cm": 21.0,
+        "height_cm": 29.7,
+        "margins_cm": {"top": 2.54, "bottom": 2.54, "left": 2.54, "right": 2.54},
+        "one_sided": true
+      },
+      "typography": {
+        "body_font": "Times New Roman",
+        "body_size_pt": 12,
+        "line_spacing": 1.15,
+        "styles": {
+          "title": {"size_pt": 20, "bold": true, "alignment": "center"},
+          "heading1": {"size_pt": 16, "bold": true},
+          "heading2": {"size_pt": 14, "bold": true},
+          "heading3": {"size_pt": 12, "bold": true}
+        }
+      },
+      "front_matter": [],
+      "section_blueprint": [
+        {"title": "Introduction", "level": 1},
+        {"title": "Main content", "level": 1},
+        {"title": "Conclusion", "level": 1}
+      ],
+      "citations": {"style": "unspecified"},
+      "header_footer": {}
+    }
+  }
+}
