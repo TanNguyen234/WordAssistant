@@ -20,6 +20,7 @@ def test_replace_preserves_single_run_formatting(tmp_path):
     out_path = tmp_path / 'styled_out.docx'
     res = replace_text(doc_path, old="BOLD AND RED TARGET", new="NEW REPLACEMENT", output_path=out_path)
     assert res.replacements == 1
+    assert res.status == 'SUCCESS'
     
     d2 = Document(out_path)
     p2 = d2.paragraphs[0]
@@ -40,13 +41,13 @@ def test_replace_dry_run_does_not_modify_disk(tmp_path):
     res = replace_text(doc_path, old="world", new="universe", output_path=out_path, dry_run=True)
     assert res.replacements == 1
     assert res.dry_run is True
+    assert res.status == 'DRY_RUN'
     assert not out_path.exists()
 
-def test_replace_detects_complex_structures_and_flags_advanced_backend(tmp_path):
+def test_replace_detects_complex_structures_and_blocks_mutation(tmp_path):
     doc_path = tmp_path / 'complex.docx'
     d = Document()
     p = d.add_paragraph("Section title with field ")
-    # Add a field to paragraph
     fld = OxmlElement('w:fldSimple')
     fld.set(qn('w:instr'), 'PAGE')
     p._p.append(fld)
@@ -55,9 +56,11 @@ def test_replace_detects_complex_structures_and_flags_advanced_backend(tmp_path)
     
     out_path = tmp_path / 'complex_out.docx'
     res = replace_text(doc_path, old="target_term", new="replaced_term", output_path=out_path)
-    assert res.replacements == 1
-    assert res.complex_structures_detected != ()
-    assert 'field' in [s.lower() for s in res.complex_structures_detected] or res.advanced_backend_recommended
+    assert res.status == 'UNSAFE_EDIT_BLOCKED'
+    assert res.advanced_backend_required is True
+    assert res.replacements == 0
+    assert not out_path.exists()
+    assert 'field' in res.complex_structures_detected
 
 def test_atomic_file_write_on_replace(tmp_path):
     doc_path = tmp_path / 'atomic.docx'
@@ -67,6 +70,7 @@ def test_atomic_file_write_on_replace(tmp_path):
     
     out_path = tmp_path / 'atomic_out.docx'
     res = replace_text(doc_path, old="Original", new="Atomic", output_path=out_path)
+    assert res.status == 'SUCCESS'
     assert res.replacements == 1
     assert out_path.exists()
     d_out = Document(out_path)

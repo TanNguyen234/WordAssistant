@@ -18,7 +18,8 @@ def init_workspace(path: str | Path) -> Path:
                 'variant': 'default',
                 'title': 'UNTITLED DOCUMENT',
                 'author': '',
-                'supervisor': ''
+                'supervisor': '',
+                'context_budget': 12000
             }, indent=2),
             encoding='utf-8'
         )
@@ -43,14 +44,17 @@ def find_workspace(start_path: str | Path | None = None) -> Path | None:
 def load_project_config(start_path: str | Path | None = None) -> dict[str, Any]:
     wa = find_workspace(start_path)
     if not wa:
-        return {'schema_version': 1, 'profile': 'generic', 'variant': 'default'}
+        return {'schema_version': 1, 'profile': 'generic', 'variant': 'default', 'context_budget': 12000}
     proj_file = wa / 'project.json'
     if not proj_file.exists():
-        return {'schema_version': 1, 'profile': 'generic', 'variant': 'default'}
+        return {'schema_version': 1, 'profile': 'generic', 'variant': 'default', 'context_budget': 12000}
     try:
-        return json.loads(proj_file.read_text(encoding='utf-8'))
+        data = json.loads(proj_file.read_text(encoding='utf-8'))
+        if 'context_budget' not in data:
+            data['context_budget'] = 12000
+        return data
     except Exception:
-        return {'schema_version': 1, 'profile': 'generic', 'variant': 'default'}
+        return {'schema_version': 1, 'profile': 'generic', 'variant': 'default', 'context_budget': 12000}
 
 def save_project_config(start_path: str | Path | None, config: dict[str, Any]) -> None:
     wa = find_workspace(start_path)
@@ -58,6 +62,12 @@ def save_project_config(start_path: str | Path | None, config: dict[str, Any]) -
         wa = init_workspace(start_path or Path.cwd())
     proj_file = wa / 'project.json'
     proj_file.write_text(json.dumps(config, ensure_ascii=False, indent=2), encoding='utf-8')
+
+def set_project_config_value(start_path: str | Path | None, key: str, value: Any) -> dict[str, Any]:
+    cfg = load_project_config(start_path)
+    cfg[key] = value
+    save_project_config(start_path, cfg)
+    return cfg
 
 def get_workspace_status(start_path: str | Path | None = None) -> dict[str, Any]:
     wa = find_workspace(start_path)
@@ -86,6 +96,7 @@ def get_workspace_status(start_path: str | Path | None = None) -> dict[str, Any]
         'workspace_root': str(wa.parent),
         'profile': cfg.get('profile', 'generic'),
         'variant': cfg.get('variant', 'default'),
+        'context_budget': cfg.get('context_budget', 12000),
         'cache_entries': cache_count,
         'evidence_records': ev_count,
         'checkpoints': checkpoints_count

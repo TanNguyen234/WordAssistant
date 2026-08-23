@@ -49,6 +49,7 @@ class ContextBundle:
     text: str
     estimated_tokens: int
     max_tokens: int
+    truncated: bool = False
 
 def estimate_tokens(text: str) -> int:
     if not text:
@@ -147,16 +148,27 @@ def build_context(
     if max_tokens < 100:
         raise ValueError("max_tokens must be >= 100")
         
+def build_context(
+    sections: list[DocumentSection],
+    query: str,
+    max_tokens: int = 12000,
+    active_section_id: str | None = None,
+    target_section_id: str | None = None
+) -> ContextBundle:
+    if not sections:
+        return ContextBundle(query=query, sections=(), text="", estimated_tokens=0, max_tokens=max_tokens, truncated=False)
+        
+    sec_target = target_section_id or active_section_id
     by_id = {s.section_id: s for s in sections}
     avg_len = sum(len(s.text) for s in sections) / max(1, len(sections))
     
     ranked = sorted(sections, key=lambda s: (_score_section(query, s, avg_len), -s.level), reverse=True)
     
     chosen: list[DocumentSection] = []
-    if active_section_id:
-        if active_section_id not in by_id:
-            raise ValueError(f"Unknown section id: {active_section_id}")
-        chosen.append(by_id[active_section_id])
+    if sec_target:
+        if sec_target not in by_id:
+            raise ValueError(f"Unknown section id: {sec_target}")
+        chosen.append(by_id[sec_target])
         
     for s in ranked:
         if s not in chosen:
@@ -165,6 +177,7 @@ def build_context(
     blocks: list[str] = []
     used_sections: list[DocumentSection] = []
     budget = max_tokens
+    was_truncated = False
     
     for s in chosen:
         # Include breadcrumb if parent exists
@@ -181,6 +194,7 @@ def build_context(
             used_sections.append(s)
             budget -= cost
         else:
+            was_truncated = True
             # If nothing used yet or we still have enough budget (>= 50 tokens), try to fit a truncated piece
             if budget >= 50:
                 truncated = _truncate_to_budget(heading, s.text, budget)
@@ -205,7 +219,7 @@ def build_context(
     
     # Invariant safety check
     if actual_tokens > max_tokens:
-        # Emergency hard chop by characters to guarantee invariant
+        was_truncated = True
         while actual_tokens > max_tokens and len(text) > 0:
             text = text[:int(len(text) * (max_tokens / max(1, actual_tokens)))].rstrip()
             actual_tokens = estimate_tokens(text)
@@ -215,5 +229,6 @@ def build_context(
         sections=tuple(used_sections),
         text=text,
         estimated_tokens=actual_tokens,
-        max_tokens=max_tokens
+        max_tokens=max_tokens,
+        truncated=was_truncated or len(used_sections) < len(sections)
     )

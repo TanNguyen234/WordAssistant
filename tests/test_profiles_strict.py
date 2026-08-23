@@ -4,9 +4,11 @@ import pytest
 from wordassistant.profiles.loader import (
     load_profile,
     discover_profiles,
+    resolve_profile,
     ProfileError,
     validate_profile_dict,
 )
+from wordassistant.cli import run
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -37,6 +39,17 @@ def test_profile_rejects_unknown_keys(tmp_path):
     f.write_text(json.dumps(bad), encoding='utf-8')
     with pytest.raises(ProfileError, match="Unknown key|one_sidded"):
         load_profile(f)
+
+def test_profile_rejects_nan_and_infinity(tmp_path):
+    var = make_valid_variant()
+    # Test infinity or NaN in page dimensions
+    var['page']['width_cm'] = float('inf')
+    bad = {
+        'id': 'bad_inf', 'name': 'Bad Inf', 'version': 1,
+        'variants': {'default': var}
+    }
+    with pytest.raises(ProfileError, match="NaN or Infinity"):
+        validate_profile_dict(bad)
 
 def test_profile_rejects_wrong_types(tmp_path):
     var = make_valid_variant()
@@ -118,3 +131,29 @@ def test_dynamic_profile_discovery(tmp_path):
     assert 'custom_discovered_profile' in ids
     assert 'generic' in ids
     assert 'hcmunre_dacn_2026_2027' in ids
+
+def test_repo_root_profile_discovery_without_extra_dirs():
+    # Verify that resolve_profile finds profiles from repo root profiles/ directory
+    prof = resolve_profile('generic')
+    assert prof.profile_id == 'generic'
+    
+    prof_hcmunre = resolve_profile('hcmunre_dacn_2026_2027')
+    assert prof_hcmunre.profile_id == 'hcmunre_dacn_2026_2027'
+
+def test_cli_profile_validate_by_id_and_by_path(capsys):
+    # Validate by ID
+    code_id = run(['profile', 'validate', 'generic', '--json'])
+    out_id = capsys.readouterr().out
+    data_id = json.loads(out_id)
+    assert code_id == 0
+    assert data_id['valid'] is True
+    assert data_id['profile_id'] == 'generic'
+    
+    # Validate by Path
+    prof_path = str(ROOT / 'profiles/generic.json')
+    code_p = run(['profile', 'validate', prof_path, '--json'])
+    out_p = capsys.readouterr().out
+    data_p = json.loads(out_p)
+    assert code_p == 0
+    assert data_p['valid'] is True
+    assert data_p['profile_id'] == 'generic'

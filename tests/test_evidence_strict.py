@@ -1,3 +1,4 @@
+import concurrent.futures
 import pytest
 from wordassistant.evidence.registry import EvidenceRegistry, EvidenceError
 
@@ -12,9 +13,16 @@ def test_evidence_strict_schema(tmp_path):
     with pytest.raises(EvidenceError, match="year"):
         reg.add({'id': 'e1', 'title': 'Title', 'authors': ['A'], 'year': 1750, 'url': 'https://example.com', 'verified_by': 'tester'})
         
-    # Invalid URL
+    # Invalid URL scheme
     with pytest.raises(EvidenceError, match="url"):
         reg.add({'id': 'e1', 'title': 'Title', 'authors': ['A'], 'year': 2024, 'url': 'ftp://bad', 'verified_by': 'tester'})
+        
+    # Empty scheme / no host
+    with pytest.raises(EvidenceError, match="url"):
+        reg.add({'id': 'e1', 'title': 'Title', 'authors': ['A'], 'year': 2024, 'url': 'https://', 'verified_by': 'tester'})
+        
+    with pytest.raises(EvidenceError, match="url"):
+        reg.add({'id': 'e1', 'title': 'Title', 'authors': ['A'], 'year': 2024, 'url': 'https:///foo', 'verified_by': 'tester'})
 
 def test_evidence_duplicate_id_policy(tmp_path):
     reg = EvidenceRegistry(tmp_path / 'evidence.json')
@@ -42,3 +50,26 @@ def test_evidence_get_and_remove(tmp_path):
     assert reg.remove('e2') is True
     assert len(reg.list()) == 0
     assert reg.remove('e2') is False
+
+def test_evidence_concurrent_writes(tmp_path):
+    reg_path = tmp_path / 'concurrent_evidence.json'
+    reg = EvidenceRegistry(reg_path)
+    
+    def add_worker(idx: int):
+        r = EvidenceRegistry(reg_path)
+        r.add({
+            'id': f'item_{idx}',
+            'title': f'Title {idx}',
+            'authors': [f'Author {idx}'],
+            'year': 2024,
+            'url': f'https://example.com/{idx}',
+            'verified_by': 'concurrent_test'
+        })
+        
+    with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
+        futures = [executor.submit(add_worker, i) for i in range(20)]
+        for f in futures:
+            f.result()
+            
+    items = reg.list()
+    assert len(items) == 20

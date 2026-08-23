@@ -3,17 +3,18 @@ from pathlib import Path
 import shutil
 from importlib.resources import files as resource_files
 from docx import Document
-from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_TAB_ALIGNMENT
 from docx.enum.section import WD_SECTION_START
 from docx.shared import Cm, Pt
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 from wordassistant.profiles.loader import DocumentProfile, Variant
 
-def _add_page_number_field(run):
+def _add_page_number_field(paragraph):
+    p = paragraph._p
     fldSimple = OxmlElement('w:fldSimple')
     fldSimple.set(qn('w:instr'), 'PAGE')
-    run._r.append(fldSimple)
+    p.append(fldSimple)
 
 def _add_toc_field(paragraph):
     p = paragraph._p
@@ -86,29 +87,85 @@ def _apply_styles(d: Document, v: Variant):
         if 'italic' in spec:
             st.font.italic = bool(spec['italic'])
 
-_FRONT_TITLES = {
-    'cover': 'TRANG BÌA',
-    'inner_cover': 'TRANG BÌA TRONG',
-    'acknowledgements': 'LỜI CẢM ƠN',
-    'declaration': 'LỜI CAM ĐOAN',
-    'supervisor_review': 'NHẬN XÉT CỦA GIẢNG VIÊN HƯỚNG DẪN',
-    'reviewer_review': 'NHẬN XÉT CỦA NGƯỜI PHẢN BIỆN',
-    'work_schedule': 'LỊCH LÀM VIỆC',
-    'abstract': 'TÓM TẮT',
-    'table_of_contents': 'MỤC LỤC',
-    'list_of_figures': 'DANH MỤC SƠ ĐỒ, HÌNH',
-    'list_of_tables': 'DANH MỤC BẢNG',
-    'abbreviations': 'KÍ HIỆU CÁC CỤM TỪ VIẾT TẮT',
-    'proposal_cover': 'BÌA ĐỀ CƯƠNG',
-    'proposal_title_page': 'TRANG THÔNG TIN ĐỀ CƯƠNG'
+_DEFAULT_FRONT_TITLES = {
+    'cover': 'COVER PAGE',
+    'inner_cover': 'INNER COVER',
+    'acknowledgements': 'ACKNOWLEDGEMENTS',
+    'declaration': 'DECLARATION',
+    'supervisor_review': 'SUPERVISOR REVIEW',
+    'reviewer_review': 'REVIEWER REVIEW',
+    'work_schedule': 'WORK SCHEDULE',
+    'abstract': 'ABSTRACT',
+    'table_of_contents': 'TABLE OF CONTENTS',
+    'list_of_figures': 'LIST OF FIGURES',
+    'list_of_tables': 'LIST OF TABLES',
+    'abbreviations': 'ABBREVIATIONS',
+    'proposal_cover': 'PROPOSAL COVER',
+    'proposal_title_page': 'PROPOSAL TITLE PAGE'
 }
+
+def _render_cover_page(d: Document, v: Variant, title: str, student: str, supervisor: str):
+    cover_spec = v.cover
+    inst_lines = cover_spec.get('institution_lines', [])
+    if inst_lines:
+        p_inst = d.add_paragraph()
+        p_inst.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        r_inst = p_inst.add_run('\n'.join(inst_lines))
+        r_inst.bold = True
+        r_inst.font.size = Pt(14)
+        
+    d.add_paragraph('\n\n')
+    
+    doc_type = cover_spec.get('document_type', '')
+    title_prefix = cover_spec.get('title_prefix', '')
+    
+    p_title = d.add_paragraph()
+    p_title.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    if doc_type:
+        r_type = p_title.add_run(f"{doc_type}\n\n")
+        r_type.bold = True
+        r_type.font.size = Pt(16)
+        
+    title_text = f"{title_prefix}\n{title.upper()}\n\n" if title_prefix else f"{title.upper()}\n\n"
+    r_t = p_title.add_run(title_text)
+    r_t.bold = True
+    r_t.font.size = Pt(18)
+    
+    meta_fields = cover_spec.get('metadata_fields', [])
+    if meta_fields:
+        p_meta = d.add_paragraph()
+        p_meta.paragraph_format.left_indent = Cm(3.0)
+        for mf in meta_fields:
+            lbl = mf.get('label', '')
+            val_key = mf.get('value_key')
+            val = mf.get('value')
+            default_val = mf.get('default', '')
+            if val_key == 'student':
+                res_val = student or default_val
+            elif val_key == 'supervisor':
+                res_val = supervisor or default_val
+            else:
+                res_val = val or default_val
+            p_meta.add_run(f"{lbl}:\t{res_val}\n")
+    elif student or supervisor:
+        p_meta = d.add_paragraph()
+        p_meta.paragraph_format.left_indent = Cm(3.0)
+        if student:
+            p_meta.add_run(f"Author:\t{student}\n")
+        if supervisor:
+            p_meta.add_run(f"Supervisor:\t{supervisor}\n")
+            
+    loc_year = cover_spec.get('location_year', '')
+    if loc_year:
+        p_bottom = d.add_paragraph(f"\n\n\n{loc_year}")
+        p_bottom.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
 def scaffold_document(
     output: str | Path,
     profile: DocumentProfile,
     variant_name: str,
     *,
-    title: str = 'UNTITLED DOCUMENT',
+    title: str | None = None,
     student: str = '',
     supervisor: str = ''
 ) -> Path:
@@ -125,11 +182,12 @@ def scaffold_document(
             asset = Path(str(resource_files('wordassistant').joinpath('data', 'use_cases', rel)))
         if asset.exists():
             shutil.copy2(asset, out)
-            # If user supplied metadata for template, replace placeholders in cloned doc
-            if title or student or supervisor:
-                _fill_template_metadata(out, title=title, student=student, supervisor=supervisor)
+            # If user explicitly supplied metadata, replace placeholders in cloned doc
+            if title is not None or student or supervisor:
+                _fill_template_metadata(out, title=title or '', student=student, supervisor=supervisor)
             return out
             
+    effective_title = title if title is not None else 'UNTITLED DOCUMENT'
     d = Document()
     _apply_section_page(d.sections[0], v)
     _apply_styles(d, v)
@@ -139,67 +197,19 @@ def scaffold_document(
     non_cover_front = [x for x in v.front_matter if x not in ('cover', 'inner_cover', 'proposal_cover')]
     
     if has_covers:
-        # Cover Section
-        p = d.add_paragraph()
-        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-        r = p.add_run("TRƯỜNG ĐẠI HỌC TÀI NGUYÊN VÀ MÔI TRƯỜNG TP.HCM\nKHOA CÔNG NGHỆ THÔNG TIN")
-        r.bold = True
-        r.font.size = Pt(14)
-        
-        p_spacer = d.add_paragraph("\n\n")
-        
-        p_title = d.add_paragraph()
-        p_title.alignment = WD_ALIGN_PARAGRAPH.CENTER
-        r_type = p_title.add_run("BÁO CÁO ĐỒ ÁN CHUYÊN NGÀNH\n\n")
-        r_type.bold = True
-        r_type.font.size = Pt(16)
-        
-        r_t = p_title.add_run(f"ĐỀ TÀI:\n{title.upper()}\n\n")
-        r_t.bold = True
-        r_t.font.size = Pt(18)
-        
-        p_meta = d.add_paragraph()
-        p_meta.paragraph_format.left_indent = Cm(3.0)
-        p_meta.add_run(f"Sinh viên thực hiện:\t{student or '[Họ và tên sinh viên - MSSV]'}\n")
-        p_meta.add_run(f"Giảng viên hướng dẫn:\t{supervisor or '[Họ và tên CBHD]'}\n")
-        p_meta.add_run("Khóa học:\t\t2023 - 2027\n")
-        p_meta.add_run("Ngành:\t\t\tCông nghệ thông tin\n")
-        
-        p_bottom = d.add_paragraph("\n\n\nTP. HỒ CHÍ MINH, 2027")
-        p_bottom.alignment = WD_ALIGN_PARAGRAPH.CENTER
-        
+        _render_cover_page(d, v, effective_title, student, supervisor)
         if 'inner_cover' in v.front_matter:
             d.add_page_break()
-            # Inner cover page
-            p_in = d.add_paragraph()
-            p_in.alignment = WD_ALIGN_PARAGRAPH.CENTER
-            r_in = p_in.add_run("TRƯỜNG ĐẠI HỌC TÀI NGUYÊN VÀ MÔI TRƯỜNG TP.HCM\nKHOA CÔNG NGHỆ THÔNG TIN")
-            r_in.bold = True
-            r_in.font.size = Pt(14)
-            
-            p_in_title = d.add_paragraph("\n\n")
-            p_in_title.alignment = WD_ALIGN_PARAGRAPH.CENTER
-            r_in_t = p_in_title.add_run(f"ĐỀ TÀI:\n{title.upper()}\n\n")
-            r_in_t.bold = True
-            r_in_t.font.size = Pt(18)
-            
-            p_in_meta = d.add_paragraph()
-            p_in_meta.paragraph_format.left_indent = Cm(3.0)
-            p_in_meta.add_run(f"Sinh viên thực hiện:\t{student or '[Họ và tên sinh viên - MSSV]'}\n")
-            p_in_meta.add_run(f"Giảng viên hướng dẫn:\t{supervisor or '[Họ và tên CBHD]'}\n")
-            
-            p_in_bot = d.add_paragraph("\n\n\nTP. HỒ CHÍ MINH, 2027")
-            p_in_bot.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            _render_cover_page(d, v, effective_title, student, supervisor)
             
     if non_cover_front:
-        # Create Front Matter Section
         front_sec = d.add_section(WD_SECTION_START.NEW_PAGE)
         _apply_section_page(front_sec, v)
         front_sec.header.is_linked_to_previous = False
         front_sec.footer.is_linked_to_previous = False
         
         for idx, item in enumerate(non_cover_front):
-            title_text = _FRONT_TITLES.get(item, item.replace('_', ' ').upper())
+            title_text = v.front_matter_titles.get(item, _DEFAULT_FRONT_TITLES.get(item, item.replace('_', ' ').upper()))
             h = d.add_heading(title_text, level=1)
             h.alignment = WD_ALIGN_PARAGRAPH.CENTER
             
@@ -207,11 +217,11 @@ def scaffold_document(
                 p_toc = d.add_paragraph()
                 _add_toc_field(p_toc)
             elif item == 'list_of_figures':
-                p_lof = d.add_paragraph("[Danh mục hình vẽ tự động]")
+                d.add_paragraph("[List of figures]")
             elif item == 'list_of_tables':
-                p_lot = d.add_paragraph("[Danh mục bảng biểu tự động]")
+                d.add_paragraph("[List of tables]")
             else:
-                d.add_paragraph("[Nội dung phần đầu theo quy định]")
+                d.add_paragraph("[Front matter content]")
                 
             if idx < len(non_cover_front) - 1:
                 d.add_page_break()
@@ -223,25 +233,26 @@ def scaffold_document(
         body_sec.header.is_linked_to_previous = False
         body_sec.footer.is_linked_to_previous = False
         
-        # Configure Header & Footer
+        # Calculate usable text width for right-aligned tab stop
+        usable_width_cm = max(5.0, v.page.width_cm - v.page.margins.left_cm - v.page.margins.right_cm)
+        
         hf = v.header_footer
         if hf:
             # Header
             hp = body_sec.header.paragraphs[0]
-            header_l = title if hf.get('header_left') == 'topic' else (supervisor if hf.get('header_left') == 'supervisor' else '')
-            header_r = f"GVHD: {supervisor}" if hf.get('header_right') == 'supervisor' else (title if hf.get('header_right') == 'topic' else '')
+            header_l = effective_title if hf.get('header_left') == 'topic' else (supervisor if hf.get('header_left') == 'supervisor' else '')
+            header_r = f"GVHD: {supervisor}" if (hf.get('header_right') == 'supervisor' and supervisor) else (effective_title if hf.get('header_right') == 'topic' else '')
             if header_l or header_r:
                 hp.text = f"{header_l}\t{header_r}".strip()
-                hp.paragraph_format.tab_stops.add_tab_stop(Cm(16.0))
+                hp.paragraph_format.tab_stops.add_tab_stop(Cm(usable_width_cm), WD_TAB_ALIGNMENT.RIGHT)
                 
             # Footer
             fp = body_sec.footer.paragraphs[0]
             foot_l = student if hf.get('footer_left') == 'student' else ''
             fp.text = f"{foot_l}\t" if foot_l else "\t"
-            fp.paragraph_format.tab_stops.add_tab_stop(Cm(16.0))
+            fp.paragraph_format.tab_stops.add_tab_stop(Cm(usable_width_cm), WD_TAB_ALIGNMENT.RIGHT)
             if hf.get('footer_right') == 'page_number':
-                r_num = fp.add_run()
-                _add_page_number_field(r_num)
+                _add_page_number_field(fp)
                 
             if hf.get('page_number_start') in ('introduction', '1', 1):
                 _set_section_page_restart(body_sec, 1)
@@ -250,29 +261,44 @@ def scaffold_document(
             sec_title = str(sec['title'])
             sec_level = max(1, min(9, int(sec.get('level', 1))))
             d.add_heading(sec_title, level=sec_level)
-            d.add_paragraph("[Nội dung chi tiết của phần này...]")
+            d.add_paragraph("[Section content...]")
             
     elif not has_covers:
-        # Fallback generic single section document
         p = d.add_paragraph()
         p.style = 'Title'
-        p.add_run(title)
-        d.add_paragraph("[Nội dung văn bản]")
+        p.add_run(effective_title)
+        d.add_paragraph("[Document content]")
         
     d.save(out)
     return out
 
 def _fill_template_metadata(doc_path: Path, title: str, student: str, supervisor: str):
     from wordassistant.document.edit import replace_text
-    try:
-        if title:
-            for old_pat in ('<TÊN ĐỀ TÀI>', '[TÊN ĐỀ TÀI]', 'TÊN ĐỀ TÀI', '<ĐỀ TÀI>', '[ĐỀ TÀI]'):
-                replace_text(doc_path, old=old_pat, new=title, output_path=doc_path)
-        if student:
-            for old_pat in ('<TÊN SINH VIÊN>', '<SINH VIÊN>', '[Họ và tên sinh viên]', '[SINH VIÊN]'):
-                replace_text(doc_path, old=old_pat, new=student, output_path=doc_path)
-        if supervisor:
-            for old_pat in ('<CÁN BỘ HƯỚNG DẪN>', '<GIẢNG VIÊN HƯỚNG DẪN>', '<GIẢNG VIÊN>', '[Họ và tên GVHD]', '[CÁN BỘ HƯỚNG DẪN]'):
-                replace_text(doc_path, old=old_pat, new=supervisor, output_path=doc_path)
-    except Exception:
-        pass
+    unresolved = []
+    
+    if title:
+        count = 0
+        for old_pat in ('<TÊN ĐỀ TÀI>', '[TÊN ĐỀ TÀI]', 'TÊN ĐỀ TÀI', '<ĐỀ TÀI>', '[ĐỀ TÀI]'):
+            res = replace_text(doc_path, old=old_pat, new=title, output_path=doc_path)
+            count += res.replacements
+        if count == 0:
+            unresolved.append('title')
+            
+    if student:
+        count = 0
+        for old_pat in ('<TÊN SINH VIÊN>', '<SINH VIÊN>', '[Họ và tên sinh viên]', '[SINH VIÊN]', 'Tên sinh viên'):
+            res = replace_text(doc_path, old=old_pat, new=student, output_path=doc_path)
+            count += res.replacements
+        if count == 0:
+            unresolved.append('student')
+            
+    if supervisor:
+        count = 0
+        for old_pat in ('Học vị. Tên giảng viên hướng dẫn', 'Tên giảng viên hướng dẫn', '<CÁN BỘ HƯỚNG DẪN>', '<GIẢNG VIÊN HƯỚNG DẪN>', '<GIẢNG VIÊN>', '[Họ và tên GVHD]', '[CÁN BỘ HƯỚNG DẪN]'):
+            res = replace_text(doc_path, old=old_pat, new=supervisor, output_path=doc_path)
+            count += res.replacements
+        if count == 0:
+            unresolved.append('supervisor')
+            
+    if unresolved:
+        raise ValueError(f"Could not resolve template placeholder(s) for explicitly provided metadata: {', '.join(unresolved)}")

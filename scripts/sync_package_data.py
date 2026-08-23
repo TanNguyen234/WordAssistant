@@ -1,5 +1,8 @@
 from pathlib import Path
-import argparse, hashlib, shutil, sys
+import argparse
+import hashlib
+import shutil
+import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -29,14 +32,28 @@ def check_version():
     if not version_file.exists():
         return False, "VERSION file missing"
     ver_txt = version_file.read_text(encoding='utf-8').strip()
+    
     init_py = ROOT / 'src/wordassistant/__init__.py'
     if not init_py.exists():
         return False, "src/wordassistant/__init__.py missing"
+    ver_code = None
     for line in init_py.read_text(encoding='utf-8').splitlines():
         if line.startswith('__version__'):
             ver_code = line.split('=')[1].strip().strip('"\'')
-            if ver_txt != ver_code:
-                return False, f"Version mismatch: VERSION={ver_txt} vs __init__.py={ver_code}"
+            break
+            
+    if ver_txt != ver_code:
+        return False, f"Version mismatch: VERSION={ver_txt} vs __init__.py={ver_code}"
+        
+    pyproject = ROOT / 'pyproject.toml'
+    if pyproject.exists():
+        for line in pyproject.read_text(encoding='utf-8').splitlines():
+            if line.strip().startswith('version ='):
+                py_ver = line.split('=')[1].strip().strip('"\'')
+                if py_ver != ver_txt:
+                    return False, f"Version mismatch: VERSION={ver_txt} vs pyproject.toml={py_ver}"
+                break
+                
     return True, ""
 
 def main():
@@ -49,8 +66,18 @@ def main():
         print(f"VERSION-ERROR: {msg}", file=sys.stderr)
         if a.check:
             raise SystemExit(2)
-    
+            
     pairs = get_pairs()
+    valid_dsts = {dst.resolve() for _, dst in pairs}
+    
+    # Check for stale files in data directory
+    data_dir = ROOT / 'src/wordassistant/data'
+    stale_files = []
+    if data_dir.exists():
+        for f in data_dir.rglob('*'):
+            if f.is_file() and f.resolve() not in valid_dsts:
+                stale_files.append(f)
+                
     bad = []
     for src, dst in pairs:
         if a.check:
@@ -60,12 +87,20 @@ def main():
             dst.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(src, dst)
             
-    if bad:
-        for s, d in bad:
-            print(f'OUT-OF-SYNC: {s.relative_to(ROOT)} -> {d.relative_to(ROOT)}', file=sys.stderr)
-        raise SystemExit(2)
+    if a.check:
+        if stale_files:
+            for sf in stale_files:
+                print(f'STALE-PACKAGE-FILE: {sf.relative_to(ROOT)}', file=sys.stderr)
+            raise SystemExit(2)
+        if bad:
+            for s, d in bad:
+                print(f'OUT-OF-SYNC: {s.relative_to(ROOT)} -> {d.relative_to(ROOT)}', file=sys.stderr)
+            raise SystemExit(2)
+    else:
+        for sf in stale_files:
+            sf.unlink()
+            
     print("package-data-sync: OK")
 
 if __name__ == '__main__':
     main()
-

@@ -150,8 +150,40 @@ def _coalesce(sections: list[DocumentSection]) -> list[DocumentSection]:
 def inspect_document(path: str | Path) -> dict[str, Any]:
     src = Path(path).resolve()
     d = Document(src)
-    doc_xml = d._element.xml
-    
+    doc_xml_parts = [d._element.xml]
+    for s in d.sections:
+        try:
+            doc_xml_parts.append(s.header._element.xml)
+            doc_xml_parts.append(s.footer._element.xml)
+        except Exception:
+            pass
+            
+    has_protection = False
+    extra_comments = 0
+    extra_footnotes = 0
+    extra_endnotes = 0
+    try:
+        import zipfile
+        with zipfile.ZipFile(src) as zf:
+            for name in zf.namelist():
+                if name.startswith('word/'):
+                    try:
+                        content = zf.read(name).decode('utf-8', errors='ignore')
+                        if name == 'word/settings.xml':
+                            if '<w:documentProtection' in content:
+                                has_protection = True
+                        elif name == 'word/comments.xml':
+                            extra_comments = content.count('<w:comment ')
+                        elif name == 'word/footnotes.xml':
+                            extra_footnotes = content.count('<w:footnote ')
+                        elif name == 'word/endnotes.xml':
+                            extra_endnotes = content.count('<w:endnote ')
+                    except Exception:
+                        pass
+    except Exception:
+        pass
+        
+    full_xml = "\n".join(doc_xml_parts)
     sections = index_docx(src)
     
     # Inventory counts
@@ -159,21 +191,21 @@ def inspect_document(path: str | Path) -> dict[str, Any]:
     tbl_count = len(d.tables)
     sec_count = len(d.sections)
     
-    img_count = doc_xml.count('<w:drawing') + doc_xml.count('<w:pict')
-    hyperlink_count = doc_xml.count('<w:hyperlink')
-    field_count = doc_xml.count('<w:fldSimple') + doc_xml.count('<w:fldChar')
-    bookmark_count = doc_xml.count('<w:bookmarkStart')
-    comment_count = doc_xml.count('<w:commentReference')
-    footnote_count = doc_xml.count('<w:footnoteReference')
-    endnote_count = doc_xml.count('<w:endnoteReference')
-    sdt_count = doc_xml.count('<w:sdt')
-    ins_count = doc_xml.count('<w:ins')
-    del_count = doc_xml.count('<w:del')
+    img_count = full_xml.count('<w:drawing') + full_xml.count('<w:pict')
+    hyperlink_count = full_xml.count('<w:hyperlink')
+    field_count = full_xml.count('<w:fldSimple') + full_xml.count('<w:fldChar')
+    bookmark_count = full_xml.count('<w:bookmarkStart')
+    comment_count = max(extra_comments, full_xml.count('<w:commentReference'))
+    footnote_count = max(extra_footnotes, full_xml.count('<w:footnoteReference'))
+    endnote_count = max(extra_endnotes, full_xml.count('<w:endnoteReference'))
+    sdt_count = full_xml.count('<w:sdt')
+    ins_count = full_xml.count('<w:ins')
+    del_count = full_xml.count('<w:del')
     
-    has_toc = 'TOC' in doc_xml
-    has_page = 'w:instr="PAGE"' in doc_xml or 'PAGE' in doc_xml
+    has_toc = 'TOC' in full_xml
+    has_page = 'w:instr="PAGE"' in full_xml or 'PAGE' in full_xml
     
-    adv_rec = (ins_count + del_count + comment_count + sdt_count > 0)
+    adv_rec = (ins_count + del_count + comment_count + sdt_count > 0 or has_protection)
     
     return {
         'file': str(src),
@@ -189,6 +221,7 @@ def inspect_document(path: str | Path) -> dict[str, Any]:
         'footnotes': footnote_count,
         'endnotes': endnote_count,
         'content_controls': sdt_count,
+        'document_protection': has_protection,
         'revisions': {
             'insertions': ins_count,
             'deletions': del_count

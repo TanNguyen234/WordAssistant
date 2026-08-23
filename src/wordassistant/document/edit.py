@@ -9,9 +9,11 @@ from docx import Document
 class ReplaceResult:
     output: Path
     replacements: int
+    status: str = "SUCCESS"  # SUCCESS, UNSAFE_EDIT_BLOCKED, NO_MATCH, DRY_RUN
     dry_run: bool = False
     complex_structures_detected: tuple[str, ...] = ()
-    advanced_backend_recommended: bool = False
+    advanced_backend_required: bool = False
+    error: str | None = None
 
 def _detect_complex_elements(element) -> list[str]:
     detected = []
@@ -30,7 +32,7 @@ def _detect_complex_elements(element) -> list[str]:
         detected.append('endnote')
     if '<w:commentReference' in xml:
         detected.append('comment')
-    if '<w:drawing' in xml:
+    if '<w:drawing' in xml or '<w:pict' in xml:
         detected.append('drawing')
     return detected
 
@@ -63,7 +65,6 @@ def _replace_paragraph_runs_safe(paragraph, old: str, new: str) -> int:
         run_spans.append((curr_offset, curr_offset + r_len, r))
         curr_offset += r_len
         
-    # Find all occurrences of old in full_text
     match_indices = []
     start = 0
     while True:
@@ -76,8 +77,6 @@ def _replace_paragraph_runs_safe(paragraph, old: str, new: str) -> int:
     if not match_indices:
         return 0
         
-    # For cross-run matches, safely update the affected run span
-    # We process from last match to first to avoid offset shifting issues if multiple
     for m_start, m_end in reversed(match_indices):
         start_run_idx = None
         end_run_idx = None
@@ -106,7 +105,7 @@ def _replace_paragraph_runs_safe(paragraph, old: str, new: str) -> int:
                     runs[mid_idx].text = ""
                 r_end_obj.text = suffix
         else:
-            # Fallback across boundary
+            # Fallback across boundary - replace in first run and clear others
             first = runs[0]
             first.text = full_text.replace(old, new)
             for r in runs[1:]:
@@ -114,6 +113,30 @@ def _replace_paragraph_runs_safe(paragraph, old: str, new: str) -> int:
             break
             
     return len(match_indices)
+
+def _collect_all_paragraphs(doc: Document) -> list:
+    paragraphs = []
+    paragraphs.extend(doc.paragraphs)
+    
+    for table in doc.tables:
+        for row in table.rows:
+            for cell in row.cells:
+                paragraphs.extend(cell.paragraphs)
+                
+    for section in doc.sections:
+        paragraphs.extend(section.header.paragraphs)
+        for table in section.header.tables:
+            for row in table.rows:
+                for cell in row.cells:
+                    paragraphs.extend(cell.paragraphs)
+                    
+        paragraphs.extend(section.footer.paragraphs)
+        for table in section.footer.tables:
+            for row in table.rows:
+                for cell in row.cells:
+                    paragraphs.extend(cell.paragraphs)
+                    
+    return paragraphs
 
 def replace_text(
     input_path: str | Path,
@@ -129,29 +152,57 @@ def replace_text(
     out = Path(output_path) if output_path else src.with_name(f"{src.stem}_edited.docx")
     
     d = Document(src)
-    total_replacements = 0
+    all_paragraphs = _collect_all_paragraphs(d)
+    
+    # 1. Preflight Phase: Scan all target paragraphs for complex structures
     complex_detected: set[str] = set()
+    matching_paragraphs = []
     
-    for p in d.paragraphs:
+    for p in all_paragraphs:
         if old in p.text:
-            complex_in_p = _detect_complex_elements(p._p)
-            complex_detected.update(complex_in_p)
-            total_replacements += _replace_paragraph_runs_safe(p, old, new)
+            matching_paragraphs.append(p)
+            detected_in_p = _detect_complex_elements(p._p)
+            complex_detected.update(detected_in_p)
             
-    for table in d.tables:
-        for row in table.rows:
-            for cell in row.cells:
-                for p in cell.paragraphs:
-                    if old in p.text:
-                        complex_in_p = _detect_complex_elements(p._p)
-                        complex_detected.update(complex_in_p)
-                        total_replacements += _replace_paragraph_runs_safe(p, old, new)
-                        
-    adv_recommended = bool(complex_detected.intersection({'field', 'content_control', 'tracked_change', 'footnote', 'endnote'}))
-    
-    if not dry_run and total_replacements > 0:
+    if not matching_paragraphs:
+        return ReplaceResult(
+            output=out,
+            replacements=0,
+            status="NO_MATCH",
+            dry_run=dry_run,
+            complex_structures_detected=(),
+            advanced_backend_required=False
+        )
+        
+    # If any matched container has complex elements (fields, content controls, revisions, etc.), BLOCK mutation
+    if complex_detected:
+        return ReplaceResult(
+            output=out,
+            replacements=0,
+            status="UNSAFE_EDIT_BLOCKED",
+            dry_run=dry_run,
+            complex_structures_detected=tuple(sorted(complex_detected)),
+            advanced_backend_required=True,
+            error=f"Target occurrence is inside or shares container with complex structures: {sorted(complex_detected)}; mutation blocked for safety."
+        )
+        
+    # 2. Execution Phase: Perform safe replacement
+    total_replacements = 0
+    for p in matching_paragraphs:
+        total_replacements += _replace_paragraph_runs_safe(p, old, new)
+        
+    if dry_run:
+        return ReplaceResult(
+            output=out,
+            replacements=total_replacements,
+            status="DRY_RUN",
+            dry_run=True,
+            complex_structures_detected=(),
+            advanced_backend_required=False
+        )
+        
+    if total_replacements > 0:
         out.parent.mkdir(parents=True, exist_ok=True)
-        # Atomic file write using a temporary file in the destination folder
         tmp_fd, tmp_path = tempfile.mkstemp(dir=out.parent, prefix=".tmp_wa_", suffix=".docx")
         os.close(tmp_fd)
         try:
@@ -168,7 +219,8 @@ def replace_text(
     return ReplaceResult(
         output=out,
         replacements=total_replacements,
-        dry_run=dry_run,
-        complex_structures_detected=tuple(sorted(complex_detected)),
-        advanced_backend_recommended=adv_recommended
+        status="SUCCESS",
+        dry_run=False,
+        complex_structures_detected=(),
+        advanced_backend_required=False
     )

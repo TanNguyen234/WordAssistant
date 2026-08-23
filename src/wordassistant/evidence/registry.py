@@ -4,12 +4,29 @@ from typing import Any
 import json
 import os
 import tempfile
+import time
+import urllib.parse
+from contextlib import contextmanager
 
 class EvidenceError(ValueError):
     pass
 
 _REQUIRED_FIELDS = {'id', 'title', 'authors', 'year', 'url', 'verified_by'}
 _ALLOWED_FIELDS = {'id', 'title', 'authors', 'year', 'url', 'verified_by', 'quote', 'claim', 'doi', 'notes', 'tags'}
+
+def _is_valid_url_or_doi(val: str) -> bool:
+    if not isinstance(val, str) or not val.strip():
+        return False
+    val = val.strip()
+    if val.startswith('doi:'):
+        return len(val) > 4 and bool(val[4:].strip())
+    try:
+        parsed = urllib.parse.urlparse(val)
+        if parsed.scheme in ('http', 'https'):
+            return bool(parsed.netloc and parsed.netloc.strip() and parsed.hostname)
+    except Exception:
+        return False
+    return False
 
 def validate_record(record: Any) -> None:
     if not isinstance(record, dict):
@@ -38,11 +55,41 @@ def validate_record(record: Any) -> None:
         raise EvidenceError(f"Field 'year' must be an integer between 1800 and 2100, got {year!r}")
         
     url = str(record['url']).strip()
-    if not (url.startswith(('http://', 'https://', 'doi:'))):
-        raise EvidenceError("Field 'url' must be an absolute http(s) URL or doi URI")
+    if not _is_valid_url_or_doi(url):
+        raise EvidenceError(f"Field 'url' must be a valid http(s) URL with hostname or doi URI, got {url!r}")
         
     if not isinstance(record['verified_by'], str) or not record['verified_by'].strip():
         raise EvidenceError("Field 'verified_by' must be a non-empty string")
+
+@contextmanager
+def _file_lock(lock_path: Path, timeout: float = 10.0):
+    lock_file = lock_path.with_name(f"{lock_path.name}.lock")
+    lock_path.parent.mkdir(parents=True, exist_ok=True)
+    start = time.time()
+    fd = None
+    while True:
+        try:
+            fd = os.open(str(lock_file), os.O_CREAT | os.O_EXCL | os.O_RDWR)
+            break
+        except FileExistsError:
+            if time.time() - start > timeout:
+                try:
+                    lock_file.unlink(missing_ok=True)
+                except Exception:
+                    pass
+            time.sleep(0.02)
+    try:
+        yield
+    finally:
+        if fd is not None:
+            try:
+                os.close(fd)
+            except Exception:
+                pass
+            try:
+                lock_file.unlink(missing_ok=True)
+            except Exception:
+                pass
 
 class EvidenceRegistry:
     def __init__(self, path: str | Path):
@@ -69,7 +116,18 @@ class EvidenceRegistry:
         os.close(tmp_fd)
         try:
             Path(tmp_path).write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding='utf-8')
-            os.replace(tmp_path, self.path)
+            # Atomic replace with retry for Windows file handle release
+            last_err = None
+            for _ in range(30):
+                try:
+                    os.replace(tmp_path, self.path)
+                    last_err = None
+                    break
+                except PermissionError as pe:
+                    last_err = pe
+                    time.sleep(0.03)
+            if last_err is not None:
+                raise last_err
         except Exception:
             if os.path.exists(tmp_path):
                 try:
@@ -81,35 +139,40 @@ class EvidenceRegistry:
     def add(self, record: dict[str, Any], replace: bool = False) -> None:
         validate_record(record)
         rec_id = str(record['id']).strip()
-        data = self._load()
-        if rec_id in data and not replace:
-            raise EvidenceError(f"Evidence record with id '{rec_id}' already exists; use replace=True to overwrite.")
-        data[rec_id] = record
-        self._save(data)
+        with _file_lock(self.path):
+            data = self._load()
+            if rec_id in data and not replace:
+                raise EvidenceError(f"Evidence record with id '{rec_id}' already exists; use replace=True to overwrite.")
+            data[rec_id] = record
+            self._save(data)
 
     def get(self, key: str) -> dict[str, Any]:
-        data = self._load()
-        if key not in data:
-            raise EvidenceError(f"Evidence record '{key}' not found.")
-        return data[key]
+        with _file_lock(self.path):
+            data = self._load()
+            if key not in data:
+                raise EvidenceError(f"Evidence record '{key}' not found.")
+            return data[key]
 
     def remove(self, key: str) -> bool:
-        data = self._load()
-        if key in data:
-            del data[key]
-            self._save(data)
-            return True
-        return False
+        with _file_lock(self.path):
+            data = self._load()
+            if key in data:
+                del data[key]
+                self._save(data)
+                return True
+            return False
 
     def list(self) -> list[dict[str, Any]]:
-        return list(self._load().values())
+        with _file_lock(self.path):
+            return list(self._load().values())
 
     def validate_all(self) -> list[str]:
         errors = []
-        data = self._load()
-        for k, v in data.items():
-            try:
-                validate_record(v)
-            except EvidenceError as e:
-                errors.append(f"Record '{k}': {e}")
+        with _file_lock(self.path):
+            data = self._load()
+            for k, v in data.items():
+                try:
+                    validate_record(v)
+                except EvidenceError as e:
+                    errors.append(f"Record '{k}': {e}")
         return errors
