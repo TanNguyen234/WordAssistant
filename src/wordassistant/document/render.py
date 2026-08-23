@@ -7,6 +7,8 @@ import subprocess
 import tempfile
 import time
 
+from wordassistant.doctor import find_libreoffice_executable
+
 @dataclass(frozen=True)
 class RenderResult:
     pdf_path: Path
@@ -27,21 +29,7 @@ def render_pdf(
     outdir = Path(output_dir).resolve() if output_dir else src.parent
     outdir.mkdir(parents=True, exist_ok=True)
     
-    exe = shutil.which('libreoffice') or shutil.which('soffice')
-    if not exe:
-        # Check standard Windows / Linux / macOS paths
-        candidates = [
-            Path(r"C:\Program Files\LibreOffice\program\soffice.exe"),
-            Path(r"C:\Program Files (x86)\LibreOffice\program\soffice.exe"),
-            Path("/usr/bin/libreoffice"),
-            Path("/usr/bin/soffice"),
-            Path("/Applications/LibreOffice.app/Contents/MacOS/soffice")
-        ]
-        for c in candidates:
-            if c.exists():
-                exe = str(c)
-                break
-                
+    exe = find_libreoffice_executable()
     if not exe:
         raise RuntimeError("LibreOffice/soffice executable was not found on PATH; render is unavailable.")
         

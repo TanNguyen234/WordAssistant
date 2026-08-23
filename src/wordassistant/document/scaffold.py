@@ -105,16 +105,16 @@ def _apply_styles(d: Document, v: Variant):
             pass
 
 _DEFAULT_FRONT_TITLES = {
-    'acknowledgements': 'LỜI CẢM ƠN',
-    'declaration': 'LỜI CAM ĐOAN',
-    'supervisor_review': 'NHẬN XÉT CỦA GIẢNG VIÊN HƯỚNG DẪN',
-    'reviewer_review': 'NHẬN XÉT CỦA NGƯỜI PHẢN BIỆN',
-    'work_schedule': 'LỊCH LÀM VIỆC',
-    'abstract': 'TÓM TẮT ĐỒ ÁN',
-    'table_of_contents': 'MỤC LỤC',
-    'list_of_figures': 'DANH MỤC HÌNH ẢNH',
-    'list_of_tables': 'DANH MỤC BẢNG BIỂU',
-    'abbreviations': 'DANH MỤC TỪ VIẾT TẮT'
+    'acknowledgements': 'ACKNOWLEDGEMENTS',
+    'declaration': 'DECLARATION',
+    'supervisor_review': 'SUPERVISOR REVIEW',
+    'reviewer_review': 'REVIEWER REVIEW',
+    'work_schedule': 'WORK SCHEDULE',
+    'abstract': 'ABSTRACT',
+    'table_of_contents': 'TABLE OF CONTENTS',
+    'list_of_figures': 'LIST OF FIGURES',
+    'list_of_tables': 'LIST OF TABLES',
+    'abbreviations': 'ABBREVIATIONS'
 }
 
 def _render_cover_page(d: Document, v: Variant, title_text: str, student: str, supervisor: str):

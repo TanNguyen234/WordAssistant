@@ -37,6 +37,17 @@ def run(cmd: list[str]) -> None:
         print('+', str(cmd[0]))
     subprocess.run(cmd, cwd=ROOT, check=True, env=env)
 
+def run_expect_failure(cmd: list[str]) -> None:
+    env = dict(os.environ)
+    env['PYTHONIOENCODING'] = 'utf-8'
+    env['PYTHONUTF8'] = '1'
+    try:
+        print('+ [expect-fail]', ' '.join(str(x) for x in cmd))
+    except Exception:
+        print('+ [expect-fail]', str(cmd[0]))
+    res = subprocess.run(cmd, cwd=ROOT, env=env)
+    assert res.returncode != 0, f"Expected non-zero exit code, got {res.returncode}"
+
 def verify_source_hashes() -> None:
     for path, expected_hash in OFFICIAL_ASSETS.items():
         if not path.exists():
@@ -81,12 +92,13 @@ def main() -> None:
     ]
     run(context_cmd)
 
-    print("\n=== 6. Running CLI End-to-End Workflow Smoke Check ===")
+    print("\n=== 6. Running CLI End-to-End Workflow Smoke & Verification Gates ===")
     with tempfile.TemporaryDirectory() as tmpdir:
         tmp = Path(tmpdir)
         report_docx = tmp / 'test_report.docx'
         proposal_docx = tmp / 'test_proposal.docx'
         generic_docx = tmp / 'test_generic.docx'
+        neg_report_docx = tmp / 'test_neg_report.docx'
         evidence_file = tmp / 'evidence.json'
         
         # doctor
@@ -98,64 +110,94 @@ def main() -> None:
         run([sys.executable, '-m', 'wordassistant.cli', 'profiles', '--json'])
         run([sys.executable, '-m', 'wordassistant.cli', 'profile', 'validate', 'generic', '--json'])
         run([sys.executable, '-m', 'wordassistant.cli', 'profile', 'validate', 'hcmunre_dacn_2026_2027', '--json'])
-        # scaffold generic & verify
-        run([
-            sys.executable, '-m', 'wordassistant.cli', 'scaffold', str(generic_docx),
-            '--profile', 'generic', '--variant', 'default', '--title', 'GENERIC DOC', '--json'
-        ])
-        run([
-            sys.executable, '-m', 'wordassistant.cli', 'verify', str(generic_docx),
-            '--profile', 'generic', '--variant', 'default', '--json'
-        ])
-        # scaffold proposal clone
-        run([
-            sys.executable, '-m', 'wordassistant.cli', 'scaffold', str(proposal_docx),
-            '--profile', 'hcmunre_dacn_2026_2027', '--variant', 'proposal', '--json'
-        ])
-        # scaffold report
+        
+        # A. Draft scaffold smoke & negative verify proof
         run([
             sys.executable, '-m', 'wordassistant.cli', 'scaffold', str(report_docx),
             '--profile', 'hcmunre_dacn_2026_2027', '--variant', 'report',
-            '--title', 'SMOKE TEST REPORT',
+            '--title', 'XAY DUNG HE THONG RAG',
             '--student', 'NGUYEN VAN A - 2351010001',
             '--supervisor', 'TS. NGUYEN VAN B',
             '--json'
         ])
-        # draft validate on fresh scaffold
+        # Draft validate on fresh scaffold must succeed
         run([
             sys.executable, '-m', 'wordassistant.cli', 'validate', str(report_docx),
             '--profile', 'hcmunre_dacn_2026_2027', '--variant', 'report', '--json'
         ])
-        # Populate references in report and verify
+        # Unedited scaffold MUST FAIL final verify because placeholders remain
+        run_expect_failure([
+            sys.executable, '-m', 'wordassistant.cli', 'verify', str(report_docx),
+            '--profile', 'hcmunre_dacn_2026_2027', '--variant', 'report', '--json'
+        ])
+        print("draft-scaffold-negative-verify: OK (rejected as expected)")
+
+        # B. Completed synthetic report fixture (passes verify)
         d = Document(report_docx)
+        for p in d.paragraphs:
+            if "[Front matter content]" in p.text:
+                p.text = "Lời cảm ơn chi tiết và đầy đủ gửi đến thầy cô và gia đình."
+            elif "[Section content...]" in p.text:
+                p.text = "Nội dung nghiên cứu chi tiết của đồ án giải quyết trọn vẹn bài toán đặt ra."
+            elif "[List of figures]" in p.text:
+                p.text = "Hình 1.1: Sơ đồ kiến trúc\nHình 1.2: Lưu đồ xử lý"
+            elif "[List of tables]" in p.text:
+                p.text = "Bảng 1.1: Danh sách tham số\nBảng 1.2: Kết quả đo đạc"
+            elif "[Document content]" in p.text:
+                p.text = "Nội dung báo cáo đã hoàn thiện đầy đủ."
+                
+        # Add 11 references under bibliography
         for idx in range(1, 12):
             d.add_paragraph(f"[{idx}] Tác giả {idx}, Tên tài liệu {idx}, Nhà xuất bản {idx}, 202{idx % 5}.")
         d.save(report_docx)
         
-        # verify orchestrator (without render)
+        # Final verify on completed synthetic report MUST PASS
         run([
             sys.executable, '-m', 'wordassistant.cli', 'verify', str(report_docx),
             '--profile', 'hcmunre_dacn_2026_2027', '--variant', 'report', '--json'
         ])
+        print("completed-synthetic-report-verify: PASS")
+
+        # C. Negative final-delivery fixture (one placeholder left)
+        shutil.copyfile(report_docx, neg_report_docx)
+        d_neg = Document(neg_report_docx)
+        d_neg.add_paragraph("[Section content...]")
+        d_neg.save(neg_report_docx)
+        run_expect_failure([
+            sys.executable, '-m', 'wordassistant.cli', 'verify', str(neg_report_docx),
+            '--profile', 'hcmunre_dacn_2026_2027', '--variant', 'report', '--json'
+        ])
+        print("negative-delivery-fixture-verify: OK (rejected as expected)")
+
+        # scaffold proposal clone & generic
+        run([
+            sys.executable, '-m', 'wordassistant.cli', 'scaffold', str(proposal_docx),
+            '--profile', 'hcmunre_dacn_2026_2027', '--variant', 'proposal', '--json'
+        ])
+        run([
+            sys.executable, '-m', 'wordassistant.cli', 'scaffold', str(generic_docx),
+            '--profile', 'generic', '--variant', 'default', '--title', 'GENERIC DOC', '--json'
+        ])
+        
         # replace dry-run
         run([
             sys.executable, '-m', 'wordassistant.cli', 'replace', str(report_docx),
-            '--old', 'SMOKE TEST', '--new', 'HARDENED AUDIT', '--dry-run', '--json'
+            '--old', 'XAY DUNG HE THONG', '--new', 'PHAT TRIEN HE THONG', '--dry-run', '--json'
         ])
         # evidence
         run([
-            sys.executable, '-m', 'wordassistant.cli', 'evidence', 'add',
+            sys.executable, '-m', 'wordassistant.cli', 'evidence', 'add', str(evidence_file),
             '--id', 'smoke1', '--title', 'Smoke Title', '--authors', 'Author A', '--year', '2024',
             '--url', 'https://example.com/smoke', '--verified-by', 'CI',
-            str(evidence_file), '--json'
+            '--json'
         ])
         run([sys.executable, '-m', 'wordassistant.cli', 'evidence', 'validate', str(evidence_file), '--json'])
 
     print("\n=== 7. Verifying LibreOffice Render Availability & Direct Render CLI ===")
-    from wordassistant.doctor import status
-    st = status()
-    if st['libreoffice']:
-        print("libreoffice-render: AVAILABLE")
+    from wordassistant.doctor import find_libreoffice_executable
+    lo_exe = find_libreoffice_executable()
+    if lo_exe:
+        print(f"libreoffice-render: AVAILABLE ({lo_exe})")
         with tempfile.TemporaryDirectory() as render_tmpdir:
             r_docx = Path(render_tmpdir) / 'render_test.docx'
             r_pdf_dir = Path(render_tmpdir) / 'pdf_out'

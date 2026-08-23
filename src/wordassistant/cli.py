@@ -138,7 +138,7 @@ def parser() -> argparse.ArgumentParser:
     ctx.add_argument('file')
     ctx.add_argument('--query', required=True)
     ctx.add_argument('--max-tokens', type=int, default=None)
-    ctx.add_argument('--active-section-id', default=None)
+    ctx.add_argument('--active-section-id', '--section', dest='active_section_id', default=None)
     ctx.add_argument('--json', action='store_true')
 
     # scaffold
@@ -357,7 +357,7 @@ def run(args: list[str] | None = None) -> int:
             eff_student = a.student if a.student is not None else (ws_cfg.get('author') or ws_cfg.get('student'))
             eff_supervisor = a.supervisor if a.supervisor is not None else ws_cfg.get('supervisor')
             
-            prof = resolve_profile(eff_prof)
+            prof = resolve_profile(eff_prof, start_path=Path(a.output).parent)
             res = scaffold_document(
                 a.output,
                 prof,
@@ -393,7 +393,7 @@ def run(args: list[str] | None = None) -> int:
             eff_prof = a.profile or ws_cfg.get('profile', 'generic')
             eff_var = a.variant or ws_cfg.get('variant', 'default')
             
-            prof = resolve_profile(eff_prof)
+            prof = resolve_profile(eff_prof, start_path=Path(a.file).parent)
             res = validate_document(a.file, prof, eff_var, tolerance_cm=a.tolerance, verify_mode=False)
             data = {
                 'file': str(a.file),
@@ -410,7 +410,7 @@ def run(args: list[str] | None = None) -> int:
             eff_prof = a.profile or ws_cfg.get('profile', 'generic')
             eff_var = a.variant or ws_cfg.get('variant', 'default')
             
-            prof = resolve_profile(eff_prof)
+            prof = resolve_profile(eff_prof, start_path=Path(a.file).parent)
             inv = inspect_document(a.file)
             val_res = validate_document(a.file, prof, eff_var, tolerance_cm=a.tolerance, verify_mode=True)
             

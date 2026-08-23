@@ -33,8 +33,6 @@ def probe_advanced_backend() -> tuple[bool, str]:
         import docx_mcp  # type: ignore
         if hasattr(docx_mcp, 'probe') and callable(docx_mcp.probe):
             return docx_mcp.probe()
-        if hasattr(docx_mcp, '__version__'):
-            return True, f"docx-mcp version {getattr(docx_mcp, '__version__')} is installed and operational."
         return False, "docx-mcp package is installed but no active adapter bridge is configured."
     except Exception as exc:
         return False, f"docx-mcp probe failed: {exc}"

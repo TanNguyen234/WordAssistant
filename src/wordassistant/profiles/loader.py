@@ -255,6 +255,12 @@ def _parse_variant(name: str, data: Any) -> Variant:
                     raise ProfileError(f"{name}.cover.metadata_fields[{mf_idx}].label must be a string")
                 if 'value_key' in mf and not isinstance(mf['value_key'], str):
                     raise ProfileError(f"{name}.cover.metadata_fields[{mf_idx}].value_key must be a string")
+                if 'value' in mf and mf['value'] is not None and not isinstance(mf['value'], str):
+                    raise ProfileError(f"{name}.cover.metadata_fields[{mf_idx}].value must be a string or null")
+                if 'default' in mf and mf['default'] is not None and not isinstance(mf['default'], str):
+                    raise ProfileError(f"{name}.cover.metadata_fields[{mf_idx}].default must be a string or null")
+                if 'required' in mf and type(mf['required']) is not bool:
+                    raise ProfileError(f"{name}.cover.metadata_fields[{mf_idx}].required must be a boolean, got {mf['required']!r}")
             
     blueprint_raw = _object_list(data.get('section_blueprint', []), f"{name}.section_blueprint")
     blueprint = []
@@ -329,6 +335,9 @@ def _parse_variant(name: str, data: Any) -> Variant:
         raise ProfileError(f"{name}.field_requirements must be an object")
     if field_reqs:
         _check_unknown_keys(field_reqs, _FIELD_REQS_KEYS, f"{name}.field_requirements")
+        for fr_key, fr_val in field_reqs.items():
+            if type(fr_val) is not bool:
+                raise ProfileError(f"{name}.field_requirements.{fr_key} must be a boolean, got {fr_val!r}")
         
     return Variant(
         name=name,
@@ -386,9 +395,11 @@ def _get_project_root() -> Path:
             return parent
     return curr.parents[3]
 
-def _find_workspace_profiles_dir() -> Path | None:
+def _find_workspace_profiles_dir(start_path: str | Path | None = None) -> Path | None:
     try:
-        curr = Path.cwd().resolve()
+        curr = Path(start_path or Path.cwd()).resolve()
+        if curr.is_file():
+            curr = curr.parent
         for parent in [curr] + list(curr.parents):
             p = parent / '.wordassistant' / 'profiles'
             if p.exists() and p.is_dir():
@@ -397,7 +408,7 @@ def _find_workspace_profiles_dir() -> Path | None:
         pass
     return None
 
-def discover_profiles(extra_dirs: list[Path] | None = None) -> list[DocumentProfile]:
+def discover_profiles(extra_dirs: list[Path] | None = None, start_path: str | Path | None = None) -> list[DocumentProfile]:
     found: dict[str, DocumentProfile] = {}
     search_dirs: list[Path] = []
     
@@ -408,7 +419,7 @@ def discover_profiles(extra_dirs: list[Path] | None = None) -> list[DocumentProf
                 search_dirs.append(d)
                 
     # 2. Workspace profiles directory (.wordassistant/profiles)
-    ws_prof_dir = _find_workspace_profiles_dir()
+    ws_prof_dir = _find_workspace_profiles_dir(start_path)
     if ws_prof_dir and ws_prof_dir not in search_dirs:
         search_dirs.append(ws_prof_dir)
                 
@@ -419,7 +430,6 @@ def discover_profiles(extra_dirs: list[Path] | None = None) -> list[DocumentProf
         
     for sdir in search_dirs:
         for f in sorted(sdir.glob('*.json')):
-            # If a discovered workspace or custom profile is invalid, report its validation error
             try:
                 prof = load_profile(f)
                 if prof.profile_id not in found:
@@ -446,7 +456,11 @@ def discover_profiles(extra_dirs: list[Path] | None = None) -> list[DocumentProf
         
     return sorted(found.values(), key=lambda p: p.profile_id)
 
-def resolve_profile(name_or_path: str, extra_dirs: list[Path] | None = None) -> DocumentProfile:
+def resolve_profile(
+    name_or_path: str,
+    extra_dirs: list[Path] | None = None,
+    start_path: str | Path | None = None
+) -> DocumentProfile:
     p = Path(name_or_path)
     if p.exists() and p.is_file():
         return load_profile(p)
@@ -461,7 +475,7 @@ def resolve_profile(name_or_path: str, extra_dirs: list[Path] | None = None) -> 
                 return load_profile(candidate)
                 
     # Check workspace profiles directory
-    ws_prof_dir = _find_workspace_profiles_dir()
+    ws_prof_dir = _find_workspace_profiles_dir(start_path)
     if ws_prof_dir:
         candidate = ws_prof_dir / filename
         if candidate.exists() and candidate.is_file():
@@ -482,7 +496,7 @@ def resolve_profile(name_or_path: str, extra_dirs: list[Path] | None = None) -> 
         pass
         
     # Check by discovered profile_id
-    for prof in discover_profiles(extra_dirs):
+    for prof in discover_profiles(extra_dirs, start_path=start_path):
         if prof.profile_id == name_or_path:
             return prof
             

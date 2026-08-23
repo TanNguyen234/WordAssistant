@@ -5,7 +5,7 @@
 This verification audit certifies that repository `TanNguyen234/WordAssistant` on working branch `feat/wordassistant-v2-universal-core` has completed all merge-readiness hardening criteria and resolved every identified audit finding across the universal deterministic DOCX toolkit.
 
 - **Architecture Model**: Deterministic, profile-driven core with zero mandatory external AI reasoning backends and optional LibreOffice/docx-mcp adapters.
-- **Test Suite Status**: 98 passed tests (100% PASS rate across all suites).
+- **Test Suite Status**: 115 passed tests (100% PASS rate across all suites).
 - **Release Verification**: Full `scripts/release_check.py` pipeline executed and passing.
 - **Source Asset Integrity**: Official Vietnamese guidance & proposal DOCX binaries byte-verified against SHA-256 ground truth.
 
@@ -15,21 +15,16 @@ This verification audit certifies that repository `TanNguyen234/WordAssistant` o
 
 | # | Domain | Audit Finding / Requirement | Resolution |
 |---|---|---|---|
-| 1 | **Profile Validation** | False-pass validator checked only basic dimensions, ignoring typography, spacing, styles, and blueprint. | Implemented thorough OOXML inspection in `src/wordassistant/document/validate.py` validating body font, size, line spacing, margins, header/footer page numbers, TOC fields, blueprint chapters, and bibliography counts with typed `ERROR` / `WARNING` / `INFO` severities. |
-| 2 | **HCMUNRE Scaffolding** | Cover generation was hardcoded with `if profile.profile_id.startswith('hcmunre')`. | Replaced with generic declarative scaffolding in `src/wordassistant/document/scaffold.py` creating clean cover layouts, unlinked header/footers, real Word TOC fields (`TOC \o "1-3"`), real `PAGE` fields, and section page restart. |
-| 3 | **Hard Context Budget** | Context budget invariant could be exceeded; `estimated_tokens` masked overflow via `min()`. | Enforced invariant `estimate_tokens(bundle.text) <= bundle.max_tokens` for all outputs in `src/wordassistant/context/retrieve.py` using token-accurate binary search truncation, supporting budgets down to `100` tokens and adversarial short-word inputs. |
-| 4 | **Lexical Retrieval** | Fragile exact-match search sensitive to Vietnamese accents/casing. | Added NFC Unicode normalization, Vietnamese diacritic-insensitive term matching, phrase boosts, title weighting, and hierarchical breadcrumb composition. |
-| 5 | **Safe Text Replacement** | Replace could flatten run formatting and mutate complex OOXML fields. | Implemented run-preserving replacement in `src/wordassistant/document/edit.py`, complex structure detection (`hyperlink`, `field`, `sdt`, `revisions`), `--dry-run` simulation mode, count limits, and atomic file replacement. |
-| 6 | **Proposal Template UX** | Proposal scaffold required custom metadata without modifying official source assets. | Added safe in-memory/clone placeholder filling for `--title`, `--student`, and `--supervisor` while maintaining 100% byte-identical source assets on disk. |
-| 7 | **Strict Schema Validation** | Profile loader allowed silent typos, invalid enums, and path traversal in `template_asset`. | Added recursive schema validation in `src/wordassistant/profiles/loader.py` enforcing strict key allowlists, valid enum sets, printable page geometry, unique non-empty section titles, nested header_footer/citations/blueprint typing, and path traversal rejection. |
-| 8 | **Dynamic Profile Discovery** | Profiles were statically hardcoded. | Implemented `discover_profiles()` dynamically querying workspace `.wordassistant/profiles`, repository `profiles/`, and packaged assets; added `wordassistant profile show` and `wordassistant profile validate` subcommands. |
-| 9 | **Workspace Engine** | Workspace lacked status reporting, project defaults, and document caching. | Built full workspace engine in `src/wordassistant/workspace.py` providing `wordassistant status`, typed project defaults persistence, and SHA-256 fingerprint document indexing cache. |
-| 10 | **Evidence Registry** | Registry lacked schema validation, duplicate policies, and atomic operations. | Hardened `src/wordassistant/evidence/registry.py` with strict schema validation, year ranges, URL/DOI formatting, `--replace` policy, atomic writes with PID lockfile protection, and CLI subcommands (`list`, `get`, `add`, `remove`, `validate`). |
-| 11 | **Isolated PDF Rendering & CLI** | Stale existing PDF in target directory could mask render failure; CLI mismatched signature. | Standardized `render_pdf(docx_path, output_dir=None, timeout_seconds=180)` in `src/wordassistant/document/render.py` to execute LibreOffice conversions in an isolated temporary directory, verify new PDF creation, and return rich `RenderResult` metadata; connected CLI `wordassistant render FILE [--outdir DIR] [--output DIR] [--timeout 180] [--json]`. |
-| 12 | **Truthful Backend Status** | Missing uniform status and routing facade for `docx-mcp`. | Implemented truthful 3-state probe model (`installed`, `adapter_supported`, `operational`, `capabilities` mapping) in `src/wordassistant/backends/status.py` and `src/wordassistant/capabilities.py`. |
-| 13 | **Orchestrator & Agent Surface** | Multiple disparate commands required for document verification. | Added `wordassistant verify <file> --profile <id> --variant <v> [--render] --json` single orchestrator command with strict delivery enforcement mode (`verify_mode=True`); updated `.agents/skills/wordassistant/SKILL.md`. |
-| 14 | **Structural Field Detection** | `inspect` command relied on substring matching against visible text for field tags. | Enhanced `src/wordassistant/document/structure.py` with structural OOXML field instruction parsing (`w:fldSimple` and `w:instrText`) avoiding false positives from literal text like "PAGE" or "TOC". |
-| 15 | **Release Check & Clean Wheel Test** | Release check missed end-to-end CLI workflows and source asset hash gates. | Expanded `scripts/release_check.py` to include Vietnamese diacritics retrieval (`"trích dẫn nguồn tài liệu gốc IEEE"`), 200-section retrieval stress test, direct render invocation, wheel building, and packaged asset hash verification in clean virtual environment. |
+| 1 | **Draft Scaffolds Rejection in Verify** | Scaffolds with placeholders (`[Section content...]`, `[Front matter content]`, etc.) could pass final verify. | Added deterministic draft placeholder detection in `src/wordassistant/document/validate.py`. In draft mode (`validate`), placeholders emit `WARNING`; in final delivery mode (`verify`), they emit `ERROR` and return non-zero exit code. |
+| 2 | **Header/Footer Semantic Roles** | Headers/footers were checked only for non-empty string presence. | Implemented semantic role verification matching `header_left` (topic), `header_right` (supervisor), `footer_left` (student), and `footer_right` (PAGE field) against cover metadata and explicit inputs. |
+| 3 | **Cover & Inner Cover Signals** | Covers were ignored in front-matter checks. | Added deterministic cover signal validation checking institution lines, document type, topic, and metadata fields according to profile requirements. |
+| 4 | **Blueprint Heading Levels** | Heading levels in document were not checked against blueprint `level`. | Added comparison between profile blueprint `level` (1..9) and actual Word heading styles (`Heading 1`, `Heading 2`, etc.), flagging mismatches in verify mode. |
+| 5 | **Bibliography-Scoped References** | Numbered items in body text could count as bibliography items. | Scoped reference counting strictly under detected bibliography section headings (`DANH MỤC TÀI LIỆU THAM KHẢO`, `REFERENCES`, etc.) until the next peer heading. |
+| 6 | **Truthful Advanced Backend Probing** | `__version__` alone could report operational status. | Removed version-based operational assumption in `src/wordassistant/backends/status.py`. Adapter operational status strictly requires callable adapter probe verification. |
+| 7 | **Centralized LibreOffice Discovery** | `doctor.py` and `render.py` had divergent LibreOffice discovery logic. | Implemented centralized `find_libreoffice_executable()` in `src/wordassistant/doctor.py` shared across `doctor`, `render`, and `release_check`. |
+| 8 | **Universal Core Neutral Front Titles** | Vietnamese titles were hardcoded in universal core defaults. | Changed core defaults in `src/wordassistant/document/scaffold.py` to neutral English (`ACKNOWLEDGEMENTS`, `DECLARATION`, etc.); HCMUNRE profile supplies Vietnamese mappings. |
+| 9 | **Target Path Profile Resolution** | Profile discovery only inspected CWD. | Extended `resolve_profile` and `discover_profiles` in `src/wordassistant/profiles/loader.py` to accept and resolve relative to target file/output directories. |
+| 10 | **CLI Argument Alias** | SKILL/README referenced `--section` while CLI only exposed `--active-section-id`. | Added `--section` as alias for `--active-section-id` in `src/wordassistant/cli.py`. |
 
 ---
 
@@ -52,44 +47,93 @@ platform win32 -- Python 3.12.4, pytest-9.1.1, pluggy-1.6.0
 rootdir: D:\Download\WordAssistant
 configfile: pyproject.toml
 testpaths: tests
-collected 98 items
+collected 115 items
 
+tests\test_advanced_backend_probe_strict.py .                            [  0%]
 tests\test_advanced_backend_status_truthful.py ...                       [  3%]
-tests\test_cli.py ..........                                             [ 13%]
-tests\test_cli_render.py ...                                             [ 16%]
-tests\test_context.py ..                                                 [ 18%]
-tests\test_context_budget_hard.py ....                                   [ 22%]
-tests\test_context_budget_strict.py ..                                   [ 24%]
-tests\test_edit.py .                                                     [ 25%]
-tests\test_evidence.py .                                                 [ 26%]
-tests\test_evidence_concurrency.py .                                     [ 27%]
-tests\test_evidence_strict.py ....                                       [ 31%]
-tests\test_generic_cover_isolation.py .                                  [ 32%]
-tests\test_inspect_and_backend.py ..                                     [ 34%]
-tests\test_inspect_field_structural.py ..                                [ 36%]
-tests\test_package_data.py ..                                            [ 38%]
-tests\test_package_data_sync.py ..                                       [ 40%]
-tests\test_page_field_ooxml.py .                                         [ 41%]
-tests\test_profile_schema_nested.py ...                                  [ 44%]
-tests\test_profiles.py ...                                               [ 47%]
-tests\test_profiles_strict.py .........                                  [ 57%]
-tests\test_proposal_metadata.py ..                                       [ 59%]
-tests\test_render_isolated.py ..                                         [ 61%]
-tests\test_retrieval_diacritics.py ...                                   [ 64%]
-tests\test_safe_replace.py ....                                          [ 68%]
-tests\test_safe_replace_preflight.py ...                                 [ 71%]
-tests\test_scaffold_structure_ooxml.py .                                 [ 72%]
-tests\test_scaffold_validate.py ...                                      [ 75%]
-tests\test_structure_real_docs.py ...                                    [ 78%]
-tests\test_typography_unresolvable.py .                                  [ 79%]
-tests\test_validator_complete.py ...                                     [ 82%]
-tests\test_validator_thorough.py ...                                     [ 85%]
-tests\test_verify_delivery_enforcement.py ..                             [ 87%]
-tests\test_verify_exit_codes.py ..                                       [ 89%]
-tests\test_workspace_config_typed.py ..                                  [ 91%]
-tests\test_workspace_defaults_cli.py ...                                 [ 94%]
-tests\test_workspace_engine.py ....                                      [ 98%]
+tests\test_bibliography_scoped_references.py ..                          [  5%]
+tests\test_blueprint_heading_levels.py .                                 [  6%]
+tests\test_cli.py ..........                                             [ 14%]
+tests\test_cli_render.py ...                                             [ 17%]
+tests\test_cli_section_alias.py .                                        [ 18%]
+tests\test_context.py ..                                                 [ 20%]
+tests\test_context_budget_hard.py ....                                   [ 23%]
+tests\test_context_budget_strict.py ..                                   [ 25%]
+tests\test_core_neutral_front_titles.py ..                               [ 26%]
+tests\test_cover_inner_cover_verification.py ..                          [ 28%]
+tests\test_draft_placeholders_rejected.py ..                             [ 30%]
+tests\test_edit.py .                                                     [ 31%]
+tests\test_evidence.py .                                                 [ 32%]
+tests\test_evidence_concurrency.py .                                     [ 33%]
+tests\test_evidence_strict.py ....                                       [ 36%]
+tests\test_generic_cover_isolation.py .                                  [ 37%]
+tests\test_header_footer_semantics.py ...                                [ 40%]
+tests\test_inspect_and_backend.py ..                                     [ 41%]
+tests\test_inspect_field_structural.py ..                                [ 43%]
+tests\test_libreoffice_discovery_centralized.py ..                       [ 45%]
+tests\test_package_data.py ..                                            [ 46%]
+tests\test_package_data_sync.py ..                                       [ 48%]
+tests\test_page_field_ooxml.py .                                         [ 49%]
+tests\test_profile_schema_nested.py ...                                  [ 52%]
+tests\test_profiles.py ...                                               [ 54%]
+tests\test_profiles_strict.py .........                                  [ 62%]
+tests\test_proposal_metadata.py ..                                       [ 64%]
+tests\test_render_isolated.py ..                                         [ 66%]
+tests\test_retrieval_diacritics.py ...                                   [ 68%]
+tests\test_safe_replace.py ....                                          [ 72%]
+tests\test_safe_replace_preflight.py ...                                 [ 74%]
+tests\test_scaffold_structure_ooxml.py .                                 [ 75%]
+tests\test_scaffold_validate.py ...                                      [ 78%]
+tests\test_structure_real_docs.py ...                                    [ 80%]
+tests\test_target_path_profile_discovery.py .                            [ 81%]
+tests\test_typography_unresolvable.py .                                  [ 82%]
+tests\test_validator_complete.py ...                                     [ 85%]
+tests\test_validator_thorough.py ...                                     [ 87%]
+tests\test_verify_delivery_enforcement.py ..                             [ 89%]
+tests\test_verify_exit_codes.py ..                                       [ 91%]
+tests\test_workspace_config_typed.py ..                                  [ 93%]
+tests\test_workspace_defaults_cli.py ...                                 [ 95%]
+tests\test_workspace_engine.py ....                                      [ 99%]
 tests\test_workspace_profile_discovery.py .                              [100%]
 
-============================= 98 passed in 18.34s =============================
+============================ 115 passed in 59.54s =============================
+```
+
+---
+
+## 5. Release Check Pipeline Result
+
+```
+=== 1. Checking Package Data Synchronization ===
++ ... python.exe scripts/sync_package_data.py --check
+
+=== 2. Verifying Official Source Asset Hashes ===
+source-asset-hashes: VERIFIED
+
+=== 3. Running Pytest Suite ===
++ ... python.exe -m pytest -v
+============================ 115 passed in 59.54s =============================
+
+=== 4. Verifying Python Compilation ===
++ ... python.exe -m compileall -q src tests scripts
+
+=== 5. Running Document Indexing & Context Hard Budget Check ===
+{'guidance_sections': 27, 'proposal_sections': 14, 'estimated_tokens': 1488, 'stress_status': 'PASS'}
+
+=== 6. Running CLI End-to-End Workflow Smoke & Verification Gates ===
+draft-scaffold-negative-verify: OK (rejected as expected)
+completed-synthetic-report-verify: PASS
+negative-delivery-fixture-verify: OK (rejected as expected)
+
+=== 7. Verifying LibreOffice Render Availability & Direct Render CLI ===
+libreoffice-render: SKIPPED_WITH_REASON (LibreOffice binary not on PATH/default locations)
+
+=== 8. Wheel Build and Clean Venv Smoke Test ===
+wheel-built: wordassistant-2.0.0-py3-none-any.whl
+installed-package-asset-hashes: VERIFIED
+clean-venv-smoke: OK
+
+========================================
+release-check: PASS
+========================================
 ```

@@ -1,4 +1,5 @@
 from pathlib import Path
+from docx import Document
 from wordassistant.cli import run
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -102,8 +103,14 @@ def test_evidence_cli_crud(tmp_path, capsys):
 
 def test_verify_orchestrator_cli(tmp_path, capsys):
     out = tmp_path / 'test_doc.docx'
-    run(['scaffold', str(out), '--profile', 'generic', '--variant', 'default', '--json'])
+    run(['scaffold', str(out), '--profile', 'generic', '--variant', 'default', '--title', 'Final Report', '--json'])
     capsys.readouterr()
+    
+    d = Document(out)
+    for p in d.paragraphs:
+        if '[Document content]' in p.text or '[Section content...]' in p.text or '[Front matter content]' in p.text:
+            p.text = 'Completed report content without draft placeholders.'
+    d.save(out)
     
     code = run(['verify', str(out), '--profile', 'generic', '--variant', 'default', '--json'])
     out_txt = capsys.readouterr().out
