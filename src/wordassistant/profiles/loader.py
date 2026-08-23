@@ -77,6 +77,7 @@ _TYPOGRAPHY_KEYS = {'body_font', 'body_size_pt', 'line_spacing', 'paragraph_spac
 _STYLE_KEYS = {'font', 'size_pt', 'bold', 'italic', 'alignment', 'line_spacing', 'space_before_pt', 'space_after_pt'}
 _BLUEPRINT_KEYS = {'title', 'level', 'required', 'numbered', 'restart_numbering'}
 _COVER_KEYS = {'institution_lines', 'document_type', 'title_prefix', 'metadata_fields', 'location_year'}
+_METADATA_FIELD_KEYS = {'key', 'label', 'value_key', 'default', 'value', 'required'}
 _CITATIONS_KEYS = {'style', 'in_text', 'minimum_references', 'prefer_primary_source', 'bibliography_order'}
 _HEADER_FOOTER_KEYS = {'header_left', 'header_right', 'footer_left', 'footer_right', 'page_number_start'}
 _FIELD_REQS_KEYS = {'table_of_contents', 'page_number', 'list_of_figures', 'list_of_tables'}
@@ -247,7 +248,13 @@ def _parse_variant(name: str, data: Any) -> Variant:
         if 'location_year' in cover_data and not isinstance(cover_data['location_year'], str):
             raise ProfileError(f"{name}.cover.location_year must be a string")
         if 'metadata_fields' in cover_data:
-            _object_list(cover_data['metadata_fields'], f"{name}.cover.metadata_fields")
+            mf_list = _object_list(cover_data['metadata_fields'], f"{name}.cover.metadata_fields")
+            for mf_idx, mf in enumerate(mf_list):
+                _check_unknown_keys(mf, _METADATA_FIELD_KEYS, f"{name}.cover.metadata_fields[{mf_idx}]")
+                if 'label' in mf and not isinstance(mf['label'], str):
+                    raise ProfileError(f"{name}.cover.metadata_fields[{mf_idx}].label must be a string")
+                if 'value_key' in mf and not isinstance(mf['value_key'], str):
+                    raise ProfileError(f"{name}.cover.metadata_fields[{mf_idx}].value_key must be a string")
             
     blueprint_raw = _object_list(data.get('section_blueprint', []), f"{name}.section_blueprint")
     blueprint = []
@@ -261,6 +268,12 @@ def _parse_variant(name: str, data: Any) -> Variant:
         level = bp.get('level', 1)
         if type(level) is not int or not (1 <= level <= 9):
             raise ProfileError(f"Section blueprint level must be an integer between 1 and 9, got {level!r}")
+        if 'required' in bp and type(bp['required']) is not bool:
+            raise ProfileError(f"Section blueprint required must be boolean, got {bp['required']!r}")
+        if 'numbered' in bp and type(bp['numbered']) is not bool:
+            raise ProfileError(f"Section blueprint numbered must be boolean, got {bp['numbered']!r}")
+        if 'restart_numbering' in bp and type(bp['restart_numbering']) is not bool:
+            raise ProfileError(f"Section blueprint restart_numbering must be boolean, got {bp['restart_numbering']!r}")
         blueprint.append(bp)
         
     citations = data.get('citations', {})
@@ -268,6 +281,12 @@ def _parse_variant(name: str, data: Any) -> Variant:
         raise ProfileError(f"{name}.citations must be an object")
     if citations:
         _check_unknown_keys(citations, _CITATIONS_KEYS, f"{name}.citations")
+        if 'style' in citations and not isinstance(citations['style'], str):
+            raise ProfileError(f"{name}.citations.style must be a string")
+        if 'in_text' in citations and not isinstance(citations['in_text'], str):
+            raise ProfileError(f"{name}.citations.in_text must be a string")
+        if 'bibliography_order' in citations and not isinstance(citations['bibliography_order'], str):
+            raise ProfileError(f"{name}.citations.bibliography_order must be a string")
         if 'minimum_references' in citations:
             min_r = citations['minimum_references']
             if type(min_r) is not int or min_r < 0:
@@ -280,13 +299,30 @@ def _parse_variant(name: str, data: Any) -> Variant:
         raise ProfileError(f"{name}.header_footer must be an object")
     if header_footer:
         _check_unknown_keys(header_footer, _HEADER_FOOTER_KEYS, f"{name}.header_footer")
+        for hf_side in ('header_left', 'header_right', 'footer_left', 'footer_right'):
+            if hf_side in header_footer and header_footer[hf_side] is not None:
+                if not isinstance(header_footer[hf_side], str):
+                    raise ProfileError(f"{name}.header_footer.{hf_side} must be a string or null")
+        if 'page_number_start' in header_footer and header_footer['page_number_start'] is not None:
+            p_start = header_footer['page_number_start']
+            if isinstance(p_start, int) and type(p_start) is not bool:
+                if p_start < 0:
+                    raise ProfileError(f"{name}.header_footer.page_number_start must be an integer >= 0, got {p_start!r}")
+            elif isinstance(p_start, str):
+                if not p_start.strip():
+                    raise ProfileError(f"{name}.header_footer.page_number_start string must not be empty")
+            else:
+                raise ProfileError(f"{name}.header_footer.page_number_start must be an integer >= 0 or a string, got {p_start!r}")
         
     template = data.get('template_asset')
     if template is not None:
         if not isinstance(template, str) or not template.strip():
             raise ProfileError(f"{name}.template_asset must be a non-empty string")
-        if '..' in Path(template).parts or Path(template).is_absolute():
+        p_template = Path(template)
+        if '..' in p_template.parts or p_template.is_absolute():
             raise ProfileError(f"Path traversal or absolute path detected in template_asset: {template}")
+        if not template.endswith('.docx'):
+            raise ProfileError(f"template_asset must be a .docx file, got: {template}")
             
     field_reqs = data.get('field_requirements', {})
     if not isinstance(field_reqs, dict):
@@ -350,30 +386,50 @@ def _get_project_root() -> Path:
             return parent
     return curr.parents[3]
 
+def _find_workspace_profiles_dir() -> Path | None:
+    try:
+        curr = Path.cwd().resolve()
+        for parent in [curr] + list(curr.parents):
+            p = parent / '.wordassistant' / 'profiles'
+            if p.exists() and p.is_dir():
+                return p
+    except Exception:
+        pass
+    return None
+
 def discover_profiles(extra_dirs: list[Path] | None = None) -> list[DocumentProfile]:
     found: dict[str, DocumentProfile] = {}
     search_dirs: list[Path] = []
     
+    # 1. Extra dirs passed explicitly
     if extra_dirs:
         for d in extra_dirs:
             if d.exists() and d.is_dir():
                 search_dirs.append(d)
                 
-    # Check repo profiles/ directory
+    # 2. Workspace profiles directory (.wordassistant/profiles)
+    ws_prof_dir = _find_workspace_profiles_dir()
+    if ws_prof_dir and ws_prof_dir not in search_dirs:
+        search_dirs.append(ws_prof_dir)
+                
+    # 3. Repo profiles/ directory
     repo_profiles = _get_project_root() / 'profiles'
     if repo_profiles.exists() and repo_profiles.is_dir() and repo_profiles not in search_dirs:
         search_dirs.append(repo_profiles)
         
     for sdir in search_dirs:
         for f in sorted(sdir.glob('*.json')):
+            # If a discovered workspace or custom profile is invalid, report its validation error
             try:
                 prof = load_profile(f)
                 if prof.profile_id not in found:
                     found[prof.profile_id] = prof
-            except Exception:
+            except Exception as exc:
+                if sdir == ws_prof_dir or (extra_dirs and sdir in extra_dirs):
+                    raise ProfileError(f"Invalid profile in {f}: {exc}") from exc
                 continue
                 
-    # Also check packaged data
+    # 4. Packaged data
     try:
         pkg_profiles = resource_files('wordassistant').joinpath('data', 'profiles')
         for f in pkg_profiles.iterdir():
@@ -397,12 +453,19 @@ def resolve_profile(name_or_path: str, extra_dirs: list[Path] | None = None) -> 
         
     filename = name_or_path if name_or_path.endswith('.json') else f"{name_or_path}.json"
     
-    # Check extra/workspace dirs
+    # Check extra dirs
     if extra_dirs:
         for d in extra_dirs:
             candidate = d / filename
             if candidate.exists() and candidate.is_file():
                 return load_profile(candidate)
+                
+    # Check workspace profiles directory
+    ws_prof_dir = _find_workspace_profiles_dir()
+    if ws_prof_dir:
+        candidate = ws_prof_dir / filename
+        if candidate.exists() and candidate.is_file():
+            return load_profile(candidate)
                 
     # Check repo profiles/
     candidate = _get_project_root() / 'profiles' / filename

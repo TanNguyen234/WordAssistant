@@ -32,6 +32,7 @@ from .workspace import (
     put_cached_document_index,
 )
 from .backends.status import get_backend_status
+from .capabilities import capabilities
 from .document.edit import replace_text
 
 def _ensure_utf8() -> None:
@@ -59,113 +60,118 @@ def _resolve_evidence_registry(path_or_ws: str | None = None) -> Path:
         if p.is_file():
             return p
         if p.is_dir():
-            wa_ev = p / '.wordassistant' / 'evidence.json'
-            if wa_ev.exists():
-                return wa_ev
-            if (p / 'evidence.json').exists():
-                return p / 'evidence.json'
-            return p / '.wordassistant' / 'evidence.json'
-        return p
+            cand = p / '.wordassistant' / 'evidence.json'
+            if cand.exists():
+                return cand
+            cand_direct = p / 'evidence.json'
+            if cand_direct.exists():
+                return cand_direct
+            return p / 'evidence.json'
     wa = find_workspace()
-    if wa and (wa / 'evidence.json').exists():
+    if wa:
         return wa / 'evidence.json'
-    return Path('.wordassistant/evidence.json')
+    return Path.cwd() / 'evidence.json'
 
 def parser() -> argparse.ArgumentParser:
-    p = argparse.ArgumentParser(prog='wordassistant', description='Deterministic profile-driven DOCX engineering toolkit')
+    p = argparse.ArgumentParser(
+        prog='wordassistant',
+        description='WordAssistant V2: Deterministic, profile-driven Word DOCX automation and bounded-context toolkit.'
+    )
     sp = p.add_subparsers(dest='cmd', required=True)
 
     # doctor
-    d = sp.add_parser('doctor', help='Check environment health and dependencies')
-    d.add_argument('--json', action='store_true')
+    doc = sp.add_parser('doctor', help='Check system environment and runtime tools')
+    doc.add_argument('--json', action='store_true')
 
     # status
-    st = sp.add_parser('status', help='Report workspace configuration and status')
+    st = sp.add_parser('status', help='Show workspace status and cache stats')
     st.add_argument('--json', action='store_true')
 
     # capabilities
-    cap = sp.add_parser('capabilities', help='Explain core vs optional advanced capabilities')
+    cap = sp.add_parser('capabilities', help='List core and optional backend capabilities')
     cap.add_argument('--json', action='store_true')
 
-    # advanced (subcommands: status)
-    adv_p = sp.add_parser('advanced', help='Advanced backend facade operations')
-    adv_sp = adv_p.add_subparsers(dest='advanced_action', required=True)
-    adv_s = adv_sp.add_parser('status', help='Report truthful operational backend status')
-    adv_s.add_argument('--json', action='store_true')
+    # advanced
+    adv = sp.add_parser('advanced', help='Query advanced Word backend status')
+    adv_sp = adv.add_subparsers(dest='advanced_action', required=True)
+    adv_st = adv_sp.add_parser('status', help='Show advanced backend operational status')
+    adv_st.add_argument('--json', action='store_true')
 
-    # config (subcommands: show, set)
-    cfg_p = sp.add_parser('config', help='Inspect or update workspace configuration')
-    cfg_sp = cfg_p.add_subparsers(dest='config_action', required=True)
-    cfg_show = cfg_sp.add_parser('show', help='Show workspace configuration')
+    # config
+    cfg = sp.add_parser('config', help='View or update workspace configuration')
+    cfg_sp = cfg.add_subparsers(dest='config_action', required=True)
+    cfg_show = cfg_sp.add_parser('show', help='Show workspace project configuration')
     cfg_show.add_argument('--json', action='store_true')
-    cfg_set = cfg_sp.add_parser('set', help='Set workspace configuration key')
-    cfg_set.add_argument('key', help='Configuration key to set')
+    cfg_set = cfg_sp.add_parser('set', help='Set workspace configuration value')
+    cfg_set.add_argument('key', help='Configuration key')
     cfg_set.add_argument('value', help='Configuration value')
     cfg_set.add_argument('--json', action='store_true')
 
     # profiles
-    pr = sp.add_parser('profiles', help='List discovered document profiles')
-    pr.add_argument('--json', action='store_true')
+    profs = sp.add_parser('profiles', help='List all available document profiles')
+    profs.add_argument('--json', action='store_true')
 
-    # profile (subcommands: show, validate)
-    prof_p = sp.add_parser('profile', help='Profile management operations')
-    prof_sp = prof_p.add_subparsers(dest='profile_action', required=True)
+    # profile
+    prof = sp.add_parser('profile', help='Inspect or validate a document profile')
+    prof_sp = prof.add_subparsers(dest='profile_action', required=True)
     
-    ps = prof_sp.add_parser('show', help='Show detailed profile structure')
-    ps.add_argument('name_or_path')
-    ps.add_argument('--json', action='store_true')
+    prof_show = prof_sp.add_parser('show', help='Show full details of a profile')
+    prof_show.add_argument('name_or_path', help='Profile ID or JSON file path')
+    prof_show.add_argument('--json', action='store_true')
     
-    pv = prof_sp.add_parser('validate', help='Strictly validate profile schema')
-    pv.add_argument('name_or_path')
-    pv.add_argument('--json', action='store_true')
+    prof_val = prof_sp.add_parser('validate', help='Validate profile JSON schema')
+    prof_val.add_argument('name_or_path', help='Profile ID or JSON file path')
+    prof_val.add_argument('--json', action='store_true')
 
     # init
-    init = sp.add_parser('init', help='Initialize a WordAssistant workspace')
-    init.add_argument('path')
-    init.add_argument('--json', action='store_true')
+    ini = sp.add_parser('init', help='Initialize .wordassistant workspace')
+    ini.add_argument('path', nargs='?', default='.')
+    ini.add_argument('--json', action='store_true')
 
     # inspect
-    i = sp.add_parser('inspect', help='Generate detailed inventory of a DOCX file')
-    i.add_argument('file')
-    i.add_argument('--json', action='store_true')
+    ins = sp.add_parser('inspect', help='Inspect DOCX structure and package parts')
+    ins.add_argument('file')
+    ins.add_argument('--json', action='store_true')
 
     # context
-    c = sp.add_parser('context', help='Retrieve token-bounded lexical context from DOCX')
-    c.add_argument('file')
-    c.add_argument('--query', required=True)
-    c.add_argument('--max-tokens', type=int, default=None)
-    c.add_argument('--section')
-    c.add_argument('--json', action='store_true')
+    ctx = sp.add_parser('context', help='Retrieve bounded context for a query')
+    ctx.add_argument('file')
+    ctx.add_argument('--query', required=True)
+    ctx.add_argument('--max-tokens', type=int, default=None)
+    ctx.add_argument('--active-section-id', default=None)
+    ctx.add_argument('--json', action='store_true')
 
     # scaffold
-    s = sp.add_parser('scaffold', help='Generate a new DOCX scaffold from profile')
-    s.add_argument('output')
-    s.add_argument('--profile', default=None)
-    s.add_argument('--variant', default=None)
-    s.add_argument('--title', default=None)
-    s.add_argument('--student', default=None)
-    s.add_argument('--supervisor', default=None)
-    s.add_argument('--json', action='store_true')
+    scaf = sp.add_parser('scaffold', help='Generate compliant DOCX from profile')
+    scaf.add_argument('output')
+    scaf.add_argument('--profile', default=None)
+    scaf.add_argument('--variant', default=None)
+    scaf.add_argument('--title', default=None)
+    scaf.add_argument('--author', '--student', dest='student', default=None)
+    scaf.add_argument('--supervisor', default=None)
+    scaf.add_argument('--dry-run', action='store_true')
+    scaf.add_argument('--json', action='store_true')
 
     # replace
-    rep = sp.add_parser('replace', help='Perform safe text replacement in DOCX')
+    rep = sp.add_parser('replace', help='Perform safe text replacement across document')
     rep.add_argument('file')
     rep.add_argument('--old', required=True)
     rep.add_argument('--new', required=True)
-    rep.add_argument('--output')
+    rep.add_argument('--output', default=None)
+    rep.add_argument('--count', type=int, default=None)
     rep.add_argument('--dry-run', action='store_true')
     rep.add_argument('--json', action='store_true')
 
     # validate
-    v = sp.add_parser('validate', help='Validate document against profile specification')
-    v.add_argument('file')
-    v.add_argument('--profile', default=None)
-    v.add_argument('--variant', default=None)
-    v.add_argument('--tolerance', type=float, default=0.08)
-    v.add_argument('--json', action='store_true')
+    val = sp.add_parser('validate', help='Validate document against profile specification')
+    val.add_argument('file')
+    val.add_argument('--profile', default=None)
+    val.add_argument('--variant', default=None)
+    val.add_argument('--tolerance', type=float, default=0.08)
+    val.add_argument('--json', action='store_true')
 
     # verify
-    ver = sp.add_parser('verify', help='Run full document verification with optional render')
+    ver = sp.add_parser('verify', help='Full audit: inspect + validate + optional render')
     ver.add_argument('file')
     ver.add_argument('--profile', default=None)
     ver.add_argument('--variant', default=None)
@@ -176,8 +182,8 @@ def parser() -> argparse.ArgumentParser:
     # render
     r = sp.add_parser('render', help='Render DOCX to PDF using LibreOffice')
     r.add_argument('file')
-    r.add_argument('--output')
-    r.add_argument('--timeout', type=int, default=60)
+    r.add_argument('--outdir', '--output', dest='outdir', default=None, help='Output directory for generated PDF')
+    r.add_argument('--timeout', type=int, default=180, help='Render timeout in seconds')
     r.add_argument('--json', action='store_true')
 
     # evidence
@@ -235,7 +241,7 @@ def run(args: list[str] | None = None) -> int:
             return 0
 
         if a.cmd == 'capabilities':
-            _print(get_backend_status(), a.json)
+            _print(capabilities(), a.json)
             return 0
 
         if a.cmd == 'advanced':
@@ -256,13 +262,13 @@ def run(args: list[str] | None = None) -> int:
             discovered = discover_profiles()
             items = [
                 {
-                    'id': p.profile_id,
-                    'name': p.name,
-                    'version': p.version,
-                    'variants': sorted(p.variants.keys()),
-                    'source_policy': p.source_policy
+                    'id': prof.profile_id,
+                    'name': prof.name,
+                    'version': prof.version,
+                    'variants': sorted(prof.variants.keys()),
+                    'source_policy': prof.source_policy
                 }
-                for p in discovered
+                for prof in discovered
             ]
             _print({'profiles': items}, a.json)
             return 0
@@ -316,27 +322,29 @@ def run(args: list[str] | None = None) -> int:
             doc_sha = hashlib.sha256(doc_bytes).hexdigest()
             
             ws_cfg = load_project_config(doc_file)
-            effective_max_tokens = a.max_tokens or ws_cfg.get('context_budget', 12000)
+            effective_max_tokens = int(a.max_tokens if a.max_tokens is not None else ws_cfg.get('context_budget', 12000))
             
             sections = get_cached_document_index(doc_file, doc_sha)
-            if sections is None:
+            if not sections:
                 sections = index_docx(doc_file)
                 put_cached_document_index(doc_file, doc_sha, sections)
                 
-            res = build_context(sections, a.query, max_tokens=effective_max_tokens, target_section_id=a.section)
+            bundle = build_context(
+                sections,
+                query=a.query,
+                max_tokens=effective_max_tokens,
+                active_section_id=a.active_section_id
+            )
             data = {
-                'query': a.query,
-                'max_tokens': effective_max_tokens,
-                'target_section': a.section,
-                'total_doc_sections': len(sections),
-                'selected_sections_count': len(res.sections),
-                'estimated_tokens': res.estimated_tokens,
-                'truncated': res.truncated,
-                'context': res.text,
+                'query': bundle.query,
                 'sections': [
                     {'id': s.section_id, 'title': s.title, 'level': s.level}
-                    for s in res.sections
-                ]
+                    for s in bundle.sections
+                ],
+                'text': bundle.text,
+                'estimated_tokens': bundle.estimated_tokens,
+                'max_tokens': bundle.max_tokens,
+                'truncated': bundle.truncated
             }
             _print(data, a.json)
             return 0
@@ -345,35 +353,40 @@ def run(args: list[str] | None = None) -> int:
             ws_cfg = load_project_config(Path(a.output).parent)
             eff_prof = a.profile or ws_cfg.get('profile', 'generic')
             eff_var = a.variant or ws_cfg.get('variant', 'default')
-            eff_title = a.title if a.title is not None else ws_cfg.get('title', 'UNTITLED DOCUMENT')
-            eff_student = a.student if a.student is not None else ws_cfg.get('author', '')
-            eff_supervisor = a.supervisor if a.supervisor is not None else ws_cfg.get('supervisor', '')
+            eff_title = a.title if a.title is not None else ws_cfg.get('title')
+            eff_student = a.student if a.student is not None else (ws_cfg.get('author') or ws_cfg.get('student'))
+            eff_supervisor = a.supervisor if a.supervisor is not None else ws_cfg.get('supervisor')
             
             prof = resolve_profile(eff_prof)
-            out_file = scaffold_document(
+            res = scaffold_document(
                 a.output,
                 prof,
                 eff_var,
                 title=eff_title,
                 student=eff_student,
-                supervisor=eff_supervisor
+                supervisor=eff_supervisor,
+                dry_run=a.dry_run
             )
-            _print({'output': str(out_file), 'profile': prof.profile_id, 'variant': eff_var}, a.json)
+            _print({
+                'status': 'SUCCESS' if not a.dry_run else 'DRY_RUN',
+                'output': str(a.output),
+                'profile': eff_prof,
+                'variant': eff_var,
+                'path': str(res)
+            }, a.json)
             return 0
 
         if a.cmd == 'replace':
-            res = replace_text(a.file, old=a.old, new=a.new, output_path=a.output, dry_run=a.dry_run)
-            res_dict = {
-                'output': str(res.output),
-                'replacements': res.replacements,
-                'status': res.status,
-                'dry_run': res.dry_run,
-                'complex_structures_detected': list(res.complex_structures_detected),
-                'advanced_backend_required': res.advanced_backend_required,
-                'error': res.error
-            }
-            _print(res_dict, a.json)
-            return 0 if res.status in ('SUCCESS', 'DRY_RUN', 'NO_MATCH') else 1
+            res = replace_text(
+                a.file,
+                a.old,
+                a.new,
+                output_path=a.output,
+                count=a.count,
+                dry_run=a.dry_run
+            )
+            _print(asdict(res), a.json)
+            return 0 if res.status in ('SUCCESS', 'DRY_RUN') else 1
 
         if a.cmd == 'validate':
             ws_cfg = load_project_config(Path(a.file).parent)
@@ -447,7 +460,7 @@ def run(args: list[str] | None = None) -> int:
             return 0 if overall_pass else 2
 
         if a.cmd == 'render':
-            res = render_pdf(a.file, output_path=a.output, timeout_seconds=a.timeout)
+            res = render_pdf(a.file, output_dir=a.outdir, timeout_seconds=a.timeout)
             _print({
                 'pdf': str(res.pdf_path),
                 'size_bytes': res.file_size_bytes,

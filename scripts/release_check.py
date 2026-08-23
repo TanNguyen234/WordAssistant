@@ -8,6 +8,16 @@ import sys
 import tempfile
 from docx import Document
 
+import os
+
+try:
+    if hasattr(sys.stdout, 'reconfigure'):
+        sys.stdout.reconfigure(encoding='utf-8')
+    if hasattr(sys.stderr, 'reconfigure'):
+        sys.stderr.reconfigure(encoding='utf-8')
+except Exception:
+    pass
+
 ROOT = Path(__file__).resolve().parents[1]
 
 OFFICIAL_ASSETS = {
@@ -18,8 +28,14 @@ OFFICIAL_ASSETS = {
 }
 
 def run(cmd: list[str]) -> None:
-    print('+', ' '.join(str(x) for x in cmd))
-    subprocess.run(cmd, cwd=ROOT, check=True)
+    env = dict(os.environ)
+    env['PYTHONIOENCODING'] = 'utf-8'
+    env['PYTHONUTF8'] = '1'
+    try:
+        print('+', ' '.join(str(x) for x in cmd))
+    except Exception:
+        print('+', str(cmd[0]))
+    subprocess.run(cmd, cwd=ROOT, check=True, env=env)
 
 def verify_source_hashes() -> None:
     for path, expected_hash in OFFICIAL_ASSETS.items():
@@ -48,14 +64,20 @@ def main() -> None:
         sys.executable, '-c',
         "from wordassistant.document.structure import index_docx; "
         "from wordassistant.context.retrieve import build_context; "
+        "from wordassistant.document.model import DocumentSection; "
         "from pathlib import Path; "
         "r = Path('use_cases/hcmunre_dacn_2026_2027/assets'); "
         "a = index_docx(r / 'huong_dan_trinh_bay_dacn_2026_2027.docx'); "
         "b = index_docx(r / 'mau_de_cuong_do_an_chuyen_nganh.docx'); "
         "assert 10 <= len(a) <= 45 and 8 <= len(b) <= 30, f'Unexpected section counts: {len(a)}, {len(b)}'; "
-        "ctx = build_context(a, 'IEEE font size and format', max_tokens=1500); "
+        "ctx = build_context(a, 'trích dẫn nguồn tài liệu gốc IEEE', max_tokens=1500); "
         "assert ctx.estimated_tokens <= 1500, f'Hard budget exceeded: {ctx.estimated_tokens} > 1500'; "
-        "print({'guidance_sections': len(a), 'proposal_sections': len(b), 'estimated_tokens': ctx.estimated_tokens})"
+        "assert any('trích dẫn' in s.title.lower() or 'tài liệu' in s.title.lower() or 'ieee' in s.text.lower() for s in ctx.sections), 'Context missing relevant citation guidance'; "
+        "stress_secs = [DocumentSection(f'sec_{i}', f'Section {i} Topic Title', f'Text content of paragraph {i} in stress document.', 1, None, i) for i in range(200)]; "
+        "stress_ctx = build_context(stress_secs, 'Topic Title 150', max_tokens=2000); "
+        "assert stress_ctx.estimated_tokens <= 2000, 'Stress token budget exceeded'; "
+        "assert any(s.section_id == 'sec_150' for s in stress_ctx.sections), 'Stress query missed exact target'; "
+        "print({'guidance_sections': len(a), 'proposal_sections': len(b), 'estimated_tokens': ctx.estimated_tokens, 'stress_status': 'PASS'})"
     ]
     run(context_cmd)
 
@@ -94,7 +116,10 @@ def main() -> None:
         run([
             sys.executable, '-m', 'wordassistant.cli', 'scaffold', str(report_docx),
             '--profile', 'hcmunre_dacn_2026_2027', '--variant', 'report',
-            '--title', 'SMOKE TEST REPORT', '--json'
+            '--title', 'SMOKE TEST REPORT',
+            '--student', 'NGUYEN VAN A - 2351010001',
+            '--supervisor', 'TS. NGUYEN VAN B',
+            '--json'
         ])
         # draft validate on fresh scaffold
         run([
@@ -126,11 +151,25 @@ def main() -> None:
         ])
         run([sys.executable, '-m', 'wordassistant.cli', 'evidence', 'validate', str(evidence_file), '--json'])
 
-    print("\n=== 7. Verifying LibreOffice Render Availability ===")
+    print("\n=== 7. Verifying LibreOffice Render Availability & Direct Render CLI ===")
     from wordassistant.doctor import status
     st = status()
     if st['libreoffice']:
         print("libreoffice-render: AVAILABLE")
+        with tempfile.TemporaryDirectory() as render_tmpdir:
+            r_docx = Path(render_tmpdir) / 'render_test.docx'
+            r_pdf_dir = Path(render_tmpdir) / 'pdf_out'
+            run([
+                sys.executable, '-m', 'wordassistant.cli', 'scaffold', str(r_docx),
+                '--profile', 'generic', '--variant', 'default', '--title', 'RENDER TEST', '--json'
+            ])
+            run([
+                sys.executable, '-m', 'wordassistant.cli', 'render', str(r_docx),
+                '--outdir', str(r_pdf_dir), '--timeout', '180', '--json'
+            ])
+            expected_pdf = r_pdf_dir / f"{r_docx.stem}.pdf"
+            assert expected_pdf.exists() and expected_pdf.stat().st_size > 0, "Direct render CLI did not produce expected non-empty PDF"
+            print(f"direct-render-cli: OK ({expected_pdf.name}, {expected_pdf.stat().st_size} bytes)")
     else:
         print("libreoffice-render: SKIPPED_WITH_REASON (LibreOffice binary not on PATH/default locations)")
 
@@ -154,6 +193,26 @@ def main() -> None:
         
         # Test CLI invocation via python -m and entrypoint executable
         run([py_exe, '-m', 'wordassistant.cli', 'doctor', '--json'])
+        run([py_exe, '-m', 'wordassistant.cli', 'profiles', '--json'])
+        run([py_exe, '-m', 'wordassistant.cli', 'profile', 'validate', 'generic', '--json'])
+        
+        clean_gen_docx = Path(clean_env_dir) / 'clean_generic.docx'
+        clean_prop_docx = Path(clean_env_dir) / 'clean_proposal.docx'
+        run([py_exe, '-m', 'wordassistant.cli', 'scaffold', str(clean_gen_docx), '--profile', 'generic', '--variant', 'default', '--json'])
+        run([py_exe, '-m', 'wordassistant.cli', 'inspect', str(clean_gen_docx), '--json'])
+        run([py_exe, '-m', 'wordassistant.cli', 'scaffold', str(clean_prop_docx), '--profile', 'hcmunre_dacn_2026_2027', '--variant', 'proposal', '--json'])
+        
+        # Verify packaged official docx hashes inside installed package
+        verify_pkg_code = (
+            "import hashlib; from importlib.resources import files; "
+            "hd = files('wordassistant').joinpath('data', 'use_cases', 'hcmunre_dacn_2026_2027', 'assets', 'huong_dan_trinh_bay_dacn_2026_2027.docx').read_bytes(); "
+            "dc = files('wordassistant').joinpath('data', 'use_cases', 'hcmunre_dacn_2026_2027', 'assets', 'mau_de_cuong_do_an_chuyen_nganh.docx').read_bytes(); "
+            "assert hashlib.sha256(hd).hexdigest().lower() == '0f3622dbcd74009fb0867e0d3fa4a1624a38983af502e55d48868edf33f74e78'; "
+            "assert hashlib.sha256(dc).hexdigest().lower() == 'bb291a6de459e33267170c3dd9087903a0d9f1911086bbfc935cb9f7781904e6'; "
+            "print('installed-package-asset-hashes: VERIFIED')"
+        )
+        run([py_exe, '-c', verify_pkg_code])
+        
         if Path(wa_exe).exists():
             run([wa_exe, 'doctor', '--json'])
         print('clean-venv-smoke: OK')

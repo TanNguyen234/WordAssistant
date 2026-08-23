@@ -15,7 +15,11 @@ class RenderResult:
     page_count: int | None = None
     duration_seconds: float = 0.0
 
-def render_pdf(docx_path: str | Path, output_dir: str | Path | None = None) -> RenderResult:
+def render_pdf(
+    docx_path: str | Path,
+    output_dir: str | Path | None = None,
+    timeout_seconds: int = 180
+) -> RenderResult:
     src = Path(docx_path).resolve()
     if not src.exists():
         raise FileNotFoundError(f"Source document not found: {src}")
@@ -24,6 +28,20 @@ def render_pdf(docx_path: str | Path, output_dir: str | Path | None = None) -> R
     outdir.mkdir(parents=True, exist_ok=True)
     
     exe = shutil.which('libreoffice') or shutil.which('soffice')
+    if not exe:
+        # Check standard Windows / Linux / macOS paths
+        candidates = [
+            Path(r"C:\Program Files\LibreOffice\program\soffice.exe"),
+            Path(r"C:\Program Files (x86)\LibreOffice\program\soffice.exe"),
+            Path("/usr/bin/libreoffice"),
+            Path("/usr/bin/soffice"),
+            Path("/Applications/LibreOffice.app/Contents/MacOS/soffice")
+        ]
+        for c in candidates:
+            if c.exists():
+                exe = str(c)
+                break
+                
     if not exe:
         raise RuntimeError("LibreOffice/soffice executable was not found on PATH; render is unavailable.")
         
@@ -36,7 +54,7 @@ def render_pdf(docx_path: str | Path, output_dir: str | Path | None = None) -> R
             [exe, '--headless', '--convert-to', 'pdf', '--outdir', str(temp_dir), str(src)],
             capture_output=True,
             text=True,
-            timeout=180
+            timeout=timeout_seconds
         )
         if cp.returncode != 0:
             raise RuntimeError(f"LibreOffice render failed (code {cp.returncode}): {cp.stderr.strip() or cp.stdout.strip()}")

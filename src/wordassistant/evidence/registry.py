@@ -67,16 +67,34 @@ def _file_lock(lock_path: Path, timeout: float = 10.0):
     lock_path.parent.mkdir(parents=True, exist_ok=True)
     start = time.time()
     fd = None
+    pid = os.getpid()
     while True:
         try:
             fd = os.open(str(lock_file), os.O_CREAT | os.O_EXCL | os.O_RDWR)
+            payload = json.dumps({'pid': pid, 'ts': time.time()}).encode('utf-8')
+            os.write(fd, payload)
             break
         except FileExistsError:
-            if time.time() - start > timeout:
+            elapsed = time.time() - start
+            if elapsed > timeout:
                 try:
-                    lock_file.unlink(missing_ok=True)
+                    content = lock_file.read_text(encoding='utf-8')
+                    info = json.loads(content)
+                    lock_pid = info.get('pid')
+                    is_alive = False
+                    if lock_pid and isinstance(lock_pid, int):
+                        try:
+                            os.kill(lock_pid, 0)
+                            is_alive = True
+                        except OSError:
+                            is_alive = False
+                    if not is_alive or (time.time() - info.get('ts', 0) > 30.0):
+                        lock_file.unlink(missing_ok=True)
                 except Exception:
-                    pass
+                    try:
+                        lock_file.unlink(missing_ok=True)
+                    except Exception:
+                        pass
             time.sleep(0.02)
     try:
         yield
@@ -116,7 +134,6 @@ class EvidenceRegistry:
         os.close(tmp_fd)
         try:
             Path(tmp_path).write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding='utf-8')
-            # Atomic replace with retry for Windows file handle release
             last_err = None
             for _ in range(30):
                 try:

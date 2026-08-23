@@ -4,6 +4,19 @@ from typing import Any
 import json
 from wordassistant.document.model import DocumentSection
 
+ALLOWED_CONFIG_KEYS = {
+    'schema_version',
+    'profile',
+    'variant',
+    'primary_document',
+    'context_budget',
+    'language',
+    'title',
+    'author',
+    'student',
+    'supervisor'
+}
+
 def init_workspace(path: str | Path) -> Path:
     root = Path(path).resolve()
     wa = root / '.wordassistant'
@@ -43,18 +56,24 @@ def find_workspace(start_path: str | Path | None = None) -> Path | None:
 
 def load_project_config(start_path: str | Path | None = None) -> dict[str, Any]:
     wa = find_workspace(start_path)
+    default_cfg: dict[str, Any] = {'schema_version': 1, 'profile': 'generic', 'variant': 'default', 'context_budget': 12000}
     if not wa:
-        return {'schema_version': 1, 'profile': 'generic', 'variant': 'default', 'context_budget': 12000}
+        return default_cfg
     proj_file = wa / 'project.json'
     if not proj_file.exists():
-        return {'schema_version': 1, 'profile': 'generic', 'variant': 'default', 'context_budget': 12000}
+        return default_cfg
     try:
         data = json.loads(proj_file.read_text(encoding='utf-8'))
-        if 'context_budget' not in data:
+        if 'context_budget' in data:
+            try:
+                data['context_budget'] = int(data['context_budget'])
+            except Exception:
+                data['context_budget'] = 12000
+        else:
             data['context_budget'] = 12000
         return data
     except Exception:
-        return {'schema_version': 1, 'profile': 'generic', 'variant': 'default', 'context_budget': 12000}
+        return default_cfg
 
 def save_project_config(start_path: str | Path | None, config: dict[str, Any]) -> None:
     wa = find_workspace(start_path)
@@ -64,8 +83,31 @@ def save_project_config(start_path: str | Path | None, config: dict[str, Any]) -
     proj_file.write_text(json.dumps(config, ensure_ascii=False, indent=2), encoding='utf-8')
 
 def set_project_config_value(start_path: str | Path | None, key: str, value: Any) -> dict[str, Any]:
+    if key not in ALLOWED_CONFIG_KEYS:
+        raise ValueError(f"Unknown config key: {key!r}. Allowed keys are: {sorted(ALLOWED_CONFIG_KEYS)}")
+        
     cfg = load_project_config(start_path)
-    cfg[key] = value
+    
+    if key == 'context_budget':
+        try:
+            val_int = int(value)
+        except (ValueError, TypeError) as exc:
+            raise ValueError(f"context_budget must be an integer >= 100, got {value!r}") from exc
+        if val_int < 100:
+            raise ValueError(f"context_budget must be >= 100, got {val_int}")
+        cfg[key] = val_int
+    elif key == 'schema_version':
+        try:
+            cfg[key] = int(value)
+        except (ValueError, TypeError) as exc:
+            raise ValueError(f"schema_version must be an integer, got {value!r}") from exc
+    elif key in ('profile', 'variant'):
+        if not isinstance(value, str) or not value.strip():
+            raise ValueError(f"{key} must be a non-empty string")
+        cfg[key] = value.strip()
+    else:
+        cfg[key] = str(value)
+        
     save_project_config(start_path, cfg)
     return cfg
 

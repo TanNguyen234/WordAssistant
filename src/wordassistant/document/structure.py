@@ -178,6 +178,9 @@ def inspect_document(path: str | Path) -> dict[str, Any]:
                             extra_footnotes = content.count('<w:footnote ')
                         elif name == 'word/endnotes.xml':
                             extra_endnotes = content.count('<w:endnote ')
+                        if name not in ('word/document.xml', 'word/header1.xml', 'word/header2.xml', 'word/header3.xml',
+                                        'word/footer1.xml', 'word/footer2.xml', 'word/footer3.xml'):
+                            doc_xml_parts.append(content)
                     except Exception:
                         pass
     except Exception:
@@ -191,19 +194,37 @@ def inspect_document(path: str | Path) -> dict[str, Any]:
     tbl_count = len(d.tables)
     sec_count = len(d.sections)
     
-    img_count = full_xml.count('<w:drawing') + full_xml.count('<w:pict')
-    hyperlink_count = full_xml.count('<w:hyperlink')
-    field_count = full_xml.count('<w:fldSimple') + full_xml.count('<w:fldChar')
-    bookmark_count = full_xml.count('<w:bookmarkStart')
-    comment_count = max(extra_comments, full_xml.count('<w:commentReference'))
-    footnote_count = max(extra_footnotes, full_xml.count('<w:footnoteReference'))
-    endnote_count = max(extra_endnotes, full_xml.count('<w:endnoteReference'))
-    sdt_count = full_xml.count('<w:sdt')
-    ins_count = full_xml.count('<w:ins')
-    del_count = full_xml.count('<w:del')
+    img_count = len(re.findall(r'<w:drawing\b', full_xml)) + len(re.findall(r'<w:pict\b', full_xml))
+    hyperlink_count = len(re.findall(r'<w:hyperlink\b', full_xml))
+    field_tag_count = len(re.findall(r'<w:fldSimple\b', full_xml)) + len(re.findall(r'<w:fldChar\b', full_xml))
+    bookmark_count = len(re.findall(r'<w:bookmarkStart\b', full_xml))
+    comment_count = max(extra_comments, len(re.findall(r'<w:commentReference\b', full_xml)))
+    footnote_count = max(extra_footnotes, len(re.findall(r'<w:footnoteReference\b', full_xml)))
+    endnote_count = max(extra_endnotes, len(re.findall(r'<w:endnoteReference\b', full_xml)))
+    sdt_count = len(re.findall(r'<w:sdt\b', full_xml))
+    ins_count = len(re.findall(r'<w:ins\b', full_xml))
+    del_count = len(re.findall(r'<w:del\b', full_xml))
     
-    has_toc = 'TOC' in full_xml
-    has_page = 'w:instr="PAGE"' in full_xml or 'PAGE' in full_xml
+    # Structural field parsing (avoiding false positives from visible paragraph text)
+    fld_simple_instrs = re.findall(r'<w:fldSimple\b[^>]*w:instr=["\']([^"\']+)["\']', full_xml, re.I)
+    instr_text_instrs = re.findall(r'<w:instrText\b[^>]*>([^<]+)</w:instrText>', full_xml, re.I)
+    all_instrs = [x.strip() for x in (fld_simple_instrs + instr_text_instrs) if x.strip()]
+    
+    page_fields_count = 0
+    toc_fields_count = 0
+    other_fields_count = 0
+    
+    for instr in all_instrs:
+        up = f" {instr.upper()} "
+        if " PAGE " in up or up.strip().startswith("PAGE"):
+            page_fields_count += 1
+        elif " TOC " in up or up.strip().startswith("TOC"):
+            toc_fields_count += 1
+        else:
+            other_fields_count += 1
+            
+    has_page = page_fields_count > 0
+    has_toc = toc_fields_count > 0
     
     adv_rec = (ins_count + del_count + comment_count + sdt_count > 0 or has_protection)
     
@@ -227,9 +248,12 @@ def inspect_document(path: str | Path) -> dict[str, Any]:
             'deletions': del_count
         },
         'fields': {
-            'total_field_tags': field_count,
+            'total_field_tags': field_tag_count,
             'toc_field': has_toc,
-            'page_field': has_page
+            'page_field': has_page,
+            'page_fields': page_fields_count,
+            'toc_fields': toc_fields_count,
+            'other_fields': other_fields_count
         },
         'advanced_backend_recommended': adv_rec,
         'outline': [

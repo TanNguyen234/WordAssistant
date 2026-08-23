@@ -1,6 +1,7 @@
 from __future__ import annotations
 from pathlib import Path
 import shutil
+import tempfile
 from importlib.resources import files as resource_files
 from docx import Document
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_TAB_ALIGNMENT
@@ -58,75 +59,89 @@ def _apply_section_page(section, v: Variant):
     section.right_margin = Cm(v.page.margins.right_cm)
 
 def _apply_styles(d: Document, v: Variant):
-    normal = d.styles['Normal']
-    normal.font.name = v.typography.body_font
-    normal.font.size = Pt(v.typography.body_size_pt)
-    if hasattr(normal._element, 'rPr') and normal._element.rPr is not None:
-        normal._element.rPr.get_or_add_rFonts().set(qn('w:eastAsia'), v.typography.body_font)
-    
-    pf = normal.paragraph_format
-    if v.typography.line_spacing is not None:
-        pf.line_spacing = v.typography.line_spacing
-    if v.typography.paragraph_spacing_before_pt is not None:
-        pf.space_before = Pt(v.typography.paragraph_spacing_before_pt)
-    if v.typography.paragraph_spacing_after_pt is not None:
-        pf.space_after = Pt(v.typography.paragraph_spacing_after_pt)
+    try:
+        normal = d.styles['Normal']
+        normal.font.name = v.typography.body_font
+        normal.font.size = Pt(v.typography.body_size_pt)
+        if v.typography.line_spacing is not None:
+            normal.paragraph_format.line_spacing = v.typography.line_spacing
+    except Exception:
+        pass
         
-    for key, stylename in [('title', 'Title'), ('heading1', 'Heading 1'), ('heading2', 'Heading 2'), ('heading3', 'Heading 3')]:
-        spec = v.typography.styles.get(key)
-        if not spec or stylename not in d.styles:
-            continue
-        st = d.styles[stylename]
-        st.font.name = v.typography.body_font
-        if hasattr(st._element, 'rPr') and st._element.rPr is not None:
-            st._element.rPr.get_or_add_rFonts().set(qn('w:eastAsia'), v.typography.body_font)
-        if 'size_pt' in spec:
-            st.font.size = Pt(float(spec['size_pt']))
-        if 'bold' in spec:
-            st.font.bold = bool(spec['bold'])
-        if 'italic' in spec:
-            st.font.italic = bool(spec['italic'])
+    for s_name, s_spec in v.typography.styles.items():
+        try:
+            style_obj = None
+            if s_name == 'title':
+                style_obj = d.styles['Title']
+            elif s_name == 'heading1':
+                style_obj = d.styles['Heading 1']
+            elif s_name == 'heading2':
+                style_obj = d.styles['Heading 2']
+            elif s_name == 'heading3':
+                style_obj = d.styles['Heading 3']
+                
+            if style_obj:
+                if 'font' in s_spec:
+                    style_obj.font.name = s_spec['font']
+                else:
+                    style_obj.font.name = v.typography.body_font
+                    
+                if 'size_pt' in s_spec:
+                    style_obj.font.size = Pt(s_spec['size_pt'])
+                if 'bold' in s_spec:
+                    style_obj.font.bold = s_spec['bold']
+                if 'italic' in s_spec:
+                    style_obj.font.italic = s_spec['italic']
+                if 'alignment' in s_spec:
+                    align_map = {
+                        'left': WD_ALIGN_PARAGRAPH.LEFT,
+                        'center': WD_ALIGN_PARAGRAPH.CENTER,
+                        'right': WD_ALIGN_PARAGRAPH.RIGHT,
+                        'justify': WD_ALIGN_PARAGRAPH.JUSTIFY
+                    }
+                    if s_spec['alignment'] in align_map:
+                        style_obj.paragraph_format.alignment = align_map[s_spec['alignment']]
+        except Exception:
+            pass
 
 _DEFAULT_FRONT_TITLES = {
-    'cover': 'COVER PAGE',
-    'inner_cover': 'INNER COVER',
-    'acknowledgements': 'ACKNOWLEDGEMENTS',
-    'declaration': 'DECLARATION',
-    'supervisor_review': 'SUPERVISOR REVIEW',
-    'reviewer_review': 'REVIEWER REVIEW',
-    'work_schedule': 'WORK SCHEDULE',
-    'abstract': 'ABSTRACT',
-    'table_of_contents': 'TABLE OF CONTENTS',
-    'list_of_figures': 'LIST OF FIGURES',
-    'list_of_tables': 'LIST OF TABLES',
-    'abbreviations': 'ABBREVIATIONS',
-    'proposal_cover': 'PROPOSAL COVER',
-    'proposal_title_page': 'PROPOSAL TITLE PAGE'
+    'acknowledgements': 'LỜI CẢM ƠN',
+    'declaration': 'LỜI CAM ĐOAN',
+    'supervisor_review': 'NHẬN XÉT CỦA GIẢNG VIÊN HƯỚNG DẪN',
+    'reviewer_review': 'NHẬN XÉT CỦA NGƯỜI PHẢN BIỆN',
+    'work_schedule': 'LỊCH LÀM VIỆC',
+    'abstract': 'TÓM TẮT ĐỒ ÁN',
+    'table_of_contents': 'MỤC LỤC',
+    'list_of_figures': 'DANH MỤC HÌNH ẢNH',
+    'list_of_tables': 'DANH MỤC BẢNG BIỂU',
+    'abbreviations': 'DANH MỤC TỪ VIẾT TẮT'
 }
 
-def _render_cover_page(d: Document, v: Variant, title: str, student: str, supervisor: str):
+def _render_cover_page(d: Document, v: Variant, title_text: str, student: str, supervisor: str):
     cover_spec = v.cover
     inst_lines = cover_spec.get('institution_lines', [])
-    if inst_lines:
-        p_inst = d.add_paragraph()
-        p_inst.alignment = WD_ALIGN_PARAGRAPH.CENTER
-        r_inst = p_inst.add_run('\n'.join(inst_lines))
-        r_inst.bold = True
-        r_inst.font.size = Pt(14)
+    for line in inst_lines:
+        p_top = d.add_paragraph()
+        p_top.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        r = p_top.add_run(line)
+        r.bold = True
+        r.font.size = Pt(13)
         
-    d.add_paragraph('\n\n')
-    
     doc_type = cover_spec.get('document_type', '')
-    title_prefix = cover_spec.get('title_prefix', '')
-    
-    p_title = d.add_paragraph()
-    p_title.alignment = WD_ALIGN_PARAGRAPH.CENTER
     if doc_type:
-        r_type = p_title.add_run(f"{doc_type}\n\n")
-        r_type.bold = True
-        r_type.font.size = Pt(16)
-        
-    title_text = f"{title_prefix}\n{title.upper()}\n\n" if title_prefix else f"{title.upper()}\n\n"
+        p_dt = d.add_paragraph(f"\n\n{doc_type}")
+        p_dt.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        if p_dt.runs:
+            p_dt.runs[0].bold = True
+            p_dt.runs[0].font.size = Pt(16)
+            
+    prefix = cover_spec.get('title_prefix', '')
+    p_title = d.add_paragraph("\n\n")
+    p_title.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    if prefix:
+        r_pre = p_title.add_run(f"{prefix}\n")
+        r_pre.bold = True
+        r_pre.font.size = Pt(14)
     r_t = p_title.add_run(title_text)
     r_t.bold = True
     r_t.font.size = Pt(18)
@@ -166,12 +181,17 @@ def scaffold_document(
     variant_name: str,
     *,
     title: str | None = None,
-    student: str = '',
-    supervisor: str = ''
+    student: str | None = None,
+    supervisor: str | None = None,
+    dry_run: bool = False
 ) -> Path:
     v = profile.variant(variant_name)
     out = Path(output)
-    out.parent.mkdir(parents=True, exist_ok=True)
+    if not dry_run:
+        out.parent.mkdir(parents=True, exist_ok=True)
+        
+    eff_student = student or ''
+    eff_supervisor = supervisor or ''
     
     # Template asset clone path (e.g. for official proposal template)
     if v.template_asset:
@@ -181,10 +201,10 @@ def scaffold_document(
             rel = v.template_asset.split('use_cases/', 1)[-1]
             asset = Path(str(resource_files('wordassistant').joinpath('data', 'use_cases', rel)))
         if asset.exists():
-            shutil.copy2(asset, out)
-            # If user explicitly supplied metadata, replace placeholders in cloned doc
-            if title is not None or student or supervisor:
-                _fill_template_metadata(out, title=title or '', student=student, supervisor=supervisor)
+            if not dry_run:
+                shutil.copy2(asset, out)
+                if title is not None or eff_student or eff_supervisor:
+                    _fill_template_metadata(out, title=title or '', student=eff_student, supervisor=eff_supervisor)
             return out
             
     effective_title = title if title is not None else 'UNTITLED DOCUMENT'
@@ -197,10 +217,10 @@ def scaffold_document(
     non_cover_front = [x for x in v.front_matter if x not in ('cover', 'inner_cover', 'proposal_cover')]
     
     if has_covers:
-        _render_cover_page(d, v, effective_title, student, supervisor)
+        _render_cover_page(d, v, effective_title, eff_student, eff_supervisor)
         if 'inner_cover' in v.front_matter:
             d.add_page_break()
-            _render_cover_page(d, v, effective_title, student, supervisor)
+            _render_cover_page(d, v, effective_title, eff_student, eff_supervisor)
             
     if non_cover_front:
         front_sec = d.add_section(WD_SECTION_START.NEW_PAGE)
@@ -233,22 +253,19 @@ def scaffold_document(
         body_sec.header.is_linked_to_previous = False
         body_sec.footer.is_linked_to_previous = False
         
-        # Calculate usable text width for right-aligned tab stop
         usable_width_cm = max(5.0, v.page.width_cm - v.page.margins.left_cm - v.page.margins.right_cm)
         
         hf = v.header_footer
         if hf:
-            # Header
             hp = body_sec.header.paragraphs[0]
-            header_l = effective_title if hf.get('header_left') == 'topic' else (supervisor if hf.get('header_left') == 'supervisor' else '')
-            header_r = f"GVHD: {supervisor}" if (hf.get('header_right') == 'supervisor' and supervisor) else (effective_title if hf.get('header_right') == 'topic' else '')
+            header_l = effective_title if hf.get('header_left') == 'topic' else (eff_supervisor if hf.get('header_left') == 'supervisor' else '')
+            header_r = f"GVHD: {eff_supervisor}" if (hf.get('header_right') == 'supervisor' and eff_supervisor) else (effective_title if hf.get('header_right') == 'topic' else '')
             if header_l or header_r:
                 hp.text = f"{header_l}\t{header_r}".strip()
                 hp.paragraph_format.tab_stops.add_tab_stop(Cm(usable_width_cm), WD_TAB_ALIGNMENT.RIGHT)
                 
-            # Footer
             fp = body_sec.footer.paragraphs[0]
-            foot_l = student if hf.get('footer_left') == 'student' else ''
+            foot_l = eff_student if hf.get('footer_left') == 'student' else ''
             fp.text = f"{foot_l}\t" if foot_l else "\t"
             fp.paragraph_format.tab_stops.add_tab_stop(Cm(usable_width_cm), WD_TAB_ALIGNMENT.RIGHT)
             if hf.get('footer_right') == 'page_number':
@@ -269,7 +286,8 @@ def scaffold_document(
         p.add_run(effective_title)
         d.add_paragraph("[Document content]")
         
-    d.save(out)
+    if not dry_run:
+        d.save(out)
     return out
 
 def _fill_template_metadata(doc_path: Path, title: str, student: str, supervisor: str):

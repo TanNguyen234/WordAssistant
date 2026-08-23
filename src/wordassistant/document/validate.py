@@ -17,7 +17,7 @@ class ValidationResult:
 
 def _resolve_run_font(run, p, doc_default_font: str | None) -> tuple[str | None, bool]:
     # Returns (font_name, is_resolved)
-    if run.font and run.font.name:
+    if hasattr(run, 'font') and run.font and run.font.name:
         return run.font.name, True
     if p.style and hasattr(p.style, 'font') and p.style.font and p.style.font.name:
         return p.style.font.name, True
@@ -27,7 +27,7 @@ def _resolve_run_font(run, p, doc_default_font: str | None) -> tuple[str | None,
 
 def _resolve_run_size(run, p, doc_default_size: float | None) -> tuple[float | None, bool]:
     # Returns (size_pt, is_resolved)
-    if run.font and run.font.size:
+    if hasattr(run, 'font') and run.font and run.font.size:
         return run.font.size.pt, True
     if p.style and hasattr(p.style, 'font') and p.style.font and p.style.font.size:
         return p.style.font.size.pt, True
@@ -135,28 +135,34 @@ def validate_document(
             # Check line spacing
             if expected_ls is not None:
                 actual_ls, ls_ok = _resolve_line_spacing(p, doc_default_ls)
-                if ls_ok and actual_ls is not None and abs(actual_ls - expected_ls) > 0.15:
+                if not ls_ok:
+                    unresolved_warnings += 1
+                elif actual_ls is not None and abs(actual_ls - expected_ls) > 0.15:
                     ls_errors += 1
                     
             # Check runs
             runs_to_check = [r for r in p.runs if r.text.strip()]
             if not runs_to_check and p.text.strip():
                 # Paragraph without explicit runs
-                font_name, font_ok = _resolve_run_font(p, p, doc_default_font or v.typography.body_font)
-                if font_ok and font_name and font_name.lower() != expected_font:
+                font_name, font_ok = _resolve_run_font(p, p, doc_default_font)
+                if not font_ok:
+                    unresolved_warnings += 1
+                elif font_name and font_name.lower() != expected_font:
                     font_errors += 1
-                size_val, size_ok = _resolve_run_size(p, p, doc_default_size or expected_size)
-                if size_ok and size_val is not None and abs(size_val - expected_size) > 0.6:
+                size_val, size_ok = _resolve_run_size(p, p, doc_default_size)
+                if not size_ok:
+                    unresolved_warnings += 1
+                elif size_val is not None and abs(size_val - expected_size) > 0.6:
                     size_errors += 1
             else:
                 for r in runs_to_check:
-                    font_name, font_ok = _resolve_run_font(r, p, doc_default_font or v.typography.body_font)
+                    font_name, font_ok = _resolve_run_font(r, p, doc_default_font)
                     if not font_ok:
                         unresolved_warnings += 1
                     elif font_name and font_name.lower() != expected_font:
                         font_errors += 1
                         
-                    size_val, size_ok = _resolve_run_size(r, p, doc_default_size or expected_size)
+                    size_val, size_ok = _resolve_run_size(r, p, doc_default_size)
                     if not size_ok:
                         unresolved_warnings += 1
                     elif size_val is not None and abs(size_val - expected_size) > 0.6:
@@ -211,7 +217,15 @@ def validate_document(
                 if item_title in h_text.casefold() or h_text.casefold() in item_title:
                     match_idx = p_idx
                     break
-            if match_idx is not None:
+            if match_idx is None and verify_mode:
+                issues.append(
+                    Issue(
+                        'error',
+                        'missing_front_matter',
+                        f"Missing required front-matter section: '{item}' ('{v.front_matter_titles.get(item, item)}')."
+                    )
+                )
+            elif match_idx is not None:
                 if match_idx < last_idx:
                     issues.append(
                         Issue(
@@ -235,7 +249,6 @@ def validate_document(
                     match_idx = p_idx
                     break
             if match_idx is None:
-                # Also check full text
                 doc_full_text = "\n".join(p.text for p in d.paragraphs)
                 if target_title not in doc_full_text.casefold():
                     missing_blueprint.append(str(sec['title']))
@@ -243,7 +256,7 @@ def validate_document(
                 blueprint_indices.append(match_idx)
                 
         if missing_blueprint:
-            sev = 'warning' if is_template_clone else 'error'
+            sev = 'warning' if (is_template_clone and not verify_mode) else 'error'
             issues.append(
                 Issue(
                     sev,
@@ -252,7 +265,6 @@ def validate_document(
                 )
             )
             
-        # Check that found blueprint sections appear in strictly increasing order
         if len(blueprint_indices) >= 2 and not is_template_clone:
             if blueprint_indices != sorted(blueprint_indices):
                 issues.append(
@@ -266,29 +278,58 @@ def validate_document(
     # 5. Header & Footer Requirements
     hf = v.header_footer
     if hf:
+        # Check PAGE number field
         if hf.get('footer_right') == 'page_number':
             has_page_field = False
             for s in d.sections:
                 f_xml = s.footer._element.xml
-                if 'w:instr="PAGE"' in f_xml or 'PAGE' in f_xml:
+                if 'w:fldSimple' in f_xml and ('PAGE' in f_xml or 'w:instr="PAGE"' in f_xml):
+                    has_page_field = True
+                    break
+                if '<w:instrText' in f_xml and 'PAGE' in f_xml:
                     has_page_field = True
                     break
             if not has_page_field:
                 issues.append(
                     Issue(
-                        'warning' if not verify_mode else 'error',
+                        'error' if verify_mode else 'warning',
                         'missing_page_number_field',
                         "Profile specifies footer page numbering, but no PAGE field was detected in footers."
+                    )
+                )
+                
+        # In verify_mode, check header_left, header_right, footer_left
+        if verify_mode and not is_template_clone:
+            # Check content sections (last section usually has body headers)
+            body_section = d.sections[-1]
+            header_text = " ".join(p.text.strip() for p in body_section.header.paragraphs if p.text.strip())
+            footer_text = " ".join(p.text.strip() for p in body_section.footer.paragraphs if p.text.strip())
+            
+            if hf.get('header_left') and not header_text:
+                issues.append(
+                    Issue(
+                        'error',
+                        'missing_header_topic',
+                        f"Profile requires header '{hf['header_left']}', but header is empty."
+                    )
+                )
+            if hf.get('footer_left') and not footer_text:
+                issues.append(
+                    Issue(
+                        'error',
+                        'missing_footer_student',
+                        f"Profile requires footer '{hf['footer_left']}', but footer is empty."
                     )
                 )
 
     # 6. TOC Field Validation
     if ('table_of_contents' in v.front_matter or 'table_of_contents' in v.field_requirements) and not is_template_clone:
         doc_xml = d._element.xml
-        if 'TOC' not in doc_xml:
+        has_toc = ('w:fldSimple' in doc_xml and 'TOC' in doc_xml) or ('<w:instrText' in doc_xml and 'TOC' in doc_xml)
+        if not has_toc:
             issues.append(
                 Issue(
-                    'warning' if not verify_mode else 'error',
+                    'error' if verify_mode else 'warning',
                     'missing_toc_field',
                     "Profile includes table_of_contents front-matter, but no TOC field code was found."
                 )
@@ -302,7 +343,6 @@ def validate_document(
         doc_lines = [p.text.strip() for p in d.paragraphs if p.text.strip()]
         count = sum(1 for ln in doc_lines if ref_pattern.match(ln))
         
-        # Also check if any paragraphs under bibliography chapter exist
         if count == 0:
             in_bib = False
             for p in d.paragraphs:

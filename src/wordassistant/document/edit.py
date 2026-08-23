@@ -143,6 +143,7 @@ def replace_text(
     old: str,
     new: str,
     output_path: str | Path | None = None,
+    count: int | None = None,
     dry_run: bool = False
 ) -> ReplaceResult:
     if not old:
@@ -189,7 +190,10 @@ def replace_text(
     # 2. Execution Phase: Perform safe replacement
     total_replacements = 0
     for p in matching_paragraphs:
-        total_replacements += _replace_paragraph_runs_safe(p, old, new)
+        if count is not None and total_replacements >= count:
+            break
+        made = _replace_paragraph_runs_safe(p, old, new)
+        total_replacements += made
         
     if dry_run:
         return ReplaceResult(

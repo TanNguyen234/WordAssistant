@@ -103,7 +103,6 @@ def _truncate_to_budget(heading: str, body: str, budget: int) -> str | None:
     marker = "\n[… truncated to budget …]"
     base_prefix = f"{heading}\n"
     if estimate_tokens(base_prefix.strip()) > budget:
-        # If even the heading exceeds budget, try just the heading truncated
         head_text = heading
         low, high = 1, len(head_text)
         best_head = None
@@ -132,7 +131,6 @@ def _truncate_to_budget(heading: str, body: str, budget: int) -> str | None:
             high = mid - 1
             
     if best_text is None:
-        # Fallback without marker
         cand = f"{base_prefix}".strip()
         if estimate_tokens(cand) <= budget:
             return cand
@@ -143,18 +141,14 @@ def build_context(
     sections: list[DocumentSection],
     query: str,
     max_tokens: int = 12000,
-    active_section_id: str | None = None
-) -> ContextBundle:
-    if max_tokens < 100:
-        raise ValueError("max_tokens must be >= 100")
-        
-def build_context(
-    sections: list[DocumentSection],
-    query: str,
-    max_tokens: int = 12000,
     active_section_id: str | None = None,
     target_section_id: str | None = None
 ) -> ContextBundle:
+    if type(max_tokens) is not int or type(max_tokens) is bool:
+        raise TypeError(f"max_tokens must be an integer, got {type(max_tokens).__name__}: {max_tokens!r}")
+    if max_tokens < 100:
+        raise ValueError(f"max_tokens must be >= 100, got {max_tokens}")
+        
     if not sections:
         return ContextBundle(query=query, sections=(), text="", estimated_tokens=0, max_tokens=max_tokens, truncated=False)
         
@@ -180,7 +174,6 @@ def build_context(
     was_truncated = False
     
     for s in chosen:
-        # Include breadcrumb if parent exists
         heading = f"## {s.title}"
         if s.parent_id and s.parent_id in by_id:
             parent = by_id[s.parent_id]
@@ -195,7 +188,6 @@ def build_context(
             budget -= cost
         else:
             was_truncated = True
-            # If nothing used yet or we still have enough budget (>= 50 tokens), try to fit a truncated piece
             if budget >= 50:
                 truncated = _truncate_to_budget(heading, s.text, budget)
                 if truncated and estimate_tokens(truncated) <= budget:
@@ -217,7 +209,6 @@ def build_context(
     text = "\n\n".join(blocks)
     actual_tokens = estimate_tokens(text)
     
-    # Invariant safety check
     if actual_tokens > max_tokens:
         was_truncated = True
         while actual_tokens > max_tokens and len(text) > 0:
