@@ -16,6 +16,8 @@ CAPABILITY_KEYS = (
     'ooxml_audit',
 )
 
+IMPLEMENTED_ADVANCED_CAPABILITIES: set[str] = set()
+
 def advanced_word_backend_available() -> bool:
     has_pkg = find_spec('docx_mcp') is not None
     has_cli = shutil.which('docx-mcp') is not None or shutil.which('docx_mcp_server') is not None
@@ -48,10 +50,11 @@ def get_backend_status() -> dict[str, Any]:
     else:
         ok, probe_msg = probe_advanced_backend()
         if ok:
-            adapter_supported = True
             operational = True
+            # Adapter supported is only True if WordAssistant has actual callable adapters
+            adapter_supported = len(IMPLEMENTED_ADVANCED_CAPABILITIES) > 0
             reason = f"docx-mcp is operational ({probe_msg})" if probe_msg else "docx-mcp is installed and operational."
-            caps = {k: "SUPPORTED" for k in CAPABILITY_KEYS}
+            caps = {k: "SUPPORTED" if k in IMPLEMENTED_ADVANCED_CAPABILITIES else "UNSUPPORTED" for k in CAPABILITY_KEYS}
         else:
             adapter_supported = False
             operational = False
@@ -66,6 +69,6 @@ def get_backend_status() -> dict[str, Any]:
         'capabilities': caps,
         'advanced_capabilities': caps,
         'core_capabilities': ['inspect', 'context', 'scaffold', 'replace', 'validate', 'verify', 'render', 'evidence'],
-        'engine': 'docx-mcp-advanced' if operational else 'python-docx-core',
-        'notes': 'Advanced backend is available for high-fidelity native revision editing.' if operational else 'Running on fast deterministic core backend (python-docx). docx-mcp is optional.'
+        'engine': 'docx-mcp-advanced' if (operational and adapter_supported) else 'python-docx-core',
+        'notes': 'Advanced backend is available for high-fidelity native revision editing.' if (operational and adapter_supported) else 'Running on fast deterministic core backend (python-docx). docx-mcp is optional.'
     }

@@ -169,6 +169,50 @@ def main() -> None:
         ])
         print("negative-delivery-fixture-verify: OK (rejected as expected)")
 
+        # D. Same-surname supervisor mismatch negative check
+        sup_mismatch_docx = tmp / 'sup_mismatch.docx'
+        shutil.copyfile(report_docx, sup_mismatch_docx)
+        d_sup = Document(sup_mismatch_docx)
+        d_sup.sections[-1].header.paragraphs[0].text = "XAY DUNG HE THONG RAG CHO VAN BAN PHAP LUAT\tTS. NGUYEN VAN C"
+        d_sup.save(sup_mismatch_docx)
+        run_expect_failure([
+            sys.executable, '-m', 'wordassistant.cli', 'verify', str(sup_mismatch_docx),
+            '--profile', 'hcmunre_dacn_2026_2027', '--variant', 'report', '--json'
+        ])
+        print("same-surname-supervisor-negative-verify: OK (rejected as expected)")
+
+        # E. Same-surname student mismatch negative check
+        stu_mismatch_docx = tmp / 'stu_mismatch.docx'
+        shutil.copyfile(report_docx, stu_mismatch_docx)
+        d_stu = Document(stu_mismatch_docx)
+        for p in d_stu.sections[-1].footer.paragraphs:
+            if "NGUYEN VAN A" in p.text:
+                p.text = "NGUYEN VAN B - 2351010002"
+        d_stu.save(stu_mismatch_docx)
+        run_expect_failure([
+            sys.executable, '-m', 'wordassistant.cli', 'verify', str(stu_mismatch_docx),
+            '--profile', 'hcmunre_dacn_2026_2027', '--variant', 'report', '--json'
+        ])
+        print("same-surname-student-negative-verify: OK (rejected as expected)")
+
+        # F. Missing inner cover negative check
+        missing_inner_docx = tmp / 'missing_inner.docx'
+        shutil.copyfile(report_docx, missing_inner_docx)
+        d_inner = Document(missing_inner_docx)
+        found_first = False
+        for p in d_inner.paragraphs:
+            if "BÁO CÁO ĐỒ ÁN" in p.text.upper() or "CÔNG NGHỆ THÔNG TIN" in p.text.upper():
+                if not found_first:
+                    found_first = True
+                else:
+                    p.text = ""
+        d_inner.save(missing_inner_docx)
+        run_expect_failure([
+            sys.executable, '-m', 'wordassistant.cli', 'verify', str(missing_inner_docx),
+            '--profile', 'hcmunre_dacn_2026_2027', '--variant', 'report', '--json'
+        ])
+        print("missing-inner-cover-negative-verify: OK (rejected as expected)")
+
         # scaffold proposal clone & generic
         run([
             sys.executable, '-m', 'wordassistant.cli', 'scaffold', str(proposal_docx),

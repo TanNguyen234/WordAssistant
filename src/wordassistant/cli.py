@@ -57,7 +57,7 @@ def _print(obj: Any, json_mode: bool = False) -> None:
 def _resolve_evidence_registry(path_or_ws: str | None = None) -> Path:
     if path_or_ws:
         p = Path(path_or_ws)
-        if p.is_file():
+        if p.is_file() or p.name.endswith('.json') or p.suffix == '.json':
             return p
         if p.is_dir():
             cand = p / '.wordassistant' / 'evidence.json'
@@ -67,6 +67,7 @@ def _resolve_evidence_registry(path_or_ws: str | None = None) -> Path:
             if cand_direct.exists():
                 return cand_direct
             return p / 'evidence.json'
+        return p
     wa = find_workspace()
     if wa:
         return wa / 'evidence.json'

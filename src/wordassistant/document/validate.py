@@ -2,6 +2,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path
 import re
+import unicodedata
 from docx import Document
 from wordassistant.profiles.loader import DocumentProfile, Variant
 
@@ -16,82 +17,120 @@ class ValidationResult:
     valid: bool
     issues: tuple[Issue, ...]
 
-DRAFT_PLACEHOLDERS = [
+GENERIC_DRAFT_PLACEHOLDERS = (
     "[front matter content]",
     "[section content...]",
     "[list of figures]",
     "[list of tables]",
     "[document content]",
     "untitled document",
-    "[họ và tên sinh viên - mssv]",
-    "[họ và tên cbhd]",
-    "[họ và tên sinh viên]",
-    "[họ và tên gvhd]",
-    "<tên đề tài>",
-    "[tên đề tài]",
-    "<tên sinh viên>",
-    "<sinh viên>",
-    "<cán bộ hướng dẫn>",
-    "<giảng viên hướng dẫn>",
-    "[tên sinh viên]",
-    "[tên gvhd]",
-]
+)
 
-def _find_draft_placeholders(d: Document) -> list[str]:
+def _normalize_text(s: str) -> str:
+    if not s:
+        return ""
+    norm = unicodedata.normalize('NFC', s)
+    return " ".join(norm.split()).casefold()
+
+def _find_draft_placeholders(d: Document, v: Variant) -> list[str]:
     found = []
+    check_set = set(GENERIC_DRAFT_PLACEHOLDERS)
+    
+    # Add defaults from profile metadata fields if they have draft brackets or angle brackets
+    if 'metadata_fields' in v.cover:
+        for mf in v.cover['metadata_fields']:
+            d_val = mf.get('default')
+            if d_val and (d_val.startswith('[') or d_val.startswith('<')):
+                check_set.add(_normalize_text(d_val))
+                
     # Check paragraphs
     for p in d.paragraphs:
         txt = p.text.strip()
         if not txt:
             continue
-        txt_lower = txt.lower()
-        for pl in DRAFT_PLACEHOLDERS:
-            if pl in txt_lower:
+        txt_norm = _normalize_text(txt)
+        for pl in check_set:
+            if pl in txt_norm:
                 found.append(txt[:80])
                 break
+                
     # Check tables
     for table in d.tables:
         for row in table.rows:
             for cell in row.cells:
-                c_txt = cell.text.strip().lower()
-                for pl in DRAFT_PLACEHOLDERS:
-                    if pl in c_txt:
-                        found.append(cell.text.strip()[:80])
+                c_txt = cell.text.strip()
+                if not c_txt:
+                    continue
+                c_norm = _normalize_text(c_txt)
+                for pl in check_set:
+                    if pl in c_norm:
+                        found.append(c_txt[:80])
                         break
     return found
 
 def _extract_cover_metadata(d: Document, v: Variant) -> dict[str, str]:
     meta: dict[str, str] = {}
-    cover_text = []
-    for p in d.paragraphs[:35]:
-        t = p.text.strip()
-        if t:
-            cover_text.append(t)
-            
-    for line in cover_text:
-        l_lower = line.lower()
-        if any(k in l_lower for k in ("sinh viên thực hiện:", "svth:", "sinh viên:")):
-            val = line.split(":", 1)[-1].strip()
-            if val:
-                meta['student'] = val
-        elif any(k in l_lower for k in ("giảng viên hướng dẫn:", "cán bộ hướng dẫn:", "gvhd:", "cbhd:")):
-            val = line.split(":", 1)[-1].strip()
-            if val:
-                meta['supervisor'] = val
+    cover_lines: list[str] = []
+    
+    front_titles = [t.casefold() for t in v.front_matter_titles.values() if len(t) > 3]
+    blueprint_titles = [sec['title'].casefold() for sec in v.section_blueprint[:2]]
+    
+    for p in d.paragraphs[:50]:
+        txt = p.text.strip()
+        if not txt:
+            continue
+        txt_lower = txt.lower()
+        if any(ft in txt_lower for ft in front_titles):
+            break
+        if any(bt in txt_lower for bt in blueprint_titles):
+            break
+        for line in txt.split('\n'):
+            clean_line = line.strip()
+            if clean_line:
+                cover_lines.append(clean_line)
                 
-    doc_type = v.cover.get('document_type', '').casefold()
+    # Match metadata fields from profile cover declarations
+    for line in cover_lines:
+        line_norm = _normalize_text(line)
+        for mf in v.cover.get('metadata_fields', []):
+            label = mf.get('label', '').strip()
+            key = mf.get('value_key', '')
+            if label and key:
+                label_norm = _normalize_text(label)
+                if label_norm in line_norm:
+                    idx = line.lower().find(label.lower())
+                    if idx != -1:
+                        val = line[idx + len(label):].strip().lstrip(':').strip()
+                        if val and not (val.startswith('[') and val.endswith(']')) and not (val.startswith('<') and val.endswith('>')):
+                            meta[key] = val
+                            
+    # Extract topic from document_type
+    doc_type = v.cover.get('document_type', '').strip()
     if doc_type:
-        for idx, line in enumerate(cover_text):
-            if doc_type in line.casefold():
-                title_parts = []
-                for next_line in cover_text[idx + 1:]:
-                    nl_lower = next_line.lower()
-                    if any(k in nl_lower for k in ("sinh viên", "svth", "giảng viên", "gvhd", "cán bộ", "tp. hồ chí minh", "tp.", "năm")):
-                        break
-                    title_parts.append(next_line)
-                if title_parts:
-                    meta['topic'] = " ".join(title_parts).strip()
+        doc_type_norm = _normalize_text(doc_type)
+        dt_idx = None
+        for i, line in enumerate(cover_lines):
+            if doc_type_norm in _normalize_text(line):
+                dt_idx = i
                 break
+        if dt_idx is not None:
+            title_lines = []
+            for next_line in cover_lines[dt_idx + 1:]:
+                nl_norm = _normalize_text(next_line)
+                if any(_normalize_text(mf.get('label', '')) in nl_norm for mf in v.cover.get('metadata_fields', []) if mf.get('label')):
+                    break
+                if v.cover.get('location_year') and _normalize_text(v.cover['location_year']) in nl_norm:
+                    break
+                if any(_normalize_text(inst) in nl_norm for inst in v.cover.get('institution_lines', [])):
+                    break
+                title_lines.append(next_line)
+            if title_lines:
+                topic_str = " ".join(title_lines).strip()
+                t_prefix = v.cover.get('title_prefix', '').strip()
+                if t_prefix and topic_str.lower().startswith(t_prefix.lower()):
+                    topic_str = topic_str[len(t_prefix):].strip().lstrip(':').strip()
+                meta['topic'] = topic_str
+                
     return meta
 
 def _resolve_run_font(run, p, doc_default_font: str | None) -> tuple[str | None, bool]:
@@ -145,7 +184,7 @@ def validate_document(
     is_template_clone = bool(v.template_asset)
     
     # 0. Draft Placeholder Detection
-    placeholders = _find_draft_placeholders(d)
+    placeholders = _find_draft_placeholders(d, v)
     if placeholders:
         sev = 'error' if verify_mode else 'warning'
         issues.append(
@@ -293,8 +332,22 @@ def validate_document(
             headings_in_doc.append((idx, p.text.strip()))
             
     # Check Cover Signals
+    front_titles = [t.casefold() for t in v.front_matter_titles.values() if len(t) > 3]
+    blueprint_titles = [sec['title'].casefold() for sec in v.section_blueprint[:2]]
+    
     if 'cover' in v.front_matter and not is_template_clone:
-        cover_text_full = "\n".join(p.text for p in d.paragraphs[:35])
+        cover_paras = []
+        for p in d.paragraphs[:50]:
+            t = p.text.strip()
+            if not t:
+                continue
+            if any(ft in t.casefold() for ft in front_titles):
+                break
+            if any(bt in t.casefold() for bt in blueprint_titles):
+                break
+            cover_paras.append(t)
+            
+        cover_text_full = "\n".join(cover_paras)
         inst_lines = v.cover.get('institution_lines', [])
         if inst_lines:
             missing_inst = False
@@ -320,6 +373,23 @@ def validate_document(
                     f"Required cover document type line '{doc_type}' is missing."
                 )
             )
+            
+        # Inner Cover Verification
+        if 'inner_cover' in v.front_matter:
+            cover_count = 0
+            if doc_type:
+                cover_count = cover_text_full.casefold().count(doc_type.casefold())
+            elif inst_lines:
+                cover_count = cover_text_full.casefold().count(inst_lines[0].casefold())
+                
+            if cover_count < 2:
+                issues.append(
+                    Issue(
+                        'error' if verify_mode else 'warning',
+                        'missing_inner_cover',
+                        "Profile specifies both cover and inner_cover, but inner cover page/block was not found."
+                    )
+                )
             
     non_cover_front = [x for x in v.front_matter if x not in ('cover', 'inner_cover', 'proposal_cover')]
     if non_cover_front and not is_template_clone:
@@ -358,6 +428,7 @@ def validate_document(
         for sec in v.section_blueprint:
             target_title = str(sec['title']).casefold()
             expected_level = sec.get('level', 1)
+            is_required = sec.get('required', True)
             matched_p = None
             match_idx = None
             
@@ -371,7 +442,8 @@ def validate_document(
             if match_idx is None:
                 doc_full_text = "\n".join(p.text for p in d.paragraphs)
                 if target_title not in doc_full_text.casefold():
-                    missing_blueprint.append(str(sec['title']))
+                    if is_required:
+                        missing_blueprint.append(str(sec['title']))
             else:
                 blueprint_indices.append(match_idx)
                 if matched_p is not None and not is_template_clone:
@@ -426,8 +498,8 @@ def validate_document(
     # 5. Header & Footer Requirements
     hf = v.header_footer
     if hf:
-        # Check PAGE number field
-        if hf.get('footer_right') == 'page_number':
+        req_page = v.field_requirements.get('page_number')
+        if (hf.get('footer_right') == 'page_number' or req_page is True) and req_page is not False:
             has_page_field = False
             for s in d.sections:
                 f_xml = s.footer._element.xml
@@ -446,6 +518,24 @@ def validate_document(
                     )
                 )
                 
+        # Check page_number_start restart
+        p_start = hf.get('page_number_start')
+        if p_start is not None and verify_mode and not is_template_clone:
+            has_pg_restart = False
+            for s in d.sections:
+                s_xml = s._sectPr.xml
+                if 'w:pgNumType' in s_xml and ('w:start=' in s_xml or 'w:start' in s_xml):
+                    has_pg_restart = True
+                    break
+            if not has_pg_restart:
+                issues.append(
+                    Issue(
+                        'error',
+                        'missing_page_number_restart',
+                        f"Profile specifies page_number_start={p_start}, but no section with pgNumType restart was found."
+                    )
+                )
+                
         # In verify_mode, check semantic roles
         if verify_mode and not is_template_clone:
             body_section = d.sections[-1]
@@ -459,55 +549,56 @@ def validate_document(
             expected_sup = cover_meta.get('supervisor')
             expected_student = cover_meta.get('student')
             
+            header_norm = _normalize_text(header_text)
+            footer_norm = _normalize_text(footer_text)
+            
             if hf.get('header_left'):
-                if not header_text:
-                    issues.append(
-                        Issue('error', 'missing_header_topic', f"Profile requires header '{hf['header_left']}', but header is empty.")
-                    )
-                elif expected_topic:
-                    topic_clean = expected_topic.replace("\n", " ").strip()
-                    if topic_clean.lower() not in header_text.lower() and not any(w in header_text.lower() for w in topic_clean.lower().split() if len(w) > 4):
-                        issues.append(
-                            Issue('error', 'header_topic_mismatch', f"Header text does not match document topic: '{header_text}' vs expected '{expected_topic}'.")
-                        )
-                elif "untitled" in header_text.lower() or any(p in header_text.lower() for p in DRAFT_PLACEHOLDERS):
-                    issues.append(
-                        Issue('error', 'header_topic_placeholder', f"Header topic contains draft placeholder: '{header_text}'.")
-                    )
+                role = hf['header_left']
+                if role == 'topic':
+                    if not header_text:
+                        issues.append(Issue('error', 'missing_header_topic', "Profile requires header topic, but header is empty."))
+                    elif expected_topic:
+                        exp_topic_norm = _normalize_text(expected_topic)
+                        if exp_topic_norm not in header_norm:
+                            issues.append(Issue('error', 'header_topic_mismatch', f"Header text does not match document topic: '{header_text}' vs expected '{expected_topic}'."))
+                    elif "untitled" in header_norm or any(_normalize_text(p) in header_norm for p in GENERIC_DRAFT_PLACEHOLDERS):
+                        issues.append(Issue('error', 'header_topic_placeholder', f"Header topic contains draft placeholder: '{header_text}'."))
 
             if hf.get('header_right') == 'supervisor':
-                found_sup = False
-                if expected_sup:
-                    sup_clean = expected_sup.lower()
-                    if sup_clean in header_text.lower() or any(part in header_text.lower() for part in sup_clean.split() if len(part) > 3):
-                        found_sup = True
-                elif header_text and '\t' in header_text:
-                    right_part = header_text.split('\t')[-1].strip()
-                    if right_part and right_part != header_text.split('\t')[0].strip() and not any(p in right_part.lower() for p in DRAFT_PLACEHOLDERS):
-                        found_sup = True
-                if not found_sup:
-                    issues.append(
-                        Issue('error', 'missing_header_supervisor', "Profile requires supervisor in header_right, but supervisor was missing or mismatched.")
-                    )
+                if not header_text:
+                    issues.append(Issue('error', 'missing_header_supervisor', "Profile requires supervisor in header_right, but header is empty."))
+                elif expected_sup:
+                    exp_sup_norm = _normalize_text(expected_sup)
+                    if '\t' in header_text:
+                        right_part = header_text.split('\t')[-1].strip()
+                        right_norm = _normalize_text(right_part)
+                        if right_norm != exp_sup_norm and exp_sup_norm not in header_norm:
+                            issues.append(Issue('error', 'header_supervisor_mismatch', f"Header supervisor '{right_part}' does not match cover supervisor '{expected_sup}'."))
+                    elif exp_sup_norm not in header_norm:
+                        issues.append(Issue('error', 'header_supervisor_mismatch', f"Header text does not contain cover supervisor '{expected_sup}'."))
+                else:
+                    if '\t' not in header_text or len(header_text.split('\t')[-1].strip()) < 3:
+                        issues.append(Issue('error', 'missing_header_supervisor', "Profile requires supervisor in header_right, but supervisor was missing."))
 
             if hf.get('footer_left') == 'student':
                 if not footer_text:
-                    issues.append(
-                        Issue('error', 'missing_footer_student', "Profile requires footer student info, but footer is empty.")
-                    )
+                    issues.append(Issue('error', 'missing_footer_student', "Profile requires footer student info, but footer is empty."))
                 elif expected_student:
-                    stu_clean = expected_student.lower()
-                    if stu_clean not in footer_text.lower() and not any(part in footer_text.lower() for part in stu_clean.split() if len(part) > 3):
-                        issues.append(
-                            Issue('error', 'footer_student_mismatch', f"Footer student text '{footer_text}' does not match cover student '{expected_student}'.")
-                        )
-                elif any(p in footer_text.lower() for p in DRAFT_PLACEHOLDERS):
-                    issues.append(
-                        Issue('error', 'footer_student_placeholder', f"Footer student contains placeholder: '{footer_text}'.")
-                    )
+                    exp_stu_norm = _normalize_text(expected_student)
+                    if '\t' in footer_text:
+                        left_part = footer_text.split('\t')[0].strip()
+                        left_norm = _normalize_text(left_part)
+                        if left_norm != exp_stu_norm and exp_stu_norm not in footer_norm:
+                            issues.append(Issue('error', 'footer_student_mismatch', f"Footer student text '{left_part}' does not match cover student '{expected_student}'."))
+                    elif exp_stu_norm not in footer_norm:
+                        issues.append(Issue('error', 'footer_student_mismatch', f"Footer text does not contain cover student '{expected_student}'."))
+                else:
+                    if any(_normalize_text(p) in footer_norm for p in GENERIC_DRAFT_PLACEHOLDERS):
+                        issues.append(Issue('error', 'footer_student_placeholder', f"Footer student contains placeholder: '{footer_text}'."))
 
     # 6. TOC Field Validation
-    if ('table_of_contents' in v.front_matter or 'table_of_contents' in v.field_requirements) and not is_template_clone:
+    req_toc = v.field_requirements.get('table_of_contents')
+    if (('table_of_contents' in v.front_matter or req_toc is True) and req_toc is not False) and not is_template_clone:
         doc_xml = d._element.xml
         has_toc = ('w:fldSimple' in doc_xml and 'TOC' in doc_xml) or ('<w:instrText' in doc_xml and 'TOC' in doc_xml)
         if not has_toc:
@@ -524,16 +615,16 @@ def validate_document(
     if isinstance(minrefs, int) and minrefs > 0 and not is_template_clone:
         ref_pattern = re.compile(r'^\[\d+\]')
         
-        # Locate bibliography section heading
         bib_start_idx = None
         bib_level = 1
         for idx, p in enumerate(d.paragraphs):
             txt = p.text.strip()
             if not txt:
                 continue
-            if ('tài liệu tham khảo' in txt.lower() or 'tai lieu tham khao' in txt.lower() or 
-                'references' in txt.lower() or 'bibliography' in txt.lower()):
-                if p.style.name.startswith('Heading') or p.style.name == 'Title' or any(sec['title'].lower() in txt.lower() for sec in v.section_blueprint):
+            txt_norm = _normalize_text(txt)
+            if ('tài liệu tham khảo' in txt_norm or 'tai lieu tham khao' in txt_norm or 
+                'references' in txt_norm or 'bibliography' in txt_norm):
+                if p.style.name.startswith('Heading') or p.style.name == 'Title' or any(_normalize_text(sec['title']) in txt_norm for sec in v.section_blueprint):
                     bib_start_idx = idx
                     if p.style.name.startswith('Heading '):
                         try:

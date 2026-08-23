@@ -5,6 +5,10 @@ import math
 from pathlib import Path
 from typing import Any, Mapping
 from importlib.resources import files as resource_files
+import re
+
+_SUPPORTED_ROLES = {'topic', 'supervisor', 'student', 'page_number'}
+_VALID_KEY_REGEX = re.compile(r'^[a-zA-Z0-9_-]+$')
 
 class ProfileError(ValueError):
     pass
@@ -253,8 +257,10 @@ def _parse_variant(name: str, data: Any) -> Variant:
                 _check_unknown_keys(mf, _METADATA_FIELD_KEYS, f"{name}.cover.metadata_fields[{mf_idx}]")
                 if 'label' in mf and not isinstance(mf['label'], str):
                     raise ProfileError(f"{name}.cover.metadata_fields[{mf_idx}].label must be a string")
-                if 'value_key' in mf and not isinstance(mf['value_key'], str):
-                    raise ProfileError(f"{name}.cover.metadata_fields[{mf_idx}].value_key must be a string")
+                if 'value_key' in mf:
+                    v_key = mf['value_key']
+                    if not isinstance(v_key, str) or not _VALID_KEY_REGEX.match(v_key):
+                        raise ProfileError(f"{name}.cover.metadata_fields[{mf_idx}].value_key must be a valid identifier (alphanumeric, underscore, hyphen), got {v_key!r}")
                 if 'value' in mf and mf['value'] is not None and not isinstance(mf['value'], str):
                     raise ProfileError(f"{name}.cover.metadata_fields[{mf_idx}].value must be a string or null")
                 if 'default' in mf and mf['default'] is not None and not isinstance(mf['default'], str):
@@ -307,8 +313,11 @@ def _parse_variant(name: str, data: Any) -> Variant:
         _check_unknown_keys(header_footer, _HEADER_FOOTER_KEYS, f"{name}.header_footer")
         for hf_side in ('header_left', 'header_right', 'footer_left', 'footer_right'):
             if hf_side in header_footer and header_footer[hf_side] is not None:
-                if not isinstance(header_footer[hf_side], str):
+                val = header_footer[hf_side]
+                if not isinstance(val, str):
                     raise ProfileError(f"{name}.header_footer.{hf_side} must be a string or null")
+                if val not in _SUPPORTED_ROLES and not val.startswith('custom:') and not val.startswith('literal:'):
+                    raise ProfileError(f"{name}.header_footer.{hf_side} must be a supported role ({sorted(_SUPPORTED_ROLES)}) or custom/literal prefix, got {val!r}")
         if 'page_number_start' in header_footer and header_footer['page_number_start'] is not None:
             p_start = header_footer['page_number_start']
             if isinstance(p_start, int) and type(p_start) is not bool:

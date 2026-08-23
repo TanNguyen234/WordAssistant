@@ -30,7 +30,10 @@ def test_status_successful_probe():
          patch("wordassistant.backends.status.probe_advanced_backend", return_value=(True, "OK")):
         st = get_backend_status()
         assert st["installed"] is True
-        assert st["adapter_supported"] is True
         assert st["operational"] is True
+        # Since WordAssistant does not yet implement mutation adapters for comments/tracked changes
+        assert st["adapter_supported"] is False
         assert "operational" in st["reason"].lower()
-        assert st["capabilities"]["comments"] == "SUPPORTED"
+        assert st["capabilities"]["comments"] == "UNSUPPORTED"
+        assert st["capabilities"]["tracked_changes"] == "UNSUPPORTED"
+
