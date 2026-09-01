@@ -3,8 +3,10 @@ import argparse
 from dataclasses import asdict
 import hashlib
 import json
+import os
 from pathlib import Path
 import sys
+import tempfile
 from typing import Any
 
 from .doctor import status
@@ -19,7 +21,10 @@ from .profiles.loader import (
 )
 from .document.scaffold import scaffold_document
 from .document.validate import validate_document
-from .document.render import render_pdf
+from .document.render import render_document
+from .document.verify import _render_via_execution_service, verify_document
+from .document.integrity import audit_integrity, build_provenance_manifest
+from .document.compose import compose_document
 from .evidence.registry import EvidenceRegistry, EvidenceError
 from .workspace import (
     init_workspace,
@@ -33,7 +38,24 @@ from .workspace import (
 )
 from .backends.status import get_backend_status
 from .capabilities import capabilities
-from .document.edit import replace_text
+from .cli_contracts import OPERATION_ALIASES
+from .selectors import SELECTOR_HELP
+from .facade import WordDocument
+from .operations.comments import comment_operation
+from .operations.revisions import revision_operation
+from .operations.compare import compare_documents, merge_documents
+from .backends.word_native.backend import WordNativeBackend
+from .operations.models import BatchExecutionError, BatchPlan, OperationRequest
+from .operations.models import OperationUnavailable
+from .execution import ExecutionService
+
+# Compatibility injection point retained for existing integrations/tests.
+render_pdf = render_document
+
+
+class _ArgumentParser(argparse.ArgumentParser):
+    def error(self, message):
+        raise ValueError(message)
 
 def _ensure_utf8() -> None:
     try:
@@ -53,6 +75,32 @@ def _print(obj: Any, json_mode: bool = False) -> None:
             print(obj)
         else:
             print(json.dumps(obj, ensure_ascii=False, indent=2, default=str))
+
+
+def _write_json_atomic(path: str | Path, payload: Any) -> Path:
+    destination = Path(path).expanduser().resolve()
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    temporary_name = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode='w',
+            encoding='utf-8',
+            newline='\n',
+            prefix=f'.{destination.name}.',
+            suffix='.tmp',
+            dir=destination.parent,
+            delete=False,
+        ) as stream:
+            temporary_name = stream.name
+            json.dump(payload, stream, ensure_ascii=False, indent=2, default=str)
+            stream.write('\n')
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.replace(temporary_name, destination)
+        return destination
+    finally:
+        if temporary_name and Path(temporary_name).exists():
+            Path(temporary_name).unlink()
 
 def _resolve_evidence_registry(path_or_ws: str | None = None) -> Path:
     if path_or_ws:
@@ -74,7 +122,7 @@ def _resolve_evidence_registry(path_or_ws: str | None = None) -> Path:
     return Path.cwd() / 'evidence.json'
 
 def parser() -> argparse.ArgumentParser:
-    p = argparse.ArgumentParser(
+    p = _ArgumentParser(
         prog='wordassistant',
         description='WordAssistant V2: Deterministic, profile-driven Word DOCX automation and bounded-context toolkit.'
     )
@@ -178,6 +226,11 @@ def parser() -> argparse.ArgumentParser:
     ver.add_argument('--variant', default=None)
     ver.add_argument('--tolerance', type=float, default=0.08)
     ver.add_argument('--render', action='store_true')
+    ver.add_argument('--engine', choices=('auto', 'word', 'libreoffice'), default='auto')
+    ver.add_argument('--native-fields', action='store_true', help='Reopen, update, and persist fields through Microsoft Word during verification')
+    ver.add_argument('--visual-reviewed', action='store_true', help='Attest that every rendered page image was reviewed after a successful content audit')
+    ver.add_argument('--visual-review-token', default=None, help='Token from the current visual_review_challenge; binds review to exact page-image hashes')
+    ver.add_argument('--delivery', action='store_true', help='Require the complete native render and visual-review delivery gate')
     ver.add_argument('--json', action='store_true')
 
     # render
@@ -185,7 +238,38 @@ def parser() -> argparse.ArgumentParser:
     r.add_argument('file')
     r.add_argument('--outdir', '--output', dest='outdir', default=None, help='Output directory for generated PDF')
     r.add_argument('--timeout', type=int, default=180, help='Render timeout in seconds')
+    r.add_argument('--engine', choices=('auto', 'word', 'libreoffice'), default='auto')
     r.add_argument('--json', action='store_true')
+
+    # integrity
+    integrity = sp.add_parser(
+        'integrity',
+        help='Audit academic integrity and create provenance bound to exact file hashes',
+    )
+    integrity_sp = integrity.add_subparsers(dest='integrity_action', required=True)
+    integrity_audit = integrity_sp.add_parser(
+        'audit',
+        help='Run deterministic citation, evidence, Unicode, placeholder, and style-review gates',
+    )
+    integrity_audit.add_argument('file')
+    integrity_audit.add_argument('--evidence', default=None, help='Evidence registry JSON path')
+    integrity_audit.add_argument('--profile', default=None)
+    integrity_audit.add_argument('--variant', default=None)
+    integrity_audit.add_argument('--fail-on-warn', action='store_true')
+    integrity_audit.add_argument('--json', action='store_true')
+
+    integrity_manifest = integrity_sp.add_parser(
+        'provenance',
+        help='Write an atomic provenance manifest bound to the DOCX and evidence registry',
+    )
+    integrity_manifest.add_argument('file')
+    integrity_manifest.add_argument('--output', required=True)
+    integrity_manifest.add_argument('--evidence', default=None, help='Evidence registry JSON path')
+    integrity_manifest.add_argument('--profile', default=None)
+    integrity_manifest.add_argument('--variant', default=None)
+    integrity_manifest.add_argument('--disclosure', default=None)
+    integrity_manifest.add_argument('--audit-report', default=None)
+    integrity_manifest.add_argument('--json', action='store_true')
 
     # evidence
     ev = sp.add_parser('evidence', help='Manage verified source evidence registry')
@@ -199,6 +283,9 @@ def parser() -> argparse.ArgumentParser:
     ev_add.add_argument('--year', type=int, required=True)
     ev_add.add_argument('--url', required=True)
     ev_add.add_argument('--verified-by', required=True)
+    evidence_kind = ev_add.add_mutually_exclusive_group(required=True)
+    evidence_kind.add_argument('--verified-real-source', action='store_true', help='Confirm the source was independently checked and is not synthetic')
+    evidence_kind.add_argument('--synthetic', action='store_true', help='Mark a QA fixture that must remain visibly labeled as synthetic')
     ev_add.add_argument('--quote')
     ev_add.add_argument('--claim')
     ev_add.add_argument('--replace', action='store_true')
@@ -224,12 +311,97 @@ def parser() -> argparse.ArgumentParser:
     ev_val.add_argument('registry', nargs='?', default=None)
     ev_val.add_argument('--json', action='store_true')
 
+    # Compact universal-core surface. Existing V2 commands above remain
+    # compatibility aliases; these are the canonical agent-facing families.
+    create = sp.add_parser('create', help='Create a DOCX from a profile')
+    create.add_argument('output')
+    create.add_argument('--profile', default=None)
+    create.add_argument('--variant', default=None)
+    create.add_argument('--title', default=None)
+    create.add_argument('--author', '--student', dest='student', default=None)
+    create.add_argument('--supervisor', default=None)
+    create.add_argument('--dry-run', action='store_true')
+    create.add_argument('--json', action='store_true')
+
+    apply = sp.add_parser('apply', help='Atomically apply an ordered operation plan')
+    apply.add_argument('file', help='Input DOCX path')
+    apply.add_argument('--output', required=True, help='Final output DOCX path')
+    apply.add_argument('--plan', required=True, help='Version-1 operation plan JSON')
+    apply.add_argument('--checkpoint', nargs='?', const='auto', default=None)
+    apply.add_argument('--json', action='store_true')
+
+    compose = sp.add_parser(
+        'compose',
+        help='Populate a scaffold from a bounded version-1 content JSON file',
+    )
+    compose.add_argument('file', help='Input scaffold DOCX path')
+    compose.add_argument('--output', required=True, help='Final output DOCX path')
+    compose.add_argument('--content', required=True, help='Version-1 content JSON path')
+    compose.add_argument('--evidence', default=None, help='Evidence registry JSON path')
+    compose.add_argument('--min-visible-characters', type=int, default=None)
+    compose.add_argument('--max-visible-characters', type=int, default=None)
+    compose.add_argument('--dry-run', action='store_true')
+    compose.add_argument('--json', action='store_true')
+
+    generic_families = {
+        'edit': 'Edit document text',
+        'format': 'Format runs, paragraphs, or styles',
+        'list': 'Create and edit lists or heading numbering',
+        'table': 'Create and edit tables',
+        'image': 'Insert and edit images',
+        'section': 'Create and edit sections',
+        'page-number': 'Configure or inspect page numbering',
+        'field': 'Insert, inspect, update, lock, or remove fields',
+        'toc': 'Insert or update TOC, LOF, or LOT fields',
+        'caption': 'Insert Word captions',
+        'reference': 'Manage bookmarks, hyperlinks, cross-references, and citations',
+        'comment': 'Manage Word-native comments',
+        'revision': 'Manage Word-native tracked changes',
+        'protect': 'Inspect or configure document protection',
+        'properties': 'Inspect or update document properties',
+        'mail-merge': 'Execute Word-native mail merge',
+    }
+    for family_name, family_help in generic_families.items():
+        family = sp.add_parser(family_name, help=family_help)
+        family.add_argument('action', help='High-level action, for example create, insert, inspect, or update')
+        family.add_argument('file', help='Input DOCX path')
+        family.add_argument('--output', default=None)
+        family.add_argument('--selector', default=None, help=SELECTOR_HELP)
+        family.add_argument('--options', default='{}', help='Operation options as a JSON object')
+        family.add_argument('--dry-run', action='store_true')
+        family.add_argument('--checkpoint', nargs='?', const='auto', default=None)
+        family.add_argument('--json', action='store_true')
+
+    for family_name, family_help in (
+        ('compare', 'Compare two DOCX files using Microsoft Word'),
+        ('merge', 'Combine revisions from two DOCX files using Microsoft Word'),
+    ):
+        family = sp.add_parser(family_name, help=family_help)
+        family.add_argument('file')
+        family.add_argument('other')
+        family.add_argument('--output', required=True)
+        family.add_argument('--json', action='store_true')
+
     return p
 
 def run(args: list[str] | None = None) -> int:
     _ensure_utf8()
     p = parser()
-    a = p.parse_args(args)
+    try:
+        a = p.parse_args(args)
+    except ValueError as exc:
+        values = list(args) if args is not None else sys.argv[1:]
+        _print(
+            {
+                'status': 'ERROR',
+                'error': {
+                    'code': 'ARGUMENT_ERROR',
+                    'message': str(exc),
+                },
+            },
+            '--json' in values,
+        )
+        return 2
 
     try:
         if a.cmd == 'doctor':
@@ -350,7 +522,7 @@ def run(args: list[str] | None = None) -> int:
             _print(data, a.json)
             return 0
 
-        if a.cmd == 'scaffold':
+        if a.cmd in {'scaffold', 'create'}:
             ws_cfg = load_project_config(Path(a.output).parent)
             eff_prof = a.profile or ws_cfg.get('profile', 'generic')
             eff_var = a.variant or ws_cfg.get('variant', 'default')
@@ -370,23 +542,119 @@ def run(args: list[str] | None = None) -> int:
             )
             _print({
                 'status': 'SUCCESS' if not a.dry_run else 'DRY_RUN',
-                'output': str(a.output),
+                'output': str(a.output) if not a.dry_run else None,
                 'profile': eff_prof,
                 'variant': eff_var,
-                'path': str(res)
+                'path': str(res) if not a.dry_run else None
             }, a.json)
             return 0
 
-        if a.cmd == 'replace':
-            res = replace_text(
-                a.file,
-                a.old,
-                a.new,
-                output_path=a.output,
-                count=a.count,
-                dry_run=a.dry_run
+        if a.cmd == 'apply':
+            plan_path = Path(a.plan)
+            try:
+                plan_data = json.loads(plan_path.read_text(encoding='utf-8'))
+            except json.JSONDecodeError as exc:
+                raise ValueError(f'Invalid batch plan JSON: {exc}') from exc
+            plan = BatchPlan.from_dict(plan_data)
+            result = ExecutionService.default().execute_batch(
+                Path(a.file),
+                Path(a.output),
+                plan,
+                checkpoint=a.checkpoint,
             )
-            _print(asdict(res), a.json)
+            _print(result.to_dict(), a.json)
+            return 0
+
+        if a.cmd == 'compose':
+            content_path = Path(a.content)
+            try:
+                content = json.loads(content_path.read_text(encoding='utf-8'))
+            except json.JSONDecodeError as exc:
+                raise ValueError(f'Invalid composition JSON: {exc}') from exc
+            result = compose_document(
+                a.file,
+                output_path=a.output,
+                content=content,
+                evidence_registry=a.evidence,
+                min_visible_characters=a.min_visible_characters,
+                max_visible_characters=a.max_visible_characters,
+                dry_run=a.dry_run,
+            )
+            _print(result, a.json)
+            return 0
+
+        if a.cmd in {
+            'edit', 'format', 'list', 'table', 'image', 'section',
+            'page-number', 'field', 'toc', 'caption', 'reference',
+            'comment', 'revision', 'protect', 'properties',
+            'mail-merge'
+        }:
+            try:
+                options = json.loads(a.options)
+                if not isinstance(options, dict):
+                    raise ValueError('--options must decode to a JSON object')
+                selector = json.loads(a.selector) if a.selector else None
+                reserved = {'input_path', 'output_path', 'selector', 'dry_run', 'checkpoint'} & set(options)
+                if reserved:
+                    raise ValueError(
+                        '--options contains reserved keys: ' + ', '.join(sorted(reserved))
+                    )
+            except json.JSONDecodeError as exc:
+                raise ValueError(f'Invalid JSON operation argument: {exc}') from exc
+
+            action = a.action.replace('-', '_')
+            operation = OPERATION_ALIASES.get((a.cmd, action), f'{a.cmd}.{action}')
+            if a.cmd == 'edit':
+                options['action'] = action
+            if (a.cmd, action) in {('section', 'header_text'), ('section', 'footer_text')}:
+                options.setdefault('story', 'header' if action == 'header_text' else 'footer')
+            result = ExecutionService.default().execute(
+                OperationRequest(
+                    operation,
+                    input_path=Path(a.file),
+                    output_path=Path(a.output) if a.output else None,
+                    selector=selector,
+                    options=options,
+                    dry_run=a.dry_run,
+                    checkpoint=a.checkpoint,
+                )
+            )
+            payload = result.to_dict() if hasattr(result, 'to_dict') else {
+                'status': 'SUCCESS', 'operation': f'{a.cmd}.{action}', 'data': result
+            }
+            _print(payload, a.json)
+            return 0
+
+        if a.cmd in {'compare', 'merge'}:
+            result = ExecutionService.default().execute(
+                OperationRequest(
+                    f'{a.cmd}.documents',
+                    input_path=Path(a.file),
+                    output_path=Path(a.output),
+                    options={'other_path': a.other},
+                )
+            )
+            _print(result.to_dict(), a.json)
+            return 0
+
+        if a.cmd == 'replace':
+            if not a.output:
+                raise ValueError('replace requires --output; in-place mutation is disabled')
+            res = ExecutionService.default().execute(
+                OperationRequest(
+                    'text.edit',
+                    input_path=Path(a.file),
+                    output_path=Path(a.output),
+                    options={
+                        'action': 'replace',
+                        'pattern': a.old,
+                        'replacement': a.new,
+                        'max_count': a.count,
+                    },
+                    dry_run=a.dry_run,
+                )
+            )
+            _print(res.to_dict(), a.json)
             return 0 if res.status in ('SUCCESS', 'DRY_RUN') else 1
 
         if a.cmd == 'validate':
@@ -407,66 +675,123 @@ def run(args: list[str] | None = None) -> int:
             return 0 if res.valid else 2
 
         if a.cmd == 'verify':
+            if a.visual_reviewed and not a.render:
+                raise ValueError("--visual-reviewed requires --render")
+            if a.visual_review_token and not a.visual_reviewed:
+                raise ValueError("--visual-review-token requires --visual-reviewed")
             ws_cfg = load_project_config(Path(a.file).parent)
             eff_prof = a.profile or ws_cfg.get('profile', 'generic')
             eff_var = a.variant or ws_cfg.get('variant', 'default')
             
             prof = resolve_profile(eff_prof, start_path=Path(a.file).parent)
             inv = inspect_document(a.file)
-            val_res = validate_document(a.file, prof, eff_var, tolerance_cm=a.tolerance, verify_mode=True)
-            
-            render_info = None
-            render_status = "SKIPPED"
-            render_ok = True
-            if a.render:
-                try:
-                    r_res = render_pdf(a.file)
-                    render_status = "PASS"
-                    render_info = {
-                        'pdf': str(r_res.pdf_path),
-                        'size_bytes': r_res.file_size_bytes,
-                        'duration_seconds': r_res.duration_seconds
-                    }
-                except Exception as r_err:
-                    render_status = "FAIL"
-                    render_ok = False
-                    render_info = {'error': str(r_err)}
-                    
-            validation_status = "PASS" if val_res.valid else "FAIL"
-            overall_pass = val_res.valid and render_ok
-            overall_status = "PASS" if overall_pass else "FAIL"
-            has_warnings = any(i.severity == 'warning' for i in val_res.issues)
-            manual_review_required = not overall_pass or has_warnings or inv.get('advanced_backend_recommended', False)
-            
-            summary = {
+            verify_renderer = (
+                render_pdf
+                if render_pdf is not render_document and a.engine == 'auto'
+                else lambda path, output_dir=None: _render_via_execution_service(
+                    path, output_dir=output_dir, engine=a.engine
+                )
+            )
+            summary = verify_document(
+                a.file, profile=prof, variant_name=eff_var, render=a.render,
+                renderer=verify_renderer, native_fields=a.native_fields,
+                visual_reviewed=a.visual_reviewed,
+                visual_review_token=a.visual_review_token,
+            )
+            summary.update({
                 'file': str(a.file),
                 'profile': prof.profile_id,
                 'variant': eff_var,
-                'overall_status': overall_status,
-                'validation_status': validation_status,
-                'render_status': render_status,
-                'manual_review_required': manual_review_required,
-                'valid': overall_pass,
-                'issues': [asdict(x) for x in val_res.issues],
+                'validation_status': summary['format_status'],
+                'valid': summary['overall_status'] == 'PASS',
+                'delivery_valid': summary['delivery_status'] == 'PASS',
                 'inventory': {
-                    'paragraphs': inv['paragraphs'],
-                    'tables': inv['tables'],
-                    'sections': inv['sections'],
-                    'images': inv['images'],
+                    'paragraphs': inv['paragraphs'], 'tables': inv['tables'],
+                    'sections': inv['sections'], 'images': inv['images'],
                     'fields': inv['fields']
                 },
-                'render': render_info
-            }
+            })
+            if not a.render and summary['render_status'] == 'NOT_REQUESTED':
+                summary['render_status'] = 'SKIPPED'
             _print(summary, a.json)
-            return 0 if overall_pass else 2
+            final_status = (
+                summary['delivery_status'] if a.delivery else summary['overall_status']
+            )
+            return 0 if final_status == 'PASS' else 2
 
         if a.cmd == 'render':
-            res = render_pdf(a.file, output_dir=a.outdir, timeout_seconds=a.timeout)
+            if render_pdf is not render_document and a.engine == 'auto':
+                res = render_pdf(a.file, output_dir=a.outdir, timeout_seconds=a.timeout)
+            else:
+                res = _render_via_execution_service(
+                    a.file,
+                    output_dir=a.outdir,
+                    engine=a.engine,
+                    timeout_seconds=a.timeout,
+                )
             _print({
                 'pdf': str(res.pdf_path),
+                'engine': res.engine,
+                'page_count': res.page_count,
                 'size_bytes': res.file_size_bytes,
                 'duration_seconds': res.duration_seconds
             }, a.json)
+            return 0
+
+        if a.cmd == 'integrity':
+            ws_cfg = load_project_config(Path(a.file).parent)
+            eff_prof = a.profile or ws_cfg.get('profile', 'generic')
+            eff_var = a.variant or ws_cfg.get('variant', 'default')
+            prof = resolve_profile(eff_prof, start_path=Path(a.file).parent)
+            # Resolve the requested variant before auditing so an unknown variant
+            # fails closed instead of silently applying another policy.
+            prof.variant(eff_var)
+            evidence_path = Path(a.evidence).expanduser().resolve() if a.evidence else None
+
+            if a.integrity_action == 'audit':
+                report = audit_integrity(
+                    a.file,
+                    evidence_registry_path=evidence_path,
+                    profile=prof,
+                    variant_name=eff_var,
+                )
+                _print(report, a.json)
+                if report['status'] == 'FAIL':
+                    return 2
+                if a.fail_on_warn and report['status'] == 'WARN':
+                    return 2
+                return 0
+
+            audit_report = None
+            if a.audit_report:
+                audit_report = json.loads(Path(a.audit_report).read_text(encoding='utf-8'))
+                if not isinstance(audit_report, dict):
+                    raise ValueError('--audit-report must contain a JSON object')
+            manifest = build_provenance_manifest(
+                a.file,
+                evidence_registry_path=evidence_path,
+                profile=prof,
+                disclosure=a.disclosure,
+                audit_report=audit_report,
+                variant_name=eff_var,
+            )
+            output = _write_json_atomic(a.output, manifest)
+            _print(
+                {
+                    'status': 'SUCCESS',
+                    'output': str(output),
+                    'document_sha256': manifest['document']['sha256'],
+                    'evidence_sha256': (
+                        manifest.get('source_registry', {})
+                        .get('evidence', {})
+                        .get('sha256')
+                        if isinstance(manifest.get('source_registry', {}).get('evidence'), dict)
+                        else None
+                    ),
+                    'audit_status': manifest['audit_summary']['status'],
+                },
+                a.json,
+            )
             return 0
 
         if a.cmd == 'evidence':
@@ -480,7 +805,8 @@ def run(args: list[str] | None = None) -> int:
                     'authors': authors_list,
                     'year': a.year,
                     'url': a.url,
-                    'verified_by': a.verified_by
+                    'verified_by': a.verified_by,
+                    'synthetic': bool(a.synthetic),
                 }
                 if a.quote:
                     rec['quote'] = a.quote
@@ -524,8 +850,38 @@ def run(args: list[str] | None = None) -> int:
                 _print({'valid': len(errs) == 0, 'errors': errs, 'registry': str(reg_path)}, a.json)
                 return 0 if len(errs) == 0 else 1
 
+    except BatchExecutionError as exc:
+        _print(
+            {
+                'status': 'ERROR',
+                'operation': 'batch.apply',
+                'error': exc.to_dict(),
+            },
+            getattr(a, 'json', False),
+        )
+        return 1
+    except OperationUnavailable as exc:
+        _print(
+            {
+                'status': 'ERROR',
+                'error': exc.error.to_dict(),
+            },
+            getattr(a, 'json', False),
+        )
+        return 1
     except Exception as exc:
-        _print({'error': str(exc)}, getattr(a, 'json', False))
+        _print(
+            {
+                'status': 'ERROR',
+                'error': {
+                    'code': 'OPERATION_FAILED',
+                    'message': str(exc),
+                    'backend_required': None,
+                    'suggested_action': 'Check command options and run wordassistant capabilities --json.',
+                },
+            },
+            getattr(a, 'json', False),
+        )
         return 1
 
     return 0

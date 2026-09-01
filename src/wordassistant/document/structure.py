@@ -1,5 +1,6 @@
 from __future__ import annotations
 from collections import defaultdict
+import hashlib
 from pathlib import Path
 from typing import Any, Iterator
 import re
@@ -10,6 +11,7 @@ from docx.table import Table
 from docx.text.paragraph import Paragraph
 from docx.oxml.ns import qn
 from .model import DocumentSection
+from wordassistant.operations.fields import inspect_fields
 
 _HEADING_STYLE = re.compile(r'^Heading\s*(\d+)$', re.I)
 _MAJOR = re.compile(
@@ -29,6 +31,7 @@ _MAJOR = re.compile(
     r')', re.I)
 _TOP_GUIDANCE = re.compile(r'^(?:trang\s+|cách thể hiện báo cáo|nội dung của các chương mục|phụ lục:|tài liệu tham khảo\.?$|quy định về trích dẫn)', re.I)
 _MINOR = re.compile(r'^(?:\d+\.\s+|\d+\.\d+\.?\s+|\d+\.\d+\.\d+\.?\s+|\d+\.\s*[A-ZÀ-Ỹ])')
+_EMU_PER_CM = 360000
 
 def index_docx(path: str | Path) -> list[DocumentSection]:
     d = Document(path)
@@ -147,6 +150,137 @@ def _coalesce(sections: list[DocumentSection]) -> list[DocumentSection]:
         i += 1
     return result
 
+
+def _paragraph_style_name(document, paragraph_element) -> str | None:
+    style_values = paragraph_element.xpath("./w:pPr/w:pStyle/@w:val")
+    if not style_values:
+        return None
+    style_id = style_values[0]
+    try:
+        return document.styles[style_id].name
+    except (KeyError, TypeError):
+        return style_id
+
+
+def _field_evidence(paragraph_element) -> list[dict[str, str]]:
+    evidence = []
+    for field in paragraph_element.xpath(".//w:fldSimple"):
+        instruction = (field.get(qn("w:instr")) or "").strip()
+        if instruction:
+            evidence.append({"kind": "simple", "instruction": instruction})
+    complex_instruction = "".join(
+        element.text or ""
+        for element in paragraph_element.xpath(".//w:instrText")
+    ).strip()
+    if complex_instruction:
+        evidence.append({"kind": "complex", "instruction": complex_instruction})
+    return evidence
+
+
+def _body_paragraph_context(document) -> tuple[list, dict]:
+    paragraphs = list(document.element.body.xpath(".//w:p"))
+    tree = document.element.getroottree()
+    paragraph_indexes = {
+        tree.getpath(paragraph): index for index, paragraph in enumerate(paragraphs)
+    }
+    contexts = {}
+    section_index = 0
+    for child in document.element.body.iterchildren():
+        child_paragraphs = (
+            [child, *child.xpath(".//w:p")]
+            if child.tag == qn("w:p")
+            else child.xpath(".//w:p")
+        )
+        for paragraph in child_paragraphs:
+            paragraph_path = tree.getpath(paragraph)
+            contexts[paragraph_path] = {
+                "paragraph_index": paragraph_indexes[paragraph_path],
+                "section_index": min(section_index, len(document.sections) - 1),
+            }
+        if child.tag == qn("w:p"):
+            properties = child.find(qn("w:pPr"))
+            if properties is not None and properties.find(qn("w:sectPr")) is not None:
+                section_index += 1
+    return paragraphs, contexts
+
+
+def _inspect_images(document) -> list[dict[str, Any]]:
+    paragraphs, contexts = _body_paragraph_context(document)
+    tree = document.element.getroottree()
+    images = []
+    for paragraph in paragraphs:
+        context = contexts[tree.getpath(paragraph)]
+        alignment_values = paragraph.xpath("./w:pPr/w:jc/@w:val")
+        alignment = alignment_values[0] if alignment_values else "left"
+        next_paragraph = paragraph.getnext()
+        caption = None
+        caption_fields = []
+        if next_paragraph is not None and next_paragraph.tag == qn("w:p"):
+            next_fields = _field_evidence(next_paragraph)
+            seq_fields = [
+                field
+                for field in next_fields
+                if field["instruction"].lstrip().upper().startswith("SEQ ")
+            ]
+            caption_style = _paragraph_style_name(document, next_paragraph)
+            if caption_style == "Caption" or seq_fields:
+                caption_fields = seq_fields
+                caption = {
+                    "paragraph_index": contexts.get(tree.getpath(next_paragraph), {}).get("paragraph_index"),
+                    "style": caption_style,
+                    "text": "".join(
+                        element.text or ""
+                        for element in next_paragraph.iter(qn("w:t"))
+                    ),
+                    "seq_field": bool(seq_fields),
+                    "field_evidence": seq_fields,
+                }
+        for drawing in paragraph.xpath(".//w:drawing"):
+            inline_nodes = drawing.xpath("./wp:inline")
+            anchor_nodes = drawing.xpath("./wp:anchor")
+            container = inline_nodes[0] if inline_nodes else (anchor_nodes[0] if anchor_nodes else None)
+            if container is None:
+                continue
+            extents = container.xpath("./wp:extent")
+            properties = container.xpath("./wp:docPr")
+            blips = container.xpath(".//a:blip/@r:embed")
+            width = int(extents[0].get("cx")) if extents else 0
+            height = int(extents[0].get("cy")) if extents else 0
+            relationship_id = blips[0] if blips else None
+            media_part = None
+            media_hash = None
+            if relationship_id is not None:
+                part = document.part.related_parts.get(relationship_id)
+                if part is not None:
+                    media_part = str(part.partname)
+                    media_hash = hashlib.sha256(part.blob).hexdigest()
+            doc_properties = properties[0] if properties else None
+            images.append(
+                {
+                    "index": len(images),
+                    **context,
+                    "paragraph_text": "".join(
+                        element.text or "" for element in paragraph.iter(qn("w:t"))
+                    ),
+                    "paragraph_style": _paragraph_style_name(document, paragraph),
+                    "width_emu": width,
+                    "height_emu": height,
+                    "width_cm": round(width / _EMU_PER_CM, 6),
+                    "height_cm": round(height / _EMU_PER_CM, 6),
+                    "aspect_ratio": round(width / height, 8) if height else None,
+                    "alignment": alignment,
+                    "inline": bool(inline_nodes),
+                    "alt_text": doc_properties.get("descr") if doc_properties is not None else None,
+                    "title": doc_properties.get("title") if doc_properties is not None else None,
+                    "relationship_id": relationship_id,
+                    "media_part": media_part,
+                    "media_sha256": media_hash,
+                    "associated_caption": caption,
+                    "caption_field_evidence": caption_fields,
+                }
+            )
+    return images
+
 def inspect_document(path: str | Path) -> dict[str, Any]:
     src = Path(path).resolve()
     d = Document(src)
@@ -227,6 +361,157 @@ def inspect_document(path: str | Path) -> dict[str, Any]:
     has_toc = toc_fields_count > 0
     
     adv_rec = (ins_count + del_count + comment_count + sdt_count > 0 or has_protection)
+
+    paragraphs_detail = []
+    lists_detail = []
+    for index, paragraph in enumerate(d.paragraphs):
+        style_name = paragraph.style.name if paragraph.style else None
+        heading_level = detect_heading(paragraph)
+        p_pr = paragraph._p.pPr
+        num_pr = p_pr.numPr if p_pr is not None else None
+        if num_pr is None and paragraph.style is not None:
+            style_p_pr = paragraph.style.element.pPr
+            num_pr = style_p_pr.numPr if style_p_pr is not None else None
+        numbering = None
+        if num_pr is not None and num_pr.numId is not None:
+            numbering = {
+                "num_id": int(num_pr.numId.val),
+                "level": int(num_pr.ilvl.val) if num_pr.ilvl is not None else 0,
+            }
+            lists_detail.append(
+                {
+                    "paragraph_index": index,
+                    "text": paragraph.text,
+                    **numbering,
+                }
+            )
+        paragraphs_detail.append(
+            {
+                "index": index,
+                "text": paragraph.text,
+                "style": style_name,
+                "heading_level": heading_level,
+                "numbering": numbering,
+            }
+        )
+
+    table_sections = {}
+    section_index = 0
+    for child in d.element.body.iterchildren():
+        if child.tag == qn("w:tbl"):
+            table_sections[id(child)] = section_index
+        elif child.tag == qn("w:p"):
+            properties = child.find(qn("w:pPr"))
+            if properties is not None and properties.find(qn("w:sectPr")) is not None:
+                section_index += 1
+
+    all_tables = []
+    seen_tables = set()
+
+    def collect_table(table, depth, available_width):
+        identity = id(table._tbl)
+        if identity in seen_tables:
+            return
+        seen_tables.add(identity)
+        all_tables.append((table, depth, available_width))
+        for row in table.rows:
+            for cell in row.cells:
+                cell_width_element = cell._tc.tcPr.tcW
+                cell_width = (
+                    int(cell_width_element.get(qn("w:w"), "0"))
+                    if cell_width_element is not None
+                    else 0
+                )
+                for nested_table in cell.tables:
+                    collect_table(nested_table, depth + 1, cell_width)
+
+    for table in d.tables:
+        table_section = d.sections[
+            table_sections.get(id(table._tbl), len(d.sections) - 1)
+        ]
+        printable_width = int(
+            table_section.page_width.twips
+            - table_section.left_margin.twips
+            - table_section.right_margin.twips
+        )
+        collect_table(table, 0, printable_width)
+
+    tbl_count = len(all_tables)
+
+    tables_detail = []
+    for index, (table, depth, available_width) in enumerate(all_tables):
+        tbl_pr = table._tbl.tblPr
+        caption = tbl_pr.find(qn("w:tblCaption"))
+        description = tbl_pr.find(qn("w:tblDescription"))
+        tbl_w = tbl_pr.find(qn("w:tblW"))
+        tbl_ind = tbl_pr.find(qn("w:tblInd"))
+        tbl_layout = tbl_pr.find(qn("w:tblLayout"))
+        grid = [int(col.get(qn("w:w"), "0")) for col in table._tbl.tblGrid.gridCol_lst]
+        width = int(tbl_w.get(qn("w:w"), "0")) if tbl_w is not None else 0
+        row_widths = []
+        for row in table._tbl.tr_lst:
+            row_widths.append(
+                sum(
+                    int(cell.tcPr.tcW.get(qn("w:w"), "0"))
+                    for cell in row.tc_lst
+                    if cell.tcPr.tcW is not None
+                )
+            )
+        geometry_ok = (
+            tbl_w is not None
+            and tbl_w.get(qn("w:type")) == "dxa"
+            and width > 0
+            and sum(grid) == width
+            and all(value == width for value in row_widths)
+            and width
+            + (int(tbl_ind.get(qn("w:w"), "0")) if tbl_ind is not None else 0)
+            <= available_width
+        )
+        tables_detail.append(
+            {
+                "index": index,
+                "depth": depth,
+                "rows": len(table.rows),
+                "columns": len(table.columns),
+                "caption": caption.get(qn("w:val")) if caption is not None else None,
+                "internal_id": description.get(qn("w:val")) if description is not None else None,
+                "geometry_status": "PASS" if geometry_ok else "FAIL",
+                "width_dxa": width,
+                "indent_dxa": int(tbl_ind.get(qn("w:w"))) if tbl_ind is not None else None,
+                "layout": tbl_layout.get(qn("w:type")) if tbl_layout is not None else None,
+                "grid_widths_dxa": grid,
+                "row_widths_dxa": row_widths,
+            }
+        )
+
+    bookmarks_detail = [
+        {
+            "name": element.get(qn("w:name")),
+            "id": element.get(qn("w:id")),
+        }
+        for element in d.element.xpath(".//w:bookmarkStart")
+        if element.get(qn("w:name")) and not element.get(qn("w:name")).startswith("_")
+    ]
+    fields_detail = inspect_fields(src)
+    images_detail = _inspect_images(d)
+    sections_detail = []
+    for index, section in enumerate(d.sections):
+        sections_detail.append(
+            {
+                "index": index,
+                "orientation": "landscape" if section.page_width > section.page_height else "portrait",
+                "width_cm": round(section.page_width.cm, 3),
+                "height_cm": round(section.page_height.cm, 3),
+                "margins_cm": {
+                    "top": round(section.top_margin.cm, 3),
+                    "bottom": round(section.bottom_margin.cm, 3),
+                    "left": round(section.left_margin.cm, 3),
+                    "right": round(section.right_margin.cm, 3),
+                },
+                "header_linked": bool(section.header.is_linked_to_previous),
+                "footer_linked": bool(section.footer.is_linked_to_previous),
+            }
+        )
     
     return {
         'file': str(src),
@@ -256,6 +541,13 @@ def inspect_document(path: str | Path) -> dict[str, Any]:
             'other_fields': other_fields_count
         },
         'advanced_backend_recommended': adv_rec,
+        'paragraphs_detail': paragraphs_detail,
+        'lists_detail': lists_detail,
+        'tables_detail': tables_detail,
+        'images_detail': images_detail,
+        'bookmarks_detail': bookmarks_detail,
+        'fields_detail': fields_detail,
+        'sections_detail': sections_detail,
         'outline': [
             {'id': s.section_id, 'title': s.title, 'level': s.level}
             for s in sections

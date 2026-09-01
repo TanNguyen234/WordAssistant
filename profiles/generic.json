@@ -10,7 +10,8 @@
         "width_cm": 21.0,
         "height_cm": 29.7,
         "margins_cm": {"top": 2.54, "bottom": 2.54, "left": 2.54, "right": 2.54},
-        "one_sided": true
+        "one_sided": true,
+        "allow_mixed_orientation": true
       },
       "typography": {
         "body_font": "Times New Roman",
@@ -25,9 +26,9 @@
       },
       "front_matter": [],
       "section_blueprint": [
-        {"title": "Introduction", "level": 1},
-        {"title": "Main content", "level": 1},
-        {"title": "Conclusion", "level": 1}
+        {"title": "Introduction", "level": 1, "required": false},
+        {"title": "Main content", "level": 1, "required": false},
+        {"title": "Conclusion", "level": 1, "required": false}
       ],
       "citations": {"style": "unspecified"},
       "header_footer": {}

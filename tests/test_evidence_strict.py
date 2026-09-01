@@ -1,4 +1,5 @@
 import concurrent.futures
+import json
 import pytest
 from wordassistant.evidence.registry import EvidenceRegistry, EvidenceError
 
@@ -11,22 +12,28 @@ def test_evidence_strict_schema(tmp_path):
         
     # Invalid year
     with pytest.raises(EvidenceError, match="year"):
-        reg.add({'id': 'e1', 'title': 'Title', 'authors': ['A'], 'year': 1750, 'url': 'https://example.com', 'verified_by': 'tester'})
+        reg.add({'id': 'e1', 'title': 'Title', 'authors': ['A'], 'year': 1750, 'url': 'https://example.com', 'verified_by': 'tester', 'synthetic': False})
         
     # Invalid URL scheme
     with pytest.raises(EvidenceError, match="url"):
-        reg.add({'id': 'e1', 'title': 'Title', 'authors': ['A'], 'year': 2024, 'url': 'ftp://bad', 'verified_by': 'tester'})
+        reg.add({'id': 'e1', 'title': 'Title', 'authors': ['A'], 'year': 2024, 'url': 'ftp://bad', 'verified_by': 'tester', 'synthetic': False})
         
     # Empty scheme / no host
     with pytest.raises(EvidenceError, match="url"):
-        reg.add({'id': 'e1', 'title': 'Title', 'authors': ['A'], 'year': 2024, 'url': 'https://', 'verified_by': 'tester'})
+        reg.add({'id': 'e1', 'title': 'Title', 'authors': ['A'], 'year': 2024, 'url': 'https://', 'verified_by': 'tester', 'synthetic': False})
         
     with pytest.raises(EvidenceError, match="url"):
-        reg.add({'id': 'e1', 'title': 'Title', 'authors': ['A'], 'year': 2024, 'url': 'https:///foo', 'verified_by': 'tester'})
+        reg.add({'id': 'e1', 'title': 'Title', 'authors': ['A'], 'year': 2024, 'url': 'https:///foo', 'verified_by': 'tester', 'synthetic': False})
+
+    with pytest.raises(EvidenceError, match="synthetic"):
+        reg.add({'id': 'e1', 'title': 'Title', 'authors': ['A'], 'year': 2024, 'url': 'https://example.com', 'verified_by': 'tester', 'synthetic': 'yes'})
+
+    with pytest.raises(EvidenceError, match="synthetic"):
+        reg.add({'id': 'e2', 'title': 'Title', 'authors': ['A'], 'year': 2024, 'url': 'https://example.com', 'verified_by': 'tester'})
 
 def test_evidence_duplicate_id_policy(tmp_path):
     reg = EvidenceRegistry(tmp_path / 'evidence.json')
-    rec = {'id': 'e1', 'title': 'Paper 1', 'authors': ['Author A'], 'year': 2023, 'url': 'https://example.com/p1', 'verified_by': 'human'}
+    rec = {'id': 'e1', 'title': 'Paper 1', 'authors': ['Author A'], 'year': 2023, 'url': 'https://example.com/p1', 'verified_by': 'human', 'synthetic': False}
     reg.add(rec)
     
     # Second add without replace=True must fail
@@ -40,7 +47,7 @@ def test_evidence_duplicate_id_policy(tmp_path):
 
 def test_evidence_get_and_remove(tmp_path):
     reg = EvidenceRegistry(tmp_path / 'evidence.json')
-    rec = {'id': 'e2', 'title': 'Paper 2', 'authors': ['Author B'], 'year': 2024, 'url': 'https://example.com/p2', 'verified_by': 'human'}
+    rec = {'id': 'e2', 'title': 'Paper 2', 'authors': ['Author B'], 'year': 2024, 'url': 'https://example.com/p2', 'verified_by': 'human', 'synthetic': False}
     reg.add(rec)
     
     assert reg.get('e2')['id'] == 'e2'
@@ -63,7 +70,8 @@ def test_evidence_concurrent_writes(tmp_path):
             'authors': [f'Author {idx}'],
             'year': 2024,
             'url': f'https://example.com/{idx}',
-            'verified_by': 'concurrent_test'
+            'verified_by': 'concurrent_test',
+            'synthetic': False,
         })
         
     with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
@@ -73,3 +81,25 @@ def test_evidence_concurrent_writes(tmp_path):
             
     items = reg.list()
     assert len(items) == 20
+
+
+def test_registry_read_rejects_tampered_record_missing_synthetic(tmp_path):
+    path = tmp_path / "tampered.json"
+    path.write_text(
+        json.dumps(
+            {
+                "fake": {
+                    "id": "fake",
+                    "title": "Self asserted source",
+                    "authors": ["Agent"],
+                    "year": 2026,
+                    "url": "https://example.com/fake",
+                    "verified_by": "the same agent",
+                }
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    with pytest.raises(EvidenceError, match="synthetic"):
+        EvidenceRegistry(path).get("fake")

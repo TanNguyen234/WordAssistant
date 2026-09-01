@@ -22,6 +22,7 @@
         "size": "A4",
         "width_cm": 21.0,
         "height_cm": 29.7,
+        "allow_mixed_orientation": true,
         "margins_cm": {
           "top": 2.0,
           "bottom": 2.0,
@@ -140,6 +141,23 @@
         "minimum_references": 10,
         "prefer_primary_source": true,
         "bibliography_order": "alphabetical_by_author"
+      },
+      "integrity": {
+        "long_quote_words": 40,
+        "quote_citation_words": 8,
+        "repeated_opening_words": 3,
+        "repeated_opening_minimum": 4,
+        "ngram_size": 5,
+        "repeated_ngram_minimum": 4,
+        "review_punctuation": [
+          "em_dash",
+          "left_curly_double_quote",
+          "right_curly_double_quote",
+          "left_curly_single_quote",
+          "right_curly_single_quote",
+          "ellipsis",
+          "non_breaking_space"
+        ]
       }
     },
     "proposal": {

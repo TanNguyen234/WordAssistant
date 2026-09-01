@@ -1,14 +1,16 @@
 from __future__ import annotations
 from pathlib import Path
+import os
 import shutil
 import tempfile
 from importlib.resources import files as resource_files
 from docx import Document
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_TAB_ALIGNMENT
-from docx.enum.section import WD_SECTION_START
+from docx.enum.section import WD_ORIENT, WD_SECTION_START
 from docx.shared import Cm, Pt
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
+from wordassistant.document.fonts import set_word_font
 from wordassistant.profiles.loader import DocumentProfile, Variant
 
 def _add_page_number_field(paragraph):
@@ -51,58 +53,66 @@ def _set_section_page_restart(section, start_num: int = 1):
     sectPr.append(pgNumType)
 
 def _apply_section_page(section, v: Variant):
-    section.page_width = Cm(v.page.width_cm)
-    section.page_height = Cm(v.page.height_cm)
+    if v.page.orientation == 'landscape':
+        section.orientation = WD_ORIENT.LANDSCAPE
+        section.page_width = Cm(max(v.page.width_cm, v.page.height_cm))
+        section.page_height = Cm(min(v.page.width_cm, v.page.height_cm))
+    else:
+        section.orientation = WD_ORIENT.PORTRAIT
+        section.page_width = Cm(min(v.page.width_cm, v.page.height_cm))
+        section.page_height = Cm(max(v.page.width_cm, v.page.height_cm))
     section.top_margin = Cm(v.page.margins.top_cm)
     section.bottom_margin = Cm(v.page.margins.bottom_cm)
     section.left_margin = Cm(v.page.margins.left_cm)
     section.right_margin = Cm(v.page.margins.right_cm)
 
 def _apply_styles(d: Document, v: Variant):
-    try:
-        normal = d.styles['Normal']
-        normal.font.name = v.typography.body_font
-        normal.font.size = Pt(v.typography.body_size_pt)
-        if v.typography.line_spacing is not None:
-            normal.paragraph_format.line_spacing = v.typography.line_spacing
-    except Exception:
-        pass
+    normal = d.styles['Normal']
+    set_word_font(normal.font, v.typography.body_font)
+    normal.font.size = Pt(v.typography.body_size_pt)
+    if v.typography.line_spacing is not None:
+        normal.paragraph_format.line_spacing = v.typography.line_spacing
+    if v.typography.paragraph_spacing_before_pt is not None:
+        normal.paragraph_format.space_before = Pt(v.typography.paragraph_spacing_before_pt)
+    if v.typography.paragraph_spacing_after_pt is not None:
+        normal.paragraph_format.space_after = Pt(v.typography.paragraph_spacing_after_pt)
         
     for s_name, s_spec in v.typography.styles.items():
-        try:
-            style_obj = None
-            if s_name == 'title':
-                style_obj = d.styles['Title']
-            elif s_name == 'heading1':
-                style_obj = d.styles['Heading 1']
-            elif s_name == 'heading2':
-                style_obj = d.styles['Heading 2']
-            elif s_name == 'heading3':
-                style_obj = d.styles['Heading 3']
+        style_obj = None
+        if s_name == 'title':
+            style_obj = d.styles['Title']
+        elif s_name.startswith('heading') and s_name[7:].isdigit():
+            level = int(s_name[7:])
+            if 1 <= level <= 9:
+                style_obj = d.styles[f'Heading {level}']
                 
-            if style_obj:
-                if 'font' in s_spec:
-                    style_obj.font.name = s_spec['font']
-                else:
-                    style_obj.font.name = v.typography.body_font
-                    
-                if 'size_pt' in s_spec:
-                    style_obj.font.size = Pt(s_spec['size_pt'])
-                if 'bold' in s_spec:
-                    style_obj.font.bold = s_spec['bold']
-                if 'italic' in s_spec:
-                    style_obj.font.italic = s_spec['italic']
-                if 'alignment' in s_spec:
-                    align_map = {
-                        'left': WD_ALIGN_PARAGRAPH.LEFT,
-                        'center': WD_ALIGN_PARAGRAPH.CENTER,
-                        'right': WD_ALIGN_PARAGRAPH.RIGHT,
-                        'justify': WD_ALIGN_PARAGRAPH.JUSTIFY
-                    }
-                    if s_spec['alignment'] in align_map:
-                        style_obj.paragraph_format.alignment = align_map[s_spec['alignment']]
-        except Exception:
-            pass
+        if style_obj:
+            if 'font' in s_spec:
+                set_word_font(style_obj.font, s_spec['font'])
+            else:
+                set_word_font(style_obj.font, v.typography.body_font)
+
+            if 'size_pt' in s_spec:
+                style_obj.font.size = Pt(s_spec['size_pt'])
+            if 'bold' in s_spec:
+                style_obj.font.bold = s_spec['bold']
+            if 'italic' in s_spec:
+                style_obj.font.italic = s_spec['italic']
+            if 'alignment' in s_spec:
+                align_map = {
+                    'left': WD_ALIGN_PARAGRAPH.LEFT,
+                    'center': WD_ALIGN_PARAGRAPH.CENTER,
+                    'right': WD_ALIGN_PARAGRAPH.RIGHT,
+                    'justify': WD_ALIGN_PARAGRAPH.JUSTIFY
+                }
+                if s_spec['alignment'] in align_map:
+                    style_obj.paragraph_format.alignment = align_map[s_spec['alignment']]
+            if 'line_spacing' in s_spec:
+                style_obj.paragraph_format.line_spacing = s_spec['line_spacing']
+            if 'space_before_pt' in s_spec:
+                style_obj.paragraph_format.space_before = Pt(s_spec['space_before_pt'])
+            if 'space_after_pt' in s_spec:
+                style_obj.paragraph_format.space_after = Pt(s_spec['space_after_pt'])
 
 _DEFAULT_FRONT_TITLES = {
     'acknowledgements': 'ACKNOWLEDGEMENTS',
@@ -175,7 +185,7 @@ def _render_cover_page(d: Document, v: Variant, title_text: str, student: str, s
         p_bottom = d.add_paragraph(f"\n\n\n{loc_year}")
         p_bottom.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
-def scaffold_document(
+def _build_scaffold_document(
     output: str | Path,
     profile: DocumentProfile,
     variant_name: str,
@@ -211,6 +221,12 @@ def scaffold_document(
     d = Document()
     _apply_section_page(d.sections[0], v)
     _apply_styles(d, v)
+    settings = d.settings.element
+    mirror = settings.find(qn('w:mirrorMargins'))
+    if not v.page.one_sided and mirror is None:
+        settings.append(OxmlElement('w:mirrorMargins'))
+    elif v.page.one_sided and mirror is not None:
+        settings.remove(mirror)
     
     # 1. Front matter & Covers
     has_covers = any(x in v.front_matter for x in ('cover', 'inner_cover', 'proposal_cover'))
@@ -227,24 +243,42 @@ def scaffold_document(
         _apply_section_page(front_sec, v)
         front_sec.header.is_linked_to_previous = False
         front_sec.footer.is_linked_to_previous = False
+        from wordassistant.operations.page_numbers import apply_page_numbers_to_section
+        apply_page_numbers_to_section(
+            d,
+            len(d.sections) - 1,
+            position='footer',
+            alignment='center',
+            number_format='lowerRoman',
+            start=1,
+            field='PAGE',
+            unlink_previous=True,
+        )
         
         for idx, item in enumerate(non_cover_front):
             title_text = v.front_matter_titles.get(item, _DEFAULT_FRONT_TITLES.get(item, item.replace('_', ' ').upper()))
             h = d.add_heading(title_text, level=1)
             h.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            if idx > 0:
+                # Attach pagination to the destination heading. A standalone
+                # page-break paragraph after a dynamic TOC/LOF/LOT can spill
+                # onto the following page when Word expands the field, then
+                # break again and leave a numbered blank page behind.
+                h.paragraph_format.page_break_before = True
             
             if item == 'table_of_contents':
                 p_toc = d.add_paragraph()
                 _add_toc_field(p_toc)
             elif item == 'list_of_figures':
-                d.add_paragraph("[List of figures]")
+                from wordassistant.operations.fields import append_field
+                p_lof = d.add_paragraph()
+                append_field(p_lof, 'TOC \\h \\z \\c "Figure"', 'Update field in Word')
             elif item == 'list_of_tables':
-                d.add_paragraph("[List of tables]")
+                from wordassistant.operations.fields import append_field
+                p_lot = d.add_paragraph()
+                append_field(p_lot, 'TOC \\h \\z \\c "Table"', 'Update field in Word')
             else:
                 d.add_paragraph("[Front matter content]")
-                
-            if idx < len(non_cover_front) - 1:
-                d.add_page_break()
                 
     # 2. Main Body Section
     if v.section_blueprint:
@@ -272,7 +306,8 @@ def scaffold_document(
                 _add_page_number_field(fp)
                 
             if hf.get('page_number_start') in ('introduction', '1', 1):
-                _set_section_page_restart(body_sec, 1)
+                from wordassistant.operations.page_numbers import _set_page_number_type
+                _set_page_number_type(body_sec, 'decimal', 1)
                 
         for sec in v.section_blueprint:
             sec_title = str(sec['title'])
@@ -289,6 +324,54 @@ def scaffold_document(
     if not dry_run:
         d.save(out)
     return out
+
+
+def scaffold_document(
+    output: str | Path,
+    profile: DocumentProfile,
+    variant_name: str,
+    *,
+    title: str | None = None,
+    student: str | None = None,
+    supervisor: str | None = None,
+    dry_run: bool = False,
+) -> Path:
+    """Build and validate a DOCX before atomically publishing it."""
+    destination = Path(output).resolve()
+    if destination.suffix.casefold() != ".docx":
+        raise ValueError("Scaffold output must use the .docx extension")
+    if dry_run:
+        return _build_scaffold_document(
+            destination,
+            profile,
+            variant_name,
+            title=title,
+            student=student,
+            supervisor=supervisor,
+            dry_run=True,
+        )
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    descriptor, temporary_name = tempfile.mkstemp(
+        prefix=f".{destination.stem}.", suffix=".docx", dir=destination.parent
+    )
+    os.close(descriptor)
+    staging = Path(temporary_name)
+    staging.unlink(missing_ok=True)
+    try:
+        _build_scaffold_document(
+            staging,
+            profile,
+            variant_name,
+            title=title,
+            student=student,
+            supervisor=supervisor,
+            dry_run=False,
+        )
+        Document(staging)
+        staging.replace(destination)
+        return destination
+    finally:
+        staging.unlink(missing_ok=True)
 
 def _fill_template_metadata(doc_path: Path, title: str, student: str, supervisor: str):
     from wordassistant.document.edit import replace_text

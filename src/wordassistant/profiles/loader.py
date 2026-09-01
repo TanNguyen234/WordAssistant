@@ -28,6 +28,7 @@ class PageSpec:
     margins: Margins
     one_sided: bool
     orientation: str = "portrait"
+    allow_mixed_orientation: bool = False
     provenance: str | None = None
 
 @dataclass(frozen=True)
@@ -49,6 +50,7 @@ class Variant:
     cover: Mapping[str, Any] = field(default_factory=dict)
     section_blueprint: tuple[Mapping[str, Any], ...] = ()
     citations: Mapping[str, Any] = field(default_factory=dict)
+    integrity: Mapping[str, Any] = field(default_factory=dict)
     header_footer: Mapping[str, Any] = field(default_factory=dict)
     template_asset: str | None = None
     field_requirements: Mapping[str, Any] = field(default_factory=dict)
@@ -73,9 +75,9 @@ class DocumentProfile:
 _ROOT_KEYS = {'id', 'name', 'version', 'variants', 'source_policy', 'source_assets', 'source_conflicts'}
 _VARIANT_KEYS = {
     'page', 'typography', 'front_matter', 'front_matter_titles', 'cover',
-    'section_blueprint', 'citations', 'header_footer', 'template_asset', 'field_requirements'
+    'section_blueprint', 'citations', 'integrity', 'header_footer', 'template_asset', 'field_requirements'
 }
-_PAGE_KEYS = {'size', 'width_cm', 'height_cm', 'margins_cm', 'one_sided', 'orientation', 'provenance'}
+_PAGE_KEYS = {'size', 'width_cm', 'height_cm', 'margins_cm', 'one_sided', 'orientation', 'allow_mixed_orientation', 'provenance'}
 _MARGINS_KEYS = {'top', 'bottom', 'left', 'right'}
 _TYPOGRAPHY_KEYS = {'body_font', 'body_size_pt', 'line_spacing', 'paragraph_spacing_before_pt', 'paragraph_spacing_after_pt', 'styles'}
 _STYLE_KEYS = {'font', 'size_pt', 'bold', 'italic', 'alignment', 'line_spacing', 'space_before_pt', 'space_after_pt'}
@@ -83,6 +85,24 @@ _BLUEPRINT_KEYS = {'title', 'level', 'required', 'numbered', 'restart_numbering'
 _COVER_KEYS = {'institution_lines', 'document_type', 'title_prefix', 'metadata_fields', 'location_year'}
 _METADATA_FIELD_KEYS = {'key', 'label', 'value_key', 'default', 'value', 'required'}
 _CITATIONS_KEYS = {'style', 'in_text', 'minimum_references', 'prefer_primary_source', 'bibliography_order'}
+_INTEGRITY_KEYS = {
+    'long_quote_words', 'quote_citation_words', 'repeated_opening_words',
+    'repeated_opening_minimum', 'ngram_size', 'repeated_ngram_minimum',
+    'review_punctuation'
+}
+_INTEGRITY_INTEGER_MINIMUMS = {
+    'long_quote_words': 1,
+    'quote_citation_words': 1,
+    'repeated_opening_words': 1,
+    'repeated_opening_minimum': 2,
+    'ngram_size': 2,
+    'repeated_ngram_minimum': 2,
+}
+_INTEGRITY_PUNCTUATION = {
+    'em_dash', 'en_dash', 'left_curly_double_quote', 'right_curly_double_quote',
+    'left_curly_single_quote', 'right_curly_single_quote', 'ellipsis',
+    'non_breaking_space'
+}
 _HEADER_FOOTER_KEYS = {'header_left', 'header_right', 'footer_left', 'footer_right', 'page_number_start'}
 _FIELD_REQS_KEYS = {'table_of_contents', 'page_number', 'list_of_figures', 'list_of_tables'}
 _VALID_ALIGNMENTS = {'left', 'center', 'right', 'justify'}
@@ -169,6 +189,10 @@ def _parse_variant(name: str, data: Any) -> Variant:
     orientation = str(page_data.get('orientation', 'portrait'))
     if orientation not in ('portrait', 'landscape'):
         raise ProfileError(f"variants.{name}.page.orientation must be 'portrait' or 'landscape'")
+
+    allow_mixed_orientation = page_data.get('allow_mixed_orientation', False)
+    if type(allow_mixed_orientation) is not bool:
+        raise ProfileError(f"variants.{name}.page.allow_mixed_orientation must be a boolean")
         
     page_spec = PageSpec(
         size=page_size,
@@ -177,6 +201,7 @@ def _parse_variant(name: str, data: Any) -> Variant:
         margins=margins,
         one_sided=one_sided,
         orientation=orientation,
+        allow_mixed_orientation=allow_mixed_orientation,
         provenance=_optional_str(page_data.get('provenance'), f"{name}.page.provenance")
     )
     
@@ -305,6 +330,29 @@ def _parse_variant(name: str, data: Any) -> Variant:
                 raise ProfileError(f"{name}.citations.minimum_references must be an integer >= 0, got {min_r!r}")
         if 'prefer_primary_source' in citations and type(citations['prefer_primary_source']) is not bool:
             raise ProfileError(f"{name}.citations.prefer_primary_source must be a boolean")
+
+    integrity = data.get('integrity', {})
+    if not isinstance(integrity, dict):
+        raise ProfileError(f"{name}.integrity must be an object")
+    if integrity:
+        _check_unknown_keys(integrity, _INTEGRITY_KEYS, f"variants.{name}.integrity")
+        for key, minimum in _INTEGRITY_INTEGER_MINIMUMS.items():
+            if key not in integrity:
+                continue
+            value = integrity[key]
+            if type(value) is not int or value < minimum:
+                raise ProfileError(
+                    f"{name}.integrity.{key} must be an integer >= {minimum}, got {value!r}"
+                )
+        if 'review_punctuation' in integrity:
+            punctuation = integrity['review_punctuation']
+            if not isinstance(punctuation, list) or any(not isinstance(item, str) for item in punctuation):
+                raise ProfileError(f"{name}.integrity.review_punctuation must be an array of strings")
+            unknown = set(punctuation) - _INTEGRITY_PUNCTUATION
+            if unknown:
+                raise ProfileError(
+                    f"{name}.integrity.review_punctuation contains unknown values: {sorted(unknown)}"
+                )
             
     header_footer = data.get('header_footer', {})
     if not isinstance(header_footer, dict):
@@ -357,6 +405,7 @@ def _parse_variant(name: str, data: Any) -> Variant:
         cover=cover_data,
         section_blueprint=tuple(blueprint),
         citations=citations,
+        integrity=integrity,
         header_footer=header_footer,
         template_asset=template,
         field_requirements=field_reqs

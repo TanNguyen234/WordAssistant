@@ -200,9 +200,15 @@ def validate_document(
         issues.append(Issue('error', 'no_sections', "Document has no sections."))
     else:
         for i, s in enumerate(d.sections):
+            expected_width = v.page.width_cm
+            expected_height = v.page.height_cm
+            is_landscape = s.page_width.cm > s.page_height.cm
+            profile_is_landscape = expected_width > expected_height
+            if v.page.allow_mixed_orientation and is_landscape != profile_is_landscape:
+                expected_width, expected_height = expected_height, expected_width
             checks = [
-                ('width', s.page_width.cm, v.page.width_cm),
-                ('height', s.page_height.cm, v.page.height_cm),
+                ('width', s.page_width.cm, expected_width),
+                ('height', s.page_height.cm, expected_height),
                 ('top_margin', s.top_margin.cm, v.page.margins.top_cm),
                 ('bottom_margin', s.bottom_margin.cm, v.page.margins.bottom_cm),
                 ('left_margin', s.left_margin.cm, v.page.margins.left_cm),
@@ -246,7 +252,12 @@ def validate_document(
             in_body = True
         if not in_body:
             continue
-        if p.style.name.startswith('Heading') or p.style.name in ('Title', 'Subtitle', 'Header', 'Footer'):
+        style_name = p.style.name if p.style is not None else ""
+        if (
+            style_name.startswith('Heading')
+            or style_name.startswith('TOC ')
+            or style_name in ('Title', 'Subtitle', 'Header', 'Footer', 'Caption', 'Bibliography')
+        ):
             continue
         if txt.startswith('[') and txt.endswith(']'):
             continue
@@ -615,8 +626,7 @@ def validate_document(
     if isinstance(minrefs, int) and minrefs > 0 and not is_template_clone:
         ref_pattern = re.compile(r'^\[\d+\]')
         
-        bib_start_idx = None
-        bib_level = 1
+        bibliography_sections: list[tuple[int, int]] = []
         for idx, p in enumerate(d.paragraphs):
             txt = p.text.strip()
             if not txt:
@@ -625,16 +635,17 @@ def validate_document(
             if ('tài liệu tham khảo' in txt_norm or 'tai lieu tham khao' in txt_norm or 
                 'references' in txt_norm or 'bibliography' in txt_norm):
                 if p.style.name.startswith('Heading') or p.style.name == 'Title' or any(_normalize_text(sec['title']) in txt_norm for sec in v.section_blueprint):
-                    bib_start_idx = idx
+                    bib_level = 1
                     if p.style.name.startswith('Heading '):
                         try:
                             bib_level = int(p.style.name.replace('Heading ', '').strip())
                         except ValueError:
                             bib_level = 1
-                    break
-                    
-        count = 0
-        if bib_start_idx is not None:
+                    bibliography_sections.append((idx, bib_level))
+
+        section_counts: list[int] = []
+        for bib_start_idx, bib_level in bibliography_sections:
+            section_count = 0
             for p in d.paragraphs[bib_start_idx + 1:]:
                 txt = p.text.strip()
                 if not txt:
@@ -647,9 +658,14 @@ def validate_document(
                     except ValueError:
                         pass
                 if ref_pattern.match(txt):
-                    count += 1
+                    section_count += 1
                 elif txt and not (txt.startswith('[') and txt.endswith(']')) and len(txt) > 10:
-                    count += 1
+                    section_count += 1
+            section_counts.append(section_count)
+
+        # A stale empty bibliography heading must not mask a later populated
+        # duplicate. Each candidate remains bounded by the next peer heading.
+        count = max(section_counts, default=0)
                     
         if count == 0:
             issues.append(

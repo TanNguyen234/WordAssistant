@@ -42,7 +42,7 @@ def test_scaffold_with_placeholders_fails_final_verify(tmp_path: Path):
     codes = [i.code for i in val_final.issues if i.severity == "error"]
     assert "draft_placeholder_detected" in codes
 
-def test_completed_synthetic_report_passes_final_verify(tmp_path: Path):
+def test_completed_synthetic_report_requires_materialized_dynamic_fields(tmp_path: Path, capsys):
     doc_path = tmp_path / "completed_report.docx"
     prof = resolve_profile("hcmunre_dacn_2026_2027")
     
@@ -84,9 +84,16 @@ def test_completed_synthetic_report_passes_final_verify(tmp_path: Path):
         
     d.save(doc_path)
     
-    # CLI verify
+    # Content placeholders are resolved, but TOC/LOF/LOT caches emitted by the
+    # scaffold remain placeholders until a field-update backend materializes
+    # them. Final delivery must fail closed at this stage.
     code = run(["verify", str(doc_path), "--profile", "hcmunre_dacn_2026_2027", "--variant", "report", "--json"])
-    assert code == 0
+    assert code == 2
+    report = json.loads(capsys.readouterr().out)
+    assert report["format_status"] == "PASS"
+    assert report["field_structure_status"] == "PASS"
+    assert report["field_freshness_status"] == "FAIL"
+    assert report["manual_review_required"] is True
     
     val_final = validate_document(doc_path, prof, "report", verify_mode=True)
     assert val_final.valid is True

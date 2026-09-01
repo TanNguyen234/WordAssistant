@@ -15,7 +15,8 @@ def test_evidence_concurrent_writers(tmp_path: Path):
                 "authors": [f"Author {i}"],
                 "year": 2024,
                 "url": f"https://example.com/item/{i}",
-                "verified_by": "CI"
+                "verified_by": "CI",
+                "synthetic": False,
             }
             reg.add(rec)
             

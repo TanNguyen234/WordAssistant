@@ -11,8 +11,8 @@ from contextlib import contextmanager
 class EvidenceError(ValueError):
     pass
 
-_REQUIRED_FIELDS = {'id', 'title', 'authors', 'year', 'url', 'verified_by'}
-_ALLOWED_FIELDS = {'id', 'title', 'authors', 'year', 'url', 'verified_by', 'quote', 'claim', 'doi', 'notes', 'tags'}
+_REQUIRED_FIELDS = {'id', 'title', 'authors', 'year', 'url', 'verified_by', 'synthetic'}
+_ALLOWED_FIELDS = {'id', 'title', 'authors', 'year', 'url', 'verified_by', 'quote', 'claim', 'doi', 'notes', 'tags', 'synthetic'}
 
 def _is_valid_url_or_doi(val: str) -> bool:
     if not isinstance(val, str) or not val.strip():
@@ -60,6 +60,9 @@ def validate_record(record: Any) -> None:
         
     if not isinstance(record['verified_by'], str) or not record['verified_by'].strip():
         raise EvidenceError("Field 'verified_by' must be a non-empty string")
+
+    if 'synthetic' in record and type(record['synthetic']) is not bool:
+        raise EvidenceError("Field 'synthetic' must be a boolean")
 
 @contextmanager
 def _file_lock(lock_path: Path, timeout: float = 10.0):
@@ -122,6 +125,15 @@ class EvidenceRegistry:
             raise EvidenceError(f"Failed to read evidence registry {self.path}: {exc}") from exc
         if not isinstance(data, dict):
             raise EvidenceError("Registry must be a JSON object")
+        for key, record in data.items():
+            try:
+                validate_record(record)
+            except EvidenceError as exc:
+                raise EvidenceError(f"Record {key!r}: {exc}") from exc
+            if record["id"] != key:
+                raise EvidenceError(
+                    f"Registry key {key!r} does not match record id {record['id']!r}"
+                )
         return data
 
     def _save(self, data: dict[str, dict[str, Any]]) -> None:
