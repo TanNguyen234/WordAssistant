@@ -1,8 +1,11 @@
 name: CI
 on: [push, pull_request]
+permissions:
+  contents: read
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     strategy:
       matrix:
         python-version: ["3.10", "3.11", "3.12"]
@@ -17,6 +20,7 @@ jobs:
 
   render-gate:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -37,3 +41,20 @@ jobs:
           python -m wordassistant.cli render /tmp/test_render.docx --outdir /tmp --json
           test -s /tmp/test_render.pdf
           echo "LibreOffice render gate passed: /tmp/test_render.pdf exists and is non-empty."
+
+  native-word-contract-gate:
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[dev,native-word]"
+      - name: Run native contracts (hosted runner is not live-Word release evidence)
+        run: python -m pytest tests/native_word -q -rs
+      - name: Verify packaged PDFium page-image fallback
+        run: python -m pytest tests/test_render_isolated.py::test_packaged_pdfium_fallback_renders_a_real_pdf -q

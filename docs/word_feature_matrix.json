@@ -1,0 +1,2936 @@
+{
+  "version": 1,
+  "operations": [
+    {
+      "name": "bibliography.generate",
+      "capability": "bibliography.generate",
+      "mutating": true,
+      "backend_preference": [
+        "python-docx"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/core/test_citation_workflow.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "bookmark.create",
+      "capability": "bookmark.create",
+      "mutating": true,
+      "backend_preference": [
+        "ooxml"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/ooxml/test_bookmark_cross_reference.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "bookmark.delete",
+      "capability": "bookmark.delete",
+      "mutating": true,
+      "backend_preference": [
+        "ooxml"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/ooxml/test_bookmark_cross_reference.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "bookmark.inspect",
+      "capability": "bookmark.inspect",
+      "mutating": false,
+      "backend_preference": [
+        "ooxml"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/ooxml/test_bookmark_cross_reference.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "bookmark.rename",
+      "capability": "bookmark.rename",
+      "mutating": true,
+      "backend_preference": [
+        "ooxml"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/ooxml/test_bookmark_cross_reference.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "caption.insert",
+      "capability": "caption.insert",
+      "mutating": true,
+      "backend_preference": [
+        "ooxml"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/ooxml/test_caption_toc_fields.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "chart.insert",
+      "capability": "charts.create",
+      "mutating": true,
+      "backend_preference": [
+        "word-native"
+      ],
+      "minimum_fidelity": "native",
+      "evidence": {
+        "structural": "NOT_APPLICABLE",
+        "native_roundtrip": "UNVERIFIED",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "citation.insert",
+      "capability": "citation.insert",
+      "mutating": true,
+      "backend_preference": [
+        "ooxml"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/core/test_citation_workflow.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "citation.list",
+      "capability": "citation.list",
+      "mutating": false,
+      "backend_preference": [
+        "ooxml"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/core/test_citation_workflow.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "citation.remove",
+      "capability": "citation.remove",
+      "mutating": true,
+      "backend_preference": [
+        "ooxml"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/core/test_citation_workflow.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "comment.create",
+      "capability": "comments.create",
+      "mutating": true,
+      "backend_preference": [
+        "word-native"
+      ],
+      "minimum_fidelity": "native",
+      "evidence": {
+        "structural": "NOT_APPLICABLE",
+        "native_roundtrip": "VERIFIED",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [],
+        "native_roundtrip": [
+          "tests/native_word/test_native_live_operations.py::test_live_comment_create_list_delete"
+        ],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [
+          "docs/reviews/native-word-live-evidence-2026-08-30.json"
+        ],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "comment.delete",
+      "capability": "comments.delete",
+      "mutating": true,
+      "backend_preference": [
+        "word-native"
+      ],
+      "minimum_fidelity": "native",
+      "evidence": {
+        "structural": "NOT_APPLICABLE",
+        "native_roundtrip": "VERIFIED",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [],
+        "native_roundtrip": [
+          "tests/native_word/test_native_live_operations.py::test_live_comment_create_list_delete"
+        ],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [
+          "docs/reviews/native-word-live-evidence-2026-08-30.json"
+        ],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "comment.list",
+      "capability": "comments.read",
+      "mutating": false,
+      "backend_preference": [
+        "word-native"
+      ],
+      "minimum_fidelity": "native",
+      "evidence": {
+        "structural": "NOT_APPLICABLE",
+        "native_roundtrip": "VERIFIED",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [],
+        "native_roundtrip": [
+          "tests/native_word/test_native_live_operations.py::test_live_comment_create_list_delete"
+        ],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [
+          "docs/reviews/native-word-live-evidence-2026-08-30.json"
+        ],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "comment.reopen",
+      "capability": "comments.advanced_edit",
+      "mutating": true,
+      "backend_preference": [
+        "word-native"
+      ],
+      "minimum_fidelity": "native",
+      "evidence": {
+        "structural": "NOT_APPLICABLE",
+        "native_roundtrip": "UNVERIFIED",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "comment.reply",
+      "capability": "comments.advanced_edit",
+      "mutating": true,
+      "backend_preference": [
+        "word-native"
+      ],
+      "minimum_fidelity": "native",
+      "evidence": {
+        "structural": "NOT_APPLICABLE",
+        "native_roundtrip": "UNVERIFIED",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "comment.resolve",
+      "capability": "comments.advanced_edit",
+      "mutating": true,
+      "backend_preference": [
+        "word-native"
+      ],
+      "minimum_fidelity": "native",
+      "evidence": {
+        "structural": "NOT_APPLICABLE",
+        "native_roundtrip": "UNVERIFIED",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "compare.documents",
+      "capability": "compare.create",
+      "mutating": true,
+      "backend_preference": [
+        "word-native"
+      ],
+      "minimum_fidelity": "native",
+      "evidence": {
+        "structural": "NOT_APPLICABLE",
+        "native_roundtrip": "VERIFIED",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [],
+        "native_roundtrip": [
+          "tests/native_word/test_native_live_operations.py::test_live_revision_toggle_compare_accept_and_native_render"
+        ],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [
+          "docs/reviews/native-word-live-evidence-2026-08-30.json"
+        ],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "content-control.create",
+      "capability": "content-control.create",
+      "mutating": true,
+      "backend_preference": [
+        "ooxml"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/ooxml/test_properties_protection_equations_controls.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": "plain_text only",
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "content-control.delete",
+      "capability": "content-control.delete",
+      "mutating": true,
+      "backend_preference": [
+        "ooxml"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "UNVERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "content-control.list",
+      "capability": "content-control.list",
+      "mutating": false,
+      "backend_preference": [
+        "ooxml"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/ooxml/test_properties_protection_equations_controls.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": "plain_text only",
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "content-control.set",
+      "capability": "content-control.set",
+      "mutating": true,
+      "backend_preference": [
+        "ooxml"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/ooxml/test_properties_protection_equations_controls.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": "plain_text only",
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "equation.insert",
+      "capability": "equation.insert",
+      "mutating": true,
+      "backend_preference": [
+        "ooxml"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/ooxml/test_properties_protection_equations_controls.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "field.insert",
+      "capability": "field.insert",
+      "mutating": true,
+      "backend_preference": [
+        "ooxml"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/ooxml/test_field_engine.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "field.inspect",
+      "capability": "field.inspect",
+      "mutating": false,
+      "backend_preference": [
+        "ooxml"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/ooxml/test_field_engine.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "field.lock",
+      "capability": "field.lock",
+      "mutating": true,
+      "backend_preference": [
+        "ooxml"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/ooxml/test_field_engine.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "field.remove",
+      "capability": "field.remove",
+      "mutating": true,
+      "backend_preference": [
+        "ooxml"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/ooxml/test_field_engine.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "field.unlock",
+      "capability": "field.unlock",
+      "mutating": true,
+      "backend_preference": [
+        "ooxml"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/ooxml/test_field_engine.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "field.update_all",
+      "capability": "fields.update",
+      "mutating": true,
+      "backend_preference": [
+        "word-native"
+      ],
+      "minimum_fidelity": "native",
+      "evidence": {
+        "structural": "NOT_APPLICABLE",
+        "native_roundtrip": "VERIFIED",
+        "dynamic_result": "VERIFIED",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [],
+        "native_roundtrip": [
+          "tests/native_word/test_native_live_operations.py::test_live_field_update_survives_reopen"
+        ],
+        "dynamic_result": [
+          "tests/native_word/test_native_live_operations.py::test_live_page_and_numpages_are_evaluated_and_persisted"
+        ],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [
+          "docs/reviews/native-word-live-evidence-2026-08-30.json"
+        ],
+        "dynamic_result": [
+          "docs/reviews/native-word-live-evidence-2026-08-30.json"
+        ],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": "Word-native evaluation, save, reopen, and persisted result verification",
+        "dynamic_result": "PAGE and NUMPAGES evaluated and persisted by an isolated Microsoft Word session",
+        "visual": null
+      }
+    },
+    {
+      "name": "format.paragraph",
+      "capability": "format.paragraph",
+      "mutating": true,
+      "backend_preference": [
+        "python-docx"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/core/test_format_operations.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "format.run",
+      "capability": "format.run",
+      "mutating": true,
+      "backend_preference": [
+        "python-docx"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/core/test_format_operations.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "header-footer.set_text",
+      "capability": "header-footer.set_text",
+      "mutating": true,
+      "backend_preference": [
+        "python-docx"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "UNVERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "heading.numbering_apply",
+      "capability": "heading.numbering_apply",
+      "mutating": true,
+      "backend_preference": [
+        "ooxml"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "VERIFIED",
+        "dynamic_result": "VERIFIED",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/ooxml/test_numbering_operations.py"
+        ],
+        "native_roundtrip": [
+          "tests/native_word/test_native_live_operations.py::test_live_heading_numbering_is_recognized_by_word_list_engine"
+        ],
+        "dynamic_result": [
+          "tests/native_word/test_native_live_operations.py::test_live_heading_numbering_is_recognized_by_word_list_engine"
+        ],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [
+          "docs/reviews/native-word-live-evidence-2026-08-30.json"
+        ],
+        "dynamic_result": [
+          "docs/reviews/native-word-live-evidence-2026-08-30.json"
+        ],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "heading.numbering_inspect",
+      "capability": "heading.numbering_inspect",
+      "mutating": false,
+      "backend_preference": [
+        "ooxml"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/ooxml/test_numbering_operations.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "heading.numbering_remove",
+      "capability": "heading.numbering_remove",
+      "mutating": true,
+      "backend_preference": [
+        "ooxml"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/ooxml/test_numbering_operations.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "image.insert",
+      "capability": "image.insert",
+      "mutating": true,
+      "backend_preference": [
+        "python-docx"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/core/test_image_operations.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "image.metadata",
+      "capability": "image.metadata",
+      "mutating": true,
+      "backend_preference": [
+        "ooxml"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "UNVERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "image.remove",
+      "capability": "image.remove",
+      "mutating": true,
+      "backend_preference": [
+        "ooxml"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/core/test_image_operations.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "image.replace",
+      "capability": "image.replace",
+      "mutating": true,
+      "backend_preference": [
+        "ooxml"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "UNVERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "image.resize",
+      "capability": "image.resize",
+      "mutating": true,
+      "backend_preference": [
+        "ooxml"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/core/test_image_operations.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "list.continue",
+      "capability": "list.continue",
+      "mutating": true,
+      "backend_preference": [
+        "ooxml"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "UNVERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "list.create",
+      "capability": "list.create",
+      "mutating": true,
+      "backend_preference": [
+        "ooxml"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/ooxml/test_numbering_operations.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "list.restart",
+      "capability": "list.restart",
+      "mutating": true,
+      "backend_preference": [
+        "ooxml"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/ooxml/test_numbering_operations.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "list.set_level",
+      "capability": "list.set_level",
+      "mutating": true,
+      "backend_preference": [
+        "ooxml"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/ooxml/test_numbering_operations.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "mail-merge.execute",
+      "capability": "mail_merge.create",
+      "mutating": true,
+      "backend_preference": [
+        "word-native"
+      ],
+      "minimum_fidelity": "native",
+      "evidence": {
+        "structural": "NOT_APPLICABLE",
+        "native_roundtrip": "UNVERIFIED",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "merge.documents",
+      "capability": "merge.create",
+      "mutating": true,
+      "backend_preference": [
+        "word-native"
+      ],
+      "minimum_fidelity": "native",
+      "evidence": {
+        "structural": "NOT_APPLICABLE",
+        "native_roundtrip": "UNVERIFIED",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "page-number.apply",
+      "capability": "page-number.apply",
+      "mutating": true,
+      "backend_preference": [
+        "ooxml"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/ooxml/test_page_numbering_semantics.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "page-number.inspect",
+      "capability": "page-number.inspect",
+      "mutating": false,
+      "backend_preference": [
+        "ooxml"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/ooxml/test_page_numbering_semantics.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "properties.get",
+      "capability": "properties.get",
+      "mutating": false,
+      "backend_preference": [
+        "ooxml"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/ooxml/test_properties_protection_equations_controls.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "properties.set",
+      "capability": "properties.set",
+      "mutating": true,
+      "backend_preference": [
+        "ooxml"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/ooxml/test_properties_protection_equations_controls.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "protect.native",
+      "capability": "protection.native_word",
+      "mutating": true,
+      "backend_preference": [
+        "word-native"
+      ],
+      "minimum_fidelity": "native",
+      "evidence": {
+        "structural": "NOT_APPLICABLE",
+        "native_roundtrip": "UNVERIFIED",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "protection.inspect",
+      "capability": "protection.inspect",
+      "mutating": false,
+      "backend_preference": [
+        "ooxml"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/ooxml/test_properties_protection_equations_controls.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "protection.protect",
+      "capability": "protection.protect",
+      "mutating": true,
+      "backend_preference": [
+        "ooxml"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/ooxml/test_properties_protection_equations_controls.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "protection.unprotect",
+      "capability": "protection.unprotect",
+      "mutating": true,
+      "backend_preference": [
+        "ooxml"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/ooxml/test_properties_protection_equations_controls.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "reference.cross_reference",
+      "capability": "reference.cross_reference",
+      "mutating": true,
+      "backend_preference": [
+        "ooxml"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/ooxml/test_bookmark_cross_reference.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "reference.hyperlink",
+      "capability": "reference.hyperlink",
+      "mutating": true,
+      "backend_preference": [
+        "ooxml"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/ooxml/test_bookmark_cross_reference.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "render.pdf",
+      "capability": "render.create",
+      "mutating": true,
+      "backend_preference": [
+        "word-native",
+        "libreoffice"
+      ],
+      "minimum_fidelity": "fallback",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "VERIFIED",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "AVAILABLE_NOT_REVIEWED"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/test_render_isolated.py"
+        ],
+        "native_roundtrip": [
+          "tests/native_word/test_native_live_operations.py::test_live_revision_toggle_compare_accept_and_native_render"
+        ],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [
+          "docs/reviews/native-word-live-evidence-2026-08-30.json"
+        ],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "revision.accept",
+      "capability": "tracked_changes.advanced_edit",
+      "mutating": true,
+      "backend_preference": [
+        "word-native"
+      ],
+      "minimum_fidelity": "native",
+      "evidence": {
+        "structural": "NOT_APPLICABLE",
+        "native_roundtrip": "UNVERIFIED",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "revision.accept_all",
+      "capability": "tracked_changes.advanced_edit",
+      "mutating": true,
+      "backend_preference": [
+        "word-native"
+      ],
+      "minimum_fidelity": "native",
+      "evidence": {
+        "structural": "NOT_APPLICABLE",
+        "native_roundtrip": "VERIFIED",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [],
+        "native_roundtrip": [
+          "tests/native_word/test_native_live_operations.py::test_live_revision_toggle_compare_accept_and_native_render"
+        ],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [
+          "docs/reviews/native-word-live-evidence-2026-08-30.json"
+        ],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "revision.disable",
+      "capability": "tracked_changes.write",
+      "mutating": true,
+      "backend_preference": [
+        "word-native"
+      ],
+      "minimum_fidelity": "native",
+      "evidence": {
+        "structural": "NOT_APPLICABLE",
+        "native_roundtrip": "VERIFIED",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [],
+        "native_roundtrip": [
+          "tests/native_word/test_native_live_operations.py::test_live_revision_toggle_compare_accept_and_native_render"
+        ],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [
+          "docs/reviews/native-word-live-evidence-2026-08-30.json"
+        ],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "revision.enable",
+      "capability": "tracked_changes.write",
+      "mutating": true,
+      "backend_preference": [
+        "word-native"
+      ],
+      "minimum_fidelity": "native",
+      "evidence": {
+        "structural": "NOT_APPLICABLE",
+        "native_roundtrip": "VERIFIED",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [],
+        "native_roundtrip": [
+          "tests/native_word/test_native_live_operations.py::test_live_revision_toggle_compare_accept_and_native_render"
+        ],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [
+          "docs/reviews/native-word-live-evidence-2026-08-30.json"
+        ],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "revision.list",
+      "capability": "tracked_changes.read",
+      "mutating": false,
+      "backend_preference": [
+        "word-native"
+      ],
+      "minimum_fidelity": "native",
+      "evidence": {
+        "structural": "NOT_APPLICABLE",
+        "native_roundtrip": "VERIFIED",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [],
+        "native_roundtrip": [
+          "tests/native_word/test_native_live_operations.py::test_live_revision_toggle_compare_accept_and_native_render"
+        ],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [
+          "docs/reviews/native-word-live-evidence-2026-08-30.json"
+        ],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "revision.reject",
+      "capability": "tracked_changes.advanced_edit",
+      "mutating": true,
+      "backend_preference": [
+        "word-native"
+      ],
+      "minimum_fidelity": "native",
+      "evidence": {
+        "structural": "NOT_APPLICABLE",
+        "native_roundtrip": "UNVERIFIED",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "revision.reject_all",
+      "capability": "tracked_changes.advanced_edit",
+      "mutating": true,
+      "backend_preference": [
+        "word-native"
+      ],
+      "minimum_fidelity": "native",
+      "evidence": {
+        "structural": "NOT_APPLICABLE",
+        "native_roundtrip": "UNVERIFIED",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "section.add",
+      "capability": "section.add",
+      "mutating": true,
+      "backend_preference": [
+        "python-docx"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/ooxml/test_section_layout.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "section.layout",
+      "capability": "section.layout",
+      "mutating": true,
+      "backend_preference": [
+        "python-docx"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/ooxml/test_section_layout.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "section.link",
+      "capability": "section.link",
+      "mutating": true,
+      "backend_preference": [
+        "python-docx"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "UNVERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "style.apply",
+      "capability": "style.apply",
+      "mutating": true,
+      "backend_preference": [
+        "python-docx"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/core/test_format_operations.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "style.clone",
+      "capability": "style.clone",
+      "mutating": true,
+      "backend_preference": [
+        "python-docx"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "UNVERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "style.create",
+      "capability": "style.create",
+      "mutating": true,
+      "backend_preference": [
+        "python-docx"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/core/test_format_operations.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "style.delete",
+      "capability": "style.delete",
+      "mutating": true,
+      "backend_preference": [
+        "python-docx"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/core/test_format_operations.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "style.update",
+      "capability": "style.update",
+      "mutating": true,
+      "backend_preference": [
+        "python-docx"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "UNVERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "table.create",
+      "capability": "table.create",
+      "mutating": true,
+      "backend_preference": [
+        "python-docx"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/core/test_table_operations.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "table.delete",
+      "capability": "table.delete",
+      "mutating": true,
+      "backend_preference": [
+        "python-docx"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "UNVERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "table.delete_column",
+      "capability": "table.delete_column",
+      "mutating": true,
+      "backend_preference": [
+        "python-docx"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/core/test_table_operations.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "table.delete_row",
+      "capability": "table.delete_row",
+      "mutating": true,
+      "backend_preference": [
+        "python-docx"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "UNVERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "table.insert_column",
+      "capability": "table.insert_column",
+      "mutating": true,
+      "backend_preference": [
+        "python-docx"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/core/test_table_operations.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "table.insert_row",
+      "capability": "table.insert_row",
+      "mutating": true,
+      "backend_preference": [
+        "python-docx"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/core/test_table_operations.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "table.layout",
+      "capability": "table.layout",
+      "mutating": true,
+      "backend_preference": [
+        "python-docx"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/core/test_table_operations.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "table.merge",
+      "capability": "table.merge",
+      "mutating": true,
+      "backend_preference": [
+        "python-docx"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/core/test_table_operations.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "table.set_cell",
+      "capability": "table.set_cell",
+      "mutating": true,
+      "backend_preference": [
+        "python-docx"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/core/test_table_operations.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "table.set_column",
+      "capability": "table.set_column",
+      "mutating": true,
+      "backend_preference": [
+        "python-docx"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "UNVERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "table.set_row",
+      "capability": "table.set_row",
+      "mutating": true,
+      "backend_preference": [
+        "python-docx"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "UNVERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "text.edit",
+      "capability": "text.edit",
+      "mutating": true,
+      "backend_preference": [
+        "python-docx"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/core/test_text_operations.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    },
+    {
+      "name": "toc.insert",
+      "capability": "toc.insert",
+      "mutating": true,
+      "backend_preference": [
+        "ooxml"
+      ],
+      "minimum_fidelity": "high",
+      "evidence": {
+        "structural": "VERIFIED",
+        "native_roundtrip": "NOT_APPLICABLE",
+        "dynamic_result": "NOT_APPLICABLE",
+        "visual": "NOT_APPLICABLE"
+      },
+      "evidence_sources": {
+        "structural": [
+          "tests/ooxml/test_caption_toc_fields.py"
+        ],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_runs": {
+        "structural": [],
+        "native_roundtrip": [],
+        "dynamic_result": [],
+        "visual": []
+      },
+      "evidence_scope": {
+        "structural": null,
+        "native_roundtrip": null,
+        "dynamic_result": null,
+        "visual": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-09-01T18:21:46.5822558+07:00",
+  "environment": {
+    "platform": "Windows",
+    "interpreter": "D:\\Download\\WordAssistant\\.venv\\Scripts\\python.exe",
+    "pythonpath": "D:\\Download\\WordAssistant\\src",
+    "word_executable": "C:\\Program Files\\Microsoft Office\\Office15\\WINWORD.EXE",
+    "word_version": "15.0",
+    "backend_probe": "Microsoft Word isolated COM launch probe succeeded"
+  },
+  "run": {
+    "runner": "pytest",
+    "consecutive_repetitions": 3,
+    "tests": [
+      "tests/native_word/test_native_live_operations.py::test_live_field_update_survives_reopen",
+      "tests/native_word/test_native_live_operations.py::test_live_page_and_numpages_are_evaluated_and_persisted",
+      "tests/native_word/test_native_live_operations.py::test_live_heading_numbering_is_recognized_by_word_list_engine",
+      "tests/native_word/test_native_live_operations.py::test_live_comment_create_list_delete",
+      "tests/native_word/test_native_live_operations.py::test_live_revision_toggle_compare_accept_and_native_render",
+      "tests/native_word/test_native_live_operations.py::test_live_execution_service_stages_native_dry_run",
+      "tests/native_word/test_native_live_operations.py::test_live_execution_service_persists_field_evidence",
+      "tests/native_word/test_native_live_operations.py::test_live_field_update_rejects_locked_dynamic_field_without_publish"
+    ],
+    "exit_code": 0,
+    "passed": 24,
+    "failed": 0,
+    "skipped": 0,
+    "status": "PASS"
+  },
+  "source_sha256": {
+    "src/wordassistant/backends/word_native/backend.py": "7CA647FF45386F0475370A8A9B1AC06F8D514329D786A8AD2CE3A1FAD8A60449",
+    "src/wordassistant/backends/word_native/worker.py": "BD6D04E1E33E79DDF2632C2BDB0B66CE4F5DDD46F4D957A6A9C10AA2A44FA608",
+    "tests/native_word/test_native_live_operations.py": "1410C1D6FC48D5D1995D157EAE3598AA1D7B7B01BC55A301CF92129E53080704",
+    "tests/native_word/test_native_field_freshness.py": "5ED4F8DFD85C0E7EBB7DF28458BEDEB3054A423D661E3E30B79AE69BD9B3BA60"
+  },
+  "limitations": [
+    "This is hash-bound local release evidence, not a cryptographically signed attestation.",
+    "The repository environment was provisioned through pip truststore with pywin32 312, setuptools 84.0.0, and wheel 0.48.0 before this run.",
+    "The docx-mcp advanced adapter is separate from the Word-native COM backend and was not operational in this run."
+  ]
+}

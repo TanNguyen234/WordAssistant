@@ -1,0 +1,132 @@
+{
+  "version": 1,
+  "orchestration": {
+    "manifest": "antigravity-workflow.json",
+    "runner": "wordassistant-antigravity",
+    "repository_runner": "python scripts/run_antigravity_workflow.py",
+    "policy": "Use one fresh Antigravity session per phase; the deterministic constraint monitor may stop the workflow and cannot be overridden by an agent summary."
+  },
+  "commands": [
+    "doctor",
+    "capabilities",
+    "inspect",
+    "context",
+    "create",
+    "compose",
+    "apply",
+    "edit",
+    "format",
+    "list",
+    "table",
+    "image",
+    "section",
+    "page-number",
+    "field",
+    "toc",
+    "caption",
+    "reference",
+    "comment",
+    "revision",
+    "protect",
+    "properties",
+    "mail-merge",
+    "compare",
+    "merge",
+    "validate",
+    "verify",
+    "render",
+    "integrity",
+    "profiles"
+  ],
+  "capability_discovery_command": "wordassistant capabilities --json",
+  "workflow_prerequisites": {
+    "always": [
+      "wordassistant doctor --json",
+      "wordassistant capabilities --json"
+    ],
+    "native_word": "Run native-only steps only when the operation_statuses entry is SUPPORTED_NATIVE; otherwise stop and report the unavailable fidelity requirement."
+  },
+  "conventions": {
+    "inspect_first": true,
+    "bounded_context_for_long_documents": true,
+    "mutations_use_output_copy": true,
+    "dry_run_before_destructive_edit": true,
+    "json_for_machine_use": true,
+    "verify_and_render_before_delivery": true,
+    "atomic_multi_operation_plans": true,
+    "provenance_before_academic_delivery": true,
+    "never_claim_ai_detection_or_detector_evasion": true
+  },
+  "delivery_gates": {
+    "validation": "validate.valid == true",
+    "verification": "verify.delivery_status == PASS",
+    "requested_features": "Every requested feature must be observed semantically at the requested depth; visible lookalikes do not count.",
+    "dynamic_fields": "Requested TOC, REF, PAGEREF, PAGE, NUMPAGES, and SEQ fields must be present and UPDATED_NATIVE after a Word reopen/update; placeholder or stale results are FAIL.",
+    "visual_page_audit": "Inspect the visible content of every rendered page; image existence, file size, and dimensions alone are not a content audit. Unexpected blank or near-blank pages are FAIL.",
+    "negative_tests": "Each negative test must exercise the exact requested invariant; harness misuse, unknown options, or unrelated exceptions are FAIL, not a passing fail-closed result.",
+    "evidence": "Never invent a source. Synthetic QA records must set synthetic=true and remain visibly labeled in citations and bibliography.",
+    "academic_integrity": "Run integrity audit with the exact profile variant and evidence registry. Synthetic evidence, unresolved placeholders, stale hashes, missing bibliography entries, and invisible spoofing characters are not waivable PASS results. Style heuristics require human review and are never AI-authorship evidence.",
+    "contradiction_policy": "FAIL if any JSON result, reopened Word semantic check, rendered page, or test log contradicts the summary.",
+    "unavailable_policy": "UNAVAILABLE or REVIEW_REQUIRED is never PASS."
+  },
+  "document_construction_order": [
+    "For a new long report, write one bounded version-1 content JSON and run compose once; never generate helper code.",
+    "Compose substantive content, real Heading styles, stable anchors, evidence-linked citations, and the existing bibliography section before layout operations.",
+    "Use one version-1 apply plan for compatible mutating operations so a failed step rolls back and no intermediate DOCX is published.",
+    "Insert section breaks with selectors at real content boundaries, then apply layout to the resulting section indexes.",
+    "Insert TOC, captions, cross-references, and pagination, then update fields through Word native when required.",
+    "Run integrity audit/provenance, inspect, validate, verify, native reopen, and content-aware page audit before delivery."
+  ],
+  "delivery_completion_sequence": {
+    "first_pass": "Run verify with --native-fields --render --engine word. REVIEW_REQUIRED is expected until page images are actually inspected.",
+    "human_or_agent_review": "Inspect the visible content of every path in render.page_images and reject blank, clipped, overflowing, duplicated, or malformed pages. Preserve visual_review_challenge.token, which is bound to the exact document and ordered page-image hashes.",
+    "final_pass": "Only after that inspection, rerun the same verify command with --visual-reviewed --visual-review-token TOKEN_FROM_CHALLENGE. PASS is valid only when the current page hashes still match and all other gates also pass."
+  },
+  "recommended_workflows": {
+    "create_report": {
+      "requires_operation_statuses": {
+        "field.update_all": "SUPPORTED_NATIVE",
+        "render.pdf": "SUPPORTED_NATIVE"
+      },
+      "on_unavailable": "Stop and report INCOMPLETE; never bypass the CLI with ad-hoc COM or call the document delivery-ready.",
+      "steps": [
+        "wordassistant doctor --json",
+        "wordassistant capabilities --json",
+        "wordassistant create report.docx --profile generic --title Report --json",
+        "wordassistant compose report.docx --output authored.docx --content content.json --evidence evidence.json --min-visible-characters 8000 --max-visible-characters 14000 --json",
+        "wordassistant apply authored.docx --output formatted.docx --plan operations.json --json",
+        "wordassistant validate formatted.docx --profile generic --variant default --json",
+        "wordassistant field update-all formatted.docx --output refreshed.docx --json",
+        "wordassistant integrity audit refreshed.docx --evidence evidence.json --profile generic --variant default --json",
+        "wordassistant integrity provenance refreshed.docx --evidence evidence.json --profile generic --variant default --output refreshed.provenance.json --json",
+        "wordassistant verify refreshed.docx --profile generic --variant default --native-fields --render --engine word --json",
+        "INSPECT_EVERY_PATH_FROM_render.page_images",
+        "wordassistant verify refreshed.docx --profile generic --variant default --native-fields --render --engine word --visual-reviewed --visual-review-token TOKEN_FROM_CHALLENGE --delivery --json"
+      ]
+    },
+    "long_document_edit": [
+      "wordassistant doctor --json",
+      "wordassistant capabilities --json",
+      "wordassistant inspect thesis.docx --json",
+      "wordassistant context thesis.docx --query \"chapter 3 results\" --json",
+      "wordassistant edit replace thesis.docx --output revised.docx --options '{\"pattern\":\"old\",\"replacement\":\"new\"}' --dry-run --json",
+      "wordassistant edit replace thesis.docx --output revised.docx --options '{\"pattern\":\"old\",\"replacement\":\"new\"}' --json",
+      "wordassistant verify revised.docx --json"
+    ],
+    "layout_change": {
+      "requires_operation_statuses": {
+        "field.update_all": "SUPPORTED_NATIVE",
+        "render.pdf": "SUPPORTED_NATIVE"
+      },
+      "on_unavailable": "Stop before native-only steps and report that dynamic-field freshness and Word-native render remain unverified.",
+      "steps": [
+        "wordassistant doctor --json",
+        "wordassistant capabilities --json",
+        "wordassistant inspect report.docx --json",
+        "wordassistant page-number apply report.docx --output numbered.docx --options '{\"section_index\":0,\"number_format\":\"decimal\"}' --json",
+        "wordassistant field update-all numbered.docx --output refreshed.docx --json",
+        "wordassistant verify refreshed.docx --render --engine word --native-fields --json"
+      ]
+    }
+  }
+}

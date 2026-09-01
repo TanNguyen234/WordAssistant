@@ -11,6 +11,30 @@ def digest(p: Path) -> str:
 
 def get_pairs():
     pairs = []
+    pairs.extend(
+        [
+            (
+                ROOT / 'wordassistant-agent.json',
+                ROOT / 'src/wordassistant/data/agent/wordassistant-agent.json',
+            ),
+            (
+                ROOT / 'antigravity-workflow.json',
+                ROOT / 'src/wordassistant/data/agent/antigravity-workflow.json',
+            ),
+            (
+                ROOT / 'scripts/run_antigravity_workflow.py',
+                ROOT / 'src/wordassistant/data/agent/run_antigravity_workflow.py',
+            ),
+            (
+                ROOT / 'docs/word_feature_matrix.json',
+                ROOT / 'src/wordassistant/data/agent/word_feature_matrix.json',
+            ),
+            (
+                ROOT / 'docs/reviews/native-word-live-evidence-2026-08-30.json',
+                ROOT / 'src/wordassistant/data/agent/native-word-live-evidence-2026-08-30.json',
+            ),
+        ]
+    )
     # Profiles
     profiles_dir = ROOT / 'profiles'
     if profiles_dir.exists():
@@ -68,6 +92,11 @@ def main():
             raise SystemExit(2)
             
     pairs = get_pairs()
+    missing_sources = [src for src, _ in pairs if not src.is_file()]
+    if missing_sources:
+        for source in missing_sources:
+            print(f'MISSING-PACKAGE-SOURCE: {source.relative_to(ROOT)}', file=sys.stderr)
+        raise SystemExit(2)
     valid_dsts = {dst.resolve() for _, dst in pairs}
     
     # Check for stale files in data directory
@@ -75,7 +104,12 @@ def main():
     stale_files = []
     if data_dir.exists():
         for f in data_dir.rglob('*'):
-            if f.is_file() and f.resolve() not in valid_dsts:
+            if (
+                f.is_file()
+                and '__pycache__' not in f.parts
+                and f.suffix not in {'.pyc', '.pyo'}
+                and f.resolve() not in valid_dsts
+            ):
                 stale_files.append(f)
                 
     bad = []

@@ -5,15 +5,64 @@ description: Create, inspect, retrieve bounded context from, validate, and rende
 
 # WordAssistant skill
 
-Use the CLI as the stable control plane. This keeps agents from loading raw implementation details or complex OOXML trees into prompt context.
+Use the CLI as the stable control plane. Never inspect repository source or raw OOXML to discover normal operations.
 
 1. Run `wordassistant doctor --json` once per environment.
-2. Inspect unfamiliar documents with `wordassistant inspect FILE --json`.
-3. For documents longer than a few pages, retrieve bounded context with `wordassistant context FILE --query "..." --max-tokens 8000 --json`.
-4. Create document skeletons with `wordassistant scaffold OUTPUT --profile PROFILE --variant VARIANT --title "..." --json`.
-5. Perform safe text replacements with `wordassistant replace FILE --old "..." --new "..." --json`.
-6. Verify and validate complete documents with `wordassistant verify FILE --profile PROFILE --variant VARIANT --json`.
-7. Render to PDF with `wordassistant render FILE --json` and inspect the rendered result when layout matters.
-8. Store only verified claims and references with `wordassistant evidence add ...`. Never fabricate citations.
+2. Inspect every unfamiliar DOCX with `wordassistant inspect FILE --json`.
+3. For long documents, retrieve only bounded task context with `wordassistant context FILE --query "..." --max-tokens 8000 --json`.
+4. Check `wordassistant capabilities --json` before native or renderer-dependent work.
+5. Mutate an output copy. Use `--dry-run` before destructive changes.
+6. For a new long report, write one bounded UTF-8 content JSON and run `compose` once after `create`; do not generate helper scripts. Then use one `apply` version-1 plan for compatible formatting/layout mutations so validation and rollback cover the whole operation and no intermediate DOCX is published.
+7. Persist native field updates to a distinct final DOCX before the final academic audit. Then run `integrity audit` with the exact profile variant and evidence registry and create `integrity provenance` bound to that final DOCX hash. Any later DOCX mutation invalidates both audit and provenance.
+8. Run `wordassistant verify OUTPUT --json` after edits.
+9. When formatting matters, render and inspect every page. A successful render does not prove fields or numbering are functional.
+10. A final delivery PASS requires both `validate.valid == true` and `verify.delivery_status == "PASS"`; `overall_status` only summarizes the checks requested in that invocation.
 
-Do not require the user or agent to supply internal section IDs; `--section` is an optional override only.
+| Need | Command |
+|---|---|
+| Read structure | `inspect` |
+| Find relevant text | `context` |
+| Create report | `create` |
+| Populate long report | `compose` |
+| Atomic multi-edit | `apply` |
+| Edit text | `edit` |
+| Formatting | `format` |
+| Lists/headings | `list` |
+| Table work | `table` |
+| Image work | `image` |
+| Sections/layout | `section` |
+| Pagination | `page-number` |
+| Fields/TOC | `field`, `toc`, `caption` |
+| Citations/references | `reference` |
+| Academic integrity/provenance | `integrity` |
+| Comments/revisions | `comment`, `revision` |
+| Final QA | `verify`, then `render` |
+
+Examples:
+
+```powershell
+wordassistant create report.docx --profile generic --title "Report" --json
+wordassistant compose report.docx --output authored.docx --content content.json --evidence evidence.json --min-visible-characters 8000 --max-visible-characters 14000 --json
+wordassistant apply authored.docx --output formatted.docx --plan operations.json --json
+wordassistant inspect thesis.docx --json
+wordassistant context thesis.docx --query "chapter 3 results" --max-tokens 8000 --json
+wordassistant edit replace thesis.docx --output revised.docx --options '{"pattern":"old","replacement":"new"}' --dry-run --json
+wordassistant format paragraph revised.docx --output formatted.docx --selector '{"type":"heading","text":"Results"}' --options '{"keep_with_next":true}' --json
+wordassistant page-number apply report.docx --output numbered.docx --options '{"section_index":1,"number_format":"decimal","start":1}' --json
+wordassistant table create report.docx --output table.docx --options '{"rows":3,"columns":4}' --json
+wordassistant image insert report.docx --output illustrated.docx --options '{"image_path":"figure.png","alt_text":"Measured results"}' --json
+wordassistant reference citation-insert report.docx --output cited.docx --selector '{"type":"text","text":"Claim supported by evidence"}' --options '{"evidence_id":"src-1","evidence_registry":"evidence.json"}' --json
+wordassistant comment create report.docx --output reviewed.docx --options '{"start":0,"end":5,"text":"Clarify this claim"}' --json
+wordassistant revision enable reviewed.docx --output tracking.docx --json
+wordassistant integrity audit tracking.docx --evidence evidence.json --profile generic --variant default --json
+wordassistant integrity provenance tracking.docx --evidence evidence.json --output tracking.provenance.json --json
+wordassistant verify tracking.docx --render --json
+```
+
+For a native final gate, first run `verify FILE --native-fields --render --engine word --json`. Inspect every returned `render.page_images` path. Only after that real page review, rerun with `--visual-reviewed`; the flag is an attestation, not an automatic image check.
+
+Real Heading styles are not the same as bold text. Automatic heading numbering is not literal `1.1` text. TOC/REF/PAGE fields may be stale until a native update reports `UPDATED_NATIVE`. Never invent citations or silently substitute an unavailable backend.
+
+Do not optimize prose to evade an AI detector. The integrity command does not perform AI detection. It fails deterministic source/provenance defects and reports repetition or unusual punctuation only as human-review style signals. Preserve legitimate Vietnamese diacritics and disclose permitted AI assistance truthfully.
+
+For new reports, `compose` authors content first and binds citations to their claim paragraphs; anchor section breaks to real content boundaries before applying section layout. Inspect every rendered page's content; dimensions and file existence are insufficient. Unexpected blank pages, stale fields, an unavailable gate, or any conflict between the summary and artifacts force FAIL. Negative tests must reject the exact tested invariant, not merely raise an unrelated argument or harness error. Mark synthetic evidence with `synthetic=true`; it remains visibly labeled in the document.

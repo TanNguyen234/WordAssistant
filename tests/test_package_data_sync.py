@@ -1,6 +1,8 @@
 from pathlib import Path
 import hashlib
 import json
+import subprocess
+import sys
 import wordassistant
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -26,3 +28,20 @@ def test_all_profiles_and_use_cases_mirrored():
                     target = ROOT / "src/wordassistant/data/use_cases" / rel
                     assert target.exists(), f"Missing mirrored use case asset: {rel}"
                     assert hashlib.sha256(f.read_bytes()).hexdigest() == hashlib.sha256(target.read_bytes()).hexdigest()
+
+
+def test_sync_check_ignores_python_bytecode_cache():
+    cache = ROOT / "src/wordassistant/data/agent/__pycache__"
+    cache.mkdir(parents=True, exist_ok=True)
+    bytecode = cache / "sync-check-test.pyc"
+    bytecode.write_bytes(b"cache")
+    try:
+        completed = subprocess.run(
+            [sys.executable, "scripts/sync_package_data.py", "--check"],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+        )
+        assert completed.returncode == 0, completed.stderr
+    finally:
+        bytecode.unlink(missing_ok=True)

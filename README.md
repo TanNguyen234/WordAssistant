@@ -25,13 +25,17 @@ python -m pip install -e .
 wordassistant doctor --json
 ```
 
-Optional advanced Word/OOXML backend:
+Optional backends:
 
 ```bash
 python -m pip install -e ".[word]"
+python -m pip install -e ".[native-word]"  # Windows + Microsoft Word
 ```
 
 ## Stable agent-facing commands
+
+`wordassistant-agent.json` defines the canonical command surface. The older
+`scaffold` and `replace` commands remain compatibility aliases.
 
 ```bash
 wordassistant doctor --json
@@ -40,12 +44,23 @@ wordassistant profiles --json
 wordassistant init . --json
 wordassistant inspect file.docx --json
 wordassistant context file.docx --query "revise evaluation and error analysis" --max-tokens 8000 --json
-wordassistant scaffold output.docx --profile generic --variant default --title "Report" --json
-wordassistant replace file.docx --old "old text" --new "new text" --output revised.docx --json
+wordassistant create output.docx --profile generic --variant default --title "Report" --json
+wordassistant compose output.docx --output authored.docx --content content.json --evidence evidence.json --min-visible-characters 8000 --max-visible-characters 14000 --json
+wordassistant apply authored.docx --output formatted.docx --plan operations.json --json
+wordassistant edit replace file.docx --output revised.docx --options '{"pattern":"old text","replacement":"new text"}' --json
+wordassistant table create revised.docx --output tabled.docx --options '{"rows":3,"columns":4}' --json
+wordassistant page-number apply tabled.docx --output numbered.docx --options '{"section_index":0,"number_format":"decimal","start":1}' --json
 wordassistant validate file.docx --profile generic --variant default --json
 wordassistant render file.docx --json
 wordassistant evidence list .wordassistant/evidence.json --json
+wordassistant integrity audit authored.docx --evidence .wordassistant/evidence.json --profile generic --variant default --json
+wordassistant integrity provenance authored.docx --evidence .wordassistant/evidence.json --output authored.provenance.json --json
 ```
+
+Run `wordassistant capabilities --json` before native comments, revisions,
+compare/merge, dynamic field refresh, charts, mail merge, or Word PDF export.
+Capability status is operation-granular and does not treat package presence as
+proof. See `docs/CAPABILITIES.md` and `docs/WORD_FIDELITY_ASSESSMENT.md`.
 
 `--section` exists as an optional precision override for `context`; agents do not need to discover or supply section IDs for normal use.
 
@@ -92,19 +107,29 @@ The report variant uses the written report guidance as normative. The proposal v
 
 The base CLI deliberately exposes a small stable command set. This is intentional: weak agents should not preload 200+ low-level OOXML tools.
 
-`wordassistant capabilities --json` reports whether the optional `docx-mcp-server` backend is installed. That backend is the route for Word-native operations such as tracked changes, comments, footnotes/endnotes, bookmarks, fields/cross-references, charts, equations, content controls, protection and deep OOXML audit. Load it only when a task requires those capabilities.
+`wordassistant capabilities --json` reports support per operation. The optional
+`docx-mcp-server` is currently unintegrated and enables no public operation by
+package presence alone. Verified native comments, revisions, compare, field
+refresh, and PDF export use the isolated Microsoft Word backend. Advanced
+controls, notes, charts, mail merge, native protection, and other unverified
+paths remain explicitly unsupported until a committed round-trip test exists.
 
 ## Evidence policy
 
-The old mutable global `references.json` design is retired. A project workspace uses `.wordassistant/evidence.json`, and records require an ID, title, authors, year, absolute URL, and `verified_by` provenance. No unrelated fallback citation is allowed.
+The old mutable global `references.json` design is retired. A project workspace uses `.wordassistant/evidence.json`, and records require an ID, title, authors, year, absolute URL, `verified_by` provenance, and an explicit boolean `synthetic`. Tampered records are rejected on read. No unrelated fallback citation is allowed.
+
+Academic integrity is provenance-first, not detector-evasion. The `integrity` command cross-checks citations, bibliography, evidence, placeholders, invisible Unicode, AI-use disclosure, and review-only prose heuristics, then binds the final DOCX and registry hashes in an atomic provenance manifest. It does not claim to detect AI authorship. See `docs/ACADEMIC_INTEGRITY.md`.
 
 ## Quality gates
 
 Before delivery:
 
-1. `wordassistant validate ...`
-2. `wordassistant render ...`
-3. inspect the rendered PDF when layout matters.
+1. run `wordassistant integrity audit ...` and write the provenance manifest for academic work;
+2. `wordassistant validate ...`;
+3. update dynamic fields to a distinct output with the Word-native backend;
+4. run `wordassistant verify ... --native-fields --render --engine word`;
+5. inspect every returned page image;
+6. rerun with `--visual-reviewed --delivery` and require `delivery_status: PASS`.
 
 Repository verification:
 
