@@ -56,7 +56,7 @@ def _default_table_width(document, table) -> int:
     )
 
 
-def _normalize_table_geometry(document, table, width_twips: int | None = None):
+def normalize_table_geometry(document, table, width_twips: int | None = None):
     tbl_pr = table._tbl.tblPr
     current = tbl_pr.find(qn("w:tblW"))
     current_width = None
@@ -116,7 +116,7 @@ def _save_result(
 ):
     if normalize_geometry:
         for table in document.tables:
-            _normalize_table_geometry(document, table)
+            normalize_table_geometry(document, table)
     output = Path(output_path).resolve()
     if not dry_run:
         atomic_save(document, output)
@@ -336,9 +336,9 @@ def set_table_layout(
     document = Document(input_path)
     table = _table(document, table_index)
     if width_cm is not None:
-        _normalize_table_geometry(document, table, int(Cm(float(width_cm)).twips))
+        normalize_table_geometry(document, table, int(Cm(float(width_cm)).twips))
     elif autofit is False:
-        _normalize_table_geometry(document, table)
+        normalize_table_geometry(document, table)
     if row_height_pt is not None:
         for row in table.rows:
             row.height = Pt(float(row_height_pt))

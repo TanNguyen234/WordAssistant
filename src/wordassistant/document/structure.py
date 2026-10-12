@@ -12,8 +12,8 @@ from docx.text.paragraph import Paragraph
 from docx.oxml.ns import qn
 from .model import DocumentSection
 from wordassistant.operations.fields import inspect_fields
+from wordassistant.selectors import _heading_level, _outline_level
 
-_HEADING_STYLE = re.compile(r'^Heading\s*(\d+)$', re.I)
 _MAJOR = re.compile(
     r'^(?:'
     r'chương\s+\d+|chapter\s+\d+|'
@@ -91,13 +91,25 @@ def detect_heading(p: Paragraph) -> int | None:
     text = p.text.strip()
     if not text:
         return None
-    style = p.style.name if p.style else ''
-    m = _HEADING_STYLE.match(style or '')
-    if m:
-        return min(9, int(m.group(1)))
+    semantic_level = _heading_level(p)
+    if semantic_level is not None:
+        return semantic_level
     ppr = p._p.pPr
-    if ppr is not None and ppr.outlineLvl is not None:
-        return int(ppr.outlineLvl.val) + 1
+    if _outline_level(p) == 9:
+        # Direct Body overrides and overridden real headings suppress heading
+        # semantics. Legacy body/list styles still need conservative heuristics.
+        if ppr is not None and ppr.find(qn('w:outlineLvl')) is not None:
+            return None
+        style = p.style
+        seen = set()
+        while style is not None and style.style_id not in seen:
+            seen.add(style.style_id)
+            if re.fullmatch(r'Heading [1-9]', style.name or ''):
+                return None
+            outline = style.element.find(f"{qn('w:pPr')}/{qn('w:outlineLvl')}")
+            if style.name != 'Normal' and outline is not None and outline.get(qn('w:val')) in {str(i) for i in range(9)}:
+                return None
+            style = style.base_style
     num_ilvl = None
     if ppr is not None and ppr.numPr is not None and ppr.numPr.ilvl is not None:
         num_ilvl = int(ppr.numPr.ilvl.val)

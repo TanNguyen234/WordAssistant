@@ -108,6 +108,8 @@ OPERATION_OPTION_OVERRIDES = {
         ("title", False, None, "string"),
         ("caption", False, None, "string"),
         ("caption_label", False, "Figure", "string"),
+        ("caption_sequence", False, None, "string"),
+        ("caption_chapter_number", False, None, "integer"),
         ("placement", False, "after", "string"),
         ("alignment", False, "center", "string"),
         ("preserve_aspect_ratio", False, True, "boolean"),

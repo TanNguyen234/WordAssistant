@@ -52,6 +52,7 @@ class Variant:
     citations: Mapping[str, Any] = field(default_factory=dict)
     integrity: Mapping[str, Any] = field(default_factory=dict)
     header_footer: Mapping[str, Any] = field(default_factory=dict)
+    captions: Mapping[str, Any] = field(default_factory=dict)
     template_asset: str | None = None
     field_requirements: Mapping[str, Any] = field(default_factory=dict)
 
@@ -75,16 +76,16 @@ class DocumentProfile:
 _ROOT_KEYS = {'id', 'name', 'version', 'variants', 'source_policy', 'source_assets', 'source_conflicts'}
 _VARIANT_KEYS = {
     'page', 'typography', 'front_matter', 'front_matter_titles', 'cover',
-    'section_blueprint', 'citations', 'integrity', 'header_footer', 'template_asset', 'field_requirements'
+    'section_blueprint', 'citations', 'integrity', 'header_footer', 'captions', 'template_asset', 'field_requirements'
 }
 _PAGE_KEYS = {'size', 'width_cm', 'height_cm', 'margins_cm', 'one_sided', 'orientation', 'allow_mixed_orientation', 'provenance'}
 _MARGINS_KEYS = {'top', 'bottom', 'left', 'right'}
 _TYPOGRAPHY_KEYS = {'body_font', 'body_size_pt', 'line_spacing', 'paragraph_spacing_before_pt', 'paragraph_spacing_after_pt', 'styles'}
 _STYLE_KEYS = {'font', 'size_pt', 'bold', 'italic', 'alignment', 'line_spacing', 'space_before_pt', 'space_after_pt'}
-_BLUEPRINT_KEYS = {'title', 'level', 'required', 'numbered', 'restart_numbering'}
-_COVER_KEYS = {'institution_lines', 'document_type', 'title_prefix', 'metadata_fields', 'location_year'}
+_BLUEPRINT_KEYS = {'title', 'level', 'required', 'numbered', 'restart_numbering', 'page_break_before'}
+_COVER_KEYS = {'institution_lines', 'document_type', 'title_prefix', 'metadata_fields', 'location_year', 'location_year_key', 'location_year_template', 'logo_asset', 'border', 'styles'}
 _METADATA_FIELD_KEYS = {'key', 'label', 'value_key', 'default', 'value', 'required'}
-_CITATIONS_KEYS = {'style', 'in_text', 'minimum_references', 'prefer_primary_source', 'bibliography_order'}
+_CITATIONS_KEYS = {'style', 'in_text', 'minimum_references', 'prefer_primary_source', 'bibliography_order', 'require_reviewed_sources'}
 _INTEGRITY_KEYS = {
     'long_quote_words', 'quote_citation_words', 'repeated_opening_words',
     'repeated_opening_minimum', 'ngram_size', 'repeated_ngram_minimum',
@@ -103,7 +104,18 @@ _INTEGRITY_PUNCTUATION = {
     'left_curly_single_quote', 'right_curly_single_quote', 'ellipsis',
     'non_breaking_space'
 }
-_HEADER_FOOTER_KEYS = {'header_left', 'header_right', 'footer_left', 'footer_right', 'page_number_start'}
+_HEADER_FOOTER_KEYS = {'header_left', 'header_right', 'footer_left', 'footer_right', 'page_number_start', 'front_matter_page_number_format'}
+_CAPTIONS_KEYS = {'figure_labels', 'table_label', 'numbering'}
+_CAPTION_NUMBERING_CONTRACT = {
+    'format': 'chapter.sequence',
+    'mode': 'verified_literal_chapter',
+    'heading_style': 'Heading 1',
+    'heading_level': 1,
+    'separator': '.',
+    'chapter_option': 'chapter_number',
+    'image_chapter_option': 'caption_chapter_number',
+}
+_CAPTION_LABEL_KEYS = {'display', 'sequence'}
 _FIELD_REQS_KEYS = {'table_of_contents', 'page_number', 'list_of_figures', 'list_of_tables'}
 _VALID_ALIGNMENTS = {'left', 'center', 'right', 'justify'}
 
@@ -276,6 +288,36 @@ def _parse_variant(name: str, data: Any) -> Variant:
             raise ProfileError(f"{name}.cover.title_prefix must be a string")
         if 'location_year' in cover_data and not isinstance(cover_data['location_year'], str):
             raise ProfileError(f"{name}.cover.location_year must be a string")
+        for key in ('location_year_key', 'location_year_template'):
+            if key in cover_data and not isinstance(cover_data[key], str):
+                raise ProfileError(f"{name}.cover.{key} must be a string")
+        if 'styles' in cover_data:
+            styles = cover_data['styles']
+            if not isinstance(styles, dict) or any(not isinstance(key, str) or not isinstance(value, str) for key, value in styles.items()):
+                raise ProfileError(f"{name}.cover.styles must map style roles to style names")
+        if 'logo_asset' in cover_data:
+            logo_asset = cover_data['logo_asset']
+            if not isinstance(logo_asset, str) or not logo_asset.strip() or Path(logo_asset).is_absolute() or '..' in Path(logo_asset).parts:
+                raise ProfileError(f"{name}.cover.logo_asset must be a safe relative path")
+        if 'border' in cover_data:
+            border = cover_data['border']
+            if not isinstance(border, dict):
+                raise ProfileError(f"{name}.cover.border must be an object")
+            _check_unknown_keys(border, {'display', 'offset_from', 'edges'}, f"{name}.cover.border")
+            if border.get('display') not in {'allPages', 'firstPage', 'notFirstPage'}:
+                raise ProfileError(f"{name}.cover.border.display must be allPages, firstPage, or notFirstPage")
+            if border.get('offset_from', 'page') not in {'page', 'text'}:
+                raise ProfileError(f"{name}.cover.border.offset_from must be page or text")
+            edges = border.get('edges')
+            if not isinstance(edges, dict) or set(edges) != {'top', 'left', 'bottom', 'right'}:
+                raise ProfileError(f"{name}.cover.border.edges must define top, left, bottom, and right")
+            for edge, edge_spec in edges.items():
+                if not isinstance(edge_spec, dict):
+                    raise ProfileError(f"{name}.cover.border.edges.{edge} must be an object")
+                _check_unknown_keys(edge_spec, {'style', 'size_eighth_points', 'space_points'}, f"{name}.cover.border.edges.{edge}")
+                _str(edge_spec, 'style')
+                for key in ('size_eighth_points', 'space_points'):
+                    _num(edge_spec.get(key), f"{name}.cover.border.edges.{edge}.{key}", positive=True)
         if 'metadata_fields' in cover_data:
             mf_list = _object_list(cover_data['metadata_fields'], f"{name}.cover.metadata_fields")
             for mf_idx, mf in enumerate(mf_list):
@@ -311,6 +353,8 @@ def _parse_variant(name: str, data: Any) -> Variant:
             raise ProfileError(f"Section blueprint numbered must be boolean, got {bp['numbered']!r}")
         if 'restart_numbering' in bp and type(bp['restart_numbering']) is not bool:
             raise ProfileError(f"Section blueprint restart_numbering must be boolean, got {bp['restart_numbering']!r}")
+        if 'page_break_before' in bp and type(bp['page_break_before']) is not bool:
+            raise ProfileError(f"Section blueprint page_break_before must be boolean, got {bp['page_break_before']!r}")
         blueprint.append(bp)
         
     citations = data.get('citations', {})
@@ -330,6 +374,8 @@ def _parse_variant(name: str, data: Any) -> Variant:
                 raise ProfileError(f"{name}.citations.minimum_references must be an integer >= 0, got {min_r!r}")
         if 'prefer_primary_source' in citations and type(citations['prefer_primary_source']) is not bool:
             raise ProfileError(f"{name}.citations.prefer_primary_source must be a boolean")
+        if 'require_reviewed_sources' in citations and type(citations['require_reviewed_sources']) is not bool:
+            raise ProfileError(f"{name}.citations.require_reviewed_sources must be a boolean")
 
     integrity = data.get('integrity', {})
     if not isinstance(integrity, dict):
@@ -376,6 +422,53 @@ def _parse_variant(name: str, data: Any) -> Variant:
                     raise ProfileError(f"{name}.header_footer.page_number_start string must not be empty")
             else:
                 raise ProfileError(f"{name}.header_footer.page_number_start must be an integer >= 0 or a string, got {p_start!r}")
+        if 'front_matter_page_number_format' in header_footer:
+            value = header_footer['front_matter_page_number_format']
+            if value not in {'none', 'lowerRoman', 'upperRoman', 'decimal'}:
+                raise ProfileError(f"{name}.header_footer.front_matter_page_number_format has an unsupported value")
+
+    captions = data.get('captions', {})
+    if not isinstance(captions, dict):
+        raise ProfileError(f"{name}.captions must be an object")
+    if captions:
+        _check_unknown_keys(captions, _CAPTIONS_KEYS, f"{name}.captions")
+        if 'numbering' in captions:
+            numbering = captions['numbering']
+            context = f"{name}.captions.numbering"
+            if not isinstance(numbering, dict):
+                raise ProfileError(f"{context} must be an object")
+            _check_unknown_keys(numbering, set(_CAPTION_NUMBERING_CONTRACT), context)
+            for key, expected in _CAPTION_NUMBERING_CONTRACT.items():
+                actual = numbering.get(key)
+                if type(actual) is not type(expected) or actual != expected:
+                    raise ProfileError(f"{context}.{key} must be {expected!r}")
+        figure_labels = captions.get('figure_labels', [])
+        if not isinstance(figure_labels, list):
+            raise ProfileError(f"{name}.captions.figure_labels must be an array")
+        normalized_labels = []
+        for index, item in enumerate(figure_labels):
+            if not isinstance(item, dict):
+                raise ProfileError(f"{name}.captions.figure_labels[{index}] must be an object")
+            _check_unknown_keys(item, _CAPTION_LABEL_KEYS, f"{name}.captions.figure_labels[{index}]")
+            display = _str(item, 'display')
+            sequence = _str(item, 'sequence')
+            if not _VALID_KEY_REGEX.fullmatch(sequence):
+                raise ProfileError(f"{name}.captions.figure_labels[{index}].sequence must be a Word-safe identifier")
+            normalized_labels.append({'display': display, 'sequence': sequence})
+        sequences = [item['sequence'].casefold() for item in normalized_labels]
+        if len(sequences) != len(set(sequences)):
+            raise ProfileError(f"{name}.captions.figure_labels sequence identifiers must be unique")
+        captions['figure_labels'] = normalized_labels
+        if 'table_label' in captions:
+            table_label = captions['table_label']
+            if not isinstance(table_label, dict):
+                raise ProfileError(f"{name}.captions.table_label must be an object")
+            _check_unknown_keys(table_label, _CAPTION_LABEL_KEYS, f"{name}.captions.table_label")
+            display = _str(table_label, 'display')
+            sequence = _str(table_label, 'sequence')
+            if not _VALID_KEY_REGEX.fullmatch(sequence):
+                raise ProfileError(f"{name}.captions.table_label.sequence must be a Word-safe identifier")
+            captions['table_label'] = {'display': display, 'sequence': sequence}
         
     template = data.get('template_asset')
     if template is not None:
@@ -407,6 +500,7 @@ def _parse_variant(name: str, data: Any) -> Variant:
         citations=citations,
         integrity=integrity,
         header_footer=header_footer,
+        captions=captions,
         template_asset=template,
         field_requirements=field_reqs
     )

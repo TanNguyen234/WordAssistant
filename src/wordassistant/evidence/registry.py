@@ -6,13 +6,26 @@ import os
 import tempfile
 import time
 import urllib.parse
+import hashlib
+import re
+import ctypes
+import sys
+import uuid
 from contextlib import contextmanager
 
 class EvidenceError(ValueError):
     pass
 
 _REQUIRED_FIELDS = {'id', 'title', 'authors', 'year', 'url', 'verified_by', 'synthetic'}
-_ALLOWED_FIELDS = {'id', 'title', 'authors', 'year', 'url', 'verified_by', 'quote', 'claim', 'doi', 'notes', 'tags', 'synthetic'}
+_ALLOWED_FIELDS = {
+    'id', 'title', 'authors', 'year', 'url', 'verified_by', 'quote', 'claim',
+    'doi', 'notes', 'tags', 'synthetic', 'review_status', 'reviewed_by',
+    'reviewed_at', 'support_location', 'support_excerpt', 'source_file',
+    'source_sha256', 'source_license', 'source_url', 'source_version',
+    'retrieved_at', 'oa_url', 'oa_license', 'oa_host', 'author_sort_key',
+    'language', 'container_title', 'volume', 'issue', 'pages', 'publisher',
+    'publication_place', 'author_metadata',
+}
 
 def _is_valid_url_or_doi(val: str) -> bool:
     if not isinstance(val, str) or not val.strip():
@@ -63,6 +76,66 @@ def validate_record(record: Any) -> None:
 
     if 'synthetic' in record and type(record['synthetic']) is not bool:
         raise EvidenceError("Field 'synthetic' must be a boolean")
+
+    for field_name in (
+        'reviewed_by', 'reviewed_at', 'support_location', 'support_excerpt',
+        'source_file', 'source_sha256', 'source_license', 'source_url',
+        'source_version', 'retrieved_at', 'oa_url', 'oa_license', 'oa_host',
+        'author_sort_key', 'claim', 'quote', 'notes',
+        'language', 'container_title', 'volume', 'issue', 'pages', 'publisher',
+        'publication_place',
+    ):
+        if field_name in record and record[field_name] is not None and not isinstance(record[field_name], str):
+            raise EvidenceError(f"Field '{field_name}' must be a string")
+    if 'author_metadata' in record:
+        metadata = record['author_metadata']
+        if not isinstance(metadata, list) or any(not isinstance(item, dict) for item in metadata):
+            raise EvidenceError("Field 'author_metadata' must be an array of objects")
+        for index, author in enumerate(metadata):
+            unknown_author_fields = set(author) - {'given', 'family', 'name'}
+            if unknown_author_fields or any(not isinstance(value, str) for value in author.values()):
+                raise EvidenceError(
+                    f"Field 'author_metadata[{index}]' must contain only string given/family/name values"
+                )
+    if 'review_status' in record and (
+        not isinstance(record['review_status'], str)
+        or record['review_status'] not in {'candidate', 'reviewed'}
+    ):
+        raise EvidenceError("Field 'review_status' must be 'candidate' or 'reviewed'")
+    if 'source_sha256' in record and (
+        not isinstance(record['source_sha256'], str)
+        or not re.fullmatch(r'[0-9a-fA-F]{64}', record['source_sha256'])
+    ):
+        raise EvidenceError("Field 'source_sha256' must be a 64-character SHA-256 hex digest")
+    if 'source_file' in record:
+        source_file = record['source_file']
+        if not isinstance(source_file, str) or not source_file.strip() or Path(source_file).name != source_file or source_file in {'.', '..'}:
+            raise EvidenceError("Field 'source_file' must be a safe file name within the source store")
+    if 'review_status' in record and record['review_status'] == 'reviewed':
+        required_review = {
+            'reviewed_by', 'reviewed_at', 'support_location', 'support_excerpt',
+            'source_file', 'source_sha256', 'source_license', 'source_url',
+            'retrieved_at', 'claim', 'language', 'author_sort_key',
+        }
+        missing_review = required_review - set(record)
+        if missing_review:
+            raise EvidenceError(f"Reviewed source is missing field(s): {sorted(missing_review)}")
+        for field_name in sorted(required_review):
+            value = record[field_name]
+            if not isinstance(value, str) or not value.strip():
+                raise EvidenceError(f"Reviewed source field '{field_name}' must be a non-empty string")
+        source_url = record['source_url'].strip()
+        if (
+            not _is_valid_url_or_doi(source_url)
+            or urllib.parse.urlparse(source_url).scheme not in ('http', 'https')
+            or any(character.isspace() for character in source_url)
+        ):
+            raise EvidenceError("Reviewed source field 'source_url' must be a valid HTTP(S) URL with hostname")
+        language = record['language'].casefold()
+        if not (language.startswith('vi') or language.startswith('en')):
+            raise EvidenceError("Reviewed source language must be verified as Vietnamese ('vi') or English ('en')")
+        if not record['author_sort_key'] or not record['author_sort_key'].strip():
+            raise EvidenceError("Reviewed source requires a language-appropriate author_sort_key")
 
 @contextmanager
 def _file_lock(lock_path: Path, timeout: float = 10.0):
@@ -181,6 +254,39 @@ class EvidenceRegistry:
             if key not in data:
                 raise EvidenceError(f"Evidence record '{key}' not found.")
             return data[key]
+
+    def assert_citable(
+        self, record: dict[str, Any], *, require_reviewed: bool = False
+    ) -> None:
+        """Reject discovered candidates and recheck reviewed source bytes."""
+        if record.get('review_status') == 'candidate':
+            raise EvidenceError(
+                f"Evidence '{record.get('id', '')}' is discovery metadata only; inspect and review its source before citing it."
+            )
+        if require_reviewed and record.get('review_status') != 'reviewed':
+            raise EvidenceError(
+                f"Evidence '{record.get('id', '')}' has no reviewed, downloaded source; review its supporting passage before citing it."
+            )
+        if record.get('review_status') != 'reviewed':
+            return
+        try:
+            source_root = (self.path.parent / 'sources').resolve()
+            source_path = (source_root / record['source_file']).resolve()
+            try:
+                source_path.relative_to(source_root)
+            except ValueError as exc:
+                raise EvidenceError("Reviewed source file escapes the workspace source store") from exc
+            if not source_path.is_file():
+                raise EvidenceError(f"Reviewed source file is missing: {source_path}")
+            digest = hashlib.sha256(source_path.read_bytes()).hexdigest()
+        except FileNotFoundError as exc:
+            raise EvidenceError(f"Reviewed source file is missing for evidence '{record.get('id', '')}'") from exc
+        except OSError as exc:
+            raise EvidenceError(f"Reviewed source file cannot be read for evidence '{record.get('id', '')}'") from exc
+        if digest.casefold() != record['source_sha256'].casefold():
+            raise EvidenceError(
+                f"Reviewed source hash changed for evidence '{record.get('id', '')}'; review it again before citing."
+            )
 
     def remove(self, key: str) -> bool:
         with _file_lock(self.path):

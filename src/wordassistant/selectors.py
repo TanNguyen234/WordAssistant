@@ -7,6 +7,7 @@ from typing import Any
 
 from docx.document import Document as Doc
 from docx.oxml import OxmlElement
+from docx.oxml.ns import qn
 from docx.text.paragraph import Paragraph
 
 
@@ -121,10 +122,38 @@ class SelectorAmbiguous(LookupError):
         self.match_count = match_count
 
 
+def _outline_level(paragraph) -> int | None:
+    """Resolve an explicit outline level through paragraph and style inheritance."""
+    properties = paragraph._p.pPr
+    outline = properties.find(qn('w:outlineLvl')) if properties is not None else None
+    if outline is not None:
+        return int(outline.get(qn('w:val')))
+    style = paragraph.style
+    seen = set()
+    while style is not None and style.style_id not in seen:
+        seen.add(style.style_id)
+        properties = style.element.pPr
+        outline = properties.find(qn('w:outlineLvl')) if properties is not None else None
+        if outline is not None:
+            return int(outline.get(qn('w:val')))
+        style = style.base_style
+    return None
+
+
 def _heading_level(paragraph) -> int | None:
-    name = paragraph.style.name if paragraph.style is not None else ""
-    match = re.match(r"Heading\s+([1-9])$", name, flags=re.IGNORECASE)
-    return int(match.group(1)) if match else None
+    """Resolve real headings; explicit body outline level 9 suppresses inheritance."""
+    outline_level = _outline_level(paragraph)
+    if outline_level is not None:
+        return outline_level + 1 if 0 <= outline_level <= 8 else None
+    style = paragraph.style
+    seen = set()
+    while style is not None and style.style_id not in seen:
+        seen.add(style.style_id)
+        match = re.fullmatch(r"Heading\s*([1-9])", style.name, flags=re.IGNORECASE)
+        if match:
+            return int(match.group(1))
+        style = style.base_style
+    return None
 
 
 def _equal(left: str, right: str, case_sensitive: bool) -> bool:

@@ -11,14 +11,21 @@ from docx.oxml.ns import qn
 from ..evidence.registry import EvidenceRegistry
 from ..operations.citations import (
     _TAG_PREFIX,
-    _format_bibliography,
+    _citation_numbers,
+    _citation_policy,
+    _set_citation_policy,
+    _ordered_citation_numbers,
+    _renumber_citations,
+    _bibliography_entries,
+    _bibliography_contains_paragraph,
     _format_in_text,
     _replace_bibliography_content,
 )
 from ..operations.common import atomic_save
+from ..profiles.loader import DocumentProfile, resolve_profile
 
 
-_ROOT_KEYS = {"version", "sections", "bibliography_heading", "citation_style"}
+_ROOT_KEYS = {"version", "sections", "bibliography_heading", "citation_style", "bibliography_order"}
 _SECTION_KEYS = {"heading", "paragraphs", "subsections"}
 _SUBSECTION_KEYS = {"title", "level", "paragraphs"}
 _PARAGRAPH_KEYS = {"text", "citations"}
@@ -97,6 +104,8 @@ def compose_document(
     output_path: str | Path,
     content: Mapping[str, Any],
     evidence_registry: str | Path | None = None,
+    profile: str | DocumentProfile | None = None,
+    variant_name: str | None = None,
     min_visible_characters: int | None = None,
     max_visible_characters: int | None = None,
     dry_run: bool = False,
@@ -112,6 +121,16 @@ def compose_document(
         raise ValueError("Composition sections must be a non-empty array")
     if len(sections) > 100:
         raise ValueError("Composition cannot contain more than 100 sections")
+    profile_variant = None
+    if profile is not None:
+        loaded_profile = (
+            profile
+            if isinstance(profile, DocumentProfile)
+            else resolve_profile(str(profile), start_path=input_path)
+        )
+        if variant_name is None:
+            variant_name = "default" if "default" in loaded_profile.variants else next(iter(loaded_profile.variants))
+        profile_variant = loaded_profile.variant(variant_name)
     for name, value in (
         ("min_visible_characters", min_visible_characters),
         ("max_visible_characters", max_visible_characters),
@@ -125,16 +144,70 @@ def compose_document(
     ):
         raise ValueError("min_visible_characters cannot exceed max_visible_characters")
 
-    citation_style = content.get("citation_style", "numeric")
+    document = Document(input_path)
+    existing_policy = _citation_policy(document)
+    _citation_numbers(document, displayed=True)
+    citation_style = content.get(
+        "citation_style",
+        profile_variant.citations.get("style", "numeric") if profile_variant else existing_policy.get("style", "numeric"),
+    )
     if not isinstance(citation_style, str) or not citation_style.strip():
         raise ValueError("citation_style must be a non-empty string")
+    citation_style = citation_style.strip()
+    required_citation_style = (
+        profile_variant.citations.get("style") if profile_variant else existing_policy.get("style")
+    )
+    require_reviewed_sources = bool(
+        (profile_variant and profile_variant.citations.get("require_reviewed_sources", False))
+        or existing_policy.get("require_reviewed", False)
+    )
+    if (
+        require_reviewed_sources
+        and "citation_style" in content
+        and required_citation_style
+        and citation_style.casefold() != str(required_citation_style).casefold()
+    ):
+        raise ValueError("citation_style cannot override the selected source-backed profile")
+    bibliography_order = content.get(
+        "bibliography_order",
+        profile_variant.citations.get("bibliography_order", "citation_order")
+        if profile_variant
+        else existing_policy.get("order", "citation_order"),
+    )
+    allowed_orders = {
+        "citation_order",
+        "vietnamese_given_name_then_english_family_name",
+    }
+    if bibliography_order not in allowed_orders:
+        raise ValueError(f"bibliography_order must be one of {sorted(allowed_orders)}")
+    required_bibliography_order = (
+        profile_variant.citations.get("bibliography_order")
+        if profile_variant
+        else existing_policy.get("order")
+    )
+    if (
+        require_reviewed_sources
+        and "bibliography_order" in content
+        and required_bibliography_order
+        and bibliography_order != required_bibliography_order
+    ):
+        raise ValueError("bibliography_order cannot override the selected source-backed profile")
     registry = EvidenceRegistry(evidence_registry) if evidence_registry else None
-    document = Document(input_path)
-    citation_numbers: dict[str, int] = {}
+    citation_numbers: dict[str, int] = _citation_numbers(document, displayed=True)
     paragraph_count = 0
     subsection_count = 0
     removed_placeholders = 0
     used_targets: set[str] = set()
+    managed_heading = existing_policy.get('heading')
+    if profile_variant and evidence_registry:
+        reference_headings = [
+            str(item['title']) for item in profile_variant.section_blueprint
+            if 'tham khảo' in str(item.get('title', '')).casefold()
+            or 'references' in str(item.get('title', '')).casefold()
+        ]
+        if reference_headings:
+            managed_heading = reference_headings[-1]
+    managed_heading = content.get('bibliography_heading', managed_heading)
 
     for section_index, section in enumerate(sections):
         context = f"sections[{section_index}]"
@@ -158,6 +231,11 @@ def compose_document(
                 f"{context}.heading must match exactly one paragraph; found {len(matches)}"
             )
         target = matches[0]
+        if managed_heading and isinstance(managed_heading, str):
+            existing_heading = existing_policy.get('heading')
+            allow_missing = not existing_heading or managed_heading.casefold() != existing_heading.casefold()
+            if _bibliography_contains_paragraph(document, managed_heading, target, allow_missing=allow_missing):
+                raise ValueError('Composition target must be outside the managed bibliography')
         removed_placeholders += int(_remove_placeholder_after(target))
         cursor = target._p
 
@@ -173,7 +251,8 @@ def compose_document(
                 if registry is None:
                     raise ValueError("evidence_registry is required when citations are used")
                 record = registry.get(evidence_id)
-                number = citation_numbers.setdefault(evidence_id, len(citation_numbers) + 1)
+                registry.assert_citable(record, require_reviewed=require_reviewed_sources)
+                number = citation_numbers.setdefault(evidence_id, max(citation_numbers.values(), default=0) + 1)
                 _append_citation(
                     paragraph,
                     evidence_id,
@@ -213,8 +292,9 @@ def compose_document(
                     if registry is None:
                         raise ValueError("evidence_registry is required when citations are used")
                     record = registry.get(evidence_id)
+                    registry.assert_citable(record, require_reviewed=require_reviewed_sources)
                     number = citation_numbers.setdefault(
-                        evidence_id, len(citation_numbers) + 1
+                        evidence_id, max(citation_numbers.values(), default=0) + 1
                     )
                     _append_citation(
                         paragraph,
@@ -224,17 +304,47 @@ def compose_document(
                 cursor = paragraph._p
                 paragraph_count += 1
 
-    bibliography_heading = content.get("bibliography_heading")
+    default_bibliography_heading = existing_policy.get("heading")
+    if profile_variant and evidence_registry:
+        references = [
+            item["title"]
+            for item in profile_variant.section_blueprint
+            if "tham khảo" in str(item.get("title", "")).casefold()
+            or "references" in str(item.get("title", "")).casefold()
+        ]
+        default_bibliography_heading = references[-1] if references else None
+    bibliography_heading = content.get("bibliography_heading", default_bibliography_heading or existing_policy.get("heading"))
+    if existing_policy.get('require_reviewed') and (
+        citation_style.casefold() != existing_policy['style'].casefold()
+        or bibliography_order != existing_policy['order']
+        or bibliography_heading != existing_policy.get('heading')
+    ):
+        raise ValueError('composition cannot override the source-backed document policy')
     if bibliography_heading is not None:
         if not isinstance(bibliography_heading, str) or not bibliography_heading.strip():
             raise ValueError("bibliography_heading must be a non-empty string")
-        if registry is None:
+        if (
+            require_reviewed_sources
+            and "bibliography_heading" in content
+            and default_bibliography_heading
+            and bibliography_heading.strip().casefold()
+            != default_bibliography_heading.strip().casefold()
+        ):
+            raise ValueError("bibliography_heading cannot override the selected source-backed profile")
+        if registry is None and (citation_numbers or 'bibliography_heading' in content):
             raise ValueError("evidence_registry is required for bibliography generation")
-        lines = [
-            _format_bibliography(registry.get(evidence_id), citation_style, number)
-            for evidence_id, number in citation_numbers.items()
-        ]
-        _replace_bibliography_content(document, bibliography_heading, lines)
+    policy = {"style": citation_style, "order": bibliography_order,
+              "heading": bibliography_heading, "require_reviewed": require_reviewed_sources}
+    if citation_numbers:
+        if registry is None:
+            raise ValueError("evidence_registry is required for existing citations")
+        citation_numbers = _ordered_citation_numbers(document, registry, policy)
+        _renumber_citations(document, citation_numbers, registry, citation_style)
+    if bibliography_heading and registry is not None:
+        entries = _bibliography_entries(registry, citation_numbers, citation_style,
+                                       require_reviewed=require_reviewed_sources)
+        _replace_bibliography_content(document, bibliography_heading, entries)
+    _set_citation_policy(document, policy)
 
     if paragraph_count > 5000:
         raise ValueError("Composition cannot contain more than 5000 content paragraphs")

@@ -439,18 +439,71 @@ def insert_toc(
     return OperationResult.success("toc.insert", "ooxml", Fidelity.HIGH, {"kind": kind, "instruction": instruction, "updated_existing": existing}, output_path=None if dry_run else output, manual_review_required=True)
 
 
-def insert_caption(
-    input_path, *, output_path, label, title, selector=None, dry_run=False
-):
-    if not re.fullmatch(r"[A-Za-z][A-Za-z0-9_]{0,39}", label):
-        raise ValueError("Caption label must be a Word-safe identifier")
-    document = Document(input_path)
-    paragraph = add_paragraph_at_boundary(document, selector, style="Caption")
-    paragraph.add_run(f"{label} ")
-    append_field(paragraph, f"SEQ {label} \\* ARABIC", "1")
+def append_caption_content(document, paragraph, label, title, sequence, chapter_number=None):
+    """Use literal verified chapters with Word's heading-based SEQ reset.
+
+    Explicit prefixes are deliberate: STYLEREF numeric switches require real
+    automatic numbering, which the report's literal CHƯƠNG headings lack.
+    """
+    instruction = f"SEQ {sequence} \\* ARABIC"
+    prefix = ""
+    if chapter_number is not None:
+        if type(chapter_number) is not int or chapter_number < 1:
+            raise ValueError("chapter_number must be a positive integer")
+        heading = None
+        found = False
+        for candidate in document.paragraphs:
+            if candidate._p is paragraph._p:
+                found = True
+                break
+            if candidate.style.style_id == "Heading1":
+                heading = candidate
+        if not found or heading is None:
+            raise ValueError("chapter caption requires a preceding built-in Heading 1 in the document body")
+        match = re.match(r"^CHƯƠNG\s+([1-9][0-9]*)(?=\s|[.:]|$)", heading.text.strip(), re.IGNORECASE)
+        if match is None or int(match.group(1)) != chapter_number:
+            raise ValueError("chapter_number does not match the nearest Heading 1 literal CHƯƠNG number")
+        # Numbering can be inherited; do not confuse literal text with an
+        # automatically numbered chapter or permit an incompatible outline.
+        property_sets = [heading._p.pPr]
+        style = heading.style
+        seen_styles = set()
+        while style is not None:
+            if style.style_id in seen_styles:
+                raise ValueError("chapter caption cannot use cyclic heading style inheritance")
+            seen_styles.add(style.style_id)
+            property_sets.append(style.element.pPr)
+            style = style.base_style
+        for properties in property_sets:
+            if properties is None:
+                continue
+            if properties.find(qn("w:numPr")) is not None:
+                raise ValueError("chapter caption literal mode does not support automatic heading numbering")
+            outline = properties.find(qn("w:outlineLvl"))
+            if outline is not None and outline.get(qn("w:val")) != "0":
+                raise ValueError("chapter caption requires Heading 1 outline level")
+        prefix = f"{chapter_number}."
+        instruction += " \\s 1"
+    paragraph.add_run(f"{label.strip()} {prefix}")
+    append_field(paragraph, instruction, "1")
     if title:
         paragraph.add_run(f". {title}")
+    return instruction
+
+
+def insert_caption(
+    input_path, *, output_path, label, title, selector=None, sequence_id=None,
+    chapter_number: int | None = None, dry_run=False
+):
+    if not isinstance(label, str) or not label.strip() or len(label) > 80:
+        raise ValueError("Caption display label must be a non-empty string of at most 80 characters")
+    sequence = sequence_id or label
+    if not re.fullmatch(r"[A-Za-z][A-Za-z0-9_]{0,39}", sequence):
+        raise ValueError("Caption sequence_id must be a Word-safe identifier")
+    document = Document(input_path)
+    paragraph = add_paragraph_at_boundary(document, selector, style="Caption")
+    instruction = append_caption_content(document, paragraph, label, title, sequence, chapter_number)
     output = Path(output_path).resolve()
     if not dry_run:
         atomic_save(document, output)
-    return OperationResult.success("caption.insert", "ooxml", Fidelity.HIGH, {"label": label}, output_path=None if dry_run else output)
+    return OperationResult.success("caption.insert", "ooxml", Fidelity.HIGH, {"label": label.strip(), "sequence_id": sequence, "chapter_number": chapter_number, "instruction": instruction}, output_path=None if dry_run else output, manual_review_required=chapter_number is not None)

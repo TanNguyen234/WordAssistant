@@ -15,7 +15,7 @@ from docx.text.paragraph import Paragraph
 
 from ..selectors import insert_paragraph_after, resolve_single_paragraph
 from .common import atomic_save
-from .fields import append_field
+from .fields import append_caption_content
 from .models import Fidelity, OperationResult
 
 
@@ -159,13 +159,13 @@ def _requested_extent(
     return width, height
 
 
-def _append_semantic_caption(image_paragraph: Paragraph, label: str, title: str) -> Paragraph:
+def _append_semantic_caption(
+    document, image_paragraph: Paragraph, label: str, title: str,
+    sequence_id: str | None = None, chapter_number: int | None = None
+) -> str:
+    sequence = sequence_id or label
     paragraph = insert_paragraph_after(image_paragraph, style="Caption")
-    paragraph.add_run(f"{label} ")
-    append_field(paragraph, f"SEQ {label} \\* ARABIC", "1")
-    if title:
-        paragraph.add_run(f". {title}")
-    return paragraph
+    return append_caption_content(document, paragraph, label, title, sequence, chapter_number)
 
 
 def insert_image(
@@ -180,6 +180,8 @@ def insert_image(
     title: str | None = None,
     caption: str | None = None,
     caption_label: str = "Figure",
+    caption_sequence: str | None = None,
+    caption_chapter_number: int | None = None,
     placement: str = "after",
     alignment: str = "center",
     preserve_aspect_ratio: bool = True,
@@ -188,6 +190,8 @@ def insert_image(
     dry_run: bool = False,
 ) -> OperationResult:
     _validate_dimensions(width_cm, height_cm, preserve_aspect_ratio)
+    if caption_chapter_number is not None and not caption:
+        raise ValueError("caption_chapter_number requires caption text")
     if type(auto_shrink) is not bool:
         raise TypeError("auto_shrink must be a boolean")
     if type(inline) is not bool:
@@ -196,8 +200,11 @@ def insert_image(
         raise ValueError("Floating image insertion requires a proven OOXML/native mode")
     if alignment not in _ALIGNMENTS:
         raise ValueError("alignment must be left, center, or right")
-    if caption and not re.fullmatch(r"[A-Za-z][A-Za-z0-9_]{0,39}", caption_label):
-        raise ValueError("Caption label must be a Word-safe identifier")
+    if caption and (not isinstance(caption_label, str) or not caption_label.strip() or len(caption_label) > 80):
+        raise ValueError("Caption label must be a non-empty display string of at most 80 characters")
+    sequence = caption_sequence or caption_label
+    if caption and not re.fullmatch(r"[A-Za-z][A-Za-z0-9_]{0,39}", sequence):
+        raise ValueError("Caption sequence must be a Word-safe identifier")
     image = Path(image_path)
     if not image.is_file():
         raise FileNotFoundError(image)
@@ -230,8 +237,9 @@ def insert_image(
         properties.set("descr", alt_text)
     if title is not None:
         properties.set("title", title)
+    caption_field = None
     if caption:
-        _append_semantic_caption(paragraph, caption_label, caption)
+        caption_field = _append_semantic_caption(document, paragraph, caption_label.strip(), caption, sequence, caption_chapter_number)
     if replaced_anchor is not None and placement == "replace":
         replaced_anchor._p.getparent().remove(replaced_anchor._p)
     drawing = shape._inline.getparent()
@@ -249,6 +257,7 @@ def insert_image(
         "python-docx",
         Fidelity.HIGH,
         None if dry_run else output,
+        manual_review_required=caption_chapter_number is not None,
         data={
             "image_index": image_index,
             "inline": True,
@@ -262,7 +271,9 @@ def insert_image(
             "aspect_ratio": round(width / height, 8),
             "available_width_emu": available_width,
             "auto_shrunk": shrunk,
-            "caption_field": f"SEQ {caption_label} \\* ARABIC" if caption else None,
+            "caption_field": caption_field,
+            "caption_chapter_number": caption_chapter_number,
+            "caption_label": caption_label.strip() if caption else None,
         },
     )
 

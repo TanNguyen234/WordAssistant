@@ -1,4 +1,5 @@
 from docx import Document
+import pytest
 
 from wordassistant.evidence.registry import EvidenceRegistry
 from wordassistant.operations.citations import (
@@ -70,7 +71,8 @@ def test_citation_can_be_anchored_to_an_existing_paragraph(tmp_path):
     assert "wordassistant:citation" not in reopened.paragraphs[1]._p.xml
 
 
-def test_synthetic_evidence_is_visibly_labeled(tmp_path):
+@pytest.mark.parametrize('style', ['IEEE', 'hcmunre_numeric'])
+def test_synthetic_evidence_is_visibly_labeled(tmp_path, style):
     source = tmp_path / "source.docx"
     document = Document()
     document.add_paragraph("Synthetic QA claim")
@@ -100,6 +102,7 @@ def test_synthetic_evidence_is_visibly_labeled(tmp_path):
         cited.output_path,
         output_path=tmp_path / "bibliography.docx",
         evidence_registry=evidence_path,
+        style=style,
     )
 
     xml = Document(cited.output_path).paragraphs[0]._p.xml

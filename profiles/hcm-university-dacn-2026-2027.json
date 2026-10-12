@@ -1,0 +1,148 @@
+{
+  "id": "hcm-university-dacn-2026-2027",
+  "name": "HCM University - Academic Project Report 2026-2027",
+  "version": 1,
+  "source_policy": "user-guide-only; written requirements take precedence over illustrative cover variations",
+  "source_assets": [
+    "use_cases/hcmunre_dacn_2026_2027/assets/huong_dan_trinh_bay_dacn_2026_2027.docx"
+  ],
+  "variants": {
+    "report": {
+      "page": {
+        "size": "A4",
+        "width_cm": 21.0,
+        "height_cm": 29.7,
+        "margins_cm": {"top": 2.0, "bottom": 2.0, "left": 3.0, "right": 2.0},
+        "one_sided": true,
+        "orientation": "portrait",
+        "allow_mixed_orientation": true,
+        "provenance": "Hướng dẫn trình bày Báo cáo ĐACN 2026-2027"
+      },
+      "typography": {
+        "body_font": "Times New Roman",
+        "body_size_pt": 13,
+        "line_spacing": 1.5,
+        "paragraph_spacing_before_pt": 0,
+        "paragraph_spacing_after_pt": 0,
+        "styles": {
+          "Title": {"font": "Times New Roman", "size_pt": 18, "bold": true, "alignment": "center"},
+          "heading1": {"font": "Times New Roman", "size_pt": 16, "bold": true},
+          "heading2": {"font": "Times New Roman", "size_pt": 14, "bold": true},
+          "heading3": {"font": "Times New Roman", "size_pt": 13, "bold": true},
+          "WA Cover University": {"font": "Times New Roman", "size_pt": 13, "bold": true, "alignment": "center", "space_after_pt": 0},
+          "WA Cover Faculty": {"font": "Times New Roman", "size_pt": 13, "bold": true, "alignment": "center", "space_after_pt": 0},
+          "WA Cover Document": {"font": "Times New Roman", "size_pt": 16, "bold": true, "alignment": "center"},
+          "WA Cover Title": {"font": "Times New Roman", "size_pt": 18, "bold": true, "alignment": "center"},
+          "WA Cover Metadata Line": {"font": "Times New Roman", "size_pt": 13, "line_spacing": 1.5},
+          "WA Cover Location Year": {"font": "Times New Roman", "size_pt": 13, "alignment": "center"},
+          "WA Front Matter Title": {"font": "Times New Roman", "size_pt": 16, "bold": true, "alignment": "center"},
+          "WA References": {"font": "Times New Roman", "size_pt": 13, "line_spacing": 1.5},
+          "WA Reference Language Heading": {"font": "Times New Roman", "size_pt": 13, "bold": true},
+          "WA Academic Caption": {"font": "Times New Roman", "size_pt": 12, "alignment": "center"},
+          "Caption": {"font": "Times New Roman", "size_pt": 12, "alignment": "center", "line_spacing": 1.0}
+        }
+      },
+      "front_matter": [
+        "cover", "inner_cover", "acknowledgements", "declaration",
+        "supervisor_review", "reviewer_review", "work_schedule", "abstract",
+        "table_of_contents", "list_of_figures", "list_of_tables", "abbreviations"
+      ],
+      "front_matter_titles": {
+        "acknowledgements": "LỜI CẢM ƠN",
+        "declaration": "LỜI CAM ĐOAN",
+        "supervisor_review": "NHẬN XÉT CỦA GIẢNG VIÊN HƯỚNG DẪN",
+        "reviewer_review": "NHẬN XÉT CỦA NGƯỜI PHẢN BIỆN",
+        "work_schedule": "LỊCH LÀM VIỆC",
+        "abstract": "TÓM TẮT",
+        "table_of_contents": "MỤC LỤC",
+        "list_of_figures": "DANH MỤC SƠ ĐỒ, HÌNH",
+        "list_of_tables": "DANH MỤC BẢNG",
+        "abbreviations": "KÝ HIỆU CÁC CỤM TỪ VIẾT TẮT"
+      },
+      "cover": {
+        "institution_lines": [
+          "TRƯỜNG ĐẠI HỌC TÀI NGUYÊN VÀ MÔI TRƯỜNG TP. HỒ CHÍ MINH",
+          "KHOA CÔNG NGHỆ THÔNG TIN"
+        ],
+        "logo_asset": "use_cases/hcmunre_dacn_2026_2027/assets/university_logo.png",
+        "document_type": "BÁO CÁO ĐỒ ÁN CHUYÊN NGÀNH",
+        "title_prefix": "ĐỀ TÀI",
+        "metadata_fields": [
+          {"label": "Sinh viên thực hiện", "value_key": "student", "default": ""},
+          {"label": "Mã số sinh viên", "value_key": "student_id", "default": ""},
+          {"label": "Giảng viên hướng dẫn", "value_key": "supervisor", "default": ""},
+          {"label": "Lớp", "value_key": "class", "default": ""},
+          {"label": "Khóa", "value_key": "cohort", "default": ""},
+          {"label": "Ngành", "value": "Công nghệ thông tin"}
+        ],
+        "location_year": "TP. HỒ CHÍ MINH",
+        "location_year_template": "TP. HỒ CHÍ MINH, THÁNG {month} NĂM {year}",
+        "styles": {
+          "institution": "WA Cover University",
+          "faculty": "WA Cover Faculty",
+          "document_type": "WA Cover Document",
+          "title": "WA Cover Title",
+          "metadata": "WA Cover Metadata Line",
+          "location_year": "WA Cover Location Year"
+        },
+        "border": {
+          "display": "firstPage",
+          "offset_from": "page",
+          "edges": {
+            "top": {"style": "thinThickSmallGap", "size_eighth_points": 24, "space_points": 24},
+            "left": {"style": "thinThickSmallGap", "size_eighth_points": 24, "space_points": 24},
+            "bottom": {"style": "thickThinSmallGap", "size_eighth_points": 24, "space_points": 24},
+            "right": {"style": "thickThinSmallGap", "size_eighth_points": 24, "space_points": 24}
+          }
+        }
+      },
+      "header_footer": {
+        "header_left": "topic",
+        "header_right": "supervisor",
+        "footer_left": "student",
+        "footer_right": "page_number",
+        "front_matter_page_number_format": "none",
+        "page_number_start": "introduction"
+      },
+      "section_blueprint": [
+        {"title": "MỞ ĐẦU", "level": 1, "required": true},
+        {"title": "TỔNG QUAN TÀI LIỆU", "level": 1, "required": true, "page_break_before": true},
+        {"title": "PHƯƠNG PHÁP THỰC HIỆN", "level": 1, "required": true, "page_break_before": true},
+        {"title": "CÀI ĐẶT THỬ NGHIỆM, KẾT QUẢ VÀ ĐÁNH GIÁ", "level": 1, "required": true, "page_break_before": true},
+        {"title": "KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN", "level": 1, "required": true, "page_break_before": true},
+        {"title": "PHỤ LỤC", "level": 1, "required": true, "page_break_before": true},
+        {"title": "DANH MỤC TÀI LIỆU THAM KHẢO", "level": 1, "required": true, "page_break_before": true}
+      ],
+      "citations": {
+        "style": "hcmunre_numeric",
+        "in_text": "numeric_brackets",
+        "minimum_references": 10,
+        "prefer_primary_source": true,
+        "require_reviewed_sources": true,
+        "bibliography_order": "vietnamese_given_name_then_english_family_name"
+      },
+      "captions": {
+        "numbering": {
+          "format": "chapter.sequence",
+          "mode": "verified_literal_chapter",
+          "heading_style": "Heading 1",
+          "heading_level": 1,
+          "separator": ".",
+          "chapter_option": "chapter_number",
+          "image_chapter_option": "caption_chapter_number"
+        },
+        "figure_labels": [
+          {"display": "HÌNH", "sequence": "Hinh"},
+          {"display": "SƠ ĐỒ", "sequence": "SoDo"}
+        ],
+        "table_label": {"display": "BẢNG", "sequence": "Bang"}
+      },
+      "field_requirements": {
+        "table_of_contents": true,
+        "page_number": true,
+        "list_of_figures": true,
+        "list_of_tables": true
+      }
+    }
+  }
+}

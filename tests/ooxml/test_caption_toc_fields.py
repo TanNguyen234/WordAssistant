@@ -31,6 +31,31 @@ def test_caption_and_list_of_figures_use_real_fields(tmp_path):
     assert "System architecture" in xml
 
 
+def test_localized_caption_display_label_uses_matching_word_sequence_id(tmp_path):
+    source = tmp_path / "source.docx"
+    Document().save(source)
+    caption = insert_caption(
+        source,
+        output_path=tmp_path / "caption.docx",
+        label="SƠ ĐỒ",
+        sequence_id="SoDo",
+        title="Mô hình hệ thống",
+    )
+    listing = insert_toc(
+        caption.output_path,
+        output_path=tmp_path / "listing.docx",
+        kind="figures",
+        caption_label="SoDo",
+    )
+
+    with ZipFile(listing.output_path) as package:
+        xml = package.read("word/document.xml").decode("utf-8")
+    assert "SƠ ĐỒ" in xml
+    assert "SEQ SoDo" in xml
+    assert '\\c &quot;SoDo&quot;' in xml
+    assert "Mô hình hệ thống" in xml
+
+
 def test_table_of_contents_and_list_of_tables_have_distinct_instructions(tmp_path):
     source = tmp_path / "source.docx"
     Document().save(source)

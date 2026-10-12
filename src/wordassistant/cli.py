@@ -26,6 +26,15 @@ from .document.verify import _render_via_execution_service, verify_document
 from .document.integrity import audit_integrity, build_provenance_manifest
 from .document.compose import compose_document
 from .evidence.registry import EvidenceRegistry, EvidenceError
+from .evidence.research import (
+    SourceResearchError,
+    download_open_access_pdf,
+    find_open_access,
+    import_crossref_doi,
+    review_downloaded_source,
+    search_crossref,
+    search_source_excerpts,
+)
 from .workspace import (
     init_workspace,
     find_workspace,
@@ -198,6 +207,7 @@ def parser() -> argparse.ArgumentParser:
     scaf.add_argument('--title', default=None)
     scaf.add_argument('--author', '--student', dest='student', default=None)
     scaf.add_argument('--supervisor', default=None)
+    scaf.add_argument('--cover-metadata', default=None, help='JSON file with editable cover fields such as student_id, class, cohort, month, and year')
     scaf.add_argument('--dry-run', action='store_true')
     scaf.add_argument('--json', action='store_true')
 
@@ -311,6 +321,46 @@ def parser() -> argparse.ArgumentParser:
     ev_val.add_argument('registry', nargs='?', default=None)
     ev_val.add_argument('--json', action='store_true')
 
+    # Academic source discovery is opt-in; search results stay candidates until
+    # a downloaded source passage has been checked and reviewed.
+    research = sp.add_parser('research', help='Discover, download, and review academic sources')
+    research_sp = research.add_subparsers(dest='research_action', required=True)
+    research_search = research_sp.add_parser('search', help='Search Crossref metadata; results are discovery leads')
+    research_search.add_argument('--query', required=True)
+    research_search.add_argument('--limit', type=int, default=10)
+    research_search.add_argument('--json', action='store_true')
+    research_import = research_sp.add_parser('import-doi', help='Import Crossref DOI metadata as a non-citable candidate')
+    research_import.add_argument('doi')
+    research_import.add_argument('--registry', default=None)
+    research_import.add_argument('--json', action='store_true')
+    research_oa = research_sp.add_parser('open-access', help='Find an explicitly licensed OA PDF for a DOI candidate')
+    research_oa.add_argument('id')
+    research_oa.add_argument('--registry', default=None)
+    research_oa.add_argument('--email-env', default='UNPAYWALL_EMAIL', help='Environment variable holding the required Unpaywall email; its value is never stored or printed')
+    research_oa.add_argument('--json', action='store_true')
+    research_download = research_sp.add_parser('download', help='Download an explicitly licensed OA PDF into .wordassistant/sources')
+    research_download.add_argument('id')
+    research_download.add_argument('--registry', default=None)
+    research_download.add_argument('--json', action='store_true')
+    research_excerpt = research_sp.add_parser('excerpt', help='Return bounded matching passages from a downloaded source')
+    research_excerpt.add_argument('id')
+    research_excerpt.add_argument('--registry', default=None)
+    research_excerpt.add_argument('--query', required=True)
+    research_excerpt.add_argument('--limit', type=int, default=5)
+    research_excerpt.add_argument('--context-chars', type=int, default=300)
+    research_excerpt.add_argument('--json', action='store_true')
+    research_review = research_sp.add_parser('review', help='Verify a source excerpt and mark a source record reviewed')
+    research_review.add_argument('id')
+    research_review.add_argument('--registry', default=None)
+    research_review.add_argument('--claim', required=True)
+    research_review.add_argument('--support-excerpt', required=True)
+    research_review.add_argument('--support-location', required=True, help='Page, section, table, or figure in the downloaded source')
+    research_review.add_argument('--reviewed-by', required=True)
+    research_review.add_argument('--language', choices=('vi', 'en'), default=None, help='Verified source language; required when Crossref metadata has no supported language')
+    research_review.add_argument('--confirm-support', action='store_true', required=True, help='Confirm that you checked this passage and it supports the stated claim')
+    research_review.add_argument('--quote', action='store_true', help='Record the exact excerpt as a direct quotation')
+    research_review.add_argument('--json', action='store_true')
+
     # Compact universal-core surface. Existing V2 commands above remain
     # compatibility aliases; these are the canonical agent-facing families.
     create = sp.add_parser('create', help='Create a DOCX from a profile')
@@ -320,6 +370,7 @@ def parser() -> argparse.ArgumentParser:
     create.add_argument('--title', default=None)
     create.add_argument('--author', '--student', dest='student', default=None)
     create.add_argument('--supervisor', default=None)
+    create.add_argument('--cover-metadata', default=None, help='JSON file with editable cover fields such as student_id, class, cohort, month, and year')
     create.add_argument('--dry-run', action='store_true')
     create.add_argument('--json', action='store_true')
 
@@ -338,6 +389,8 @@ def parser() -> argparse.ArgumentParser:
     compose.add_argument('--output', required=True, help='Final output DOCX path')
     compose.add_argument('--content', required=True, help='Version-1 content JSON path')
     compose.add_argument('--evidence', default=None, help='Evidence registry JSON path')
+    compose.add_argument('--profile', default=None, help='Selected profile; supplies citation style, ordering, and bibliography heading defaults')
+    compose.add_argument('--variant', default=None)
     compose.add_argument('--min-visible-characters', type=int, default=None)
     compose.add_argument('--max-visible-characters', type=int, default=None)
     compose.add_argument('--dry-run', action='store_true')
@@ -529,6 +582,20 @@ def run(args: list[str] | None = None) -> int:
             eff_title = a.title if a.title is not None else ws_cfg.get('title')
             eff_student = a.student if a.student is not None else (ws_cfg.get('author') or ws_cfg.get('student'))
             eff_supervisor = a.supervisor if a.supervisor is not None else ws_cfg.get('supervisor')
+            cover_metadata = ws_cfg.get('cover_metadata', {})
+            if not isinstance(cover_metadata, dict):
+                raise ValueError('Workspace cover_metadata must be a JSON object')
+            if getattr(a, 'cover_metadata', None):
+                try:
+                    cover_metadata = json.loads(Path(a.cover_metadata).read_text(encoding='utf-8'))
+                except (OSError, json.JSONDecodeError) as exc:
+                    raise ValueError(f'Could not read cover metadata JSON: {exc}') from exc
+                if not isinstance(cover_metadata, dict) or any(
+                    not isinstance(key, str) or not isinstance(value, (str, int, float))
+                    for key, value in cover_metadata.items()
+                ):
+                    raise ValueError('Cover metadata JSON must be an object of string keys and scalar values')
+                cover_metadata = {key: str(value) for key, value in cover_metadata.items()}
             
             prof = resolve_profile(eff_prof, start_path=Path(a.output).parent)
             res = scaffold_document(
@@ -538,6 +605,7 @@ def run(args: list[str] | None = None) -> int:
                 title=eff_title,
                 student=eff_student,
                 supervisor=eff_supervisor,
+                cover_metadata=cover_metadata,
                 dry_run=a.dry_run
             )
             _print({
@@ -576,6 +644,8 @@ def run(args: list[str] | None = None) -> int:
                 output_path=a.output,
                 content=content,
                 evidence_registry=a.evidence,
+                profile=a.profile,
+                variant_name=a.variant,
                 min_visible_characters=a.min_visible_characters,
                 max_visible_characters=a.max_visible_characters,
                 dry_run=a.dry_run,
@@ -849,6 +919,69 @@ def run(args: list[str] | None = None) -> int:
                 errs = reg.validate_all()
                 _print({'valid': len(errs) == 0, 'errors': errs, 'registry': str(reg_path)}, a.json)
                 return 0 if len(errs) == 0 else 1
+
+        if a.cmd == 'research':
+            if a.research_action == 'search':
+                candidates = search_crossref(a.query, limit=a.limit)
+                _print({
+                    'status': 'CANDIDATES',
+                    'provider': 'Crossref',
+                    'total': len(candidates),
+                    'records': candidates,
+                    'note': 'Metadata search results are discovery leads, not verified claim support.',
+                }, a.json)
+                return 0
+            reg_path = _resolve_evidence_registry(getattr(a, 'registry', None))
+            if a.research_action == 'import-doi':
+                record = import_crossref_doi(a.doi, evidence_registry=reg_path)
+                _print({
+                    'status': 'CANDIDATE_IMPORTED',
+                    'id': record['id'],
+                    'doi': record['doi'],
+                    'review_status': record['review_status'],
+                    'registry': str(reg_path),
+                }, a.json)
+                return 0
+            if a.research_action == 'open-access':
+                email = os.environ.get(a.email_env, '')
+                access = find_open_access(
+                    a.id,
+                    evidence_registry=reg_path,
+                    email=email,
+                )
+                _print({'status': 'OA_LOCATION_FOUND', **access}, a.json)
+                return 0
+            if a.research_action == 'download':
+                downloaded = download_open_access_pdf(
+                    a.id,
+                    evidence_registry=reg_path,
+                )
+                _print({'status': 'DOWNLOADED_CANDIDATE', **downloaded}, a.json)
+                return 0
+            if a.research_action == 'excerpt':
+                excerpts = search_source_excerpts(
+                    a.id,
+                    evidence_registry=reg_path,
+                    query=a.query,
+                    limit=a.limit,
+                    context_chars=a.context_chars,
+                )
+                _print(excerpts, a.json)
+                return 0
+            if a.research_action == 'review':
+                reviewed = review_downloaded_source(
+                    a.id,
+                    evidence_registry=reg_path,
+                    claim=a.claim,
+                    support_excerpt=a.support_excerpt,
+                    support_location=a.support_location,
+                    reviewed_by=a.reviewed_by,
+                    confirm_support=a.confirm_support,
+                    quote=a.quote,
+                    language=a.language,
+                )
+                _print({'status': 'REVIEWED', **reviewed}, a.json)
+                return 0
 
     except BatchExecutionError as exc:
         _print(

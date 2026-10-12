@@ -5,6 +5,8 @@ import json
 
 import pytest
 from docx import Document
+from docx.oxml import OxmlElement
+from docx.oxml.ns import qn
 
 from wordassistant.document.integrity import audit_integrity, build_provenance_manifest
 from wordassistant.evidence.registry import EvidenceRegistry
@@ -198,6 +200,45 @@ def test_missing_requested_registry_fails_closed_on_real_docx(tmp_path):
     gate = report["gates"]["source_evidence"]
     assert gate["status"] == "FAIL"
     assert gate["findings"][0]["kind"] == "missing_evidence_registry"
+
+
+def test_report_integrity_audit_rejects_unreviewed_evidence_linked_citation(tmp_path):
+    path = tmp_path / "unreviewed-linked-citation.docx"
+    document = Document()
+    paragraph = document.add_paragraph("The claim is supported ")
+    sdt = OxmlElement("w:sdt")
+    properties = OxmlElement("w:sdtPr")
+    tag = OxmlElement("w:tag")
+    tag.set(qn("w:val"), "wordassistant:citation:source-1")
+    properties.append(tag)
+    content = OxmlElement("w:sdtContent")
+    run = OxmlElement("w:r")
+    text = OxmlElement("w:t")
+    text.text = "[1]"
+    run.append(text)
+    content.append(run)
+    sdt.extend([properties, content])
+    paragraph._p.append(sdt)
+    document.add_heading("References", level=1)
+    document.add_paragraph("[1] Legacy record without source review.")
+    document.save(path)
+    registry_path = _save_registry(
+        tmp_path / "evidence.json", [_real_source("source-1")]
+    )
+
+    report = audit_integrity(
+        path,
+        registry_path,
+        profile={"citations": {"require_reviewed_sources": True}},
+    )
+
+    gate = report["gates"]["source_evidence"]
+    assert gate["status"] == "FAIL"
+    assert gate["linked_evidence_id_count"] == 1
+    assert any(
+        item["kind"] == "cited_source_not_reviewed"
+        for item in gate["findings"]
+    )
 
 
 def test_manifest_rejects_registry_changed_after_audit(tmp_path):

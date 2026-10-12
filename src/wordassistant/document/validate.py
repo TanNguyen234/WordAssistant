@@ -338,8 +338,18 @@ def validate_document(
 
     # 3. Front Matter Presence & Sequential Order
     headings_in_doc: list[tuple[int, str]] = []
+    front_matter_title_keys = {
+        _normalize_text(title)
+        for title in v.front_matter_titles.values()
+        if isinstance(title, str) and title.strip()
+    }
     for idx, p in enumerate(d.paragraphs):
-        if p.style.name.startswith('Heading') or p.style.name == 'Title':
+        normalized_text = _normalize_text(p.text.strip())
+        if (
+            p.style.name.startswith('Heading')
+            or p.style.name == 'Title'
+            or normalized_text in front_matter_title_keys
+        ):
             headings_in_doc.append((idx, p.text.strip()))
             
     # Check Cover Signals

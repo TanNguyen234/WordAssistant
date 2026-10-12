@@ -16,6 +16,7 @@ from docx.text.paragraph import Paragraph
 
 from wordassistant.evidence.registry import EvidenceError, EvidenceRegistry
 from wordassistant.profiles.loader import DocumentProfile, Variant, resolve_profile
+from wordassistant.selectors import _heading_level
 
 
 INTEGRITY_SCHEMA_VERSION = "1.0"
@@ -46,6 +47,10 @@ _AUTHOR_YEAR_CITATION = re.compile(
 _BIBLIOGRAPHY_ENTRY = re.compile(r"^\s*\[(\d+)\]\s*\S")
 _BIBLIOGRAPHY_HEADING = re.compile(
     r"^(?:references|bibliography|tài liệu tham khảo|danh mục tài liệu tham khảo)\s*[:.]?$",
+    re.IGNORECASE,
+)
+_BIBLIOGRAPHY_LANGUAGE_HEADING = re.compile(
+    r"^(?:tiếng việt|tiếng anh|vietnamese|english)\s*[:.]?$",
     re.IGNORECASE,
 )
 _QUOTE = re.compile(r'"([^"\n]+)"|“([^”\n]+)”')
@@ -123,6 +128,7 @@ def _collect_paragraphs(document: DocxDocument) -> list[dict[str, Any]]:
                 "paragraph_index": index,
                 "text": visible_text,
                 "style": _safe_style_name(paragraph),
+                "heading_level": _heading_level(paragraph),
             }
         )
 
@@ -168,6 +174,7 @@ def _profile_policy(
         "profile_version": None,
         "minimum_references": 0,
         "prefer_primary_source": False,
+        "require_reviewed_sources": False,
         "long_quote_words": 40,
         "quote_citation_words": 8,
         "repeated_opening_words": 3,
@@ -223,6 +230,7 @@ def _profile_policy(
         raise ValueError("minimum_references must be an integer >= 0")
     policy["minimum_references"] = minimum
     policy["prefer_primary_source"] = citations.get("prefer_primary_source", False) is True
+    policy["require_reviewed_sources"] = citations.get("require_reviewed_sources", False) is True
 
     integer_options = {
         "long_quote_words": 1,
@@ -285,7 +293,10 @@ def _bibliography_indexes(records: list[dict[str, Any]]) -> tuple[set[int], set[
             inside = True
             bibliography_record_indexes.add(index)
             continue
-        if inside and record["style"].lower().startswith("heading") and text:
+        if inside and _BIBLIOGRAPHY_LANGUAGE_HEADING.match(text):
+            bibliography_record_indexes.add(index)
+            continue
+        if inside and record["heading_level"] is not None and text:
             inside = False
         if not inside or not text:
             continue
@@ -330,6 +341,20 @@ def _registry_report(path: str | Path | None) -> tuple[list[dict[str, Any]], dic
         "record_count": len(records),
         "record_ids": sorted(str(item["id"]) for item in records),
     }, None
+
+
+def _linked_evidence_ids(document: DocxDocument) -> set[str]:
+    linked_ids: set[str] = set()
+    for element in document.element.body.xpath(".//w:sdt"):
+        properties = element.find(qn("w:sdtPr"))
+        tag_node = properties.find(qn("w:tag")) if properties is not None else None
+        tag = tag_node.get(qn("w:val"), "") if tag_node is not None else ""
+        citation_prefix = "wordassistant:citation:"
+        if tag.startswith(citation_prefix):
+            evidence_id = tag[len(citation_prefix):].strip()
+            if evidence_id:
+                linked_ids.add(evidence_id)
+    return linked_ids
 
 
 def audit_integrity(
@@ -450,6 +475,47 @@ def audit_integrity(
     )
 
     evidence_records, registry_meta, registry_error = _registry_report(evidence_registry_path)
+    evidence_by_id = {str(item.get("id")): item for item in evidence_records}
+    linked_evidence_ids = _linked_evidence_ids(document)
+    linked_source_findings: list[dict[str, Any]] = []
+    if linked_evidence_ids and evidence_registry_path is not None and not registry_error:
+        registry = EvidenceRegistry(evidence_registry_path)
+        for evidence_id in sorted(linked_evidence_ids):
+            record = evidence_by_id.get(evidence_id)
+            if record is None:
+                linked_source_findings.append({
+                    "kind": "cited_evidence_id_missing",
+                    "evidence_id": evidence_id,
+                })
+                continue
+            if record.get("review_status") == "candidate":
+                linked_source_findings.append({
+                    "kind": "cited_source_is_candidate",
+                    "evidence_id": evidence_id,
+                })
+                continue
+            if policy["require_reviewed_sources"] and record.get("review_status") != "reviewed":
+                linked_source_findings.append({
+                    "kind": "cited_source_not_reviewed",
+                    "evidence_id": evidence_id,
+                })
+                continue
+            try:
+                registry.assert_citable(
+                    record, require_reviewed=policy["require_reviewed_sources"]
+                )
+            except EvidenceError as exc:
+                error_text = str(exc).casefold()
+                if "hash changed" in error_text:
+                    kind = "reviewed_source_hash_changed"
+                elif "missing" in error_text:
+                    kind = "reviewed_source_file_missing"
+                else:
+                    kind = "reviewed_source_file_invalid"
+                linked_source_findings.append({
+                    "kind": kind,
+                    "evidence_id": evidence_id,
+                })
     primary_records = [
         item
         for item in evidence_records
@@ -482,6 +548,7 @@ def audit_integrity(
         source_findings.append(
             {"kind": "synthetic_evidence_present", "record_ids": sorted(item["id"] for item in synthetic_records)}
         )
+    source_findings.extend(linked_source_findings)
     if policy["prefer_primary_source"] and evidence_records and not primary_records:
         source_findings.append({"kind": "no_explicitly_tagged_primary_source"})
 
@@ -493,6 +560,12 @@ def audit_integrity(
             "invalid_evidence_registry",
             "evidence_registry_has_fewer_records_than_numeric_citations",
             "synthetic_evidence_present",
+            "cited_evidence_id_missing",
+            "cited_source_is_candidate",
+            "cited_source_not_reviewed",
+            "reviewed_source_file_invalid",
+            "reviewed_source_hash_changed",
+            "reviewed_source_file_missing",
         }
         for finding in source_findings
     )
@@ -507,6 +580,8 @@ def audit_integrity(
         verified_record_count=len(evidence_records),
         primary_record_count=len(primary_records),
         synthetic_record_count=len(synthetic_records),
+        linked_evidence_id_count=len(linked_evidence_ids),
+        require_reviewed_sources=policy["require_reviewed_sources"],
         primary_status="EXPLICIT_TAG_ONLY",
     )
 
@@ -534,6 +609,7 @@ def audit_integrity(
         if index not in bibliography_indexes
         and record["story"] in {"body", "table"}
         and not record["style"].lower().startswith("heading")
+        and not record["style"].lower().startswith(("wa cover", "wa front matter"))
     ]
     opening_locations: dict[str, list[dict[str, Any]]] = {}
     ngram_locations: dict[str, list[dict[str, Any]]] = {}
@@ -656,6 +732,14 @@ def build_provenance_manifest(
         current_hash = registry_meta.get("sha256") if isinstance(registry_meta, Mapping) else None
         if audited_hash != current_hash:
             raise ValueError("audit_report does not match the current evidence registry SHA-256")
+        # Registry and DOCX hashes do not bind the external source-store bytes.
+        # Recheck only linked reviewed sources before reusing the audit summary.
+        if evidence_registry_path is not None:
+            registry = EvidenceRegistry(evidence_registry_path)
+            linked_ids = _linked_evidence_ids(Document(source))
+            for record in evidence_records:
+                if record['id'] in linked_ids and record.get('review_status') == 'reviewed':
+                    registry.assert_citable(record)
     detected_disclosure = report.get("gates", {}).get("ai_use_disclosure_provenance", {})
     if disclosure is None:
         disclosure_value: Any = {
