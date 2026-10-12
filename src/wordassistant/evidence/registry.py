@@ -137,42 +137,91 @@ def validate_record(record: Any) -> None:
         if not record['author_sort_key'] or not record['author_sort_key'].strip():
             raise EvidenceError("Reviewed source requires a language-appropriate author_sort_key")
 
+def _windows_process_alive(pid: int) -> bool | None:
+    """Query liveness without signals; inaccessible processes have unknown state."""
+    from ctypes import wintypes
+
+    kernel = ctypes.WinDLL('kernel32', use_last_error=True)
+    kernel.OpenProcess.argtypes = [wintypes.DWORD, wintypes.BOOL, wintypes.DWORD]
+    kernel.OpenProcess.restype = wintypes.HANDLE
+    kernel.GetExitCodeProcess.argtypes = [wintypes.HANDLE, ctypes.POINTER(wintypes.DWORD)]
+    kernel.GetExitCodeProcess.restype = wintypes.BOOL
+    kernel.CloseHandle.argtypes = [wintypes.HANDLE]
+    kernel.CloseHandle.restype = wintypes.BOOL
+    handle = kernel.OpenProcess(0x1000, False, pid)  # PROCESS_QUERY_LIMITED_INFORMATION
+    if not handle:
+        return False if ctypes.get_last_error() == 87 else None  # ERROR_INVALID_PARAMETER
+    try:
+        exit_code = wintypes.DWORD()
+        if not kernel.GetExitCodeProcess(handle, ctypes.byref(exit_code)):
+            return None
+        return exit_code.value == 259  # STILL_ACTIVE
+    finally:
+        kernel.CloseHandle(handle)
+
+
+def _process_alive(pid: Any) -> bool | None:
+    if type(pid) is not int or pid <= 0:
+        return None
+    if sys.platform == 'win32':
+        try:
+            return _windows_process_alive(pid)
+        except (OSError, AttributeError):
+            return None
+    if os.name == 'posix':
+        try:
+            os.kill(pid, 0)
+        except ProcessLookupError:
+            return False
+        except PermissionError:
+            return True
+        except OSError:
+            return None
+        return True
+    return None
+
+
 @contextmanager
 def _file_lock(lock_path: Path, timeout: float = 10.0):
     lock_file = lock_path.with_name(f"{lock_path.name}.lock")
     lock_path.parent.mkdir(parents=True, exist_ok=True)
-    start = time.time()
+    start = time.monotonic()
     fd = None
     pid = os.getpid()
+    recovered = False
     while True:
         try:
             fd = os.open(str(lock_file), os.O_CREAT | os.O_EXCL | os.O_RDWR)
-            payload = json.dumps({'pid': pid, 'ts': time.time()}).encode('utf-8')
-            os.write(fd, payload)
             break
         except FileExistsError:
-            elapsed = time.time() - start
-            if elapsed > timeout:
+            elapsed = time.monotonic() - start
+            if elapsed >= timeout:
                 try:
-                    content = lock_file.read_text(encoding='utf-8')
+                    content = lock_file.read_bytes()
                     info = json.loads(content)
-                    lock_pid = info.get('pid')
-                    is_alive = False
-                    if lock_pid and isinstance(lock_pid, int):
-                        try:
-                            os.kill(lock_pid, 0)
-                            is_alive = True
-                        except OSError:
-                            is_alive = False
-                    if not is_alive or (time.time() - info.get('ts', 0) > 30.0):
-                        lock_file.unlink(missing_ok=True)
-                except Exception:
-                    try:
-                        lock_file.unlink(missing_ok=True)
-                    except Exception:
-                        pass
+                    owner_alive = _process_alive(info.get('pid')) if isinstance(info, dict) else None
+                    if not recovered and owner_alive is False and lock_file.read_bytes() == content:
+                        lock_file.unlink()
+                        recovered = True
+                        continue
+                except FileNotFoundError:
+                    if not recovered:
+                        recovered = True
+                        continue
+                except (OSError, ValueError):
+                    pass
+                raise EvidenceError(f"Timed out waiting for evidence registry lock: {lock_file}")
             time.sleep(0.02)
+    payload = json.dumps({'pid': pid, 'ts': time.time(), 'token': uuid.uuid4().hex}).encode('utf-8')
+    acquired_stat = None
+    written = 0
     try:
+        acquired_stat = os.fstat(fd)
+        while written < len(payload):
+            count = os.write(fd, payload[written:])
+            if count <= 0:
+                raise OSError("Failed to write evidence registry lock ownership")
+            written += count
         yield
     finally:
         if fd is not None:
@@ -181,7 +230,13 @@ def _file_lock(lock_path: Path, timeout: float = 10.0):
             except Exception:
                 pass
             try:
-                lock_file.unlink(missing_ok=True)
+                current_stat = lock_file.stat()
+                if (
+                    acquired_stat is not None
+                    and (current_stat.st_dev, current_stat.st_ino) == (acquired_stat.st_dev, acquired_stat.st_ino)
+                    and lock_file.read_bytes() == payload[:written]
+                ):
+                    lock_file.unlink(missing_ok=True)
             except Exception:
                 pass
 
