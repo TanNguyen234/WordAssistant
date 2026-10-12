@@ -189,6 +189,7 @@ def parser() -> argparse.ArgumentParser:
     # inspect
     ins = sp.add_parser('inspect', help='Inspect DOCX structure and package parts')
     ins.add_argument('file')
+    ins.add_argument('--summary', action='store_true', help='Omit paragraph text and detailed object inventories')
     ins.add_argument('--json', action='store_true')
 
     # context
@@ -197,6 +198,7 @@ def parser() -> argparse.ArgumentParser:
     ctx.add_argument('--query', required=True)
     ctx.add_argument('--max-tokens', type=int, default=None)
     ctx.add_argument('--active-section-id', '--section', dest='active_section_id', default=None)
+    ctx.add_argument('--only-section', dest='target_section_id', default=None, help='Restrict returned context to exactly one indexed section')
     ctx.add_argument('--json', action='store_true')
 
     # scaffold
@@ -539,6 +541,19 @@ def run(args: list[str] | None = None) -> int:
 
         if a.cmd == 'inspect':
             inv = inspect_document(a.file)
+            if a.summary:
+                summary_keys = (
+                    'file', 'file_name', 'size_bytes', 'paragraphs', 'tables',
+                    'sections', 'images', 'hyperlinks', 'bookmarks', 'comments',
+                    'footnotes', 'endnotes', 'content_controls',
+                    'document_protection', 'revisions', 'fields',
+                    'advanced_backend_recommended', 'sections_detail',
+                )
+                outline = inv.get('outline', [])
+                inv = {key: inv[key] for key in summary_keys if key in inv}
+                inv['outline_count'] = len(outline)
+                inv['outline_preview'] = outline[:100]
+                inv['outline_preview_truncated'] = len(outline) > 100
             _print(inv, a.json)
             return 0
 
@@ -559,7 +574,8 @@ def run(args: list[str] | None = None) -> int:
                 sections,
                 query=a.query,
                 max_tokens=effective_max_tokens,
-                active_section_id=a.active_section_id
+                active_section_id=a.active_section_id,
+                target_section_id=a.target_section_id,
             )
             data = {
                 'query': bundle.query,

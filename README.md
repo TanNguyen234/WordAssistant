@@ -42,8 +42,8 @@ wordassistant doctor --json
 wordassistant capabilities --json
 wordassistant profiles --json
 wordassistant init . --json
-wordassistant inspect file.docx --json
-wordassistant context file.docx --query "revise evaluation and error analysis" --max-tokens 8000 --json
+wordassistant inspect file.docx --summary --json
+wordassistant context file.docx --query "revise evaluation and error analysis" --max-tokens 4000 --json
 wordassistant create output.docx --profile generic --variant default --title "Report" --json
 wordassistant compose output.docx --output authored.docx --content content.json --evidence evidence.json --min-visible-characters 8000 --max-visible-characters 14000 --json
 wordassistant apply authored.docx --output formatted.docx --plan operations.json --json
@@ -62,11 +62,20 @@ compare/merge, dynamic field refresh, charts, mail merge, or Word PDF export.
 Capability status is operation-granular and does not treat package presence as
 proof. See `docs/CAPABILITIES.md` and `docs/WORD_FIDELITY_ASSESSMENT.md`.
 
-`--section` exists as an optional precision override for `context`; agents do not need to discover or supply section IDs for normal use.
+For strict section retrieval, use a section ID returned by `context` with
+`--only-section ID`. The older `--section` / `--active-section-id` options
+prioritize a section and may include neighboring sections.
 
 ## Long-document safety
 
-`inspect` builds a structural index from styles, outline levels, numbering, tables, typography and conservative legacy-DOCX heuristics. `context` ranks sections against the user's query and enforces a hard input budget. It therefore avoids the anti-pattern:
+For documents over 40 pages or of unknown length, `inspect --summary` returns
+counts and at most 100 heading entries without paragraph text. Full `inspect`
+includes document text, so do not send its output to an agent for a long file.
+The local index uses styles, outline levels, numbering, tables, typography and
+conservative legacy-DOCX heuristics. `context` ranks sections against the query
+and caps each response at 12,000 estimated tokens. Agent workflows use 4,000
+tokens per retrieval and at most 8,000 combined per task turn; this combined
+limit is an agent rule, not an aggregate runtime counter. The workflow avoids:
 
 ```text
 200-page DOCX -> entire text -> LLM

@@ -3,15 +3,16 @@
 Use `wordassistant-agent.json` for machine discovery and `.agents/skills/wordassistant/SKILL.md` for the short operating workflow.
 
 1. Run `wordassistant doctor --json` once per environment.
-2. Inspect unfamiliar documents.
-3. Retrieve bounded context for long documents.
-4. For a new long report, use `create`, write one bounded UTF-8 content JSON, and run `compose` once. Do not generate helper scripts.
-5. Use a high-level command family and an output copy.
-6. Use `apply` for a validated, atomic multi-operation plan rather than publishing a chain of temporary DOCX files.
-7. Persist native field updates to a distinct final DOCX, then run `integrity audit` and bind that final file/evidence hash with `integrity provenance`. Any later mutation makes both stale.
-8. Use dry-run before destructive changes.
-9. Verify structural, semantic, dynamic-field, native, and visual statuses independently.
-10. Render and inspect every page when layout matters.
+2. Inspect unfamiliar short documents. For files over 40 pages or of unknown length, use `inspect --summary --json` so paragraph text is not returned to the agent.
+3. Retrieve one relevant section at a time with `context --query ... --max-tokens 4000 --only-section SECTION_ID`. Discover an ID with a bounded query when needed. Keep the combined context at or below 8,000 tokens per task turn, even for a 200-page DOCX.
+4. Edit only the relevant section or exact target using a stable selector/anchor and an output copy. A heading selector scopes `edit replace` to that heading's section; omit no selector unless a document-wide replacement is intended.
+5. For a new long report, use `create`, write one bounded UTF-8 content JSON, and run `compose` once. Do not generate helper scripts.
+6. Use a high-level command family and an output copy.
+7. Use `apply` for a validated, atomic multi-operation plan rather than publishing a chain of temporary DOCX files.
+8. Persist native field updates to a distinct final DOCX, then run `integrity audit` and bind that final file/evidence hash with `integrity provenance`. Any later mutation makes both stale.
+9. Use dry-run before destructive changes.
+10. Verify structural, semantic, dynamic-field, native, and visual statuses independently.
+11. Render and inspect every page when layout matters.
 
 `wordassistant capabilities --json` includes `selector_schema` with the allowed
 keys, exact-match semantics, and copyable examples. Do not inspect source code

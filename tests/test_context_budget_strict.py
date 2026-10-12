@@ -21,6 +21,9 @@ def test_context_budget_rejects_invalid_types_and_values():
     with pytest.raises((ValueError, TypeError)):
         build_context(sections, "query", max_tokens=True)  # type: ignore
 
+    with pytest.raises(ValueError, match="hard maximum of 12000"):
+        build_context(sections, "query", max_tokens=12001)
+
 def test_context_hard_invariant_preserved():
     sections = [
         DocumentSection(f"s{i}", f"Title {i}", "Long repetitive text " * 50, 1)

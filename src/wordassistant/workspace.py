@@ -4,6 +4,10 @@ from typing import Any
 import json
 from wordassistant.document.model import DocumentSection
 
+# Bump when indexing semantics change; DOCX hashes alone cannot invalidate
+# section boundaries computed by older indexers.
+DOCUMENT_INDEX_SCHEMA_VERSION = 2
+
 ALLOWED_CONFIG_KEYS = {
     'schema_version',
     'profile',
@@ -153,8 +157,10 @@ def get_cached_document_index(start_path: str | Path | None, sha256_hash: str) -
         return None
     try:
         data = json.loads(cache_file.read_text(encoding='utf-8'))
+        if not isinstance(data, dict) or data.get('schema_version') != DOCUMENT_INDEX_SCHEMA_VERSION:
+            return None
         sections = []
-        for item in data:
+        for item in data['sections']:
             sections.append(
                 DocumentSection(
                     section_id=item['section_id'],
@@ -190,4 +196,5 @@ def put_cached_document_index(start_path: str | Path | None, sha256_hash: str, s
         }
         for s in sections
     ]
-    cache_file.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding='utf-8')
+    payload = {'schema_version': DOCUMENT_INDEX_SCHEMA_VERSION, 'sections': data}
+    cache_file.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding='utf-8')

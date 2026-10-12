@@ -36,6 +36,8 @@
     "verify",
     "render",
     "integrity",
+    "evidence",
+    "research",
     "profiles"
   ],
   "capability_discovery_command": "wordassistant capabilities --json",
@@ -107,10 +109,11 @@
     "long_document_edit": [
       "wordassistant doctor --json",
       "wordassistant capabilities --json",
-      "wordassistant inspect thesis.docx --json",
-      "wordassistant context thesis.docx --query \"chapter 3 results\" --json",
-      "wordassistant edit replace thesis.docx --output revised.docx --options '{\"pattern\":\"old\",\"replacement\":\"new\"}' --dry-run --json",
-      "wordassistant edit replace thesis.docx --output revised.docx --options '{\"pattern\":\"old\",\"replacement\":\"new\"}' --json",
+      "wordassistant inspect thesis.docx --summary --json",
+      "wordassistant context thesis.docx --query \"chapter 3 results\" --max-tokens 4000 --json",
+      "wordassistant context thesis.docx --query \"chapter 3 results\" --max-tokens 4000 --only-section SECTION_ID_FROM_CONTEXT --json",
+      "wordassistant edit replace thesis.docx --output revised.docx --selector '{\"type\":\"heading\",\"text\":\"EXACT_SECTION_HEADING\"}' --options '{\"pattern\":\"old\",\"replacement\":\"new\"}' --dry-run --json",
+      "wordassistant edit replace thesis.docx --output revised.docx --selector '{\"type\":\"heading\",\"text\":\"EXACT_SECTION_HEADING\"}' --options '{\"pattern\":\"old\",\"replacement\":\"new\"}' --json",
       "wordassistant verify revised.docx --json"
     ],
     "layout_change": {
@@ -122,7 +125,7 @@
       "steps": [
         "wordassistant doctor --json",
         "wordassistant capabilities --json",
-        "wordassistant inspect report.docx --json",
+        "wordassistant inspect report.docx --summary --json",
         "wordassistant page-number apply report.docx --output numbered.docx --options '{\"section_index\":0,\"number_format\":\"decimal\"}' --json",
         "wordassistant field update-all numbered.docx --output refreshed.docx --json",
         "wordassistant verify refreshed.docx --render --engine word --native-fields --json"

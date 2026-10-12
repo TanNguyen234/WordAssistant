@@ -17,8 +17,8 @@ Use WordAssistant through its CLI. Do **not** read the entire repository or DOCX
 ```powershell
 wordassistant doctor --json
 wordassistant capabilities --json
-wordassistant inspect <file.docx> --json
-wordassistant context <file.docx> --query "what you need" --max-tokens 8000 --json
+wordassistant inspect <file.docx> --summary --json
+wordassistant context <file.docx> --query "what you need" --max-tokens 4000 --json
 wordassistant verify <file.docx> --profile generic --variant default --render --json
 ```
 
@@ -37,6 +37,13 @@ JSON output; request bounded context before editing long files; write every
 mutation to a distinct output copy; dry-run first; never invent citations; and
 require final `verify` plus render review before delivery. Never treat an
 unavailable native or visual gate as PASS.
+
+For strict section edits, take an ID returned by `context` and retrieve it with
+`--only-section ID`. `--section` only prioritizes a section and may add neighbors.
+Keep retrieved context at or below 8,000 estimated tokens per task turn, then
+edit with a heading selector and an output copy. For source-backed reports,
+follow `docs/academic-report-workflow.md`; `research` candidates must be
+downloaded and reviewed before citation.
 
 For academic work, do not optimize text to evade AI detectors. Require real source evidence, citation/bibliography consistency, an honest AI-use disclosure, and hash-bound provenance. Treat repetition and punctuation findings only as prompts for human review, never proof of AI authorship.
 

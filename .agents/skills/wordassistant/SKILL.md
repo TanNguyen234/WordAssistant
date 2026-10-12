@@ -8,15 +8,16 @@ description: Create, inspect, retrieve bounded context from, validate, and rende
 Use the CLI as the stable control plane. Never inspect repository source or raw OOXML to discover normal operations.
 
 1. Run `wordassistant doctor --json` once per environment.
-2. Inspect every unfamiliar DOCX with `wordassistant inspect FILE --json`.
-3. For long documents, retrieve only bounded task context with `wordassistant context FILE --query "..." --max-tokens 8000 --json`.
-4. Check `wordassistant capabilities --json` before native or renderer-dependent work.
-5. Mutate an output copy. Use `--dry-run` before destructive changes.
-6. For a new long report, write one bounded UTF-8 content JSON and run `compose` once after `create`; do not generate helper scripts. Then use one `apply` version-1 plan for compatible formatting/layout mutations so validation and rollback cover the whole operation and no intermediate DOCX is published.
-7. Persist native field updates to a distinct final DOCX before the final academic audit. Then run `integrity audit` with the exact profile variant and evidence registry and create `integrity provenance` bound to that final DOCX hash. Any later DOCX mutation invalidates both audit and provenance.
-8. Run `wordassistant verify OUTPUT --json` after edits.
-9. When formatting matters, render and inspect every page. A successful render does not prove fields or numbering are functional.
-10. A final delivery PASS requires both `validate.valid == true` and `verify.delivery_status == "PASS"`; `overall_status` only summarizes the checks requested in that invocation.
+2. Inspect unfamiliar short DOCX files with `wordassistant inspect FILE --json`. For documents over 40 pages or of unknown length, use `wordassistant inspect FILE --summary --json`; full inspection includes every paragraph's text and should not be sent to an agent as context.
+3. For a long document, retrieve one relevant section at a time. Start with `wordassistant context FILE --query "..." --max-tokens 4000 --json` if you need to discover the section ID, then use `--only-section SECTION_ID` for strict single-section retrieval. Keep total retrieved context at or below 8,000 tokens in one task turn and repeat only for another necessary section. A 200-page DOCX may be indexed locally; its full text must not be pasted into the LLM prompt. The older `--active-section-id` / `--section` option prioritizes a section but may include neighbors.
+4. Edit only the selected section or exact text target using a stable selector/anchor and save an output copy. For section-wide text edits, use a heading selector; `edit replace` without a selector may change matching text throughout the document.
+5. Check `wordassistant capabilities --json` before native or renderer-dependent work.
+6. Mutate an output copy. Use `--dry-run` before destructive changes.
+7. For a new long report, write one bounded UTF-8 content JSON and run `compose` once after `create`; do not generate helper scripts. Then use one `apply` version-1 plan for compatible formatting/layout mutations so validation and rollback cover the whole operation and no intermediate DOCX is published.
+8. Persist native field updates to a distinct final DOCX before the final academic audit. Then run `integrity audit` with the exact profile variant and evidence registry and create `integrity provenance` bound to that final DOCX hash. Any later DOCX mutation invalidates both audit and provenance.
+9. Run `wordassistant verify OUTPUT --json` after edits.
+10. When formatting matters, render and inspect every page. A successful render does not prove fields or numbering are functional.
+11. A final delivery PASS requires both `validate.valid == true` and `verify.delivery_status == "PASS"`; `overall_status` only summarizes the checks requested in that invocation.
 
 | Need | Command |
 |---|---|
@@ -44,9 +45,9 @@ Examples:
 wordassistant create report.docx --profile generic --title "Report" --json
 wordassistant compose report.docx --output authored.docx --content content.json --evidence evidence.json --min-visible-characters 8000 --max-visible-characters 14000 --json
 wordassistant apply authored.docx --output formatted.docx --plan operations.json --json
-wordassistant inspect thesis.docx --json
-wordassistant context thesis.docx --query "chapter 3 results" --max-tokens 8000 --json
-wordassistant edit replace thesis.docx --output revised.docx --options '{"pattern":"old","replacement":"new"}' --dry-run --json
+wordassistant inspect thesis.docx --summary --json
+wordassistant context thesis.docx --query "chapter 3 results" --max-tokens 4000 --only-section chapter-3-results --json
+wordassistant edit replace thesis.docx --output revised.docx --selector '{"type":"heading","text":"Results"}' --options '{"pattern":"old","replacement":"new"}' --dry-run --json
 wordassistant format paragraph revised.docx --output formatted.docx --selector '{"type":"heading","text":"Results"}' --options '{"keep_with_next":true}' --json
 wordassistant page-number apply report.docx --output numbered.docx --options '{"section_index":1,"number_format":"decimal","start":1}' --json
 wordassistant table create report.docx --output table.docx --options '{"rows":3,"columns":4}' --json

@@ -131,6 +131,81 @@ def test_inspect_cli(capsys):
     assert 'paragraphs' in out
     assert 'sections' in out
 
+
+def test_inspect_summary_omits_document_text_and_large_inventories(tmp_path, capsys):
+    path = tmp_path / 'long_report.docx'
+    document = Document()
+    document.add_heading('Methods', level=1)
+    document.add_paragraph('SENSITIVE BODY TEXT THAT MUST NOT BE IN SUMMARY')
+    document.add_heading('Results', level=1)
+    document.add_paragraph('More body text.')
+    document.save(path)
+
+    code = run(['inspect', str(path), '--summary', '--json'])
+    payload = json.loads(capsys.readouterr().out)
+
+    assert code == 0
+    assert payload['paragraphs'] == 4
+    assert payload['outline_count'] == 2
+    assert [item['title'] for item in payload['outline_preview']] == ['Methods', 'Results']
+    assert 'paragraphs_detail' not in payload
+    assert 'tables_detail' not in payload
+    assert 'SENSITIVE BODY TEXT' not in json.dumps(payload)
+
+
+def test_inspect_summary_bounds_heading_preview(tmp_path, capsys):
+    path = tmp_path / 'many_sections.docx'
+    document = Document()
+    for index in range(130):
+        document.add_heading(f'Section {index}', level=1)
+        document.add_paragraph(f'Content {index}')
+    document.save(path)
+
+    code = run(['inspect', str(path), '--summary', '--json'])
+    payload = json.loads(capsys.readouterr().out)
+
+    assert code == 0
+    assert payload['outline_count'] == 130
+    assert len(payload['outline_preview']) == 100
+    assert payload['outline_preview_truncated'] is True
+
+
+def test_context_only_section_returns_no_neighboring_text(tmp_path, capsys):
+    path = tmp_path / 'two_chapters.docx'
+    document = Document()
+    document.add_heading('Methods', level=1)
+    document.add_paragraph('The target method and only its details.')
+    document.add_heading('Results', level=1)
+    document.add_paragraph('Neighboring results details.')
+    document.save(path)
+
+    code = run([
+        'context', str(path), '--query', 'details', '--only-section', 'methods',
+        '--max-tokens', '4000', '--json',
+    ])
+    payload = json.loads(capsys.readouterr().out)
+
+    assert code == 0
+    assert [item['id'] for item in payload['sections']] == ['methods']
+    assert 'The target method' in payload['text']
+    assert 'Neighboring results' not in payload['text']
+
+
+def test_context_cli_rejects_overfeed_budget(tmp_path, capsys):
+    path = tmp_path / 'report.docx'
+    document = Document()
+    document.add_heading('Methods', level=1)
+    document.add_paragraph('Some content.')
+    document.save(path)
+
+    code = run([
+        'context', str(path), '--query', 'content', '--max-tokens', '12001', '--json',
+    ])
+    captured = capsys.readouterr()
+
+    assert code == 1
+    assert 'hard maximum of 12000' in (captured.out + captured.err)
+
 def test_evidence_cli_crud(tmp_path, capsys):
     reg = tmp_path / 'evidence.json'
     

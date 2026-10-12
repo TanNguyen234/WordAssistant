@@ -8,7 +8,10 @@ ROOT = Path(__file__).resolve().parents[2]
 def test_agent_manifest_is_compact_and_actionable():
     manifest = json.loads((ROOT / "wordassistant-agent.json").read_text(encoding="utf-8"))
     assert manifest["version"] == 1
-    assert len(manifest["commands"]) <= 30
+    # The two academic-source families extend the compact 30-family surface.
+    assert len(manifest["commands"]) <= 32
+    assert {"evidence", "research"} <= set(manifest["commands"])
+    assert len(manifest["commands"]) == len(set(manifest["commands"]))
     assert {"inspect", "context", "create", "edit", "verify", "render"} <= set(manifest["commands"])
     assert manifest["capability_discovery_command"] == "wordassistant capabilities --json"
     assert "long_document_edit" in manifest["recommended_workflows"]

@@ -6,6 +6,7 @@ import unicodedata
 from wordassistant.document.model import DocumentSection
 
 _WORD = re.compile(r'\w+', re.UNICODE)
+MAX_CONTEXT_TOKENS = 12000
 
 _VI_MAP = {
     'à': 'a', 'á': 'a', 'ả': 'a', 'ã': 'a', 'ạ': 'a',
@@ -148,25 +149,43 @@ def build_context(
         raise TypeError(f"max_tokens must be an integer, got {type(max_tokens).__name__}: {max_tokens!r}")
     if max_tokens < 100:
         raise ValueError(f"max_tokens must be >= 100, got {max_tokens}")
+    if max_tokens > MAX_CONTEXT_TOKENS:
+        raise ValueError(
+            f"max_tokens exceeds the configured hard maximum of {MAX_CONTEXT_TOKENS}"
+        )
         
+    by_id = {s.section_id: s for s in sections}
+    for name, section_id in (
+        ('target_section_id', target_section_id),
+        ('active_section_id', active_section_id),
+    ):
+        if section_id is not None:
+            if not isinstance(section_id, str) or not section_id.strip():
+                raise ValueError(f"{name} must be a non-empty string")
+            if section_id not in by_id:
+                raise ValueError(f"Unknown section id: {section_id}")
+    if (target_section_id is not None and active_section_id is not None
+            and active_section_id != target_section_id):
+        raise ValueError("target_section_id conflicts with active_section_id")
+
     if not sections:
         return ContextBundle(query=query, sections=(), text="", estimated_tokens=0, max_tokens=max_tokens, truncated=False)
         
-    sec_target = target_section_id or active_section_id
-    by_id = {s.section_id: s for s in sections}
     avg_len = sum(len(s.text) for s in sections) / max(1, len(sections))
     
     ranked = sorted(sections, key=lambda s: (_score_section(query, s, avg_len), -s.level), reverse=True)
     
     chosen: list[DocumentSection] = []
-    if sec_target:
-        if sec_target not in by_id:
-            raise ValueError(f"Unknown section id: {sec_target}")
-        chosen.append(by_id[sec_target])
-        
-    for s in ranked:
-        if s not in chosen:
-            chosen.append(s)
+    if target_section_id is not None:
+        # A target is a hard retrieval boundary: do not add neighboring sections.
+        chosen = [by_id[target_section_id]]
+    else:
+        if active_section_id is not None:
+            chosen.append(by_id[active_section_id])
+
+        for section in ranked:
+            if section not in chosen:
+                chosen.append(section)
             
     blocks: list[str] = []
     used_sections: list[DocumentSection] = []
@@ -221,5 +240,8 @@ def build_context(
         text=text,
         estimated_tokens=actual_tokens,
         max_tokens=max_tokens,
-        truncated=was_truncated or len(used_sections) < len(sections)
+        truncated=(
+            was_truncated
+            or (target_section_id is None and len(used_sections) < len(sections))
+        )
     )

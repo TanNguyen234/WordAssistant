@@ -42,9 +42,20 @@ def test_long_edit_workflow_uses_real_option_names_and_real_mutation():
     assert len(edit_steps) == 2
     assert "--dry-run" in edit_steps[0]
     assert "--dry-run" not in edit_steps[1]
+    assert all("--selector" in step for step in edit_steps)
+    section_selector = edit_steps[0][edit_steps[0].index("--selector") + 1]
+    assert json.loads(section_selector) == {
+        "type": "heading",
+        "text": "EXACT_SECTION_HEADING",
+    }
     assert '"pattern"' in edit_steps[0][edit_steps[0].index("--options") + 1]
     assert '"replacement"' in edit_steps[0][edit_steps[0].index("--options") + 1]
     assert workflow[-1].startswith("wordassistant verify revised.docx")
+    assert "inspect thesis.docx --summary" in workflow[2]
+    bounded_context_steps = [step for step in workflow if "wordassistant context" in step]
+    assert len(bounded_context_steps) == 2
+    assert all("--max-tokens 4000" in step for step in bounded_context_steps)
+    assert "--only-section" in bounded_context_steps[1]
 
 
 def test_create_report_workflow_encodes_complete_delivery_sequence():
