@@ -330,18 +330,14 @@ def main() -> None:
         print("libreoffice-render: SKIPPED_WITH_REASON (LibreOffice binary not on PATH/default locations)")
 
     print("\n=== 8. Offline Wheel Build and Isolated Install Smoke Test ===")
-    dist_dir = ROOT / 'dist'
-    if dist_dir.exists():
-        shutil.rmtree(dist_dir)
-    # Release verification must not depend on live package-index access. Build
-    # against the already-provisioned, version-checked toolchain.
-    run([sys.executable, '-m', 'build', '--wheel', '--no-isolation'])
-    wheel_files = list(dist_dir.glob('*.whl'))
-    assert len(wheel_files) == 1, f"Expected 1 wheel file in dist/, found {len(wheel_files)}"
-    wheel_file = wheel_files[0]
-    print(f"wheel-built: {wheel_file.name}")
-
-    with tempfile.TemporaryDirectory() as clean_env_dir:
+    # A verification run must preserve artifacts already present in dist/.
+    # Build offline in a fresh temporary directory, then install that wheel.
+    with tempfile.TemporaryDirectory(prefix='wordassistant-release-wheel-') as wheel_dir, tempfile.TemporaryDirectory() as clean_env_dir:
+        run([sys.executable, '-m', 'build', '--wheel', '--no-isolation', '--outdir', wheel_dir])
+        wheel_files = list(Path(wheel_dir).glob('*.whl'))
+        assert len(wheel_files) == 1, f"Expected 1 release wheel, found {len(wheel_files)}"
+        wheel_file = wheel_files[0]
+        print(f"wheel-built: {wheel_file.name}")
         venv_path = Path(clean_env_dir) / 'test_env'
         # Inherit only third-party runtime dependencies from the provisioned
         # interpreter; the WordAssistant wheel itself is installed explicitly.
@@ -374,6 +370,7 @@ def main() -> None:
         run_installed([py_exe, '-m', 'wordassistant.cli', 'doctor', '--json'])
         run_installed([py_exe, '-m', 'wordassistant.cli', 'profiles', '--json'])
         run_installed([py_exe, '-m', 'wordassistant.cli', 'profile', 'validate', 'generic', '--json'])
+        run_installed([py_exe, '-m', 'wordassistant.cli', 'profile', 'validate', 'hcm-university-dacn-2026-2027', '--json'])
         installed_commands = json.loads(
             (ROOT / 'wordassistant-agent.json').read_text(encoding='utf-8')
         )['commands']
@@ -385,6 +382,10 @@ def main() -> None:
         run_installed([py_exe, '-m', 'wordassistant.cli', 'scaffold', str(clean_gen_docx), '--profile', 'generic', '--variant', 'default', '--json'])
         run_installed([py_exe, '-m', 'wordassistant.cli', 'inspect', str(clean_gen_docx), '--json'])
         run_installed([py_exe, '-m', 'wordassistant.cli', 'scaffold', str(clean_prop_docx), '--profile', 'hcmunre_dacn_2026_2027', '--variant', 'proposal', '--json'])
+        academic_docx = Path(clean_env_dir) / 'academic_report.docx'
+        run_installed([py_exe, '-m', 'wordassistant.cli', 'scaffold', str(academic_docx), '--profile', 'hcm-university-dacn-2026-2027', '--variant', 'report', '--title', 'Release academic fixture', '--json'])
+        run_installed([py_exe, '-m', 'wordassistant.cli', 'inspect', str(academic_docx), '--summary', '--json'])
+        run_installed([py_exe, '-m', 'wordassistant.cli', 'context', str(academic_docx), '--query', 'introduction', '--only-section', 'mo-au', '--max-tokens', '4000', '--json'])
         
         # Verify packaged official docx hashes inside installed package
         verify_pkg_code = (
