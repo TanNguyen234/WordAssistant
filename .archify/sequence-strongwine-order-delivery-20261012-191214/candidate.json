@@ -1,0 +1,260 @@
+{
+  "schema_version": 1,
+  "diagram_type": "sequence",
+  "meta": {
+    "title": "Luồng đặt hàng, thanh toán và giao nhận StrongWine",
+    "output": ".archify/sequence-strongwine-order-delivery-20261012-191214/strongwine-order-delivery.html",
+    "column_fit": "spread",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/TanNguyen234/Wine-website.git",
+      "provider": "github",
+      "link_mode": "web",
+      "revision": "fc63d312998b40380ce6d9fed61a14d6924836a8"
+    }
+  },
+  "participants": [
+    {
+      "id": "customer",
+      "type": "external",
+      "label": "Khách hàng"
+    },
+    {
+      "id": "web",
+      "type": "backend",
+      "label": "Web",
+      "sublabel": "Cart / Pay",
+      "sources": [
+        {
+          "path": "src/main/java/com/strongwine/strongwine/controller/CartController.java",
+          "line": 109,
+          "end_line": 128
+        },
+        {
+          "path": "src/main/java/com/strongwine/strongwine/controller/CartController.java",
+          "line": 194,
+          "end_line": 219
+        },
+        {
+          "path": "src/main/java/com/strongwine/strongwine/controller/PaymentController.java",
+          "line": 72,
+          "end_line": 76
+        }
+      ]
+    },
+    {
+      "id": "services",
+      "type": "backend",
+      "label": "Nghiệp vụ",
+      "sublabel": "Order / Pay / Kho",
+      "sources": [
+        {
+          "end_line": 202,
+          "line": 98,
+          "path": "src/main/java/com/strongwine/strongwine/service/OrderService.java"
+        },
+        {
+          "end_line": 180,
+          "line": 139,
+          "path": "src/main/java/com/strongwine/strongwine/service/PaymentService.java"
+        },
+        {
+          "end_line": 206,
+          "line": 149,
+          "path": "src/main/java/com/strongwine/strongwine/service/ShipmentService.java"
+        }
+      ]
+    },
+    {
+      "id": "stripe",
+      "type": "external",
+      "label": "Stripe",
+      "sources": [
+        {
+          "path": "src/main/java/com/strongwine/strongwine/service/StripeService.java",
+          "line": 32,
+          "end_line": 54
+        }
+      ]
+    },
+    {
+      "id": "database",
+      "type": "database",
+      "label": "SQL Server",
+      "sublabel": "winestore_2",
+      "sources": [
+        {
+          "path": "src/main/resources/application.properties",
+          "line": 14,
+          "end_line": 24
+        }
+      ]
+    },
+    {
+      "id": "paid_event",
+      "type": "messagebus",
+      "label": "OrderPaidEvent",
+      "sublabel": "sau commit",
+      "sources": [
+        {
+          "path": "src/main/java/com/strongwine/strongwine/service/OrderPaidShipmentListener.java",
+          "line": 21,
+          "end_line": 27
+        }
+      ]
+    },
+    {
+      "id": "shipper",
+      "type": "frontend",
+      "label": "Shipper web",
+      "sublabel": "Giao nhận",
+      "sources": [
+        {
+          "end_line": 103,
+          "line": 65,
+          "path": "src/main/java/com/strongwine/strongwine/controller/ShipperController.java"
+        },
+        {
+          "end_line": 640,
+          "line": 619,
+          "path": "src/main/java/com/strongwine/strongwine/service/ShipmentService.java"
+        },
+        {
+          "end_line": 62,
+          "line": 56,
+          "path": "src/main/java/com/strongwine/strongwine/security/SecurityConfig.java"
+        }
+      ]
+    }
+  ],
+  "segments": [
+    {
+      "to": 340,
+      "from": 120,
+      "label": "Đặt hàng và thanh toán"
+    },
+    {
+      "to": 480,
+      "from": 345,
+      "label": "Xác nhận thanh toán và tạo vận đơn"
+    },
+    {
+      "to": 605,
+      "from": 485,
+      "label": "Giao hàng và xác thực OTP"
+    }
+  ],
+  "messages": [
+    {
+      "id": "checkout",
+      "from": "customer",
+      "to": "web",
+      "y": 160,
+      "label": "Checkout token hợp lệ",
+      "variant": "security"
+    },
+    {
+      "id": "create-order",
+      "from": "web",
+      "to": "services",
+      "y": 188,
+      "label": "Validate giỏ hàng, địa chỉ; tạo đơn PENDING"
+    },
+    {
+      "id": "reserve-stock",
+      "from": "services",
+      "to": "database",
+      "y": 216,
+      "label": "Lưu đơn và giữ tồn trong giao dịch"
+    },
+    {
+      "id": "create-payment",
+      "from": "web",
+      "to": "services",
+      "y": 244,
+      "label": "Khởi tạo phiên Stripe cho đơn"
+    },
+    {
+      "id": "stripe-session",
+      "from": "services",
+      "to": "stripe",
+      "y": 272,
+      "label": "Tạo Stripe Checkout Session"
+    },
+    {
+      "id": "hosted-checkout",
+      "from": "stripe",
+      "to": "customer",
+      "y": 300,
+      "label": "Trả URL, chuyển khách đến Stripe",
+      "variant": "return"
+    },
+    {
+      "id": "pay",
+      "from": "customer",
+      "to": "stripe",
+      "y": 328,
+      "label": "Thanh toán tại Stripe Checkout",
+      "variant": "security"
+    },
+    {
+      "id": "webhook",
+      "from": "stripe",
+      "to": "web",
+      "y": 356,
+      "label": "Webhook kèm Stripe-Signature",
+      "variant": "security"
+    },
+    {
+      "id": "verify-event",
+      "from": "web",
+      "to": "services",
+      "y": 384,
+      "label": "Xác minh chữ ký, sự kiện, chống lặp"
+    },
+    {
+      "id": "mark-paid",
+      "from": "services",
+      "to": "database",
+      "y": 412,
+      "label": "Ghi PAID, xác nhận trừ tồn"
+    },
+    {
+      "id": "publish-paid",
+      "from": "services",
+      "to": "paid_event",
+      "y": 440,
+      "label": "Phát OrderPaidEvent"
+    },
+    {
+      "id": "after-commit",
+      "from": "paid_event",
+      "to": "services",
+      "y": 468,
+      "label": "AFTER_COMMIT: tạo vận đơn, phân công",
+      "variant": "emphasis"
+    },
+    {
+      "id": "save-shipment",
+      "from": "services",
+      "to": "database",
+      "y": 496,
+      "label": "Lưu vận đơn và thông tin OTP"
+    },
+    {
+      "id": "shipper-action",
+      "from": "shipper",
+      "to": "services",
+      "y": 524,
+      "label": "Shipper nhận đơn, giao và nhập OTP",
+      "variant": "security"
+    },
+    {
+      "id": "complete-delivery",
+      "from": "services",
+      "to": "database",
+      "y": 552,
+      "label": "Xác thực OTP; chuyển COMPLETED"
+    }
+  ]
+}
