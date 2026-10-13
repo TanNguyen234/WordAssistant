@@ -152,6 +152,56 @@ def main() -> int:
                     }
             _emit_json({"status": "SUCCESS", "data": data})
             return 0
+        if payload.get("action") == "verify_fields_and_render":
+            required = {"render.pdf", "field.update_all"}
+            if not required.issubset(backend.verified_operations):
+                raise RuntimeError(
+                    "Combined native verification requires verified operations: "
+                    + ", ".join(sorted(required))
+                )
+            path = Path(payload["input_path"])
+            output_path = Path(payload["output_path"])
+            with backend._session(path) as (application, document):
+                before = backend._field_snapshot(document)
+                stages = {}
+                try:
+                    render_data = backend._execute_document_operation(
+                        application,
+                        document,
+                        OperationRequest(
+                            "render.pdf", input_path=path, output_path=output_path
+                        ),
+                    )
+                    stages["render"] = {
+                        "status": "SUCCESS",
+                        "data": {"page_count": render_data.get("page_count")},
+                    }
+                except Exception as exc:
+                    stages["render"] = {"status": "ERROR", "message": str(exc)}
+                try:
+                    field_data = backend._execute_document_operation(
+                        application,
+                        document,
+                        OperationRequest("field.update_all", input_path=path),
+                    )
+                    field_data = _persist_verified_fields(document, field_data)
+                    field_data["source_results_were_current"] = _field_results_match(
+                        before, field_data.get("fields", [])
+                    )
+                    if not field_data["source_results_were_current"]:
+                        before_values = _normalized_field_results(before)
+                        after_values = _normalized_field_results(field_data.get("fields", []))
+                        field_data["field_freshness_comparison"] = {
+                            "before_count": len(before_values),
+                            "after_count": len(after_values),
+                            "before_only": [list(value) for value in sorted(set(before_values) - set(after_values))[:10]],
+                            "after_only": [list(value) for value in sorted(set(after_values) - set(before_values))[:10]],
+                        }
+                    stages["fields"] = {"status": "SUCCESS", "data": field_data}
+                except Exception as exc:
+                    stages["fields"] = {"status": "ERROR", "message": str(exc)}
+            _emit_json({"status": "SUCCESS", "data": stages})
+            return 0
         _emit_json({"status": "ERROR", "message": "Unknown worker action"})
         return 2
     except Exception as exc:

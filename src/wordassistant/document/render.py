@@ -162,7 +162,10 @@ def render_pdf_pages(
         staged_pages = tuple(sorted(staging.glob("page-*.png"), key=_page_number))
         if not staged_pages:
             raise RuntimeError("PDF page rendering reported success but produced no PNG pages.")
-        _validate_png_page_set(staged_pages)
+        # Poppler output was already validated before deciding whether to fall
+        # back. PDFium output still needs validation here.
+        if not executable or poppler_error is not None:
+            _validate_png_page_set(staged_pages)
         return _publish_page_set(staged_pages, destination)
     finally:
         shutil.rmtree(staging, ignore_errors=True)

@@ -44,9 +44,11 @@ def test_pdf_page_content_audit_flags_near_blank_pages(tmp_path, monkeypatch):
 
     monkeypatch.setattr("wordassistant.document.verify.shutil.which", lambda _: "pdftotext")
 
+    calls = []
     def fake_run(command, **kwargs):
-        page = int(command[command.index("-f") + 1])
-        return type("Completed", (), {"returncode": 0, "stdout": outputs[page], "stderr": ""})()
+        calls.append(command)
+        text = "\f".join(outputs.values()) + "\f"
+        return type("Completed", (), {"returncode": 0, "stdout": text, "stderr": ""})()
 
     monkeypatch.setattr("wordassistant.document.verify.subprocess.run", fake_run)
 
@@ -55,6 +57,7 @@ def test_pdf_page_content_audit_flags_near_blank_pages(tmp_path, monkeypatch):
     assert result["status"] == "FAIL"
     assert result["near_blank_pages"] == [2]
     assert result["pages"][1]["alphanumeric_characters"] == 1
+    assert len(calls) == 1
 
 
 def test_pdf_page_content_audit_is_explicitly_unavailable_without_extractor(tmp_path, monkeypatch):

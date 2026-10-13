@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "recorded_at": "2026-09-01T18:21:46.5822558+07:00",
+  "recorded_at": "2026-10-13T17:18:24.567+07:00",
   "environment": {
     "platform": "Windows",
     "interpreter": "D:\\Download\\WordAssistant\\.venv\\Scripts\\python.exe",
@@ -30,13 +30,14 @@
   },
   "source_sha256": {
     "src/wordassistant/backends/word_native/backend.py": "7CA647FF45386F0475370A8A9B1AC06F8D514329D786A8AD2CE3A1FAD8A60449",
-    "src/wordassistant/backends/word_native/worker.py": "BD6D04E1E33E79DDF2632C2BDB0B66CE4F5DDD46F4D957A6A9C10AA2A44FA608",
+    "src/wordassistant/backends/word_native/worker.py": "C5D6E6E06C92A92F094DC27F580CD0113FF603E1A7CA4E97A7102D433DC86D36",
     "tests/native_word/test_native_live_operations.py": "1410C1D6FC48D5D1995D157EAE3598AA1D7B7B01BC55A301CF92129E53080704",
     "tests/native_word/test_native_field_freshness.py": "5ED4F8DFD85C0E7EBB7DF28458BEDEB3054A423D661E3E30B79AE69BD9B3BA60"
   },
   "limitations": [
     "This is hash-bound local release evidence, not a cryptographically signed attestation.",
     "The repository environment was provisioned through pip truststore with pywin32 312, setuptools 84.0.0, and wheel 0.48.0 before this run.",
-    "The docx-mcp advanced adapter is separate from the Word-native COM backend and was not operational in this run."
+    "The docx-mcp advanced adapter is separate from the Word-native COM backend and was not operational in this run.",
+    "After this repeated operation run, the combined native field-verification and Word PDF-render path also passed one isolated smoke test on a synthetic one-page DOCX; field and render status were PASS, engine was Word 15.0."
   ]
 }

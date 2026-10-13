@@ -76,6 +76,24 @@ def test_page_render_falls_back_to_packaged_pdfium(tmp_path):
     assert saved == ["page-1.png", "page-2.png"]
 
 
+def test_successful_poppler_pngs_are_validated_once(tmp_path, monkeypatch):
+    source = tmp_path / "one.pdf"
+    source.write_bytes(b"%PDF")
+    def fake_run(command, **kwargs):
+        _write_test_png(Path(command[-1]).with_name("page-1.png"))
+        return MagicMock(returncode=0, stdout="", stderr="")
+    calls = []
+    original = __import__("wordassistant.document.render", fromlist=["_validate_png_page_set"])._validate_png_page_set
+    def count_validation(pages):
+        calls.append(tuple(pages))
+        return original(pages)
+    monkeypatch.setattr("wordassistant.document.render.shutil.which", lambda _: "pdftoppm")
+    monkeypatch.setattr("wordassistant.document.render.subprocess.run", fake_run)
+    monkeypatch.setattr("wordassistant.document.render._validate_png_page_set", count_validation)
+    render_pdf_pages(source)
+    assert len(calls) == 1
+
+
 def test_packaged_pdfium_fallback_renders_a_real_pdf(tmp_path):
     from PIL import Image
 

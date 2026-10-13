@@ -11,6 +11,7 @@ from typing import Any
 
 from .doctor import status
 from .document.structure import index_docx, inspect_document
+from .document.captions import audit_captions
 from .context.retrieve import build_context
 from .profiles.loader import (
     load_profile,
@@ -111,6 +112,30 @@ def _write_json_atomic(path: str | Path, payload: Any) -> Path:
         if temporary_name and Path(temporary_name).exists():
             Path(temporary_name).unlink()
 
+
+def _assert_report_output_is_distinct(
+    report_output: str | Path,
+    source: str | Path,
+    report: dict,
+    reuse_report: str | Path | None = None,
+) -> None:
+    destination = Path(report_output).expanduser().resolve()
+    protected = {Path(source).expanduser().resolve()}
+    if reuse_report:
+        protected.add(Path(reuse_report).expanduser().resolve())
+    render = report.get('render') or {}
+    if render.get('pdf_path'):
+        protected.add(Path(render['pdf_path']).expanduser().resolve())
+    protected.update(
+        Path(image).expanduser().resolve()
+        for image in render.get('page_images', [])
+    )
+    normalized = {os.path.normcase(str(path)) for path in protected}
+    if os.path.normcase(str(destination)) in normalized:
+        raise ValueError(
+            "--report-output must not overwrite the source DOCX, reuse report, "
+            "rendered PDF, or rendered page image."
+        )
 def _resolve_evidence_registry(path_or_ws: str | None = None) -> Path:
     if path_or_ws:
         p = Path(path_or_ws)
@@ -242,6 +267,9 @@ def parser() -> argparse.ArgumentParser:
     ver.add_argument('--native-fields', action='store_true', help='Reopen, update, and persist fields through Microsoft Word during verification')
     ver.add_argument('--visual-reviewed', action='store_true', help='Attest that every rendered page image was reviewed after a successful content audit')
     ver.add_argument('--visual-review-token', default=None, help='Token from the current visual_review_challenge; binds review to exact page-image hashes')
+    ver.add_argument('--reuse-render-report', default=None, help='Reuse verified PDF/page artifacts from a prior full verify report (no render)')
+    ver.add_argument('--report-output', default=None, help='Write the complete verify report atomically to this path')
+    ver.add_argument('--summary', action='store_true', help='Print a compact summary; requires --report-output')
     ver.add_argument('--delivery', action='store_true', help='Require the complete native render and visual-review delivery gate')
     ver.add_argument('--json', action='store_true')
 
@@ -408,7 +436,7 @@ def parser() -> argparse.ArgumentParser:
         'page-number': 'Configure or inspect page numbering',
         'field': 'Insert, inspect, update, lock, or remove fields',
         'toc': 'Insert or update TOC, LOF, or LOT fields',
-        'caption': 'Insert Word captions',
+        'caption': 'Audit captions or insert Word captions',
         'reference': 'Manage bookmarks, hyperlinks, cross-references, and citations',
         'comment': 'Manage Word-native comments',
         'revision': 'Manage Word-native tracked changes',
@@ -555,6 +583,20 @@ def run(args: list[str] | None = None) -> int:
                 inv['outline_preview'] = outline[:100]
                 inv['outline_preview_truncated'] = len(outline) > 100
             _print(inv, a.json)
+            return 0
+
+        if a.cmd == 'caption' and a.action == 'audit':
+            if (
+                a.output is not None
+                or a.selector is not None
+                or a.options != '{}'
+                or a.dry_run
+                or a.checkpoint is not None
+            ):
+                raise ValueError(
+                    "caption audit is read-only and does not accept mutation options"
+                )
+            _print(audit_captions(a.file), a.json)
             return 0
 
         if a.cmd == 'context':
@@ -761,8 +803,10 @@ def run(args: list[str] | None = None) -> int:
             return 0 if res.valid else 2
 
         if a.cmd == 'verify':
-            if a.visual_reviewed and not a.render:
-                raise ValueError("--visual-reviewed requires --render")
+            if a.summary and not a.report_output:
+                raise ValueError("--summary requires --report-output")
+            if a.visual_reviewed and not a.render and not a.reuse_render_report:
+                raise ValueError("--visual-reviewed requires --render or --reuse-render-report")
             if a.visual_review_token and not a.visual_reviewed:
                 raise ValueError("--visual-review-token requires --visual-reviewed")
             ws_cfg = load_project_config(Path(a.file).parent)
@@ -771,18 +815,23 @@ def run(args: list[str] | None = None) -> int:
             
             prof = resolve_profile(eff_prof, start_path=Path(a.file).parent)
             inv = inspect_document(a.file)
-            verify_renderer = (
-                render_pdf
-                if render_pdf is not render_document and a.engine == 'auto'
-                else lambda path, output_dir=None: _render_via_execution_service(
+            if a.engine == 'auto' and render_pdf is render_document:
+                # Preserve the default renderer inside verify_document so it
+                # can combine native field verification and PDF export.
+                verify_renderer = None
+            elif a.engine == 'auto':
+                # Compatibility hook used by callers that inject cli.render_pdf.
+                verify_renderer = render_pdf
+            else:
+                verify_renderer = lambda path, output_dir=None: _render_via_execution_service(
                     path, output_dir=output_dir, engine=a.engine
                 )
-            )
             summary = verify_document(
                 a.file, profile=prof, variant_name=eff_var, render=a.render,
                 renderer=verify_renderer, native_fields=a.native_fields,
                 visual_reviewed=a.visual_reviewed,
                 visual_review_token=a.visual_review_token,
+                reuse_render_report=a.reuse_render_report,
             )
             summary.update({
                 'file': str(a.file),
@@ -799,7 +848,41 @@ def run(args: list[str] | None = None) -> int:
             })
             if not a.render and summary['render_status'] == 'NOT_REQUESTED':
                 summary['render_status'] = 'SKIPPED'
-            _print(summary, a.json)
+            if a.report_output:
+                _assert_report_output_is_distinct(
+                    a.report_output, a.file, summary, a.reuse_render_report
+                )
+                report_path = _write_json_atomic(a.report_output, summary)
+                report_bytes = report_path.read_bytes()
+                if a.summary:
+                    compact = {
+                        key: summary.get(key) for key in (
+                            'overall_status', 'delivery_status', 'delivery_gates',
+                            'structural_status', 'format_status', 'numbering_status',
+                            'table_geometry_status', 'field_structure_status',
+                            'field_freshness_status', 'field_evaluation_status',
+                            'render_status', 'native_word_status', 'visual_status',
+                            'manual_review_required', 'issues', 'inventory', 'render',
+                            'visual_review_challenge', 'visual_review_reuse',
+                            'render_reuse_manifest',
+                        ) if key in summary
+                    }
+                    compact.pop('render_reuse_manifest', None)
+                    if 'render' in compact and isinstance(compact['render'], dict):
+                        compact['render'] = {k: v for k, v in compact['render'].items() if k != 'page_images' and k != 'page_content_audit'}
+                    if 'visual_review_challenge' in compact:
+                        challenge = compact['visual_review_challenge']
+                        compact['visual_review_challenge'] = {
+                            key: challenge.get(key)
+                            for key in ('token', 'page_count', 'token_scope')
+                            if key in challenge
+                        }
+                    compact.update({'report_path': str(report_path), 'report_sha256': hashlib.sha256(report_bytes).hexdigest()})
+                    _print(compact, True)
+                else:
+                    _print(summary, a.json)
+            else:
+                _print(summary, a.json)
             final_status = (
                 summary['delivery_status'] if a.delivery else summary['overall_status']
             )

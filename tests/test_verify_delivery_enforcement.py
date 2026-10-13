@@ -1,9 +1,74 @@
 from __future__ import annotations
 from pathlib import Path
+import pytest
 from docx import Document
 from wordassistant.document.scaffold import scaffold_document
 from wordassistant.document.validate import validate_document
 from wordassistant.profiles.loader import resolve_profile
+
+
+def test_verify_summary_writes_full_report_and_reports_hash(tmp_path, monkeypatch, capsys):
+    import hashlib
+    import json
+    from wordassistant import cli
+
+    doc_path = tmp_path / "report.docx"
+    Document().save(doc_path)
+    report_path = tmp_path / "full.json"
+    monkeypatch.setattr(cli, "load_project_config", lambda _: {})
+    monkeypatch.setattr(cli, "resolve_profile", lambda *args, **kwargs: type("Profile", (), {"profile_id": "generic"})())
+    monkeypatch.setattr(cli, "inspect_document", lambda _: {"paragraphs": 1, "tables": 0, "sections": 1, "images": 0, "fields": 0})
+    monkeypatch.setattr(cli, "verify_document", lambda *args, **kwargs: {
+        "overall_status": "PASS", "delivery_status": "INCOMPLETE", "delivery_gates": {},
+        "format_status": "PASS", "issues": [], "render_status": "NOT_REQUESTED",
+        "native_field_results": [{"result": "private-detail"}],
+    })
+    result = cli.run(["verify", str(doc_path), "--summary", "--report-output", str(report_path), "--json"])
+    assert result == 0
+    compact = json.loads(capsys.readouterr().out)
+    assert compact["report_path"] == str(report_path.resolve())
+    assert compact["report_sha256"] == hashlib.sha256(report_path.read_bytes()).hexdigest()
+    assert "native_field_results" not in compact
+    assert "native_field_results" in json.loads(report_path.read_text(encoding="utf-8"))
+
+
+@pytest.mark.parametrize("collision", ["source", "reuse", "pdf", "image"])
+def test_verify_report_output_rejects_protected_path_collisions(
+    tmp_path, monkeypatch, capsys, collision
+):
+    import json
+    from wordassistant import cli
+
+    source = tmp_path / "report.docx"
+    Document().save(source)
+    reuse_report = tmp_path / "reuse.json"
+    reuse_report.write_text("{}", encoding="utf-8")
+    pdf = tmp_path / "rendered.pdf"
+    pdf.write_bytes(b"%PDF")
+    image = tmp_path / "page-1.png"
+    image.write_bytes(b"png")
+    output = {
+        "source": source,
+        "reuse": reuse_report,
+        "pdf": pdf,
+        "image": image,
+    }[collision]
+    before = output.read_bytes()
+    monkeypatch.setattr(cli, "load_project_config", lambda _: {})
+    monkeypatch.setattr(cli, "resolve_profile", lambda *args, **kwargs: type("Profile", (), {"profile_id": "generic"})())
+    monkeypatch.setattr(cli, "inspect_document", lambda _: {"paragraphs": 1, "tables": 0, "sections": 1, "images": 0, "fields": 0})
+    monkeypatch.setattr(cli, "verify_document", lambda *args, **kwargs: {
+        "overall_status": "PASS", "delivery_status": "INCOMPLETE", "delivery_gates": {},
+        "format_status": "PASS", "issues": [], "render_status": "PASS",
+        "render": {"pdf_path": str(pdf), "page_images": [str(image)]},
+    })
+    result = cli.run([
+        "verify", str(source), "--report-output", str(output),
+        "--reuse-render-report", str(reuse_report), "--json",
+    ])
+    assert result == 1
+    assert "must not overwrite" in json.loads(capsys.readouterr().out)["error"]["message"]
+    assert output.read_bytes() == before
 
 def test_verify_fails_when_required_front_matter_missing(tmp_path: Path):
     doc_path = tmp_path / "report.docx"
