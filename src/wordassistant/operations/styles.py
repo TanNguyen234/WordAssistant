@@ -1,11 +1,12 @@
 from __future__ import annotations
 
 from pathlib import Path
+import re
 from typing import Any
 
 from docx import Document
 from docx.enum.style import WD_STYLE_TYPE
-from docx.shared import Pt
+from docx.shared import Pt, RGBColor
 
 from ..document.fonts import set_word_font
 from ..selectors import Selector, resolve_paragraphs
@@ -115,6 +116,15 @@ def update_style(input_path, *, output_path, name, dry_run=False, **properties):
     for key in ("bold", "italic"):
         if key in properties:
             setattr(style.font, key, bool(properties[key]))
+    if "font_color" in properties:
+        value = str(properties["font_color"]).strip().lstrip("#")
+        if not re.fullmatch(r"[0-9A-Fa-f]{6}", value):
+            raise ValueError("font_color must be a six-digit RGB value")
+        style.font.color.rgb = RGBColor.from_string(value.upper())
+    if "left_indent_pt" in properties:
+        style.paragraph_format.left_indent = Pt(float(properties["left_indent_pt"]))
+    if "first_line_indent_pt" in properties:
+        style.paragraph_format.first_line_indent = Pt(float(properties["first_line_indent_pt"]))
     if not dry_run:
         atomic_save(document, output_path)
     return _result("style.update", output_path, {"style": name}, dry_run)

@@ -72,6 +72,22 @@ def test_capabilities_explain_core_and_advanced(capsys):
     table_example = payload['operation_contracts']['table.create']['options_example']
     assert table_example == {'rows': 2, 'columns': 2}
     assert payload['operation_contracts']['image.insert']['options_example']['image_path'] == 'IMAGE.png'
+    caption_separator = next(
+        option for option in payload['operation_contracts']['image.insert']['options']
+        if option['name'] == 'caption_separator'
+    )
+    assert caption_separator['default'] == '.'
+    border_inset = next(
+        option for option in payload['operation_contracts']['section.layout']['options']
+        if option['name'] == 'page_border_space_pt'
+    )
+    assert border_inset['type'] == 'number'
+    style_options = {
+        option['name']: option
+        for option in payload['operation_contracts']['style.update']['options']
+    }
+    assert style_options['font_color']['type'] == 'string'
+    assert style_options['left_indent_pt']['type'] == 'number'
     assert payload['operation_contracts']['image.resize']['options_example'] == {
         'image_index': 0, 'width_cm': 5.0
     }

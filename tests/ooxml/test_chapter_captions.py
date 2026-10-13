@@ -9,6 +9,7 @@ from PIL import Image
 
 from wordassistant.operations.fields import insert_caption, inspect_fields
 from wordassistant.operations.images import insert_image
+from wordassistant.operations.lists import apply_heading_numbering
 from wordassistant.profiles.loader import load_profile, ProfileError
 
 
@@ -83,6 +84,87 @@ def test_image_uses_same_chapter_contract(tmp_path):
     assert inspect_fields(output)[0]['instruction'] == 'SEQ Hinh \\* ARABIC \\s 1'
     assert result.data['caption_chapter_number'] == 3
     assert any(p.text.startswith('HÌNH 3.') for p in Document(output).paragraphs)
+
+
+def test_image_caption_uses_numeric_chapter_and_colon(tmp_path):
+    source, output, image = tmp_path / 'source.docx', tmp_path / 'output.docx', tmp_path / 'image.png'
+    Image.new('RGB', (10, 10)).save(image)
+    doc = Document()
+    doc.add_heading('5 LUỒNG NGHIỆP VỤ QUẢN TRỊ VÀ KHO', 1)
+    doc.save(source)
+
+    insert_image(source, output_path=output, image_path=image, caption='Tồn kho',
+                 caption_label='Hình', caption_sequence='Hinh', caption_chapter_number=5,
+                 caption_separator=':')
+
+    caption = next(p for p in Document(output).paragraphs if p.style.name == 'Caption')
+    assert ''.join(caption._p.xpath('.//w:t/text()')) == 'Hình 5.1: Tồn kho'
+
+
+def test_numbered_heading_caption_accepts_colon_separator(tmp_path):
+    source, output = tmp_path / 'source.docx', tmp_path / 'output.docx'
+    doc = Document()
+    doc.add_heading('4 LUỒNG NGHIỆP VỤ KHÁCH HÀNG', 1)
+    doc.add_paragraph('screen anchor')
+    doc.save(source)
+
+    insert_caption(source, output_path=output, label='Hình', title='Giao diện trang đăng nhập',
+                   sequence_id='Hinh', chapter_number=4, caption_separator=':',
+                   selector={'type': 'text', 'text': 'screen anchor'})
+
+    fields = inspect_fields(output)
+    caption = next(p for p in Document(output).paragraphs if p.style.name == 'Caption')
+    visible = ''.join(caption._p.xpath('.//w:t/text()'))
+    assert fields[0]['instruction'] == 'SEQ Hinh \\* ARABIC \\s 1'
+    assert visible == 'Hình 4.1: Giao diện trang đăng nhập'
+
+
+def test_caption_number_verifies_automatic_multilevel_heading(tmp_path):
+    source, numbered, output = (
+        tmp_path / 'source.docx', tmp_path / 'numbered.docx', tmp_path / 'captioned.docx'
+    )
+    doc = Document()
+    doc.add_heading('Front matter', 1)
+    doc.add_heading('CƠ SỞ LÝ THUYẾT', 1)
+    doc.add_heading('KHẢO SÁT TỔNG QUAN', 1)
+    doc.add_heading('PHÂN TÍCH MÔ HÌNH', 1)
+    doc.add_heading('LUỒNG NGHIỆP VỤ KHÁCH HÀNG', 1)
+    doc.add_paragraph('screen anchor')
+    doc.add_heading('Appendix', 1)
+    doc.save(source)
+
+    apply_heading_numbering(
+        source,
+        output_path=numbered,
+        levels=3,
+        start_text='CƠ SỞ LÝ THUYẾT',
+        end_text='Appendix',
+    )
+    insert_caption(
+        numbered,
+        output_path=output,
+        label='Hình',
+        title='Giao diện danh mục',
+        sequence_id='Hinh',
+        chapter_number=4,
+        caption_separator=':',
+        selector={'type': 'text', 'text': 'screen anchor'},
+    )
+
+    caption = next(p for p in Document(output).paragraphs if p.style.name == 'Caption')
+    assert ''.join(caption._p.xpath('.//w:t/text()')) == 'Hình 4.1: Giao diện danh mục'
+    assert inspect_fields(output)[0]['instruction'] == 'SEQ Hinh \\* ARABIC \\s 1'
+
+
+@pytest.mark.parametrize('separator', ['-', ';', ''])
+def test_caption_rejects_unsupported_separator(tmp_path, separator):
+    source, output = tmp_path / 'source.docx', tmp_path / 'output.docx'
+    Document().save(source)
+    with pytest.raises(ValueError, match='separator'):
+        insert_caption(source, output_path=output, label='Hình', title='Test',
+                       sequence_id='Hinh',
+                       caption_separator=separator)
+    assert not output.exists()
 
 
 def test_generic_caption_remains_global(tmp_path):

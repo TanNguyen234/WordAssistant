@@ -91,6 +91,7 @@ _STRUCTURAL_TEST_GROUPS = {
         "heading.numbering_inspect",
     },
     "tests/ooxml/test_section_layout.py": {"section.add", "section.layout"},
+    "tests/ooxml/test_styles.py": {"style.update"},
     "tests/ooxml/test_page_numbering_semantics.py": {
         "page-number.apply", "page-number.inspect",
     },

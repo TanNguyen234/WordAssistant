@@ -38,3 +38,20 @@ def test_agent_manifest_has_fail_closed_delivery_gates():
     assert packaged["delivery_gates"] == gates
     assert packaged["delivery_completion_sequence"] == manifest["delivery_completion_sequence"]
     assert "visual-review-token" in gates["verification"] or "visual-review-token" in manifest["delivery_completion_sequence"]["final_pass"]
+
+
+def test_agent_manifest_requires_course_essay_evidence_matrix():
+    manifest = json.loads((ROOT / "wordassistant-agent.json").read_text(encoding="utf-8"))
+    gate = manifest["delivery_gates"]["course_essay_evidence_matrix"].casefold()
+
+    for required_evidence in (
+        "every database table",
+        "sample rows",
+        "every function",
+        "1366 px",
+        "embedded",
+        "12 mm",
+        "multilevel numbering",
+        "hình x.x",
+    ):
+        assert required_evidence in gate

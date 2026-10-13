@@ -110,6 +110,7 @@ OPERATION_OPTION_OVERRIDES = {
         ("caption_label", False, "Figure", "string"),
         ("caption_sequence", False, None, "string"),
         ("caption_chapter_number", False, None, "integer"),
+        ("caption_separator", False, ".", "string"),
         ("placement", False, "after", "string"),
         ("alignment", False, "center", "string"),
         ("preserve_aspect_ratio", False, True, "boolean"),
@@ -151,6 +152,9 @@ OPERATION_OPTION_OVERRIDES = {
         ("font_size_pt", False, None, "number"),
         ("bold", False, None, "boolean"),
         ("italic", False, None, "boolean"),
+        ("font_color", False, None, "string"),
+        ("left_indent_pt", False, None, "number"),
+        ("first_line_indent_pt", False, None, "number"),
     ],
     "properties.set": [
         ("custom", False, None, "object"),

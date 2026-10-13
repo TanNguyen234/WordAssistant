@@ -1,10 +1,59 @@
 import pytest
 from docx import Document
 from docx.enum.section import WD_ORIENT, WD_SECTION_START
+from docx.oxml import OxmlElement
+from docx.oxml.ns import qn
 from docx.shared import Cm
 
 from wordassistant.operations.sections import add_section_break, set_section_layout
 from wordassistant.operations.page_numbers import configure_page_numbers
+
+
+def _add_first_page_border(section, space_points=6):
+    borders = OxmlElement("w:pgBorders")
+    borders.set(qn("w:offsetFrom"), "page")
+    borders.set(qn("w:display"), "firstPage")
+    for edge_name in ("top", "left", "bottom", "right"):
+        edge = OxmlElement(f"w:{edge_name}")
+        edge.set(qn("w:val"), "single")
+        edge.set(qn("w:sz"), "8")
+        edge.set(qn("w:space"), str(space_points))
+        borders.append(edge)
+    section._sectPr.append(borders)
+
+
+def test_section_layout_can_inset_existing_first_page_frame(tmp_path):
+    source = tmp_path / "source.docx"
+    document = Document()
+    _add_first_page_border(document.sections[0])
+    document.add_paragraph("Cover")
+    document.save(source)
+
+    result = set_section_layout(
+        source,
+        output_path=tmp_path / "inset.docx",
+        section_index=0,
+        page_border_space_pt=34,
+    )
+
+    borders = Document(result.output_path).sections[0]._sectPr.find(qn("w:pgBorders"))
+    assert borders.get(qn("w:offsetFrom")) == "page"
+    assert borders.get(qn("w:display")) == "firstPage"
+    assert {borders.find(qn(f"w:{edge}")).get(qn("w:space")) for edge in ("top", "left", "bottom", "right")} == {"34"}
+
+
+def test_section_layout_requires_existing_frame_to_set_inset(tmp_path):
+    source = tmp_path / "source.docx"
+    Document().save(source)
+
+    with pytest.raises(ValueError, match="page border"):
+        set_section_layout(
+            source,
+            output_path=tmp_path / "inset.docx",
+            section_index=0,
+            page_border_space_pt=34,
+        )
+    assert not (tmp_path / "inset.docx").exists()
 
 
 def test_portrait_landscape_portrait_roundtrip_with_columns_and_mirroring(tmp_path):

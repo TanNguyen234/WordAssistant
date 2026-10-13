@@ -9,7 +9,7 @@ from docx import Document
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_TAB_ALIGNMENT
 from docx.enum.style import WD_STYLE_TYPE
 from docx.enum.section import WD_ORIENT, WD_SECTION_START
-from docx.shared import Cm, Pt
+from docx.shared import Cm, Pt, RGBColor
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 from wordassistant.document.fonts import set_word_font
@@ -120,6 +120,8 @@ def _apply_styles(d: Document, v: Variant):
                 style_obj.font.bold = s_spec['bold']
             if 'italic' in s_spec:
                 style_obj.font.italic = s_spec['italic']
+            if 'font_color' in s_spec:
+                style_obj.font.color.rgb = RGBColor.from_string(s_spec['font_color'])
             if 'alignment' in s_spec:
                 align_map = {
                     'left': WD_ALIGN_PARAGRAPH.LEFT,
@@ -135,6 +137,10 @@ def _apply_styles(d: Document, v: Variant):
                 style_obj.paragraph_format.space_before = Pt(s_spec['space_before_pt'])
             if 'space_after_pt' in s_spec:
                 style_obj.paragraph_format.space_after = Pt(s_spec['space_after_pt'])
+            if 'left_indent_pt' in s_spec:
+                style_obj.paragraph_format.left_indent = Pt(s_spec['left_indent_pt'])
+            if 'first_line_indent_pt' in s_spec:
+                style_obj.paragraph_format.first_line_indent = Pt(s_spec['first_line_indent_pt'])
 
 
 def _apply_cover_border(section, cover_spec):

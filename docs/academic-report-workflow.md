@@ -29,6 +29,22 @@ wordassistant edit replace report.docx --output report-revised.docx `
 
 Without `--selector`, a text replacement can affect matching text throughout the document. Save the final operation to a separate output copy after reviewing the dry-run result.
 
+### Course-essay acceptance matrix (required before composition)
+
+For a user-defined course essay, write a requirement/evidence matrix before creating or editing the DOCX. Keep the user's profile separate from school-specific profiles in this repository; do not silently apply HCMUNRE rules to another school.
+
+When an older DOCX is supplied as a read-only reference, record the permitted facts and assets and keep its chapter order, layout, and stale application screenshots out of the new report unless the user explicitly requests them. Use current project/database evidence for the implementation being described.
+
+The matrix must include:
+
+- **Database coverage:** every current database table, its purpose, all columns and SQL types, primary and foreign keys, nullability, defaults, unique constraints, indexes, relationships, and representative sample rows. Mark unavailable evidence; never infer schema details. Remove credentials, tokens, and unnecessary personal data from samples.
+- **Interface coverage:** every distinct implemented function and each applicable role/persona. Capture fresh desktop screenshots at 1366 px wide or above, showing the whole browser tab content at normal web size. Do not use mobile emulation, cropped fragments, or screenshots from the old reference. Embed every required image in the DOCX and track its route, persona, state, resolution, and caption.
+- **Demo content and role context:** prefer records confirmed as demo data or synthetic fixtures and show them in context without forced masks. A shipper delivery view should make the recipient, full destination, item names and quantities, shipment status, and call/map actions readable. If a live database record is not confirmed as demo data, use a synthetic fixture instead of exposing it as an example. When authentication blocks a live route, render the same project template with a verified fixture and record the screenshot source and state in the matrix.
+- **Cover and typography:** when two covers are required, verify both are distinct. Keep a cover frame visibly inset (target at least 12 mm from the page edge); for an existing page-relative frame, `section.layout` accepts `page_border_space_pt` to set all four border edges. Use real Word heading styles with consistent level indentation and true multilevel numbering when requested. `style.update` supports font color and paragraph indents for existing styles. Apply the specified body size and black heading/caption text when required.
+- **Pagination and captions:** list every required page boundary, including declarations and major sections. Respect the requested minimum length without an artificial upper limit or filler. When the caption form is `Hình x.x: Tên hình`, keep only that title in the caption.
+
+Do not begin DOCX mutations while a required matrix row has no source or planned evidence. Before delivery, map every database table to its schema and sample-data content, every requested feature/persona to an image embedded in the saved DOCX, and every layout requirement to a rendered-page check. Generic `validate`/`verify` success does not replace those content checks.
+
 ## 2. Create the editable Word scaffold
 
 Copy `examples/hcmunre/report_metadata.example.json`, fill only known metadata, and pass it to the scaffold command:
@@ -48,14 +64,18 @@ Do not leave the bracketed example values in a submitted report. The generated d
 
 For images and tables, read `captions` from `wordassistant profile show hcm-university-dacn-2026-2027 --json`. This profile maps the visible labels `HÌNH`, `SƠ ĐỒ`, and `BẢNG` to Word sequence identifiers `Hinh`, `SoDo`, and `Bang`. Insert captions with both the visible `label` and matching `sequence_id` (or image `caption_label` and `caption_sequence`) so the list fields collect the captions.
 
-The guide requires chapter.sequence numbering (for example `HÌNH 2.1`).
+The HCMUNRE guide requires chapter.sequence numbering (for example `HÌNH 2.1`).
 Supply `chapter_number` for standalone captions or `caption_chapter_number`
 for image captions. The nearest preceding built-in `Heading 1` must start
-with the matching literal `CHƯƠNG N` and have no automatic numbering.
-The operation checks this prerequisite and inserts the chapter prefix plus
+with the matching literal `CHƯƠNG N` or a leading chapter numeral `N`, or have
+a valid decimal automatic Heading 1 number. The operation verifies that number
+and inserts the verified chapter prefix plus
 `SEQ Hinh \\* ARABIC \\s 1` (or `SoDo` / `Bang`); Word resets the sequence
-after each Heading 1. These options are explicit: selecting the profile alone
-does not convert existing captions or automatically add chapter numbers.
+after each Heading 1. For a user-requested colon form such as `Hình 2.1: Tên
+hình`, pass `caption_separator: ":"` and use the user's requested label; the
+default remains a period for compatibility with profiles that require it.
+These options are explicit: selecting a profile alone does not convert
+existing captions or automatically add chapter numbers.
 
 ```powershell
 wordassistant caption insert report.docx --output captioned.docx `
@@ -63,14 +83,14 @@ wordassistant caption insert report.docx --output captioned.docx `
   --options '{"label":"BẢNG","sequence_id":"Bang","title":"[Verified table title]","chapter_number":2}' --json
 wordassistant image insert captioned.docx --output illustrated.docx `
   --selector '{"type":"text","text":"[Exact paragraph in chapter 2]"}' `
-  --options '{"image_path":"figure.png","caption":"[Verified figure title]","caption_label":"HÌNH","caption_sequence":"Hinh","caption_chapter_number":2}' --json
+  --options '{"image_path":"figure.png","caption":"[Verified figure title]","caption_label":"HÌNH","caption_sequence":"Hinh","caption_chapter_number":2,"caption_separator":":"}' --json
 ```
 
 Update fields and save through Word before delivery. Chapter prefixes are
-verified literal text; reverify them after renumbering headings or moving
-captions across chapters. Automatically numbered chapters need a separately
-validated STYLEREF workflow. OOXML tests verify field instructions and failure
-gates; they do not establish Word's updated display or rendered appearance.
+verified against the current literal or automatic Heading 1 number; reverify
+them after renumbering headings or moving captions across chapters. OOXML
+tests verify field instructions and failure gates; they do not establish
+Word's updated display or rendered appearance.
 
 ## 3. Find, download, and review sources
 

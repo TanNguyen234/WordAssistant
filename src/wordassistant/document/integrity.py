@@ -55,6 +55,26 @@ _BIBLIOGRAPHY_LANGUAGE_HEADING = re.compile(
 )
 _QUOTE = re.compile(r'"([^"\n]+)"|“([^”\n]+)”')
 _NUMBER_OR_PERCENT = re.compile(r"(?<!\w)\d+(?:[.,]\d+)?(?:\s*%|\b)")
+_STRUCTURAL_NUMBER_PREFIX = re.compile(
+    r"^\s*(?:hình|sơ đồ|bảng|chương|mục|phụ lục|figure|diagram|table|chapter|section)\s+\d+(?:\.\d+)*(?:\s*[:.)-]|$)",
+    re.IGNORECASE,
+)
+_NUMBERED_LIST_PREFIX = re.compile(r"^\s*\d+(?:\.\d+)*[.)]?\s+")
+_SOFTWARE_VERSION = re.compile(
+    r"\b(?:Java|JDK|JRE|Spring(?:\s+Boot)?|Tomcat|SQL\s+Server|Python|Node(?:\.js)?|PostgreSQL|MySQL|Hibernate)\s+\d+(?:\.\d+)*(?:-[\w.]+)?\b",
+    re.IGNORECASE,
+)
+_QUANTITATIVE_UNIT = re.compile(
+    r"(?:%|\bpercent(?:age)?\b|phần\s*trăm|\b(?:ms|milliseconds?|seconds?|minutes?|hours?|days?|bytes?|KB|MB|GB|TB|VND|USD)\b|đồng|giây|phút|giờ|lượt)",
+    re.IGNORECASE,
+)
+_QUANTITATIVE_CONTEXT = re.compile(
+    r"\b(?:tỷ\s*lệ|số\s*lượng|tổng\s*số|trung\s*bình|tăng|giảm|cao\s*hơn|thấp\s*hơn|"
+    r"đạt|chiếm|người\s*dùng|user|users|đơn\s*hàng|giao\s*dịch|bản\s*ghi|mẫu\s*thử|"
+    r"yêu\s*cầu|requests?|throughput|latency|hiệu\s*năng|thời\s*gian|tốc\s*độ|"
+    r"average|total|count|measured|capacity|maximum|minimum)\b",
+    re.IGNORECASE,
+)
 _PLACEHOLDER = re.compile(
     r"(?:\b(?:TBD|TODO|FIXME|LOREM\s+IPSUM)\b|"
     r"\[(?:INSERT|ADD|PLACEHOLDER|CITATION\s+NEEDED)[^\]]*\]|"
@@ -65,10 +85,33 @@ _DISCLOSURE = re.compile(
     r"(?:AI[- ]use disclosure|declaration of (?:generative )?AI use|"
     r"tuyên bố (?:về )?việc sử dụng (?:trí tuệ nhân tạo|AI)|"
     r"công bố (?:việc )?sử dụng (?:trí tuệ nhân tạo|AI)|"
-    r"generative AI (?:was|was not|has been|has not been) used)",
+    r"generative AI (?:was|was not|has been|has not been) used|"
+    r"(?:wordassistant|công cụ\s+(?:AI|trí tuệ nhân tạo))[^.!?\n]{0,140}"
+    r"(?:được dùng|đã dùng|được sử dụng|hỗ trợ|soạn thảo|biên tập|rà soát))",
     re.IGNORECASE,
 )
 _WORD = re.compile(r"[^\W_]+(?:[-'][^\W_]+)*", re.UNICODE)
+_REPETITION_STOPWORDS = {
+    "a", "an", "and", "are", "as", "at", "be", "been", "being", "by", "for",
+    "from", "in", "into", "is", "it", "of", "on", "or", "that", "the", "their",
+    "this", "to", "was", "were", "with", "within", "without", "part", "same",
+    "và", "là", "các", "của", "cho", "được", "để", "đến", "đang", "đã", "khi",
+    "một", "những", "này", "như", "ở", "qua", "trong", "từ", "với", "theo", "về",
+    "cũng", "có", "thì", "sẽ", "sau", "trước", "tại", "phần", "cùng", "mỗi",
+}
+
+
+def _has_quantitative_signal(text: str, style: str, story: str) -> bool:
+    if story == "table" or style.casefold().startswith(("caption", "toc ")):
+        return False
+    if not _NUMBER_OR_PERCENT.search(text):
+        return False
+    if _STRUCTURAL_NUMBER_PREFIX.match(text) or _NUMBERED_LIST_PREFIX.match(text):
+        return False
+    candidate = _SOFTWARE_VERSION.sub("", text)
+    if not _NUMBER_OR_PERCENT.search(candidate):
+        return False
+    return bool(_QUANTITATIVE_UNIT.search(candidate) or _QUANTITATIVE_CONTEXT.search(candidate))
 
 
 def _hash_file(path: Path) -> str:
@@ -592,8 +635,8 @@ def audit_integrity(
             index in bibliography_indexes
             or not text
             or record["style"].lower().startswith("heading")
-            or not _NUMBER_OR_PERCENT.search(text)
             or _has_citation_marker(text)
+            or not _has_quantitative_signal(text, record["style"], record["story"])
         ):
             continue
         quantitative_findings.append(_location(record, excerpt=text[:220]))
@@ -601,15 +644,16 @@ def audit_integrity(
         "WARN" if quantitative_findings else "PASS",
         quantitative_findings,
         classification="HUMAN_REVIEW_HEURISTIC_NOT_PROOF",
+        scope="Explicit units, percentages, measurements, or count/performance context; structural labels, software versions, and database cells are excluded.",
     )
 
     prose_records = [
         record
         for index, record in enumerate(records)
         if index not in bibliography_indexes
-        and record["story"] in {"body", "table"}
+        and record["story"] == "body"
         and not record["style"].lower().startswith("heading")
-        and not record["style"].lower().startswith(("wa cover", "wa front matter"))
+        and not record["style"].lower().startswith(("wa cover", "wa front matter", "caption", "toc "))
     ]
     opening_locations: dict[str, list[dict[str, Any]]] = {}
     ngram_locations: dict[str, list[dict[str, Any]]] = {}
@@ -636,9 +680,24 @@ def audit_integrity(
                 {"kind": "repeated_sentence_opening", "text": opening, "occurrences": len(locations), "locations": locations[:10]}
             )
     for ngram, locations in sorted(ngram_locations.items()):
-        if len(locations) >= policy["repeated_ngram_minimum"]:
+        tokens = ngram.split()
+        meaningful_tokens = [token for token in tokens if token not in _REPETITION_STOPWORDS]
+        distinct_paragraphs = {
+            int(location["paragraph_index"])
+            for location in locations
+            if isinstance(location.get("paragraph_index"), int)
+        }
+        if (
+            len(meaningful_tokens) >= 3
+            and len(distinct_paragraphs) >= policy["repeated_ngram_minimum"]
+        ):
             repetition_findings.append(
-                {"kind": "repeated_ngram", "text": ngram, "occurrences": len(locations), "locations": locations[:10]}
+                {
+                    "kind": "repeated_ngram",
+                    "text": ngram,
+                    "occurrences": len(distinct_paragraphs),
+                    "locations": locations[:10],
+                }
             )
     gates["repetitive_prose_review"] = _gate(
         "WARN" if repetition_findings else "PASS",
@@ -646,6 +705,7 @@ def audit_integrity(
         classification="HUMAN_REVIEW_HEURISTIC_NOT_AI_DETECTION",
         finding_count_total=len(repetition_findings),
         ngram_size=policy["ngram_size"],
+        scope="Sentence openings and content-bearing phrases repeated across distinct body paragraphs; headings, captions, and table cells are excluded.",
     )
 
     placeholder_findings: list[dict[str, Any]] = []

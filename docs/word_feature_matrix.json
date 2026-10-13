@@ -2461,13 +2461,15 @@
       ],
       "minimum_fidelity": "high",
       "evidence": {
-        "structural": "UNVERIFIED",
+        "structural": "VERIFIED",
         "native_roundtrip": "NOT_APPLICABLE",
         "dynamic_result": "NOT_APPLICABLE",
         "visual": "NOT_APPLICABLE"
       },
       "evidence_sources": {
-        "structural": [],
+        "structural": [
+          "tests/ooxml/test_styles.py"
+        ],
         "native_roundtrip": [],
         "dynamic_result": [],
         "visual": []

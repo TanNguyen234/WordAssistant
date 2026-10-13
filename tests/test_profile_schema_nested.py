@@ -56,3 +56,39 @@ def test_reject_invalid_template_asset():
     p2["variants"]["default"]["template_asset"] = "something.txt"  # Not .docx
     with pytest.raises(ProfileError):
         validate_profile_dict(p2)
+
+
+def test_accept_style_color_and_heading_indentation():
+    profile = base_profile()
+    profile["variants"]["default"]["typography"]["styles"] = {
+        "heading2": {
+            "font_color": "000000",
+            "left_indent_pt": 18,
+            "first_line_indent_pt": -9,
+        }
+    }
+
+    parsed = validate_profile_dict(profile)
+
+    assert parsed.variant("default").typography.styles["heading2"]["font_color"] == "000000"
+
+
+@pytest.mark.parametrize("value", ["00000", "0000000", "GGGGGG", 123])
+def test_reject_invalid_style_font_color(value):
+    profile = base_profile()
+    profile["variants"]["default"]["typography"]["styles"] = {
+        "Caption": {"font_color": value}
+    }
+
+    with pytest.raises(ProfileError):
+        validate_profile_dict(profile)
+
+
+def test_reject_negative_style_left_indent():
+    profile = base_profile()
+    profile["variants"]["default"]["typography"]["styles"] = {
+        "Heading 2": {"left_indent_pt": -1}
+    }
+
+    with pytest.raises(ProfileError):
+        validate_profile_dict(profile)

@@ -4,6 +4,7 @@ from pathlib import Path
 import re
 import unicodedata
 from docx import Document
+from docx.oxml.ns import qn
 from wordassistant.profiles.loader import DocumentProfile, Variant
 
 @dataclass(frozen=True)
@@ -164,6 +165,55 @@ def _resolve_line_spacing(p, doc_default_ls: float | None) -> tuple[float | None
         return doc_default_ls, True
     return None, False
 
+
+def _profile_style_name(style_key: str) -> str:
+    key = style_key.strip()
+    heading_match = re.fullmatch(r"heading\s*([1-9])", key, re.IGNORECASE)
+    if heading_match:
+        return f"Heading {heading_match.group(1)}"
+    if key.casefold() == "title":
+        return "Title"
+    return key
+
+
+def _starts_new_page(document: Document, paragraph_index: int) -> bool:
+    paragraph = document.paragraphs[paragraph_index]
+    if paragraph.paragraph_format.page_break_before is True:
+        return True
+
+    previous = document.paragraphs[paragraph_index - 1] if paragraph_index > 0 else None
+    for candidate in (previous, paragraph):
+        if candidate is None:
+            continue
+        if any(
+            node.get(qn("w:type")) == "page"
+            for node in candidate._p.iter(qn("w:br"))
+        ):
+            return True
+        p_pr = candidate._p.pPr
+        section_properties = p_pr.sectPr if p_pr is not None else None
+        if section_properties is not None:
+            section_type = section_properties.type
+            if section_type is None or section_type.val in {"nextPage", "oddPage", "evenPage"}:
+                return True
+    return False
+
+
+def _paragraph_numbering(paragraph) -> tuple[int, int] | None:
+    properties = paragraph._p.pPr
+    numbering = properties.numPr if properties is not None else None
+    if numbering is None and paragraph.style is not None:
+        style_properties = paragraph.style._element.pPr
+        numbering = style_properties.numPr if style_properties is not None else None
+    if numbering is None or numbering.numId is None:
+        return None
+    try:
+        number_id = int(numbering.numId.val)
+        level = int(numbering.ilvl.val) if numbering.ilvl is not None else 0
+    except (TypeError, ValueError):
+        return None
+    return number_id, level
+
 def validate_document(
     path: str | Path,
     profile: DocumentProfile,
@@ -241,10 +291,10 @@ def validate_document(
     expected_size = v.typography.body_size_pt
     expected_ls = v.typography.line_spacing
     
-    body_paragraphs = []
+    body_paragraphs: list[tuple[int, object]] = []
     in_body = False or len(d.sections) == 1 or not any(x in v.front_matter for x in ('cover', 'inner_cover'))
     
-    for p in d.paragraphs:
+    for paragraph_index, p in enumerate(d.paragraphs):
         txt = p.text.strip()
         if not txt:
             continue
@@ -261,19 +311,22 @@ def validate_document(
             continue
         if txt.startswith('[') and txt.endswith(']'):
             continue
-        body_paragraphs.append(p)
+        body_paragraphs.append((paragraph_index, p))
         
     font_errors = 0
     size_errors = 0
     ls_errors = 0
     unresolved_warnings = 0
+    unresolved_examples: list[str] = []
     
     if not is_template_clone:
-        for p in body_paragraphs:
+        for paragraph_index, p in body_paragraphs:
+            unresolved_properties: set[str] = set()
             if expected_ls is not None:
                 actual_ls, ls_ok = _resolve_line_spacing(p, doc_default_ls)
                 if not ls_ok:
                     unresolved_warnings += 1
+                    unresolved_properties.add('line spacing')
                 elif actual_ls is not None and abs(actual_ls - expected_ls) > 0.15:
                     ls_errors += 1
                     
@@ -282,11 +335,13 @@ def validate_document(
                 font_name, font_ok = _resolve_run_font(p, p, doc_default_font)
                 if not font_ok:
                     unresolved_warnings += 1
+                    unresolved_properties.add('font')
                 elif font_name and font_name.lower() != expected_font:
                     font_errors += 1
                 size_val, size_ok = _resolve_run_size(p, p, doc_default_size)
                 if not size_ok:
                     unresolved_warnings += 1
+                    unresolved_properties.add('size')
                 elif size_val is not None and abs(size_val - expected_size) > 0.6:
                     size_errors += 1
             else:
@@ -294,14 +349,22 @@ def validate_document(
                     font_name, font_ok = _resolve_run_font(r, p, doc_default_font)
                     if not font_ok:
                         unresolved_warnings += 1
+                        unresolved_properties.add('font')
                     elif font_name and font_name.lower() != expected_font:
                         font_errors += 1
                         
                     size_val, size_ok = _resolve_run_size(r, p, doc_default_size)
                     if not size_ok:
                         unresolved_warnings += 1
+                        unresolved_properties.add('size')
                     elif size_val is not None and abs(size_val - expected_size) > 0.6:
                         size_errors += 1
+
+            if unresolved_properties and len(unresolved_examples) < 5:
+                style_name = p.style.name if p.style is not None else 'Unknown style'
+                unresolved_examples.append(
+                    f"paragraph {paragraph_index} [{style_name}]: {', '.join(sorted(unresolved_properties))}"
+                )
 
         if font_errors > 0:
             issues.append(
@@ -332,7 +395,92 @@ def validate_document(
                 Issue(
                     'warning',
                     'unresolvable_formatting',
-                    f"Unresolvable formatting properties in {unresolved_warnings} run(s)."
+                    f"Could not resolve {unresolved_warnings} expected text-formatting value(s). "
+                    f"Examples (zero-based paragraph indexes): {'; '.join(unresolved_examples)}."
+                )
+            )
+
+    # 2a. Explicit Word-style requirements (not only body-run defaults).
+    for style_key, style_spec in v.typography.styles.items():
+        style_name = _profile_style_name(style_key)
+        try:
+            style = d.styles[style_name]
+        except KeyError:
+            issues.append(
+                Issue(
+                    'error' if verify_mode else 'warning',
+                    'profile_style_missing',
+                    f"Profile configures style '{style_name}', but that Word style is missing.",
+                )
+            )
+            continue
+
+        styled_paragraphs = [
+            paragraph for paragraph in d.paragraphs
+            if paragraph.style is not None and paragraph.style.style_id == style.style_id
+        ]
+        expected_size = style_spec.get('size_pt')
+        if expected_size is not None:
+            style_size = style.font.size.pt if style.font.size is not None else None
+            mismatch_count = int(style_size is None or abs(style_size - expected_size) > 0.6)
+            for paragraph in styled_paragraphs:
+                for run in paragraph.runs:
+                    if run.text.strip() and run.font.size is not None and abs(run.font.size.pt - expected_size) > 0.6:
+                        mismatch_count += 1
+            if mismatch_count:
+                actual = 'unset' if style_size is None else f'{style_size:g} pt'
+                issues.append(
+                    Issue(
+                        'error' if verify_mode else 'warning',
+                        'style_size_mismatch',
+                        f"Style '{style_name}' font size is {actual}; expected {expected_size:g} pt. "
+                        f"{max(0, mismatch_count - int(style_size is None or abs(style_size - expected_size) > 0.6))} direct run override(s) also differ.",
+                    )
+                )
+
+        expected_color = style_spec.get('font_color')
+        if expected_color is not None:
+            expected_color = str(expected_color).lstrip('#').upper()
+            style_color = str(style.font.color.rgb).upper() if style.font.color.rgb is not None else None
+            mismatched_runs = 0
+            for paragraph in styled_paragraphs:
+                for run in paragraph.runs:
+                    if not run.text.strip():
+                        continue
+                    color = run.font.color.rgb
+                    if color is not None and str(color).upper() != expected_color:
+                        mismatched_runs += 1
+                    elif color is None and run.font.color.theme_color is not None:
+                        mismatched_runs += 1
+            if style_color != expected_color or mismatched_runs:
+                actual = style_color or 'unset'
+                issues.append(
+                    Issue(
+                        'error' if verify_mode else 'warning',
+                        'style_color_mismatch',
+                        f"Style '{style_name}' font color is {actual}; expected #{expected_color}. "
+                        f"{mismatched_runs} direct run override(s) differ or use an unresolved theme color.",
+                    )
+                )
+
+        expected_indents = {
+            'left_indent_pt': style_spec.get('left_indent_pt'),
+            'first_line_indent_pt': style_spec.get('first_line_indent_pt'),
+        }
+        indent_mismatches = []
+        for attribute, expected in expected_indents.items():
+            if expected is None:
+                continue
+            actual_value = getattr(style.paragraph_format, attribute.removesuffix('_pt'))
+            actual = actual_value.pt if actual_value is not None else 0.0
+            if abs(actual - expected) > 0.6:
+                indent_mismatches.append(f"{attribute}={actual:g} pt (expected {expected:g} pt)")
+        if indent_mismatches:
+            issues.append(
+                Issue(
+                    'error' if verify_mode else 'warning',
+                    'style_indent_mismatch',
+                    f"Style '{style_name}' indentation mismatch: {', '.join(indent_mismatches)}.",
                 )
             )
 
@@ -370,6 +518,47 @@ def validate_document(
             
         cover_text_full = "\n".join(cover_paras)
         inst_lines = v.cover.get('institution_lines', [])
+
+        border_spec = v.cover.get('border')
+        if border_spec:
+            actual_border = d.sections[0]._sectPr.find(qn('w:pgBorders'))
+            if actual_border is None:
+                issues.append(
+                    Issue(
+                        'error' if verify_mode else 'warning',
+                        'cover_border_missing',
+                        "Profile requires a page frame, but the first section has no page border.",
+                    )
+                )
+            else:
+                expected_offset = border_spec.get('offset_from', 'page')
+                actual_offset = actual_border.get(qn('w:offsetFrom'), 'page')
+                actual_display = actual_border.get(qn('w:display'))
+                if actual_offset != expected_offset or actual_display != border_spec.get('display'):
+                    issues.append(
+                        Issue(
+                            'error' if verify_mode else 'warning',
+                            'cover_border_configuration',
+                            f"Cover frame uses offset '{actual_offset}' and display '{actual_display}'; "
+                            f"expected '{expected_offset}' and '{border_spec.get('display')}'.",
+                        )
+                    )
+                for edge, edge_spec in border_spec.get('edges', {}).items():
+                    actual_edge = actual_border.find(qn(f'w:{edge}'))
+                    try:
+                        actual_space = int(actual_edge.get(qn('w:space'))) if actual_edge is not None else 0
+                    except (TypeError, ValueError):
+                        actual_space = 0
+                    expected_space = int(edge_spec.get('space_points', 0))
+                    if actual_space < expected_space:
+                        issues.append(
+                            Issue(
+                                'error' if verify_mode else 'warning',
+                                'cover_border_inset',
+                                f"Cover frame {edge} inset is {actual_space} pt; expected at least {expected_space} pt from the page edge.",
+                            )
+                        )
+
         if inst_lines:
             missing_inst = False
             for line in inst_lines:
@@ -411,6 +600,21 @@ def validate_document(
                         "Profile specifies both cover and inner_cover, but inner cover page/block was not found."
                     )
                 )
+            elif v.cover.get('require_distinct_inner_cover'):
+                anchor = doc_type or (inst_lines[0] if inst_lines else '')
+                anchor_paragraphs = [
+                    index
+                    for index, paragraph in enumerate(d.paragraphs[:50])
+                    if anchor and anchor.casefold() in paragraph.text.casefold()
+                ]
+                if len(anchor_paragraphs) < 2 or not _starts_new_page(d, anchor_paragraphs[1]):
+                    issues.append(
+                        Issue(
+                            'error' if verify_mode else 'warning',
+                            'inner_cover_not_distinct',
+                            "Profile requires a separate inner cover page, but the second cover block does not start on a new page.",
+                        )
+                    )
             
     non_cover_front = [x for x in v.front_matter if x not in ('cover', 'inner_cover', 'proposal_cover')]
     if non_cover_front and not is_template_clone:
@@ -445,6 +649,9 @@ def validate_document(
     if v.section_blueprint:
         missing_blueprint = []
         blueprint_indices: list[int] = []
+        numbering_missing: list[str] = []
+        numbering_invalid: list[str] = []
+        numbered_headings: list[tuple[str, int, int, int]] = []
         
         for sec in v.section_blueprint:
             target_title = str(sec['title']).casefold()
@@ -495,6 +702,31 @@ def validate_document(
                                 f"Section '{sec['title']}' uses custom style '{style_name}'; heading level could not be deterministically verified."
                             )
                         )
+
+                    if sec.get('page_break_before') and not _starts_new_page(d, match_idx):
+                        issues.append(
+                            Issue(
+                                'error' if verify_mode else 'warning',
+                                'blueprint_page_break_missing',
+                                f"Section '{sec['title']}' is required to start on a new page, but no page break was found before its heading.",
+                            )
+                        )
+
+                    if sec.get('numbered'):
+                        number_info = _paragraph_numbering(matched_p)
+                        if number_info is None:
+                            numbering_missing.append(str(sec['title']))
+                        else:
+                            number_id, number_level = number_info
+                            expected_number_level = expected_level - 1
+                            if number_level != expected_number_level:
+                                numbering_invalid.append(
+                                    f"{sec['title']} (level {number_level + 1}, expected {expected_level})"
+                                )
+                            else:
+                                numbered_headings.append(
+                                    (str(sec['title']), expected_level, number_id, number_level)
+                                )
                 
         if missing_blueprint:
             sev = 'warning' if (is_template_clone and not verify_mode) else 'error'
@@ -505,6 +737,59 @@ def validate_document(
                     f"Missing required section(s) from profile blueprint: {', '.join(missing_blueprint[:5])}."
                 )
             )
+
+        if numbering_missing:
+            issues.append(
+                Issue(
+                    'error' if verify_mode else 'warning',
+                    'blueprint_heading_numbering_missing',
+                    f"Required automatic heading numbering is missing for: {', '.join(numbering_missing[:5])}.",
+                )
+            )
+
+        if numbered_headings:
+            number_ids = {item[2] for item in numbered_headings}
+            required_levels = {item[3] for item in numbered_headings}
+            if len(number_ids) != 1:
+                numbering_invalid.append("required headings do not share one multilevel list")
+            else:
+                number_id = next(iter(number_ids))
+                numbering_part = d.part.numbering_part.element
+                abstract_id = None
+                for number in numbering_part.findall(qn('w:num')):
+                    if number.get(qn('w:numId')) == str(number_id):
+                        abstract_ref = number.find(qn('w:abstractNumId'))
+                        if abstract_ref is not None:
+                            abstract_id = abstract_ref.get(qn('w:val'))
+                        break
+                abstract = next(
+                    (
+                        item for item in numbering_part.findall(qn('w:abstractNum'))
+                        if item.get(qn('w:abstractNumId')) == abstract_id
+                    ),
+                    None,
+                )
+                multi_level = abstract.find(qn('w:multiLevelType')) if abstract is not None else None
+                actual_levels = {
+                    int(item.get(qn('w:ilvl')))
+                    for item in abstract.findall(qn('w:lvl'))
+                    if item.get(qn('w:ilvl')) is not None
+                } if abstract is not None else set()
+                if (
+                    multi_level is None
+                    or multi_level.get(qn('w:val')) not in {'multilevel', 'hybridMultilevel'}
+                    or not required_levels.issubset(actual_levels)
+                ):
+                    numbering_invalid.append("numbering definition is not a complete multilevel list for the required heading levels")
+
+            if numbering_invalid:
+                issues.append(
+                    Issue(
+                        'error' if verify_mode else 'warning',
+                        'blueprint_heading_numbering_invalid',
+                        f"Required heading numbering is not a valid shared multilevel list: {', '.join(numbering_invalid[:5])}.",
+                    )
+                )
             
         if len(blueprint_indices) >= 2 and not is_template_clone:
             if blueprint_indices != sorted(blueprint_indices):

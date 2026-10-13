@@ -141,6 +141,62 @@ def test_repetition_is_warn_only_and_never_ai_detection(tmp_path):
     assert report["gates"]["ai_use_disclosure_provenance"]["status"] == "PASS"
 
 
+def test_vietnamese_ai_assistance_disclosure_is_recognized(tmp_path):
+    path = tmp_path / "vietnamese-ai-disclosure.docx"
+    document = Document()
+    document.add_paragraph(
+        "WordAssistant hỗ trợ định dạng; công cụ AI hỗ trợ soạn thảo và rà soát diễn đạt."
+    )
+    document.save(path)
+
+    report = audit_integrity(path)
+
+    gate = report["gates"]["ai_use_disclosure_provenance"]
+    assert gate["status"] == "PASS"
+    assert gate["declared"] is True
+
+
+def test_quantitative_review_ignores_figure_labels_and_software_versions(tmp_path):
+    path = tmp_path / "quantitative-signal.docx"
+    document = Document()
+    document.add_paragraph("Hình 1.2: Giao diện trang đăng nhập", style="Caption")
+    document.add_paragraph("Môi trường chạy sử dụng Java 21 và Spring Boot 3.")
+    document.add_paragraph("Tỷ lệ giao dịch thành công đạt 98,7%.")
+    document.save(path)
+
+    report = audit_integrity(path)
+
+    findings = report["gates"]["quantitative_claims_lacking_citation"]["findings"]
+    assert len(findings) == 1
+    assert "98,7%" in findings[0]["excerpt"]
+
+
+def test_repetition_review_suppresses_common_function_word_phrases(tmp_path):
+    path = tmp_path / "common-phrase.docx"
+    document = Document()
+    document.add_paragraph("For checkout, this is part of the same workflow.")
+    document.add_paragraph("For review, this is part of the same workflow.")
+    document.add_paragraph("For admin, this is part of the same workflow.")
+    document.save(path)
+
+    report = audit_integrity(
+        path,
+        profile={
+            "integrity": {
+                "repeated_opening_words": 4,
+                "repeated_opening_minimum": 3,
+                "ngram_size": 5,
+                "repeated_ngram_minimum": 3,
+                "review_punctuation": [],
+            }
+        },
+    )
+
+    gate = report["gates"]["repetitive_prose_review"]
+    assert gate["status"] == "PASS"
+    assert gate["findings"] == []
+
+
 def test_provenance_manifest_binds_real_docx_registry_and_audit(tmp_path):
     path = tmp_path / "manifest.docx"
     document = Document()

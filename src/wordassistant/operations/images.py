@@ -161,11 +161,14 @@ def _requested_extent(
 
 def _append_semantic_caption(
     document, image_paragraph: Paragraph, label: str, title: str,
-    sequence_id: str | None = None, chapter_number: int | None = None
+    sequence_id: str | None = None, chapter_number: int | None = None,
+    caption_separator: str = ".",
 ) -> str:
     sequence = sequence_id or label
     paragraph = insert_paragraph_after(image_paragraph, style="Caption")
-    return append_caption_content(document, paragraph, label, title, sequence, chapter_number)
+    return append_caption_content(
+        document, paragraph, label, title, sequence, chapter_number, caption_separator
+    )
 
 
 def insert_image(
@@ -182,6 +185,7 @@ def insert_image(
     caption_label: str = "Figure",
     caption_sequence: str | None = None,
     caption_chapter_number: int | None = None,
+    caption_separator: str = ".",
     placement: str = "after",
     alignment: str = "center",
     preserve_aspect_ratio: bool = True,
@@ -239,7 +243,10 @@ def insert_image(
         properties.set("title", title)
     caption_field = None
     if caption:
-        caption_field = _append_semantic_caption(document, paragraph, caption_label.strip(), caption, sequence, caption_chapter_number)
+        caption_field = _append_semantic_caption(
+            document, paragraph, caption_label.strip(), caption, sequence,
+            caption_chapter_number, caption_separator,
+        )
     if replaced_anchor is not None and placement == "replace":
         replaced_anchor._p.getparent().remove(replaced_anchor._p)
     drawing = shape._inline.getparent()
@@ -273,6 +280,7 @@ def insert_image(
             "auto_shrunk": shrunk,
             "caption_field": caption_field,
             "caption_chapter_number": caption_chapter_number,
+            "caption_separator": caption_separator if caption else None,
             "caption_label": caption_label.strip() if caption else None,
         },
     )

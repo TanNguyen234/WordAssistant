@@ -81,9 +81,17 @@ _VARIANT_KEYS = {
 _PAGE_KEYS = {'size', 'width_cm', 'height_cm', 'margins_cm', 'one_sided', 'orientation', 'allow_mixed_orientation', 'provenance'}
 _MARGINS_KEYS = {'top', 'bottom', 'left', 'right'}
 _TYPOGRAPHY_KEYS = {'body_font', 'body_size_pt', 'line_spacing', 'paragraph_spacing_before_pt', 'paragraph_spacing_after_pt', 'styles'}
-_STYLE_KEYS = {'font', 'size_pt', 'bold', 'italic', 'alignment', 'line_spacing', 'space_before_pt', 'space_after_pt'}
+_STYLE_KEYS = {
+    'font', 'size_pt', 'bold', 'italic', 'alignment', 'line_spacing',
+    'space_before_pt', 'space_after_pt', 'font_color', 'left_indent_pt',
+    'first_line_indent_pt',
+}
 _BLUEPRINT_KEYS = {'title', 'level', 'required', 'numbered', 'restart_numbering', 'page_break_before'}
-_COVER_KEYS = {'institution_lines', 'document_type', 'title_prefix', 'metadata_fields', 'location_year', 'location_year_key', 'location_year_template', 'logo_asset', 'border', 'styles'}
+_COVER_KEYS = {
+    'institution_lines', 'document_type', 'title_prefix', 'metadata_fields',
+    'location_year', 'location_year_key', 'location_year_template', 'logo_asset',
+    'border', 'styles', 'require_distinct_inner_cover',
+}
 _METADATA_FIELD_KEYS = {'key', 'label', 'value_key', 'default', 'value', 'required'}
 _CITATIONS_KEYS = {'style', 'in_text', 'minimum_references', 'prefer_primary_source', 'bibliography_order', 'require_reviewed_sources'}
 _INTEGRITY_KEYS = {
@@ -244,6 +252,15 @@ def _parse_variant(name: str, data: Any) -> Variant:
             raise ProfileError(f"Invalid alignment '{s_val['alignment']}' in style {s_name}; allowed are {sorted(_VALID_ALIGNMENTS)}")
         if 'size_pt' in s_val:
             _num(s_val['size_pt'], f"{name}.styles.{s_name}.size_pt", positive=True)
+        if 'font_color' in s_val:
+            color = s_val['font_color']
+            if not isinstance(color, str) or not re.fullmatch(r'#?[0-9A-Fa-f]{6}', color.strip()):
+                raise ProfileError(f"{name}.styles.{s_name}.font_color must be a six-digit RGB value")
+            s_val['font_color'] = color.strip().lstrip('#').upper()
+        if 'left_indent_pt' in s_val:
+            _num(s_val['left_indent_pt'], f"{name}.styles.{s_name}.left_indent_pt", nonnegative=True)
+        if 'first_line_indent_pt' in s_val:
+            _num(s_val['first_line_indent_pt'], f"{name}.styles.{s_name}.first_line_indent_pt")
         if 'font' in s_val and (not isinstance(s_val['font'], str) or not s_val['font'].strip()):
             raise ProfileError(f"{name}.styles.{s_name}.font must be a non-empty string")
         if 'bold' in s_val and type(s_val['bold']) is not bool:
@@ -280,6 +297,8 @@ def _parse_variant(name: str, data: Any) -> Variant:
         raise ProfileError(f"{name}.cover must be an object")
     if cover_data:
         _check_unknown_keys(cover_data, _COVER_KEYS, f"{name}.cover")
+        if 'require_distinct_inner_cover' in cover_data and type(cover_data['require_distinct_inner_cover']) is not bool:
+            raise ProfileError(f"{name}.cover.require_distinct_inner_cover must be a boolean")
         if 'institution_lines' in cover_data:
             _string_list(cover_data['institution_lines'], f"{name}.cover.institution_lines")
         if 'document_type' in cover_data:

@@ -20,6 +20,7 @@ def test_public_image_caption_accepts_localized_sequence(tmp_path, capsys, batch
         "caption": "Kiến trúc",
         "caption_label": "HÌNH",
         "caption_sequence": "Hinh",
+        "caption_separator": ":",
     }
     if batch:
         plan = tmp_path / "plan.json"
@@ -41,3 +42,5 @@ def test_public_image_caption_accepts_localized_sequence(tmp_path, capsys, batch
                         for node in document.element.body.iter(qn("w:fldSimple")))
     assert any("SEQ Hinh" in instruction for instruction in instructions)
     assert any("HÌNH" in paragraph.text for paragraph in document.paragraphs)
+    assert any("HÌNH 1: Kiến trúc" in ''.join(paragraph._p.xpath('.//w:t/text()'))
+               for paragraph in document.paragraphs)

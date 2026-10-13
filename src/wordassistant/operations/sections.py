@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from copy import deepcopy
+import math
 from pathlib import Path
 
 from docx import Document
@@ -121,6 +122,7 @@ def set_section_layout(
     columns: int | None = None,
     different_first_page: bool | None = None,
     different_odd_even: bool | None = None,
+    page_border_space_pt: float | None = None,
     dry_run=False,
 ):
     document = Document(input_path)
@@ -160,6 +162,26 @@ def set_section_layout(
         cols.set(qn("w:num"), str(columns))
     if different_first_page is not None:
         section.different_first_page_header_footer = bool(different_first_page)
+    if page_border_space_pt is not None:
+        if (
+            isinstance(page_border_space_pt, bool)
+            or not isinstance(page_border_space_pt, (int, float))
+            or not math.isfinite(float(page_border_space_pt))
+            or not 1 <= float(page_border_space_pt) <= 144
+        ):
+            raise ValueError("page_border_space_pt must be between 1 and 144 points")
+        borders = section._sectPr.find(qn("w:pgBorders"))
+        if borders is None:
+            raise ValueError("Cannot set page border inset because this section has no page border")
+        if borders.get(qn("w:offsetFrom"), "page") != "page":
+            raise ValueError("page_border_space_pt requires a page-relative border")
+        edge_names = ("top", "left", "bottom", "right")
+        edges = [borders.find(qn(f"w:{name}")) for name in edge_names]
+        if any(edge is None for edge in edges):
+            raise ValueError("Cannot set page border inset because one or more border edges are missing")
+        space = str(int(round(float(page_border_space_pt))))
+        for edge in edges:
+            edge.set(qn("w:space"), space)
     settings = document.settings.element
     even = settings.find(qn("w:evenAndOddHeaders"))
     if different_odd_even is not None:
@@ -190,7 +212,13 @@ def set_section_layout(
             settings.append(OxmlElement("w:mirrorMargins"))
         elif not mirrored_margins and mirror is not None:
             settings.remove(mirror)
-    return _result(document, output_path, "section.layout", {"section_index": section_index}, dry_run)
+    return _result(
+        document,
+        output_path,
+        "section.layout",
+        {"section_index": section_index, "page_border_space_pt": page_border_space_pt},
+        dry_run,
+    )
 
 
 def link_header_footer(input_path, *, output_path, section_index: int, linked: bool, story="both", dry_run=False):

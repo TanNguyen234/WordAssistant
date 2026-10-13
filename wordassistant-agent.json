@@ -63,6 +63,7 @@
     "validation": "validate.valid == true",
     "verification": "verify.delivery_status == PASS",
     "requested_features": "Every requested feature must be observed semantically at the requested depth; visible lookalikes do not count.",
+    "course_essay_evidence_matrix": "Before composing or editing a user-defined course essay, map every database table to its full schema and representative sample rows, and every function/persona to a fresh desktop screenshot at 1366 px or wider embedded in the DOCX. Keep the old reference read-only and use only user-approved facts/assets. Verify both requested covers with a frame at least 12 mm inside the page edge, 13 pt body text when requested, aligned real heading styles with true multilevel numbering, black headings/captions, required page starts, and title-only captions such as Hình x.x: Tên hình. Missing evidence is INCOMPLETE even if generic validation passes.",
     "dynamic_fields": "Requested TOC, REF, PAGEREF, PAGE, NUMPAGES, and SEQ fields must be present and UPDATED_NATIVE after a Word reopen/update; placeholder or stale results are FAIL.",
     "visual_page_audit": "Inspect the visible content of every rendered page; image existence, file size, and dimensions alone are not a content audit. Unexpected blank or near-blank pages are FAIL.",
     "negative_tests": "Each negative test must exercise the exact requested invariant; harness misuse, unknown options, or unrelated exceptions are FAIL, not a passing fail-closed result.",
@@ -72,6 +73,7 @@
     "unavailable_policy": "UNAVAILABLE or REVIEW_REQUIRED is never PASS."
   },
   "document_construction_order": [
+    "Before composition or editing, freeze the user-specific course-essay acceptance matrix and assign a source plus evidence artifact to each required content, database, screenshot, and layout row.",
     "For a new long report, write one bounded version-1 content JSON and run compose once; never generate helper code.",
     "Compose substantive content, real Heading styles, stable anchors, evidence-linked citations, and the existing bibliography section before layout operations.",
     "Use one version-1 apply plan for compatible mutating operations so a failed step rolls back and no intermediate DOCX is published.",

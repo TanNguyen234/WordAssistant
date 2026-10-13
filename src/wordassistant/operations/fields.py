@@ -439,12 +439,118 @@ def insert_toc(
     return OperationResult.success("toc.insert", "ooxml", Fidelity.HIGH, {"kind": kind, "instruction": instruction, "updated_existing": existing}, output_path=None if dry_run else output, manual_review_required=True)
 
 
-def append_caption_content(document, paragraph, label, title, sequence, chapter_number=None):
-    """Use literal verified chapters with Word's heading-based SEQ reset.
+def _effective_heading_num_pr(paragraph):
+    properties = paragraph._p.pPr
+    num_pr = properties.find(qn("w:numPr")) if properties is not None else None
+    if num_pr is not None:
+        return num_pr
+    style = paragraph.style
+    seen_styles = set()
+    while style is not None:
+        if style.style_id in seen_styles:
+            raise ValueError("chapter caption cannot use cyclic heading style inheritance")
+        seen_styles.add(style.style_id)
+        properties = style.element.pPr
+        num_pr = properties.find(qn("w:numPr")) if properties is not None else None
+        if num_pr is not None:
+            return num_pr
+        style = style.base_style
+    return None
 
-    Explicit prefixes are deliberate: STYLEREF numeric switches require real
-    automatic numbering, which the report's literal CHƯƠNG headings lack.
+
+def _automatic_heading_number(document, heading):
+    num_pr = _effective_heading_num_pr(heading)
+    if num_pr is None:
+        return None
+    num_id_node = num_pr.find(qn("w:numId"))
+    if num_id_node is None or not num_id_node.get(qn("w:val")):
+        return None
+    num_id = num_id_node.get(qn("w:val"))
+    ilvl_node = num_pr.find(qn("w:ilvl"))
+    level_number = int(ilvl_node.get(qn("w:val"), "0")) if ilvl_node is not None else 0
+    if level_number != 0:
+        return None
+
+    numbering = document.part.numbering_part.element
+    num = next(
+        (item for item in numbering.findall(qn("w:num"))
+         if item.get(qn("w:numId")) == num_id),
+        None,
+    )
+    if num is None:
+        return None
+    abstract_ref = num.find(qn("w:abstractNumId"))
+    if abstract_ref is None:
+        return None
+    abstract_id = abstract_ref.get(qn("w:val"))
+    abstract = next(
+        (item for item in numbering.findall(qn("w:abstractNum"))
+         if item.get(qn("w:abstractNumId")) == abstract_id),
+        None,
+    )
+    level = next(
+        (item for item in abstract.findall(qn("w:lvl"))
+         if item.get(qn("w:ilvl")) == "0"),
+        None,
+    ) if abstract is not None else None
+    if level is None:
+        return None
+    number_format = level.find(qn("w:numFmt"))
+    level_text = level.find(qn("w:lvlText"))
+    if (
+        number_format is None
+        or number_format.get(qn("w:val")) != "decimal"
+        or level_text is None
+        or "%1" not in level_text.get(qn("w:val"), "")
+    ):
+        return None
+
+    start_node = level.find(qn("w:start"))
+    start = int(start_node.get(qn("w:val"), "1")) if start_node is not None else 1
+    for override in num.findall(qn("w:lvlOverride")):
+        if override.get(qn("w:ilvl")) != "0":
+            continue
+        if override.find(qn("w:lvl")) is not None:
+            return None
+        start_override = override.find(qn("w:startOverride"))
+        if start_override is not None:
+            start = int(start_override.get(qn("w:val"), str(start)))
+
+    paragraph_index = next(
+        (index for index, item in enumerate(document.paragraphs) if item._p is heading._p),
+        None,
+    )
+    if paragraph_index is None:
+        return None
+    preceding = 0
+    for candidate in document.paragraphs[:paragraph_index]:
+        if candidate.style is None or candidate.style.style_id != "Heading1":
+            continue
+        candidate_num_pr = _effective_heading_num_pr(candidate)
+        if candidate_num_pr is None:
+            continue
+        candidate_num = candidate_num_pr.find(qn("w:numId"))
+        candidate_level = candidate_num_pr.find(qn("w:ilvl"))
+        if (
+            candidate_num is not None
+            and candidate_num.get(qn("w:val")) == num_id
+            and (candidate_level is None or candidate_level.get(qn("w:val"), "0") == "0")
+        ):
+            preceding += 1
+    return start + preceding
+
+
+def append_caption_content(
+    document, paragraph, label, title, sequence, chapter_number=None,
+    caption_separator=".",
+):
+    """Use a verified literal or automatic chapter number with Word's SEQ reset.
+
+    Explicit prefixes are deliberate: Word's SEQ reset is tied to Heading 1,
+    while the visible chapter number is checked against its heading/list.
     """
+    if not isinstance(caption_separator, str) or caption_separator not in {".", ":"}:
+        raise ValueError("caption_separator must be '.' or ':'")
     instruction = f"SEQ {sequence} \\* ARABIC"
     prefix = ""
     if chapter_number is not None:
@@ -460,11 +566,11 @@ def append_caption_content(document, paragraph, label, title, sequence, chapter_
                 heading = candidate
         if not found or heading is None:
             raise ValueError("chapter caption requires a preceding built-in Heading 1 in the document body")
-        match = re.match(r"^CHƯƠNG\s+([1-9][0-9]*)(?=\s|[.:]|$)", heading.text.strip(), re.IGNORECASE)
-        if match is None or int(match.group(1)) != chapter_number:
-            raise ValueError("chapter_number does not match the nearest Heading 1 literal CHƯƠNG number")
-        # Numbering can be inherited; do not confuse literal text with an
-        # automatically numbered chapter or permit an incompatible outline.
+        heading_text = heading.text.strip()
+        match = re.match(r"^CHƯƠNG\s+([1-9][0-9]*)(?=\s|[.:]|$)", heading_text, re.IGNORECASE)
+        if match is None:
+            match = re.match(r"^([1-9][0-9]*)(?=\s|[.:]|$)", heading_text)
+        literal_number = int(match.group(1)) if match is not None else None
         property_sets = [heading._p.pPr]
         style = heading.style
         seen_styles = set()
@@ -477,23 +583,28 @@ def append_caption_content(document, paragraph, label, title, sequence, chapter_
         for properties in property_sets:
             if properties is None:
                 continue
-            if properties.find(qn("w:numPr")) is not None:
-                raise ValueError("chapter caption literal mode does not support automatic heading numbering")
             outline = properties.find(qn("w:outlineLvl"))
             if outline is not None and outline.get(qn("w:val")) != "0":
                 raise ValueError("chapter caption requires Heading 1 outline level")
+        if literal_number is not None:
+            if literal_number != chapter_number:
+                raise ValueError("chapter_number does not match the nearest Heading 1 literal chapter number")
+            if _effective_heading_num_pr(heading) is not None:
+                raise ValueError("literal chapter headings cannot also use automatic numbering")
+        elif _automatic_heading_number(document, heading) != chapter_number:
+            raise ValueError("chapter_number does not match the nearest Heading 1 automatic number")
         prefix = f"{chapter_number}."
         instruction += " \\s 1"
     paragraph.add_run(f"{label.strip()} {prefix}")
     append_field(paragraph, instruction, "1")
     if title:
-        paragraph.add_run(f". {title}")
+        paragraph.add_run(f"{caption_separator} {title}")
     return instruction
 
 
 def insert_caption(
     input_path, *, output_path, label, title, selector=None, sequence_id=None,
-    chapter_number: int | None = None, dry_run=False
+    chapter_number: int | None = None, caption_separator=".", dry_run=False
 ):
     if not isinstance(label, str) or not label.strip() or len(label) > 80:
         raise ValueError("Caption display label must be a non-empty string of at most 80 characters")
@@ -502,8 +613,15 @@ def insert_caption(
         raise ValueError("Caption sequence_id must be a Word-safe identifier")
     document = Document(input_path)
     paragraph = add_paragraph_at_boundary(document, selector, style="Caption")
-    instruction = append_caption_content(document, paragraph, label, title, sequence, chapter_number)
+    instruction = append_caption_content(
+        document, paragraph, label, title, sequence, chapter_number, caption_separator
+    )
     output = Path(output_path).resolve()
     if not dry_run:
         atomic_save(document, output)
-    return OperationResult.success("caption.insert", "ooxml", Fidelity.HIGH, {"label": label.strip(), "sequence_id": sequence, "chapter_number": chapter_number, "instruction": instruction}, output_path=None if dry_run else output, manual_review_required=chapter_number is not None)
+    return OperationResult.success(
+        "caption.insert", "ooxml", Fidelity.HIGH,
+        {"label": label.strip(), "sequence_id": sequence, "chapter_number": chapter_number,
+         "caption_separator": caption_separator, "instruction": instruction},
+        output_path=None if dry_run else output, manual_review_required=chapter_number is not None,
+    )

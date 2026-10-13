@@ -28,5 +28,11 @@ def test_unresolvable_formatting_produces_warning_not_false_pass(tmp_path: Path)
     prof = resolve_profile("generic")
     res = validate_document(doc_path, prof, "default", verify_mode=False)
     # Warnings for unresolvable formatting should be present, not false pass or false error
-    warning_codes = [i.code for i in res.issues if i.severity == "warning"]
-    assert "unresolvable_formatting" in warning_codes
+    warning = next(
+        issue
+        for issue in res.issues
+        if issue.severity == "warning" and issue.code == "unresolvable_formatting"
+    )
+    assert "paragraph" in warning.message.casefold()
+    assert "font" in warning.message.casefold()
+    assert "size" in warning.message.casefold()

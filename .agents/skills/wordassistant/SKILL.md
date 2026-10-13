@@ -19,6 +19,23 @@ Use the CLI as the stable control plane. Never inspect repository source or raw 
 10. When formatting matters, render and inspect every page. A successful render does not prove fields or numbering are functional.
 11. A final delivery PASS requires both `validate.valid == true` and `verify.delivery_status == "PASS"`; `overall_status` only summarizes the checks requested in that invocation.
 
+## User-specific course-essay gate
+
+Before composing or changing a course essay, turn the user's instructions into a checked acceptance matrix. Do not begin DOCX mutations while any required row lacks an owner, source, or planned evidence. A profile from another school is not a substitute for the user's rules.
+
+For a report based on an older reference document:
+
+- Keep the reference read-only. Record which facts and assets may be reused; do not inherit its chapter order, page layout, or stale product screenshots when the user has excluded them.
+- Build a database inventory from the current project/database. Cover every table and record its purpose, columns, SQL types, primary/foreign keys, nullability, defaults, unique constraints, indexes, relationships, and representative sample rows. Mark missing evidence instead of guessing. Redact passwords, tokens, and unnecessary personal data.
+- Build a screenshot matrix from the complete feature/route inventory, with a row for each distinct function and each applicable persona (for example customer, administrator, and shipper). Capture fresh desktop screenshots at a viewport at least 1366 px wide. Show the complete browser tab content at web size; do not use mobile emulation, cropped cards, or stale reference images. Embed every required screenshot in the DOCX at readable size and record its route, persona, state, and resolution. A link to an image file does not count as an embedded figure.
+- Prefer records explicitly designated as demo data or synthetic fixtures for screenshots. Show those values in context without forced masking when the values explain the workflow. For a shipper delivery, the screenshot should make the recipient, full delivery destination, order items and quantities, shipment status, and useful call/map actions readable. If the available live record is not confirmed as demo data, switch to a synthetic fixture; do not silently present real customer details as examples. If authentication prevents a live route capture, render the same project template with a verified fixture and record that capture source/state in the matrix.
+- Use a two-cover plan when requested. Keep the cover frame visibly inset from the page edge (target at least 12 mm), and check the rendered cover. Use real Word heading styles with tidy, consistent level indentation and true multilevel numbering when required. Apply the requested body size; set headings and captions to black when required.
+- Give every major section its required page boundary and verify the rendered start page. Keep each declaration or front-matter item to its requested page. Respect a stated minimum page count without imposing an arbitrary maximum or adding filler.
+- Keep figure captions to the requested title form only. When the requested form is `Hình x.x: Tên hình`, do not append a source note, route, persona, or explanatory sentence to that caption.
+- For that colon form, pass `caption_separator: ":"` to WordAssistant and verify the visible chapter.sequence number against the nearest real `Heading 1` before insertion. Preserve the selected institution profile's label casing unless the user gives a different label.
+
+The acceptance matrix must map every required database table to its specification and sample data, and every requested function/persona to an embedded desktop screenshot. Before delivery, check those rows against the DOCX itself, then validate and render the saved output and visually review every page. If a row is missing, delivery is incomplete even when generic profile validation passes.
+
 | Need | Command |
 |---|---|
 | Read structure | `inspect` |
