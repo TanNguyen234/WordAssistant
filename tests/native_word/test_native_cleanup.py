@@ -278,6 +278,9 @@ def test_worker_timeout_kills_only_handed_off_word_pid(monkeypatch):
         "wordassistant.backends.word_native.backend._WindowsKillOnCloseJob.for_process",
         lambda process: None,
     )
+    monkeypatch.setattr(
+        "wordassistant.backends.word_native.backend.platform.system", lambda: "Windows"
+    )
 
     with pytest.raises(TimeoutError):
         _run_native_worker({"action": "health", "label": "Tiếng Việt"}, 1)
