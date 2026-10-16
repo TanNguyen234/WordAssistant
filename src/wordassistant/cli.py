@@ -465,6 +465,20 @@ def parser() -> argparse.ArgumentParser:
         family.add_argument('--output', required=True)
         family.add_argument('--json', action='store_true')
 
+    plantuml = sp.add_parser('plantuml', help='Check PlantUML engine and render diagrams')
+    plantuml_sp = plantuml.add_subparsers(dest='plantuml_action', required=True)
+
+    plantuml_doc = plantuml_sp.add_parser('doctor', help='Check PlantUML jar engine and Java runtime')
+    plantuml_doc.add_argument('--json', action='store_true')
+
+    plantuml_render = plantuml_sp.add_parser('render', help='Render PlantUML diagram source to image')
+    plantuml_render.add_argument('file', nargs='?', default=None, help='Input PlantUML file (.puml/.wsd/.txt)')
+    plantuml_render.add_argument('--text', default=None, help='PlantUML source text if file is not provided')
+    plantuml_render.add_argument('--output', '-o', default=None, help='Output path for rendered diagram')
+    plantuml_render.add_argument('--format', '-f', default='png', choices=['png', 'svg', 'eps', 'txt', 'pdf'], help='Output format (default: png)')
+    plantuml_render.add_argument('--timeout', type=int, default=60, help='Render timeout in seconds (default: 60)')
+    plantuml_render.add_argument('--json', action='store_true')
+
     return p
 
 def run(args: list[str] | None = None) -> int:
@@ -1080,6 +1094,25 @@ def run(args: list[str] | None = None) -> int:
                     language=a.language,
                 )
                 _print({'status': 'REVIEWED', **reviewed}, a.json)
+                return 0
+
+        if a.cmd == 'plantuml':
+            from .diagrams.plantuml import doctor as plantuml_doctor, render_plantuml
+            if a.plantuml_action == 'doctor':
+                res = plantuml_doctor()
+                _print(res, a.json)
+                return 0 if res.get('operational') else 1
+            if a.plantuml_action == 'render':
+                source = a.file if a.file is not None else a.text
+                if not source:
+                    raise ValueError("PlantUML render requires either a source file or --text")
+                res = render_plantuml(
+                    source,
+                    output_path=a.output,
+                    format=a.format,
+                    timeout_seconds=a.timeout,
+                )
+                _print(res, a.json)
                 return 0
 
     except BatchExecutionError as exc:
