@@ -10,6 +10,7 @@ import pytest
 
 from wordassistant.backends.word_native.backend import (
     WordNativeBackend,
+    _discover_word_executable,
     _run_native_worker,
     _word_process_id,
 )
@@ -212,7 +213,10 @@ def _word_process_ids():
     return result
 
 
-@pytest.mark.skipif(platform.system() != "Windows", reason="Windows process-tree gate")
+@pytest.mark.skipif(
+    platform.system() != "Windows" or _discover_word_executable() is None,
+    reason="Windows Word executable required",
+)
 def test_timed_out_worker_cannot_spawn_a_delayed_word_process():
     baseline = _word_process_ids()
     with pytest.raises(TimeoutError):
