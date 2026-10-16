@@ -131,6 +131,9 @@ def main() -> int:
         if payload.get("action") == "verify_fields":
             path = Path(payload["input_path"])
             with backend._session(path) as (application, document):
+                repaginate = getattr(document, "Repaginate", None)
+                if callable(repaginate):
+                    repaginate()
                 before = backend._field_snapshot(document)
                 data = backend._execute_document_operation(
                     application,
@@ -162,6 +165,9 @@ def main() -> int:
             path = Path(payload["input_path"])
             output_path = Path(payload["output_path"])
             with backend._session(path) as (application, document):
+                repaginate = getattr(document, "Repaginate", None)
+                if callable(repaginate):
+                    repaginate()
                 before = backend._field_snapshot(document)
                 stages = {}
                 try:
