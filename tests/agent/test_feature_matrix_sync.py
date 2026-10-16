@@ -50,7 +50,8 @@ def test_native_live_evidence_is_zero_skip_and_bound_to_current_sources():
     assert run["failed"] == run["skipped"] == 0
 
     for relative_path, expected_hash in evidence["source_sha256"].items():
-        actual_hash = hashlib.sha256((ROOT / relative_path).read_bytes()).hexdigest()
+        content = (ROOT / relative_path).read_bytes().replace(b"\r\n", b"\n")
+        actual_hash = hashlib.sha256(content).hexdigest()
         assert actual_hash.upper() == expected_hash.upper(), relative_path
 
 
