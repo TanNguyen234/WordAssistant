@@ -180,6 +180,15 @@ def _check_word_delivery(
 
         render = verify.get("render")
         rendered_hash = render.get("document_sha256") if isinstance(render, dict) else None
+        if not rendered_hash:
+            # Reused Word renders bind the DOCX hash in the reuse manifest
+            # rather than duplicating it under render.
+            reuse_manifest = verify.get("render_reuse_manifest")
+            rendered_hash = (
+                reuse_manifest.get("document_sha256")
+                if isinstance(reuse_manifest, dict)
+                else None
+            )
         if document_hash is None:
             _add(checks, "verify_document_hash", INCOMPLETE, "Cannot bind verify evidence without the output DOCX.")
         elif not isinstance(rendered_hash, str) or not rendered_hash:
@@ -435,7 +444,13 @@ def _check_integrity_audit(
         required_count = len(expected_evidence_ids)
         registry_meta = registry_gate.get("registry")
         audited_registry_hash = registry_meta.get("sha256") if isinstance(registry_meta, dict) else None
-        current_registry_path = _resolve(project_dir, project.get("evidence_registry_file", "evidence.json"))
+        # Project/source claims and Word bibliography citations can use different
+        # registries. Bind the integrity audit to the registry it actually read,
+        # while _check_claim_evidence continues to use evidence_registry_file.
+        citation_registry_value = project.get("report_citation_registry_file")
+        if not citation_registry_value:
+            citation_registry_value = project.get("evidence_registry_file", "evidence.json")
+        current_registry_path = _resolve(project_dir, citation_registry_value)
         try:
             current_registry_hash = (
                 _sha256(current_registry_path)
@@ -457,10 +472,34 @@ def _check_integrity_audit(
             or isinstance(verified_count, bool)
         ):
             _add(checks, "integrity_source_evidence", INCOMPLETE, "Audit does not report linked and verified evidence counts.")
-        elif linked_count < required_count or verified_count < required_count:
-            _add(checks, "integrity_source_evidence", INCOMPLETE, f"The report maps {required_count} unique evidence IDs but audit links {linked_count} and verifies {verified_count} records.")
         else:
-            _add(checks, "integrity_source_evidence", PASS, "Integrity source_evidence passed and covers the claim evidence IDs.")
+            citation_gate = gates.get("numeric_citation_bibliography_consistency")
+            citation_numbers = citation_gate.get("citation_numbers") if isinstance(citation_gate, dict) else None
+            if (
+                isinstance(citation_numbers, list)
+                and all(type(number) is int and number > 0 for number in citation_numbers)
+            ):
+                required_citation_count = len(set(citation_numbers))
+                coverage_label = "unique in-text citation numbers"
+            else:
+                # Older reports did not expose citation numbers. Keep their
+                # fail-closed check by falling back to mapped project claims.
+                required_citation_count = required_count
+                coverage_label = "mapped project evidence IDs"
+            if linked_count < required_citation_count or verified_count < linked_count:
+                _add(
+                    checks,
+                    "integrity_source_evidence",
+                    INCOMPLETE,
+                    f"The report has {required_citation_count} {coverage_label}; audit links {linked_count} and records {verified_count} registry records.",
+                )
+            else:
+                _add(
+                    checks,
+                    "integrity_source_evidence",
+                    PASS,
+                    f"Integrity source_evidence passed and covers {required_citation_count} {coverage_label}.",
+                )
     elif source_status == FAIL:
         _add(checks, "integrity_source_evidence", FAIL, "Integrity source_evidence gate failed.")
     else:

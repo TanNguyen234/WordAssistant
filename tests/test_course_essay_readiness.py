@@ -241,6 +241,22 @@ def test_changed_docx_hash_fails_delivery_and_stale_audit_binding() -> None:
     assert report["gates"]["submission_readiness"]["status"] == "FAIL"
 
 
+def test_reused_render_manifest_binds_word_delivery_to_the_docx_hash() -> None:
+    with tempfile.TemporaryDirectory() as temp:
+        project_dir, _project, output, _source = _case(Path(temp))
+        verify_path = project_dir / "qa" / "word-verify.json"
+        verify = json.loads(verify_path.read_text(encoding="utf-8"))
+        document_digest = hashlib.sha256(output.read_bytes()).hexdigest()
+        verify["render"].pop("document_sha256")
+        verify["render_reuse_manifest"] = {"document_sha256": document_digest}
+        verify_path.write_text(json.dumps(verify), encoding="utf-8")
+
+        report = readiness.assess(project_dir)
+
+    assert report["gates"]["word_delivery"]["status"] == "PASS"
+    assert report["gates"]["content_and_sources"]["status"] == "PASS"
+
+
 def test_selected_profile_must_have_a_passing_format_gate() -> None:
     with tempfile.TemporaryDirectory() as temp:
         project_dir, project, _output, _source = _case(Path(temp))
@@ -286,6 +302,41 @@ def test_vacuous_generic_source_gate_does_not_cover_claim_evidence_ids() -> None
     assert report["gates"]["word_delivery"]["status"] == "PASS"
     assert report["gates"]["content_and_sources"]["status"] == "INCOMPLETE"
     assert report["gates"]["submission_readiness"]["status"] == "INCOMPLETE"
+
+
+def test_report_citation_registry_is_separate_from_project_claim_registry() -> None:
+    with tempfile.TemporaryDirectory() as temp:
+        project_dir, project, _output, _source = _case(Path(temp))
+        citation_registry = project_dir / "report-evidence.json"
+        citation_registry.write_text(json.dumps({"[1]": "reviewed paper"}), encoding="utf-8")
+        project["report_citation_registry_file"] = "report-evidence.json"
+        _save_project(project_dir, project)
+
+        audit_path = project_dir / "qa" / "integrity-audit.json"
+        audit = json.loads(audit_path.read_text(encoding="utf-8"))
+        audit["gates"]["source_evidence"]["linked_evidence_id_count"] = 3
+        audit["gates"]["source_evidence"]["verified_record_count"] = 3
+        audit["gates"]["source_evidence"]["registry"]["sha256"] = hashlib.sha256(
+            citation_registry.read_bytes()
+        ).hexdigest()
+        audit["gates"]["numeric_citation_bibliography_consistency"] = {
+            "status": "PASS",
+            "finding_count": 0,
+            "findings": [],
+            "citation_numbers": [1, 2, 3],
+            "bibliography_numbers": [1, 2, 3],
+        }
+        audit_path.write_text(json.dumps(audit), encoding="utf-8")
+
+        report = readiness.assess(project_dir)
+
+    assert report["gates"]["content_and_sources"]["status"] == "PASS"
+    assert report["gates"]["submission_readiness"]["status"] == "PASS"
+    checks = report["gates"]["content_and_sources"]["checks"]
+    registry_check = next(item for item in checks if item["check"] == "integrity_registry_hash")
+    source_check = next(item for item in checks if item["check"] == "integrity_source_evidence")
+    assert registry_check["status"] == "PASS"
+    assert "3 unique in-text citation numbers" in source_check["detail"]
 
 
 def test_integrity_evidence_counts_must_be_integers_not_booleans() -> None:

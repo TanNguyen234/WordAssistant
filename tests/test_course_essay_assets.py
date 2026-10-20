@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -164,6 +165,78 @@ class CourseEssayAssetTests(unittest.TestCase):
             self.assertEqual("PASS", report["status"])
             self.assertTrue(hierarchy_png.is_file())
             self.assertIn("Library — librarian", hierarchy_puml.read_text(encoding="utf-8"))
+
+    def test_render_only_mode_supports_manually_verified_non_spring_projects(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            inventory_path = root / "screen-inventory.json"
+            inventory_path.write_text(json.dumps({
+                "schema_version": 1,
+                "system_title": "VietLex",
+                "screens": [{
+                    "id": "search",
+                    "label": "Tìm văn bản",
+                    "roles": ["reader"],
+                    "modules": {"reader": "Tra cứu"},
+                    "routes": ["GET /search"],
+                    "controller": "app/api/legal_routes.py",
+                    "mapping_tokens": ["@router.get('/search')"],
+                    "template": "legal_search.html",
+                    "view_token": "return templates.TemplateResponse",
+                }],
+                "wireframes": [{
+                    "id": "search-form",
+                    "file": "search.png",
+                    "screen_ids": ["search"],
+                    "caption": "Màn hình tra cứu",
+                    "screen_title": "Tìm văn bản pháp luật",
+                    "route": "GET /search",
+                    "sections": [{"title": "Điều kiện tìm kiếm", "fields": ["Số hiệu", "Ngày"]}],
+                }],
+            }), encoding="utf-8")
+
+            report = assets.render_assets(
+                inventory_path,
+                root / "wireframes",
+                root / "diagrams",
+                root / "render-report.json",
+            )
+
+            self.assertEqual("RENDERED", report["status"])
+            self.assertEqual("NOT_RUN_MANUAL_REVIEW_REQUIRED", report["source_verification"])
+            self.assertTrue((root / "wireframes" / "search.png").is_file())
+            self.assertTrue((root / "diagrams" / "screen_hierarchy_reader.png").is_file())
+            self.assertTrue((root / "diagrams" / "screen_hierarchy_reader.puml").is_file())
+            hierarchy = report["hierarchy_sources"][0]
+            self.assertEqual("Pillow", hierarchy["renderer"])
+            self.assertTrue(hierarchy["editable_puml_source"].endswith("screen_hierarchy_reader.puml"))
+            self.assertEqual(report, json.loads((root / "render-report.json").read_text(encoding="utf-8")))
+
+            cli_report = root / "cli-render-report.json"
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    str(Path(assets.__file__).resolve()),
+                    "render",
+                    "--inventory",
+                    str(inventory_path),
+                    "--wireframe-dir",
+                    str(root / "wireframes"),
+                    "--diagram-dir",
+                    str(root / "diagrams"),
+                    "--report",
+                    str(cli_report),
+                ],
+                check=False,
+                capture_output=True,
+                text=True,
+                encoding="utf-8",
+            )
+            self.assertEqual(0, completed.returncode, completed.stderr)
+            self.assertEqual(
+                "NOT_RUN_MANUAL_REVIEW_REQUIRED",
+                json.loads(completed.stdout)["source_verification"],
+            )
 
     def test_initializer_copies_blank_starter_without_overwriting(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:

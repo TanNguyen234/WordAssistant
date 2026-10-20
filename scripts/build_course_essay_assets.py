@@ -7,6 +7,7 @@ import argparse
 import json
 import re
 import shutil
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -397,7 +398,12 @@ def _walk_dicts(value: Any):
             yield from _walk_dicts(child)
 
 
-def validate_inventory(project_root: Path, inventory: dict[str, Any]) -> list[str]:
+def validate_inventory(
+    project_root: Path,
+    inventory: dict[str, Any],
+    *,
+    verify_source: bool = True,
+) -> list[str]:
     errors: list[str] = []
     if inventory.get("schema_version") != 1:
         errors.append("screen inventory schema_version must be 1")
@@ -417,20 +423,21 @@ def validate_inventory(project_root: Path, inventory: dict[str, Any]) -> list[st
                 errors.append(f"{screen_id}: screen route must be a rendered GET view: {route}")
                 continue
             declared_routes.add(route[4:].strip())
-        controller_path = project_root / screen.get("controller", "")
-        if not controller_path.is_file():
-            errors.append(f"{screen_id}: controller source is missing: {screen.get('controller')}")
-            continue
-        controller_source = controller_path.read_text(encoding="utf-8", errors="replace")
-        for token in screen.get("mapping_tokens", []):
-            if token not in controller_source:
-                errors.append(f"{screen_id}: controller mapping evidence is missing: {token}")
-        view_token = screen.get("view_token", "")
-        if not view_token or view_token not in controller_source:
-            errors.append(f"{screen_id}: controller view return evidence is missing: {view_token!r}")
-        template_path = project_root / template_root / screen.get("template", "")
-        if not template_path.is_file():
-            errors.append(f"{screen_id}: view template is missing: {template_path}")
+        if verify_source:
+            controller_path = project_root / screen.get("controller", "")
+            if not controller_path.is_file():
+                errors.append(f"{screen_id}: controller source is missing: {screen.get('controller')}")
+                continue
+            controller_source = controller_path.read_text(encoding="utf-8", errors="replace")
+            for token in screen.get("mapping_tokens", []):
+                if token not in controller_source:
+                    errors.append(f"{screen_id}: controller mapping evidence is missing: {token}")
+            view_token = screen.get("view_token", "")
+            if not view_token or view_token not in controller_source:
+                errors.append(f"{screen_id}: controller view return evidence is missing: {view_token!r}")
+            template_path = project_root / template_root / screen.get("template", "")
+            if not template_path.is_file():
+                errors.append(f"{screen_id}: view template is missing: {template_path}")
         for role in screen.get("roles", []):
             if not isinstance(role, str) or not role.strip():
                 errors.append(f"{screen_id}: role must be a non-empty string: {role!r}")
@@ -441,12 +448,13 @@ def validate_inventory(project_root: Path, inventory: dict[str, Any]) -> list[st
             if role not in screen.get("modules", {}):
                 errors.append(f"{screen_id}: module label missing for role {role!r}")
 
-    discovered = discover_mvc_get_views(project_root, template_root)
-    discovered_routes = {item["route"] for item in discovered}
-    for route in sorted(discovered_routes - declared_routes):
-        errors.append(f"MVC GET view route is missing from the screen inventory: GET {route}")
-    for route in sorted(declared_routes - discovered_routes):
-        errors.append(f"Inventory route is not a discovered MVC GET view: GET {route}")
+    if verify_source:
+        discovered = discover_mvc_get_views(project_root, template_root)
+        discovered_routes = {item["route"] for item in discovered}
+        for route in sorted(discovered_routes - declared_routes):
+            errors.append(f"MVC GET view route is missing from the screen inventory: GET {route}")
+        for route in sorted(declared_routes - discovered_routes):
+            errors.append(f"Inventory route is not a discovered MVC GET view: GET {route}")
 
     wireframe_ids: set[str] = set()
     filenames: set[str] = set()
@@ -608,6 +616,29 @@ def _render_hierarchy(inventory: dict[str, Any], role: str, output_path: Path) -
     return {"role": role, "path": str(output_path.resolve()), "width": width, "height": height}
 
 
+def _render_inventory_assets(
+    inventory: dict[str, Any],
+    wireframe_dir: Path,
+    diagram_dir: Path,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    wireframes = [render_wireframe(item, wireframe_dir / item["file"]) for item in inventory["wireframes"]]
+    hierarchies = []
+    roles = sorted({role for screen in inventory.get("screens", []) for role in screen.get("roles", [])})
+    for role in roles:
+        path = diagram_dir / f"screen_hierarchy_{role}.puml"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(_hierarchy_puml(inventory, role), encoding="utf-8")
+        image_path = diagram_dir / f"screen_hierarchy_{role}.png"
+        hierarchies.append(
+            {
+                "editable_puml_source": str(path.resolve()),
+                "renderer": "Pillow",
+                **_render_hierarchy(inventory, role, image_path),
+            }
+        )
+    return wireframes, hierarchies
+
+
 def build_assets(
     project_root: Path,
     inventory_path: Path,
@@ -624,23 +655,55 @@ def build_assets(
             report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         raise ValueError(json.dumps(report, ensure_ascii=False, indent=2))
 
-    wireframes = [render_wireframe(item, wireframe_dir / item["file"]) for item in inventory["wireframes"]]
-    hierarchies = []
-    roles = sorted({role for screen in inventory.get("screens", []) for role in screen.get("roles", [])})
-    for role in roles:
-        path = diagram_dir / f"screen_hierarchy_{role}.puml"
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(_hierarchy_puml(inventory, role), encoding="utf-8")
-        image_path = diagram_dir / f"screen_hierarchy_{role}.png"
-        hierarchies.append({"plantuml_source": str(path.resolve()), **_render_hierarchy(inventory, role, image_path)})
+    wireframes, hierarchies = _render_inventory_assets(inventory, wireframe_dir, diagram_dir)
 
     report = {
         "created_utc": datetime.now(timezone.utc).isoformat(),
         "status": "PASS",
+        "source_verification": "JAVA_SPRING_MVC_SCANNER",
         "project_root": str(project_root.resolve()),
         "inventory": str(inventory_path.resolve()),
         "screen_count": len(inventory.get("screens", [])),
         "mvc_get_view_routes": discover_mvc_get_views(project_root, inventory.get("template_root", "src/main/resources/templates")),
+        "wireframes": wireframes,
+        "hierarchy_sources": hierarchies,
+        "style": "black and white line wireframes; blank fields and rows; no sample values; no browser chrome",
+    }
+    if report_path:
+        report_path.parent.mkdir(parents=True, exist_ok=True)
+        report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return report
+
+
+def render_assets(
+    inventory_path: Path,
+    wireframe_dir: Path,
+    diagram_dir: Path,
+    report_path: Path | None = None,
+) -> dict[str, Any]:
+    """Render a structurally valid inventory when source verification is manual or external."""
+    inventory = json.loads(inventory_path.read_text(encoding="utf-8-sig"))
+    errors = validate_inventory(Path("."), inventory, verify_source=False)
+    if errors:
+        report = {
+            "status": "FAIL",
+            "source_verification": "NOT_RUN_MANUAL_REVIEW_REQUIRED",
+            "errors": errors,
+            "inventory": str(inventory_path.resolve()),
+        }
+        if report_path:
+            report_path.parent.mkdir(parents=True, exist_ok=True)
+            report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        raise ValueError(json.dumps(report, ensure_ascii=False, indent=2))
+
+    wireframes, hierarchies = _render_inventory_assets(inventory, wireframe_dir, diagram_dir)
+    report = {
+        "created_utc": datetime.now(timezone.utc).isoformat(),
+        "status": "RENDERED",
+        "source_verification": "NOT_RUN_MANUAL_REVIEW_REQUIRED",
+        "manual_source_review_required": True,
+        "inventory": str(inventory_path.resolve()),
+        "screen_count": len(inventory.get("screens", [])),
         "wireframes": wireframes,
         "hierarchy_sources": hierarchies,
         "style": "black and white line wireframes; blank fields and rows; no sample values; no browser chrome",
@@ -680,8 +743,21 @@ def main() -> int:
     build.add_argument("--wireframe-dir", type=Path, required=True)
     build.add_argument("--diagram-dir", type=Path, required=True)
     build.add_argument("--report", type=Path)
+    render = subparsers.add_parser(
+        "render",
+        help="Render a manually source-checked inventory without claiming automated route verification",
+    )
+    render.add_argument("--inventory", type=Path, required=True)
+    render.add_argument("--wireframe-dir", type=Path, required=True)
+    render.add_argument("--diagram-dir", type=Path, required=True)
+    render.add_argument("--report", type=Path)
     args = parser.parse_args()
-    report = build_assets(args.project_root, args.inventory, args.wireframe_dir, args.diagram_dir, args.report)
+    if args.command == "build":
+        report = build_assets(args.project_root, args.inventory, args.wireframe_dir, args.diagram_dir, args.report)
+    else:
+        report = render_assets(args.inventory, args.wireframe_dir, args.diagram_dir, args.report)
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
     print(json.dumps(report, ensure_ascii=False, indent=2))
     return 0
 
