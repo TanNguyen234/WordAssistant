@@ -3,8 +3,8 @@
   "orchestration": {
     "manifest": "antigravity-workflow.json",
     "runner": "wordassistant-antigravity",
-    "repository_runner": "python scripts/run_antigravity_workflow.py",
-    "policy": "Use one fresh Antigravity session per phase; the deterministic constraint monitor may stop the workflow and cannot be overridden by an agent summary."
+    "repository_runner": "Optional only when the user explicitly requests it: python scripts/run_antigravity_workflow.py",
+    "policy": "Antigravity uses an external provider. Do not invoke the runner automatically; use it only after an explicit user request. Normal WordAssistant operations are local and do not require a model provider."
   },
   "commands": [
     "doctor",

@@ -19,6 +19,8 @@ def test_agent_manifest_is_compact_and_actionable():
     assert manifest["orchestration"]["manifest"] == "antigravity-workflow.json"
     assert manifest["orchestration"]["runner"] == "wordassistant-antigravity"
     assert "run_antigravity_workflow.py" in manifest["orchestration"]["repository_runner"]
+    assert "only when the user explicitly requests it" in manifest["orchestration"]["repository_runner"]
+    assert "Do not invoke the runner automatically" in manifest["orchestration"]["policy"]
 
 
 def test_agent_manifest_has_fail_closed_delivery_gates():

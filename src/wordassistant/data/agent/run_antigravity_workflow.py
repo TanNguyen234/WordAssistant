@@ -427,8 +427,6 @@ def build_agy_command(
         json.dumps(schema, separators=(",", ":")),
         "--model",
         execution["model"],
-        "--effort",
-        execution["effort"],
         "--mode",
         mode,
         "--print-timeout",
@@ -436,6 +434,9 @@ def build_agy_command(
         "--print",
         prompt,
     ]
+    effort = execution.get("effort")
+    if effort:
+        command.extend(["--effort", effort])
     if isolated_project:
         command.insert(1, "--new-project")
     return command
@@ -479,7 +480,7 @@ def build_phase_prompt(
     }
     cli_executable = ROOT / ".venv" / "Scripts" / "wordassistant.exe"
     public_cli = str(cli_executable.resolve()) if cli_executable.is_file() else "wordassistant"
-    return f"""Use $antigravity-orchestrator and, for DOCX work, $wordassistant.
+    return f"""Follow the declared project phase contract and, for DOCX work, use $wordassistant.
 You are executing exactly one state-machine phase: {phase_id}.
 Single objective: {phase['objective']}
 Workspace root: {workspace.resolve()}

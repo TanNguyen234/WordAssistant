@@ -56,8 +56,8 @@ def test_workflow_is_a_small_fail_closed_state_machine():
     assert manifest["execution"]["max_objectives_per_invocation"] == 1
     assert manifest["execution"]["fresh_session_per_phase"] is True
     assert manifest["execution"]["stop_on_gate_failure"] is True
-    assert manifest["execution"]["model"] == "gemini-3.7-flash-high"
-    assert manifest["execution"]["effort"] == "high"
+    assert manifest["execution"]["model"] == "gemini-3.8-flash-high"
+    assert manifest["execution"]["effort"] is None
 
     phases = manifest["phases"]
     assert [phase["id"] for phase in phases] == [
@@ -134,7 +134,7 @@ def test_lanes_select_only_needed_phases_and_live_qa_cannot_edit_source():
     ]
 
 
-def test_runner_pins_model_effort_and_keeps_one_phase_per_prompt():
+def test_runner_uses_model_variant_without_unsupported_effort_flag():
     runner = _runner()
     manifest = _manifest()
     command = runner.build_agy_command(
@@ -145,8 +145,8 @@ def test_runner_pins_model_effort_and_keeps_one_phase_per_prompt():
     )
 
     assert command[0] == "agy.exe"
-    assert command[command.index("--model") + 1] == "gemini-3.7-flash-high"
-    assert command[command.index("--effort") + 1] == "high"
+    assert command[command.index("--model") + 1] == "gemini-3.8-flash-high"
+    assert "--effort" not in command
     assert command[command.index("--add-dir") + 1] == str(ROOT)
     assert "--sandbox" in command
     assert "--dangerously-skip-permissions" in command
@@ -155,6 +155,22 @@ def test_runner_pins_model_effort_and_keeps_one_phase_per_prompt():
     assert command[-1] == "bounded discovery"
     assert "--mode" in command
     assert command[command.index("--mode") + 1] == "plan"
+
+
+def test_antigravity_is_not_an_automatic_skill_or_runner_requirement():
+    runner = _runner()
+    rule = (ROOT / ".agents" / "rules" / "wordassistant.md").read_text(encoding="utf-8")
+    prompt = runner.build_phase_prompt(
+        _manifest(),
+        phase_id="intake",
+        request="bounded request",
+        previous_result=None,
+        allowed_paths=set(),
+    )
+    assert "Do not invoke `agy`" in rule
+    assert "only when the user explicitly asks" in rule
+    assert "antigravity-orchestrator" not in rule
+    assert "$antigravity-orchestrator" not in prompt
 
 
 def test_constraint_monitor_rejects_changes_outside_plan_allowlist():
