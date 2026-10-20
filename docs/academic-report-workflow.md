@@ -31,7 +31,7 @@ Without `--selector`, a text replacement can affect matching text throughout the
 
 ### Course-essay acceptance matrix (right-sized to the rubric)
 
-Before composition, list each requirement from the user's assignment and the evidence that will satisfy it. Keep institution-specific rules scoped to the selected profile. If no rubric is available, record that limitation and avoid treating another school's template as authoritative.
+Before composition, list each requirement from the user's assignment and the evidence that will satisfy it. Keep institution-specific rules scoped to the selected profile. If no rubric is available, record that limitation and avoid treating another school's template as authoritative. A generic-profile draft may still be useful for review, but rubric compliance is `NOT_RUN` and submission readiness remains `INCOMPLETE` until the controlling requirements are supplied.
 
 For each illustration, record its kind and source:
 
@@ -43,6 +43,18 @@ For each illustration, record its kind and source:
 Add database/schema tables, representative data, feature/persona screenshots, resolution requirements, and page minimums only when the rubric requests them. Do not fabricate missing schema, data, screenshots, citations, or results. Note when runtime access or a controlling reference is unavailable.
 
 Before delivery, check the actual saved DOCX against the matrix. Update Word fields, render the saved file, and inspect every page for missing content, incorrect colors/styles, unexpected spacing or numbering, image cropping, and page breaks. A generic validator is supporting evidence, not a substitute for the rubric checks.
+
+### Separate Word delivery from academic readiness
+
+Report these gates separately:
+
+- `word_delivery`: `PASS` only after applicable profile validation, native fields/render, and visual review pass. It says the DOCX is structurally and visually deliverable.
+- `content_and_sources`: `PASS` only when each required rubric row is evidenced, each factual project claim resolves to checked source material, and each academic/legal citation resolves to reviewed evidence and a visible reference entry. A source manifest or file hash alone records provenance; it does not prove that a passage supports a claim.
+- `submission_readiness`: `PASS` only when every required gate passes and no required check remains `NOT_RUN`, `BLOCKED`, or `FAIL`. A `WARN` may pass only after every finding is explicitly reviewed and dispositioned; `source_evidence` must be `PASS` and bound to the current evidence registry. Missing rubric, missing evidence registry, or undispositioned warnings keep this status `INCOMPLETE`.
+
+Use `NOT_RUN`, `BLOCKED`, `FAIL`, `PASS`, or `WAIVED` with the authority and reason. Do not label an unresolved row `MET_AS_UNRESOLVED`, and do not describe a Word delivery PASS as a finished or submission-ready essay. If the user asks for a draft without a rubric, deliver it explicitly as a provisional draft with the unresolved gates at the top of the handoff. Tests, benchmarks, runtime screenshots, and external legal-source checks are required only when the assignment or claims depend on them; when not run, limit the claims accordingly.
+
+For a course-essay workspace, configure the saved `wordassistant verify` and `integrity audit` JSON paths in `project.json`, complete `requirements-matrix.csv`, `claim-evidence.csv`, and any warning dispositions, then run `python scripts/check_course_essay_readiness.py WORKSPACE` from the repository root. The read-only checker binds both QA reports to the current DOCX and evidence-registry SHA-256, checks that each claim ID resolves to a reviewed registry record, and prints separate `word_delivery`, `content_and_sources`, and `submission_readiness` gates. Exit code `0` is PASS, `1` is INCOMPLETE, and `2` is FAIL. Example: `word_delivery: PASS; content_and_sources: INCOMPLETE (rubric missing; S1–S8 have no reviewed evidence mapping); submission_readiness: INCOMPLETE — draft, not confirmed ready to submit.`
 
 ## 2. Create the editable Word scaffold
 

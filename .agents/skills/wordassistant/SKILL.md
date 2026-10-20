@@ -17,11 +17,13 @@ Use the CLI as the stable control plane. Never inspect repository source or raw 
 8. Persist native field updates to a distinct final DOCX before the final academic audit. Then run `integrity audit` with the exact profile variant and evidence registry and create `integrity provenance` bound to that final DOCX hash. Any later DOCX mutation invalidates both audit and provenance.
 9. Run `wordassistant verify OUTPUT --json` after edits.
 10. When formatting matters, render and inspect every page. A successful render does not prove fields or numbering are functional.
-11. A final delivery PASS requires both `validate.valid == true` and `verify.delivery_status == "PASS"`; `overall_status` only summarizes the checks requested in that invocation.
+11. A **Word delivery** PASS requires both `validate.valid == true` (when a controlling profile applies) and `verify.delivery_status == "PASS"`; `overall_status` only summarizes the checks requested in that invocation. These checks do not establish academic accuracy, source quality, or course-rubric compliance.
+12. Track Word delivery, content/source review, and submission readiness as separate statuses. If the rubric is missing, required citations are not backed by reviewed evidence, or a required check is `NOT_RUN`, label the document a draft and submission readiness `INCOMPLETE`; do not promote the Word delivery PASS into a claim that the essay is ready to submit. Review and disposition each integrity-audit warning.
+13. For a course essay, save the final verify and integrity-audit JSON at the paths in `project.json`, complete the requirements and claim-evidence matrices, then run `python scripts/check_course_essay_readiness.py WORKSPACE`. The checker is read-only: exit `0` means all configured gates pass, `1` means `INCOMPLETE`, and `2` means `FAIL`. Include all three reported statuses and reasons in the handoff.
 
 ## Course-essay gate (project-driven)
 
-Before editing a course essay, turn the user's rubric and supplied references into a small requirement/evidence matrix. Select an institution profile only when the user or assignment names it. If the rubric or a required reference is missing, mark that check unresolved instead of borrowing rules from another school or inventing requirements.
+Before editing a course essay, turn the user's rubric and supplied references into a small requirement/evidence matrix. Select an institution profile only when the user or assignment names it. If the rubric or a required reference is missing, mark that check unresolved instead of borrowing rules from another school or inventing requirements. Missing rubric means rubric compliance is `NOT_RUN` and submission readiness stays `INCOMPLETE`; it is not a requirement that can be marked met by documenting its absence.
 
 Classify every figure before placing it in Word:
 

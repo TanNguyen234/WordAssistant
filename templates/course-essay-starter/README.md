@@ -7,13 +7,24 @@ Follow `docs/strongwine-course-essay-workflow.md` in order for the full runbook,
 ## Start
 
 1. Copy the project folder using `scripts/init_course_essay_project.py`.
-2. Record the assignment, rubric, selected Word profile (if any), source project and revision in `project.json`; map every rubric requirement in `requirements-matrix.csv`.
+2. Record the assignment file or a faithful `assignment_summary`, rubric, selected Word profile (if any), source project and revision in `project.json`; map every rubric requirement in `requirements-matrix.csv`.
 3. Read only the relevant source files and document them in `screen-inventory.json` and `figure-plan.csv`.
 4. Plan each UML diagram in `diagram-plan.csv`: record its question, source files/symbols, editable `.puml`, rendered image and verification status. A diagram renderer does not verify the facts in a diagram.
 5. Separate current runtime screenshots from wireframes. A wireframe shows verified controls and blank data areas; a runtime screenshot shows the running application at a recorded route, role, state, viewport and date.
 6. Build diagrams from source evidence. Include rendered GET views as screens; list POST actions and API endpoints as actions or interfaces, never as pages.
 7. Create or update the DOCX with the WordAssistant CLI. Select an institutional profile only when the assignment requires it.
-8. Update Word fields, save a new final copy, render that saved copy, and inspect every page. Re-render after any document change.
+8. Update Word fields, save a new output candidate, render that saved copy, and inspect every page. Re-render after any document change.
+9. Save the raw Word verify JSON and integrity audit JSON at the paths configured in `project.json`. If an institution profile is selected, run `wordassistant validate OUTPUT_DOCX --profile ID --variant VARIANT --json` and save its output to `qa/profile-validation.json`. Keep reports bound to the same `output_docx`.
+10. Map each factual claim, including labels such as `(S1)`–`(S8)`, in `claim-evidence.csv`. Record the source path, source SHA-256, exact source location, review status, support confirmation, reviewer, and date.
+11. Give every warning in the integrity audit a matching row in `integrity-warning-dispositions.csv` using its gate name and one-based finding index. A source-evidence warning cannot be waived into readiness; repair the mapping and rerun the audit.
+12. Run `python scripts/check_course_essay_readiness.py PATH_TO_THIS_WORKSPACE` from the WordAssistant repository root. It reads the project, DOCX, QA reports, matrix, claim evidence, warning dispositions, and required acceptance checks without modifying them. Exit code `0` means every configured gate passed, `1` means incomplete, and `2` means a hard failure.
+13. Report all three statuses separately. A WordAssistant PASS only covers Word delivery. If the rubric is absent, S1–S8 do not resolve to reviewed evidence, or another required gate is incomplete, label the DOCX a draft and submission readiness `INCOMPLETE`.
+
+All eight checks listed in `required_acceptance_checks` are mandatory. Set one to `true` only after a person completes the review and records its evidence in the relevant plan or QA report. If a check does not apply, record why in the plan/report before marking it complete; the checker does not infer completion from missing files.
+
+Example handoff when a DOCX renders but assignment requirements or evidence are unresolved:
+
+> Word delivery: PASS. Content and sources: INCOMPLETE — rubric not supplied; S1–S8 are not mapped to reviewed evidence records. Submission readiness: INCOMPLETE. This file is a draft, not confirmed ready to submit.
 
 ## Keep the evidence small and clear
 
@@ -28,6 +39,11 @@ Follow `docs/strongwine-course-essay-workflow.md` in order for the full runbook,
 
 - `project.json`: project identity, authority and acceptance checks.
 - `requirements-matrix.csv`: rubric-to-section/evidence map, initially blank.
+- `claim-evidence.csv`: claim-to-source map with checked source hashes and reviewer confirmation.
+- `evidence.json`: WordAssistant evidence registry. The starter is empty; readiness stays incomplete until claim IDs are registered and reviewed.
+- `integrity-warning-dispositions.csv`: one-based per-finding review record for integrity warnings.
+- `output/`: final DOCX location after Word fields, render, and review are complete.
+- `qa/`: saved, unmodified Word verify, integrity audit, and readiness JSON reports.
 - `screen-inventory.json`: blank starter for source-backed view routes and templates.
 - `figure-plan.csv`: figure evidence plan; it does not claim that a capture has been made.
 - `diagram-plan.csv`: UML/ERD question and evidence plan; it does not claim that a diagram has been verified.

@@ -13,6 +13,7 @@ Use `wordassistant-agent.json` for machine discovery and `.agents/skills/wordass
 9. Use dry-run before destructive changes.
 10. Verify structural, semantic, dynamic-field, native, and visual statuses independently.
 11. Render and inspect every page when layout matters.
+12. For a course essay, complete the workspace requirement/claim evidence files, save raw Word verify and integrity audit JSON to `project.json` paths, and run `python scripts/check_course_essay_readiness.py WORKSPACE`. It returns `word_delivery`, `content_and_sources`, and `submission_readiness` separately without modifying files. Exit `0` is PASS, `1` is INCOMPLETE, and `2` is FAIL. A Word PASS alone never means ready to submit.
 
 `wordassistant capabilities --json` includes `selector_schema` with the allowed
 keys, exact-match semantics, and copyable examples. Do not inspect source code

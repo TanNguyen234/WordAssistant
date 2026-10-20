@@ -43,6 +43,8 @@ Trước khi viết, phân loại tài liệu đầu vào:
 
 Không bịa tên, lớp, MSSV, chữ ký, duyệt, kết quả kiểm thử, số liệu, route, chức năng, bảng dữ liệu hoặc trích dẫn. Thiếu thông tin thì để ô cần điền hoặc ghi `NOT PROVIDED` trong workspace; không lấp bằng nội dung có vẻ hợp lý.
 
+Thiếu rubric không tự biến một bản DOCX generic thành tiểu luận hoàn chỉnh. Có thể tạo bản nháp để người dùng xem, nhưng báo `word_delivery: PASS` riêng và giữ `submission_readiness: INCOMPLETE` cho tới khi yêu cầu môn học và các evidence bắt buộc được kiểm. Không gắn nhãn “đã hoàn tất/sẵn sàng nộp” chỉ vì Word render và verify pass.
+
 ## 2. Khởi tạo workspace mới
 
 Từ thư mục gốc WordAssistant, chọn một thư mục output mới. Script từ chối ghi đè thư mục đã tồn tại:
@@ -56,12 +58,17 @@ New-Item -ItemType Directory -Force artifacts\course-essay | Out-Null
 
 Parent folder phải tồn tại; destination `my-project` thì chưa được tồn tại. Script chép bộ khung từ `templates/course-essay-starter/` và chỉ điền title đã xác minh. Điền các file trong `artifacts/course-essay/my-project/`:
 
-- `project.json`: title/course, assignment/rubric, source root/revision, danh sách reference chỉ đọc, profile (mặc định `null`), output DOCX và các cổng nghiệm thu.
-- `requirements-matrix.csv`: từng yêu cầu ở rubric, vị trí trong đề, mục bài đáp ứng, evidence và trạng thái kiểm chứng.
+- `project.json`: title/course, assignment/rubric, source root/revision, danh sách reference chỉ đọc, profile (mặc định `null`), output DOCX, evidence registry, QA JSON và các cổng nghiệm thu.
+- `requirements-matrix.csv`: từng yêu cầu ở rubric, vị trí trong đề, mục bài đáp ứng, evidence, trạng thái kiểm chứng và người có thẩm quyền nếu được miễn.
+- `claim-evidence.csv`: claim ID, vị trí bài, evidence ID, đường dẫn/hash/vị trí nguồn và xác nhận review.
+- `evidence.json`: registry các evidence ID; ID trong bài phải tồn tại và ở trạng thái reviewed.
+- `integrity-warning-dispositions.csv`: quyết định riêng cho từng warning/finding.
 - `screen-inventory.json`: view GET đã xác minh và định nghĩa wireframe nguồn-backed.
 - `figure-plan.csv`: từng hình cần có, loại hình, nguồn, route/role/state, artifact và trạng thái xác minh.
 - `diagram-plan.csv`: từng biểu đồ UML/ERD, câu hỏi biểu đồ trả lời, source files/symbols, `.puml`, PNG và trạng thái kiểm.
 - `README.md`: hướng dẫn tại workspace và các placeholder phải hoàn tất.
+
+Các trạng thái trong matrix: `PASS`, `NOT_RUN`, `BLOCKED`, `FAIL`, hoặc `WAIVED` kèm lý do và người có thẩm quyền. Không dùng `MET_AS_UNRESOLVED`; thiếu đề/rubric là `NOT_RUN` và chặn xác nhận rubric compliance.
 
 Không sửa project nguồn để làm report. Tạo thư mục output riêng cho `content.json`, `evidence.json`, `.puml`, PNG, DOCX và QA reports. Không lưu credentials hoặc dữ liệu khách hàng vào workspace.
 
@@ -106,6 +113,10 @@ Không đưa POST, API JSON, redirect-only handler, action của nút hay inline
 ### 4.3 `figure-plan.csv`
 
 Đây là sổ theo dõi chứng cứ hình, không phải nguồn sinh hình. Dùng `kind` nhất quán (`wireframe`, `runtime_screenshot`, `saved_project_capture`, `uml`, `screen_hierarchy`, `other`). Với screenshot ghi route, role, state, viewport, ngày chụp và đường dẫn nguồn. Với wireframe ghi route/template, trường/nút đang có và output PNG. `status` bắt đầu là `planned`; chỉ đổi sang `verified`/`captured`/`generated` sau khi nhìn và so với source. Không gọi ảnh cũ trong project là runtime capture mới.
+
+### 4.4 Evidence registry và ký hiệu citation nội bộ
+
+Mỗi citation trong bài phải được phân giải thành một record có nguồn, vị trí/đoạn hỗ trợ, ngày/version và trạng thái review; liên kết claim → record phải nhìn được trong bài hoặc trong evidence registry. `source_manifest.json` với đường dẫn/hash hữu ích cho provenance nhưng không thay bibliography/evidence registry. Ký hiệu `(S1)` chỉ hợp lệ nếu S1 trỏ đến record đã review và tài liệu có danh mục tương ứng. Nếu audit profile yêu cầu nguồn đã review mà registry không có, không lấy `source_evidence: PASS` từ generic profile làm bằng chứng thay thế.
 
 ## 5. Tạo wireframe đúng mẫu và cây phân rã màn hình
 
@@ -222,8 +233,10 @@ Giữ Word semantics: Heading styles thật, section properties, page-number fie
 3. Mở **mọi** đường dẫn `render.page_images` trong report challenge. Không chỉ xem contact sheet. Kiểm tra bìa và trang cận bìa, tiêu đề/căn giữa, khung bìa, header/footer, số trang, text màu xanh ngoài ý muốn, ký tự/dấu tiếng Việt, chữ giãn bất thường, dòng rơi, caption, bảng, ảnh méo/cắt và trang trắng. Mở riêng trang có sơ đồ/wireframe để đọc nhãn ở kích thước trang.
 4. Chỉ sau khi đã xem hết ảnh, lấy token `visual_review_challenge.token` từ report và chạy lại cùng verify với `--visual-reviewed --visual-review-token <token>`. Token gắn với hash trang đã render; nếu sửa DOCX thì render lại và xin challenge/token mới. Không đặt `--visual-reviewed` trước khi đã xem mọi trang.
 5. Đối chiếu nội dung hình lần cuối với route/template/class/method được ghi trong manifest. Nếu sửa bất cứ thứ gì, quay lại cập nhật field, lưu, chạy verify/render và xem lại.
-6. Chạy `validate` chỉ với profile/rubric đã chọn. `validate.valid == true` và `verify.delivery_status == PASS` là điều kiện PASS nếu profile áp dụng; kiểm tra theo profile là `NOT RUN` nếu rubric/profile không có.
-7. Ghi report QA JSON, lệnh chạy, hash SHA-256 của DOCX cuối, profile đã dùng, các điểm `PASS` và `NOT RUN`. Giữ đúng một file mang tên final; giữ source `.puml`, manifest, report QA và DOCX input cần thiết. Không xóa source/evidence để “dọn gọn” nếu chưa xác nhận chúng không còn cần.
+6. Chạy `validate` chỉ với profile/rubric đã chọn. `validate.valid == true` và `verify.delivery_status == PASS` chỉ đặt `word_delivery: PASS`; chúng không kiểm tra tính đúng của luận điểm, nguồn luật, citation, UML hay việc tuân thủ rubric môn học.
+7. Duyệt từng hàng requirements matrix, từng citation/evidence mapping và từng integrity warning. Dùng `PASS` chỉ khi evidence đã mở/đọc và hỗ trợ claim; dùng `NOT_RUN`/`BLOCKED` nếu rubric, registry hoặc kiểm chứng bắt buộc chưa có. Warning heuristic được phân loại và xử lý, không được im lặng bỏ qua.
+8. Đặt `submission_readiness: PASS` chỉ khi mọi yêu cầu đã áp dụng được chứng minh bằng evidence và mọi cổng bắt buộc pass/waive hợp lệ. Nếu thiếu rubric hoặc còn nguồn/citation chưa review, `submission_readiness: INCOMPLETE`; được bàn giao như bản nháp/provisional, không gọi là tiểu luận sẵn sàng nộp.
+9. Ghi report QA JSON, lệnh chạy, hash SHA-256 của DOCX cuối, profile đã dùng, các điểm `PASS`/`NOT_RUN`/`BLOCKED` và trạng thái readiness riêng. Giữ đúng một file mang tên final khi đã đủ điều kiện; giữ source `.puml`, manifest, report QA và DOCX input cần thiết. Không xóa source/evidence để “dọn gọn” nếu chưa xác nhận chúng không còn cần.
 
 Các lệnh WordAssistant thường dùng (chạy `--help` nếu phiên bản CLI khác):
 
@@ -282,7 +295,35 @@ Nếu thay builder/manifest/logic sửa DOCX, chạy focused tests trước và 
 \.venv\Scripts\python.exe -m pytest -q
 ```
 
-Dừng trước khi bàn giao nếu route/view chưa khớp source, sơ đồ còn placeholder, figure không có provenance, ảnh bị crop/chữ không đọc được, caption/danh mục sai, hoặc Word output chưa render và xem sau lần sửa cuối. Nếu thiếu rubric/profile/backend/runtime app, ghi cụ thể phần nào `NOT RUN` thay vì biến thành PASS.
+Dừng trước khi tuyên bố sẵn sàng nộp nếu route/view chưa khớp source, sơ đồ còn placeholder, figure không có provenance, ảnh bị crop/chữ không đọc được, caption/danh mục sai, source/citation chưa review, integrity warning chưa được disposition, rubric thiếu, hoặc một check bắt buộc đang `NOT_RUN`. Có thể bàn giao DOCX đã render như bản nháp, nhưng phải ghi rõ `word_delivery: PASS` và `submission_readiness: INCOMPLETE`.
+
+### Cổng readiness tự động, chỉ đọc
+
+Trong `project.json`, khai báo đường dẫn tương đối tới DOCX cuối, rubric/đề, requirements matrix, claim-evidence, `evidence.json`, verify JSON cuối, integrity-audit JSON cuối và warning-dispositions CSV. Lưu nguyên JSON stdout của WordAssistant; không sửa report để làm cho cổng qua. Verify phải có `delivery_status: PASS`, `overall_status: PASS`, `render_status: PASS`, `visual_status: PASS` và `render.document_sha256` trùng hash DOCX. Nếu chọn profile thì lưu cả `wordassistant validate OUTPUT --profile ID --variant VARIANT --json` tại `qa/profile-validation.json`; `validate.valid` phải là `true`, còn `verify.format_status` phải là `PASS`, cùng đúng profile/variant/file. Integrity audit phải có `document.sha256` trùng hash DOCX, hash registry trùng file hiện tại và `source_evidence: PASS`.
+
+`claim-evidence.csv` ghi một hàng cho mỗi claim cần chứng minh, gồm claim/evidence ID, vị trí trong bài, đường dẫn nguồn, SHA-256, vị trí đoạn hỗ trợ, `review_status=reviewed`, `support_confirmed=yes`, người review và ngày. Mỗi `evidence_id` phải tồn tại trong `evidence.json`, có trạng thái reviewed và cùng source SHA-256/vị trí hỗ trợ. Audit còn phải xác nhận số ID liên kết và số record đã kiểm tra đủ bao phủ các ID của claim matrix; điều này chặn trường hợp `source_evidence: PASS` rỗng do profile không yêu cầu reference. Nếu dùng `(S1)`–`(S8)`, mỗi ID phải có hàng tương ứng và registry record thật. Trong `requirements-matrix.csv`, `evidence_files` là danh sách đường dẫn file phân tách bằng dấu chấm phẩy; mỗi file phải tồn tại. Không để yêu cầu ở trạng thái trống, `NOT_RUN`, `BLOCKED` hoặc `FAIL`. Waiver cần lý do, verification và `waived_by` trong hàng.
+
+Mỗi gate `WARN` trong integrity audit cần một hàng `integrity-warning-dispositions.csv` theo đúng tên gate và `finding_index` bắt đầu từ 1. `decision` chỉ nhận `accepted` hoặc `not_applicable`; ghi lý do, bằng chứng, reviewer và ngày. Cổng không cho phép disposition vượt qua `source_evidence` đang WARN/FAIL; sửa mapping rồi chạy lại integrity audit.
+
+Tám mục trong `required_acceptance_checks` là cổng review thủ công bắt buộc: đã đọc đề/rubric, map claim/evidence, disposition warning, đối chiếu route/template, phân biệt wireframe/runtime capture, cập nhật danh mục hình, cập nhật/lưu Word fields và xem mọi trang render cuối. `true` là xác nhận của người review, không phải kết quả tự suy ra của script. Ghi evidence vào matrix, figure/diagram plan hoặc QA report; nếu một mục không áp dụng, ghi rõ lý do trước khi đánh dấu hoàn tất.
+
+Chạy từ thư mục gốc WordAssistant sau khi DOCX cuối và hai report QA đã cố định:
+
+```powershell
+\.venv\Scripts\python.exe scripts\check_course_essay_readiness.py artifacts\course-essay\my-project
+```
+
+Script chỉ đọc workspace và in một JSON report ra stdout, gồm `word_delivery`, `content_and_sources`, `submission_readiness`, từng check, lý do, đường dẫn DOCX và SHA-256. Nó không sửa project, report QA hay DOCX. Exit code `0` nghĩa readiness `PASS`, `1` nghĩa còn `INCOMPLETE`, `2` nghĩa có lỗi cứng `FAIL`. Lưu stdout nếu cần artifact bền vững, ví dụ `... > artifacts\course-essay\my-project\qa\readiness.json`; giữ stderr riêng.
+
+Ví dụ khi kiểm tra Word đã qua nhưng đề và nguồn chưa đủ:
+
+```text
+word_delivery: PASS
+content_and_sources: INCOMPLETE — rubric chưa có; các claim (S1)–(S8) chưa nối tới evidence đã review.
+submission_readiness: INCOMPLETE — bàn giao bản nháp, chưa xác nhận sẵn sàng nộp.
+```
+
+Kết quả của checker chỉ xác nhận các cổng và file đã khai báo; người review vẫn phải mở/đọc nguồn để xác nhận đoạn nguồn thực sự hỗ trợ luận điểm. Không gọi bài sẵn sàng nộp nếu matrix/claim evidence sai, dữ liệu kê khai không trung thực, hoặc rubric/nguồn bắt buộc chưa được cung cấp.
 
 ## Checklist bàn giao nhanh
 
@@ -292,5 +333,7 @@ Dừng trước khi bàn giao nếu route/view chưa khớp source, sơ đồ c�
 - [ ] `.puml` và hình output cùng được lưu; diagram plan có source và câu hỏi biểu đồ trả lời.
 - [ ] Caption và danh mục được cập nhật thành Word fields; layout được kiểm ở Word.
 - [ ] Mọi trang của đúng DOCX cuối đã được mở xem sau render cuối.
-- [ ] Báo hash, commands, QA reports, PASS/NOT RUN và chỉ một final output.
+- [ ] Citation/claim có evidence đã review; mọi integrity warning có disposition.
+- [ ] Word delivery và academic submission readiness được báo riêng; không còn cổng bắt buộc `NOT_RUN` để gọi là sẵn sàng nộp.
+- [ ] Báo hash, commands, QA reports, PASS/NOT RUN/BLOCKED và chỉ một final output khi đã đủ điều kiện.
 - [ ] Lỗi phát sinh mới chỉ được thêm vào lessons sau khi đã xác nhận nguyên nhân và cách phòng ngừa.
