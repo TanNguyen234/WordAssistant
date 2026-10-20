@@ -51,3 +51,8 @@ These rules apply to WordAssistant and to agents using this repository as a DOCX
 - For DOCX work, follow `.agents/skills/wordassistant/SKILL.md`.
 - For English or Vietnamese prose review, follow `.agents/skills/signs-of-ai-writing/SKILL.md`; use its linter findings as optional review prompts only.
 - Skills guide workflow. They do not install tools, plugins, credentials, dependencies, or authorize external calls.
+
+
+## Course-essay project asset and caption gate
+
+When checking an existing course essay against a current application project, preserve the input DOCX and work on a distinct output copy. Tie each screenshot/diagram to current route/template, actual image contents, and (when available) source asset hash. Hash-only evidence is snapshot provenance, not runtime verification. Mark mockups as proposals. Inspect dynamic SEQ field placement and the visible Word-rendered caption/list. Keep stdout JSON and stderr separate. Record missing rubric/runtime evidence as NOT_RUN, not PASS. Read `docs/strongwine-course-essay-lessons.md` and follow `docs/strongwine-course-essay-workflow.md`.

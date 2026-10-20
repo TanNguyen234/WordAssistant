@@ -1,0 +1,1264 @@
+{
+  "schema_version": 1,
+  "project": "StrongWine",
+  "scope_note": "Server-rendered MVC GET views only. API endpoints, POST actions, redirects and third-party Stripe checkout are not pages in the hierarchy.",
+  "template_root": "src/main/resources/templates",
+  "screens": [
+    {
+      "id": "home",
+      "label": "Trang chủ",
+      "roles": [
+        "customer"
+      ],
+      "modules": {
+        "customer": "Khám phá"
+      },
+      "routes": [
+        "GET /home"
+      ],
+      "controller": "src/main/java/com/strongwine/strongwine/controller/HomeController.java",
+      "mapping_tokens": [
+        "@GetMapping(\"/home\")"
+      ],
+      "template": "home.html",
+      "view_token": "return \"home\";"
+    },
+    {
+      "id": "wine_catalog",
+      "label": "Danh mục rượu",
+      "roles": [
+        "customer",
+        "admin"
+      ],
+      "modules": {
+        "customer": "Khám phá",
+        "admin": "Sản phẩm"
+      },
+      "routes": [
+        "GET /wines"
+      ],
+      "controller": "src/main/java/com/strongwine/strongwine/controller/WineController.java",
+      "mapping_tokens": [
+        "@RequestMapping(\"/wines\")",
+        "@GetMapping"
+      ],
+      "template": "wine-list.html",
+      "view_token": "return \"wine-list\";"
+    },
+    {
+      "id": "wine_detail",
+      "label": "Chi tiết rượu",
+      "roles": [
+        "customer"
+      ],
+      "modules": {
+        "customer": "Khám phá"
+      },
+      "routes": [
+        "GET /wines/{id}"
+      ],
+      "controller": "src/main/java/com/strongwine/strongwine/controller/WineController.java",
+      "mapping_tokens": [
+        "@RequestMapping(\"/wines\")",
+        "@GetMapping(\"/{id}\")"
+      ],
+      "template": "wine-details.html",
+      "view_token": "return \"wine-details\";"
+    },
+    {
+      "id": "cart",
+      "label": "Giỏ hàng",
+      "roles": [
+        "customer"
+      ],
+      "modules": {
+        "customer": "Mua hàng"
+      },
+      "routes": [
+        "GET /cart"
+      ],
+      "controller": "src/main/java/com/strongwine/strongwine/controller/CartController.java",
+      "mapping_tokens": [
+        "@RequestMapping(\"/cart\")",
+        "@GetMapping"
+      ],
+      "template": "cart.html",
+      "view_token": "return \"cart\";"
+    },
+    {
+      "id": "checkout",
+      "label": "Checkout",
+      "roles": [
+        "customer"
+      ],
+      "modules": {
+        "customer": "Mua hàng"
+      },
+      "routes": [
+        "GET /cart/checkout"
+      ],
+      "controller": "src/main/java/com/strongwine/strongwine/controller/CartController.java",
+      "mapping_tokens": [
+        "@RequestMapping(\"/cart\")",
+        "@GetMapping(\"/checkout\")"
+      ],
+      "template": "checkout.html",
+      "view_token": "return \"checkout\";"
+    },
+    {
+      "id": "login",
+      "label": "Đăng nhập",
+      "roles": [
+        "customer"
+      ],
+      "modules": {
+        "customer": "Tài khoản"
+      },
+      "routes": [
+        "GET /login"
+      ],
+      "controller": "src/main/java/com/strongwine/strongwine/controller/AuthController.java",
+      "mapping_tokens": [
+        "@GetMapping(\"/login\")"
+      ],
+      "template": "login.html",
+      "view_token": "return \"login\";"
+    },
+    {
+      "id": "register",
+      "label": "Đăng ký",
+      "roles": [
+        "customer"
+      ],
+      "modules": {
+        "customer": "Tài khoản"
+      },
+      "routes": [
+        "GET /register"
+      ],
+      "controller": "src/main/java/com/strongwine/strongwine/controller/AuthController.java",
+      "mapping_tokens": [
+        "@GetMapping(\"/register\")"
+      ],
+      "template": "register.html",
+      "view_token": "return \"register\";"
+    },
+    {
+      "id": "forgot_password",
+      "label": "Quên mật khẩu",
+      "roles": [
+        "customer"
+      ],
+      "modules": {
+        "customer": "Tài khoản"
+      },
+      "routes": [
+        "GET /forgot-password"
+      ],
+      "controller": "src/main/java/com/strongwine/strongwine/controller/AuthController.java",
+      "mapping_tokens": [
+        "@GetMapping(\"/forgot-password\")"
+      ],
+      "template": "forgot-password.html",
+      "view_token": "return \"forgot-password\";"
+    },
+    {
+      "id": "reset_password",
+      "label": "Đặt lại mật khẩu",
+      "roles": [
+        "customer"
+      ],
+      "modules": {
+        "customer": "Tài khoản"
+      },
+      "routes": [
+        "GET /reset-password"
+      ],
+      "controller": "src/main/java/com/strongwine/strongwine/controller/AuthController.java",
+      "mapping_tokens": [
+        "@GetMapping(\"/reset-password\")"
+      ],
+      "template": "reset-password.html",
+      "view_token": "return \"reset-password\";"
+    },
+    {
+      "id": "orders",
+      "label": "Đơn hàng của tôi",
+      "roles": [
+        "customer"
+      ],
+      "modules": {
+        "customer": "Đơn hàng"
+      },
+      "routes": [
+        "GET /orders"
+      ],
+      "controller": "src/main/java/com/strongwine/strongwine/controller/OrderController.java",
+      "mapping_tokens": [
+        "@GetMapping(\"/orders\")"
+      ],
+      "template": "orders.html",
+      "view_token": "return \"orders\";"
+    },
+    {
+      "id": "order_detail",
+      "label": "Chi tiết đơn hàng",
+      "roles": [
+        "customer"
+      ],
+      "modules": {
+        "customer": "Đơn hàng"
+      },
+      "routes": [
+        "GET /orders/{id}"
+      ],
+      "controller": "src/main/java/com/strongwine/strongwine/controller/OrderController.java",
+      "mapping_tokens": [
+        "@GetMapping(\"/orders/{id}\")"
+      ],
+      "template": "order-detail.html",
+      "view_token": "return \"order-detail\";"
+    },
+    {
+      "id": "order_confirmation",
+      "label": "Xác nhận đơn hàng",
+      "roles": [
+        "customer"
+      ],
+      "modules": {
+        "customer": "Đơn hàng"
+      },
+      "routes": [
+        "GET /order-confirmation"
+      ],
+      "controller": "src/main/java/com/strongwine/strongwine/controller/OrderController.java",
+      "mapping_tokens": [
+        "@GetMapping(\"/order-confirmation\")"
+      ],
+      "template": "order-confirmation.html",
+      "view_token": "return \"order-confirmation\";"
+    },
+    {
+      "id": "admin_dashboard",
+      "label": "Tổng quan quản trị",
+      "roles": [
+        "admin"
+      ],
+      "modules": {
+        "admin": "Tổng quan"
+      },
+      "routes": [
+        "GET /admin"
+      ],
+      "controller": "src/main/java/com/strongwine/strongwine/controller/AdminController.java",
+      "mapping_tokens": [
+        "@RequestMapping(\"/admin\")",
+        "@GetMapping"
+      ],
+      "template": "admin-dashboard.html",
+      "view_token": "return \"admin-dashboard\";"
+    },
+    {
+      "id": "wine_create",
+      "label": "Thêm rượu",
+      "roles": [
+        "admin"
+      ],
+      "modules": {
+        "admin": "Sản phẩm"
+      },
+      "routes": [
+        "GET /wines/admin/create"
+      ],
+      "controller": "src/main/java/com/strongwine/strongwine/controller/WineController.java",
+      "mapping_tokens": [
+        "@RequestMapping(\"/wines\")",
+        "@GetMapping(\"/admin/create\")"
+      ],
+      "template": "wine-form.html",
+      "view_token": "return \"wine-form\";"
+    },
+    {
+      "id": "wine_edit",
+      "label": "Sửa rượu",
+      "roles": [
+        "admin"
+      ],
+      "modules": {
+        "admin": "Sản phẩm"
+      },
+      "routes": [
+        "GET /wines/admin/edit/{id}"
+      ],
+      "controller": "src/main/java/com/strongwine/strongwine/controller/WineController.java",
+      "mapping_tokens": [
+        "@RequestMapping(\"/wines\")",
+        "@GetMapping(\"/admin/edit/{id}\")"
+      ],
+      "template": "wine-form.html",
+      "view_token": "return \"wine-form\";"
+    },
+    {
+      "id": "admin_wine_import",
+      "label": "Nhập rượu từ Excel",
+      "roles": [
+        "admin"
+      ],
+      "modules": {
+        "admin": "Sản phẩm"
+      },
+      "routes": [
+        "GET /admin/wines/import"
+      ],
+      "controller": "src/main/java/com/strongwine/strongwine/controller/AdminController.java",
+      "mapping_tokens": [
+        "@RequestMapping(\"/admin\")",
+        "@GetMapping(\"/wines/import\")"
+      ],
+      "template": "admin-wine-import.html",
+      "view_token": "return \"admin-wine-import\";"
+    },
+    {
+      "id": "admin_orders",
+      "label": "Đơn hàng toàn sàn",
+      "roles": [
+        "admin"
+      ],
+      "modules": {
+        "admin": "Đơn hàng và thanh toán"
+      },
+      "routes": [
+        "GET /admin/orders"
+      ],
+      "controller": "src/main/java/com/strongwine/strongwine/controller/AdminOrderController.java",
+      "mapping_tokens": [
+        "@RequestMapping(\"/admin/orders\")",
+        "@GetMapping"
+      ],
+      "template": "admin-orders.html",
+      "view_token": "return \"admin-orders\";"
+    },
+    {
+      "id": "admin_payments",
+      "label": "Thanh toán",
+      "roles": [
+        "admin"
+      ],
+      "modules": {
+        "admin": "Đơn hàng và thanh toán"
+      },
+      "routes": [
+        "GET /admin/payments"
+      ],
+      "controller": "src/main/java/com/strongwine/strongwine/controller/AdminPaymentController.java",
+      "mapping_tokens": [
+        "@RequestMapping(\"/admin/payments\")",
+        "@GetMapping"
+      ],
+      "template": "admin-payments.html",
+      "view_token": "return \"admin-payments\";"
+    },
+    {
+      "id": "admin_inventory",
+      "label": "Tồn kho",
+      "roles": [
+        "admin"
+      ],
+      "modules": {
+        "admin": "Kho và vận đơn"
+      },
+      "routes": [
+        "GET /admin/inventory"
+      ],
+      "controller": "src/main/java/com/strongwine/strongwine/controller/AdminInventoryController.java",
+      "mapping_tokens": [
+        "@RequestMapping(\"/admin/inventory\")",
+        "@org.springframework.web.bind.annotation.GetMapping"
+      ],
+      "template": "admin-inventory.html",
+      "view_token": "return \"admin-inventory\";"
+    },
+    {
+      "id": "admin_shipments",
+      "label": "Danh sách vận đơn",
+      "roles": [
+        "admin"
+      ],
+      "modules": {
+        "admin": "Kho và vận đơn"
+      },
+      "routes": [
+        "GET /admin/shipments"
+      ],
+      "controller": "src/main/java/com/strongwine/strongwine/controller/AdminShipmentController.java",
+      "mapping_tokens": [
+        "@RequestMapping(\"/admin/shipments\")",
+        "@GetMapping"
+      ],
+      "template": "admin-shipments.html",
+      "view_token": "return \"admin-shipments\";"
+    },
+    {
+      "id": "admin_shipment_edit",
+      "label": "Sửa vận đơn",
+      "roles": [
+        "admin"
+      ],
+      "modules": {
+        "admin": "Kho và vận đơn"
+      },
+      "routes": [
+        "GET /admin/shipments/edit/{id}"
+      ],
+      "controller": "src/main/java/com/strongwine/strongwine/controller/AdminShipmentController.java",
+      "mapping_tokens": [
+        "@RequestMapping(\"/admin/shipments\")",
+        "@GetMapping(\"/edit/{id}\")"
+      ],
+      "template": "admin-shipment-form.html",
+      "view_token": "return \"admin-shipment-form\";"
+    },
+    {
+      "id": "admin_users",
+      "label": "Danh sách người dùng",
+      "roles": [
+        "admin"
+      ],
+      "modules": {
+        "admin": "Người dùng"
+      },
+      "routes": [
+        "GET /admin/users"
+      ],
+      "controller": "src/main/java/com/strongwine/strongwine/controller/AdminUserController.java",
+      "mapping_tokens": [
+        "@RequestMapping(\"/admin/users\")",
+        "@GetMapping"
+      ],
+      "template": "admin-users.html",
+      "view_token": "return \"admin-users\";"
+    },
+    {
+      "id": "admin_user_create",
+      "label": "Tạo người dùng",
+      "roles": [
+        "admin"
+      ],
+      "modules": {
+        "admin": "Người dùng"
+      },
+      "routes": [
+        "GET /admin/users/create"
+      ],
+      "controller": "src/main/java/com/strongwine/strongwine/controller/AdminUserController.java",
+      "mapping_tokens": [
+        "@RequestMapping(\"/admin/users\")",
+        "@GetMapping(\"/create\")"
+      ],
+      "template": "admin-user-form.html",
+      "view_token": "return \"admin-user-form\";"
+    },
+    {
+      "id": "admin_user_edit",
+      "label": "Sửa người dùng",
+      "roles": [
+        "admin"
+      ],
+      "modules": {
+        "admin": "Người dùng"
+      },
+      "routes": [
+        "GET /admin/users/edit/{id}"
+      ],
+      "controller": "src/main/java/com/strongwine/strongwine/controller/AdminUserController.java",
+      "mapping_tokens": [
+        "@RequestMapping(\"/admin/users\")",
+        "@GetMapping(\"/edit/{id}\")"
+      ],
+      "template": "admin-user-form.html",
+      "view_token": "return \"admin-user-form\";"
+    },
+    {
+      "id": "admin_shippers",
+      "label": "Danh sách shipper",
+      "roles": [
+        "admin"
+      ],
+      "modules": {
+        "admin": "Nhân viên giao hàng"
+      },
+      "routes": [
+        "GET /admin/shippers"
+      ],
+      "controller": "src/main/java/com/strongwine/strongwine/controller/AdminShipperController.java",
+      "mapping_tokens": [
+        "@RequestMapping(\"/admin/shippers\")",
+        "@GetMapping"
+      ],
+      "template": "admin-shippers.html",
+      "view_token": "return \"admin-shippers\";"
+    },
+    {
+      "id": "admin_shipper_create",
+      "label": "Tạo hồ sơ shipper",
+      "roles": [
+        "admin"
+      ],
+      "modules": {
+        "admin": "Nhân viên giao hàng"
+      },
+      "routes": [
+        "GET /admin/shippers/create"
+      ],
+      "controller": "src/main/java/com/strongwine/strongwine/controller/AdminShipperController.java",
+      "mapping_tokens": [
+        "@RequestMapping(\"/admin/shippers\")",
+        "@GetMapping(\"/create\")"
+      ],
+      "template": "admin-shipper-form.html",
+      "view_token": "return \"admin-shipper-form\";"
+    },
+    {
+      "id": "admin_shipper_edit",
+      "label": "Sửa hồ sơ shipper",
+      "roles": [
+        "admin"
+      ],
+      "modules": {
+        "admin": "Nhân viên giao hàng"
+      },
+      "routes": [
+        "GET /admin/shippers/edit/{id}"
+      ],
+      "controller": "src/main/java/com/strongwine/strongwine/controller/AdminShipperController.java",
+      "mapping_tokens": [
+        "@RequestMapping(\"/admin/shippers\")",
+        "@GetMapping(\"/edit/{id}\")"
+      ],
+      "template": "admin-shipper-form.html",
+      "view_token": "return \"admin-shipper-form\";"
+    },
+    {
+      "id": "shipper_dashboard",
+      "label": "Bảng điều khiển giao hàng",
+      "roles": [
+        "shipper"
+      ],
+      "modules": {
+        "shipper": "Công việc giao hàng"
+      },
+      "routes": [
+        "GET /shipper",
+        "GET /shipper/dashboard",
+        "GET /shipper/shipments"
+      ],
+      "controller": "src/main/java/com/strongwine/strongwine/controller/ShipperController.java",
+      "mapping_tokens": [
+        "@RequestMapping(\"/shipper\")",
+        "@GetMapping({\"\", \"/dashboard\", \"/shipments\"})"
+      ],
+      "template": "shipper-dashboard.html",
+      "view_token": "return \"shipper-dashboard\";"
+    }
+  ],
+  "wireframes": [
+    {
+      "id": "home",
+      "file": "wf_4_1_home.png",
+      "screen_ids": [
+        "home"
+      ],
+      "caption": "Hình 4.1: Wireframe Trang chủ sàn thương mại điện tử StrongWine (Grayscale Web Mockup)",
+      "screen_title": "Trang chủ StrongWine",
+      "route": "GET /home",
+      "sections": [
+        {
+          "title": "Điều hướng",
+          "text_items": [
+            "StrongWine",
+            "Trang chủ",
+            "Danh mục rượu vang",
+            "Đăng nhập",
+            "Giỏ hàng"
+          ]
+        },
+        {
+          "title": "Nội dung trang chủ",
+          "text_items": [
+            "Tinh hoa từ những vườn nho danh tiếng thế giới.",
+            "Khám phá theo dòng rượu vang",
+            "Bộ sưu tập nổi bật"
+          ],
+          "panels": [
+            "Khu vực nội dung chính"
+          ]
+        },
+        {
+          "title": "Sản phẩm",
+          "cards": {
+            "count": 4,
+            "items": [
+              "Ảnh sản phẩm",
+              "Tên rượu vang",
+              "Giá",
+              "+ Giỏ"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "checkout",
+      "file": "wf_4_5_checkout_v2.png",
+      "screen_ids": [
+        "checkout"
+      ],
+      "caption": "Hình 4.5: Wireframe Giao diện thanh toán đơn hàng Checkout (Grayscale Web Mockup)",
+      "screen_title": "Hoàn tất đơn đặt hàng",
+      "route": "GET /cart/checkout",
+      "sections": [
+        {
+          "title": "Thông tin liên hệ và nhận mã OTP",
+          "fields": [
+            "Họ và tên người nhận",
+            "Số điện thoại liên hệ",
+            "Email nhận thông báo và mã OTP",
+            "Địa chỉ nhận hàng chi tiết",
+            "Ghi chú"
+          ]
+        },
+        {
+          "title": "Vị trí giao nhận",
+          "fields": [
+            "Tìm địa điểm trên bản đồ"
+          ],
+          "panels": [
+            "Bản đồ giao nhận"
+          ]
+        },
+        {
+          "title": "Thanh toán",
+          "fields": [
+            "Hình thức thanh toán"
+          ],
+          "text_items": [
+            "Đơn hàng của bạn"
+          ],
+          "buttons": [
+            "Xác nhận đặt hàng"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "order_detail",
+      "file": "wf_4_6_order_detail.png",
+      "screen_ids": [
+        "order_detail"
+      ],
+      "caption": "Hình 4.6: Wireframe Chi tiết đơn hàng và theo dõi vận chuyển (Grayscale Web Mockup)",
+      "screen_title": "Chi tiết đơn hàng",
+      "route": "GET /orders/{id}",
+      "sections": [
+        {
+          "title": "Hành trình đơn hàng",
+          "text_items": [
+            "Trạng thái đơn hàng",
+            "Thông tin giao nhận"
+          ]
+        },
+        {
+          "title": "Sản phẩm đặt mua",
+          "table_columns": [
+            "Tên rượu vang",
+            "Đơn giá",
+            "Số lượng",
+            "Thành tiền"
+          ],
+          "rows": 2
+        },
+        {
+          "title": "Mã nhận rượu bảo mật",
+          "fields": [
+            "Mã OTP"
+          ],
+          "buttons": [
+            "Sao chép mã OTP",
+            "Thanh toán ngay"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "catalog",
+      "file": "wf_4_2_catalog.png",
+      "screen_ids": [
+        "wine_catalog"
+      ],
+      "caption": "Hình 4.2: Wireframe Danh mục rượu và bộ lọc đa tiêu chí (Grayscale Web Mockup)",
+      "screen_title": "Bộ sưu tập rượu vang",
+      "route": "GET /wines",
+      "sections": [
+        {
+          "title": "Bộ lọc rượu",
+          "fields": [
+            "Tên rượu vang",
+            "Dòng rượu vang",
+            "Quốc gia",
+            "Niên vụ",
+            "Giá từ",
+            "Giá đến",
+            "Sắp xếp"
+          ],
+          "text_items": [
+            "Chỉ hiển thị rượu còn tồn kho"
+          ],
+          "buttons": [
+            "Áp dụng bộ lọc",
+            "Xoá"
+          ]
+        },
+        {
+          "title": "Danh sách rượu",
+          "cards": {
+            "count": 4,
+            "items": [
+              "Ảnh sản phẩm",
+              "Tên rượu vang",
+              "Giá",
+              "Xem nhanh",
+              "+ Giỏ"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "wine_detail",
+      "file": "wf_4_3_wine_detail.png",
+      "screen_ids": [
+        "wine_detail"
+      ],
+      "caption": "Hình 4.3: Wireframe Chi tiết sản phẩm rượu và tasting notes (Grayscale Web Mockup)",
+      "screen_title": "Chi tiết rượu vang",
+      "route": "GET /wines/{id}",
+      "sections": [
+        {
+          "title": "Thông tin sản phẩm",
+          "panels": [
+            "Ảnh chai rượu"
+          ],
+          "text_items": [
+            "Tên rượu vang",
+            "Dòng rượu vang",
+            "Quốc gia",
+            "Niên vụ",
+            "Giá"
+          ]
+        },
+        {
+          "title": "Mua hàng",
+          "fields": [
+            "Số lượng"
+          ],
+          "buttons": [
+            "Thêm vào giỏ hàng",
+            "Mua ngay"
+          ]
+        },
+        {
+          "title": "Đánh giá và ghi chú thưởng thức",
+          "fields": [
+            "Điểm thưởng thức (1 - 5 sao)",
+            "Cảm nhận hương vị và món ăn kết hợp"
+          ],
+          "buttons": [
+            "Gửi đánh giá"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "auth",
+      "file": "wf_4_7_auth.png",
+      "screen_ids": [
+        "login",
+        "register"
+      ],
+      "caption": "Hình 4.7: Wireframe Đăng nhập và tạo tài khoản thành viên (Grayscale Web Mockup)",
+      "screen_title": "Đăng nhập và đăng ký",
+      "route": "GET /login · GET /register",
+      "sections": [
+        {
+          "title": "Đăng nhập — /login",
+          "fields": [
+            "Tên đăng nhập hoặc Email",
+            "Mật khẩu"
+          ],
+          "buttons": [
+            "Đăng nhập vào hệ thống"
+          ]
+        },
+        {
+          "title": "Tạo tài khoản — /register",
+          "fields": [
+            "Tên đăng nhập",
+            "Địa chỉ Email",
+            "Mật khẩu",
+            "Xác nhận mật khẩu"
+          ],
+          "buttons": [
+            "Hoàn tất đăng ký"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "password_reset",
+      "file": "wf_4_8_password_reset.png",
+      "screen_ids": [
+        "forgot_password",
+        "reset_password"
+      ],
+      "caption": "Hình 4.8: Wireframe Biểu mẫu yêu cầu đặt lại mật khẩu bảo mật (Grayscale Web Mockup)",
+      "screen_title": "Khôi phục mật khẩu",
+      "route": "GET /forgot-password · GET /reset-password",
+      "sections": [
+        {
+          "title": "Gửi yêu cầu khôi phục — /forgot-password",
+          "fields": [
+            "Email đã đăng ký"
+          ],
+          "buttons": [
+            "Gửi yêu cầu khôi phục"
+          ]
+        },
+        {
+          "title": "Đặt mật khẩu mới — /reset-password",
+          "fields": [
+            "Mật khẩu mới",
+            "Xác nhận mật khẩu mới"
+          ],
+          "buttons": [
+            "Lưu mật khẩu mới"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cart",
+      "file": "wf_4_4_cart.png",
+      "screen_ids": [
+        "cart"
+      ],
+      "caption": "Hình 4.4: Wireframe Quản lý giỏ hàng và cập nhật số lượng (Grayscale Web Mockup)",
+      "screen_title": "Giỏ hàng của bạn",
+      "route": "GET /cart",
+      "sections": [
+        {
+          "title": "Sản phẩm trong giỏ hàng",
+          "table_columns": [
+            "Hình ảnh",
+            "Rượu vang",
+            "Đơn giá",
+            "Số lượng",
+            "Thành tiền",
+            "Thao tác"
+          ],
+          "rows": 3
+        },
+        {
+          "title": "Thông tin tạm tính",
+          "text_items": [
+            "Tổng tiền đơn hàng"
+          ],
+          "buttons": [
+            "Tiếp tục mua sắm",
+            "Tiến hành đặt hàng"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "admin_dashboard",
+      "file": "wf_5_3_admin_dashboard.png",
+      "screen_ids": [
+        "admin_dashboard"
+      ],
+      "caption": "Hình 5.3: Wireframe Bảng điều khiển quản trị Dashboard KPI (Grayscale Web Mockup)",
+      "screen_title": "Tổng quan vận hành và doanh thu",
+      "route": "GET /admin",
+      "sections": [
+        {
+          "title": "Tổng quan",
+          "panels": [
+            "Chỉ số tổng quan",
+            "Biểu đồ doanh thu 7 ngày",
+            "Cơ cấu dòng rượu vang"
+          ]
+        },
+        {
+          "title": "Bảng dữ liệu",
+          "table_columns": [
+            "Mã đơn",
+            "Khách nhận",
+            "Tổng tiền",
+            "Trạng thái",
+            "Thanh toán"
+          ],
+          "rows": 2
+        },
+        {
+          "title": "Cảnh báo",
+          "text_items": [
+            "Đơn đặt hàng gần đây",
+            "Cảnh báo tồn kho thấp"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "admin_users",
+      "file": "wf_5_7_admin_users.png",
+      "screen_ids": [
+        "admin_users"
+      ],
+      "caption": "Hình 5.7: Wireframe Quản lý tài khoản người dùng và phân quyền (Grayscale Web Mockup)",
+      "screen_title": "Danh sách người dùng hệ thống",
+      "route": "GET /admin/users",
+      "sections": [
+        {
+          "title": "Người dùng",
+          "table_columns": [
+            "ID",
+            "Tên đăng nhập",
+            "Email",
+            "Vai trò",
+            "Ngày tạo",
+            "Thao tác"
+          ],
+          "rows": 4
+        }
+      ]
+    },
+    {
+      "id": "admin_shippers",
+      "file": "wf_5_8_admin_shippers.png",
+      "screen_ids": [
+        "admin_shippers"
+      ],
+      "caption": "Hình 5.8: Wireframe Quản lý danh sách nhân viên giao hàng Shipper (Grayscale Web Mockup)",
+      "screen_title": "Quản lý nhân viên giao hàng",
+      "route": "GET /admin/shippers",
+      "sections": [
+        {
+          "title": "Danh sách shipper",
+          "table_columns": [
+            "ID",
+            "Họ và tên",
+            "Số điện thoại",
+            "Phương tiện",
+            "Trạng thái",
+            "Tải đơn",
+            "Sẵn sàng nhận đơn",
+            "Thao tác"
+          ],
+          "rows": 4
+        }
+      ]
+    },
+    {
+      "id": "admin_wines",
+      "file": "wf_5_4_admin_wines_v2.png",
+      "screen_ids": [
+        "wine_catalog"
+      ],
+      "caption": "Hình 5.4: Wireframe Quản lý danh mục và sản phẩm rượu vang (Grayscale Web Mockup)",
+      "screen_title": "Danh mục rượu — chế độ quản trị",
+      "route": "GET /wines (nút quản trị theo quyền)",
+      "sections": [
+        {
+          "title": "Thao tác quản trị theo quyền",
+          "buttons": [
+            "Thêm rượu",
+            "Nhập Excel"
+          ]
+        },
+        {
+          "title": "Bộ lọc và danh sách",
+          "fields": [
+            "Tên rượu vang",
+            "Dòng rượu vang",
+            "Quốc gia",
+            "Niên vụ",
+            "Giá từ",
+            "Giá đến",
+            "Sắp xếp"
+          ],
+          "cards": {
+            "count": 4,
+            "items": [
+              "Ảnh sản phẩm",
+              "Tên rượu vang",
+              "Giá",
+              "Xem nhanh",
+              "+ Giỏ"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "admin_wine_form",
+      "file": "wf_5_5_admin_wine_form.png",
+      "screen_ids": [
+        "wine_create",
+        "wine_edit"
+      ],
+      "caption": "Hình 5.5: Wireframe Thêm mới và chỉnh sửa thông tin rượu (Grayscale Web Mockup)",
+      "screen_title": "Biểu mẫu sản phẩm rượu",
+      "route": "GET /wines/admin/create · GET /wines/admin/edit/{id}",
+      "sections": [
+        {
+          "title": "Thông tin sản phẩm",
+          "fields": [
+            "Tên rượu vang",
+            "Dòng rượu vang",
+            "Quốc gia xuất xứ",
+            "Niên vụ",
+            "Giá niêm yết",
+            "Đường dẫn ảnh sản phẩm",
+            "Tải ảnh sản phẩm",
+            "Ghi chú hương vị và mô tả chi tiết"
+          ],
+          "buttons": [
+            "Lưu thông tin sản phẩm"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "admin_orders",
+      "file": "wf_5_9_admin_orders.png",
+      "screen_ids": [
+        "admin_orders"
+      ],
+      "caption": "Hình 5.9: Wireframe Giám sát đơn hàng toàn sàn và trạng thái thanh toán (Grayscale Web Mockup)",
+      "screen_title": "Danh sách đơn đặt hàng",
+      "route": "GET /admin/orders",
+      "sections": [
+        {
+          "title": "Đơn hàng",
+          "table_columns": [
+            "Mã đơn",
+            "Khách hàng",
+            "Người nhận và địa chỉ",
+            "Ngày đặt",
+            "Tổng tiền",
+            "Trạng thái đơn",
+            "Thanh toán",
+            "Thao tác"
+          ],
+          "rows": 4
+        }
+      ]
+    },
+    {
+      "id": "admin_inventory",
+      "file": "wf_5_10_admin_inventory.png",
+      "screen_ids": [
+        "admin_inventory"
+      ],
+      "caption": "Hình 5.10: Wireframe Bảng quản trị tồn kho và điều phối chi nhánh (Grayscale Web Mockup)",
+      "screen_title": "Tồn kho và lịch sử xuất nhập",
+      "route": "GET /admin/inventory",
+      "sections": [
+        {
+          "title": "Tồn kho hiện tại",
+          "table_columns": [
+            "ID rượu",
+            "Tên rượu vang",
+            "Kho lưu trữ",
+            "Tổng tồn",
+            "Đang giữ chỗ",
+            "Khả dụng",
+            "Cập nhật lúc",
+            "Điều chỉnh kho"
+          ],
+          "rows": 2
+        },
+        {
+          "title": "Điều chỉnh kho",
+          "fields": [
+            "Sản phẩm",
+            "Số lượng chai",
+            "Ghi chú chứng từ / lý do"
+          ],
+          "buttons": [
+            "Nhập",
+            "Xuất",
+            "Xác nhận cập nhật"
+          ]
+        },
+        {
+          "title": "Giao dịch kho gần đây",
+          "table_columns": [
+            "Mã GD",
+            "Sản phẩm",
+            "Kho",
+            "Loại GD",
+            "Số lượng",
+            "Ghi chú",
+            "Thời gian"
+          ],
+          "rows": 2
+        }
+      ]
+    },
+    {
+      "id": "admin_excel_import",
+      "file": "wf_5_6_admin_excel_v2.png",
+      "screen_ids": [
+        "admin_wine_import"
+      ],
+      "caption": "Hình 5.6: Wireframe Nhập danh mục rượu hàng loạt từ tệp Excel (Grayscale Web Mockup)",
+      "screen_title": "Nhập danh mục và tồn kho từ Excel",
+      "route": "GET /admin/wines/import",
+      "sections": [
+        {
+          "title": "Tải lên bảng tính",
+          "fields": [
+            "Tệp Excel .xlsx",
+            "Kho lưu trữ"
+          ],
+          "text_items": [
+            "Cộng dồn tồn kho (ADD)",
+            "Ghi đè tồn kho (REPLACE)"
+          ]
+        },
+        {
+          "title": "Kết quả kiểm tra trước khi nhập",
+          "table_columns": [
+            "Dòng",
+            "Trạng thái",
+            "Tên rượu vang",
+            "Phân loại",
+            "Quốc gia và niên vụ",
+            "Giá bán",
+            "Số lượng kho",
+            "Chi tiết kiểm tra"
+          ],
+          "rows": 2
+        },
+        {
+          "title": "Thao tác",
+          "buttons": [
+            "Xác nhận nhập vào cơ sở dữ liệu"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "shipper_dashboard",
+      "file": "wf_6_1_shipper_dashboard.png",
+      "screen_ids": [
+        "shipper_dashboard"
+      ],
+      "caption": "Hình 6.1: Wireframe Bảng điều khiển công việc Shipper (Grayscale Web Mockup)",
+      "screen_title": "Bảng điều khiển tài xế",
+      "route": "GET /shipper · /shipper/dashboard · /shipper/shipments",
+      "sections": [
+        {
+          "title": "Lọc công việc",
+          "text_items": [
+            "Tất cả",
+            "Đang giao",
+            "Chờ lấy",
+            "Hoàn tất"
+          ]
+        },
+        {
+          "title": "Vận đơn được phân công",
+          "text_items": [
+            "Thông tin người nhận",
+            "Địa chỉ giao nhận",
+            "Sản phẩm trong đơn",
+            "Trạng thái vận đơn"
+          ],
+          "buttons": [
+            "Xác nhận đã lấy rượu tại hầm",
+            "Bắt đầu xuất phát giao hàng",
+            "Báo sự cố"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "shipper_delivery_state",
+      "file": "wf_6_2_shipper_delivery_detail_v2.png",
+      "screen_ids": [
+        "shipper_dashboard"
+      ],
+      "caption": "Hình 6.2: Wireframe trạng thái xem chi tiết vận đơn trên bảng điều khiển Shipper",
+      "screen_title": "Chi tiết vận đơn — trạng thái trong dashboard",
+      "route": "GET /shipper/dashboard",
+      "inline_state_note": "Trạng thái mở rộng trong dashboard; không phải route hoặc trang riêng.",
+      "sections": [
+        {
+          "title": "Thông tin người nhận",
+          "fields": [
+            "Tên người nhận",
+            "Số điện thoại",
+            "Địa chỉ giao nhận"
+          ],
+          "buttons": [
+            "Gọi điện",
+            "Mở bản đồ"
+          ]
+        },
+        {
+          "title": "Sản phẩm trong đơn",
+          "table_columns": [
+            "Tên sản phẩm",
+            "Số lượng"
+          ],
+          "rows": 2
+        },
+        {
+          "title": "Trạng thái giao hàng",
+          "text_items": [
+            "Thông tin cập nhật theo vận đơn"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "shipper_otp_state",
+      "file": "wf_6_3_shipper_otp_v2.png",
+      "screen_ids": [
+        "shipper_dashboard"
+      ],
+      "caption": "Hình 6.3: Wireframe trạng thái nhập OTP hoàn tất giao hàng trên bảng điều khiển Shipper",
+      "screen_title": "Xác thực OTP — trạng thái trong dashboard",
+      "route": "GET /shipper/dashboard",
+      "inline_state_note": "Các ô OTP nằm trong dashboard; thao tác hoàn tất gửi POST /shipper/shipments/{id}/complete.",
+      "sections": [
+        {
+          "title": "Mã xác thực giao hàng",
+          "fields": [
+            "Mã OTP gồm 6 chữ số"
+          ],
+          "text_items": [
+            "Thông tin người nhận",
+            "Thông tin vận đơn"
+          ],
+          "buttons": [
+            "Gửi lại OTP",
+            "Xác thực OTP và hoàn tất giao"
+          ]
+        }
+      ]
+    }
+  ],
+  "system_title": "StrongWine"
+}

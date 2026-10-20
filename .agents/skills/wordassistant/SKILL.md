@@ -19,22 +19,31 @@ Use the CLI as the stable control plane. Never inspect repository source or raw 
 10. When formatting matters, render and inspect every page. A successful render does not prove fields or numbering are functional.
 11. A final delivery PASS requires both `validate.valid == true` and `verify.delivery_status == "PASS"`; `overall_status` only summarizes the checks requested in that invocation.
 
-## User-specific course-essay gate
+## Course-essay gate (project-driven)
 
-Before composing or changing a course essay, turn the user's instructions into a checked acceptance matrix. Do not begin DOCX mutations while any required row lacks an owner, source, or planned evidence. A profile from another school is not a substitute for the user's rules.
+Before editing a course essay, turn the user's rubric and supplied references into a small requirement/evidence matrix. Select an institution profile only when the user or assignment names it. If the rubric or a required reference is missing, mark that check unresolved instead of borrowing rules from another school or inventing requirements.
 
-For a report based on an older reference document:
+Classify every figure before placing it in Word:
 
-- Keep the reference read-only. Record which facts and assets may be reused; do not inherit its chapter order, page layout, or stale product screenshots when the user has excluded them.
-- Build a database inventory from the current project/database. Cover every table and record its purpose, columns, SQL types, primary/foreign keys, nullability, defaults, unique constraints, indexes, relationships, and representative sample rows. Mark missing evidence instead of guessing. Redact passwords, tokens, and unnecessary personal data.
-- Build a screenshot matrix from the complete feature/route inventory, with a row for each distinct function and each applicable persona (for example customer, administrator, and shipper). Capture fresh desktop screenshots at a viewport at least 1366 px wide. Show the complete browser tab content at web size; do not use mobile emulation, cropped cards, or stale reference images. Embed every required screenshot in the DOCX at readable size and record its route, persona, state, and resolution. A link to an image file does not count as an embedded figure.
-- Prefer records explicitly designated as demo data or synthetic fixtures for screenshots. Show those values in context without forced masking when the values explain the workflow. For a shipper delivery, the screenshot should make the recipient, full delivery destination, order items and quantities, shipment status, and useful call/map actions readable. If the available live record is not confirmed as demo data, switch to a synthetic fixture; do not silently present real customer details as examples. If authentication prevents a live route capture, render the same project template with a verified fixture and record that capture source/state in the matrix.
-- Use a two-cover plan when requested. Keep the cover frame visibly inset from the page edge (target at least 12 mm), and check the rendered cover. Use real Word heading styles with tidy, consistent level indentation and true multilevel numbering when required. Apply the requested body size; set headings and captions to black when required.
-- Give every major section its required page boundary and verify the rendered start page. Keep each declaration or front-matter item to its requested page. Respect a stated minimum page count without imposing an arbitrary maximum or adding filler.
-- Keep figure captions to the requested title form only. When the requested form is `Hình x.x: Tên hình`, do not append a source note, route, persona, or explanatory sentence to that caption.
-- For that colon form, pass `caption_separator: ":"` to WordAssistant and verify the visible chapter.sequence number against the nearest real `Heading 1` before insertion. Preserve the selected institution profile's label casing unless the user gives a different label.
+- **Runtime screenshot:** captured from the running application; record the route, role, UI state, capture date, and source.
+- **Saved project capture:** an existing image from the project; label it as a saved capture and do not claim it was freshly verified at runtime.
+- **Source-backed wireframe:** a proposed or simplified screen drawn from the real route/template and its visible controls. Follow the user's sample style. For a plain form/table sample, use simple black lines on white, accurate labels and empty fields/rows; do not add browser chrome, invented records, prices, metrics, or features.
+- **Diagram:** derive routes, modules, classes, and process steps from current source code and identify its evidence source.
 
-The acceptance matrix must map every required database table to its specification and sample data, and every requested function/persona to an embedded desktop screenshot. Before delivery, check those rows against the DOCX itself, then validate and render the saved output and visually review every page. If a row is missing, delivery is incomplete even when generic profile validation passes.
+For a screen hierarchy, inventory controller routes that return HTML views and verify each route's template. Treat POST actions, JSON/API endpoints, and redirect-only handlers as actions or endpoints, not separate screens. A single view returned by several aliases remains one screen. Preserve exact paths in a machine-readable inventory when drawing them would make the reference-style diagram hard to read.
+
+Build only the content the assignment requires. Do not require a complete database schema, synthetic sample rows, a screenshot for every feature/persona, or a fixed desktop viewport unless the rubric asks for it. Never expose real customer data in examples. Keep captions concise and distinguish screenshots from wireframes.
+
+For Word, preserve real styles, caption/TOC fields, section properties, and page numbering. Update fields in Microsoft Word, save, render the saved copy, and visually review every page when layout matters. Check both covers when present, running headers/footers, text color, accidental numbering, image aspect ratio, clipping, and page breaks. Keep the source file unchanged and report any rubric, runtime, or visual check that could not be completed.
+
+## Course-essay quality checks
+
+1. Follow the supplied rubric and selected institution profile; do not infer school-specific requirements from another report.
+2. Keep each illustration beside the analysis it supports when the assignment gives that structure.
+3. Match wireframes and diagrams to the user's supplied examples. Do not impose browser-chrome mockups or one-box-per-page requirements unless requested.
+4. Verify important routes and fields against current controllers/templates. Separate implemented screens, inline states, actions, API endpoints, and proposed designs.
+5. Preserve dynamic Word fields and inspect the rendered output for stale numbering, clipping, color/style regressions, unexpected spacing, and missing page elements.
+6. Include a database/schema inventory or sample data only when the assignment requires it and the source supports it.
 
 | Need | Command |
 |---|---|
@@ -84,3 +93,9 @@ Real Heading styles are not the same as bold text. Automatic heading numbering i
 Do not optimize prose to evade an AI detector. The integrity command does not perform AI detection. It fails deterministic source/provenance defects and reports repetition or unusual punctuation only as human-review style signals. Preserve legitimate Vietnamese diacritics and disclose permitted AI assistance truthfully.
 
 For new reports, `compose` authors content first and binds citations to their claim paragraphs; anchor section breaks to real content boundaries before applying section layout. Inspect every rendered page's content; dimensions and file existence are insufficient. Unexpected blank pages, stale fields, an unavailable gate, or any conflict between the summary and artifacts force FAIL. Negative tests must reject the exact tested invariant, not merely raise an unrelated argument or harness error. Mark synthetic evidence with `synthetic=true`; it remains visibly labeled in the document.
+
+
+## Existing course-essay project source check
+
+When an essay is checked against a current application repository, preserve the input and make corrections in an output copy. Validate every figure/caption pair against the current route/template and inspect the image itself. A matching asset hash establishes snapshot provenance only; do not claim current runtime verification without a fresh route capture. For dynamic figure numbering, inspect SEQ field position and confirm the visible Word-rendered caption and list-of-figures entry. Rerender after any DOCX mutation. If no course rubric or runtime capture is supplied/performed, report that check as NOT_RUN.
+For course-essay work, follow the ordered runbook in `docs/strongwine-course-essay-workflow.md`; it records the initializer, each script/CLI input and output, route inventory, wireframe/UML process, Word field update, and visual QA gates. Read `docs/strongwine-course-essay-lessons.md` before recurring StrongWine edits and update it only with verified mistakes, causes, and prevention steps. Do not use StrongWine-only scripts as generic project tools without adapting and verifying their source-specific configuration.

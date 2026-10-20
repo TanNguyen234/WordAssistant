@@ -29,21 +29,20 @@ wordassistant edit replace report.docx --output report-revised.docx `
 
 Without `--selector`, a text replacement can affect matching text throughout the document. Save the final operation to a separate output copy after reviewing the dry-run result.
 
-### Course-essay acceptance matrix (required before composition)
+### Course-essay acceptance matrix (right-sized to the rubric)
 
-For a user-defined course essay, write a requirement/evidence matrix before creating or editing the DOCX. Keep the user's profile separate from school-specific profiles in this repository; do not silently apply HCMUNRE rules to another school.
+Before composition, list each requirement from the user's assignment and the evidence that will satisfy it. Keep institution-specific rules scoped to the selected profile. If no rubric is available, record that limitation and avoid treating another school's template as authoritative.
 
-When an older DOCX is supplied as a read-only reference, record the permitted facts and assets and keep its chapter order, layout, and stale application screenshots out of the new report unless the user explicitly requests them. Use current project/database evidence for the implementation being described.
+For each illustration, record its kind and source:
 
-The matrix must include:
+- A **runtime screenshot** comes from the running app; capture its route, role, state, and date.
+- A **saved project capture** is an existing project image; label it as saved and do not imply a fresh runtime check.
+- A **wireframe** is a proposed view based on an implemented route and template. Match the user's visual sample, draw only actual labels and controls, leave example data blank unless requested, and do not add browser chrome unless the reference calls for it.
+- A **diagram** must match current implementation evidence. For screen trees, include HTML GET routes that return views. Keep POST actions, JSON APIs, and redirect-only handlers out of the screen count. Group route aliases that use the same view as one screen.
 
-- **Database coverage:** every current database table, its purpose, all columns and SQL types, primary and foreign keys, nullability, defaults, unique constraints, indexes, relationships, and representative sample rows. Mark unavailable evidence; never infer schema details. Remove credentials, tokens, and unnecessary personal data from samples.
-- **Interface coverage:** every distinct implemented function and each applicable role/persona. Capture fresh desktop screenshots at 1366 px wide or above, showing the whole browser tab content at normal web size. Do not use mobile emulation, cropped fragments, or screenshots from the old reference. Embed every required image in the DOCX and track its route, persona, state, resolution, and caption.
-- **Demo content and role context:** prefer records confirmed as demo data or synthetic fixtures and show them in context without forced masks. A shipper delivery view should make the recipient, full destination, item names and quantities, shipment status, and call/map actions readable. If a live database record is not confirmed as demo data, use a synthetic fixture instead of exposing it as an example. When authentication blocks a live route, render the same project template with a verified fixture and record the screenshot source and state in the matrix.
-- **Cover and typography:** when two covers are required, verify both are distinct. Keep a cover frame visibly inset (target at least 12 mm from the page edge); for an existing page-relative frame, `section.layout` accepts `page_border_space_pt` to set all four border edges. Use real Word heading styles with consistent level indentation and true multilevel numbering when requested. `style.update` supports font color and paragraph indents for existing styles. Apply the specified body size and black heading/caption text when required.
-- **Pagination and captions:** list every required page boundary, including declarations and major sections. Respect the requested minimum length without an artificial upper limit or filler. When the caption form is `Hình x.x: Tên hình`, keep only that title in the caption.
+Add database/schema tables, representative data, feature/persona screenshots, resolution requirements, and page minimums only when the rubric requests them. Do not fabricate missing schema, data, screenshots, citations, or results. Note when runtime access or a controlling reference is unavailable.
 
-Do not begin DOCX mutations while a required matrix row has no source or planned evidence. Before delivery, map every database table to its schema and sample-data content, every requested feature/persona to an image embedded in the saved DOCX, and every layout requirement to a rendered-page check. Generic `validate`/`verify` success does not replace those content checks.
+Before delivery, check the actual saved DOCX against the matrix. Update Word fields, render the saved file, and inspect every page for missing content, incorrect colors/styles, unexpected spacing or numbering, image cropping, and page breaks. A generic validator is supporting evidence, not a substitute for the rubric checks.
 
 ## 2. Create the editable Word scaffold
 
