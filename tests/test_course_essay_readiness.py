@@ -8,6 +8,9 @@ import tempfile
 from pathlib import Path
 
 from docx import Document
+from docx.enum.style import WD_STYLE_TYPE
+from docx.oxml import OxmlElement
+from docx.oxml.ns import qn
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -31,11 +34,11 @@ COVER_METADATA_FIELDS = [
     "field", "value", "authority", "authority_type", "status", "reviewed_by", "review_date", "notes",
 ]
 STRUCTURE_PARITY_FIELDS = [
-    "reference_id", "reference_level", "reference_heading", "target_heading", "target_level", "target_order", "decision",
+    "item_id", "source_basis", "source_location", "planned_heading", "planned_level", "target_heading", "target_level", "target_order", "decision",
     "coverage_note", "evidence_files", "status", "reviewed_by", "review_date",
 ]
 ASSET_PARITY_FIELDS = [
-    "reference_id", "item_type", "reference_index", "reference_caption", "reference_description",
+    "asset_id", "asset_type", "source_basis", "source_location",
     "target_section", "target_caption", "decision", "coverage_note", "evidence_files",
     "status", "reviewed_by", "review_date",
 ]
@@ -48,14 +51,20 @@ def _write_csv(path: Path, fields: list[str], rows: list[dict[str, str]]) -> Non
         writer.writerows(rows)
 
 
-def _write_docx(path: Path, outline_rows: list[dict[str, str]]) -> None:
+def _write_docx(
+    path: Path,
+    outline_rows: list[dict[str, str]],
+    captions: list[str] | None = None,
+) -> None:
     document = Document()
     for row in outline_rows:
         document.add_paragraph(
-            row["reference_heading"],
-            style=f"Heading {row['reference_level']}",
+            row["target_heading"],
+            style=f"Heading {row['target_level']}",
         )
         document.add_paragraph("Synthetic section body long enough to preserve every heading in the outline.")
+    for caption in captions or []:
+        document.add_paragraph(caption)
     document.save(path)
 
 
@@ -70,8 +79,16 @@ def _case(root: Path) -> tuple[Path, dict, Path, Path]:
     source.write_text("Reviewed evidence passage", encoding="utf-8")
     output = project_dir / "output" / "final.docx"
     output.parent.mkdir()
-    baseline_rows = readiness._rows(readiness._STRONGWINE_STRUCTURE_BASELINE)
-    _write_docx(output, baseline_rows)
+    structure_rows = [
+        {"item_id": "S-01", "source_basis": "assignment", "source_location": "section 1", "planned_heading": "Project overview", "planned_level": "1", "target_heading": "Project overview", "target_level": "1", "target_order": "1"},
+        {"item_id": "S-02", "source_basis": "assignment", "source_location": "section 2", "planned_heading": "System design", "planned_level": "2", "target_heading": "System design", "target_level": "2", "target_order": "2"},
+        {"item_id": "S-03", "source_basis": "project analysis", "source_location": "report plan", "planned_heading": "Evaluation", "planned_level": "2", "target_heading": "Evaluation", "target_level": "2", "target_order": "3"},
+    ]
+    asset_rows = [
+        {"asset_id": "A-01", "asset_type": "DIAGRAM", "source_basis": "project source", "source_location": "architecture config", "target_section": "System design", "target_caption": "Figure 1. Project architecture", "decision": "ADAPTED", "coverage_note": "Derived from checked source", "evidence_files": "source.txt", "status": "PASS", "reviewed_by": "Reviewer", "review_date": "2026-10-20"},
+        {"asset_id": "A-02", "asset_type": "TABLE", "source_basis": "evaluation record", "source_location": "evaluation.json", "target_section": "Evaluation", "target_caption": "Table 1. Evaluation results", "decision": "MATCHED", "coverage_note": "Derived from checked source", "evidence_files": "source.txt", "status": "PASS", "reviewed_by": "Reviewer", "review_date": "2026-10-20"},
+    ]
+    _write_docx(output, structure_rows, [row["target_caption"] for row in asset_rows])
     digest = hashlib.sha256(output.read_bytes()).hexdigest()
     source_digest = hashlib.sha256(source.read_bytes()).hexdigest()
 
@@ -100,8 +117,8 @@ def _case(root: Path) -> tuple[Path, dict, Path, Path]:
         "required_acceptance_checks": [
             "assignment_and_rubric_checked",
             "cover_metadata_fields_verified",
-            "strongwine_structure_parity_reviewed",
-            "strongwine_asset_parity_reviewed",
+            "project_structure_inventory_reviewed",
+            "project_visual_inventory_reviewed",
             "all_required_claims_mapped_to_reviewed_evidence",
             "all_integrity_warnings_reviewed_and_dispositioned",
             "source_routes_and_templates_checked",
@@ -113,8 +130,8 @@ def _case(root: Path) -> tuple[Path, dict, Path, Path]:
         "acceptance_checks": {
             "assignment_and_rubric_checked": True,
             "cover_metadata_fields_verified": True,
-            "strongwine_structure_parity_reviewed": True,
-            "strongwine_asset_parity_reviewed": True,
+            "project_structure_inventory_reviewed": True,
+            "project_visual_inventory_reviewed": True,
             "all_required_claims_mapped_to_reviewed_evidence": True,
             "all_integrity_warnings_reviewed_and_dispositioned": True,
             "source_routes_and_templates_checked": True,
@@ -141,39 +158,17 @@ def _case(root: Path) -> tuple[Path, dict, Path, Path]:
         "notes": "Not supplied; leave blank in the document.",
     } for field in readiness._COVER_METADATA_FIELDS]
     _write_csv(project_dir / "cover-metadata.csv", COVER_METADATA_FIELDS, metadata_rows)
-    baseline_rows = readiness._rows(readiness._STRONGWINE_STRUCTURE_BASELINE)
     parity_rows = [{
-        "reference_id": row["reference_id"],
-        "reference_level": row["reference_level"],
-        "reference_heading": row["reference_heading"],
-        "target_heading": row["reference_heading"],
-        "target_level": row["reference_level"],
-        "target_order": str(index),
+        **row,
         "decision": "MATCHED",
         "coverage_note": "Synthetic mapping for readiness test fixture.",
         "evidence_files": "source.txt",
         "status": "PASS",
         "reviewed_by": "Reviewer",
         "review_date": "2026-10-20",
-    } for index, row in enumerate(baseline_rows, start=1)]
+    } for row in structure_rows]
     _write_csv(project_dir / "structure-parity.csv", STRUCTURE_PARITY_FIELDS, parity_rows)
-    asset_baseline_rows = readiness._rows(readiness._STRONGWINE_ASSET_BASELINE)
-    asset_parity_rows = [{
-        "reference_id": row["reference_id"],
-        "item_type": row["item_type"],
-        "reference_index": row["reference_index"],
-        "reference_caption": row["reference_caption"],
-        "reference_description": row["reference_description"],
-        "target_section": "Synthetic test section",
-        "target_caption": f"Synthetic {row['item_type'].lower()} target",
-        "decision": "ADAPTED",
-        "coverage_note": "Synthetic mapping for readiness test fixture.",
-        "evidence_files": "source.txt",
-        "status": "PASS",
-        "reviewed_by": "Reviewer",
-        "review_date": "2026-10-20",
-    } for row in asset_baseline_rows]
-    _write_csv(project_dir / "asset-parity.csv", ASSET_PARITY_FIELDS, asset_parity_rows)
+    _write_csv(project_dir / "asset-parity.csv", ASSET_PARITY_FIELDS, asset_rows)
     _write_csv(
         project_dir / "claim-evidence.csv",
         CLAIM_FIELDS,
@@ -213,6 +208,18 @@ def _save_project(project_dir: Path, project: dict) -> None:
     (project_dir / "project.json").write_text(json.dumps(project), encoding="utf-8")
 
 
+def _rebind_qa(project_dir: Path, output: Path) -> None:
+    digest = hashlib.sha256(output.read_bytes()).hexdigest()
+    verify_path = project_dir / "qa" / "word-verify.json"
+    verify = json.loads(verify_path.read_text(encoding="utf-8"))
+    verify["render"]["document_sha256"] = digest
+    verify_path.write_text(json.dumps(verify), encoding="utf-8")
+    audit_path = project_dir / "qa" / "integrity-audit.json"
+    audit = json.loads(audit_path.read_text(encoding="utf-8"))
+    audit["document"]["sha256"] = digest
+    audit_path.write_text(json.dumps(audit), encoding="utf-8")
+
+
 def test_all_required_evidence_and_word_gates_produce_ready_status() -> None:
     with tempfile.TemporaryDirectory() as temp:
         project_dir, _project, _output, _source = _case(Path(temp))
@@ -225,37 +232,49 @@ def test_all_required_evidence_and_word_gates_produce_ready_status() -> None:
     assert report["gates"]["submission_readiness"]["status"] == "PASS"
 
 
-def test_structure_parity_requires_every_canonical_heading() -> None:
+def test_structure_inventory_accepts_a_project_specific_number_of_headings() -> None:
     with tempfile.TemporaryDirectory() as temp:
-        project_dir, _project, _output, _source = _case(Path(temp))
+        project_dir, _project, output, _source = _case(Path(temp))
         rows = readiness._rows(project_dir / "structure-parity.csv")
-        _write_csv(project_dir / "structure-parity.csv", STRUCTURE_PARITY_FIELDS, rows[:-1])
+        for index in range(4, 7):
+            rows.append({
+                "item_id": f"S-{index:02}", "source_basis": "project plan", "source_location": f"plan row {index}", "planned_level": "2",
+                "planned_heading": f"Additional section {index}",
+                "target_heading": f"Additional section {index}", "target_level": "2",
+                "target_order": str(index), "decision": "ADAPTED",
+                "coverage_note": "Required by this project plan.", "evidence_files": "source.txt",
+                "status": "PASS", "reviewed_by": "Reviewer", "review_date": "2026-10-20",
+            })
+        _write_csv(project_dir / "structure-parity.csv", STRUCTURE_PARITY_FIELDS, rows)
+        captions = [row["target_caption"] for row in readiness._rows(project_dir / "asset-parity.csv")]
+        _write_docx(output, rows, captions)
+        _rebind_qa(project_dir, output)
 
         report = readiness.assess(project_dir)
 
     parity = next(
         item for item in report["gates"]["content_and_sources"]["checks"]
-        if item["check"] == "strongwine_structure_parity"
+        if item["check"] == "project_structure_inventory"
     )
-    assert parity["status"] == "INCOMPLETE"
-    assert report["gates"]["submission_readiness"]["status"] == "INCOMPLETE"
+    assert parity["status"] == "PASS"
+    assert "6 project-planned headings" in parity["detail"]
+    assert report["gates"]["submission_readiness"]["status"] == "PASS"
 
 
-def test_structure_parity_rejects_omitted_or_not_applicable_sections() -> None:
+def test_structure_inventory_requires_every_planned_heading_in_the_matrix() -> None:
     with tempfile.TemporaryDirectory() as temp:
         project_dir, _project, _output, _source = _case(Path(temp))
         rows = readiness._rows(project_dir / "structure-parity.csv")
-        rows[0]["decision"] = "OMIT"
+        rows[0]["target_heading"] = ""
         _write_csv(project_dir / "structure-parity.csv", STRUCTURE_PARITY_FIELDS, rows)
 
         report = readiness.assess(project_dir)
 
     parity = next(
         item for item in report["gates"]["content_and_sources"]["checks"]
-        if item["check"] == "strongwine_structure_parity"
+        if item["check"] == "project_structure_inventory"
     )
-    assert parity["status"] == "FAIL"
-    assert report["gates"]["submission_readiness"]["status"] == "FAIL"
+    assert parity["status"] == "INCOMPLETE"
 
 
 def test_structure_parity_rejects_changed_heading_level() -> None:
@@ -269,7 +288,7 @@ def test_structure_parity_rejects_changed_heading_level() -> None:
 
     parity = next(
         item for item in report["gates"]["content_and_sources"]["checks"]
-        if item["check"] == "strongwine_structure_parity"
+        if item["check"] == "project_structure_inventory"
     )
     assert parity["status"] == "FAIL"
 
@@ -285,38 +304,59 @@ def test_structure_parity_rejects_reordered_headings() -> None:
 
     parity = next(
         item for item in report["gates"]["content_and_sources"]["checks"]
-        if item["check"] == "strongwine_structure_parity"
+        if item["check"] == "project_structure_inventory"
     )
     assert parity["status"] == "FAIL"
 
 
-def test_structure_parity_checks_the_actual_docx_outline() -> None:
+def test_structure_inventory_checks_the_actual_docx_outline() -> None:
     with tempfile.TemporaryDirectory() as temp:
         project_dir, _project, output, _source = _case(Path(temp))
-        baseline_rows = readiness._rows(readiness._STRONGWINE_STRUCTURE_BASELINE)
-        _write_docx(output, baseline_rows[:-1])
+        rows = readiness._rows(project_dir / "structure-parity.csv")
+        _write_docx(output, rows[:-1], [row["target_caption"] for row in readiness._rows(project_dir / "asset-parity.csv")])
 
         report = readiness.assess(project_dir)
 
     outline_check = next(
         item for item in report["gates"]["content_and_sources"]["checks"]
-        if item["check"] == "strongwine_structure_in_docx"
+        if item["check"] == "project_structure_in_docx"
     )
     assert outline_check["status"] == "FAIL"
 
 
-def test_structure_parity_rejects_reordered_headings_in_the_actual_docx() -> None:
+def test_structure_inventory_ignores_toc_entries_even_with_outline_level() -> None:
     with tempfile.TemporaryDirectory() as temp:
         project_dir, _project, output, _source = _case(Path(temp))
-        baseline_rows = readiness._rows(readiness._STRONGWINE_STRUCTURE_BASELINE)
-        baseline_rows[0], baseline_rows[1] = baseline_rows[1], baseline_rows[0]
-        _write_docx(output, baseline_rows)
+        document = Document(output)
+        document.styles.add_style("TOC 1", WD_STYLE_TYPE.PARAGRAPH)
+        toc_entry = document.add_paragraph("Project overview\t1", style="TOC 1")
+        outline_level = OxmlElement("w:outlineLvl")
+        outline_level.set(qn("w:val"), "0")
+        toc_entry._p.get_or_add_pPr().append(outline_level)
+        document.save(output)
+        _rebind_qa(project_dir, output)
 
         report = readiness.assess(project_dir)
 
     outline_check = next(
         item for item in report["gates"]["content_and_sources"]["checks"]
-        if item["check"] == "strongwine_structure_in_docx"
+        if item["check"] == "project_structure_in_docx"
+    )
+    assert outline_check["status"] == "PASS"
+
+
+def test_structure_inventory_rejects_reordered_headings_in_the_actual_docx() -> None:
+    with tempfile.TemporaryDirectory() as temp:
+        project_dir, _project, output, _source = _case(Path(temp))
+        rows = readiness._rows(project_dir / "structure-parity.csv")
+        rows[0], rows[1] = rows[1], rows[0]
+        _write_docx(output, rows, [row["target_caption"] for row in readiness._rows(project_dir / "asset-parity.csv")])
+
+        report = readiness.assess(project_dir)
+
+    outline_check = next(
+        item for item in report["gates"]["content_and_sources"]["checks"]
+        if item["check"] == "project_structure_in_docx"
     )
     assert outline_check["status"] == "FAIL"
 
@@ -332,25 +372,29 @@ def test_structure_parity_needs_existing_evidence_for_each_mapped_heading() -> N
 
     parity = next(
         item for item in report["gates"]["content_and_sources"]["checks"]
-        if item["check"] == "strongwine_structure_parity"
+        if item["check"] == "project_structure_inventory"
     )
     assert parity["status"] == "INCOMPLETE"
 
 
-def test_asset_parity_requires_every_reference_image_and_table_slot() -> None:
+def test_visual_inventory_is_project_specific_and_checks_document_captions() -> None:
     with tempfile.TemporaryDirectory() as temp:
-        project_dir, _project, _output, _source = _case(Path(temp))
+        project_dir, _project, output, _source = _case(Path(temp))
         rows = readiness._rows(project_dir / "asset-parity.csv")
-        _write_csv(project_dir / "asset-parity.csv", ASSET_PARITY_FIELDS, rows[:-1])
+        _write_csv(project_dir / "asset-parity.csv", ASSET_PARITY_FIELDS, rows[:1])
+        structure = readiness._rows(project_dir / "structure-parity.csv")
+        _write_docx(output, structure, [rows[0]["target_caption"]])
+        _rebind_qa(project_dir, output)
 
         report = readiness.assess(project_dir)
 
     parity = next(
         item for item in report["gates"]["content_and_sources"]["checks"]
-        if item["check"] == "strongwine_asset_parity"
+        if item["check"] == "project_visual_inventory"
     )
-    assert parity["status"] == "INCOMPLETE"
-    assert report["gates"]["submission_readiness"]["status"] == "INCOMPLETE"
+    assert parity["status"] == "PASS"
+    assert "1 project-planned figure/table captions" in parity["detail"]
+    assert report["gates"]["submission_readiness"]["status"] == "PASS"
 
 
 def test_asset_parity_rejects_dropped_visual_slots() -> None:
@@ -364,12 +408,12 @@ def test_asset_parity_rejects_dropped_visual_slots() -> None:
 
     parity = next(
         item for item in report["gates"]["content_and_sources"]["checks"]
-        if item["check"] == "strongwine_asset_parity"
+        if item["check"] == "project_visual_inventory"
     )
     assert parity["status"] == "FAIL"
 
 
-def test_asset_parity_needs_evidence_for_each_replacement_artifact() -> None:
+def test_visual_inventory_needs_evidence_for_each_planned_artifact() -> None:
     with tempfile.TemporaryDirectory() as temp:
         project_dir, _project, _output, _source = _case(Path(temp))
         rows = readiness._rows(project_dir / "asset-parity.csv")
@@ -380,9 +424,24 @@ def test_asset_parity_needs_evidence_for_each_replacement_artifact() -> None:
 
     parity = next(
         item for item in report["gates"]["content_and_sources"]["checks"]
-        if item["check"] == "strongwine_asset_parity"
+        if item["check"] == "project_visual_inventory"
     )
     assert parity["status"] == "INCOMPLETE"
+
+
+def test_visual_inventory_requires_each_planned_caption_in_the_docx() -> None:
+    with tempfile.TemporaryDirectory() as temp:
+        project_dir, _project, output, _source = _case(Path(temp))
+        structure = readiness._rows(project_dir / "structure-parity.csv")
+        _write_docx(output, structure, ["Figure 1. Project architecture"])
+
+        report = readiness.assess(project_dir)
+
+    parity = next(
+        item for item in report["gates"]["content_and_sources"]["checks"]
+        if item["check"] == "project_visual_inventory"
+    )
+    assert parity["status"] == "FAIL"
 
 
 def test_cover_metadata_cannot_use_the_reference_sample_as_authority() -> None:
