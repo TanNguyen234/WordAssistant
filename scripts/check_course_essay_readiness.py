@@ -18,6 +18,9 @@ FAIL = "FAIL"
 _VALID_ROW_STATUSES = {PASS, "WAIVED", "NOT_RUN", "BLOCKED", FAIL}
 _REQUIRED_ACCEPTANCE_CHECKS = (
     "assignment_and_rubric_checked",
+    "cover_metadata_fields_verified",
+    "strongwine_structure_parity_reviewed",
+    "strongwine_asset_parity_reviewed",
     "all_required_claims_mapped_to_reviewed_evidence",
     "all_integrity_warnings_reviewed_and_dispositioned",
     "source_routes_and_templates_checked",
@@ -26,6 +29,29 @@ _REQUIRED_ACCEPTANCE_CHECKS = (
     "word_fields_updated_and_saved",
     "all_rendered_pages_visually_reviewed",
 )
+_STRONGWINE_STRUCTURE_BASELINE = (
+    Path(__file__).resolve().parents[1] / "docs" / "strongwine-course-essay-structure-baseline.csv"
+)
+_STRONGWINE_STRUCTURE_BASELINE_SHA256 = "d9ca607623378dac0d9e5b8f065748406b74a636e93ec059baa131723569bd33"
+_STRONGWINE_ASSET_BASELINE = (
+    Path(__file__).resolve().parents[1] / "docs" / "strongwine-course-essay-asset-baseline.csv"
+)
+_STRONGWINE_ASSET_BASELINE_SHA256 = "68424c135917a2814a4c893a4bb3b9ce0f12d1626bbf12090bf92ea6d9a5d04a"
+_STRUCTURE_DECISIONS = {"MATCHED", "ADAPTED"}
+_COVER_METADATA_FIELDS = {
+    "document_type",
+    "project_title",
+    "course_name",
+    "institution",
+    "faculty",
+    "program_or_major",
+    "student_name",
+    "student_id",
+    "class_or_cohort",
+    "supervisor_name",
+    "academic_year",
+}
+_COVER_AUTHORITY_TYPES = {"USER_INSTRUCTION", "ASSIGNMENT_OR_RUBRIC", "OFFICIAL_PROFILE", "NOT_PROVIDED"}
 
 
 def _resolve(base: Path, value: Any) -> Path | None:
@@ -282,6 +308,343 @@ def _check_requirements(project_dir: Path, project: dict[str, Any], checks: list
 
     if not row_statuses:
         _add(checks, "requirements_matrix", INCOMPLETE, "The matrix contains no usable requirement rows.")
+
+
+def _check_cover_metadata(project_dir: Path, project: dict[str, Any], checks: list[dict[str, str]]) -> None:
+    metadata_path = _resolve(project_dir, project.get("cover_metadata_file", "cover-metadata.csv"))
+    if metadata_path is None or not metadata_path.is_file():
+        _add(checks, "cover_metadata", INCOMPLETE, "cover-metadata.csv is missing.")
+        return
+    try:
+        rows = _rows(metadata_path)
+    except (OSError, UnicodeError, csv.Error) as exc:
+        _add(checks, "cover_metadata", FAIL, f"Cannot read cover-metadata.csv: {exc}")
+        return
+    if not rows:
+        _add(checks, "cover_metadata", INCOMPLETE, "cover-metadata.csv has no identity fields.")
+        return
+
+    by_field: dict[str, dict[str, str]] = {}
+    duplicate_fields: set[str] = set()
+    for row in rows:
+        field = (row.get("field") or "").strip()
+        if not field:
+            continue
+        if field in by_field:
+            duplicate_fields.add(field)
+        by_field[field] = row
+    if duplicate_fields:
+        _add(checks, "cover_metadata", FAIL, f"Duplicate metadata fields: {sorted(duplicate_fields)}.")
+        return
+
+    missing_fields = _COVER_METADATA_FIELDS - by_field.keys()
+    if missing_fields:
+        _add(checks, "cover_metadata", INCOMPLETE, f"Missing metadata fields: {sorted(missing_fields)}.")
+        return
+
+    incomplete: list[str] = []
+    invalid: list[str] = []
+    for field in sorted(_COVER_METADATA_FIELDS):
+        row = by_field[field]
+        authority_type = (row.get("authority_type") or "").strip().upper()
+        status = (row.get("status") or "").strip().upper()
+        value = (row.get("value") or "").strip()
+        authority = (row.get("authority") or "").strip()
+        notes = (row.get("notes") or "").strip()
+        reviewer = (row.get("reviewed_by") or "").strip()
+        review_date = (row.get("review_date") or "").strip()
+
+        if authority_type == "REFERENCE_SAMPLE":
+            invalid.append(field)
+            continue
+        if authority_type not in _COVER_AUTHORITY_TYPES:
+            incomplete.append(field)
+            continue
+        if status == "VERIFIED":
+            if (
+                not value
+                or not authority
+                or authority_type not in {"USER_INSTRUCTION", "ASSIGNMENT_OR_RUBRIC", "OFFICIAL_PROFILE"}
+                or not reviewer
+                or not _valid_iso_date(review_date)
+            ):
+                incomplete.append(field)
+        elif status == "PLACEHOLDER":
+            if value or authority_type != "NOT_PROVIDED" or not notes or not reviewer or not _valid_iso_date(review_date):
+                incomplete.append(field)
+        elif status == "NOT_APPLICABLE":
+            if value or not authority or authority_type == "NOT_PROVIDED" or not notes or not reviewer or not _valid_iso_date(review_date):
+                incomplete.append(field)
+        elif status == "FAIL":
+            invalid.append(field)
+        else:
+            incomplete.append(field)
+
+    if invalid:
+        _add(checks, "cover_metadata", FAIL, f"Metadata uses a sample as authority or contains a failed field: {sorted(invalid)}.")
+    elif incomplete:
+        _add(checks, "cover_metadata", INCOMPLETE, f"Metadata needs a verified authority or deliberate placeholder: {sorted(incomplete)}.")
+    else:
+        _add(checks, "cover_metadata", PASS, "All cover identity fields have a verified authority or an explicit placeholder/non-applicability record.")
+
+
+def _check_structure_parity(
+    project_dir: Path,
+    project: dict[str, Any],
+    checks: list[dict[str, str]],
+    output_path: Path | None,
+) -> None:
+    baseline_path = _STRONGWINE_STRUCTURE_BASELINE
+    if not baseline_path.is_file():
+        _add(checks, "strongwine_structure_parity", FAIL, f"Canonical StrongWine structure baseline is missing: {baseline_path}.")
+        return
+    try:
+        baseline_hash = _sha256(baseline_path)
+        baseline_rows = _rows(baseline_path)
+    except (OSError, UnicodeError, csv.Error) as exc:
+        _add(checks, "strongwine_structure_parity", FAIL, f"Cannot read the canonical structure baseline: {exc}")
+        return
+    if baseline_hash.casefold() != _STRONGWINE_STRUCTURE_BASELINE_SHA256:
+        _add(checks, "strongwine_structure_parity", FAIL, "Canonical StrongWine structure baseline hash changed; update the baseline and checker together after review.")
+        return
+
+    baseline_by_id: dict[str, dict[str, str]] = {}
+    for row in baseline_rows:
+        reference_id = (row.get("reference_id") or "").strip()
+        if not reference_id or reference_id in baseline_by_id:
+            _add(checks, "strongwine_structure_parity", FAIL, "Canonical structure baseline has a blank or duplicate reference_id.")
+            return
+        if not (row.get("reference_heading") or "").strip() or not (row.get("reference_level") or "").strip():
+            _add(checks, "strongwine_structure_parity", FAIL, f"Canonical baseline row {reference_id} is missing its heading or level.")
+            return
+        baseline_by_id[reference_id] = row
+    if not baseline_by_id:
+        _add(checks, "strongwine_structure_parity", FAIL, "Canonical StrongWine structure baseline contains no headings.")
+        return
+
+    matrix_path = _resolve(project_dir, project.get("structure_parity_matrix_file", "structure-parity.csv"))
+    if matrix_path is None or not matrix_path.is_file():
+        _add(checks, "strongwine_structure_parity", INCOMPLETE, "structure-parity.csv is missing.")
+        return
+    try:
+        rows = _rows(matrix_path)
+    except (OSError, UnicodeError, csv.Error) as exc:
+        _add(checks, "strongwine_structure_parity", FAIL, f"Cannot read structure-parity.csv: {exc}")
+        return
+    if not rows:
+        _add(checks, "strongwine_structure_parity", INCOMPLETE, "structure-parity.csv has no mapped headings.")
+        return
+
+    mapped: dict[str, dict[str, str]] = {}
+    duplicate_ids: set[str] = set()
+    for row in rows:
+        reference_id = (row.get("reference_id") or "").strip()
+        if not reference_id:
+            continue
+        if reference_id in mapped:
+            duplicate_ids.add(reference_id)
+        mapped[reference_id] = row
+    unknown_ids = mapped.keys() - baseline_by_id.keys()
+    if duplicate_ids or unknown_ids:
+        _add(checks, "strongwine_structure_parity", FAIL, f"Structure map has duplicate IDs {sorted(duplicate_ids)} or IDs outside the baseline {sorted(unknown_ids)}.")
+        return
+    missing_ids = baseline_by_id.keys() - mapped.keys()
+    if missing_ids:
+        _add(checks, "strongwine_structure_parity", INCOMPLETE, f"Structure map is missing {len(missing_ids)} of {len(baseline_by_id)} StrongWine headings; first missing IDs: {sorted(missing_ids)[:8]}.")
+        return
+
+    source_root = _resolve(project_dir, project.get("source_project_root")) or project_dir
+    incomplete: list[str] = []
+    invalid: list[str] = []
+    for expected_order, (reference_id, baseline) in enumerate(baseline_by_id.items(), start=1):
+        row = mapped[reference_id]
+        if (
+            (row.get("reference_heading") or "").strip() != baseline["reference_heading"].strip()
+            or (row.get("reference_level") or "").strip() != baseline["reference_level"].strip()
+        ):
+            invalid.append(reference_id)
+            continue
+        decision = (row.get("decision") or "").strip().upper()
+        status = (row.get("status") or "").strip().upper()
+        target_heading = (row.get("target_heading") or "").strip()
+        target_level_raw = (row.get("target_level") or "").strip()
+        target_order_raw = (row.get("target_order") or "").strip()
+        coverage_note = (row.get("coverage_note") or "").strip()
+        evidence_values = [item.strip() for item in (row.get("evidence_files") or "").split(";") if item.strip()]
+        reviewer = (row.get("reviewed_by") or "").strip()
+        review_date = (row.get("review_date") or "").strip()
+        if decision in {"OMIT", "NOT_APPLICABLE", "SKIP"} or status == FAIL:
+            invalid.append(reference_id)
+            continue
+        if not target_level_raw or not target_order_raw:
+            incomplete.append(reference_id)
+            continue
+        try:
+            target_level = int(target_level_raw)
+            target_order = int(target_order_raw)
+        except ValueError:
+            incomplete.append(reference_id)
+            continue
+        if target_level != int(baseline["reference_level"]) or target_order != expected_order:
+            invalid.append(reference_id)
+            continue
+        if decision not in _STRUCTURE_DECISIONS or status != PASS or not target_heading or not coverage_note or not evidence_values or not reviewer or not _valid_iso_date(review_date):
+            incomplete.append(reference_id)
+            continue
+        missing_evidence = []
+        for evidence in evidence_values:
+            candidates = (_resolve(project_dir, evidence), _resolve(source_root, evidence))
+            if not any(candidate is not None and candidate.is_file() for candidate in candidates):
+                missing_evidence.append(evidence)
+        if missing_evidence:
+            incomplete.append(reference_id)
+
+    if invalid:
+        _add(checks, "strongwine_structure_parity", FAIL, f"Some mapped sections were omitted, changed from the baseline, or marked failed: {sorted(invalid)[:8]}.")
+    elif incomplete:
+        _add(checks, "strongwine_structure_parity", INCOMPLETE, f"{len(incomplete)} StrongWine sections lack a complete, evidence-backed target mapping; first IDs: {sorted(incomplete)[:8]}.")
+    else:
+        _add(checks, "strongwine_structure_parity", PASS, f"All {len(baseline_by_id)} StrongWine headings map to reviewed, evidence-backed target sections.")
+        if output_path is None or not output_path.is_file():
+            _add(checks, "strongwine_structure_in_docx", INCOMPLETE, "The final DOCX is missing; its actual heading outline cannot be checked.")
+            return
+        try:
+            from docx import Document
+            from wordassistant.selectors import _heading_level
+
+            document = Document(output_path)
+            outline = [
+                (paragraph.text, _heading_level(paragraph))
+                for paragraph in document.paragraphs
+                if paragraph.text.strip() and _heading_level(paragraph) is not None
+            ]
+        except Exception as exc:
+            _add(checks, "strongwine_structure_in_docx", FAIL, f"Cannot inspect the final DOCX heading outline: {exc}")
+            return
+
+        actual = [
+            (" ".join(str(title).split()).casefold(), level)
+            for title, level in outline
+        ]
+        cursor = 0
+        missing_targets: list[str] = []
+        for reference_id, _baseline in baseline_by_id.items():
+            row = mapped[reference_id]
+            expected_title = " ".join(row["target_heading"].split()).casefold()
+            expected_level = int(row["target_level"])
+            found = next(
+                (
+                    index
+                    for index in range(cursor, len(actual))
+                    if actual[index] == (expected_title, expected_level)
+                ),
+                None,
+            )
+            if found is None:
+                missing_targets.append(reference_id)
+            else:
+                cursor = found + 1
+        if missing_targets:
+            _add(checks, "strongwine_structure_in_docx", FAIL, f"The final DOCX outline is missing, mis-leveling, or reordering mapped headings; first reference IDs: {missing_targets[:8]}.")
+        else:
+            _add(checks, "strongwine_structure_in_docx", PASS, f"All {len(baseline_by_id)} mapped headings appear in the final DOCX outline at the required levels and in order.")
+
+
+def _check_asset_parity(project_dir: Path, project: dict[str, Any], checks: list[dict[str, str]]) -> None:
+    baseline_path = _STRONGWINE_ASSET_BASELINE
+    if not baseline_path.is_file():
+        _add(checks, "strongwine_asset_parity", FAIL, f"Canonical StrongWine asset baseline is missing: {baseline_path}.")
+        return
+    try:
+        baseline_hash = _sha256(baseline_path)
+        baseline_rows = _rows(baseline_path)
+    except (OSError, UnicodeError, csv.Error) as exc:
+        _add(checks, "strongwine_asset_parity", FAIL, f"Cannot read the canonical asset baseline: {exc}")
+        return
+    if baseline_hash.casefold() != _STRONGWINE_ASSET_BASELINE_SHA256:
+        _add(checks, "strongwine_asset_parity", FAIL, "Canonical StrongWine asset baseline hash changed; update the baseline and checker together after review.")
+        return
+
+    baseline_by_id: dict[str, dict[str, str]] = {}
+    for row in baseline_rows:
+        reference_id = (row.get("reference_id") or "").strip()
+        if not reference_id or reference_id in baseline_by_id:
+            _add(checks, "strongwine_asset_parity", FAIL, "Canonical asset baseline has a blank or duplicate reference_id.")
+            return
+        baseline_by_id[reference_id] = row
+    if not baseline_by_id:
+        _add(checks, "strongwine_asset_parity", FAIL, "Canonical StrongWine asset baseline contains no image or table entries.")
+        return
+
+    matrix_path = _resolve(project_dir, project.get("asset_parity_matrix_file", "asset-parity.csv"))
+    if matrix_path is None or not matrix_path.is_file():
+        _add(checks, "strongwine_asset_parity", INCOMPLETE, "asset-parity.csv is missing.")
+        return
+    try:
+        rows = _rows(matrix_path)
+    except (OSError, UnicodeError, csv.Error) as exc:
+        _add(checks, "strongwine_asset_parity", FAIL, f"Cannot read asset-parity.csv: {exc}")
+        return
+    if not rows:
+        _add(checks, "strongwine_asset_parity", INCOMPLETE, "asset-parity.csv has no mapped images or tables.")
+        return
+
+    mapped: dict[str, dict[str, str]] = {}
+    duplicate_ids: set[str] = set()
+    for row in rows:
+        reference_id = (row.get("reference_id") or "").strip()
+        if not reference_id:
+            continue
+        if reference_id in mapped:
+            duplicate_ids.add(reference_id)
+        mapped[reference_id] = row
+    unknown_ids = mapped.keys() - baseline_by_id.keys()
+    if duplicate_ids or unknown_ids:
+        _add(checks, "strongwine_asset_parity", FAIL, f"Asset map has duplicate IDs {sorted(duplicate_ids)} or IDs outside the baseline {sorted(unknown_ids)}.")
+        return
+    missing_ids = baseline_by_id.keys() - mapped.keys()
+    if missing_ids:
+        _add(checks, "strongwine_asset_parity", INCOMPLETE, f"Asset map is missing {len(missing_ids)} of {len(baseline_by_id)} StrongWine images/tables; first missing IDs: {sorted(missing_ids)[:8]}.")
+        return
+
+    source_root = _resolve(project_dir, project.get("source_project_root")) or project_dir
+    incomplete: list[str] = []
+    invalid: list[str] = []
+    for reference_id, baseline in baseline_by_id.items():
+        row = mapped[reference_id]
+        fixed_fields = ("item_type", "reference_index", "reference_caption", "reference_description")
+        if any((row.get(field) or "").strip() != (baseline.get(field) or "").strip() for field in fixed_fields):
+            invalid.append(reference_id)
+            continue
+        decision = (row.get("decision") or "").strip().upper()
+        status = (row.get("status") or "").strip().upper()
+        target_section = (row.get("target_section") or "").strip()
+        target_caption = (row.get("target_caption") or "").strip()
+        coverage_note = (row.get("coverage_note") or "").strip()
+        evidence_values = [item.strip() for item in (row.get("evidence_files") or "").split(";") if item.strip()]
+        reviewer = (row.get("reviewed_by") or "").strip()
+        review_date = (row.get("review_date") or "").strip()
+        if decision in {"OMIT", "NOT_APPLICABLE", "SKIP"} or status == FAIL:
+            invalid.append(reference_id)
+            continue
+        if decision not in _STRUCTURE_DECISIONS or status != PASS or not target_section or not target_caption or not coverage_note or not evidence_values or not reviewer or not _valid_iso_date(review_date):
+            incomplete.append(reference_id)
+            continue
+        if any(
+            not any(
+                candidate is not None and candidate.is_file()
+                for candidate in (_resolve(project_dir, evidence), _resolve(source_root, evidence))
+            )
+            for evidence in evidence_values
+        ):
+            incomplete.append(reference_id)
+
+    if invalid:
+        _add(checks, "strongwine_asset_parity", FAIL, f"Some reference image/table slots were omitted, altered, or marked failed: {sorted(invalid)[:8]}.")
+    elif incomplete:
+        _add(checks, "strongwine_asset_parity", INCOMPLETE, f"{len(incomplete)} of {len(baseline_by_id)} StrongWine image/table slots lack a complete, evidence-backed target equivalent; first IDs: {sorted(incomplete)[:8]}.")
+    else:
+        _add(checks, "strongwine_asset_parity", PASS, f"All {len(baseline_by_id)} StrongWine image/table slots map to reviewed, evidence-backed target equivalents.")
 
 
 def _check_claim_evidence(project_dir: Path, project: dict[str, Any], checks: list[dict[str, str]]) -> set[str]:
@@ -619,6 +982,9 @@ def assess(project_dir: str | Path) -> dict[str, Any]:
     word_gate, _output_path, document_hash = _check_word_delivery(directory, project)
     content_checks: list[dict[str, str]] = []
     _check_requirements(directory, project, content_checks)
+    _check_cover_metadata(directory, project, content_checks)
+    _check_structure_parity(directory, project, content_checks, _output_path)
+    _check_asset_parity(directory, project, content_checks)
     evidence_ids = _check_claim_evidence(directory, project, content_checks)
     _check_acceptance(project, content_checks)
     _check_integrity_audit(directory, project, document_hash, evidence_ids, content_checks)

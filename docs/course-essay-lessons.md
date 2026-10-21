@@ -10,14 +10,20 @@ Các mục dưới đây là lỗi đã quan sát trong các lần chạy cụ t
 | `capture_source_snapshot.py --help` đã ghi đè trạng thái project. | Script chạy ngay khi import, không có argparse, và cập nhật hàng loạt metadata/default acceptance checks. | Chỉ chạy công việc dưới `if __name__ == "__main__"`; parse arguments trước mọi thao tác ghi; giữ `--help` không có side effect; khi cập nhật snapshot chỉ sửa trường source revision/manifest, không chạm output, evidence registries hay acceptance checks. |
 | Một asset builder có thể bị hiểu nhầm là đã kiểm route của framework bất kỳ. | Adapter hiện tự phát hiện route/template chỉ cho Java Spring MVC; chế độ render ảnh không thể chứng minh route hoặc template. | Tách `build` (Java scanner) khỏi `render` (vẽ từ inventory đã kiểm thủ công). Ghi `source_verification=NOT_RUN_MANUAL_REVIEW_REQUIRED` ở report render-only; chỉ reviewer source mới đánh dấu hình verified. |
 | Bản Word có thể bị gọi là sẵn sàng nộp chỉ vì render/verify đạt. | Word delivery, học thuật/nguồn, và tuân thủ rubric là các cổng khác nhau. | Chạy `check_course_essay_readiness.py`; báo riêng cả ba cổng. Thiếu rubric, AI-disclosure policy hoặc evidence bắt buộc thì giữ `submission_readiness=INCOMPLETE`. |
+| Bản VietLex bị thu gọn so với StrongWine và cover ghi sai GVHD. | `project.json` để trống assignment/rubric, đặt profile theo “style-derived”; task plan/README giới hạn StrongWine thành mẫu hình thức, không có bảng map cấu trúc. Dù workflow đã cấm mượn tên người, `cover-metadata.json` vẫn mang supervisor từ bài mẫu. Readiness trước đây không kiểm cấu trúc hoặc authority của metadata bìa. | Dùng baseline bất kể `document_type`; map hết 204 heading rows và 109 slot hình/bảng vào tương đương có evidence. Ghi từng cover value cùng authority trong `cover-metadata.csv`; cấm `REFERENCE_SAMPLE`. Checker chặn thiếu/omit/mapping không có evidence; reviewer vẫn phải so bìa và nội dung cuối với authority. |
 
 ## Bằng chứng của bài VietLex ngày 2026-10-20
 
 Hồ sơ `D:\Download\ProfessionalLegalRAG\artifacts\course-essay-vietlex-20261020` ghi rõ DOCX `Final_v5` là canonical, hash của DOCX/PDF, ba registry/QA gate, danh sách nguồn và review trực quan. `qa/readiness-final.json` ghi Word delivery `PASS`, content/source `INCOMPLETE`, submission readiness `INCOMPLETE` vì rubric chưa được cung cấp. Các warning trong integrity audit vẫn là warning sau khi disposition, không được diễn giải thành xác nhận nội dung.
 
+Kiểm tra chỉ đọc ngày 2026-10-21 đối chiếu đúng `Final_v5` với StrongWine final: VietLex có 41 trang, 289 đoạn, 2 bảng và 7 ảnh; StrongWine có 176 trang, 1,192 đoạn, 44 bảng và 65 image instances. Cả hai có bảy chương, nhưng phần đầu VietLex thiếu lịch trình, ABSTRACT và danh mục từ viết tắt. `cover-metadata.json` và vùng nhận xét GVHD của VietLex ghi tên lấy từ StrongWine, trong khi người dùng xác nhận đúng là ThS. Đinh Thị Hồng Loan. Word delivery PASS chỉ xác nhận dàn trang, không xác nhận cấu trúc đủ như mẫu.
+
+Nguyên nhân được xác nhận gồm hai phần: (1) hợp đồng workflow cũ không có chế độ full structural parity/ma trận bắt buộc nên lượt VietLex bị đặt ở “style only”; (2) thao tác nhập metadata đã vi phạm quy tắc có sẵn khi lấy tên GVHD từ mẫu. Đây không phải do “model mới”; cần siết cả workflow lẫn cổng kiểm tra.
+
 ## Dùng với bài khác
 
 - Đọc `docs/strongwine-course-essay-workflow.md` và starter README trước khi tạo workspace.
+- Không soạn DOCX trước khi hoàn thành `cover-metadata.csv`, toàn bộ 204 dòng `structure-parity.csv` và 109 dòng `asset-parity.csv`. Readiness giữ `INCOMPLETE` nếu còn hàng thiếu, bị bỏ, chưa có evidence hoặc chưa được reviewer kiểm.
 - Không dùng script/manifest theo framework cụ thể nếu chưa xác nhận adapter.
 - Bài học không phải rubric; nguồn/project mới cần tự xác minh.
 - Ghi `PASS`, `WARN`, `NOT_RUN`, `BLOCKED` dựa trên artifact thực tế; không đoán kết quả khi thiếu file hoặc log.
