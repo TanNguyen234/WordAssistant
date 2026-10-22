@@ -80,8 +80,8 @@ Each advertised mutation feature must have the applicable evidence below:
 1. Keep operation-level evidence and capability status synchronized with tests.
 2. Require native verification for freshness claims about dynamic fields.
 3. Render every page and complete visual review before delivery claims.
-4. Use those gates in the Antigravity black-box test before final capability
-   claims, commits, and push.
+4. Use those gates in local CLI and installed-wheel checks before final
+   capability claims, commits, and push.
 
 ## Remediation evidence from this review
 

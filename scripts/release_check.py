@@ -347,7 +347,6 @@ def main() -> None:
         pip_exe = str(venv_path / ('Scripts/pip.exe' if sys.platform == 'win32' else 'bin/pip'))
         py_exe = str(venv_path / ('Scripts/python.exe' if sys.platform == 'win32' else 'bin/python'))
         wa_exe = str(venv_path / ('Scripts/wordassistant.exe' if sys.platform == 'win32' else 'bin/wordassistant'))
-        ag_exe = str(venv_path / ('Scripts/wordassistant-antigravity.exe' if sys.platform == 'win32' else 'bin/wordassistant-antigravity'))
         clean_cwd = Path(clean_env_dir)
         clean_execution_env = {'PYTHONPATH': '', 'PYTHONNOUSERSITE': '1'}
 
@@ -398,8 +397,10 @@ def main() -> None:
             f"root = __import__('pathlib').Path({str(ROOT)!r}); "
             "assert pkg.joinpath('wordassistant-agent.json').read_bytes() == root.joinpath('wordassistant-agent.json').read_bytes(); "
             "assert pkg.joinpath('word_feature_matrix.json').read_bytes() == root.joinpath('docs', 'word_feature_matrix.json').read_bytes(); "
-            "assert pkg.joinpath('antigravity-workflow.json').read_bytes() == root.joinpath('antigravity-workflow.json').read_bytes(); "
-            "assert pkg.joinpath('run_antigravity_workflow.py').is_file(); "
+            "assert not pkg.joinpath('antigravity-workflow.json').exists(); "
+            "assert not pkg.joinpath('run_antigravity_workflow.py').exists(); "
+            "from importlib.metadata import entry_points; "
+            "assert not any(ep.name == 'wordassistant-antigravity' for ep in entry_points(group='console_scripts')); "
             "commands = json.loads(pkg.joinpath('wordassistant-agent.json').read_text(encoding='utf-8'))['commands']; "
             "assert {'doctor','capabilities','inspect','context','create','edit','verify','render'} <= set(commands); "
             "print('installed-package-asset-hashes: VERIFIED')"
@@ -458,8 +459,6 @@ def main() -> None:
 
         if Path(wa_exe).exists():
             run_installed([wa_exe, 'doctor', '--json'])
-        assert Path(ag_exe).exists(), "wordassistant-antigravity entry point is missing"
-        run_installed([ag_exe, '--help'])
         print('isolated-wheel-smoke: OK (installed wheel code, release dependencies)')
 
     print('\n========================================')

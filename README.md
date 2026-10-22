@@ -45,7 +45,7 @@ wordassistant init . --json
 wordassistant inspect file.docx --summary --json
 wordassistant context file.docx --query "revise evaluation and error analysis" --max-tokens 4000 --json
 wordassistant create output.docx --profile generic --variant default --title "Report" --json
-wordassistant compose output.docx --output authored.docx --content content.json --evidence evidence.json --min-visible-characters 8000 --max-visible-characters 14000 --json
+wordassistant compose output.docx --output authored.docx --content content.json --evidence report-evidence.json --json
 wordassistant apply authored.docx --output formatted.docx --plan operations.json --json
 wordassistant edit replace file.docx --output revised.docx --options '{"pattern":"old text","replacement":"new text"}' --json
 wordassistant table create revised.docx --output tabled.docx --options '{"rows":3,"columns":4}' --json
@@ -150,11 +150,11 @@ python scripts/sync_package_data.py --check
 python scripts/release_check.py
 ```
 
-## Agent integrations
+## Agent instructions
 
-- `GEMINI.md`: compact Antigravity entrypoint.
+- `wordassistant-agent.json`: local CLI command and workflow manifest, mirrored in the installed package.
 - `.agents/rules/wordassistant.md`: workspace rule.
-- `.agents/skills/wordassistant/SKILL.md`: one discoverable skill rather than many competing academic-only skills.
+- `.agents/skills/wordassistant/SKILL.md`: WordAssistant workflow skill.
 - `AGENTS.md`: provider-neutral operating rules.
 
 See `docs/ARCHITECTURE.md`, `docs/MIGRATION_V1_TO_V2.md`, and `use_cases/hcmunre_dacn_2026_2027/README.md`.

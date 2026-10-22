@@ -18,14 +18,6 @@ def get_pairs():
                 ROOT / 'src/wordassistant/data/agent/wordassistant-agent.json',
             ),
             (
-                ROOT / 'antigravity-workflow.json',
-                ROOT / 'src/wordassistant/data/agent/antigravity-workflow.json',
-            ),
-            (
-                ROOT / 'scripts/run_antigravity_workflow.py',
-                ROOT / 'src/wordassistant/data/agent/run_antigravity_workflow.py',
-            ),
-            (
                 ROOT / 'docs/word_feature_matrix.json',
                 ROOT / 'src/wordassistant/data/agent/word_feature_matrix.json',
             ),

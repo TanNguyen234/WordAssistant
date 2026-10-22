@@ -587,10 +587,25 @@ def validate_document(
         # Inner Cover Verification
         if 'inner_cover' in v.front_matter:
             cover_count = 0
-            if doc_type:
+            anchor = ""
+            if doc_type and doc_type.casefold() in cover_text_full.casefold():
+                anchor = doc_type
                 cover_count = cover_text_full.casefold().count(doc_type.casefold())
-            elif inst_lines:
-                cover_count = cover_text_full.casefold().count(inst_lines[0].casefold())
+            elif inst_lines and any(inst.casefold() in cover_text_full.casefold() for inst in inst_lines):
+                anchor = [inst for inst in inst_lines if inst.casefold() in cover_text_full.casefold()][0]
+                cover_count = cover_text_full.casefold().count(anchor.casefold())
+            else:
+                for marker in ["tiểu luận", "báo cáo", "đồ án", "khoa công nghệ thông tin"]:
+                    if marker in cover_text_full.casefold():
+                        anchor = marker
+                        cover_count = cover_text_full.casefold().count(marker)
+                        break
+            if not anchor:
+                anchor = doc_type or (inst_lines[0] if inst_lines else '')
+                if doc_type:
+                    cover_count = cover_text_full.casefold().count(doc_type.casefold())
+                elif inst_lines:
+                    cover_count = cover_text_full.casefold().count(inst_lines[0].casefold())
                 
             if cover_count < 2:
                 issues.append(
@@ -601,11 +616,26 @@ def validate_document(
                     )
                 )
             elif v.cover.get('require_distinct_inner_cover'):
-                anchor = doc_type or (inst_lines[0] if inst_lines else '')
+                # The document type often appears again near the middle of
+                # each cover. Check the page break at the start of the second
+                # cover block (normally the institution line) instead.
+                distinct_anchor = next(
+                    (
+                        institution
+                        for institution in inst_lines
+                        if institution
+                        and cover_text_full.casefold().count(institution.casefold()) >= 2
+                    ),
+                    '',
+                )
+                distinct_anchor = distinct_anchor or anchor or doc_type or (
+                    inst_lines[0] if inst_lines else ''
+                )
                 anchor_paragraphs = [
                     index
                     for index, paragraph in enumerate(d.paragraphs[:50])
-                    if anchor and anchor.casefold() in paragraph.text.casefold()
+                    if distinct_anchor
+                    and distinct_anchor.casefold() in paragraph.text.casefold()
                 ]
                 if len(anchor_paragraphs) < 2 or not _starts_new_page(d, anchor_paragraphs[1]):
                     issues.append(

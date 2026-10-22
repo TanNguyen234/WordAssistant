@@ -1,6 +1,6 @@
 # Quy trình tái lập báo cáo môn học và đồ án chuyên ngành phần mềm
 
-Tài liệu này là runbook theo thứ tự từ lúc nhận đề đến lúc bàn giao DOCX. Mục tiêu áp dụng như nhau cho tiểu luận học phần và đồ án chuyên ngành: giữ đủ độ sâu phù hợp của một báo cáo phần mềm hoàn chỉnh, nhưng số đề mục, hình và bảng được xác định riêng theo đề, rubric, profile được chọn và bằng chứng của project. StrongWine là một ví dụ hoàn chỉnh để rà chiều sâu và kiểu trình bày; cấu trúc và số lượng trong tệp đó không phải định mức bắt buộc. Không được rút gọn chỉ vì nhãn loại bài, cũng không ép bài mới có các mục hoặc hình/bảng không áp dụng. Mọi yêu cầu đều phải có mặt trong outline/ma trận hoặc có quyết định không áp dụng với lý do và người review. Phần cuối ghi rõ lệnh riêng của bài StrongWine để không nhầm script mẫu với công cụ dùng chung. Đọc thêm `docs/course-essay-lessons.md` để tránh các lỗi đã xác nhận. Quy trình WordAssistant này không gọi agy/Antigravity, n8n hay model provider.
+Tài liệu này là runbook dùng chung theo thứ tự từ lúc nhận đề đến lúc bàn giao DOCX. Mục tiêu áp dụng như nhau cho tiểu luận học phần và đồ án chuyên ngành: giữ đủ độ sâu phù hợp của một báo cáo phần mềm hoàn chỉnh, nhưng số đề mục, hình và bảng được xác định riêng theo đề, rubric, profile được chọn và bằng chứng của project. StrongWine là ví dụ để rà chiều sâu và kiểu trình bày; cấu trúc và số lượng trong tệp đó không phải định mức bắt buộc. Không được rút gọn chỉ vì nhãn loại bài, cũng không ép bài mới có các mục hoặc hình/bảng không áp dụng. Mọi yêu cầu phải có mặt trong outline/ma trận hoặc có quyết định không áp dụng cùng lý do và reviewer. Tài liệu này không chứa lệnh riêng, route, asset hay dữ liệu của StrongWine; lỗi đã xác nhận và cách phòng ngừa được lưu ở `docs/strongwine-course-essay-lessons.md`.
 
 ## Sơ đồ luồng
 
@@ -48,9 +48,11 @@ Trước khi viết, phân loại tài liệu đầu vào:
 
 Trước khi soạn, so từng dòng cover-metadata.csv với bìa, biểu mẫu nhận xét, header/footer và tên loại tài liệu trong DOCX. Chỉ đưa tên người dùng cung cấp hoặc tên có trong nguồn chính thức đã kiểm. Trước khi bàn giao, kiểm trực quan các vị trí đó trên render cuối; đánh dấu `cover_metadata_fields_verified` chỉ khi mọi giá trị khớp authority và không có dữ kiện thừa từ mẫu.
 
+Khi mẫu đã duyệt có hai bìa, giữ hai khối nội dung riêng: bìa ngoài có khung; bìa trong lặp đủ tên trường/khoa, logo, loại báo cáo, đề tài, thông tin sinh viên/GVHD và ngày, nhưng không có khung. Số trang/first-page footer phải lấy từ profile và hình mẫu đang dùng; một cấu hình thường gặp là ẩn số ở bìa ngoài, in Trang 1 ở bìa trong, tiếp tục phần đầu, rồi khởi động lại Trang 1 ở nội dung. Sau khi lưu bằng Word, mở riêng hai trang đầu và xác nhận đủ nội dung, khung và số trang; chỉ kiểm tra paragraph count là chưa đủ.
+
 ### 1.2 Lập outline động theo bài
 
-Trước khi soạn DOCX, lập outline đầy đủ theo đề, rubric, profile và source project. Dùng các nhóm trong phần 1 để rà thiếu chiều sâu; không sao chép tất cả heading hoặc số lượng từ StrongWine. Trong `structure-parity.csv`, tạo đúng một hàng cho từng heading dự kiến có style Heading trong DOCX cuối. Ma trận không phải danh sách ấn định trước: số dòng phụ thuộc bài.
+Trước khi soạn DOCX, lập outline đầy đủ theo đề, rubric, profile và source project. Dùng các nhóm trong phần 1 để rà thiếu chiều sâu; không sao chép tất cả heading hoặc số lượng từ StrongWine. Trong `structure-parity.csv`, tạo đúng một hàng cho **mọi heading** dự kiến xuất hiện trong DOCX cuối, kể cả heading do template, field TOC/danh mục, section nhận xét, tài liệu tham khảo hoặc phụ lục tạo ra. Không dựa vào generator để tự chèn heading ngoài ma trận. Ma trận không phải danh sách ấn định trước: số dòng phụ thuộc bài.
 
 - `item_id`: ID ổn định của heading trong project, ví dụ `H-001`.
 - `source_basis`, `source_location`: authority của heading (assignment, rubric, profile, yêu cầu người dùng, project analysis hoặc StrongWine exemplar) và vị trí cụ thể.
@@ -273,70 +275,73 @@ Giữ Word semantics: Heading styles thật, section properties, page-number fie
 
 ## 9. Cập nhật field, render và kiểm tra
 
-1. Lưu Word ra một output DOCX mới. Trong Microsoft Word, cập nhật tất cả field, TOC, danh mục hình/bảng và số trang; repaginate rồi Save. Nếu native Word không có, ghi rõ backend thay thế và giới hạn.
-2. Chạy verify đầu tiên để tạo render artifacts và visual-review challenge. Thay `PROFILE` bằng profile đã được đề cho phép; bỏ `--profile` nếu không có profile phù hợp. Dùng `--delivery` để lệnh trả trạng thái delivery:
+Ổn định nội dung, captions, section breaks, bảng, ảnh, style và page breaks trước khi cập nhật field. Chọn **một** cách cập nhật field: khuyến nghị `field update-all` ra một DOCX mới, rồi verify/render bản đó; hoặc dùng riêng `verify --native-fields`. Không chạy cả hai cách cho cùng một candidate vì lần cập nhật sau có thể phân trang lại hoặc làm thay đổi nội dung đã kiểm.
 
-   ```powershell
-   \.venv\Scripts\python.exe -m wordassistant.cli verify output.docx `
-     --native-fields --render --engine word --delivery `
-     --report-output artifacts\course-essay\my-project\qa\verify-challenge.json --json
-   ```
+### 9.1 Cập nhật field đúng một lần
 
-3. Mở **mọi** đường dẫn `render.page_images` trong report challenge. Không chỉ xem contact sheet. Kiểm tra bìa và trang cận bìa, tiêu đề/căn giữa, khung bìa, header/footer, số trang, text màu xanh ngoài ý muốn, ký tự/dấu tiếng Việt, chữ giãn bất thường, dòng rơi, caption, bảng, ảnh méo/cắt và trang trắng. Mở riêng trang có sơ đồ/wireframe để đọc nhãn ở kích thước trang.
-4. Chỉ sau khi đã xem hết ảnh, lấy token `visual_review_challenge.token` từ report và chạy lại cùng verify với `--visual-reviewed --visual-review-token <token>`. Token gắn với hash trang đã render; nếu sửa DOCX thì render lại và xin challenge/token mới. Không đặt `--visual-reviewed` trước khi đã xem mọi trang.
-5. Đối chiếu nội dung hình lần cuối với route/template/class/method được ghi trong manifest. Nếu sửa bất cứ thứ gì, quay lại cập nhật field, lưu, chạy verify/render và xem lại.
-6. Chạy `validate` chỉ với profile/rubric đã chọn. `validate.valid == true` và `verify.delivery_status == PASS` chỉ đặt `word_delivery: PASS`; chúng không kiểm tra tính đúng của luận điểm, nguồn luật, citation, UML hay việc tuân thủ rubric môn học.
-7. Duyệt từng hàng requirements matrix, từng citation/evidence mapping và từng integrity warning. Dùng `PASS` chỉ khi evidence đã mở/đọc và hỗ trợ claim; dùng `NOT_RUN`/`BLOCKED` nếu rubric, registry hoặc kiểm chứng bắt buộc chưa có. Warning heuristic được phân loại và xử lý, không được im lặng bỏ qua.
-8. Đặt `submission_readiness: PASS` chỉ khi mọi yêu cầu đã áp dụng được chứng minh bằng evidence và mọi cổng bắt buộc pass/waive hợp lệ. Nếu thiếu rubric hoặc còn nguồn/citation chưa review, `submission_readiness: INCOMPLETE`; được bàn giao như bản nháp/provisional, không gọi là tiểu luận sẵn sàng nộp.
-9. Ghi report QA JSON, lệnh chạy, hash SHA-256 của DOCX cuối, profile đã dùng, các điểm `PASS`/`NOT_RUN`/`BLOCKED` và trạng thái readiness riêng. Giữ đúng một file mang tên final khi đã đủ điều kiện; giữ source `.puml`, manifest, report QA và DOCX input cần thiết. Không xóa source/evidence để “dọn gọn” nếu chưa xác nhận chúng không còn cần.
+Lưu bản đã dàn trang thành `prefields.docx`, sau đó chạy WordAssistant field update ra output riêng. Giữ stdout JSON tách khỏi stderr:
+
+```powershell
+\.venv\Scripts\python.exe -m wordassistant.cli field update-all `
+  artifacts\course-essay\my-project\output\prefields.docx `
+  --output artifacts\course-essay\my-project\output\fields-updated.docx `
+  --json `
+  1> artifacts\course-essay\my-project\qa\field-update.stdout.json `
+  2> artifacts\course-essay\my-project\qa\field-update.stderr.log
+```
+
+Chỉ tiếp tục khi JSON báo `status=SUCCESS`, `updated=true`, `repaginated=true`, cập nhật đúng TOC/danh mục cần có và không có warning chưa xử lý. Sau khi Word lưu, kiểm tra lại hai bìa, số section, heading/caption và bookmark/PAGEREF còn tham chiếu được. Nếu một thao tác sửa heading/xóa paragraph làm mất bookmark TOC, phải chuyển bookmark sang heading chuẩn hoặc dựng lại field trước khi review.
+
+### 9.2 Render và duyệt mọi trang
+
+Chạy verify/render trên `fields-updated.docx` **không** bật `--native-fields` lần nữa. Thay `PROFILE` bằng profile đã xác nhận; bỏ `--profile` nếu không có profile phù hợp:
+
+```powershell
+\.venv\Scripts\python.exe -m wordassistant.cli verify `
+  artifacts\course-essay\my-project\output\fields-updated.docx `
+  --profile PROFILE --variant report --render --engine word `
+  --report-output artifacts\course-essay\my-project\qa\verify-challenge.json `
+  --summary --json
+
+\.venv\Scripts\python.exe scripts\make_course_essay_contact_sheets.py `
+  artifacts\course-essay\my-project\qa\verify-challenge.json `
+  artifacts\course-essay\my-project\qa\contact-sheets
+```
+
+Contact sheet là mục lục trực quan giúp rà hết trang; nó không thay việc mở và đọc **từng** `render.page_images`. Kiểm tra bìa/cận bìa, tiêu đề/căn giữa, khung, header/footer, số trang, chữ xanh ngoài ý muốn, dấu tiếng Việt, chữ giãn bất thường, dòng rơi, caption, bảng, méo/crop và trang trắng. Mở riêng ở độ phân giải gốc mọi sơ đồ/wireframe và các trang có bảng/hình bị đổi sau khi phân trang.
+
+Sau khi xem hết ảnh, nếu verify/render ở chế độ `--render`, dùng `visual_review_challenge.token`. Nếu chạy bước bàn giao với `--reuse-render-report`, lấy `visual_review_reuse.token` từ report render đã duyệt (dạng `wa-visual-reuse-v1:...`); hai token khác nhau và không thay thế cho nhau. Chạy lại verify với cùng DOCX và report render đã duyệt:
+
+```powershell
+\.venv\Scripts\python.exe -m wordassistant.cli verify `
+  artifacts\course-essay\my-project\output\fields-updated.docx `
+  --profile PROFILE --variant report --delivery `
+  --native-fields `
+  --reuse-render-report artifacts\course-essay\my-project\qa\verify-challenge.json `
+  --visual-reviewed --visual-review-token TOKEN `
+  --report-output artifacts\course-essay\my-project\qa\verify-delivery.json `
+  --summary --json
+```
+
+Token gắn với hash DOCX và ordered page-image hashes. `--reuse-render-report` yêu cầu token có tiền tố `wa-visual-reuse-v1:` lấy từ chính report đầu vào; truyền nhầm `visual_review_challenge.token` sẽ làm `render_reuse_invalid`. Ở lệnh reuse cuối, `--native-fields` kiểm tra cached field trong phiên Word cô lập; nó không lưu thay đổi vào DOCX. Không dùng đồng thời thao tác cập nhật `field update-all` và `verify --native-fields --render` cho cùng candidate. Nếu đã dùng `field update-all`, hãy render/duyệt bản output, rồi chạy lệnh reuse với `--native-fields` như ví dụ để kiểm tra field đã lưu. Nếu dùng `verify --native-fields --render` để cập nhật và render trong một lượt thì đó là thao tác cập nhật duy nhất.
+
+`validate.valid == true` và `verify.delivery_status == PASS` chỉ đặt `word_delivery: PASS`; chúng không kiểm tra luận điểm, nguồn luật, citation, UML hay tuân thủ rubric môn học. Duyệt từng hàng requirements matrix, citation/evidence mapping và integrity warning. Chỉ đặt `submission_readiness: PASS` khi mọi yêu cầu áp dụng có evidence và mọi cổng bắt buộc pass/waive hợp lệ. Nếu thiếu rubric hoặc nguồn/citation chưa review, giữ `submission_readiness: INCOMPLETE`; bàn giao dưới dạng bản nháp/provisional.
+
+Ghi QA JSON, command, SHA-256 DOCX cuối, profile/variant, PASS/NOT_RUN/BLOCKED và readiness. Giữ source `.puml`, manifest, report QA và DOCX input cần thiết. Không xóa source/evidence để “dọn gọn” nếu chưa xác nhận chúng không còn cần.
 
 Các lệnh WordAssistant thường dùng (chạy `--help` nếu phiên bản CLI khác):
 
 ```powershell
 \.venv\Scripts\python.exe -m wordassistant.cli inspect output.docx --summary --json
 \.venv\Scripts\python.exe -m wordassistant.cli verify output.docx --json
-\.venv\Scripts\python.exe -m wordassistant.cli verify output.docx --native-fields --render --engine word --delivery --json
 \.venv\Scripts\python.exe -m wordassistant.cli render output.docx --engine word --outdir artifacts\course-essay\my-project\qa\render --json
 ```
 
-Lần verify đầu trả `visual_review_challenge.token`; sau khi mở mọi `page_images`, lặp lại cùng lệnh với `--visual-reviewed --visual-review-token TOKEN`. `--visual-reviewed` là attestation gắn token, không tự kiểm tra pixel. Luôn mở ảnh từ đúng lần render cuối.
+Lần verify có render trả `visual_review_challenge.token`; sau khi mở mọi `page_images`, dùng lệnh reuse-render ở mục 9.2 với `--visual-reviewed --visual-review-token TOKEN`. `--visual-reviewed` là attestation gắn token, không tự kiểm tra pixel. Luôn mở ảnh từ đúng lần render cuối.
 
-## 10. StrongWine đã làm: nguồn, lệnh và khác biệt riêng
+## 10. StrongWine là tài liệu tham chiếu, không phải cấu hình chạy
 
-Phần này ghi trạng thái của bài hiện tại, không phải giá trị mặc định cho project khác:
-
-- DOCX đầu vào chỉ đọc: `artifacts/strongwine_course_essay_final_checked_v2.docx`.
-- Project nguồn chỉ đọc: `D:\Projects\strongwine_2\Wine-website`.
-- Inventory đã kiểm chứng: `examples/strongwine-course-essay/screen-inventory.json`.
-- DOCX đạt yêu cầu người dùng: `artifacts/strongwine_course_essay_final_checked_v3.docx`.
-- Lỗi và biện pháp phòng ngừa đã xác nhận: `docs/strongwine-course-essay-lessons.md`.
-
-Làm mới wireframe và cây phân rã từ source StrongWine:
-
-```powershell
-\.venv\Scripts\python.exe scripts\build_course_essay_assets.py build `
-  --project-root 'D:\Projects\strongwine_2\Wine-website' `
-  --inventory examples\strongwine-course-essay\screen-inventory.json `
-  --wireframe-dir artifacts\strongwine-oop-essay\wireframes_lowfi `
-  --diagram-dir artifacts\strongwine-oop-essay\plantuml_overhaul `
-  --report artifacts\strongwine-oop-essay\wireframe-build-report.json
-```
-
-Manifest StrongWine đã ghi các view/route của project; số lượng trong report phản ánh revision nguồn đã đọc, không copy số lượng đó sang project khác. Cây dùng đúng mẫu ba tầng và đặt tên screen trong box; route path đầy đủ ở manifest/report.
-
-`scripts/strongwine_course_essay.py` và `scripts/run_strongwine_course_essay_qa.ps1` là helper dành riêng cho DOCX StrongWine hiện tại: audit nội dung/hình với project, prepare/update visuals, sửa caption sequence đã được xem xét, khôi phục byte ảnh sau khi Word lưu, cập nhật field bằng Word COM, chạy inspect/page-number và render. Wrapper nhận đúng một trong `-Prepare`, `-UpdateVisuals`, `-RepairCaptionSequence`; mỗi mode yêu cầu input/output phù hợp và từ chối overwrite output. Các anchor, caption, trang kiểm và wireframe hiện gắn với bài StrongWine, nên không chạy wrapper này cho bài khác nếu chưa thay toàn bộ cấu hình có chủ đích.
-
-Ví dụ refresh hình trong một bản sao khác của bài StrongWine:
-
-```powershell
-\.\scripts\run_strongwine_course_essay_qa.ps1 `
-  -InputDocx artifacts\strongwine_course_essay_final_checked_v2.docx `
-  -OutputDocx artifacts\strongwine_course_essay_final_checked_v3.docx `
-  -ProjectRoot 'D:\Projects\strongwine_2\Wine-website' `
-  -UpdateVisuals
-```
-
-QA helper tạo JSON/log trong thư mục timestamp và preview trang từ PDF render; command/report là chứng cứ của lần chạy cụ thể. Nếu thay DOCX sau đó thì phải chạy lại QA. Một bài khác cần wrapper tổng quát riêng hoặc thao tác chuẩn WordAssistant nêu ở trên, không đổi path/title rồi kỳ vọng wrapper tự hiểu bài.
+Chỉ dùng bản StrongWine đã được người dùng chấp thuận để rà độ sâu và phong cách. Không lấy tên, route, role, hình, caption, số lượng, nhận xét giảng viên, source path hoặc lệnh dành riêng cho StrongWine đưa vào project mới. Các script `strongwine_*` và wrapper `run_strongwine_*` được khóa theo bài đó; không đổi mỗi đường dẫn rồi tái sử dụng. Với project mới, khởi tạo từ `scripts/init_course_essay_project.py`, điền inventory/evidence của project đó, rồi dùng `scripts/build_course_essay_assets.py` và lệnh WordAssistant ở các bước trên. Lịch sử lỗi StrongWine chỉ phục vụ phòng ngừa, không là nguồn sự thật cho report mới.
 
 ## Regression và điều kiện dừng
 

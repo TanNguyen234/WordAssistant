@@ -16,11 +16,6 @@ def test_agent_manifest_is_compact_and_actionable():
     assert manifest["capability_discovery_command"] == "wordassistant capabilities --json"
     assert "long_document_edit" in manifest["recommended_workflows"]
     assert {"protect", "properties", "mail-merge"} <= set(manifest["commands"])
-    assert manifest["orchestration"]["manifest"] == "antigravity-workflow.json"
-    assert manifest["orchestration"]["runner"] == "wordassistant-antigravity"
-    assert "run_antigravity_workflow.py" in manifest["orchestration"]["repository_runner"]
-    assert "only when the user explicitly requests it" in manifest["orchestration"]["repository_runner"]
-    assert "Do not invoke the runner automatically" in manifest["orchestration"]["policy"]
 
 
 def test_agent_manifest_has_fail_closed_delivery_gates():
@@ -46,14 +41,24 @@ def test_agent_manifest_requires_course_essay_evidence_matrix():
     manifest = json.loads((ROOT / "wordassistant-agent.json").read_text(encoding="utf-8"))
     gate = manifest["delivery_gates"]["course_essay_evidence_matrix"].casefold()
 
-    for required_evidence in (
-        "every database table",
-        "sample rows",
-        "every function",
-        "1366 px",
-        "embedded",
-        "12 mm",
-        "multilevel numbering",
-        "hình x.x",
-    ):
-        assert required_evidence in gate
+    assert "project-specific" in gate
+    assert "strongwine" in gate
+    assert "do not copy" in gate
+    assert "every database table" not in gate
+    assert "1366 px" not in gate
+
+
+def test_report_workflow_has_no_fixed_heading_or_asset_quota():
+    manifest = json.loads((ROOT / "wordassistant-agent.json").read_text(encoding="utf-8"))
+    gate = manifest["delivery_gates"]["course_essay_evidence_matrix"].casefold()
+    assert "counts come from" in gate
+    assert "rubric" in gate
+    assert "source project" in gate
+
+
+def test_agent_manifest_does_not_expose_external_provider_runner():
+    pyproject = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
+    assert "wordassistant-antigravity" not in pyproject
+    assert not (ROOT / "GEMINI.md").exists()
+    assert not (ROOT / "antigravity-workflow.json").exists()
+    assert not (ROOT / "scripts" / "run_antigravity_workflow.py").exists()

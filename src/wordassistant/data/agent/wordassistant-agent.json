@@ -1,11 +1,5 @@
 {
   "version": 1,
-  "orchestration": {
-    "manifest": "antigravity-workflow.json",
-    "runner": "wordassistant-antigravity",
-    "repository_runner": "Optional only when the user explicitly requests it: python scripts/run_antigravity_workflow.py",
-    "policy": "Antigravity uses an external provider. Do not invoke the runner automatically; use it only after an explicit user request. Normal WordAssistant operations are local and do not require a model provider."
-  },
   "commands": [
     "doctor",
     "capabilities",
@@ -63,7 +57,7 @@
     "validation": "validate.valid == true",
     "verification": "verify.delivery_status == PASS",
     "requested_features": "Every requested feature must be observed semantically at the requested depth; visible lookalikes do not count.",
-    "course_essay_evidence_matrix": "Before composing or editing a user-defined course essay, map every database table to its full schema and representative sample rows, and every function/persona to a fresh desktop screenshot at 1366 px or wider embedded in the DOCX. Keep the old reference read-only and use only user-approved facts/assets. Verify both requested covers with a frame at least 12 mm inside the page edge, 13 pt body text when requested, aligned real heading styles with true multilevel numbering, black headings/captions, required page starts, and title-only captions such as Hình x.x: Tên hình. Missing evidence is INCOMPLETE even if generic validation passes.",
+    "course_essay_evidence_matrix": "Before drafting, build project-specific acceptance, requirement, outline and visual inventories from the assignment, rubric, selected profile and read-only source project. Use StrongWine only as a qualitative depth and style comparator; do not copy its headings, counts or facts. Counts come from the current project and its questions, not a fixed quota. Map every required heading, project claim and planned asset to its authority/source and review status. Inspect database entities/schema only as needed to explain the actual system; enumerate actual GET views and templates, and distinguish source-backed wireframes from screenshots captured from a running app. Include, adapt, or record a reviewer-approved not-applicable decision with a reason for each relevant comparator group. Missing rubric, source or runtime evidence remains INCOMPLETE.",
     "dynamic_fields": "Requested TOC, REF, PAGEREF, PAGE, NUMPAGES, and SEQ fields must be present and UPDATED_NATIVE after a Word reopen/update; placeholder or stale results are FAIL.",
     "visual_page_audit": "Inspect the visible content of every rendered page; image existence, file size, and dimensions alone are not a content audit. Unexpected blank or near-blank pages are FAIL.",
     "negative_tests": "Each negative test must exercise the exact requested invariant; harness misuse, unknown options, or unrelated exceptions are FAIL, not a passing fail-closed result.",
@@ -73,8 +67,10 @@
     "unavailable_policy": "UNAVAILABLE or REVIEW_REQUIRED is never PASS."
   },
   "document_construction_order": [
-    "Before composition or editing, freeze the user-specific course-essay acceptance matrix and assign a source plus evidence artifact to each required content, database, screenshot, and layout row.",
-    "For a new long report, write one bounded version-1 content JSON and run compose once; never generate helper code.",
+    "Before composition or editing, freeze the user-specific assignment/rubric/profile checks and map each requirement to a report section and evidence artifact; keep missing inputs explicitly NOT_RUN.",
+    "Use an accepted full-report example such as StrongWine to review depth and style, then derive the outline and asset inventory from this project's requirements and evidence. Record each applicable, adapted, or reviewer-approved not-applicable group; never use example counts as quotas.",
+    "Enumerate every heading expected in the final DOCX, including generated front matter, lists, references and appendices. Do not rely on compose or a matrix generator to silently add headings that are absent from the approved outline.",
+    "Choose compose and reusable helper scripts according to document size and project needs. There is no universal visible-character target; review generated scripts before using them.",
     "Compose substantive content, real Heading styles, stable anchors, evidence-linked citations, and the existing bibliography section before layout operations.",
     "Use one version-1 apply plan for compatible mutating operations so a failed step rolls back and no intermediate DOCX is published.",
     "Insert section breaks with selectors at real content boundaries, then apply layout to the resulting section indexes.",
@@ -97,12 +93,12 @@
         "wordassistant doctor --json",
         "wordassistant capabilities --json",
         "wordassistant create report.docx --profile generic --title Report --json",
-        "wordassistant compose report.docx --output authored.docx --content content.json --evidence evidence.json --min-visible-characters 8000 --max-visible-characters 14000 --json",
+        "wordassistant compose report.docx --output authored.docx --content content.json --evidence report-evidence.json --json",
         "wordassistant apply authored.docx --output formatted.docx --plan operations.json --json",
         "wordassistant validate formatted.docx --profile generic --variant default --json",
         "wordassistant field update-all formatted.docx --output refreshed.docx --json",
-        "wordassistant integrity audit refreshed.docx --evidence evidence.json --profile generic --variant default --json",
-        "wordassistant integrity provenance refreshed.docx --evidence evidence.json --profile generic --variant default --output refreshed.provenance.json --json",
+        "wordassistant integrity audit refreshed.docx --evidence report-evidence.json --profile generic --variant default --json",
+        "wordassistant integrity provenance refreshed.docx --evidence report-evidence.json --profile generic --variant default --output refreshed.provenance.json --json",
         "wordassistant verify refreshed.docx --profile generic --variant default --native-fields --render --engine word --json",
         "INSPECT_EVERY_PATH_FROM_render.page_images",
         "wordassistant verify refreshed.docx --profile generic --variant default --native-fields --render --engine word --visual-reviewed --visual-review-token TOKEN_FROM_CHALLENGE --delivery --json"

@@ -13,7 +13,7 @@ Use the CLI as the stable control plane. Never inspect repository source or raw 
 4. Edit only the selected section or exact text target using a stable selector/anchor and save an output copy. For section-wide text edits, use a heading selector; `edit replace` without a selector may change matching text throughout the document.
 5. Check `wordassistant capabilities --json` before native or renderer-dependent work.
 6. Mutate an output copy. Use `--dry-run` before destructive changes.
-7. For a new long report, write one bounded UTF-8 content JSON and run `compose` once after `create`; do not generate helper scripts. Then use one `apply` version-1 plan for compatible formatting/layout mutations so validation and rollback cover the whole operation and no intermediate DOCX is published.
+7. For a new long report, write one bounded UTF-8 content JSON and run `compose` once after `create`. Reuse documented helpers for project inventory, diagrams, screenshots, and QA when their inputs match; create a new helper only for a repeatable task with defined inputs/outputs, tests, and runbook instructions. Then use one `apply` version-1 plan for compatible formatting/layout mutations so validation and rollback cover the whole operation and no intermediate DOCX is published.
 8. Persist native field updates to a distinct final DOCX before the final academic audit. Then run `integrity audit` with the exact profile variant and evidence registry and create `integrity provenance` bound to that final DOCX hash. Any later DOCX mutation invalidates both audit and provenance.
 9. Run `wordassistant verify OUTPUT --json` after edits.
 10. When formatting matters, render and inspect every page. A successful render does not prove fields or numbering are functional.
@@ -71,7 +71,7 @@ Examples:
 
 ```powershell
 wordassistant create report.docx --profile generic --title "Report" --json
-wordassistant compose report.docx --output authored.docx --content content.json --evidence evidence.json --min-visible-characters 8000 --max-visible-characters 14000 --json
+wordassistant compose report.docx --output authored.docx --content content.json --evidence report-evidence.json --json
 wordassistant apply authored.docx --output formatted.docx --plan operations.json --json
 wordassistant inspect thesis.docx --summary --json
 wordassistant context thesis.docx --query "chapter 3 results" --max-tokens 4000 --only-section chapter-3-results --json

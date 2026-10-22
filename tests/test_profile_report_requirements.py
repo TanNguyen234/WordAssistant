@@ -149,3 +149,26 @@ def test_profile_requires_inner_cover_on_a_separate_page(tmp_path: Path):
     result = validate_document(path, profile, "default", verify_mode=True)
 
     assert "inner_cover_not_distinct" in {issue.code for issue in result.issues}
+
+
+def test_profile_checks_inner_cover_break_at_cover_block_start(tmp_path: Path):
+    profile = _profile(
+        front_matter=["cover", "inner_cover"],
+        cover={
+            "institution_lines": ["TRƯỜNG ĐẠI HỌC"],
+            "document_type": "TIỂU LUẬN",
+            "require_distinct_inner_cover": True,
+        },
+    )
+    path = tmp_path / "separate-cover-blocks.docx"
+    document = Document()
+    document.add_paragraph("TRƯỜNG ĐẠI HỌC")
+    document.add_paragraph("TIỂU LUẬN")
+    inner_cover_start = document.add_paragraph("TRƯỜNG ĐẠI HỌC")
+    inner_cover_start.paragraph_format.page_break_before = True
+    document.add_paragraph("TIỂU LUẬN")
+    document.save(path)
+
+    result = validate_document(path, profile, "default", verify_mode=True)
+
+    assert "inner_cover_not_distinct" not in {issue.code for issue in result.issues}
