@@ -1,0 +1,817 @@
+{
+  "schema_version": 1,
+  "domain": "software",
+  "document_sha256": "6f68151f42380f8935737823c2a55f6cd37a55b5023ec7c707d4f7d4dffeaf5b",
+  "model_scope_reason": "LMS course essay with project-management analysis and source-based software design views; deployment approval and runtime outcomes are outside the available evidence.",
+  "model_decisions": [
+    {
+      "dimension": "use_case",
+      "disposition": "REQUIRED",
+      "reason": "The supplied guide calls for role/use-case analysis; it defines the functional scope tracked by Trello work items.",
+      "authority": "User request, supplied LMS capture guide and docs/02_ROLES_USE_CASES.md",
+      "assets": [
+        {
+          "editable_file": "compact_model_sources/LMS_Use_Case_Compact_Light.exported.drawio",
+          "rendered_file": "compact_model_sources/LMS_Use_Case_Compact_Light.png",
+          "caption_title": "Ca sử dụng LMS theo vai trò",
+          "sources": [
+            {
+              "file": "D:/Download/LMS/docs/02_ROLES_USE_CASES.md",
+              "sha256": "0f1c4c1b22b62dd20b70c2446085de51fae07ad6b2c0de0c386ef59676a60277"
+            }
+          ],
+          "semantic_review": "Compared the three actors and nine grouped interactions with the role and permission matrix. Lecturer ownership and ACTIVE student enrollment are stated in adjacent prose; common login and notifications are explicitly omitted.",
+          "notation_review": "Stick figures denote actors, ovals denote interactions and arrowless lines denote participation. Dashed frames group roles and are explicitly not system boundaries. This is a compact use-case view rather than a complete include/extend model.",
+          "editable_sha256": "fd13ba662ad2ca424ff02574f1888f53c8c35c3512cbc5bf9c8645a2229f4090",
+          "rendered_sha256": "bb0c1fcb0c802e47f106d541d35ab8505c77d5dd4d31db9c4183514ecd396e84"
+        }
+      ],
+      "status": "REVIEWED",
+      "reviewer": "Codex source and editorial review",
+      "review_date": "2026-10-25"
+    },
+    {
+      "dimension": "data",
+      "disposition": "REQUIRED",
+      "reason": "The course project must explain stored entities, relationships and integrity constraints; the report includes the supplied 12-table ERD.",
+      "authority": "Supplied guide; database/01_schema.sql; Chapter 9 design scope",
+      "assets": [
+        {
+          "editable_file": "sources/archive/LMS_QLDA_10-11_2026/drawio/LMS_12.drawio",
+          "rendered_file": "sources/archive/LMS_QLDA_10-11_2026/anh_so_do/LMS_12.png",
+          "caption_title": "Mô hình dữ liệu LMS",
+          "sources": [
+            {
+              "file": "D:/Download/LMS/database/01_schema.sql",
+              "sha256": "025c97ac98d90caabb7787315abd00b98fd5b371a7b6a0db5595a1ffee24017a"
+            }
+          ],
+          "semantic_review": "Checked the 12 named tables, principal PK/FK links, unique enrollment and submission pairs, and the source-type/source-id grade reference. The original manifest and adjacent prose disclose simplified links; the SQL schema remains the detailed authority.",
+          "notation_review": "PK/FK labels and relationship lines describe SQL data relationships. GradedBy and some User links are simplified; SourceId is not represented as a fabricated SQL foreign key. Read with the SQL schema and the conceptual class explanation.",
+          "editable_sha256": "d4fd6e588701d761454b01d8777d8cd9b8dee04c022a0ea72b067120ca7dfcc1",
+          "rendered_sha256": "366fe31978ed8d6c3275403acfe20afca2cc4f785071610aa7c619200e88e2b7"
+        }
+      ],
+      "status": "REVIEWED",
+      "reviewer": "Codex source and editorial review",
+      "review_date": "2026-10-25"
+    },
+    {
+      "dimension": "class",
+      "disposition": "REQUIRED",
+      "reason": "The guide requests a class view. A focused conceptual model clarifies the assignment workflow without inventing implementation methods or duplicating every ERD table.",
+      "authority": "Supplied guide; database/01_schema.sql; assignments route implementation",
+      "assets": [
+        {
+          "editable_file": "compact_model_sources/LMS_Class_Assignment_Reviewed_Light.exported.drawio",
+          "rendered_file": "compact_model_sources/LMS_Class_Assignment_Reviewed_Light.png",
+          "caption_title": "Mô hình lớp khái niệm của luồng bài tập",
+          "sources": [
+            {
+              "file": "D:/Download/LMS/database/01_schema.sql",
+              "sha256": "025c97ac98d90caabb7787315abd00b98fd5b371a7b6a0db5595a1ffee24017a"
+            },
+            {
+              "file": "D:/Download/LMS/backend/app/api/routes/assignments.py",
+              "sha256": "ee32b9bba57cfd2426b11e4b463433f4be80ad0dd6f8297a9eb92423a07e176c"
+            }
+          ],
+          "semantic_review": "Verified six concepts and displayed fields against Users, Enrollments, Courses, Assignments, Submissions and Grades. The conceptual view is labelled as a subset, contains no invented methods, and explains the unique assignment/student submission and polymorphic grade source.",
+          "notation_review": "Rectangular class compartments show names and selected attributes. Solid associations are selected relationships without displayed multiplicities; the ERD supplies the detailed data view. The dashed dependency labelled logic is explicitly not a physical Assignment-to-Grade FK.",
+          "editable_sha256": "4b134f3777aa36c0c397d1a3cd933ca84cd47a4649a046d9407d51823b6f1129",
+          "rendered_sha256": "35abfe2179c8b93957da4f2dc6ec60f93d1fb9099db08c67bdc4464f95580f99"
+        }
+      ],
+      "status": "REVIEWED",
+      "reviewer": "Codex source and editorial review",
+      "review_date": "2026-10-25"
+    },
+    {
+      "dimension": "activity",
+      "disposition": "REQUIRED",
+      "reason": "The guide requests an activity/process view; the student submission flow exposes acceptance and rejection conditions that matter to scope and testing.",
+      "authority": "Supplied guide; UC-05; PUT assignment submission implementation",
+      "assets": [
+        {
+          "editable_file": "sources/archive/LMS_QLDA_10-11_2026/drawio/LMS_05.drawio",
+          "rendered_file": "sources/archive/LMS_QLDA_10-11_2026/anh_so_do/LMS_05.png",
+          "caption_title": "Luồng sinh viên nộp bài văn bản",
+          "sources": [
+            {
+              "file": "D:/Download/LMS/docs/02_ROLES_USE_CASES.md",
+              "sha256": "0f1c4c1b22b62dd20b70c2446085de51fae07ad6b2c0de0c386ef59676a60277"
+            },
+            {
+              "file": "D:/Download/LMS/backend/app/api/routes/assignments.py",
+              "sha256": "ee32b9bba57cfd2426b11e4b463433f4be80ad0dd6f8297a9eb92423a07e176c"
+            }
+          ],
+          "semantic_review": "Checked enrollment, deadline/AllowLate, nonempty ContentText, published assignment and active course guards, create/update behavior and the prohibition on changing graded submissions. The figure groups these guards; prose names the omitted detail and text-only MVP.",
+          "notation_review": "The supplied asset uses flowchart start/end ovals, activities and a Yes/No decision. The document explicitly calls this a simplified activity flow, not a claim of complete UML activity notation. Branches converge to end; rejection does not create a submission.",
+          "editable_sha256": "ca19a415827d8166957befceeb995bb92265b1fd16fcd9254a3694f3c49c1c1a",
+          "rendered_sha256": "d497caa62a8d0f72bae495beb5cb081c6499bb40ad4b6638b07f2b806ec10c8a"
+        }
+      ],
+      "status": "REVIEWED",
+      "reviewer": "Codex source and editorial review",
+      "review_date": "2026-10-25"
+    },
+    {
+      "dimension": "sequence",
+      "disposition": "REQUIRED",
+      "reason": "The guide requests an interaction sequence. Grading connects UI, authorization, transaction changes and the evidence needed before Done.",
+      "authority": "Supplied guide; backend/app/api/routes/assignments.py get_assignment_submissions and grade_submission",
+      "assets": [
+        {
+          "editable_file": "compact_model_sources/LMS_Sequence_Grade_Reviewed_Light.exported.drawio",
+          "rendered_file": "compact_model_sources/LMS_Sequence_Grade_Reviewed_Light.png",
+          "caption_title": "Trình tự tương tác khi giảng viên chấm bài",
+          "sources": [
+            {
+              "file": "D:/Download/LMS/backend/app/api/routes/assignments.py",
+              "sha256": "ee32b9bba57cfd2426b11e4b463433f4be80ad0dd6f8297a9eb92423a07e176c"
+            }
+          ],
+          "semantic_review": "Verified GET /assignments/{assignment_id}/submissions and PUT /submissions/{submission_id}/grade, course-owner validation, score bounds, Submission/Grade updates, Notification creation and commit confirmation. It models the successful path, not an observed execution trace.",
+          "notation_review": "Participant headers and vertical lifelines identify roles/components; messages run downward in time and arrow direction identifies sender/receiver. Activation and distinct dashed return notation are deliberately omitted and disclosed. Step 9 means successful commit acknowledgement; denial and transaction-error paths are outside the figure.",
+          "editable_sha256": "11f706013b423e52aef8de46c3c2a621f130cb9c0e5542a1aabe57ae6cfb988a",
+          "rendered_sha256": "239e26c0c18b91e82189aea4f3aac0ab7da2c97d45af59c28cb4fedc969440d5"
+        }
+      ],
+      "status": "REVIEWED",
+      "reviewer": "Codex source and editorial review",
+      "review_date": "2026-10-25"
+    },
+    {
+      "dimension": "state",
+      "disposition": "REQUIRED",
+      "reason": "The guide requests a state view; submission status affects permitted student and lecturer actions and acceptance checks.",
+      "authority": "Supplied guide; SQL status CHECK constraint; submission/grading endpoints",
+      "assets": [
+        {
+          "editable_file": "sources/archive/LMS_QLDA_10-11_2026/drawio/LMS_11.drawio",
+          "rendered_file": "sources/archive/LMS_QLDA_10-11_2026/anh_so_do/LMS_11.png",
+          "caption_title": "Trạng thái nộp và chấm bài",
+          "sources": [
+            {
+              "file": "D:/Download/LMS/database/01_schema.sql",
+              "sha256": "025c97ac98d90caabb7787315abd00b98fd5b371a7b6a0db5595a1ffee24017a"
+            },
+            {
+              "file": "D:/Download/LMS/backend/app/api/routes/assignments.py",
+              "sha256": "ee32b9bba57cfd2426b11e4b463433f4be80ad0dd6f8297a9eb92423a07e176c"
+            }
+          ],
+          "semantic_review": "Checked SUBMITTED, LATE and GRADED against schema and code. The model shows initial acceptance and first grading. Adjacent prose explicitly preserves allowed resubmission before grading and lecturer regrading; the end label does not mean deletion or immutability.",
+          "notation_review": "Named rounded state boxes and directed transitions show a simplified first-cycle state view. Initial/final ovals and omitted update loops are acknowledged; this is not an exhaustive formal UML state machine.",
+          "editable_sha256": "ca9d087c6f30c0202302672a616806d8adeb365ba2e8281fb345b60727c9dbf4",
+          "rendered_sha256": "1d622994a495493968d511a2852e099f229b553c421fb82b083aaa7e014e4fdd"
+        }
+      ],
+      "status": "REVIEWED",
+      "reviewer": "Codex source and editorial review",
+      "review_date": "2026-10-25"
+    },
+    {
+      "dimension": "component",
+      "disposition": "REQUIRED",
+      "reason": "Architecture boundaries are relevant to the design gate, work packages and technical risk allocation.",
+      "authority": "LMS docs/03_ARCHITECTURE.md; supplied architecture diagram; project-management design gate",
+      "assets": [
+        {
+          "editable_file": "sources/archive/LMS_QLDA_10-11_2026/drawio/LMS_13.drawio",
+          "rendered_file": "sources/archive/LMS_QLDA_10-11_2026/anh_so_do/LMS_13.png",
+          "caption_title": "Kiến trúc hệ thống LMS",
+          "sources": [
+            {
+              "file": "D:/Download/LMS/docs/03_ARCHITECTURE.md",
+              "sha256": "c56340a8c89677ea788733c24e584540236ac0314e9c2b44c785746ba33fe6a0"
+            }
+          ],
+          "semantic_review": "Compared React/TypeScript/Vite, FastAPI/SQLAlchemy and SQL Server boundaries with the source architecture document. The three user roles enter via the frontend; the report keeps authorization at the API and makes no production deployment claim.",
+          "notation_review": "Boxes and connecting arrows form an architectural component view at system level, not a full UML component/interface specification. Technology labels describe source architecture; they do not identify measured physical hosts or live network topology.",
+          "editable_sha256": "84c5b00bd566e891dccdec4dd7b44b6f093521e5f7221559b827f20cfd773dc7",
+          "rendered_sha256": "6fb18963d89fba4de8ddd539ea660c95d75ee82fa2f8293156c2ea5abb098660"
+        }
+      ],
+      "status": "REVIEWED",
+      "reviewer": "Codex source and editorial review",
+      "review_date": "2026-10-25"
+    },
+    {
+      "dimension": "deployment",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The authorized essay concerns the academic prototype and management plan. No verified deployment topology, production hosts or infrastructure configuration is supplied for a physical deployment model. Architecture boundaries and planned environment risks are covered without inventing hosts.",
+      "authority": "Direct request; docs/03_ARCHITECTURE.md; project evidence limits",
+      "status": "REVIEWED",
+      "reviewer": "Codex source and editorial review",
+      "review_date": "2026-10-25"
+    }
+  ],
+  "section_reviews": [
+    {
+      "heading": "MỞ ĐẦU",
+      "argument": "Connects fragmented learning information to the need for a controlled project plan and traceable deliverables.",
+      "evidence": "The method now names source/schema reconciliation and removes the stale claim that the report still uses a generic profile.",
+      "terminology": "Project assumptions are distinguished from measured user scale and actual approvals.",
+      "sufficiency": "Explains purpose, method and scope without inventing identity or implementation outcomes.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source and editorial review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "CHƯƠNG 1. TỔNG QUAN VÀ KHỞI TẠO DỰ ÁN",
+      "argument": "Relates the business case to LMS core deliverables and explicitly bounded extensions.",
+      "evidence": "Charter and reconciliation support the 20-week, 1.2-billion-VND and 8.5-FTE planning baseline.",
+      "terminology": "FTE denotes allocated effort rather than a fixed headcount; business case and acceptance remain planning concepts.",
+      "sufficiency": "Covers initiation, assumptions and constraints for the authorized essay; sponsor approval is not asserted.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source and editorial review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "CHƯƠNG 2. CÁC BÊN LIÊN QUAN VÀ TỔ CHỨC DỰ ÁN",
+      "argument": "Uses stakeholder influence/interest to identify participation and escalation responsibilities.",
+      "evidence": "The reduced RACI now selects source activities separately: drafting, specification, technical work, sign-off and handover. Each of its eight rows contains one A.",
+      "terminology": "Responsible and Accountable remain distinct; Dev/QA is an explicitly combined technical column and Sponsor is a planning role.",
+      "sufficiency": "Resolves the earlier double-A aggregation error and preserves source authority; it does not imply named people have approved the plan.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source and editorial review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "CHƯƠNG 3. QUẢN LÝ PHẠM VI VÀ WBS",
+      "argument": "Connects product boundaries, work packages and acceptance/change control.",
+      "evidence": "Scope/WBS sources support three roles, text-only submissions and the stated excluded extensions.",
+      "terminology": "WBS is work decomposition; an illustrated package does not establish completion.",
+      "sufficiency": "Provides the basis for Trello work items and change impact without converting the supplied WBS into an official rubric.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source and editorial review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "CHƯƠNG 4. QUẢN LÝ TIẾN ĐỘ VÀ CPM",
+      "argument": "Explains forward/backward scheduling and why dependency changes affect finish/float monitoring.",
+      "evidence": "The reconciled 19-activity baseline ends at week 20 with ACT-04 float 1 and ACT-16 float 2; the diagram contains no calendar dates.",
+      "terminology": "ES/EF/LS/float and planned versus actual dates are kept distinct.",
+      "sufficiency": "Supports baseline schedule control; actual performance cannot be evaluated without progress records.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source and editorial review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "CHƯƠNG 5. QUẢN LÝ NGUỒN LỰC VÀ CHI PHÍ",
+      "argument": "Links role allocation and cost categories to budget control and change authorization.",
+      "evidence": "The six cost categories sum to 1.2 billion VND; planned cash-flow stages sum to the same BAC.",
+      "terminology": "8.5 FTE is effort allocation, contingency is unspent planned reserve, and EVM actual cost needs records.",
+      "sufficiency": "Covers the budget/resource baseline and control method; no actual spending or savings are claimed.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source and editorial review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "CHƯƠNG 6. QUẢN LÝ RỦI RO",
+      "argument": "Connects scope, authorization, schedule and upload-expectation risks to triggers, owners and responses.",
+      "evidence": "Risk register and quality sources support the selected risks and 120-million-VND contingency planning limit.",
+      "terminology": "P×I is an ordinal prioritization scale and an occurred risk becomes an issue; it is not a measured probability.",
+      "sufficiency": "Makes monitoring/actions explicit for the planned project while retaining the academic simulation limit.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source and editorial review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "CHƯƠNG 7. QUẢN LÝ CHẤT LƯỢNG VÀ KIỂM THỬ",
+      "argument": "Connects Definition of Done, gates and triage to acceptance evidence rather than board movement alone.",
+      "evidence": "15 reviewed citations with source hashes; four focused passing tests, type/build/lint logs; fourteen actual captures, including ten fresh web images. qa/vietnamese-ui/doi-chieu-vietlex-v20.md",
+      "terminology": "Vietnamese UI labels, provisional grade meaning and evidence levels distinguished.",
+      "sufficiency": "Provides the planned control method and capture requirements; runtime/UAT execution remains incomplete.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "CHƯƠNG 8. TRUYỀN THÔNG, THAY ĐỔI VÀ TRELLO",
+      "argument": "Links card conventions and review/Done rules to WBS, changes and design deliverables.",
+      "evidence": "The 23/10 snapshot supports nine lists and 39 cards. Its API aggregate is visibly classified and no real Done is asserted.",
+      "terminology": "Board workflow is proposed; SIMULATED labels and the separate Oct–Nov group proposal do not replace the reconciled baseline.",
+      "sufficiency": "Explains management use and traceability; the required UI capture checklist is still NOT RUN.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source and editorial review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "CHƯƠNG 9. THIẾT KẾ VÀ BIỂU ĐỒ DRAW.IO",
+      "argument": "Explains how architecture, data and assignment models expose rules that must become design/review/test work items.",
+      "evidence": "15 reviewed citations with source hashes; four focused passing tests, type/build/lint logs; fourteen actual captures, including ten fresh web images. qa/vietnamese-ui/doi-chieu-vietlex-v20.md",
+      "terminology": "Vietnamese UI labels, provisional grade meaning and evidence levels distinguished.",
+      "sufficiency": "Adds the previously missing model coverage and consequences for acceptance, while explicitly limiting simplified notation and deployment claims.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "CHƯƠNG 10. NGHIỆM THU VÀ ĐÓNG DỰ ÁN",
+      "argument": "Requires acceptance evidence and authorized sign-off before closure and handover.",
+      "evidence": "The closure/UAT sources are planning templates; the EVM example is arithmetically consistent but has no invoices, timesheets or actual status date.",
+      "terminology": "Illustrative PV/EV/AC are not measured savings or completed acceptance.",
+      "sufficiency": "Describes the closure package and outstanding evidence without claiming a signed or successful project.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source and editorial review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "KẾT LUẬN VÀ KIẾN NGHỊ",
+      "argument": "Synthesizes the link between baseline, Trello traceability and source-based models rather than repeating only an asset inventory.",
+      "evidence": "Reconciled baseline plus observed board and role-specific UI states; missing rubric, identities and full UAT remain explicit.",
+      "terminology": "Word delivery and submission readiness have separate meanings.",
+      "sufficiency": "Answers the essay objective provisionally; it explicitly keeps submission readiness incomplete.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source and editorial review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Phụ lục B. Checklist ảnh Trello, Draw.io và LMS",
+      "argument": "Defines what real application captures must show and what evidence to preserve.",
+      "evidence": "Ten actual Trello/LMS screenshots inserted; guide checklist distinguishes captured UI, empty Done, missing Calendar/editor/API/terminal evidence.",
+      "terminology": "Static diagram exports and API aggregates are not relabelled as captures.",
+      "sufficiency": "Partial capture coverage is explicit; no universal missing-image statement remains.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source and editorial review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Phụ lục D. Mô hình nghiệp vụ LMS",
+      "argument": "Connects the five model views through the same assignment domain and explains the consequences of each branch or association.",
+      "evidence": "Images were inspected and compared with the roles document, SQL schema and assignment source; original sources remain read-only.",
+      "terminology": "Simplified flowchart/activity, sequence and state notation is disclosed; conceptual classes are not presented as implementation classes.",
+      "sufficiency": "The five figures now appear with explanation and source references; full runtime verification and a physical deployment model are not claimed.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source and editorial review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Phụ lục E Minh chứng Trello và website LMS",
+      "argument": "Connects each observed interface state to a management or product claim and distinguishes observation from unexecuted actions.",
+      "evidence": "15 reviewed citations with source hashes; four focused passing tests, type/build/lint logs; fourteen actual captures, including ten fresh web images. qa/vietnamese-ui/doi-chieu-vietlex-v20.md",
+      "terminology": "Vietnamese UI labels, provisional grade meaning and evidence levels distinguished.",
+      "sufficiency": "Addresses the user request for real web/Trello figures. Calendar, editor, API 403 and terminal evidence remain outstanding; original HTTP response evidence UNKNOWN.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Cơ sở đề xuất và mục tiêu dự án",
+      "argument": "Develops Cơ sở đề xuất và mục tiêu dự án within CHƯƠNG 1. TỔNG QUAN VÀ KHỞI TẠO DỰ ÁN. Relates the business case to LMS core deliverables and explicitly bounded extensions.",
+      "evidence": "Charter and reconciliation support the 20-week, 1.2-billion-VND and 8.5-FTE planning baseline.",
+      "terminology": "FTE denotes allocated effort rather than a fixed headcount; business case and acceptance remain planning concepts.",
+      "sufficiency": "Covers initiation, assumptions and constraints for the authorized essay; sponsor approval is not asserted.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Giả định và ràng buộc",
+      "argument": "Develops Giả định và ràng buộc within CHƯƠNG 1. TỔNG QUAN VÀ KHỞI TẠO DỰ ÁN. Relates the business case to LMS core deliverables and explicitly bounded extensions.",
+      "evidence": "Charter and reconciliation support the 20-week, 1.2-billion-VND and 8.5-FTE planning baseline.",
+      "terminology": "FTE denotes allocated effort rather than a fixed headcount; business case and acceptance remain planning concepts.",
+      "sufficiency": "Covers initiation, assumptions and constraints for the authorized essay; sponsor approval is not asserted.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Các bên liên quan và phương án tham gia",
+      "argument": "Develops Các bên liên quan và phương án tham gia within CHƯƠNG 2. CÁC BÊN LIÊN QUAN VÀ TỔ CHỨC DỰ ÁN. Uses stakeholder influence/interest to identify participation and escalation responsibilities.",
+      "evidence": "The reduced RACI now selects source activities separately: drafting, specification, technical work, sign-off and handover. Each of its eight rows contains one A.",
+      "terminology": "Responsible and Accountable remain distinct; Dev/QA is an explicitly combined technical column and Sponsor is a planning role.",
+      "sufficiency": "Resolves the earlier double-A aggregation error and preserves source authority; it does not imply named people have approved the plan.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Phân công trách nhiệm và xử lý vượt thẩm quyền",
+      "argument": "Develops Phân công trách nhiệm và xử lý vượt thẩm quyền within CHƯƠNG 2. CÁC BÊN LIÊN QUAN VÀ TỔ CHỨC DỰ ÁN. Uses stakeholder influence/interest to identify participation and escalation responsibilities.",
+      "evidence": "The reduced RACI now selects source activities separately: drafting, specification, technical work, sign-off and handover. Each of its eight rows contains one A.",
+      "terminology": "Responsible and Accountable remain distinct; Dev/QA is an explicitly combined technical column and Sponsor is a planning role.",
+      "sufficiency": "Resolves the earlier double-A aggregation error and preserves source authority; it does not imply named people have approved the plan.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Ranh giới phạm vi và điều kiện chấp nhận",
+      "argument": "Develops Ranh giới phạm vi và điều kiện chấp nhận within CHƯƠNG 3. QUẢN LÝ PHẠM VI VÀ WBS. Connects product boundaries, work packages and acceptance/change control.",
+      "evidence": "Scope/WBS sources support three roles, text-only submissions and the stated excluded extensions.",
+      "terminology": "WBS is work decomposition; an illustrated package does not establish completion.",
+      "sufficiency": "Provides the basis for Trello work items and change impact without converting the supplied WBS into an official rubric.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Phân rã công việc theo sản phẩm bàn giao",
+      "argument": "Develops Phân rã công việc theo sản phẩm bàn giao within CHƯƠNG 3. QUẢN LÝ PHẠM VI VÀ WBS. Connects product boundaries, work packages and acceptance/change control.",
+      "evidence": "Scope/WBS sources support three roles, text-only submissions and the stated excluded extensions.",
+      "terminology": "WBS is work decomposition; an illustrated package does not establish completion.",
+      "sufficiency": "Provides the basis for Trello work items and change impact without converting the supplied WBS into an official rubric.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Danh sách hoạt động và phụ thuộc",
+      "argument": "Develops Danh sách hoạt động và phụ thuộc within CHƯƠNG 4. QUẢN LÝ TIẾN ĐỘ VÀ CPM. Explains forward/backward scheduling and why dependency changes affect finish/float monitoring.",
+      "evidence": "The reconciled 19-activity baseline ends at week 20 with ACT-04 float 1 and ACT-16 float 2; the diagram contains no calendar dates.",
+      "terminology": "ES/EF/LS/float and planned versus actual dates are kept distinct.",
+      "sufficiency": "Supports baseline schedule control; actual performance cannot be evaluated without progress records.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Theo dõi sai lệch",
+      "argument": "Develops Theo dõi sai lệch within CHƯƠNG 4. QUẢN LÝ TIẾN ĐỘ VÀ CPM. Explains forward/backward scheduling and why dependency changes affect finish/float monitoring.",
+      "evidence": "The reconciled 19-activity baseline ends at week 20 with ACT-04 float 1 and ACT-16 float 2; the diagram contains no calendar dates.",
+      "terminology": "ES/EF/LS/float and planned versus actual dates are kept distinct.",
+      "sufficiency": "Supports baseline schedule control; actual performance cannot be evaluated without progress records.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Phân bổ nguồn lực theo vai trò",
+      "argument": "Develops Phân bổ nguồn lực theo vai trò within CHƯƠNG 5. QUẢN LÝ NGUỒN LỰC VÀ CHI PHÍ. Links role allocation and cost categories to budget control and change authorization.",
+      "evidence": "The six cost categories sum to 1.2 billion VND; planned cash-flow stages sum to the same BAC.",
+      "terminology": "8.5 FTE is effort allocation, contingency is unspent planned reserve, and EVM actual cost needs records.",
+      "sufficiency": "Covers the budget/resource baseline and control method; no actual spending or savings are claimed.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Kiểm soát chi phí",
+      "argument": "Develops Kiểm soát chi phí within CHƯƠNG 5. QUẢN LÝ NGUỒN LỰC VÀ CHI PHÍ. Links role allocation and cost categories to budget control and change authorization.",
+      "evidence": "The six cost categories sum to 1.2 billion VND; planned cash-flow stages sum to the same BAC.",
+      "terminology": "8.5 FTE is effort allocation, contingency is unspent planned reserve, and EVM actual cost needs records.",
+      "sufficiency": "Covers the budget/resource baseline and control method; no actual spending or savings are claimed.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Giám sát và ứng phó",
+      "argument": "Develops Giám sát và ứng phó within CHƯƠNG 6. QUẢN LÝ RỦI RO. Connects scope, authorization, schedule and upload-expectation risks to triggers, owners and responses.",
+      "evidence": "Risk register and quality sources support the selected risks and 120-million-VND contingency planning limit.",
+      "terminology": "P×I is an ordinal prioritization scale and an occurred risk becomes an issue; it is not a measured probability.",
+      "sufficiency": "Makes monitoring/actions explicit for the planned project while retaining the academic simulation limit.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Cổng chất lượng và điều kiện hoàn tất",
+      "argument": "Develops Cổng chất lượng và điều kiện hoàn tất within CHƯƠNG 7. QUẢN LÝ CHẤT LƯỢNG VÀ KIỂM THỬ. Connects Definition of Done, gates and triage to acceptance evidence rather than board movement alone.",
+      "evidence": "Quality and UAT sources define QG1–QG5 and ten planned AC scenarios; actual test outcomes are not supplied.",
+      "terminology": "Gate conditions and P0/P1 targets are requirements; NOT RUN does not mean pass or fail.",
+      "sufficiency": "Provides the planned control method and capture requirements; runtime/UAT execution remains incomplete.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Kiểm thử chấp nhận và phân loại lỗi",
+      "argument": "Develops Kiểm thử chấp nhận và phân loại lỗi within CHƯƠNG 7. QUẢN LÝ CHẤT LƯỢNG VÀ KIỂM THỬ. Connects Definition of Done, gates and triage to acceptance evidence rather than board movement alone.",
+      "evidence": "Quality and UAT sources define QG1–QG5 and ten planned AC scenarios; actual test outcomes are not supplied.",
+      "terminology": "Gate conditions and P0/P1 targets are requirements; NOT RUN does not mean pass or fail.",
+      "sufficiency": "Provides the planned control method and capture requirements; runtime/UAT execution remains incomplete.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Kết quả rà soát giao diện và giới hạn kiểm chứng",
+      "argument": "Develops Kết quả rà soát giao diện và giới hạn kiểm chứng within CHƯƠNG 7. QUẢN LÝ CHẤT LƯỢNG VÀ KIỂM THỬ. Connects Definition of Done, gates and triage to acceptance evidence rather than board movement alone.",
+      "evidence": "Quality and UAT sources define QG1–QG5 and ten planned AC scenarios; actual test outcomes are not supplied.",
+      "terminology": "Gate conditions and P0/P1 targets are requirements; NOT RUN does not mean pass or fail.",
+      "sufficiency": "Provides the planned control method and capture requirements; runtime/UAT execution remains incomplete.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Luồng công việc và quy ước sử dụng Trello",
+      "argument": "Develops Luồng công việc và quy ước sử dụng Trello within CHƯƠNG 8. TRUYỀN THÔNG, THAY ĐỔI VÀ TRELLO. Links card conventions and review/Done rules to WBS, changes and design deliverables.",
+      "evidence": "The 23/10 snapshot supports nine lists and 39 cards. Its API aggregate is visibly classified and no real Done is asserted.",
+      "terminology": "Board workflow is proposed; SIMULATED labels and the separate Oct–Nov group proposal do not replace the reconciled baseline.",
+      "sufficiency": "Explains management use and traceability; the required UI capture checklist is still NOT RUN.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Kết nối Trello — WBS — Draw.io — Word",
+      "argument": "Develops Kết nối Trello — WBS — Draw.io — Word within CHƯƠNG 8. TRUYỀN THÔNG, THAY ĐỔI VÀ TRELLO. Links card conventions and review/Done rules to WBS, changes and design deliverables.",
+      "evidence": "The 23/10 snapshot supports nine lists and 39 cards. Its API aggregate is visibly classified and no real Done is asserted.",
+      "terminology": "Board workflow is proposed; SIMULATED labels and the separate Oct–Nov group proposal do not replace the reconciled baseline.",
+      "sufficiency": "Explains management use and traceability; the required UI capture checklist is still NOT RUN.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Kiến trúc và dữ liệu",
+      "argument": "Develops Kiến trúc và dữ liệu within CHƯƠNG 9. THIẾT KẾ VÀ BIỂU ĐỒ DRAW.IO. Explains how architecture, data and assignment models expose rules that must become design/review/test work items.",
+      "evidence": "Roles, SQL schema and assignment endpoints support the added rules and model discussions; editable Draw.io sources and exported PNGs are preserved.",
+      "terminology": "Source models, conceptual classes, API behavior and runtime evidence remain distinct; SourceId is not called a SQL FK to Assignment.",
+      "sufficiency": "Adds the previously missing model coverage and consequences for acceptance, while explicitly limiting simplified notation and deployment claims.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Quy trình xuất biểu đồ",
+      "argument": "Develops Quy trình xuất biểu đồ within CHƯƠNG 9. THIẾT KẾ VÀ BIỂU ĐỒ DRAW.IO. Explains how architecture, data and assignment models expose rules that must become design/review/test work items.",
+      "evidence": "Roles, SQL schema and assignment endpoints support the added rules and model discussions; editable Draw.io sources and exported PNGs are preserved.",
+      "terminology": "Source models, conceptual classes, API behavior and runtime evidence remain distinct; SourceId is not called a SQL FK to Assignment.",
+      "sufficiency": "Adds the previously missing model coverage and consequences for acceptance, while explicitly limiting simplified notation and deployment claims.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Khảo sát giao diện theo vai trò",
+      "argument": "Develops Khảo sát giao diện theo vai trò within CHƯƠNG 9. THIẾT KẾ VÀ BIỂU ĐỒ DRAW.IO. Explains how architecture, data and assignment models expose rules that must become design/review/test work items.",
+      "evidence": "Roles, SQL schema and assignment endpoints support the added rules and model discussions; editable Draw.io sources and exported PNGs are preserved.",
+      "terminology": "Source models, conceptual classes, API behavior and runtime evidence remain distinct; SourceId is not called a SQL FK to Assignment.",
+      "sufficiency": "Adds the previously missing model coverage and consequences for acceptance, while explicitly limiting simplified notation and deployment claims.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Tiêu chí nghiệm thu",
+      "argument": "Develops Tiêu chí nghiệm thu within CHƯƠNG 10. NGHIỆM THU VÀ ĐÓNG DỰ ÁN. Requires acceptance evidence and authorized sign-off before closure and handover.",
+      "evidence": "The closure/UAT sources are planning templates; the EVM example is arithmetically consistent but has no invoices, timesheets or actual status date.",
+      "terminology": "Illustrative PV/EV/AC are not measured savings or completed acceptance.",
+      "sufficiency": "Describes the closure package and outstanding evidence without claiming a signed or successful project.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Bài học kinh nghiệm và hướng phát triển",
+      "argument": "Develops Bài học kinh nghiệm và hướng phát triển within CHƯƠNG 10. NGHIỆM THU VÀ ĐÓNG DỰ ÁN. Requires acceptance evidence and authorized sign-off before closure and handover.",
+      "evidence": "The closure/UAT sources are planning templates; the EVM example is arithmetically consistent but has no invoices, timesheets or actual status date.",
+      "terminology": "Illustrative PV/EV/AC are not measured savings or completed acceptance.",
+      "sufficiency": "Describes the closure package and outstanding evidence without claiming a signed or successful project.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "PHỤ LỤC",
+      "argument": "Develops PHỤ LỤC within PHỤ LỤC. Reviewed conceptual/design scope and source inventory.",
+      "evidence": "Source inventory and reviewed bibliography; diagrams retain editable sources.",
+      "terminology": "Planning, source model, observation and executed result remain distinct.",
+      "sufficiency": "Provides the applicable design/source view; unresolved runtime and approval evidence is explicit.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Phụ lục A. Danh mục sơ đồ Draw.io",
+      "argument": "Develops Phụ lục A. Danh mục sơ đồ Draw.io within PHỤ LỤC. Develops PHỤ LỤC within PHỤ LỤC. Reviewed conceptual/design scope and source inventory.",
+      "evidence": "Source inventory and reviewed bibliography; diagrams retain editable sources.",
+      "terminology": "Planning, source model, observation and executed result remain distinct.",
+      "sufficiency": "Provides the applicable design/source view; unresolved runtime and approval evidence is explicit.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Phụ lục C. Loại bằng chứng và giới hạn",
+      "argument": "Develops Phụ lục C. Loại bằng chứng và giới hạn within PHỤ LỤC. Develops PHỤ LỤC within PHỤ LỤC. Reviewed conceptual/design scope and source inventory.",
+      "evidence": "Source inventory and reviewed bibliography; diagrams retain editable sources.",
+      "terminology": "Planning, source model, observation and executed result remain distinct.",
+      "sufficiency": "Provides the applicable design/source view; unresolved runtime and approval evidence is explicit.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Vai trò và Use Case",
+      "argument": "Develops Vai trò và Use Case within PHỤ LỤC. Develops PHỤ LỤC within PHỤ LỤC. Reviewed conceptual/design scope and source inventory.",
+      "evidence": "Source inventory and reviewed bibliography; diagrams retain editable sources.",
+      "terminology": "Planning, source model, observation and executed result remain distinct.",
+      "sufficiency": "Provides the applicable design/source view; unresolved runtime and approval evidence is explicit.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Luồng nộp bài",
+      "argument": "Develops Luồng nộp bài within PHỤ LỤC. Develops PHỤ LỤC within PHỤ LỤC. Reviewed conceptual/design scope and source inventory.",
+      "evidence": "Source inventory and reviewed bibliography; diagrams retain editable sources.",
+      "terminology": "Planning, source model, observation and executed result remain distinct.",
+      "sufficiency": "Provides the applicable design/source view; unresolved runtime and approval evidence is explicit.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Trình tự chấm bài",
+      "argument": "Develops Trình tự chấm bài within PHỤ LỤC. Develops PHỤ LỤC within PHỤ LỤC. Reviewed conceptual/design scope and source inventory.",
+      "evidence": "Source inventory and reviewed bibliography; diagrams retain editable sources.",
+      "terminology": "Planning, source model, observation and executed result remain distinct.",
+      "sufficiency": "Provides the applicable design/source view; unresolved runtime and approval evidence is explicit.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Các lớp miền của bài tập",
+      "argument": "Develops Các lớp miền của bài tập within PHỤ LỤC. Develops PHỤ LỤC within PHỤ LỤC. Reviewed conceptual/design scope and source inventory.",
+      "evidence": "Source inventory and reviewed bibliography; diagrams retain editable sources.",
+      "terminology": "Planning, source model, observation and executed result remain distinct.",
+      "sufficiency": "Provides the applicable design/source view; unresolved runtime and approval evidence is explicit.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Trạng thái bài nộp",
+      "argument": "Develops Trạng thái bài nộp within PHỤ LỤC. Develops PHỤ LỤC within PHỤ LỤC. Reviewed conceptual/design scope and source inventory.",
+      "evidence": "Source inventory and reviewed bibliography; diagrams retain editable sources.",
+      "terminology": "Planning, source model, observation and executed result remain distinct.",
+      "sufficiency": "Provides the applicable design/source view; unresolved runtime and approval evidence is explicit.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Các cột công việc trên bảng Trello LMS",
+      "argument": "Ảnh cho thấy nhóm đã tổ chức công việc theo To Do, Doing, Review, Done và Blocked. Tại thời điểm chụp, To Do có 25 thẻ; Doing, Review và Done đều bằng 0. Điều này cho phép nhận xét về cấu trúc quản lý và tình trạng theo dõi, nhưng chưa cho phép báo cáo phần trăm hoàn thành. Thẻ hỏi rubric nằm ở Blocked cho thấy nhóm còn một đầu vào cần xác nhận.",
+      "evidence": "captures/2026-10-26-vi/capture-manifest.json",
+      "terminology": "Screen observations retain real demo content; raw enums are distinct from localized labels.",
+      "sufficiency": "Ảnh cho thấy nhóm đã tổ chức công việc theo To Do, Doing, Review, Done và Blocked. Tại thời điểm chụp, To Do có 25 thẻ; Doing, Review và Done đều bằng 0. Điều này cho phép nhận xét về cấu trúc quản lý và tình trạng theo dõi, nhưng chưa cho phép báo cáo phần trăm hoàn thành. Thẻ hỏi rubric nằm ở Blocked cho thấy nhóm còn một đầu vào cần xác nhận.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Mô tả và checklist của thẻ WBS",
+      "argument": "Thẻ PM-04 quy định đầu ra là WBS hướng sản phẩm bàn giao và có bảy điều kiện kiểm tra. Checklist đang ở mức 0/7, gồm phân biệt phạm vi sản phẩm với phạm vi dự án, xác định người phụ trách và liên kết bằng chứng. Vì vậy, đây là minh chứng tiêu chí đã được đưa lên công cụ; chưa phải xác nhận WBS đã được review xong.",
+      "evidence": "captures/2026-10-26-vi/capture-manifest.json",
+      "terminology": "Screen observations retain real demo content; raw enums are distinct from localized labels.",
+      "sufficiency": "Thẻ PM-04 quy định đầu ra là WBS hướng sản phẩm bàn giao và có bảy điều kiện kiểm tra. Checklist đang ở mức 0/7, gồm phân biệt phạm vi sản phẩm với phạm vi dự án, xác định người phụ trách và liên kết bằng chứng. Vì vậy, đây là minh chứng tiêu chí đã được đưa lên công cụ; chưa phải xác nhận WBS đã được review xong.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Mốc kế hoạch và trạng thái Done trên Trello",
+      "argument": "Các mốc tháng 10–11 được đặt cạnh danh sách nghiệm thu mô phỏng. Ngày trên thẻ là mốc kế hoạch của nhóm; ảnh không phải chế độ Calendar hoặc Timeline và không chứng minh tiến độ thực tế. Cột Done đang trống. Báo cáo ghi nhận đúng trạng thái này, thay vì tạo thêm một thẻ hoàn tất để làm minh chứng.",
+      "evidence": "captures/2026-10-26-vi/capture-manifest.json",
+      "terminology": "Screen observations retain real demo content; raw enums are distinct from localized labels.",
+      "sufficiency": "Các mốc tháng 10–11 được đặt cạnh danh sách nghiệm thu mô phỏng. Ngày trên thẻ là mốc kế hoạch của nhóm; ảnh không phải chế độ Calendar hoặc Timeline và không chứng minh tiến độ thực tế. Cột Done đang trống. Báo cáo ghi nhận đúng trạng thái này, thay vì tạo thêm một thẻ hoàn tất để làm minh chứng.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Thẻ nghiệm thu được ghi rõ là mô phỏng",
+      "argument": "Tiêu đề SIM-01 và phần mô tả ghi rõ đây là kịch bản tương lai, không phải biên bản thật. Nội dung checklist có một bộ giả định EVM riêng, khác đường cơ sở trong bài. Nhãn này giúp tránh nhầm ví dụ phục vụ báo cáo với kết quả kiểm thử hoặc quyết định nghiệm thu.",
+      "evidence": "captures/2026-10-26-vi/capture-manifest.json",
+      "terminology": "Screen observations retain real demo content; raw enums are distinct from localized labels.",
+      "sufficiency": "Tiêu đề SIM-01 và phần mô tả ghi rõ đây là kịch bản tương lai, không phải biên bản thật. Nội dung checklist có một bộ giả định EVM riêng, khác đường cơ sở trong bài. Nhãn này giúp tránh nhầm ví dụ phục vụ báo cáo với kết quả kiểm thử hoặc quyết định nghiệm thu.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Trang đăng nhập của website LMS",
+      "argument": "Màn hình đăng nhập cung cấp trường tài khoản, mật khẩu và các tài khoản demo theo ba vai trò. Ảnh được chụp trên website đang chạy ở địa chỉ cục bộ; mật khẩu trong trường nhập được che. Sự hiện diện của giao diện này xác nhận điểm vào hệ thống, còn khả năng truy cập từng chức năng phải được quan sát sau đăng nhập.",
+      "evidence": "captures/2026-10-26-vi/capture-manifest.json",
+      "terminology": "Screen observations retain real demo content; raw enums are distinct from localized labels.",
+      "sufficiency": "Màn hình đăng nhập cung cấp trường tài khoản, mật khẩu và các tài khoản demo theo ba vai trò. Ảnh được chụp trên website đang chạy ở địa chỉ cục bộ; mật khẩu trong trường nhập được che. Sự hiện diện của giao diện này xác nhận điểm vào hệ thống, còn khả năng truy cập từng chức năng phải được quan sát sau đăng nhập.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Trang quản lý người dùng của quản trị viên",
+      "argument": "Sau khi đăng nhập bằng vai trò quản trị, menu hiển thị chức năng Người dùng và danh sách tài khoản lấy từ cơ sở dữ liệu kiểm thử. Trang có bộ lọc vai trò và thao tác quản lý trạng thái. Các tên và email trên ảnh thuộc dữ liệu demo; lần quan sát này không thêm, sửa hoặc khóa tài khoản.",
+      "evidence": "captures/2026-10-26-vi/capture-manifest.json",
+      "terminology": "Screen observations retain real demo content; raw enums are distinct from localized labels.",
+      "sufficiency": "Sau khi đăng nhập bằng vai trò quản trị, menu hiển thị chức năng Người dùng và danh sách tài khoản lấy từ cơ sở dữ liệu kiểm thử. Trang có bộ lọc vai trò và thao tác quản lý trạng thái. Các tên và email trên ảnh thuộc dữ liệu demo; lần quan sát này không thêm, sửa hoặc khóa tài khoản.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Giảng viên xem bài tập theo khóa học phụ trách",
+      "argument": "Vai trò giảng viên nhìn thấy danh sách khóa học được phân công và bài tập tương ứng. Với WEB220, bài tập REST API hiển thị trạng thái Đã giao, điểm tối đa và hạn nộp. Đây là đầu vào cho việc kiểm tra tính nhất quán giữa đặc tả bài tập, giao diện và dữ liệu, chưa phải kết quả kiểm thử mọi trường hợp phân quyền.",
+      "evidence": "captures/2026-10-26-vi/capture-manifest.json",
+      "terminology": "Screen observations retain real demo content; raw enums are distinct from localized labels.",
+      "sufficiency": "Vai trò giảng viên nhìn thấy danh sách khóa học được phân công và bài tập tương ứng. Với WEB220, bài tập REST API hiển thị trạng thái Đã giao, điểm tối đa và hạn nộp. Đây là đầu vào cho việc kiểm tra tính nhất quán giữa đặc tả bài tập, giao diện và dữ liệu, chưa phải kết quả kiểm thử mọi trường hợp phân quyền.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Giảng viên xem bài nộp văn bản của sinh viên",
+      "argument": "Từ nút Xem và Chấm bài, giao diện mở danh sách bài nộp và nội dung văn bản đã lưu. Ảnh có tên sinh viên demo, thời điểm nộp và nút chấm điểm. Lần quan sát dừng ở bước đọc; không gửi điểm hoặc thay đổi phản hồi. Hình nối mô hình trình tự chấm bài trong Phụ lục D với một trạng thái cụ thể trên ứng dụng.",
+      "evidence": "captures/2026-10-26-vi/capture-manifest.json",
+      "terminology": "Screen observations retain real demo content; raw enums are distinct from localized labels.",
+      "sufficiency": "Từ nút Xem và Chấm bài, giao diện mở danh sách bài nộp và nội dung văn bản đã lưu. Ảnh có tên sinh viên demo, thời điểm nộp và nút chấm điểm. Lần quan sát dừng ở bước đọc; không gửi điểm hoặc thay đổi phản hồi. Hình nối mô hình trình tự chấm bài trong Phụ lục D với một trạng thái cụ thể trên ứng dụng.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Sinh viên xem bài tập và hành động cập nhật bài nộp",
+      "argument": "Tài khoản sinh viên Nguyễn An nhìn thấy bài tập của khóa AI310 và hành động Cập nhật bài nộp. Khóa học được chọn từ những lớp tài khoản đang theo học. Ảnh phản ánh màn hình trước thao tác gửi; không được dùng để kết luận lần nộp mới đã thành công hoặc các trường hợp quá hạn đều đã được kiểm tra.",
+      "evidence": "captures/2026-10-26-vi/capture-manifest.json",
+      "terminology": "Screen observations retain real demo content; raw enums are distinct from localized labels.",
+      "sufficiency": "Tài khoản sinh viên Nguyễn An nhìn thấy bài tập của khóa AI310 và hành động Cập nhật bài nộp. Khóa học được chọn từ những lớp tài khoản đang theo học. Ảnh phản ánh màn hình trước thao tác gửi; không được dùng để kết luận lần nộp mới đã thành công hoặc các trường hợp quá hạn đều đã được kiểm tra.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Bảng điểm cá nhân trên dữ liệu kiểm thử",
+      "argument": "Bảng điểm AI310 hiển thị điểm thành phần 10/10 và trọng số 10% đã lưu trước lần chụp. Giao diện giải thích trung bình chỉ là tạm tính, chưa áp dụng trọng số học phần và chưa xác định việc đạt học phần. Không thực hiện bài kiểm tra hoặc thay đổi điểm để tạo hình minh chứng.",
+      "evidence": "captures/2026-10-26-vi/capture-manifest.json",
+      "terminology": "Screen observations retain real demo content; raw enums are distinct from localized labels.",
+      "sufficiency": "Bảng điểm AI310 hiển thị điểm thành phần 10/10 và trọng số 10% đã lưu trước lần chụp. Giao diện giải thích trung bình chỉ là tạm tính, chưa áp dụng trọng số học phần và chưa xác định việc đạt học phần. Không thực hiện bài kiểm tra hoặc thay đổi điểm để tạo hình minh chứng.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Trang tổng quan của quản trị viên",
+      "argument": "Tổng quan hiển thị số liệu tài khoản và khóa học từ dữ liệu mẫu. Ô theo dõi hệ thống ghi rõ chưa có dữ liệu giám sát; không hiển thị kết luận máy chủ hoạt động bình thường khi chưa có phép đo.",
+      "evidence": "captures/2026-10-26-vi/capture-manifest.json",
+      "terminology": "Screen observations retain real demo content; raw enums are distinct from localized labels.",
+      "sufficiency": "Tổng quan hiển thị số liệu tài khoản và khóa học từ dữ liệu mẫu. Ô theo dõi hệ thống ghi rõ chưa có dữ liệu giám sát; không hiển thị kết luận máy chủ hoạt động bình thường khi chưa có phép đo.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Hộp thư thông báo của quản trị viên",
+      "argument": "Tài khoản quản trị hiện chưa có thông báo. Ảnh ghi nhận trạng thái rỗng thực tế, không bổ sung thông báo giả hoặc đánh dấu đã đọc để chuẩn bị ảnh.",
+      "evidence": "captures/2026-10-26-vi/capture-manifest.json",
+      "terminology": "Screen observations retain real demo content; raw enums are distinct from localized labels.",
+      "sufficiency": "Tài khoản quản trị hiện chưa có thông báo. Ảnh ghi nhận trạng thái rỗng thực tế, không bổ sung thông báo giả hoặc đánh dấu đã đọc để chuẩn bị ảnh.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Danh sách bài kiểm tra theo học phần",
+      "argument": "Giảng viên xem các bài kiểm tra của WEB220. Nhãn chức năng và trạng thái dùng tiếng Việt; tiêu đề và nội dung bài mẫu giữ nguyên. Không tạo câu hỏi, xuất bản hoặc bắt đầu lượt làm bài trong lần quan sát.",
+      "evidence": "captures/2026-10-26-vi/capture-manifest.json",
+      "terminology": "Screen observations retain real demo content; raw enums are distinct from localized labels.",
+      "sufficiency": "Giảng viên xem các bài kiểm tra của WEB220. Nhãn chức năng và trạng thái dùng tiếng Việt; tiêu đề và nội dung bài mẫu giữ nguyên. Không tạo câu hỏi, xuất bản hoặc bắt đầu lượt làm bài trong lần quan sát.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "Bảng điểm trên màn hình điện thoại",
+      "argument": "Khung xem 390 × 844 cho thấy các thẻ điểm xếp thành một cột và phần đầu trang được thu gọn. Bảng dữ liệu có vùng cuộn riêng. Ảnh phản ánh một kích thước kiểm tra; chưa thay được đánh giá trên nhiều thiết bị hoặc kiểm thử khả năng tiếp cận.",
+      "evidence": "captures/2026-10-26-vi/capture-manifest.json",
+      "terminology": "Screen observations retain real demo content; raw enums are distinct from localized labels.",
+      "sufficiency": "Khung xem 390 × 844 cho thấy các thẻ điểm xếp thành một cột và phần đầu trang được thu gọn. Bảng dữ liệu có vùng cuộn riêng. Ảnh phản ánh một kích thước kiểm tra; chưa thay được đánh giá trên nhiều thiết bị hoặc kiểm thử khả năng tiếp cận.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    },
+    {
+      "heading": "TÀI LIỆU THAM KHẢO",
+      "argument": "Develops TÀI LIỆU THAM KHẢO within TÀI LIỆU THAM KHẢO. Reviewed conceptual/design scope and source inventory.",
+      "evidence": "Source inventory and reviewed bibliography; diagrams retain editable sources.",
+      "terminology": "Planning, source model, observation and executed result remain distinct.",
+      "sufficiency": "Provides the applicable design/source view; unresolved runtime and approval evidence is explicit.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source, editorial and visual review",
+      "review_date": "2026-10-26"
+    }
+  ],
+  "final_visual_review_file": "qa/vietnamese-ui/visual-review.json",
+  "front_matter_reviews": [
+    {
+      "heading": "TÓM TẮT",
+      "argument": "States the management-plan objective and the roles of Trello and Draw.io.",
+      "evidence": "Baseline and API counts agree with the reconciled plan and dated snapshot; UAT/EVM remain simulated or unrun.",
+      "terminology": "FTE, baseline and snapshot retain their planning/evidence meanings; API output is not called a UI capture.",
+      "sufficiency": "Summarizes scope and material limits; official assessment and runtime evidence remain unresolved elsewhere.",
+      "status": "REVIEWED",
+      "reviewer": "Codex source and editorial review",
+      "review_date": "2026-10-26"
+    }
+  ],
+  "front_matter_review_file": "qa/vietnamese-ui/frontmatter-review.json"
+}

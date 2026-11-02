@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Đường truy xuất V3 của VietLex",
+    "subtitle": "Mô hình mã tại commit 7519cd1; không xác nhận cấu hình hoặc trạng thái production",
+    "output": "vietlex-v3-retrieval.html",
+    "locale": "vi",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/TanNguyen234/VietLex-Tech-Spec",
+      "provider": "github",
+      "revision": "7519cd1aea4a3639140b9188de1843ebf0ddb1c0",
+      "link_mode": "web"
+    }
+  },
+  "components": [
+    {"id":"question","type":"frontend","label":"Câu truy vấn","sublabel":"dense + sparse","tag":"input"},
+    {"id":"retriever","type":"backend","label":"VertexQdrantRetriever","sublabel":"điều phối query","sources":[{"path":"app/services/vertex_qdrant_retrieval.py","line":102,"end_line":117}]},
+    {"id":"dense","type":"cloud","label":"Provider embedding","sublabel":"embed_query theo vector contract","sources":[{"path":"app/services/vertex_qdrant_retrieval.py","line":30,"end_line":34}]},
+    {"id":"sparse","type":"backend","label":"Sparse encoder","sublabel":"encode_query","sources":[{"path":"app/services/vertex_qdrant_retrieval.py","line":35,"end_line":35}]},
+    {"id":"qdrant","type":"cloud","label":"Qdrant query_points","sublabel":"dense + sparse prefetch","sources":[{"path":"app/services/vertex_qdrant_retrieval.py","line":44,"end_line":69}]},
+    {"id":"fusion","type":"backend","label":"Rank fusion","sublabel":"RRF / DBSF / blend 0.5 + 0.5","sources":[{"path":"app/services/vertex_qdrant_retrieval.py","line":71,"end_line":99}]},
+    {"id":"validate","type":"backend","label":"Validate payload","sublabel":"provider · model · schema · revision · fields","sources":[{"path":"app/services/vertex_qdrant_retrieval.py","line":118,"end_line":146}]},
+    {"id":"evidence","type":"backend","label":"EvidenceChunk + StageCandidate","sublabel":"document identity · citation · text · score","sources":[{"path":"app/services/vertex_qdrant_retrieval.py","line":147,"end_line":176}]},
+    {"id":"outcome","type":"backend","label":"RetrievalOutcome","sublabel":"ok / no_candidate / retrieval_error","sources":[{"path":"app/services/vertex_qdrant_retrieval.py","line":178,"end_line":226}]}
+  ],
+  "connections": [
+    {"from":"question","to":"retriever","label":"query + limit + fusion"},
+    {"from":"retriever","to":"dense","label":"dense query"},
+    {"from":"retriever","to":"sparse","label":"sparse query"},
+    {"from":"dense","to":"qdrant","label":"dense vector"},
+    {"from":"sparse","to":"qdrant","label":"sparse vector"},
+    {"from":"qdrant","to":"fusion","label":"points theo mode"},
+    {"from":"fusion","to":"validate","label":"ranked points"},
+    {"from":"validate","to":"evidence","label":"payload hợp lệ"},
+    {"from":"evidence","to":"outcome","label":"evidence + trace"}
+  ]
+}

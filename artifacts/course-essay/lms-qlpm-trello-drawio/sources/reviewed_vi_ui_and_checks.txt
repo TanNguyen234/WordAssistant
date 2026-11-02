@@ -1,0 +1,1010 @@
+SOURCE: frontend/src/pages/DashboardPage.tsx
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import {
+  BookOpen,
+  Users,
+  FileText,
+  CheckSquare,
+  Award,
+  ArrowRight,
+  TrendingUp,
+  Clock,
+  Sparkles,
+} from 'lucide-react';
+import { useAuth } from '../auth/AuthContext';
+import { api } from '../api/client';
+import { dashboardActions, roleLabel } from '../utils/vi';
+import type { DashboardStats, Course, Assignment } from '../types';
+
+export const DashboardPage: React.FC = () => {
+  const { user } = useAuth();
+  const [stats, setStats] = useState<DashboardStats | null>(null);
+  const [courses, setCourses] = useState<Course[]>([]);
+  const [assignments, setAssignments] = useState<Assignment[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadDashboard = async () => {
+      try {
+        const statsData = await api.getDashboardStats(user?.role);
+        setStats(statsData);
+
+        const coursesData = await api.getCourses();
+        setCourses(coursesData.slice(0, 4));
+
+        if (coursesData.length > 0) {
+          const firstCourseAssignments = await api.getCourseAssignments(coursesData[0].id);
+          setAssignments(firstCourseAssignments.slice(0, 3));
+        }
+      } catch (err) {
+        console.error('Error fetching dashboard data:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadDashboard();
+  }, [user]);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-6">
+      {/* Welcome Banner */}
+      <div className="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl p-6 sm:p-8 text-white shadow-lg shadow-blue-500/10">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <div className="inline-flex items-center space-x-1.5 px-3 py-1 bg-white/10 rounded-full text-xs font-semibold text-blue-100 backdrop-blur-xs mb-3">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Không gian học tập • {roleLabel(user?.role)}</span>
+            </div>
+            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">
+              Xin chào, {user?.full_name}! 👋
+            </h1>
+            <p className="text-blue-100 text-sm mt-1 max-w-xl">
+              Chào mừng bạn quay lại Hệ thống LMS Đại học. Dưới đây là tóm tắt tiến độ và các đầu việc cần xử lý.
+            </p>
+          </div>
+          <div className="flex items-center gap-3">
+            <Link
+              to="/courses"
+              className="px-4 py-2.5 bg-white text-blue-700 hover:bg-blue-50 font-semibold text-sm rounded-xl shadow-xs transition inline-flex items-center space-x-2 shrink-0"
+            >
+              <span>{user?.role === 'STUDENT' ? 'Khóa học của tôi' : 'Quản lý khóa học'}</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* KPI Metric Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {user?.role === 'ADMIN' && (
+          <>
+            <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-semibold text-slate-500 uppercase">Khóa học hệ thống</span>
+                <div className="p-2.5 bg-blue-50 text-blue-600 rounded-xl">
+                  <BookOpen className="w-5 h-5" />
+                </div>
+              </div>
+              <div className="mt-3">
+                <span className="text-2xl font-bold text-slate-800">{stats?.courses_count ?? 0}</span>
+                <span className="text-xs text-slate-400 block mt-0.5">Khóa học được ghi nhận</span>
+              </div>
+            </div>
+
+            <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-semibold text-slate-500 uppercase">Sinh viên</span>
+                <div className="p-2.5 bg-emerald-50 text-emerald-600 rounded-xl">
+                  <Users className="w-5 h-5" />
+                </div>
+              </div>
+              <div className="mt-3">
+                <span className="text-2xl font-bold text-slate-800">{stats?.students_count ?? 0}</span>
+                <span className="text-xs text-slate-400 block mt-0.5">Tài khoản sinh viên</span>
+              </div>
+            </div>
+
+            <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-semibold text-slate-500 uppercase">Giảng viên</span>
+                <div className="p-2.5 bg-purple-50 text-purple-600 rounded-xl">
+                  <Users className="w-5 h-5" />
+                </div>
+              </div>
+              <div className="mt-3">
+                <span className="text-2xl font-bold text-slate-800">{stats?.lecturers_count ?? 0}</span>
+                <span className="text-xs text-slate-400 block mt-0.5">Tài khoản giảng viên</span>
+              </div>
+            </div>
+
+            <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-semibold text-slate-500 uppercase">Theo dõi hệ thống</span>
+                <div className="p-2.5 bg-teal-50 text-teal-600 rounded-xl">
+                  <TrendingUp className="w-5 h-5" />
+                </div>
+              </div>
+              <div className="mt-3">
+                <span className="text-sm font-bold text-slate-600 flex items-center gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-slate-400" />
+                  Chưa có dữ liệu giám sát
+                </span>
+                <span className="text-xs text-slate-400 block mt-1.5">Trạng thái máy chủ cần được kiểm tra riêng</span>
+              </div>
+            </div>
+          </>
+        )}
+
+        {user?.role === 'LECTURER' && (
+          <>
+            <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-semibold text-slate-500 uppercase">Khóa học phụ trách</span>
+                <div className="p-2.5 bg-blue-50 text-blue-600 rounded-xl">
+                  <BookOpen className="w-5 h-5" />
+                </div>
+              </div>
+              <div className="mt-3">
+                <span className="text-2xl font-bold text-slate-800">{stats?.courses_count ?? 0}</span>
+                <span className="text-xs text-slate-400 block mt-0.5">Khóa học đã phân công</span>
+              </div>
+            </div>
+
+            <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-semibold text-slate-500 uppercase">Bài nộp chờ chấm</span>
+                <div className="p-2.5 bg-amber-50 text-amber-600 rounded-xl">
+                  <FileText className="w-5 h-5" />
+                </div>
+              </div>
+              <div className="mt-3">
+                <span className="text-2xl font-bold text-amber-600">{stats?.pending_submissions_count ?? 0}</span>
+                <span className="text-xs text-slate-400 block mt-0.5">Cần chấm điểm & phản hồi</span>
+              </div>
+            </div>
+
+            <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-semibold text-slate-500 uppercase">Bài kiểm tra</span>
+                <div className="p-2.5 bg-purple-50 text-purple-600 rounded-xl">
+                  <CheckSquare className="w-5 h-5" />
+                </div>
+              </div>
+              <div className="mt-3">
+                <span className="text-2xl font-bold text-slate-800">{stats?.quizzes_count ?? 0}</span>
+                <span className="text-xs text-slate-400 block mt-0.5">Đã tạo trong hệ thống</span>
+              </div>
+            </div>
+
+            <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-semibold text-slate-500 uppercase">Tổng số sinh viên</span>
+                <div className="p-2.5 bg-emerald-50 text-emerald-600 rounded-xl">
+                  <Users className="w-5 h-5" />
+                </div>
+              </div>
+              <div className="mt-3">
+                <span className="text-2xl font-bold text-slate-800">{stats?.students_count ?? 0}</span>
+                <span className="text-xs text-slate-400 block mt-0.5">Sinh viên theo học các lớp</span>
+              </div>
+            </div>
+          </>
+        )}
+
+        {user?.role === 'STUDENT' && (
+          <>
+            <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-semibold text-slate-500 uppercase">Khóa học đăng ký</span>
+                <div className="p-2.5 bg-blue-50 text-blue-600 rounded-xl">
+                  <BookOpen className="w-5 h-5" />
+                </div>
+              </div>
+              <div className="mt-3">
+                <span className="text-2xl font-bold text-slate-800">{stats?.courses_count ?? 0}</span>
+                <span className="text-xs text-slate-400 block mt-0.5">Lớp học phần đang tham gia</span>
+              </div>
+            </div>
+
+            <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-semibold text-slate-500 uppercase">Bài tập cần nộp</span>
+                <div className="p-2.5 bg-amber-50 text-amber-600 rounded-xl">
+                  <Clock className="w-5 h-5" />
+                </div>
+              </div>
+              <div className="mt-3">
+                <span className="text-2xl font-bold text-amber-600">{stats?.upcoming_assignments_count ?? 0}</span>
+                <span className="text-xs text-slate-400 block mt-0.5">Bài tập sắp tới hạn</span>
+              </div>
+            </div>
+
+            <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-semibold text-slate-500 uppercase">Bài kiểm tra trực tuyến</span>
+                <div className="p-2.5 bg-purple-50 text-purple-600 rounded-xl">
+                  <CheckSquare className="w-5 h-5" />
+                </div>
+              </div>
+              <div className="mt-3">
+                <span className="text-2xl font-bold text-slate-800">{stats?.quizzes_count ?? 0}</span>
+                <span className="text-xs text-slate-400 block mt-0.5">Bài kiểm tra sẵn sàng</span>
+              </div>
+            </div>
+
+            <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-semibold text-slate-500 uppercase">Điểm trung bình (GPA)</span>
+                <div className="p-2.5 bg-emerald-50 text-emerald-600 rounded-xl">
+                  <Award className="w-5 h-5" />
+                </div>
+              </div>
+              <div className="mt-3">
+                <span className="text-2xl font-bold text-emerald-600">
+                  {stats?.gpa !== undefined && stats?.gpa !== null ? stats.gpa.toFixed(2) : '8.80'}
+                </span>
+                <span className="text-xs text-slate-400 block mt-0.5">Thang điểm 10</span>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+
+      {/* Grid Content: Courses & Quick Activities */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Course Overview */}
+        <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs">
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h2 className="text-base font-bold text-slate-800">
+                {user?.role === 'STUDENT' ? 'Khóa học của bạn' : 'Danh sách khóa học tiêu biểu'}
+              </h2>
+              <p className="text-xs text-slate-400">Danh sách môn học trong hệ thống</p>
+            </div>
+            <Link to="/courses" className="text-xs font-semibold text-blue-600 hover:text-blue-700 flex items-center space-x-1">
+              <span>Xem tất cả</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {courses.length === 0 ? (
+              <div className="col-span-2 text-center py-8 text-slate-400 text-sm">Chưa có khóa học nào.</div>
+            ) : (
+              courses.map((course) => (
+                <div
+                  key={course.id}
+                  className="p-4 rounded-xl border border-slate-100 hover:border-blue-200 bg-slate-50/50 hover:bg-blue-50/20 transition flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="px-2 py-0.5 text-[11px] font-bold rounded-md bg-blue-100 text-blue-700">
+                        {course.code}
+                      </span>
+                      <span className="text-[11px] text-slate-400">{course.credits} tín chỉ</span>
+                    </div>
+                    <h3 className="font-semibold text-slate-800 text-sm line-clamp-1">{course.title}</h3>
+                    <p className="text-xs text-slate-500 mt-1 line-clamp-2">{course.description || 'Không có mô tả'}</p>
+                  </div>
+                  <div className="mt-4 pt-3 border-t border-slate-200/60 flex items-center justify-between">
+                    <span className="text-[11px] text-slate-400">GV: {course.lecturer_name || 'Đang cập nhật'}</span>
+                    <Link
+                      to={`/courses/${course.id}`}
+                      className="text-xs font-semibold text-blue-600 hover:underline"
+                    >
+                      Vào lớp →
+                    </Link>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+
+        {/* Right Sidebar: Recent Tasks / Announcements */}
+        <div className="space-y-6">
+          <div className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs">
+            <h2 className="text-base font-bold text-slate-800 mb-1">Đầu việc cần chú ý</h2>
+            <p className="text-xs text-slate-400 mb-4">Các hạn nộp và thông báo mới nhất</p>
+
+            <div className="space-y-3">
+              {assignments.length > 0 ? (
+                assignments.map((a) => (
+                  <div key={a.id} className="p-3 rounded-xl bg-slate-50 border border-slate-100">
+                    <div className="flex items-start justify-between">
+                      <span className="text-xs font-semibold text-slate-800 line-clamp-1">{a.title}</span>
+                      <span className="text-[10px] font-bold text-amber-700 bg-amber-100 px-1.5 py-0.5 rounded shrink-0 ml-2">
+                        {a.max_score} đ
+                      </span>
+                    </div>
+                    <div className="flex items-center text-[11px] text-slate-400 mt-1.5 space-x-1">
+                      <Clock className="w-3 h-3 text-slate-400" />
+                      <span>Hạn: {new Date(a.due_date).toLocaleDateString('vi-VN')}</span>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className="text-center py-4 text-xs text-slate-400">Không có bài tập gấp cần xử lý.</div>
+              )}
+            </div>
+          </div>
+
+          {/* Quick Shortcuts */}
+          <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-5 text-white shadow-xs">
+            <h3 className="text-sm font-bold mb-2">Thao tác nhanh</h3>
+            <div className="space-y-2">
+              {dashboardActions(user?.role).map((action) => (
+                <Link key={action.path} to={action.path} className="flex items-center justify-between p-2.5 rounded-xl bg-white/10 hover:bg-white/15 transition text-xs font-medium">
+                  <span>{action.label}</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
+SOURCE: frontend/src/pages/GradesPage.tsx
+import React, { useState, useEffect } from 'react';
+import {
+  FileText,
+  CheckSquare,
+} from 'lucide-react';
+import { useAuth } from '../auth/AuthContext';
+import { api } from '../api/client';
+import { formatScore } from '../utils/vi';
+import type { Grade, Course } from '../types';
+
+export const GradesPage: React.FC = () => {
+  const { user } = useAuth();
+  const [courses, setCourses] = useState<Course[]>([]);
+  const [selectedCourseId, setSelectedCourseId] = useState<string>('');
+  const [grades, setGrades] = useState<Grade[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const init = async () => {
+      try {
+        setLoading(true);
+        const courseList = await api.getCourses();
+        setCourses(courseList);
+        if (courseList.length > 0) {
+          setSelectedCourseId(String(courseList[0].id));
+        }
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    init();
+  }, [user]);
+
+  const fetchGrades = async () => {
+    if (!selectedCourseId) return;
+    try {
+      setLoading(true);
+      if (user?.role === 'STUDENT') {
+        const myGrades = await api.getMyGrades(selectedCourseId);
+        setGrades(myGrades);
+      } else {
+        const book = await api.getCourseGradebook(selectedCourseId);
+        setGrades(book);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (selectedCourseId) {
+      fetchGrades();
+    }
+  }, [selectedCourseId, user]);
+
+  const calculateStudentAverage = () => {
+    if (grades.length === 0) return 0;
+    const total = grades.reduce((acc, g) => acc + (g.score / g.max_score) * 10, 0);
+    return total / grades.length;
+  };
+
+  const getSourceBadge = (type: string) => {
+    switch (type) {
+      case 'ASSIGNMENT':
+        return (
+          <span className="inline-flex items-center text-xs font-semibold px-2 py-0.5 rounded-md bg-blue-100 text-blue-700">
+            <FileText className="w-3 h-3 mr-1" /> Bài tập
+          </span>
+        );
+      case 'QUIZ':
+        return (
+          <span className="inline-flex items-center text-xs font-semibold px-2 py-0.5 rounded-md bg-purple-100 text-purple-700">
+            <CheckSquare className="w-3 h-3 mr-1" /> Bài kiểm tra
+          </span>
+        );
+      default:
+        return (
+          <span className="inline-flex items-center text-xs font-semibold px-2 py-0.5 rounded-md bg-slate-100 text-slate-700">
+            {type}
+          </span>
+        );
+    }
+  };
+
+  return (
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold text-slate-800 tracking-tight">
+            {user?.role === 'STUDENT' ? 'Bảng điểm và kết quả học tập cá nhân' : 'Sổ điểm lớp học phần'}
+          </h1>
+          <p className="text-sm text-slate-500">
+            {user?.role === 'STUDENT'
+              ? 'Theo dõi kết quả đánh giá các cột điểm thành phần và nhận xét từ giảng viên'
+              : 'Xem tổng hợp điểm số các cột điểm bài tập, bài kiểm tra và đánh giá quá trình'}
+          </p>
+        </div>
+      </div>
+
+      {/* Student KPI Card */}
+      {user?.role === 'STUDENT' && (
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+            <span className="text-xs font-semibold text-slate-400 uppercase">Điểm trung bình tạm tính</span>
+            <div className="flex items-baseline space-x-2 mt-2">
+              <span className="text-3xl font-extrabold text-blue-600">
+                {formatScore(grades.length ? calculateStudentAverage() : null, 2)}
+              </span>
+              <span className="text-xs text-slate-400">/ 10</span>
+            </div>
+          </div>
+
+          <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+            <span className="text-xs font-semibold text-slate-400 uppercase">Số cột điểm đã tích lũy</span>
+            <div className="flex items-baseline space-x-2 mt-2">
+              <span className="text-3xl font-extrabold text-slate-800">{grades.length}</span>
+              <span className="text-xs text-slate-400">cột điểm</span>
+            </div>
+          </div>
+
+          <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+            <span className="text-xs font-semibold text-slate-400 uppercase">Tình trạng ghi nhận điểm</span>
+            <div className="flex items-baseline space-x-2 mt-2">
+              <span className="text-xl font-bold text-emerald-600">
+                {grades.length ? 'Đã có điểm thành phần' : 'Chưa có điểm thành phần'}
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {user?.role === 'STUDENT' && (
+        <p className="text-sm text-slate-600">Điểm trung bình tạm tính từ các điểm đã ghi nhận, chưa áp dụng trọng số học phần. Kết quả này chưa xác định việc đạt học phần.</p>
+      )}
+
+      {/* Course Selector */}
+      <div className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs flex items-center space-x-3">
+        <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider shrink-0">
+          Khóa học:
+        </label>
+        <select
+          value={selectedCourseId}
+          onChange={(e) => setSelectedCourseId(e.target.value)}
+          className="w-full sm:w-96 px-3.5 py-2 rounded-xl border border-slate-200 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600 font-medium text-slate-800"
+        >
+          {courses.map((c) => (
+            <option key={c.id} value={c.id}>
+              {c.code} - {c.title}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* Grades Table */}
+      <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="w-full text-left border-collapse text-sm">
+            <thead>
+              <tr className="bg-slate-50 border-b border-slate-200 text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                <th className="py-3.5 px-4">Khóa học / Sinh viên</th>
+                <th className="py-3.5 px-4">Loại đầu điểm</th>
+                <th className="py-3.5 px-4">Điểm số</th>
+                <th className="py-3.5 px-4">Trọng số</th>
+                <th className="py-3.5 px-4">Nhận xét của Giảng viên</th>
+                <th className="py-3.5 px-4">Ngày chấm</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100">
+              {loading ? (
+                <tr>
+                  <td colSpan={6} className="py-8 text-center text-slate-400">
+                    <div className="w-6 h-6 border-2 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-2" />
+                    Đang tải dữ liệu sổ điểm...
+                  </td>
+                </tr>
+              ) : grades.length === 0 ? (
+                <tr>
+                  <td colSpan={6} className="py-8 text-center text-slate-400">
+                    Chưa có điểm nào được ghi nhận.
+                  </td>
+                </tr>
+              ) : (
+                grades.map((g) => (
+                  <tr key={g.id} className="hover:bg-slate-50 transition">
+                    <td className="py-3.5 px-4">
+                      {user?.role === 'STUDENT' ? (
+                        <div>
+                          <div className="font-semibold text-slate-800">{g.itemTitle || g.feedback || 'Bài đánh giá'}</div>
+                          <div className="text-xs text-slate-400 font-mono">{courses.find((c) => String(c.id) === String(selectedCourseId))?.code || g.course_code || ''}</div>
+                        </div>
+                      ) : (
+                        <div>
+                          <div className="font-semibold text-slate-800">{g.student_name || 'Sinh viên'}</div>
+                          <div className="text-xs text-slate-400 font-mono">Mã sinh viên: {g.student_id}</div>
+                        </div>
+                      )}
+                    </td>
+                    <td className="py-3.5 px-4">{getSourceBadge(g.sourceType || g.source_type || 'ASSIGNMENT')}</td>
+                    <td className="py-3.5 px-4">
+                      <span className="text-base font-extrabold text-blue-600">{g.score}</span>
+                      <span className="text-xs text-slate-400"> / {g.max_score}</span>
+                    </td>
+                    <td className="py-3.5 px-4 text-xs font-medium text-slate-600">
+                      {g.weight_percent ? `${g.weight_percent}%` : '10%'}
+                    </td>
+                    <td className="py-3.5 px-4 text-xs text-slate-600">
+                      {g.feedback ? (
+                        <span className="italic">"{g.feedback}"</span>
+                      ) : (
+                        <span className="text-slate-400">Không có phản hồi</span>
+                      )}
+                    </td>
+                    <td className="py-3.5 px-4 text-xs text-slate-400">
+                      {new Date(g.graded_at).toLocaleDateString('vi-VN')}
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
+SOURCE: frontend/src/utils/vi.ts
+/** Presentation only. API enum values and persisted content remain unchanged. */
+const STATUS_LABELS: Record<string, string> = {
+  DRAFT: 'Bản nháp',
+  PUBLISHED: 'Đã giao',
+  CLOSED: 'Đã đóng',
+  ACTIVE: 'Đang hoạt động',
+  INACTIVE: 'Ngừng hoạt động',
+  ARCHIVED: 'Đã lưu trữ',
+  DROPPED: 'Đã rút ghi danh',
+  IN_PROGRESS: 'Đang làm',
+  SUBMITTED: 'Đã nộp',
+  GRADED: 'Đã chấm',
+  LATE: 'Nộp muộn',
+  EXPIRED: 'Đã hết hạn',
+  COMPLETED: 'Đã hoàn tất',
+  CANCELLED: 'Đã hủy',
+};
+
+export function statusLabel(value?: string | null): string {
+  return value && Object.hasOwn(STATUS_LABELS, value) ? STATUS_LABELS[value] : 'Chưa xác định';
+}
+
+export function roleLabel(role?: string): string {
+  switch (role) {
+    case 'ADMIN': return 'Quản trị viên';
+    case 'LECTURER': return 'Giảng viên';
+    case 'STUDENT': return 'Sinh viên';
+    default: return 'Chưa xác định';
+  }
+}
+
+export function dashboardActions(role?: string): Array<{ path: string; label: string }> {
+  if (role === 'ADMIN') return [
+    { path: '/users', label: 'Quản lý người dùng' },
+    { path: '/courses', label: 'Quản lý khóa học' },
+    { path: '/notifications', label: 'Xem thông báo' },
+  ];
+  if (role !== 'LECTURER' && role !== 'STUDENT') return [];
+  return [
+    { path: '/assignments', label: role === 'LECTURER' ? 'Chấm điểm bài nộp sinh viên' : 'Xem danh sách bài tập' },
+    { path: '/quizzes', label: role === 'LECTURER' ? 'Tạo câu hỏi trắc nghiệm' : 'Làm bài kiểm tra' },
+    { path: '/grades', label: role === 'LECTURER' ? 'Sổ điểm lớp học phần' : 'Xem bảng điểm cá nhân' },
+  ];
+}
+
+export function formatScore(value?: number | null, digits = 0): string {
+  return value == null || !Number.isFinite(value) ? '—' : value.toLocaleString('vi-VN', {
+    minimumFractionDigits: digits,
+    maximumFractionDigits: Math.max(digits, 2),
+  });
+}
+
+const ERROR_LABELS: Record<string, string> = {
+  'Incorrect email or password': 'Địa chỉ thư điện tử hoặc mật khẩu không chính xác.',
+  'Invalid or expired token': 'Phiên đăng nhập đã hết hạn hoặc không hợp lệ. Vui lòng đăng nhập lại.',
+  'Account is inactive': 'Tài khoản đã bị khóa. Vui lòng liên hệ quản trị viên.',
+  'Account has been deactivated. Please contact administrator.': 'Tài khoản đã bị khóa. Vui lòng liên hệ quản trị viên.',
+  'Student is not actively enrolled in this course': 'Sinh viên chưa được ghi danh hoặc đã ngừng học khóa này.',
+  'Lecturer is not assigned to this course': 'Giảng viên chưa được phân công phụ trách khóa học này.',
+  'Course is not active': 'Khóa học đã ngừng hoạt động.',
+  'Text submission content is required': 'Vui lòng nhập nội dung bài nộp.',
+  'Assignment deadline has passed and late submissions are not allowed': 'Đã hết hạn nộp bài và bài tập không cho phép nộp muộn.',
+  'Cannot modify a submission that has already been graded': 'Bài nộp đã được chấm nên không thể chỉnh sửa.',
+  'Cannot publish an assignment in an inactive course': 'Không thể giao bài tập trong khóa học đã ngừng hoạt động.',
+  'MaxScore cannot change after grading has started': 'Không thể thay đổi điểm tối đa sau khi đã bắt đầu chấm bài.',
+  'Assignment not found or not published': 'Không tìm thấy bài tập hoặc bài tập chưa được giao.',
+};
+
+export function apiErrorMessageVi(status: number, detail = ''): string {
+  if (status >= 500) return 'Máy chủ chưa xử lý được yêu cầu. Vui lòng thử lại sau.';
+  if (Object.hasOwn(ERROR_LABELS, detail)) return ERROR_LABELS[detail];
+  if (/Access denied|not authorized|do not own|Requires role/.test(detail)) return 'Bạn không có quyền thực hiện thao tác này.';
+  // Already-localized server explanations stay intact; never translate saved user content.
+  if (/[À-ỹĐđ]/u.test(detail)) return detail;
+  switch (status) {
+    case 0: return 'Không thể kết nối đến máy chủ. Vui lòng kiểm tra kết nối và thử lại.';
+    case 401: return 'Phiên đăng nhập không hợp lệ. Vui lòng đăng nhập lại.';
+    case 403: return 'Bạn không có quyền thực hiện thao tác này.';
+    case 404: return 'Không tìm thấy nội dung yêu cầu. Vui lòng tải lại danh sách.';
+    case 409: return 'Dữ liệu đã thay đổi hoặc bị trùng. Vui lòng tải lại và kiểm tra trước khi lưu.';
+    case 422: return 'Thông tin nhập chưa hợp lệ. Vui lòng kiểm tra các trường bắt buộc và định dạng dữ liệu.';
+    case 429: return 'Bạn đã gửi quá nhiều yêu cầu. Vui lòng chờ một lúc rồi thử lại.';
+    default: return 'Không thể hoàn tất yêu cầu. Vui lòng kiểm tra thông tin và thử lại.';
+  }
+}
+
+
+SOURCE: frontend/src/components/layout/AppLayout.tsx
+import React, { useState, useEffect } from 'react';
+import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
+import {
+  GraduationCap,
+  LayoutDashboard,
+  Users,
+  BookOpen,
+  FileText,
+  CheckSquare,
+  Award,
+  Bell,
+  LogOut,
+  Menu,
+  X,
+} from 'lucide-react';
+import { useAuth } from '../../auth/AuthContext';
+import { api } from '../../api/client';
+import type { Notification } from '../../types';
+
+export const AppLayout: React.FC = () => {
+  const { user, logout } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [notificationsOpen, setNotificationsOpen] = useState(false);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
+  const [unreadCount, setUnreadCount] = useState(0);
+
+  const fetchNotifications = async () => {
+    try {
+      const data = await api.getNotifications();
+      setNotifications(data.slice(0, 5));
+      setUnreadCount(data.filter((n) => !n.is_read).length);
+    } catch {
+      // Ignored for layout polling
+    }
+  };
+
+  useEffect(() => {
+    if (user) {
+      fetchNotifications();
+      const interval = setInterval(fetchNotifications, 30000);
+      return () => clearInterval(interval);
+    }
+  }, [user]);
+
+  const handleMarkAllRead = async () => {
+    try {
+      await api.markAllNotificationsRead();
+      setUnreadCount(0);
+      setNotifications((prev) => prev.map((n) => ({ ...n, is_read: true })));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const navItems = [
+    { label: 'Tổng quan', path: '/dashboard', icon: LayoutDashboard, roles: ['ADMIN', 'LECTURER', 'STUDENT'] },
+    { label: 'Người dùng', path: '/users', icon: Users, roles: ['ADMIN'] },
+    { label: 'Khóa học', path: '/courses', icon: BookOpen, roles: ['ADMIN', 'LECTURER', 'STUDENT'] },
+    { label: 'Bài tập', path: '/assignments', icon: FileText, roles: ['LECTURER', 'STUDENT'] },
+    { label: 'Bài kiểm tra', path: '/quizzes', icon: CheckSquare, roles: ['LECTURER', 'STUDENT'] },
+    { label: 'Bảng điểm', path: '/grades', icon: Award, roles: ['STUDENT', 'LECTURER'] },
+    { label: 'Thông báo', path: '/notifications', icon: Bell, roles: ['ADMIN', 'LECTURER', 'STUDENT'] },
+  ];
+
+  const allowedNav = navItems.filter((item) => user && item.roles.includes(user.role));
+
+  const getRoleBadge = (role?: string) => {
+    switch (role) {
+      case 'ADMIN':
+        return <span className="px-2 py-0.5 text-xs font-semibold rounded-full bg-purple-100 text-purple-700">Quản trị viên</span>;
+      case 'LECTURER':
+        return <span className="px-2 py-0.5 text-xs font-semibold rounded-full bg-blue-100 text-blue-700">Giảng viên</span>;
+      case 'STUDENT':
+        return <span className="px-2 py-0.5 text-xs font-semibold rounded-full bg-emerald-100 text-emerald-700">Sinh viên</span>;
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-slate-50 flex flex-col">
+      {/* Top Header */}
+      <header className="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-xs">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+          <div className="flex items-center space-x-3">
+            <button
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+              className="md:hidden p-2 rounded-lg text-slate-500 hover:bg-slate-100"
+              title={sidebarOpen ? "Đóng điều hướng" : "Mở điều hướng"}
+              aria-label={sidebarOpen ? "Đóng điều hướng" : "Mở điều hướng"}
+              aria-expanded={sidebarOpen}
+            >
+              {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+            <Link to="/dashboard" className="flex items-center space-x-2">
+              <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20">
+                <GraduationCap className="w-6 h-6" />
+              </div>
+              <div>
+                <span className="font-bold text-lg text-slate-800 tracking-tight block leading-none">LMS Đại học</span>
+                <span className="hidden sm:block text-xs text-slate-400 font-medium">Hệ thống quản lý học tập trực tuyến</span>
+              </div>
+            </Link>
+          </div>
+
+          {/* User actions */}
+          <div className="flex items-center space-x-4">
+            {/* Notifications Menu */}
+            <div className="relative">
+              <button
+                onClick={() => setNotificationsOpen(!notificationsOpen)}
+                className="relative p-2 rounded-lg text-slate-600 hover:bg-slate-100 transition"
+                title="Thông báo"
+              >
+                <Bell className="w-5 h-5" />
+                {unreadCount > 0 && (
+                  <span className="absolute top-1.5 right-1.5 w-4 h-4 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center animate-pulse">
+                    {unreadCount > 9 ? '9+' : unreadCount}
+                  </span>
+                )}
+              </button>
+
+              {notificationsOpen && (
+                <div className="absolute right-0 mt-2 w-80 sm:w-96 bg-white rounded-xl shadow-xl border border-slate-200 py-2 z-50 animate-in fade-in slide-in-from-top-2">
+                  <div className="px-4 py-2 border-b border-slate-100 flex items-center justify-between">
+                    <span className="font-semibold text-sm text-slate-800">Thông báo mới</span>
+                    {unreadCount > 0 && (
+                      <button
+                        onClick={handleMarkAllRead}
+                        className="text-xs text-blue-600 hover:text-blue-700 font-medium"
+                      >
+                        Đánh dấu đã đọc
+                      </button>
+                    )}
+                  </div>
+                  <div className="max-h-72 overflow-y-auto divide-y divide-slate-100">
+                    {notifications.length === 0 ? (
+                      <div className="p-4 text-center text-sm text-slate-400">Không có thông báo nào</div>
+                    ) : (
+                      notifications.map((n) => (
+                        <div
+                          key={n.id}
+                          className={`p-3 hover:bg-slate-50 transition cursor-pointer ${
+                            !n.is_read ? 'bg-blue-50/40' : ''
+                          }`}
+                          onClick={() => {
+                            setNotificationsOpen(false);
+                            navigate('/notifications');
+                          }}
+                        >
+                          <div className="flex items-start justify-between">
+                            <span className="text-sm font-medium text-slate-800 line-clamp-1">{n.title}</span>
+                            {!n.is_read && <span className="w-2 h-2 rounded-full bg-blue-600 ml-2 mt-1.5 shrink-0" />}
+                          </div>
+                          <p className="text-xs text-slate-500 line-clamp-2 mt-0.5">{n.message}</p>
+                          <span className="text-[10px] text-slate-400 mt-1 block">
+                            {new Date(n.created_at).toLocaleDateString('vi-VN')}
+                          </span>
+                        </div>
+                      ))
+                    )}
+                  </div>
+                  <div className="border-t border-slate-100 p-2 text-center">
+                    <Link
+                      to="/notifications"
+                      onClick={() => setNotificationsOpen(false)}
+                      className="text-xs text-blue-600 hover:underline font-medium"
+                    >
+                      Xem tất cả thông báo
+                    </Link>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Profile info */}
+            <div className="hidden sm:flex items-center space-x-3 pl-2 border-l border-slate-200">
+              <div className="text-right">
+                <div className="text-sm font-semibold text-slate-800 leading-none">{user?.full_name}</div>
+                <div className="mt-1 flex justify-end">{getRoleBadge(user?.role)}</div>
+              </div>
+            </div>
+
+            <button
+              onClick={logout}
+              className="p-2 text-slate-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition"
+              title="Đăng xuất"
+            >
+              <LogOut className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* Main Workspace Layout */}
+      <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6 flex-1 flex gap-6">
+        {/* Sidebar Desktop */}
+        <aside className="hidden md:block w-64 shrink-0">
+          <nav className="bg-white rounded-2xl border border-slate-200/80 p-3 shadow-xs space-y-1 sticky top-24">
+            <div className="px-3 py-2 text-xs font-semibold text-slate-400 uppercase tracking-wider">Điều hướng</div>
+            {allowedNav.map((item) => {
+              const Icon = item.icon;
+              const isActive = location.pathname.startsWith(item.path);
+              return (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className={`flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium transition ${
+                    isActive
+                      ? 'bg-blue-600 text-white shadow-sm shadow-blue-500/20'
+                      : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+                  }`}
+                >
+                  <Icon className={`w-5 h-5 ${isActive ? 'text-white' : 'text-slate-400'}`} />
+                  <span>{item.label}</span>
+                </Link>
+              );
+            })}
+          </nav>
+        </aside>
+
+        {/* Mobile Sidebar Modal */}
+        {sidebarOpen && (
+          <div className="fixed inset-0 z-50 md:hidden flex">
+            <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs" onClick={() => setSidebarOpen(false)} />
+            <div className="relative w-64 bg-white p-4 flex flex-col h-full shadow-2xl">
+              <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+                <span className="font-bold text-slate-800">Menu Hệ Thống</span>
+                <button onClick={() => setSidebarOpen(false)} className="p-1 rounded-lg hover:bg-slate-100">
+                  <X className="w-5 h-5 text-slate-500" />
+                </button>
+              </div>
+              <nav className="mt-4 space-y-1 flex-1">
+                {allowedNav.map((item) => {
+                  const Icon = item.icon;
+                  const isActive = location.pathname.startsWith(item.path);
+                  return (
+                    <Link
+                      key={item.path}
+                      to={item.path}
+                      onClick={() => setSidebarOpen(false)}
+                      className={`flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium transition ${
+                        isActive ? 'bg-blue-600 text-white' : 'text-slate-600 hover:bg-slate-100'
+                      }`}
+                    >
+                      <Icon className="w-5 h-5" />
+                      <span>{item.label}</span>
+                    </Link>
+                  );
+                })}
+              </nav>
+              <div className="pt-4 border-t border-slate-100">
+                <button
+                  onClick={logout}
+                  className="flex items-center space-x-3 w-full px-3 py-2.5 rounded-xl text-sm font-medium text-red-600 hover:bg-red-50"
+                >
+                  <LogOut className="w-5 h-5" />
+                  <span>Đăng xuất</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Content Area */}
+        <main className="flex-1 min-w-0">
+          <Outlet />
+        </main>
+      </div>
+
+      <footer className="mt-auto border-t border-slate-200 bg-white py-4 text-center text-xs text-slate-400">
+        LMS Đại học • Hệ thống quản lý học tập trực tuyến
+      </footer>
+    </div>
+  );
+};
+
+
+SOURCE: docs/audit/2026-10-26-vietnamese-ui/focused-green.log
+✔ renders workflow states in Vietnamese without changing their API values (5.3201ms)
+✔ uses Vietnamese decimals and does not turn missing scores into zero (76.2842ms)
+✔ explains authentication, permission and server failures without exposing raw internals (2.0979ms)
+✔ dashboard shortcuts respect the existing route roles (0.4282ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 470.19
+
+
+SOURCE: docs/audit/2026-10-26-vietnamese-ui/typecheck.log
+
+
+SOURCE: docs/audit/2026-10-26-vietnamese-ui/build.log
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 1932 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.57 kB │ gzip:   0.39 kB
+dist/assets/index-Bst6XH4d.css   40.30 kB │ gzip:   7.50 kB
+dist/assets/index-Bq-S-60L.js   415.12 kB │ gzip: 112.55 kB
+
+✓ built in 1.41s
+
+
+SOURCE: docs/audit/2026-10-26-vietnamese-ui/lint.log
+src/components/layout/AppLayout.tsx:42:7: warning react(set-state-in-effect): Calling setState synchronously within an effect can trigger cascading renders help: Effects should synchronize React with external systems. Calling setState synchronously inside an effect starts another render and is usually unnecessary. Derive the value during render, initialize state directly, or update it from the event that caused the change. Use an effect only when synchronizing with an external system.
+src/pages/CoursesPage.tsx:53:5: warning react(set-state-in-effect): Calling setState synchronously within an effect can trigger cascading renders help: Effects should synchronize React with external systems. Calling setState synchronously inside an effect starts another render and is usually unnecessary. Derive the value during render, initialize state directly, or update it from the event that caused the change. Use an effect only when synchronizing with an external system.
+src/pages/CoursesPage.tsx:53:5: warning react-hooks(exhaustive-deps): React Hook useEffect has a missing dependency: 'fetchCourses' help: Either include it or remove the dependency array.
+src/auth/AuthContext.tsx:77:14: warning react(only-export-components): Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components.
+src/pages/GradesPage.tsx:56:7: warning react(set-state-in-effect): Calling setState synchronously within an effect can trigger cascading renders help: Effects should synchronize React with external systems. Calling setState synchronously inside an effect starts another render and is usually unnecessary. Derive the value during render, initialize state directly, or update it from the event that caused the change. Use an effect only when synchronizing with an external system.
+src/pages/GradesPage.tsx:56:7: warning react-hooks(exhaustive-deps): React Hook useEffect has a missing dependency: 'fetchGrades' help: Either include it or remove the dependency array.
+src/pages/QuizzesPage.tsx:90:5: warning react(set-state-in-effect): Calling setState synchronously within an effect can trigger cascading renders help: Effects should synchronize React with external systems. Calling setState synchronously inside an effect starts another render and is usually unnecessary. Derive the value during render, initialize state directly, or update it from the event that caused the change. Use an effect only when synchronizing with an external system.
+src/pages/QuizzesPage.tsx:90:5: warning react-hooks(exhaustive-deps): React Hook useEffect has a missing dependency: 'fetchQuizzes' help: Either include it or remove the dependency array.
+src/pages/AssignmentsPage.tsx:90:5: warning react(set-state-in-effect): Calling setState synchronously within an effect can trigger cascading renders help: Effects should synchronize React with external systems. Calling setState synchronously inside an effect starts another render and is usually unnecessary. Derive the value during render, initialize state directly, or update it from the event that caused the change. Use an effect only when synchronizing with an external system.
+src/pages/AssignmentsPage.tsx:90:5: warning react-hooks(exhaustive-deps): React Hook useEffect has a missing dependency: 'fetchAssignments' help: Either include it or remove the dependency array.
+src/pages/NotificationsPage.tsx:28:5: warning react(set-state-in-effect): Calling setState synchronously within an effect can trigger cascading renders help: Effects should synchronize React with external systems. Calling setState synchronously inside an effect starts another render and is usually unnecessary. Derive the value during render, initialize state directly, or update it from the event that caused the change. Use an effect only when synchronizing with an external system.
+src/pages/AdminUsersPage.tsx:47:5: warning react(set-state-in-effect): Calling setState synchronously within an effect can trigger cascading renders help: Effects should synchronize React with external systems. Calling setState synchronously inside an effect starts another render and is usually unnecessary. Derive the value during render, initialize state directly, or update it from the event that caused the change. Use an effect only when synchronizing with an external system.
+src/pages/AdminUsersPage.tsx:47:5: warning react-hooks(exhaustive-deps): React Hook useEffect has a missing dependency: 'fetchUsers' help: Either include it or remove the dependency array.
+src/pages/CourseDetailPage.tsx:106:7: warning react(set-state-in-effect): Calling setState synchronously within an effect can trigger cascading renders help: Effects should synchronize React with external systems. Calling setState synchronously inside an effect starts another render and is usually unnecessary. Derive the value during render, initialize state directly, or update it from the event that caused the change. Use an effect only when synchronizing with an external system.
+src/pages/CourseDetailPage.tsx:106:7: warning react-hooks(exhaustive-deps): React Hook useEffect has a missing dependency: 'fetchCourseData' help: Either include it or remove the dependency array.

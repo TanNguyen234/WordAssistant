@@ -1,0 +1,57 @@
+@startuml
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName "Times New Roman"
+skinparam defaultFontSize 20
+skinparam classAttributeIconSize 0
+skinparam nodesep 70
+skinparam ranksep 70
+hide methods
+top to bottom direction
+class "Hồ sơ nghiên cứu" as Workspace <<research_workspaces>> {
+  workspace_id : string
+  user_id : string?
+  client_id : string
+  title : string
+  description : string
+  expires_at : datetime
+}
+class "Tài liệu tải lên" as Doc <<documents[]>> {
+  document_id : string
+  filename : string
+  uploaded_at : datetime
+  original_bytes : bytes?
+}
+class "Nguồn được ghim" as Evidence <<evidence[]>> {
+  evidence_id : string
+  title : string
+  document_id : int?
+  review : object?
+  created_at : datetime
+}
+class "Lần phân tích" as Analysis <<analyses[]>> {
+  analysis_id : string
+  kind : string
+  status : string
+  research_mode : string?
+  result : object
+  created_at : datetime
+}
+class "Sự kiện đọc nguồn" as Event <<result.events[]>> {
+  type : string
+  analysis_id : string
+}
+Workspace "1" *-- "0..*" Doc : nhúng
+Workspace "1" *-- "0..*" Evidence : nhúng
+Workspace "1" *-- "0..*" Analysis : nhúng
+Analysis "1" *-- "0..*" Event : khi đọc nguồn
+Analysis ..> Evidence : chọn qua evidence_ids
+Doc -[hidden]right- Evidence
+note bottom
+Hình thoi đen: thành phần được nhúng trong hồ sơ MongoDB.
+Quan hệ chọn nguồn áp dụng cho loại phân tích có evidence_ids;
+không phải mọi lần phân tích đều có cùng cấu trúc kết quả.
+document_id có thể rỗng đối với nguồn từ tài liệu người dùng.
+Đây là mô hình logic, không phải các lớp ORM đã cài đặt.
+end note
+@enduml

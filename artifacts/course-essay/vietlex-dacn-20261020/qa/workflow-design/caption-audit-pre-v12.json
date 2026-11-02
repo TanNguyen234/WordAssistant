@@ -1,0 +1,1721 @@
+{
+  "version": 1,
+  "file": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Final_WorkflowRepair_20261023.docx",
+  "status": "REVIEW_REQUIRED",
+  "scope": {
+    "figures": "images in direct body paragraphs, grouped by paragraph",
+    "tables": "top-level body tables",
+    "visible_caption_rule": "immediately adjacent body paragraph detected by Caption style, SEQ field, or common Vietnamese/English literal label; explicit figure/table types must match the object",
+    "excludes": [
+      "headers and footers",
+      "images inside tables",
+      "nested tables",
+      "objects inside content controls or custom XML wrappers"
+    ],
+    "mutates_document": false,
+    "infers_caption_text": false
+  },
+  "summary": {
+    "figures": {
+      "total": 20,
+      "present": 9,
+      "missing": 2,
+      "empty": 0,
+      "ambiguous": 9,
+      "type_mismatch": 0,
+      "metadata_only": 0
+    },
+    "tables": {
+      "total": 15,
+      "present": 13,
+      "missing": 2,
+      "empty": 0,
+      "ambiguous": 0,
+      "type_mismatch": 0,
+      "metadata_only": 0
+    }
+  },
+  "figures": [
+    {
+      "kind": "figure",
+      "index": 0,
+      "body_child_index": 2,
+      "image_count": 1,
+      "paragraph_text": "",
+      "caption_metadata": null,
+      "caption_status": "MISSING",
+      "captions": [],
+      "adjacent_captions": [],
+      "mismatched_captions": []
+    },
+    {
+      "kind": "figure",
+      "index": 1,
+      "body_child_index": 13,
+      "image_count": 1,
+      "paragraph_text": "",
+      "caption_metadata": null,
+      "caption_status": "MISSING",
+      "captions": [],
+      "adjacent_captions": [],
+      "mismatched_captions": []
+    },
+    {
+      "kind": "figure",
+      "index": 2,
+      "body_child_index": 305,
+      "image_count": 1,
+      "paragraph_text": "",
+      "caption_metadata": null,
+      "caption_status": "PRESENT",
+      "captions": [
+        {
+          "body_child_index": 306,
+          "text": "HÌNH 2.1. Phân cấp màn hình HTML và thao tác chính",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        }
+      ],
+      "adjacent_captions": [
+        {
+          "body_child_index": 306,
+          "text": "HÌNH 2.1. Phân cấp màn hình HTML và thao tác chính",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        }
+      ],
+      "mismatched_captions": []
+    },
+    {
+      "kind": "figure",
+      "index": 3,
+      "body_child_index": 309,
+      "image_count": 1,
+      "paragraph_text": "",
+      "caption_metadata": null,
+      "caption_status": "PRESENT",
+      "captions": [
+        {
+          "body_child_index": 310,
+          "text": "HÌNH 2.2. Use case chính và ranh giới chức năng",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        }
+      ],
+      "adjacent_captions": [
+        {
+          "body_child_index": 310,
+          "text": "HÌNH 2.2. Use case chính và ranh giới chức năng",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        }
+      ],
+      "mismatched_captions": []
+    },
+    {
+      "kind": "figure",
+      "index": 4,
+      "body_child_index": 357,
+      "image_count": 1,
+      "paragraph_text": "",
+      "caption_metadata": null,
+      "caption_status": "PRESENT",
+      "captions": [
+        {
+          "body_child_index": 358,
+          "text": "HÌNH 2.3. Mô hình lớp rút gọn của evidence retrieval",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        }
+      ],
+      "adjacent_captions": [
+        {
+          "body_child_index": 358,
+          "text": "HÌNH 2.3. Mô hình lớp rút gọn của evidence retrieval",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        }
+      ],
+      "mismatched_captions": []
+    },
+    {
+      "kind": "figure",
+      "index": 5,
+      "body_child_index": 388,
+      "image_count": 1,
+      "paragraph_text": "",
+      "caption_metadata": null,
+      "caption_status": "PRESENT",
+      "captions": [
+        {
+          "body_child_index": 389,
+          "text": "HÌNH 2.4. Kiến trúc retrieval theo hai cấu hình",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        }
+      ],
+      "adjacent_captions": [
+        {
+          "body_child_index": 389,
+          "text": "HÌNH 2.4. Kiến trúc retrieval theo hai cấu hình",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        }
+      ],
+      "mismatched_captions": []
+    },
+    {
+      "kind": "figure",
+      "index": 6,
+      "body_child_index": 411,
+      "image_count": 1,
+      "paragraph_text": "",
+      "caption_metadata": null,
+      "caption_status": "PRESENT",
+      "captions": [
+        {
+          "body_child_index": 412,
+          "text": "HÌNH 2.5. Luồng nạp dữ liệu VietLex và tạo các chỉ mục",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        }
+      ],
+      "adjacent_captions": [
+        {
+          "body_child_index": 412,
+          "text": "HÌNH 2.5. Luồng nạp dữ liệu VietLex và tạo các chỉ mục",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        }
+      ],
+      "mismatched_captions": []
+    },
+    {
+      "kind": "figure",
+      "index": 7,
+      "body_child_index": 441,
+      "image_count": 1,
+      "paragraph_text": "",
+      "caption_metadata": null,
+      "caption_status": "PRESENT",
+      "captions": [
+        {
+          "body_child_index": 442,
+          "text": "HÌNH 3.1. Luồng POST /chat từ đầu vào đến trả HTML",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        }
+      ],
+      "adjacent_captions": [
+        {
+          "body_child_index": 442,
+          "text": "HÌNH 3.1. Luồng POST /chat từ đầu vào đến trả HTML",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        }
+      ],
+      "mismatched_captions": []
+    },
+    {
+      "kind": "figure",
+      "index": 8,
+      "body_child_index": 445,
+      "image_count": 1,
+      "paragraph_text": "",
+      "caption_metadata": null,
+      "caption_status": "PRESENT",
+      "captions": [
+        {
+          "body_child_index": 446,
+          "text": "HÌNH 3.2. Ảnh chụp runtime giao diện hỏi đáp — GET /",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        }
+      ],
+      "adjacent_captions": [
+        {
+          "body_child_index": 446,
+          "text": "HÌNH 3.2. Ảnh chụp runtime giao diện hỏi đáp — GET /",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        }
+      ],
+      "mismatched_captions": []
+    },
+    {
+      "kind": "figure",
+      "index": 9,
+      "body_child_index": 449,
+      "image_count": 1,
+      "paragraph_text": "",
+      "caption_metadata": null,
+      "caption_status": "PRESENT",
+      "captions": [
+        {
+          "body_child_index": 450,
+          "text": "HÌNH 3.3. Ảnh chụp runtime tra cứu văn bản — GET /search",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        }
+      ],
+      "adjacent_captions": [
+        {
+          "body_child_index": 450,
+          "text": "HÌNH 3.3. Ảnh chụp runtime tra cứu văn bản — GET /search",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        }
+      ],
+      "mismatched_captions": []
+    },
+    {
+      "kind": "figure",
+      "index": 10,
+      "body_child_index": 467,
+      "image_count": 1,
+      "paragraph_text": "",
+      "caption_metadata": null,
+      "caption_status": "PRESENT",
+      "captions": [
+        {
+          "body_child_index": 468,
+          "text": "HÌNH 3.4. Luồng đọc nguồn chính thức và hủy run trong workspace",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        }
+      ],
+      "adjacent_captions": [
+        {
+          "body_child_index": 468,
+          "text": "HÌNH 3.4. Luồng đọc nguồn chính thức và hủy run trong workspace",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        }
+      ],
+      "mismatched_captions": []
+    },
+    {
+      "kind": "figure",
+      "index": 11,
+      "body_child_index": 471,
+      "image_count": 1,
+      "paragraph_text": "",
+      "caption_metadata": null,
+      "caption_status": "AMBIGUOUS",
+      "captions": [
+        {
+          "body_child_index": 472,
+          "text": "HÌNH 3.5. Đọc Bộ luật Lao động 2019 — GET /documents/333670",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        }
+      ],
+      "adjacent_captions": [
+        {
+          "body_child_index": 472,
+          "text": "HÌNH 3.5. Đọc Bộ luật Lao động 2019 — GET /documents/333670",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        }
+      ],
+      "mismatched_captions": []
+    },
+    {
+      "kind": "figure",
+      "index": 12,
+      "body_child_index": 473,
+      "image_count": 1,
+      "paragraph_text": "",
+      "caption_metadata": null,
+      "caption_status": "AMBIGUOUS",
+      "captions": [
+        {
+          "body_child_index": 472,
+          "text": "HÌNH 3.5. Đọc Bộ luật Lao động 2019 — GET /documents/333670",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        },
+        {
+          "body_child_index": 474,
+          "text": "HÌNH 3.6. Tra cứu sự kiện hiệu lực — GET /legal-status",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        }
+      ],
+      "adjacent_captions": [
+        {
+          "body_child_index": 472,
+          "text": "HÌNH 3.5. Đọc Bộ luật Lao động 2019 — GET /documents/333670",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        },
+        {
+          "body_child_index": 474,
+          "text": "HÌNH 3.6. Tra cứu sự kiện hiệu lực — GET /legal-status",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        }
+      ],
+      "mismatched_captions": []
+    },
+    {
+      "kind": "figure",
+      "index": 13,
+      "body_child_index": 475,
+      "image_count": 1,
+      "paragraph_text": "",
+      "caption_metadata": null,
+      "caption_status": "AMBIGUOUS",
+      "captions": [
+        {
+          "body_child_index": 474,
+          "text": "HÌNH 3.6. Tra cứu sự kiện hiệu lực — GET /legal-status",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        },
+        {
+          "body_child_index": 476,
+          "text": "HÌNH 3.7. Chất lượng và kiểm chứng — GET /evaluation-lab",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        }
+      ],
+      "adjacent_captions": [
+        {
+          "body_child_index": 474,
+          "text": "HÌNH 3.6. Tra cứu sự kiện hiệu lực — GET /legal-status",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        },
+        {
+          "body_child_index": 476,
+          "text": "HÌNH 3.7. Chất lượng và kiểm chứng — GET /evaluation-lab",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        }
+      ],
+      "mismatched_captions": []
+    },
+    {
+      "kind": "figure",
+      "index": 14,
+      "body_child_index": 478,
+      "image_count": 1,
+      "paragraph_text": "",
+      "caption_metadata": null,
+      "caption_status": "AMBIGUOUS",
+      "captions": [
+        {
+          "body_child_index": 479,
+          "text": "HÌNH 3.8. Hồ sơ nghiên cứu — GET /workspaces",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        }
+      ],
+      "adjacent_captions": [
+        {
+          "body_child_index": 479,
+          "text": "HÌNH 3.8. Hồ sơ nghiên cứu — GET /workspaces",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        }
+      ],
+      "mismatched_captions": []
+    },
+    {
+      "kind": "figure",
+      "index": 15,
+      "body_child_index": 480,
+      "image_count": 1,
+      "paragraph_text": "",
+      "caption_metadata": null,
+      "caption_status": "AMBIGUOUS",
+      "captions": [
+        {
+          "body_child_index": 479,
+          "text": "HÌNH 3.8. Hồ sơ nghiên cứu — GET /workspaces",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        },
+        {
+          "body_child_index": 481,
+          "text": "HÌNH 3.9. Đăng nhập — GET /login",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        }
+      ],
+      "adjacent_captions": [
+        {
+          "body_child_index": 479,
+          "text": "HÌNH 3.8. Hồ sơ nghiên cứu — GET /workspaces",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        },
+        {
+          "body_child_index": 481,
+          "text": "HÌNH 3.9. Đăng nhập — GET /login",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        }
+      ],
+      "mismatched_captions": []
+    },
+    {
+      "kind": "figure",
+      "index": 16,
+      "body_child_index": 483,
+      "image_count": 1,
+      "paragraph_text": "",
+      "caption_metadata": null,
+      "caption_status": "AMBIGUOUS",
+      "captions": [
+        {
+          "body_child_index": 484,
+          "text": "HÌNH 3.10. Đăng ký — GET /register",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        }
+      ],
+      "adjacent_captions": [
+        {
+          "body_child_index": 484,
+          "text": "HÌNH 3.10. Đăng ký — GET /register",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        }
+      ],
+      "mismatched_captions": []
+    },
+    {
+      "kind": "figure",
+      "index": 17,
+      "body_child_index": 485,
+      "image_count": 1,
+      "paragraph_text": "",
+      "caption_metadata": null,
+      "caption_status": "AMBIGUOUS",
+      "captions": [
+        {
+          "body_child_index": 484,
+          "text": "HÌNH 3.10. Đăng ký — GET /register",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        },
+        {
+          "body_child_index": 486,
+          "text": "HÌNH 3.11. Khôi phục mật khẩu — GET /forgot-password",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        }
+      ],
+      "adjacent_captions": [
+        {
+          "body_child_index": 484,
+          "text": "HÌNH 3.10. Đăng ký — GET /register",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        },
+        {
+          "body_child_index": 486,
+          "text": "HÌNH 3.11. Khôi phục mật khẩu — GET /forgot-password",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        }
+      ],
+      "mismatched_captions": []
+    },
+    {
+      "kind": "figure",
+      "index": 18,
+      "body_child_index": 487,
+      "image_count": 1,
+      "paragraph_text": "",
+      "caption_metadata": null,
+      "caption_status": "AMBIGUOUS",
+      "captions": [
+        {
+          "body_child_index": 486,
+          "text": "HÌNH 3.11. Khôi phục mật khẩu — GET /forgot-password",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        },
+        {
+          "body_child_index": 488,
+          "text": "HÌNH 3.12. Quyền riêng tư — GET /privacy",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        }
+      ],
+      "adjacent_captions": [
+        {
+          "body_child_index": 486,
+          "text": "HÌNH 3.11. Khôi phục mật khẩu — GET /forgot-password",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        },
+        {
+          "body_child_index": 488,
+          "text": "HÌNH 3.12. Quyền riêng tư — GET /privacy",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        }
+      ],
+      "mismatched_captions": []
+    },
+    {
+      "kind": "figure",
+      "index": 19,
+      "body_child_index": 489,
+      "image_count": 1,
+      "paragraph_text": "",
+      "caption_metadata": null,
+      "caption_status": "AMBIGUOUS",
+      "captions": [
+        {
+          "body_child_index": 488,
+          "text": "HÌNH 3.12. Quyền riêng tư — GET /privacy",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        },
+        {
+          "body_child_index": 490,
+          "text": "HÌNH 3.13. Điều khoản sử dụng — GET /terms",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        }
+      ],
+      "adjacent_captions": [
+        {
+          "body_child_index": 488,
+          "text": "HÌNH 3.12. Quyền riêng tư — GET /privacy",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        },
+        {
+          "body_child_index": 490,
+          "text": "HÌNH 3.13. Điều khoản sử dụng — GET /terms",
+          "style": "Caption",
+          "sequence_ids": [
+            "Hinh"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "figure",
+          "is_empty": false
+        }
+      ],
+      "mismatched_captions": []
+    }
+  ],
+  "tables": [
+    {
+      "kind": "table",
+      "index": 0,
+      "body_child_index": 67,
+      "image_count": null,
+      "paragraph_text": null,
+      "caption_metadata": null,
+      "caption_status": "MISSING",
+      "captions": [],
+      "adjacent_captions": [],
+      "mismatched_captions": []
+    },
+    {
+      "kind": "table",
+      "index": 1,
+      "body_child_index": 222,
+      "image_count": null,
+      "paragraph_text": null,
+      "caption_metadata": null,
+      "caption_status": "MISSING",
+      "captions": [],
+      "adjacent_captions": [],
+      "mismatched_captions": []
+    },
+    {
+      "kind": "table",
+      "index": 2,
+      "body_child_index": 285,
+      "image_count": null,
+      "paragraph_text": null,
+      "caption_metadata": null,
+      "caption_status": "PRESENT",
+      "captions": [
+        {
+          "body_child_index": 284,
+          "text": "BẢNG 2.1. Vai trò và phạm vi năng lực trong source",
+          "style": "Caption",
+          "sequence_ids": [
+            "Bang"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "table",
+          "is_empty": false
+        }
+      ],
+      "adjacent_captions": [
+        {
+          "body_child_index": 284,
+          "text": "BẢNG 2.1. Vai trò và phạm vi năng lực trong source",
+          "style": "Caption",
+          "sequence_ids": [
+            "Bang"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "table",
+          "is_empty": false
+        }
+      ],
+      "mismatched_captions": []
+    },
+    {
+      "kind": "table",
+      "index": 3,
+      "body_child_index": 290,
+      "image_count": null,
+      "paragraph_text": null,
+      "caption_metadata": null,
+      "caption_status": "PRESENT",
+      "captions": [
+        {
+          "body_child_index": 289,
+          "text": "BẢNG 2.2. Capability nội bộ tái dựng từ source và giới hạn nghiệm thu",
+          "style": "Caption",
+          "sequence_ids": [
+            "Bang"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "table",
+          "is_empty": false
+        }
+      ],
+      "adjacent_captions": [
+        {
+          "body_child_index": 289,
+          "text": "BẢNG 2.2. Capability nội bộ tái dựng từ source và giới hạn nghiệm thu",
+          "style": "Caption",
+          "sequence_ids": [
+            "Bang"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "table",
+          "is_empty": false
+        }
+      ],
+      "mismatched_captions": []
+    },
+    {
+      "kind": "table",
+      "index": 4,
+      "body_child_index": 320,
+      "image_count": null,
+      "paragraph_text": null,
+      "caption_metadata": null,
+      "caption_status": "PRESENT",
+      "captions": [
+        {
+          "body_child_index": 319,
+          "text": "BẢNG 2.3. Use case chính, route và nhánh thay thế",
+          "style": "Caption",
+          "sequence_ids": [
+            "Bang"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "table",
+          "is_empty": false
+        }
+      ],
+      "adjacent_captions": [
+        {
+          "body_child_index": 319,
+          "text": "BẢNG 2.3. Use case chính, route và nhánh thay thế",
+          "style": "Caption",
+          "sequence_ids": [
+            "Bang"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "table",
+          "is_empty": false
+        }
+      ],
+      "mismatched_captions": []
+    },
+    {
+      "kind": "table",
+      "index": 5,
+      "body_child_index": 370,
+      "image_count": null,
+      "paragraph_text": null,
+      "caption_metadata": null,
+      "caption_status": "PRESENT",
+      "captions": [
+        {
+          "body_child_index": 369,
+          "text": "BẢNG 2.4. Trách nhiệm các đối tượng và thành phần chính",
+          "style": "Caption",
+          "sequence_ids": [
+            "Bang"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "table",
+          "is_empty": false
+        }
+      ],
+      "adjacent_captions": [
+        {
+          "body_child_index": 369,
+          "text": "BẢNG 2.4. Trách nhiệm các đối tượng và thành phần chính",
+          "style": "Caption",
+          "sequence_ids": [
+            "Bang"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "table",
+          "is_empty": false
+        }
+      ],
+      "mismatched_captions": []
+    },
+    {
+      "kind": "table",
+      "index": 6,
+      "body_child_index": 395,
+      "image_count": null,
+      "paragraph_text": null,
+      "caption_metadata": null,
+      "caption_status": "PRESENT",
+      "captions": [
+        {
+          "body_child_index": 394,
+          "text": "BẢNG 2.5. Hai hợp đồng retrieval và giới hạn snapshot được ghi nhận",
+          "style": "Caption",
+          "sequence_ids": [
+            "Bang"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "table",
+          "is_empty": false
+        }
+      ],
+      "adjacent_captions": [
+        {
+          "body_child_index": 394,
+          "text": "BẢNG 2.5. Hai hợp đồng retrieval và giới hạn snapshot được ghi nhận",
+          "style": "Caption",
+          "sequence_ids": [
+            "Bang"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "table",
+          "is_empty": false
+        }
+      ],
+      "mismatched_captions": []
+    },
+    {
+      "kind": "table",
+      "index": 7,
+      "body_child_index": 416,
+      "image_count": null,
+      "paragraph_text": null,
+      "caption_metadata": null,
+      "caption_status": "PRESENT",
+      "captions": [
+        {
+          "body_child_index": 415,
+          "text": "BẢNG 2.6. Vai trò kho dữ liệu, chỉ mục và giới hạn độ phủ",
+          "style": "Caption",
+          "sequence_ids": [
+            "Bang"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "table",
+          "is_empty": false
+        }
+      ],
+      "adjacent_captions": [
+        {
+          "body_child_index": 415,
+          "text": "BẢNG 2.6. Vai trò kho dữ liệu, chỉ mục và giới hạn độ phủ",
+          "style": "Caption",
+          "sequence_ids": [
+            "Bang"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "table",
+          "is_empty": false
+        }
+      ],
+      "mismatched_captions": []
+    },
+    {
+      "kind": "table",
+      "index": 8,
+      "body_child_index": 509,
+      "image_count": null,
+      "paragraph_text": null,
+      "caption_metadata": null,
+      "caption_status": "PRESENT",
+      "captions": [
+        {
+          "body_child_index": 508,
+          "text": "BẢNG 3.1. Chỉ số đánh giá đã lưu và phạm vi diễn giải",
+          "style": "Caption",
+          "sequence_ids": [
+            "Bang"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "table",
+          "is_empty": false
+        }
+      ],
+      "adjacent_captions": [
+        {
+          "body_child_index": 508,
+          "text": "BẢNG 3.1. Chỉ số đánh giá đã lưu và phạm vi diễn giải",
+          "style": "Caption",
+          "sequence_ids": [
+            "Bang"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "table",
+          "is_empty": false
+        }
+      ],
+      "mismatched_captions": []
+    },
+    {
+      "kind": "table",
+      "index": 9,
+      "body_child_index": 516,
+      "image_count": null,
+      "paragraph_text": null,
+      "caption_metadata": null,
+      "caption_status": "PRESENT",
+      "captions": [
+        {
+          "body_child_index": 515,
+          "text": "BẢNG 3.2. Bằng chứng dự án đã lưu và giới hạn kết luận",
+          "style": "Caption",
+          "sequence_ids": [
+            "Bang"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "table",
+          "is_empty": false
+        }
+      ],
+      "adjacent_captions": [
+        {
+          "body_child_index": 515,
+          "text": "BẢNG 3.2. Bằng chứng dự án đã lưu và giới hạn kết luận",
+          "style": "Caption",
+          "sequence_ids": [
+            "Bang"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "table",
+          "is_empty": false
+        }
+      ],
+      "mismatched_captions": []
+    },
+    {
+      "kind": "table",
+      "index": 10,
+      "body_child_index": 537,
+      "image_count": null,
+      "paragraph_text": null,
+      "caption_metadata": null,
+      "caption_status": "PRESENT",
+      "captions": [
+        {
+          "body_child_index": 536,
+          "text": "BẢNG 3.3. Rủi ro trọng yếu, bằng chứng và biện pháp đề xuất",
+          "style": "Caption",
+          "sequence_ids": [
+            "Bang"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "table",
+          "is_empty": false
+        }
+      ],
+      "adjacent_captions": [
+        {
+          "body_child_index": 536,
+          "text": "BẢNG 3.3. Rủi ro trọng yếu, bằng chứng và biện pháp đề xuất",
+          "style": "Caption",
+          "sequence_ids": [
+            "Bang"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "table",
+          "is_empty": false
+        }
+      ],
+      "mismatched_captions": []
+    },
+    {
+      "kind": "table",
+      "index": 11,
+      "body_child_index": 557,
+      "image_count": null,
+      "paragraph_text": null,
+      "caption_metadata": null,
+      "caption_status": "PRESENT",
+      "captions": [
+        {
+          "body_child_index": 556,
+          "text": "BẢNG 3.4. Màn hình, route GET và ranh giới quan sát",
+          "style": "Caption",
+          "sequence_ids": [
+            "Bang"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "table",
+          "is_empty": false
+        }
+      ],
+      "adjacent_captions": [
+        {
+          "body_child_index": 556,
+          "text": "BẢNG 3.4. Màn hình, route GET và ranh giới quan sát",
+          "style": "Caption",
+          "sequence_ids": [
+            "Bang"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field",
+            "literal_label"
+          ],
+          "caption_kind": "table",
+          "is_empty": false
+        }
+      ],
+      "mismatched_captions": []
+    },
+    {
+      "kind": "table",
+      "index": 12,
+      "body_child_index": 570,
+      "image_count": null,
+      "paragraph_text": null,
+      "caption_metadata": null,
+      "caption_status": "PRESENT",
+      "captions": [
+        {
+          "body_child_index": 569,
+          "text": "BẢNG A.1. Claim trọng yếu và đường truy vết evidence",
+          "style": "Caption",
+          "sequence_ids": [
+            "Bang"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field"
+          ],
+          "caption_kind": "table",
+          "is_empty": false
+        }
+      ],
+      "adjacent_captions": [
+        {
+          "body_child_index": 569,
+          "text": "BẢNG A.1. Claim trọng yếu và đường truy vết evidence",
+          "style": "Caption",
+          "sequence_ids": [
+            "Bang"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field"
+          ],
+          "caption_kind": "table",
+          "is_empty": false
+        }
+      ],
+      "mismatched_captions": []
+    },
+    {
+      "kind": "table",
+      "index": 13,
+      "body_child_index": 579,
+      "image_count": null,
+      "paragraph_text": null,
+      "caption_metadata": null,
+      "caption_status": "PRESENT",
+      "captions": [
+        {
+          "body_child_index": 578,
+          "text": "BẢNG B.1. Sơ đồ và ảnh chụp runtime được dùng trong báo cáo",
+          "style": "Caption",
+          "sequence_ids": [
+            "Bang"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field"
+          ],
+          "caption_kind": "table",
+          "is_empty": false
+        }
+      ],
+      "adjacent_captions": [
+        {
+          "body_child_index": 578,
+          "text": "BẢNG B.1. Sơ đồ và ảnh chụp runtime được dùng trong báo cáo",
+          "style": "Caption",
+          "sequence_ids": [
+            "Bang"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field"
+          ],
+          "caption_kind": "table",
+          "is_empty": false
+        }
+      ],
+      "mismatched_captions": []
+    },
+    {
+      "kind": "table",
+      "index": 14,
+      "body_child_index": 584,
+      "image_count": null,
+      "paragraph_text": null,
+      "caption_metadata": null,
+      "caption_status": "PRESENT",
+      "captions": [
+        {
+          "body_child_index": 583,
+          "text": "BẢNG C.1. Thuật ngữ chỉ số và trạng thái bằng chứng",
+          "style": "Caption",
+          "sequence_ids": [
+            "Bang"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field"
+          ],
+          "caption_kind": "table",
+          "is_empty": false
+        }
+      ],
+      "adjacent_captions": [
+        {
+          "body_child_index": 583,
+          "text": "BẢNG C.1. Thuật ngữ chỉ số và trạng thái bằng chứng",
+          "style": "Caption",
+          "sequence_ids": [
+            "Bang"
+          ],
+          "detected_by": [
+            "caption_style",
+            "seq_field"
+          ],
+          "caption_kind": "table",
+          "is_empty": false
+        }
+      ],
+      "mismatched_captions": []
+    }
+  ],
+  "issues": [
+    {
+      "severity": "WARNING",
+      "code": "caption_missing",
+      "object_kind": "figure",
+      "object_index": 0,
+      "message": "No immediately adjacent visible caption evidence was found."
+    },
+    {
+      "severity": "WARNING",
+      "code": "caption_missing",
+      "object_kind": "figure",
+      "object_index": 1,
+      "message": "No immediately adjacent visible caption evidence was found."
+    },
+    {
+      "severity": "WARNING",
+      "code": "caption_missing",
+      "object_kind": "table",
+      "object_index": 0,
+      "message": "No immediately adjacent visible caption evidence was found."
+    },
+    {
+      "severity": "WARNING",
+      "code": "caption_missing",
+      "object_kind": "table",
+      "object_index": 1,
+      "message": "No immediately adjacent visible caption evidence was found."
+    },
+    {
+      "severity": "WARNING",
+      "code": "caption_ambiguous",
+      "object_kind": "figure",
+      "object_index": 11,
+      "message": "More than one adjacent caption may refer to this object, or one caption is shared by multiple objects."
+    },
+    {
+      "severity": "WARNING",
+      "code": "caption_ambiguous",
+      "object_kind": "figure",
+      "object_index": 12,
+      "message": "More than one adjacent caption may refer to this object, or one caption is shared by multiple objects."
+    },
+    {
+      "severity": "WARNING",
+      "code": "caption_ambiguous",
+      "object_kind": "figure",
+      "object_index": 13,
+      "message": "More than one adjacent caption may refer to this object, or one caption is shared by multiple objects."
+    },
+    {
+      "severity": "WARNING",
+      "code": "caption_ambiguous",
+      "object_kind": "figure",
+      "object_index": 14,
+      "message": "More than one adjacent caption may refer to this object, or one caption is shared by multiple objects."
+    },
+    {
+      "severity": "WARNING",
+      "code": "caption_ambiguous",
+      "object_kind": "figure",
+      "object_index": 15,
+      "message": "More than one adjacent caption may refer to this object, or one caption is shared by multiple objects."
+    },
+    {
+      "severity": "WARNING",
+      "code": "caption_ambiguous",
+      "object_kind": "figure",
+      "object_index": 16,
+      "message": "More than one adjacent caption may refer to this object, or one caption is shared by multiple objects."
+    },
+    {
+      "severity": "WARNING",
+      "code": "caption_ambiguous",
+      "object_kind": "figure",
+      "object_index": 17,
+      "message": "More than one adjacent caption may refer to this object, or one caption is shared by multiple objects."
+    },
+    {
+      "severity": "WARNING",
+      "code": "caption_ambiguous",
+      "object_kind": "figure",
+      "object_index": 18,
+      "message": "More than one adjacent caption may refer to this object, or one caption is shared by multiple objects."
+    },
+    {
+      "severity": "WARNING",
+      "code": "caption_ambiguous",
+      "object_kind": "figure",
+      "object_index": 19,
+      "message": "More than one adjacent caption may refer to this object, or one caption is shared by multiple objects."
+    }
+  ]
+}

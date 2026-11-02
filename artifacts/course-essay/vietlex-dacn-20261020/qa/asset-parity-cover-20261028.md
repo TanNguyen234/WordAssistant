@@ -1,0 +1,1 @@
+Bản Word có một bìa; logo thứ hai thuộc trang bìa trùng đã loại khỏi bản sao. Logo còn lại có SHA-256 b8df6c5cd754400a794e0fece51a13d6d1dc194eb00f3cfa6621f5ef53427e3b. Hình 2.1 nằm ngay trước caption, ảnh nhúng có SHA-256 5b6c9ea04a03c0b0d96651e623c20afb34dfb6c49637ee5e5ff4610a1a4a07d6, trùng asset đã ghi. Matrix v18 được giữ nguyên; matrix mới bỏ riêng LOGO-002.

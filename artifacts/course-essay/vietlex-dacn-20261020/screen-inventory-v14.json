@@ -1,0 +1,1937 @@
+{
+  "schema_version": 3,
+  "system_title": "VietLex — nghiên cứu/tra cứu pháp luật Việt Nam",
+  "source_revision": "7519cd1aea4a3639140b9188de1843ebf0ddb1c0 (dirty source worktree; status SHA-256 e1fabe1707999e3187f9c50af47c617168a4a93d5efa3f817fe42336089f8392)",
+  "source_snapshot_file": "source/source_manifest.json",
+  "source_snapshot_sha256": "a5477c71e3a86c7772da123c551e30bc37c02c9863d9016c80925a6f184c70c9",
+  "document_path": "output/VietLex_DoAnChuyenNganh_RubricCriteria_FinalQA_20261025_v6.docx",
+  "document_sha256": "b750f252d9b1955d896f905e1045d7d80654d5432273d447b8dc0bbedf892c39",
+  "route_source_inventory_file": "qa/route-source-inventory-v13.json",
+  "route_source_inventory_sha256": "0b0d506c4641bf8cbd801004b24da28e438dde7a8451e8297d9af1a29ec08d1a",
+  "route_count": 103,
+  "route_class_counts": {
+    "full_html_page": 26,
+    "action": 16,
+    "redirect": 19,
+    "api_or_operational_non_screen": 12,
+    "json_api": 23,
+    "html_partial": 5,
+    "download": 2
+  },
+  "runtime_capture_manifest": "assets/runtime-captures-clickthrough-20261023/capture-manifest.json",
+  "runtime_capture_manifest_sha256": "2312159c76c4eee1efe59b340717792ad8b1bc8400abbfa834a7256c1e91ab39",
+  "capture_context": {
+    "browser_surface": "visible_browser_tab",
+    "headless": false,
+    "navigation_policy": "visible_ui_clickthrough"
+  },
+  "runtime_capture_instances": 13,
+  "runtime_unique_captured_routes": 11,
+  "runtime_captures": [
+    {
+      "asset_id": "F06",
+      "screen_id": "home-chat",
+      "method": "GET",
+      "route": "/",
+      "template": "app/templates/index.html",
+      "handler": "app/main.py:get_index",
+      "page_title": "VietLex · Không gian nghiên cứu pháp luật",
+      "state": "CAPTURED_UI_CLICKTHROUGH",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/",
+      "http_status": 200,
+      "document_status": 200,
+      "console_errors": [],
+      "console_warnings": [],
+      "ui_steps": [
+        "Mở trang VietLex",
+        "Bấm Hỏi đáp trên thanh điều hướng",
+        "Chờ /readyz trả 200 và trạng thái Hệ thống sẵn sàng"
+      ],
+      "arrived_via_visible_ui": true,
+      "screenshot_path": "assets/runtime-captures-clickthrough-20261023/clickthrough-home.png",
+      "screenshot_sha256": "451c3e43c0b4a178f32c817e5ffce3786bc370155bd7a21d6b75e90c7ac496c2",
+      "captured_at": "2026-10-23T19:50:02+07:00",
+      "included_in_final_docx": true,
+      "included_in_docx": true,
+      "exclusion_reason": null
+    },
+    {
+      "asset_id": "F07",
+      "screen_id": "legal-search",
+      "method": "GET",
+      "route": "/search?scope=metadata&q=45%2F2019%2FQH14&as_of=2026-10-23&legal_type=&authority=&issued_from=&issued_to=&sort=default",
+      "template": "app/templates/legal_search.html",
+      "handler": "app/api/legal_routes.py:legal_search",
+      "page_title": "Tìm văn bản · VietLex",
+      "state": "CAPTURED_UI_CLICKTHROUGH",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/search?scope=metadata&q=45%2F2019%2FQH14&as_of=2026-10-23&legal_type=&authority=&issued_from=&issued_to=&sort=default",
+      "http_status": 200,
+      "document_status": 200,
+      "console_errors": [],
+      "console_warnings": [],
+      "ui_steps": [
+        "Nhập số hiệu công khai 45/2019/QH14",
+        "Bấm Tìm (GET; không tạo dữ liệu)"
+      ],
+      "arrived_via_visible_ui": true,
+      "screenshot_path": "assets/runtime-captures-clickthrough-20261023/search-results.png",
+      "screenshot_sha256": "a8d5f4787d026e39d99d4155ac3832b71a83a55f9c9d1e5cd4e3ff4969405a87",
+      "captured_at": "2026-10-23T19:46:13+07:00",
+      "included_in_final_docx": true,
+      "included_in_docx": true,
+      "exclusion_reason": null
+    },
+    {
+      "asset_id": "R03",
+      "screen_id": "legal-document",
+      "method": "GET",
+      "route": "/documents/333670?as_of=2026-10-23",
+      "template": "",
+      "handler": "",
+      "page_title": "Bộ luật Lao động 2019 · VietLex",
+      "state": "CAPTURED_UI_CLICKTHROUGH",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/documents/333670?as_of=2026-10-23",
+      "http_status": 200,
+      "document_status": 200,
+      "console_errors": [],
+      "console_warnings": [],
+      "ui_steps": [
+        "Bấm kết quả Bộ luật Lao động 2019"
+      ],
+      "arrived_via_visible_ui": true,
+      "screenshot_path": "assets/runtime-captures-clickthrough-20261023/legal-document-top.png",
+      "screenshot_sha256": "50f866d068ed0c0d5f82f990cc0c70ffe056afd4b028d4b071ea76fdfbfb3407",
+      "captured_at": "2026-10-23T19:46:33+07:00",
+      "included_in_final_docx": true,
+      "included_in_docx": true,
+      "exclusion_reason": null
+    },
+    {
+      "asset_id": "R04",
+      "screen_id": "legal-status",
+      "method": "GET",
+      "route": "/legal-status",
+      "template": "registry view",
+      "handler": "app/api/legal_registry_routes.py",
+      "page_title": "Hiệu lực theo ngày · VietLex",
+      "state": "CAPTURED_UI_CLICKTHROUGH",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/legal-status",
+      "http_status": 200,
+      "document_status": 200,
+      "console_errors": [],
+      "console_warnings": [],
+      "ui_steps": [
+        "Bấm Đối chiếu sự kiện hiệu lực theo ngày"
+      ],
+      "arrived_via_visible_ui": true,
+      "screenshot_path": "assets/runtime-captures-clickthrough-20261023/legal-status.png",
+      "screenshot_sha256": "dc170c2c2e28917578514fc6af9634b60255ecfe72d937238c45bc202400965b",
+      "captured_at": "2026-10-23T19:46:57+07:00",
+      "included_in_final_docx": true,
+      "included_in_docx": false,
+      "exclusion_reason": "Captured historical UI state retained in manifest; excluded from v6 because it does not add evidence to the selected home → search results → document detail flow."
+    },
+    {
+      "asset_id": "R05",
+      "screen_id": "evaluation-lab",
+      "method": "GET",
+      "route": "/evaluation-lab",
+      "template": "NOT_MAPPED_IN_SOURCE_SCREEN_INVENTORY",
+      "handler": "NOT_MAPPED",
+      "page_title": "Chất lượng và kiểm chứng · VietLex",
+      "state": "CAPTURED_UI_CLICKTHROUGH",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/evaluation-lab",
+      "http_status": 200,
+      "document_status": 200,
+      "console_errors": [],
+      "console_warnings": [],
+      "ui_steps": [
+        "Mở menu Tìm hiểu thêm",
+        "Bấm Chất lượng và kiểm chứng"
+      ],
+      "arrived_via_visible_ui": true,
+      "screenshot_path": "assets/runtime-captures-clickthrough-20261023/evaluation-lab-top.png",
+      "screenshot_sha256": "1f3443cd129b0037b1d799cf462ec42120dd3bd5de577b853bde30e5c217732d",
+      "captured_at": "2026-10-23T19:47:19+07:00",
+      "included_in_final_docx": true,
+      "included_in_docx": false,
+      "exclusion_reason": "Captured historical UI state retained in manifest; excluded from v6 because it does not add evidence to the selected home → search results → document detail flow."
+    },
+    {
+      "asset_id": "R06",
+      "screen_id": "workspace-list",
+      "method": "GET",
+      "route": "/workspaces",
+      "template": "workspace list view",
+      "handler": "app/api/workspace_routes.py",
+      "page_title": "Hồ sơ nghiên cứu · VietLex",
+      "state": "CAPTURED_UI_CLICKTHROUGH",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/workspaces",
+      "http_status": 200,
+      "document_status": 200,
+      "console_errors": [],
+      "console_warnings": [],
+      "ui_steps": [
+        "Bấm Hồ sơ nghiên cứu"
+      ],
+      "arrived_via_visible_ui": true,
+      "screenshot_path": "assets/runtime-captures-clickthrough-20261023/workspaces.png",
+      "screenshot_sha256": "d822b1f101f6fe1590fcc32dbe42bb2ced7182305c2a868edf4ec91f1e8df2a8",
+      "captured_at": "2026-10-23T19:47:33+07:00",
+      "included_in_final_docx": true,
+      "included_in_docx": false,
+      "exclusion_reason": "Captured historical UI state retained in manifest; excluded from v6 because it does not add evidence to the selected home → search results → document detail flow."
+    },
+    {
+      "asset_id": "R07",
+      "screen_id": "login",
+      "method": "GET",
+      "route": "/login",
+      "template": "NOT_MAPPED_IN_SOURCE_SCREEN_INVENTORY",
+      "handler": "NOT_MAPPED",
+      "page_title": "Tài khoản · VietLex",
+      "state": "CAPTURED_UI_CLICKTHROUGH",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/login",
+      "http_status": 200,
+      "document_status": 200,
+      "console_errors": [],
+      "console_warnings": [],
+      "ui_steps": [
+        "Bấm Đăng nhập; không nhập thông tin đăng nhập"
+      ],
+      "arrived_via_visible_ui": true,
+      "screenshot_path": "assets/runtime-captures-clickthrough-20261023/login.png",
+      "screenshot_sha256": "768e2bb66326c3c54ea54daeb8ff1d7f9c3d7ffe1ec73b749f5783d1c82666b1",
+      "captured_at": "2026-10-23T19:47:47+07:00",
+      "included_in_final_docx": true,
+      "included_in_docx": false,
+      "exclusion_reason": "Captured historical UI state retained in manifest; excluded from v6 because it does not add evidence to the selected home → search results → document detail flow."
+    },
+    {
+      "asset_id": "R08",
+      "screen_id": "register",
+      "method": "GET",
+      "route": "/register",
+      "template": "NOT_MAPPED_IN_SOURCE_SCREEN_INVENTORY",
+      "handler": "NOT_MAPPED",
+      "page_title": "Tài khoản · VietLex",
+      "state": "CAPTURED_UI_CLICKTHROUGH",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/register",
+      "http_status": 200,
+      "document_status": 200,
+      "console_errors": [],
+      "console_warnings": [],
+      "ui_steps": [
+        "Bấm Đăng ký; không tạo tài khoản, không gửi biểu mẫu"
+      ],
+      "arrived_via_visible_ui": true,
+      "screenshot_path": "assets/runtime-captures-clickthrough-20261023/register.png",
+      "screenshot_sha256": "ba3c30967064211fbaa3e848598bccd725f42bf4a149745c20ab830621f1e9df",
+      "captured_at": "2026-10-23T19:47:52+07:00",
+      "included_in_final_docx": true,
+      "included_in_docx": false,
+      "exclusion_reason": "Captured historical UI state retained in manifest; excluded from v6 because it does not add evidence to the selected home → search results → document detail flow."
+    },
+    {
+      "asset_id": "R09",
+      "screen_id": "forgot-password",
+      "method": "GET",
+      "route": "/forgot-password",
+      "template": "NOT_MAPPED_IN_SOURCE_SCREEN_INVENTORY",
+      "handler": "NOT_MAPPED",
+      "page_title": "Tài khoản · VietLex",
+      "state": "CAPTURED_UI_CLICKTHROUGH",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/forgot-password",
+      "http_status": 200,
+      "document_status": 200,
+      "console_errors": [],
+      "console_warnings": [],
+      "ui_steps": [
+        "Bấm Quên mật khẩu?; không nhập email và không gửi hướng dẫn"
+      ],
+      "arrived_via_visible_ui": true,
+      "screenshot_path": "assets/runtime-captures-clickthrough-20261023/forgot-password.png",
+      "screenshot_sha256": "988f1456d15a85f18448a7ca0e02d044a40dc9ac2de2eeaf51ef45361bb83bac",
+      "captured_at": "2026-10-23T19:48:01+07:00",
+      "included_in_final_docx": true,
+      "included_in_docx": false,
+      "exclusion_reason": "Captured historical UI state retained in manifest; excluded from v6 because it does not add evidence to the selected home → search results → document detail flow."
+    },
+    {
+      "asset_id": "R10",
+      "screen_id": "privacy",
+      "method": "GET",
+      "route": "/privacy",
+      "template": "NOT_MAPPED_IN_SOURCE_SCREEN_INVENTORY",
+      "handler": "NOT_MAPPED",
+      "page_title": "Quyền riêng tư · VietLex",
+      "state": "CAPTURED_UI_CLICKTHROUGH",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/privacy",
+      "http_status": 200,
+      "document_status": 200,
+      "console_errors": [],
+      "console_warnings": [],
+      "ui_steps": [
+        "Mở menu Tìm hiểu thêm",
+        "Bấm Quyền riêng tư"
+      ],
+      "arrived_via_visible_ui": true,
+      "screenshot_path": "assets/runtime-captures-clickthrough-20261023/privacy.png",
+      "screenshot_sha256": "2f2320d3754eab0344ff8034d05c56a89dead92fd72d3590be76d32c47ca666f",
+      "captured_at": "2026-10-23T19:48:09+07:00",
+      "included_in_final_docx": true,
+      "included_in_docx": false,
+      "exclusion_reason": "Captured historical UI state retained in manifest; excluded from v6 because it does not add evidence to the selected home → search results → document detail flow."
+    },
+    {
+      "asset_id": "R11",
+      "screen_id": "terms",
+      "method": "GET",
+      "route": "/terms",
+      "template": "NOT_MAPPED_IN_SOURCE_SCREEN_INVENTORY",
+      "handler": "NOT_MAPPED",
+      "page_title": "Điều khoản · VietLex",
+      "state": "CAPTURED_UI_CLICKTHROUGH",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/terms",
+      "http_status": 200,
+      "document_status": 200,
+      "console_errors": [],
+      "console_warnings": [],
+      "ui_steps": [
+        "Mở menu Tìm hiểu thêm",
+        "Bấm Điều khoản"
+      ],
+      "arrived_via_visible_ui": true,
+      "screenshot_path": "assets/runtime-captures-clickthrough-20261023/terms.png",
+      "screenshot_sha256": "3931624759b9489b79969b261a1a2326ae05ab4a612c9b99915f17f4996d4653",
+      "captured_at": "2026-10-23T19:48:21+07:00",
+      "included_in_final_docx": true,
+      "included_in_docx": false,
+      "exclusion_reason": "Captured historical UI state retained in manifest; excluded from v6 because it does not add evidence to the selected home → search results → document detail flow."
+    }
+  ],
+  "full_html_pages": [
+    {
+      "route": "/",
+      "method": "GET",
+      "classification": "full_html_page",
+      "handler": "get_index",
+      "source_file": "app/main.py",
+      "source_line": 173,
+      "source_sha256": "5868c8f169e3fa3d895cc047b2c3f7285bd1fde49553225972d369c1e94bd254",
+      "template": "app/templates/index.html",
+      "template_sha256": "eef1ab9d2472d33ffe5b75f6dbb08f4ef9aa9f5d959f9c7903265d968cdbb15c",
+      "access": "public or anonymous flow; endpoint may show unavailable state by environment/config",
+      "runtime_capture_ids": [
+        "F06"
+      ],
+      "included_in_docx": true,
+      "runtime_capture_status": "CAPTURED"
+    },
+    {
+      "route": "/search",
+      "method": "GET",
+      "classification": "full_html_page",
+      "handler": "legal_search",
+      "source_file": "app/api/legal_routes.py",
+      "source_line": 82,
+      "source_sha256": "dd8174fb644746f903419b022a62be05419b0ec1cd2718f6bb345c1dacc26f67",
+      "template": "app/templates/legal_search.html",
+      "template_sha256": "7df991ce48351d050b83905e73544c28840b0e3bf01865abca4e036d8841918a",
+      "access": "public or anonymous flow; endpoint may show unavailable state by environment/config",
+      "runtime_capture_ids": [
+        "F07"
+      ],
+      "included_in_docx": true,
+      "runtime_capture_status": "CAPTURED"
+    },
+    {
+      "route": "/documents/{document_id}",
+      "method": "GET",
+      "classification": "full_html_page",
+      "handler": "legal_document",
+      "source_file": "app/api/legal_routes.py",
+      "source_line": 130,
+      "source_sha256": "dd8174fb644746f903419b022a62be05419b0ec1cd2718f6bb345c1dacc26f67",
+      "template": "app/templates/legal_document.html",
+      "template_sha256": "0dbb35da2ac9caa67e3b07f7aa2ddb1a4854d88aff2f919e23d63b374ba2558a",
+      "access": "public or anonymous flow; endpoint may show unavailable state by environment/config",
+      "runtime_capture_ids": [
+        "R03"
+      ],
+      "included_in_docx": true,
+      "runtime_capture_status": "CAPTURED"
+    },
+    {
+      "route": "/legal-status",
+      "method": "GET",
+      "classification": "full_html_page",
+      "handler": "legal_status",
+      "source_file": "app/api/legal_registry_routes.py",
+      "source_line": 25,
+      "source_sha256": "6a274c68c2a757465538f38a4b765ca9e19e323d6aba98d4a5d9faa6b88928b3",
+      "template": "app/templates/legal_status.html",
+      "template_sha256": "3cde8725e86034011035a9ecddc82412b0d27292224312863ddd26e85db215ba",
+      "access": "public or anonymous flow; endpoint may show unavailable state by environment/config",
+      "runtime_capture_ids": [],
+      "included_in_docx": false,
+      "runtime_capture_status": "NOT_CAPTURED"
+    },
+    {
+      "route": "/privacy",
+      "method": "GET",
+      "classification": "full_html_page",
+      "handler": "privacy_page",
+      "source_file": "app/api/legal_routes.py",
+      "source_line": 187,
+      "source_sha256": "dd8174fb644746f903419b022a62be05419b0ec1cd2718f6bb345c1dacc26f67",
+      "template": "app/templates/privacy.html",
+      "template_sha256": "14c210ee8b1ba01c69eb6182dd58e19461a94f00e7e0835ec101645625cb8ac3",
+      "access": "public or anonymous flow; endpoint may show unavailable state by environment/config",
+      "runtime_capture_ids": [],
+      "included_in_docx": false,
+      "runtime_capture_status": "NOT_CAPTURED"
+    },
+    {
+      "route": "/terms",
+      "method": "GET",
+      "classification": "full_html_page",
+      "handler": "terms_page",
+      "source_file": "app/api/legal_routes.py",
+      "source_line": 192,
+      "source_sha256": "dd8174fb644746f903419b022a62be05419b0ec1cd2718f6bb345c1dacc26f67",
+      "template": "app/templates/terms.html",
+      "template_sha256": "fcdf67cf307e146340ea33a149ae7a6116ed1fe21a82af31d757ba9d39b07cd2",
+      "access": "public or anonymous flow; endpoint may show unavailable state by environment/config",
+      "runtime_capture_ids": [],
+      "included_in_docx": false,
+      "runtime_capture_status": "NOT_CAPTURED"
+    },
+    {
+      "route": "/evaluation-lab",
+      "method": "GET",
+      "classification": "full_html_page",
+      "handler": "evaluation_lab",
+      "source_file": "app/api/evaluation_lab_routes.py",
+      "source_line": 96,
+      "source_sha256": "dfd5d15bebfdd16a6b743e6d1f10f6e15361c40c3dd0db12e8898a79f6282409",
+      "template": "app/templates/evaluation_lab.html",
+      "template_sha256": "3c46f6e42298ae02ad9e4b1db8745a7f2f459efeca86d62d186d28c05830d40f",
+      "access": "public or anonymous flow; endpoint may show unavailable state by environment/config",
+      "runtime_capture_ids": [],
+      "included_in_docx": false,
+      "runtime_capture_status": "NOT_CAPTURED"
+    },
+    {
+      "route": "/workspaces",
+      "method": "GET",
+      "classification": "full_html_page",
+      "handler": "workspace_list",
+      "source_file": "app/api/workspace_routes.py",
+      "source_line": 147,
+      "source_sha256": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c",
+      "template": "app/templates/research_workspaces.html",
+      "template_sha256": "0b39d14346346c50813791217b6c31a7f372a864da27b8585188b4dbad22a3d7",
+      "access": "public or anonymous flow; endpoint may show unavailable state by environment/config",
+      "runtime_capture_ids": [],
+      "included_in_docx": false,
+      "runtime_capture_status": "NOT_CAPTURED"
+    },
+    {
+      "route": "/workspaces/{workspace_id}",
+      "method": "GET",
+      "classification": "full_html_page",
+      "handler": "workspace_detail",
+      "source_file": "app/api/workspace_routes.py",
+      "source_line": 191,
+      "source_sha256": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c",
+      "template": "app/templates/research_workspace.html",
+      "template_sha256": "7f3bcc23afbab80b8448f9abd7668a49ea3ac10d69923b26175f6d56b0a9486e",
+      "access": "owner_scoped_or_anonymous_client_scoped",
+      "runtime_capture_ids": [],
+      "included_in_docx": false,
+      "runtime_capture_status": "NOT_CAPTURED"
+    },
+    {
+      "route": "/login",
+      "method": "GET",
+      "classification": "full_html_page",
+      "handler": "login_page",
+      "source_file": "app/api/account_routes.py",
+      "source_line": 181,
+      "source_sha256": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+      "template": "app/templates/account_form.html",
+      "template_sha256": "e6112144e4cecca26e23bb5a8931236b66a1f60d632d0925d3bf041469f5f143",
+      "access": "public or anonymous flow; endpoint may show unavailable state by environment/config",
+      "runtime_capture_ids": [],
+      "included_in_docx": false,
+      "runtime_capture_status": "NOT_CAPTURED"
+    },
+    {
+      "route": "/register",
+      "method": "GET",
+      "classification": "full_html_page",
+      "handler": "register_page",
+      "source_file": "app/api/account_routes.py",
+      "source_line": 110,
+      "source_sha256": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+      "template": "app/templates/account_form.html",
+      "template_sha256": "e6112144e4cecca26e23bb5a8931236b66a1f60d632d0925d3bf041469f5f143",
+      "access": "public or anonymous flow; endpoint may show unavailable state by environment/config",
+      "runtime_capture_ids": [],
+      "included_in_docx": false,
+      "runtime_capture_status": "NOT_CAPTURED"
+    },
+    {
+      "route": "/verify-email",
+      "method": "GET",
+      "classification": "full_html_page",
+      "handler": "verify_email",
+      "source_file": "app/api/account_routes.py",
+      "source_line": 243,
+      "source_sha256": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+      "template": "app/templates/account_form.html",
+      "template_sha256": "e6112144e4cecca26e23bb5a8931236b66a1f60d632d0925d3bf041469f5f143",
+      "access": "email_token_required for successful verification",
+      "runtime_capture_ids": [],
+      "included_in_docx": false,
+      "runtime_capture_status": "NOT_CAPTURED"
+    },
+    {
+      "route": "/forgot-password",
+      "method": "GET",
+      "classification": "full_html_page",
+      "handler": "forgot_password_page",
+      "source_file": "app/api/account_routes.py",
+      "source_line": 275,
+      "source_sha256": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+      "template": "app/templates/account_form.html",
+      "template_sha256": "e6112144e4cecca26e23bb5a8931236b66a1f60d632d0925d3bf041469f5f143",
+      "access": "public or anonymous flow; endpoint may show unavailable state by environment/config",
+      "runtime_capture_ids": [],
+      "included_in_docx": false,
+      "runtime_capture_status": "NOT_CAPTURED"
+    },
+    {
+      "route": "/reset-password",
+      "method": "GET",
+      "classification": "full_html_page",
+      "handler": "reset_password_page",
+      "source_file": "app/api/account_routes.py",
+      "source_line": 310,
+      "source_sha256": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+      "template": "app/templates/account_form.html",
+      "template_sha256": "e6112144e4cecca26e23bb5a8931236b66a1f60d632d0925d3bf041469f5f143",
+      "access": "reset_token_required for successful password update",
+      "runtime_capture_ids": [],
+      "included_in_docx": false,
+      "runtime_capture_status": "NOT_CAPTURED"
+    },
+    {
+      "route": "/settings",
+      "method": "GET",
+      "classification": "full_html_page",
+      "handler": "account_settings",
+      "source_file": "app/api/account_routes.py",
+      "source_line": 348,
+      "source_sha256": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+      "template": "app/templates/settings.html",
+      "template_sha256": "c1af79e9c5dae04932cc8bfd6a2bc00999807da0aed6850ce172d49ed83d49cf",
+      "access": "authenticated_user_required",
+      "runtime_capture_ids": [],
+      "included_in_docx": false,
+      "runtime_capture_status": "NOT_CAPTURED"
+    },
+    {
+      "route": "/admin",
+      "method": "GET",
+      "classification": "full_html_page",
+      "handler": "admin_page",
+      "source_file": "app/api/routes.py",
+      "source_line": 1188,
+      "source_sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+      "template": "app/templates/admin.html",
+      "template_sha256": "1f826082bf0929867f1e7af83b4afe0e3a9cfe5160cf8985a14ae0ea4e589aea",
+      "access": "admin_required",
+      "runtime_capture_ids": [],
+      "included_in_docx": false,
+      "runtime_capture_status": "NOT_CAPTURED"
+    },
+    {
+      "route": "/admin/requests",
+      "method": "GET",
+      "classification": "full_html_page",
+      "handler": "admin_requests_page",
+      "source_file": "app/api/routes.py",
+      "source_line": 1206,
+      "source_sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+      "template": "app/templates/admin_requests_page.html",
+      "template_sha256": "1726addd9476d06228c0123ea9b47cc45278230a07d15446b98a7685bda5689f",
+      "access": "admin_required",
+      "runtime_capture_ids": [],
+      "included_in_docx": false,
+      "runtime_capture_status": "NOT_CAPTURED"
+    },
+    {
+      "route": "/admin/usage",
+      "method": "GET",
+      "classification": "full_html_page",
+      "handler": "admin_usage_page",
+      "source_file": "app/api/routes.py",
+      "source_line": 1220,
+      "source_sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+      "template": "app/templates/admin_usage_page.html",
+      "template_sha256": "ec9807bbe1b533824232b34c8416f1835718c5489b718800499da79764528384",
+      "access": "admin_required",
+      "runtime_capture_ids": [],
+      "included_in_docx": false,
+      "runtime_capture_status": "NOT_CAPTURED"
+    },
+    {
+      "route": "/admin/providers",
+      "method": "GET",
+      "classification": "full_html_page",
+      "handler": "admin_providers_page",
+      "source_file": "app/api/routes.py",
+      "source_line": 1230,
+      "source_sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+      "template": "app/templates/admin_providers_page.html",
+      "template_sha256": "d6bf8f85f9ae6171c191fe6459e5b46e196c77c1f42ef1ae7e704cbc7b368716",
+      "access": "admin_required",
+      "runtime_capture_ids": [],
+      "included_in_docx": false,
+      "runtime_capture_status": "NOT_CAPTURED"
+    },
+    {
+      "route": "/admin/system",
+      "method": "GET",
+      "classification": "full_html_page",
+      "handler": "admin_system_page",
+      "source_file": "app/api/routes.py",
+      "source_line": 1237,
+      "source_sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+      "template": "app/templates/admin_system_page.html",
+      "template_sha256": "7638dc4abb4ad67adced6daa3cbf5d76e2ece70ef495ae366f6e7c70b37c2fbb",
+      "access": "admin_required",
+      "runtime_capture_ids": [],
+      "included_in_docx": false,
+      "runtime_capture_status": "NOT_CAPTURED"
+    },
+    {
+      "route": "/admin/evaluations",
+      "method": "GET",
+      "classification": "full_html_page",
+      "handler": "admin_evaluations",
+      "source_file": "app/api/evaluation_lab_routes.py",
+      "source_line": 44,
+      "source_sha256": "dfd5d15bebfdd16a6b743e6d1f10f6e15361c40c3dd0db12e8898a79f6282409",
+      "template": "app/templates/evaluation_lab.html",
+      "template_sha256": "3c46f6e42298ae02ad9e4b1db8745a7f2f459efeca86d62d186d28c05830d40f",
+      "access": "admin_required",
+      "runtime_capture_ids": [],
+      "included_in_docx": false,
+      "runtime_capture_status": "NOT_CAPTURED"
+    },
+    {
+      "route": "/admin/legal-registry",
+      "method": "GET",
+      "classification": "full_html_page",
+      "handler": "registry_admin",
+      "source_file": "app/api/legal_registry_routes.py",
+      "source_line": 62,
+      "source_sha256": "6a274c68c2a757465538f38a4b765ca9e19e323d6aba98d4a5d9faa6b88928b3",
+      "template": "app/templates/admin_legal_registry.html",
+      "template_sha256": "92a1d475a988aa86b9bde3dc4aef503e14c640f172ebd988fe033650e749a892",
+      "access": "admin_required",
+      "runtime_capture_ids": [],
+      "included_in_docx": false,
+      "runtime_capture_status": "NOT_CAPTURED"
+    },
+    {
+      "route": "/admin/corpus",
+      "method": "GET",
+      "classification": "full_html_page",
+      "handler": "corpus_queue",
+      "source_file": "app/api/product_quality_routes.py",
+      "source_line": 22,
+      "source_sha256": "726e077eb4941d8e55e64dc1cba2c4a8cfe1f17d8e04fa2e468dc42aaf4c04ed",
+      "template": "app/templates/admin_corpus_queue.html",
+      "template_sha256": "d9c4e09df3765c970fae570eea09c4434a8f60e6e19dca801e7115d57cef8bd0",
+      "access": "admin_required",
+      "runtime_capture_ids": [],
+      "included_in_docx": false,
+      "runtime_capture_status": "NOT_CAPTURED"
+    },
+    {
+      "route": "/admin/feedback",
+      "method": "GET",
+      "classification": "full_html_page",
+      "handler": "feedback_queue",
+      "source_file": "app/api/product_quality_routes.py",
+      "source_line": 62,
+      "source_sha256": "726e077eb4941d8e55e64dc1cba2c4a8cfe1f17d8e04fa2e468dc42aaf4c04ed",
+      "template": "app/templates/admin_feedback_queue.html",
+      "template_sha256": "41652a79413a78980e96e4db9a5ab7ecec0830382815971cda0bd0083b0df71c",
+      "access": "admin_required",
+      "runtime_capture_ids": [],
+      "included_in_docx": false,
+      "runtime_capture_status": "NOT_CAPTURED"
+    },
+    {
+      "route": "/admin/users",
+      "method": "GET",
+      "classification": "full_html_page",
+      "handler": "admin_users_partial",
+      "source_file": "app/api/routes.py",
+      "source_line": 1322,
+      "source_sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+      "template": "app/templates/admin_users_page.html",
+      "template_sha256": "c5eeed334b75c37b72297af891506a697eb5e64fb7e64fd195b144947c3b2ba7",
+      "access": "admin_required",
+      "runtime_capture_ids": [],
+      "included_in_docx": false,
+      "runtime_capture_status": "NOT_CAPTURED"
+    },
+    {
+      "route": "/admin/audit",
+      "method": "GET",
+      "classification": "full_html_page",
+      "handler": "admin_audit_partial",
+      "source_file": "app/api/routes.py",
+      "source_line": 1387,
+      "source_sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+      "template": "app/templates/admin_audit_page.html",
+      "template_sha256": "d0cc50f5eb5f9192eae64d01c798d1c184ec3a8f0c8fcc4504c5832f0a378fb2",
+      "access": "admin_required",
+      "runtime_capture_ids": [],
+      "included_in_docx": false,
+      "runtime_capture_status": "NOT_CAPTURED"
+    }
+  ],
+  "partials": [
+    {
+      "route": "/sessions",
+      "method": "GET",
+      "classification": "html_partial",
+      "handler": "list_sessions",
+      "source_file": "app/api/routes.py",
+      "source_line": 1026,
+      "source_sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+      "template": "app/templates/sidebar_sessions.html",
+      "template_sha256": "5f6aaca688ff2f32588d0604fa3731261f434f5eb0be5572af56b7bfec2b90bd",
+      "access": "session_or_anonymous_owner_scoped",
+      "count_as_screen": false
+    },
+    {
+      "route": "/sessions/{session_id}",
+      "method": "GET",
+      "classification": "html_partial",
+      "handler": "get_session_history",
+      "source_file": "app/api/routes.py",
+      "source_line": 1074,
+      "source_sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+      "template": "app/templates/chat_history_messages.html",
+      "template_sha256": "8cd7e585cb011b9f08ef419dc3f27373ae622f02a1d36843e832eaa8bbab95c6",
+      "access": "session_or_anonymous_owner_scoped",
+      "count_as_screen": false
+    },
+    {
+      "route": "/admin/stats",
+      "method": "GET",
+      "classification": "html_partial",
+      "handler": "admin_stats_partial",
+      "source_file": "app/api/routes.py",
+      "source_line": 1249,
+      "source_sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+      "template": "app/templates/admin_stats.html",
+      "template_sha256": "5dfb7ea726670b210e43c34f2601f4dea617a0954c07cfd216b94ebb8d315a37",
+      "access": "admin_required",
+      "count_as_screen": false
+    },
+    {
+      "route": "/admin/logs",
+      "method": "GET",
+      "classification": "html_partial",
+      "handler": "admin_logs_partial",
+      "source_file": "app/api/routes.py",
+      "source_line": 1259,
+      "source_sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+      "template": "app/templates/admin_logs.html",
+      "template_sha256": "5307f6b9b8530d7ae39d4112492467b60a4dc82eeb977c50fc035de7182f07fd",
+      "access": "admin_required",
+      "count_as_screen": false
+    },
+    {
+      "route": "/admin/details/{trace_id}",
+      "method": "GET",
+      "classification": "html_partial",
+      "handler": "admin_details_partial",
+      "source_file": "app/api/routes.py",
+      "source_line": 1304,
+      "source_sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+      "template": "app/templates/admin_details.html",
+      "template_sha256": "3274b9b1ca4a4fef3e24da5dc449f94d7db78c7f1017d07e3c1eeae99e05e2bb",
+      "access": "admin_required",
+      "count_as_screen": false
+    }
+  ],
+  "downloads": [
+    {
+      "route": "/admin/export.csv",
+      "method": "GET",
+      "classification": "download",
+      "detail": "CSV attachment"
+    },
+    {
+      "route": "/sessions/{session_id}/export",
+      "method": "GET",
+      "classification": "download",
+      "detail": "session export"
+    }
+  ],
+  "not_captured": [
+    {
+      "route": "/verify-email",
+      "reason": "Requires an email verification token; reaching it through the UI requires account creation and email transmission, neither was performed."
+    },
+    {
+      "route": "/reset-password",
+      "reason": "Requires a reset token; forgot-password form was viewed but no email was entered or sent."
+    },
+    {
+      "route": "/settings",
+      "reason": "Requires an authenticated session."
+    },
+    {
+      "route": "/admin/*",
+      "reason": "Role-protected administrative pages; no admin role used."
+    },
+    {
+      "route": "/workspaces/{workspace_id}",
+      "reason": "Requires an owned workspace ID; no workspace was created."
+    },
+    {
+      "route": "/sessions and /sessions/{session_id}",
+      "reason": "HTMX/user-owned fragments, not standalone public screens; no private session was opened."
+    },
+    {
+      "route": "/healthz and /readyz",
+      "reason": "Operational endpoints, not UI pages."
+    }
+  ],
+  "live_deployment_revision_confirmation": "NOT_RUN: deployed source revision was not independently confirmed against the dirty source snapshot.",
+  "non_screen_routes": [
+    {
+      "file": "app/api/account_routes.py",
+      "sha256": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+      "line": 128,
+      "method": "POST",
+      "route": "/register",
+      "handler": "register",
+      "response_class": "HTMLResponse",
+      "html_view": true,
+      "template": null,
+      "response_calls": [],
+      "classification": "action",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/account_routes.py",
+      "sha256": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+      "line": 190,
+      "method": "POST",
+      "route": "/login",
+      "handler": "login",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "RedirectResponse"
+      ],
+      "classification": "redirect",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/account_routes.py",
+      "sha256": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+      "line": 232,
+      "method": "POST",
+      "route": "/logout",
+      "handler": "logout",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "RedirectResponse"
+      ],
+      "classification": "redirect",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/account_routes.py",
+      "sha256": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+      "line": 258,
+      "method": "POST",
+      "route": "/verify-email",
+      "handler": "verify_email_submit",
+      "response_class": "HTMLResponse",
+      "html_view": true,
+      "template": null,
+      "response_calls": [],
+      "classification": "action",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/account_routes.py",
+      "sha256": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+      "line": 284,
+      "method": "POST",
+      "route": "/forgot-password",
+      "handler": "forgot_password",
+      "response_class": "HTMLResponse",
+      "html_view": true,
+      "template": null,
+      "response_calls": [],
+      "classification": "action",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/account_routes.py",
+      "sha256": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+      "line": 319,
+      "method": "POST",
+      "route": "/reset-password",
+      "handler": "reset_password",
+      "response_class": "HTMLResponse",
+      "html_view": true,
+      "template": null,
+      "response_calls": [],
+      "classification": "action",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/account_routes.py",
+      "sha256": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+      "line": 342,
+      "method": "GET",
+      "route": "/account",
+      "handler": "account_entry",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "RedirectResponse"
+      ],
+      "classification": "redirect",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/account_routes.py",
+      "sha256": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+      "line": 374,
+      "method": "POST",
+      "route": "/account/sessions/{session_id}/revoke",
+      "handler": "account_session_revoke",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "RedirectResponse"
+      ],
+      "classification": "redirect",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/account_routes.py",
+      "sha256": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+      "line": 386,
+      "method": "POST",
+      "route": "/account/sessions/revoke-others",
+      "handler": "account_sessions_revoke_others",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "RedirectResponse"
+      ],
+      "classification": "redirect",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/account_routes.py",
+      "sha256": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+      "line": 398,
+      "method": "GET",
+      "route": "/account/export",
+      "handler": "account_export",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [],
+      "classification": "api_or_operational_non_screen",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/account_routes.py",
+      "sha256": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+      "line": 412,
+      "method": "POST",
+      "route": "/account/history/delete",
+      "handler": "account_history_delete",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "RedirectResponse"
+      ],
+      "classification": "redirect",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/account_routes.py",
+      "sha256": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+      "line": 423,
+      "method": "POST",
+      "route": "/account/delete",
+      "handler": "account_delete",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "RedirectResponse"
+      ],
+      "classification": "redirect",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/claim_verification_routes.py",
+      "sha256": "d93fc6eee5fb320b48f5fff09c2ec0801497803db77cb33b243558dbc674b47c",
+      "line": 36,
+      "method": "POST",
+      "route": "/workspaces/{workspace_id}/analyses/claims",
+      "handler": "claim_verification",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "JSONResponse"
+      ],
+      "classification": "json_api",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/document_redline_routes.py",
+      "sha256": "a22ba05bef1ecfec65f8fb573dbb25abdb07b13f59085ea7080cf6caedfab0a6",
+      "line": 22,
+      "method": "POST",
+      "route": "/workspaces/{workspace_id}/analyses/redline",
+      "handler": "document_redline",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "JSONResponse"
+      ],
+      "classification": "json_api",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/finding_routes.py",
+      "sha256": "1edd25ab296ad7372c74ec9ce42394e6c4f60c81e6963fa3a242a3b2cde23c28",
+      "line": 28,
+      "method": "GET",
+      "route": "/workspaces/{workspace_id}/findings/{analysis_id}",
+      "handler": "finding_board",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [],
+      "classification": "api_or_operational_non_screen",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/finding_routes.py",
+      "sha256": "1edd25ab296ad7372c74ec9ce42394e6c4f60c81e6963fa3a242a3b2cde23c28",
+      "line": 37,
+      "method": "POST",
+      "route": "/workspaces/{workspace_id}/findings/{analysis_id}/{finding_index}",
+      "handler": "finding_update",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "RedirectResponse"
+      ],
+      "classification": "redirect",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/free_web_research_routes.py",
+      "sha256": "50dc8bb6d95429dadb380d438281e52c975d8ef86a8da73bb3073f9bd92175cf",
+      "line": 296,
+      "method": "POST",
+      "route": "/workspaces/{workspace_id}/research/read",
+      "handler": "free_web_research_read",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [],
+      "classification": "action",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/free_web_research_routes.py",
+      "sha256": "50dc8bb6d95429dadb380d438281e52c975d8ef86a8da73bb3073f9bd92175cf",
+      "line": 430,
+      "method": "GET",
+      "route": "/workspaces/{workspace_id}/research/runs/{run_id}",
+      "handler": "free_web_research_run_status",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "JSONResponse"
+      ],
+      "classification": "json_api",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/free_web_research_routes.py",
+      "sha256": "50dc8bb6d95429dadb380d438281e52c975d8ef86a8da73bb3073f9bd92175cf",
+      "line": 455,
+      "method": "POST",
+      "route": "/workspaces/{workspace_id}/research/runs/{run_id}/cancel",
+      "handler": "free_web_research_cancel",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "JSONResponse"
+      ],
+      "classification": "json_api",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/full_document_review_routes.py",
+      "sha256": "67b904e73675cf43f9dd43a26e8ff5757c627912e21f10f300f8187373eccd55",
+      "line": 55,
+      "method": "POST",
+      "route": "/workspaces/{workspace_id}/documents/{document_id}/analyses/full-review/plan",
+      "handler": "full_document_review_plan",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "JSONResponse"
+      ],
+      "classification": "json_api",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/full_document_review_routes.py",
+      "sha256": "67b904e73675cf43f9dd43a26e8ff5757c627912e21f10f300f8187373eccd55",
+      "line": 86,
+      "method": "POST",
+      "route": "/workspaces/{workspace_id}/analyses/full-review",
+      "handler": "run_full_document_review",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "JSONResponse"
+      ],
+      "classification": "json_api",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/legal_effect_routes.py",
+      "sha256": "78c493040c2add2d46aa78832eef54f84e6ec914751f7e7c373970bf3202fc61",
+      "line": 36,
+      "method": "POST",
+      "route": "/workspaces/{workspace_id}/analyses/legal-effect",
+      "handler": "legal_effect_review",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "JSONResponse"
+      ],
+      "classification": "json_api",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/legal_effect_routes.py",
+      "sha256": "78c493040c2add2d46aa78832eef54f84e6ec914751f7e7c373970bf3202fc61",
+      "line": 135,
+      "method": "GET",
+      "route": "/workspaces/{workspace_id}/analyses/legal-effect",
+      "handler": "legal_effect_history",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "JSONResponse"
+      ],
+      "classification": "json_api",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/legal_registry_routes.py",
+      "sha256": "6a274c68c2a757465538f38a4b765ca9e19e323d6aba98d4a5d9faa6b88928b3",
+      "line": 98,
+      "method": "POST",
+      "route": "/workspaces/{workspace_id}/analyses/{analysis_id}/publish-legal-effect",
+      "handler": "publish_legal_effect",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "RedirectResponse"
+      ],
+      "classification": "redirect",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/legal_registry_routes.py",
+      "sha256": "6a274c68c2a757465538f38a4b765ca9e19e323d6aba98d4a5d9faa6b88928b3",
+      "line": 133,
+      "method": "POST",
+      "route": "/admin/legal-registry/{review_id}/withdraw",
+      "handler": "withdraw_legal_effect",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "RedirectResponse"
+      ],
+      "classification": "redirect",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/legal_routes.py",
+      "sha256": "dd8174fb644746f903419b022a62be05419b0ec1cd2718f6bb345c1dacc26f67",
+      "line": 155,
+      "method": "POST",
+      "route": "/documents/{document_id}/sections/{section_id}/pin",
+      "handler": "pin_document_section",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [],
+      "classification": "action",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/legal_timeline_routes.py",
+      "sha256": "fd04db00254e0d61fd47a5400056444f514cdc4183e0d0ad76c349f75cc5b41a",
+      "line": 18,
+      "method": "POST",
+      "route": "/workspaces/{workspace_id}/analyses/timeline",
+      "handler": "timeline",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "JSONResponse"
+      ],
+      "classification": "json_api",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/model_comparison_routes.py",
+      "sha256": "9e6ca7c886b1d02f804987da3d30cf9bf6960f5b09a8ceabe241186cdb8795ce",
+      "line": 32,
+      "method": "POST",
+      "route": "/workspaces/{workspace_id}/analyses/models",
+      "handler": "model_comparison",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "JSONResponse"
+      ],
+      "classification": "json_api",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/product_quality_routes.py",
+      "sha256": "726e077eb4941d8e55e64dc1cba2c4a8cfe1f17d8e04fa2e468dc42aaf4c04ed",
+      "line": 73,
+      "method": "POST",
+      "route": "/admin/feedback/{trace_id}",
+      "handler": "feedback_triage",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "RedirectResponse"
+      ],
+      "classification": "redirect",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/product_quality_routes.py",
+      "sha256": "726e077eb4941d8e55e64dc1cba2c4a8cfe1f17d8e04fa2e468dc42aaf4c04ed",
+      "line": 96,
+      "method": "GET",
+      "route": "/admin/feedback/{trace_id}/regression-draft",
+      "handler": "regression_draft",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "JSONResponse"
+      ],
+      "classification": "json_api",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/research_report_routes.py",
+      "sha256": "46391ff2e29b782698348bbfdeadf63742948e043696d7c5037b2285d38c091a",
+      "line": 39,
+      "method": "GET",
+      "route": "/workspaces/{workspace_id}/reports/{analysis_id}",
+      "handler": "report_editor",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [],
+      "classification": "api_or_operational_non_screen",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/research_report_routes.py",
+      "sha256": "46391ff2e29b782698348bbfdeadf63742948e043696d7c5037b2285d38c091a",
+      "line": 48,
+      "method": "POST",
+      "route": "/workspaces/{workspace_id}/reports/{analysis_id}",
+      "handler": "report_save_version",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "RedirectResponse"
+      ],
+      "classification": "redirect",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/research_report_routes.py",
+      "sha256": "46391ff2e29b782698348bbfdeadf63742948e043696d7c5037b2285d38c091a",
+      "line": 69,
+      "method": "GET",
+      "route": "/workspaces/{workspace_id}/reports/{analysis_id}/export",
+      "handler": "report_export",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [],
+      "classification": "api_or_operational_non_screen",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/research_report_routes.py",
+      "sha256": "46391ff2e29b782698348bbfdeadf63742948e043696d7c5037b2285d38c091a",
+      "line": 91,
+      "method": "POST",
+      "route": "/workspaces/{workspace_id}/analyses/report",
+      "handler": "research_report",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "JSONResponse"
+      ],
+      "classification": "json_api",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/retained_source_routes.py",
+      "sha256": "5c1dd10cefae0b5ae734292d8e9670e2eb43082c4adec8908423af627cb7c123",
+      "line": 26,
+      "method": "POST",
+      "route": "/workspaces/{workspace_id}/analyses/retained-source",
+      "handler": "retained_source_answer",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "RedirectResponse"
+      ],
+      "classification": "redirect",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/retained_source_routes.py",
+      "sha256": "5c1dd10cefae0b5ae734292d8e9670e2eb43082c4adec8908423af627cb7c123",
+      "line": 123,
+      "method": "GET",
+      "route": "/workspaces/{workspace_id}/source-analysis/{analysis_id}",
+      "handler": "retained_source_result",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [],
+      "classification": "api_or_operational_non_screen",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/routes.py",
+      "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+      "line": 213,
+      "method": "GET",
+      "route": "/healthz",
+      "handler": "healthz",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [],
+      "classification": "api_or_operational_non_screen",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/routes.py",
+      "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+      "line": 218,
+      "method": "GET",
+      "route": "/readyz",
+      "handler": "readyz",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "JSONResponse"
+      ],
+      "classification": "json_api",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/routes.py",
+      "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+      "line": 232,
+      "method": "GET",
+      "route": "/api/progress/{request_id}",
+      "handler": "chat_progress_status",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [],
+      "classification": "api_or_operational_non_screen",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/routes.py",
+      "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+      "line": 243,
+      "method": "GET",
+      "route": "/api/interactions/{trace_id}/retrieval",
+      "handler": "retrieval_inspector",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [],
+      "classification": "api_or_operational_non_screen",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/routes.py",
+      "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+      "line": 261,
+      "method": "GET",
+      "route": "/api/progress/{request_id}/stream",
+      "handler": "chat_progress_stream",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "StreamingResponse"
+      ],
+      "classification": "api_or_operational_non_screen",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/routes.py",
+      "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+      "line": 289,
+      "method": "POST",
+      "route": "/chat",
+      "handler": "chat",
+      "response_class": "HTMLResponse",
+      "html_view": true,
+      "template": null,
+      "response_calls": [
+        "TemplateResponse"
+      ],
+      "classification": "action",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/routes.py",
+      "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+      "line": 933,
+      "method": "POST",
+      "route": "/api/feedback",
+      "handler": "feedback",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [],
+      "classification": "action",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/routes.py",
+      "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+      "line": 958,
+      "method": "POST",
+      "route": "/api/evaluation/{trace_id}",
+      "handler": "public_evaluation",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "JSONResponse"
+      ],
+      "classification": "json_api",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/routes.py",
+      "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+      "line": 1045,
+      "method": "POST",
+      "route": "/sessions",
+      "handler": "new_session",
+      "response_class": "HTMLResponse",
+      "html_view": true,
+      "template": null,
+      "response_calls": [
+        "HTMLResponse"
+      ],
+      "classification": "action",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/routes.py",
+      "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+      "line": 1105,
+      "method": "DELETE",
+      "route": "/sessions/{session_id}",
+      "handler": "remove_session",
+      "response_class": null,
+      "html_view": true,
+      "template": null,
+      "response_calls": [
+        "HTMLResponse"
+      ],
+      "classification": "action",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/routes.py",
+      "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+      "line": 1122,
+      "method": "POST",
+      "route": "/sessions/{session_id}/rename",
+      "handler": "rename_sess",
+      "response_class": "HTMLResponse",
+      "html_view": true,
+      "template": null,
+      "response_calls": [
+        "TemplateResponse"
+      ],
+      "classification": "action",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/routes.py",
+      "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+      "line": 1149,
+      "method": "GET",
+      "route": "/sessions/{session_id}/export",
+      "handler": "export_session",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [],
+      "classification": "download",
+      "access": "owner_or_client_scoped",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/routes.py",
+      "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+      "line": 1280,
+      "method": "GET",
+      "route": "/admin/export.csv",
+      "handler": "admin_export",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [],
+      "classification": "download",
+      "access": "admin_required",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/routes.py",
+      "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+      "line": 1340,
+      "method": "POST",
+      "route": "/admin/users/{user_id}/status",
+      "handler": "admin_set_user_status",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "RedirectResponse"
+      ],
+      "classification": "redirect",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/routes.py",
+      "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+      "line": 1367,
+      "method": "POST",
+      "route": "/admin/users/{user_id}/revoke-sessions",
+      "handler": "admin_revoke_user_sessions",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "RedirectResponse"
+      ],
+      "classification": "redirect",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/trusted_source_routes.py",
+      "sha256": "02dc2c017e91100ab35dc6fca0959f2976a5dc600c9f1477d3c637af3cca9fe2",
+      "line": 29,
+      "method": "GET",
+      "route": "/workspaces/{workspace_id}/sources/{analysis_id}",
+      "handler": "saved_source_reader",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [],
+      "classification": "api_or_operational_non_screen",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/trusted_source_routes.py",
+      "sha256": "02dc2c017e91100ab35dc6fca0959f2976a5dc600c9f1477d3c637af3cca9fe2",
+      "line": 43,
+      "method": "POST",
+      "route": "/workspaces/{workspace_id}/evidence/{evidence_id}/review",
+      "handler": "evidence_review",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "RedirectResponse"
+      ],
+      "classification": "redirect",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/trusted_source_routes.py",
+      "sha256": "02dc2c017e91100ab35dc6fca0959f2976a5dc600c9f1477d3c637af3cca9fe2",
+      "line": 68,
+      "method": "POST",
+      "route": "/workspaces/{workspace_id}/analyses/sources",
+      "handler": "source_read",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "JSONResponse"
+      ],
+      "classification": "json_api",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/trusted_source_routes.py",
+      "sha256": "02dc2c017e91100ab35dc6fca0959f2976a5dc600c9f1477d3c637af3cca9fe2",
+      "line": 135,
+      "method": "POST",
+      "route": "/workspaces/{workspace_id}/sources/pin",
+      "handler": "pin_source",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "JSONResponse"
+      ],
+      "classification": "json_api",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/workspace_routes.py",
+      "sha256": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c",
+      "line": 158,
+      "method": "GET",
+      "route": "/api/workspaces",
+      "handler": "workspace_options",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [],
+      "classification": "api_or_operational_non_screen",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/workspace_routes.py",
+      "sha256": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c",
+      "line": 174,
+      "method": "POST",
+      "route": "/workspaces",
+      "handler": "workspace_create",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "RedirectResponse"
+      ],
+      "classification": "redirect",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/workspace_routes.py",
+      "sha256": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c",
+      "line": 237,
+      "method": "POST",
+      "route": "/workspaces/{workspace_id}/documents",
+      "handler": "workspace_document_upload",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "JSONResponse"
+      ],
+      "classification": "json_api",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/workspace_routes.py",
+      "sha256": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c",
+      "line": 318,
+      "method": "GET",
+      "route": "/workspaces/{workspace_id}/documents/{document_id}/original",
+      "handler": "workspace_original_download",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [],
+      "classification": "api_or_operational_non_screen",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/workspace_routes.py",
+      "sha256": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c",
+      "line": 335,
+      "method": "DELETE",
+      "route": "/workspaces/{workspace_id}/documents/{document_id}",
+      "handler": "workspace_document_delete",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [],
+      "classification": "action",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/workspace_routes.py",
+      "sha256": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c",
+      "line": 357,
+      "method": "POST",
+      "route": "/workspaces/{workspace_id}/documents/{document_id}/clauses/{clause_id}/pin",
+      "handler": "workspace_document_clause_pin",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "JSONResponse"
+      ],
+      "classification": "json_api",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/workspace_routes.py",
+      "sha256": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c",
+      "line": 413,
+      "method": "POST",
+      "route": "/workspaces/{workspace_id}/documents/{document_id}/review",
+      "handler": "workspace_contract_review",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "JSONResponse"
+      ],
+      "classification": "json_api",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/workspace_routes.py",
+      "sha256": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c",
+      "line": 540,
+      "method": "POST",
+      "route": "/workspaces/{workspace_id}/research/plan",
+      "handler": "deep_research_plan",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [],
+      "classification": "action",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/workspace_routes.py",
+      "sha256": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c",
+      "line": 570,
+      "method": "POST",
+      "route": "/workspaces/{workspace_id}/research/run",
+      "handler": "deep_research_run",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "JSONResponse"
+      ],
+      "classification": "json_api",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/workspace_routes.py",
+      "sha256": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c",
+      "line": 652,
+      "method": "POST",
+      "route": "/workspaces/{workspace_id}",
+      "handler": "workspace_update",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "RedirectResponse"
+      ],
+      "classification": "redirect",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/workspace_routes.py",
+      "sha256": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c",
+      "line": 677,
+      "method": "DELETE",
+      "route": "/workspaces/{workspace_id}",
+      "handler": "workspace_delete",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "JSONResponse"
+      ],
+      "classification": "json_api",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/workspace_routes.py",
+      "sha256": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c",
+      "line": 692,
+      "method": "POST",
+      "route": "/workspaces/{workspace_id}/evidence",
+      "handler": "workspace_pin_evidence",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "JSONResponse"
+      ],
+      "classification": "json_api",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/workspace_routes.py",
+      "sha256": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c",
+      "line": 739,
+      "method": "DELETE",
+      "route": "/workspaces/{workspace_id}/evidence/{evidence_id}",
+      "handler": "workspace_unpin_evidence",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [],
+      "classification": "action",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/workspace_routes.py",
+      "sha256": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c",
+      "line": 760,
+      "method": "POST",
+      "route": "/workspaces/{workspace_id}/analyses/selected",
+      "handler": "selected_evidence_analysis",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "JSONResponse"
+      ],
+      "classification": "json_api",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/workspace_routes.py",
+      "sha256": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c",
+      "line": 848,
+      "method": "POST",
+      "route": "/workspaces/{workspace_id}/analyses/compare",
+      "handler": "compare_evidence",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [],
+      "classification": "action",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/api/workspace_routes.py",
+      "sha256": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c",
+      "line": 875,
+      "method": "POST",
+      "route": "/workspaces/{workspace_id}/analyses/obligations",
+      "handler": "obligation_matrix",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [],
+      "classification": "action",
+      "screenshot_asset_ids": []
+    },
+    {
+      "file": "app/main.py",
+      "sha256": "5868c8f169e3fa3d895cc047b2c3f7285bd1fde49553225972d369c1e94bd254",
+      "line": 215,
+      "method": "GET",
+      "route": "/favicon.ico",
+      "handler": "favicon",
+      "response_class": null,
+      "html_view": false,
+      "template": null,
+      "response_calls": [
+        "RedirectResponse"
+      ],
+      "classification": "redirect",
+      "screenshot_asset_ids": []
+    }
+  ],
+  "final_document_review": {
+    "verification_report": "qa/verify-v6-delivery.json",
+    "verification_sha256": "1a37f740be788fecf2ef6a6e0a2a67b13c9637e6078fe6c86cd9faa3a24490b9",
+    "rendered_pages": 80,
+    "visually_reviewed_pages": 80,
+    "reviewed_by": "Codex visual review",
+    "review_date": "2026-10-25"
+  }
+}

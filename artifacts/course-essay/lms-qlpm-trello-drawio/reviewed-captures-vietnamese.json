@@ -1,0 +1,90 @@
+{
+  "heading": "Phụ lục E Minh chứng Trello và website LMS",
+  "introduction": "Các ảnh trong phụ lục được chụp trực tiếp từ Trello và website LMS ngày 26/10/2026 sau khi thao tác qua giao diện. Website sử dụng cơ sở dữ liệu kiểm thử UniversityLms_Test_Repeat_20261021_1027 có sẵn; không sử dụng cơ sở dữ liệu người dùng. Quan sát chỉ đọc và đăng nhập demo không làm thay đổi điểm, bài nộp hoặc trạng thái thẻ. Bằng chứng này phản ánh trạng thái đã quan sát, không xác nhận toàn bộ UAT hay triển khai sản xuất. Các ảnh website trong bản sửa này được chụp lại sau khi Việt hóa; dữ liệu mẫu được giữ nguyên, không thêm lớp che hoặc ghép nội dung. Bốn ảnh Trello được giữ từ lần quan sát trước.",
+  "screens": [
+    {
+      "id": "T01",
+      "file": "T01-board-workflow.png",
+      "caption": "Các cột công việc trên bảng Trello LMS",
+      "text": "Ảnh cho thấy nhóm đã tổ chức công việc theo To Do, Doing, Review, Done và Blocked. Tại thời điểm chụp, To Do có 25 thẻ; Doing, Review và Done đều bằng 0. Điều này cho phép nhận xét về cấu trúc quản lý và tình trạng theo dõi, nhưng chưa cho phép báo cáo phần trăm hoàn thành. Thẻ hỏi rubric nằm ở Blocked cho thấy nhóm còn một đầu vào cần xác nhận."
+    },
+    {
+      "id": "T02",
+      "file": "T02-wbs-checklist.png",
+      "caption": "Mô tả và checklist của thẻ WBS",
+      "text": "Thẻ PM-04 quy định đầu ra là WBS hướng sản phẩm bàn giao và có bảy điều kiện kiểm tra. Checklist đang ở mức 0/7, gồm phân biệt phạm vi sản phẩm với phạm vi dự án, xác định người phụ trách và liên kết bằng chứng. Vì vậy, đây là minh chứng tiêu chí đã được đưa lên công cụ; chưa phải xác nhận WBS đã được review xong."
+    },
+    {
+      "id": "T03",
+      "file": "T03-milestones-and-done.png",
+      "caption": "Mốc kế hoạch và trạng thái Done trên Trello",
+      "text": "Các mốc tháng 10–11 được đặt cạnh danh sách nghiệm thu mô phỏng. Ngày trên thẻ là mốc kế hoạch của nhóm; ảnh không phải chế độ Calendar hoặc Timeline và không chứng minh tiến độ thực tế. Cột Done đang trống. Báo cáo ghi nhận đúng trạng thái này, thay vì tạo thêm một thẻ hoàn tất để làm minh chứng."
+    },
+    {
+      "id": "T04",
+      "file": "T04-simulated-acceptance.png",
+      "caption": "Thẻ nghiệm thu được ghi rõ là mô phỏng",
+      "text": "Tiêu đề SIM-01 và phần mô tả ghi rõ đây là kịch bản tương lai, không phải biên bản thật. Nội dung checklist có một bộ giả định EVM riêng, khác đường cơ sở trong bài. Nhãn này giúp tránh nhầm ví dụ phục vụ báo cáo với kết quả kiểm thử hoặc quyết định nghiệm thu."
+    },
+    {
+      "id": "L01",
+      "file": "L01-login-actual-vi.png",
+      "caption": "Trang đăng nhập của website LMS",
+      "text": "Màn hình đăng nhập cung cấp trường tài khoản, mật khẩu và các tài khoản demo theo ba vai trò. Ảnh được chụp trên website đang chạy ở địa chỉ cục bộ; mật khẩu trong trường nhập được che. Sự hiện diện của giao diện này xác nhận điểm vào hệ thống, còn khả năng truy cập từng chức năng phải được quan sát sau đăng nhập."
+    },
+    {
+      "id": "L02",
+      "file": "L02-admin-users-actual-vi.png",
+      "caption": "Trang quản lý người dùng của quản trị viên",
+      "text": "Sau khi đăng nhập bằng vai trò quản trị, menu hiển thị chức năng Người dùng và danh sách tài khoản lấy từ cơ sở dữ liệu kiểm thử. Trang có bộ lọc vai trò và thao tác quản lý trạng thái. Các tên và email trên ảnh thuộc dữ liệu demo; lần quan sát này không thêm, sửa hoặc khóa tài khoản."
+    },
+    {
+      "id": "L03",
+      "file": "L03-lecturer-assignments-actual-vi.png",
+      "caption": "Giảng viên xem bài tập theo khóa học phụ trách",
+      "text": "Vai trò giảng viên nhìn thấy danh sách khóa học được phân công và bài tập tương ứng. Với WEB220, bài tập REST API hiển thị trạng thái Đã giao, điểm tối đa và hạn nộp. Đây là đầu vào cho việc kiểm tra tính nhất quán giữa đặc tả bài tập, giao diện và dữ liệu, chưa phải kết quả kiểm thử mọi trường hợp phân quyền."
+    },
+    {
+      "id": "L03b",
+      "file": "L03b-lecturer-submissions-actual-vi.png",
+      "caption": "Giảng viên xem bài nộp văn bản của sinh viên",
+      "text": "Từ nút Xem và Chấm bài, giao diện mở danh sách bài nộp và nội dung văn bản đã lưu. Ảnh có tên sinh viên demo, thời điểm nộp và nút chấm điểm. Lần quan sát dừng ở bước đọc; không gửi điểm hoặc thay đổi phản hồi. Hình nối mô hình trình tự chấm bài trong Phụ lục D với một trạng thái cụ thể trên ứng dụng."
+    },
+    {
+      "id": "L04",
+      "file": "L04-student-assignment-actual-vi.png",
+      "caption": "Sinh viên xem bài tập và hành động cập nhật bài nộp",
+      "text": "Tài khoản sinh viên Nguyễn An nhìn thấy bài tập của khóa AI310 và hành động Cập nhật bài nộp. Khóa học được chọn từ những lớp tài khoản đang theo học. Ảnh phản ánh màn hình trước thao tác gửi; không được dùng để kết luận lần nộp mới đã thành công hoặc các trường hợp quá hạn đều đã được kiểm tra."
+    },
+    {
+      "id": "L05",
+      "file": "L05-student-grades-actual-vi.png",
+      "caption": "Bảng điểm cá nhân trên dữ liệu kiểm thử",
+      "text": "Bảng điểm AI310 hiển thị điểm thành phần 10/10 và trọng số 10% đã lưu trước lần chụp. Giao diện giải thích trung bình chỉ là tạm tính, chưa áp dụng trọng số học phần và chưa xác định việc đạt học phần. Không thực hiện bài kiểm tra hoặc thay đổi điểm để tạo hình minh chứng."
+    },
+    {
+      "id": "L08",
+      "file": "L08-admin-dashboard-actual-vi.png",
+      "caption": "Trang tổng quan của quản trị viên",
+      "text": "Tổng quan hiển thị số liệu tài khoản và khóa học từ dữ liệu mẫu. Ô theo dõi hệ thống ghi rõ chưa có dữ liệu giám sát; không hiển thị kết luận máy chủ hoạt động bình thường khi chưa có phép đo."
+    },
+    {
+      "id": "L10",
+      "file": "L10-notifications-actual-vi.png",
+      "caption": "Hộp thư thông báo của quản trị viên",
+      "text": "Tài khoản quản trị hiện chưa có thông báo. Ảnh ghi nhận trạng thái rỗng thực tế, không bổ sung thông báo giả hoặc đánh dấu đã đọc để chuẩn bị ảnh."
+    },
+    {
+      "id": "L12",
+      "file": "L12-quizzes-actual-vi.png",
+      "caption": "Danh sách bài kiểm tra theo học phần",
+      "text": "Giảng viên xem các bài kiểm tra của WEB220. Nhãn chức năng và trạng thái dùng tiếng Việt; tiêu đề và nội dung bài mẫu giữ nguyên. Không tạo câu hỏi, xuất bản hoặc bắt đầu lượt làm bài trong lần quan sát."
+    },
+    {
+      "id": "L13",
+      "file": "L13-mobile-grades-actual-vi.png",
+      "caption": "Bảng điểm trên màn hình điện thoại",
+      "text": "Khung xem 390 × 844 cho thấy các thẻ điểm xếp thành một cột và phần đầu trang được thu gọn. Bảng dữ liệu có vùng cuộn riêng. Ảnh phản ánh một kích thước kiểm tra; chưa thay được đánh giá trên nhiều thiết bị hoặc kiểm thử khả năng tiếp cận."
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "status": "PASS",
+  "document_sha256": "6b023d85c5b79439c80ef60f3abe9b64c6765a1815dc99bf2e8df136b64c3cf1",
+  "checks": [
+    {
+      "check": "content_review_hash",
+      "status": "PASS",
+      "detail": "Review binds the current DOCX SHA-256."
+    },
+    {
+      "check": "software_model_scope",
+      "status": "PASS",
+      "detail": "Each basic model must be required or explicitly inapplicable; missing=[]."
+    },
+    {
+      "check": "model_use_case",
+      "status": "PASS",
+      "detail": "Use case chính và ranh giới chức năng"
+    },
+    {
+      "check": "model_data",
+      "status": "PASS",
+      "detail": "Mô hình dữ liệu tài khoản và hội thoại theo ký pháp lớp UML"
+    },
+    {
+      "check": "model_data",
+      "status": "PASS",
+      "detail": "Mô hình dữ liệu hồ sơ nghiên cứu theo ký pháp lớp UML"
+    },
+    {
+      "check": "model_class",
+      "status": "PASS",
+      "detail": "Mô hình lớp cài đặt phục vụ truy xuất căn cứ"
+    },
+    {
+      "check": "model_activity",
+      "status": "PASS",
+      "detail": "Sơ đồ hoạt động tra cứu và mở văn bản"
+    },
+    {
+      "check": "model_sequence",
+      "status": "PASS",
+      "detail": "Luồng POST /chat từ đầu vào đến trả HTML"
+    },
+    {
+      "check": "model_sequence",
+      "status": "PASS",
+      "detail": "Luồng đọc nguồn chính thức và hủy lượt thực hiện trong hồ sơ"
+    },
+    {
+      "check": "model_state",
+      "status": "PASS",
+      "detail": "Sơ đồ trạng thái của lượt đọc nguồn trong hồ sơ"
+    },
+    {
+      "check": "model_component",
+      "status": "PASS",
+      "detail": "Kiến trúc truy xuất theo hai cấu hình"
+    },
+    {
+      "check": "model_component",
+      "status": "PASS",
+      "detail": "Luồng nạp dữ liệu VietLex và tạo các chỉ mục"
+    },
+    {
+      "check": "model_deployment",
+      "status": "PASS",
+      "detail": "Explicitly reviewed as inapplicable: The report analyzes application/component design; no checked host/network deployment specification or deployed revision parity was supplied. Architecture views remain logical. A physical deployment model would invent topology."
+    },
+    {
+      "check": "section_MỞ ĐẦU",
+      "status": "PASS",
+      "detail": "Argument, evidence, terminology and sufficiency were explicitly reviewed."
+    },
+    {
+      "check": "section_Cơ sở lý thuyết và khung phân tích",
+      "status": "PASS",
+      "detail": "Argument, evidence, terminology and sufficiency were explicitly reviewed."
+    },
+    {
+      "check": "section_PHÂN TÍCH NGHIỆP VỤ VÀ MÔ HÌNH CHỨC NĂNG",
+      "status": "PASS",
+      "detail": "Argument, evidence, terminology and sufficiency were explicitly reviewed."
+    },
+    {
+      "check": "section_PHÂN TÍCH VÀ THIẾT KẾ HƯỚNG ĐỐI TƯỢNG",
+      "status": "PASS",
+      "detail": "Argument, evidence, terminology and sufficiency were explicitly reviewed."
+    },
+    {
+      "check": "section_KIẾN TRÚC, DỮ LIỆU, LỰA CHỌN CÔNG NGHỆ VÀ THIẾT KẾ THÀNH PHẦN",
+      "status": "PASS",
+      "detail": "Argument, evidence, terminology and sufficiency were explicitly reviewed."
+    },
+    {
+      "check": "section_KIỂM THỬ, BẢO MẬT VÀ ĐÁNH GIÁ HỆ THỐNG",
+      "status": "PASS",
+      "detail": "Argument, evidence, terminology and sufficiency were explicitly reviewed."
+    },
+    {
+      "check": "section_ĐỀ XUẤT CẢI TIẾN VÀ KẾ HOẠCH KIỂM CHỨNG",
+      "status": "PASS",
+      "detail": "Argument, evidence, terminology and sufficiency were explicitly reviewed."
+    },
+    {
+      "check": "section_KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN",
+      "status": "PASS",
+      "detail": "Argument, evidence, terminology and sufficiency were explicitly reviewed."
+    }
+  ],
+  "limits": "Checks verify recorded review and provenance; they do not infer prose quality or image meaning."
+}

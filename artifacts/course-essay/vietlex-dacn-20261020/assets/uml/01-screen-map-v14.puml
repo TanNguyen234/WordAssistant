@@ -1,0 +1,61 @@
+@startuml
+left to right direction
+skinparam monochrome true
+skinparam shadowing false
+skinparam packageStyle rectangle
+skinparam componentStyle rectangle
+skinparam defaultFontName "Times New Roman"
+skinparam defaultFontSize 12
+skinparam ArrowColor #455A64
+skinparam packageBorderColor #455A64
+skinparam componentBorderColor #455A64
+skinparam noteBorderColor #707070
+
+title Phân cấp màn hình theo route HTML và hành động trong source VietLex
+
+package "Trang HTML — route GET" {
+  package "Tra cứu pháp luật" {
+    component "Hỏi đáp\nGET /" as chat
+    component "Tìm văn bản\nGET /search" as search
+    component "Đọc văn bản\nGET /documents/{document_id}" as reader
+    component "Sự kiện hiệu lực\nGET /legal-status" as legalstatus
+    component "Dashboard đánh giá\nGET /evaluation-lab" as evaluation
+  }
+  package "Hồ sơ nghiên cứu" {
+    component "Danh sách hồ sơ\nGET /workspaces" as workspaces
+    component "Chi tiết hồ sơ\nGET /workspaces/{workspace_id}" as workspace
+  }
+  package "Tài khoản và thông tin" {
+    component "Đăng nhập / đăng ký\nGET /login, /register" as account
+    component "Khôi phục mật khẩu\nGET /forgot-password" as passwordreset
+    component "Xác minh / đặt lại mật khẩu\nGET /verify-email, /reset-password" as accountmore
+    component "Cài đặt tài khoản\nGET /settings" as settings
+    component "Quyền riêng tư / điều khoản\nGET /privacy, /terms" as information
+  }
+  package "Quản trị — route GET" {
+    component "Tổng quan và requests\nGET /admin, /admin/requests" as admin1
+    component "Usage, provider, hệ thống\nGET /admin/usage, /admin/providers,\n/admin/system" as admin2
+    component "Corpus, registry, feedback\nGET /admin/corpus, /admin/legal-registry,\n/admin/feedback" as admin3
+    component "Đánh giá, người dùng, nhật ký\nGET /admin/evaluations, /admin/users,\n/admin/audit" as admin4
+  }
+}
+
+chat --> search : liên kết Tra cứu
+search --> reader : chọn kết quả
+chat --> workspaces : lối vào Nghiên cứu
+workspaces --> workspace : mở hồ sơ
+admin1 --> admin2 : liên kết trong khu vực admin
+admin1 --> admin3 : liên kết trong khu vực admin
+admin1 --> admin4 : liên kết trong khu vực admin
+
+rectangle "Hành động, API và partial — không phải màn hình độc lập\nPOST /chat → HTML fragment trả vào vùng hội thoại\nPOST /workspaces → tạo hồ sơ\nPOST/DELETE /sessions... → thao tác lịch sử\nPOST /admin/... → thao tác có guard\nGET /sessions..., /admin/stats, /admin/logs,\nGET /admin/details/{trace_id} → partial\nGET /admin/export.csv → tệp tải xuống\nJSON, redirect và endpoint vận hành → không phải HTML page" as actions
+note bottom of actions
+Phân loại từ decorator/handler trong app/main.py và app/api/*.py.
+Route có cùng trang hoặc trả partial/action không được tính
+thành một màn hình riêng. Quyền và runtime của trang bị bảo vệ
+chưa được kiểm tra trong lượt này.
+end note
+note bottom of search
+Luồng minh họa có ảnh runtime: / → /search → /documents/{document_id}.
+end note
+@enduml

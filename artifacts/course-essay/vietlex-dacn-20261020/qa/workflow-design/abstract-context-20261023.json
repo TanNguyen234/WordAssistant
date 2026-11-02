@@ -1,0 +1,14 @@
+{
+  "query": "Abstract language summary objectives methods results conclusion",
+  "sections": [
+    {
+      "id": "abstract",
+      "title": "ABSTRACT",
+      "level": 1
+    }
+  ],
+  "text": "## ABSTRACT\nThis capstone examines VietLex, a Vietnamese legal research and retrieval system. The analysis is based on source code and project documents captured on 22 October 2026. Because the repository working tree was dirty, findings are tied to the observed files and hashes and do not represent a clean release or a verified production configuration. The scope covers server-rendered views, search routes, the question-answering pipeline, configuration-selected retrieval contracts, evidence objects, and existing evaluation records.\n\nThe analysis shows that the system combines metadata and full-text search, document reading, research workspaces, evidence retrieval, answer generation, and selected safety checks. Its architecture retains two distinct retrieval paths, limits evidence and context, supports optional hash-checked clause expansion, and uses conditional caching. The analysis diagrams are derived from source code; 11 interface images are actual runtime captures of public routes, recorded in an anonymous session on 22 October 2026.\n\nThe recorded Golden-50 snapshot from 3 September 2026 is historical: answer exact match was 0/50 and token F1 was 0.2305. A project status note dated 19 October 2026 reports two exploratory natural-language queries that did not achieve a full pass; no representative new answer benchmark is available. These records do not establish legal correctness or production readiness. No official assignment brief or rubric was supplied, so compliance and submission readiness remain unconfirmed.\n\nKeywords: VietLex; retrieval-augmented generation (RAG); Vietnamese legal retrieval; hybrid retrieval; object-oriented analysis and design; system evaluation.",
+  "estimated_tokens": 568,
+  "max_tokens": 2200,
+  "truncated": false
+}

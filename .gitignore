@@ -14,7 +14,25 @@ dist/
 docx-mcp/
 output*.docx
 sample_essay*.docx
-artifacts/
+artifacts/*
 .antigravity/runs/
 
 .wordassistant-capabilities-current.json
+
+# Whitelist course essay deliverables and academic materials
+!artifacts/course-essay/
+!artifacts/course-essay/**
+!artifacts/course-essay/**/*.pdf
+!artifacts/course-essay/**/*.docx
+artifacts/course-essay/**/*-pages/
+artifacts/course-essay/**/render*/
+artifacts/course-essay/**/cover-final-render/
+artifacts/course-essay/**/pagebreak-final-render/
+artifacts/course-essay/**/contact-sheets*/
+artifacts/course-essay/**/visual-review*/
+artifacts/course-essay/**/final-page-review*/
+artifacts/course-essay/**/history/
+artifacts/course-essay/**/staging*/
+artifacts/course-essay/**/*.zip
+artifacts/course-essay/**/.*.docx
+artifacts/course-essay/**/*.tmp

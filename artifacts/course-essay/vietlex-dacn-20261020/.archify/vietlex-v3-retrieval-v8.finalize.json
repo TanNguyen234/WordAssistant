@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "fail",
+  "type": "architecture",
+  "quality": "showcase",
+  "startedAt": "2026-10-21T01:45:09.180Z",
+  "specification": {
+    "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\.archify\\vietlex-v3-retrieval-v8.json",
+    "sha256": "f250585a57f2a73fe1203e372a5944ff0cde76efd6b3d01bfafe51329690c560",
+    "bytes": 2933
+  },
+  "artifact": {
+    "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\.archify\\vietlex-v3-retrieval-v8.html"
+  },
+  "stages": {
+    "validate": {
+      "status": "fail",
+      "exitCode": 1,
+      "durationMs": null,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "C:\\Users\\VI TINH THANH AN\\.codex\\skills\\archify\\bin\\archify.mjs",
+        "deliver",
+        "architecture",
+        "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\.archify\\vietlex-v3-retrieval-v8.json",
+        "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\.archify\\vietlex-v3-retrieval-v8.html",
+        "--quality",
+        "showcase",
+        "--repo-root",
+        "D:\\Download\\ProfessionalLegalRAG",
+        "--json"
+      ],
+      "receipt": {
+        "schemaVersion": 1,
+        "ok": false,
+        "command": "deliver",
+        "receiptId": "a583a637-0cda-440f-9f5f-dba27f23ad7c",
+        "stage": "render",
+        "type": "architecture",
+        "input": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\.archify\\vietlex-v3-retrieval-v8.json",
+        "output": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\.archify\\vietlex-v3-retrieval-v8.html",
+        "error": "Renderer failed before emitting a structured diagnostic.",
+        "diagnostics": [
+          {
+            "code": "internal/unclassified",
+            "severity": "error",
+            "message": "Renderer failed before emitting a structured diagnostic.",
+            "subject": {},
+            "evidence": {
+              "exitCode": 1
+            },
+            "supportedFixes": []
+          }
+        ],
+        "provenance": "absent",
+        "update": {
+          "status": "unavailable",
+          "installedVersion": null,
+          "availableVersion": null,
+          "releaseNotes": null,
+          "checkedAt": null,
+          "source": null,
+          "noticeRequired": false,
+          "noticeText": null,
+          "reason": "disabled"
+        }
+      },
+      "execution": "embedded-in-deliver"
+    },
+    "deliver": {
+      "status": "not-run",
+      "execution": "blocked-by-validate"
+    }
+  },
+  "diagnostics": [
+    {
+      "code": "internal/unclassified",
+      "severity": "error",
+      "message": "Renderer failed before emitting a structured diagnostic.",
+      "subject": {},
+      "evidence": {
+        "exitCode": 1
+      },
+      "supportedFixes": []
+    }
+  ],
+  "evidence": {
+    "receipt": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\.archify\\vietlex-v3-retrieval-v8.finalize.json",
+    "summaryReceipt": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\.archify\\vietlex-v3-retrieval-v8.finalize-summary.json"
+  },
+  "visualReview": "not-requested",
+  "failedStage": "validate",
+  "finishedAt": "2026-10-21T01:45:12.326Z",
+  "durationMs": 3146,
+  "update": {
+    "status": "unavailable",
+    "installedVersion": null,
+    "availableVersion": null,
+    "releaseNotes": null,
+    "checkedAt": null,
+    "source": null,
+    "noticeRequired": false,
+    "noticeText": null,
+    "reason": "cache-valid"
+  }
+}

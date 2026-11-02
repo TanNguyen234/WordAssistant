@@ -1,0 +1,144 @@
+{
+  "version": 1,
+  "steps": [
+    {
+      "operation": "section.layout",
+      "options": {
+        "section_index": 0,
+        "page_size": "A4",
+        "orientation": "portrait",
+        "margins": {
+          "top": 2.0,
+          "bottom": 2.0,
+          "left": 3.0,
+          "right": 2.0
+        }
+      }
+    },
+    {
+      "operation": "section.layout",
+      "options": {
+        "section_index": 1,
+        "page_size": "A4",
+        "orientation": "portrait",
+        "margins": {
+          "top": 2.0,
+          "bottom": 2.0,
+          "left": 3.0,
+          "right": 2.0
+        }
+      }
+    },
+    {
+      "operation": "section.layout",
+      "options": {
+        "section_index": 2,
+        "page_size": "A4",
+        "orientation": "portrait",
+        "margins": {
+          "top": 2.0,
+          "bottom": 2.0,
+          "left": 3.0,
+          "right": 2.0
+        }
+      }
+    },
+    {
+      "operation": "style.update",
+      "options": {
+        "name": "Normal",
+        "font_family": "Times New Roman",
+        "font_size_pt": 13,
+        "bold": false
+      }
+    },
+    {
+      "operation": "style.update",
+      "options": {
+        "name": "Title",
+        "font_family": "Times New Roman",
+        "font_size_pt": 18,
+        "bold": true
+      }
+    },
+    {
+      "operation": "style.update",
+      "options": {
+        "name": "Heading 1",
+        "font_family": "Times New Roman",
+        "font_size_pt": 16,
+        "bold": true
+      }
+    },
+    {
+      "operation": "style.update",
+      "options": {
+        "name": "Heading 2",
+        "font_family": "Times New Roman",
+        "font_size_pt": 14,
+        "bold": true
+      }
+    },
+    {
+      "operation": "style.update",
+      "options": {
+        "name": "Heading 3",
+        "font_family": "Times New Roman",
+        "font_size_pt": 13,
+        "bold": true
+      }
+    },
+    {
+      "operation": "format.run",
+      "selector": {
+        "type": "document"
+      },
+      "options": {
+        "font_family": "Times New Roman",
+        "font_size_pt": 13
+      }
+    },
+    {
+      "operation": "format.run",
+      "selector": {
+        "type": "style",
+        "style": "Title"
+      },
+      "options": {
+        "font_family": "Times New Roman",
+        "font_size_pt": 18
+      }
+    },
+    {
+      "operation": "format.run",
+      "selector": {
+        "type": "style",
+        "style": "Heading 1"
+      },
+      "options": {
+        "font_family": "Times New Roman",
+        "font_size_pt": 16
+      }
+    },
+    {
+      "operation": "format.run",
+      "selector": {
+        "type": "style",
+        "style": "Heading 2"
+      },
+      "options": {
+        "font_family": "Times New Roman",
+        "font_size_pt": 14
+      }
+    },
+    {
+      "operation": "format.paragraph",
+      "selector": {
+        "type": "document"
+      },
+      "options": {
+        "line_spacing": 1.5
+      }
+    }
+  ]
+}

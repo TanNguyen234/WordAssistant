@@ -1,0 +1,2164 @@
+{
+  "status": "SUCCESS",
+  "operation": "field.update_all",
+  "backend_used": "word-native",
+  "fidelity": "native",
+  "output_path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_FieldUpdated_20261023.docx",
+  "warnings": [],
+  "manual_review_required": false,
+  "data": {
+    "updated": true,
+    "repaginated": true,
+    "passes": 2,
+    "story_ranges_updated": 24,
+    "tables_of_contents_updated": 1,
+    "tables_of_figures_updated": 2,
+    "pagination_fields_stabilized": 0,
+    "fields": [
+      {
+        "story": "document",
+        "type": 13,
+        "instruction": "TOC \\o \"1-3\" \\h \\z \\u",
+        "result": "LỜI CẢM ƠN\t2LỜI CAM ĐOAN\t3NHẬN XÉT CỦA GIẢNG VIÊN HƯỚNG DẪN\t4NHẬN XÉT CỦA NGƯỜI PHẢN BIỆN\t5LỊCH LÀM VIỆC\t6TÓM TẮT ĐỒ ÁN\t7MỤC LỤC\t8DANH MỤC SƠ ĐỒ, HÌNH\t12DANH MỤC BẢNG BIỂU\t13KÍ HIỆU CÁC CỤM TỪ VIẾT TẮT\t14MỞ ĐẦU\t1Mục tiêu, câu hỏi và phạm vi khảo sát\t1Phạm vi, phương pháp và bằng chứng\t1Đóng góp và cấu trúc báo cáo\t2NỘI DUNG\t3CHƯƠNG 1: TỔNG QUAN TÀI LIỆU\t3Retrieval và truy xuất trong tiếng Việt\t3RAG, evidence và giới hạn của câu trả lời sinh\t3Đánh giá theo tầng và nguyên tắc hướng đối tượng\t4Khung phân tích dùng trong bài\t4Sai lệch cấp văn bản trong retrieval pháp lý\t5Đánh giá groundedness trong hỏi đáp pháp lý\t5Tổng hợp nghiên cứu và khung phân tích riêng cho VietLex\t6CHƯƠNG 2: PHƯƠNG PHÁP THỰC HIỆN\t7Đối tượng và hiện trạng hệ thống\t7Phạm vi người dùng và ranh giới\t7Yêu cầu chức năng rút ra từ source\t8Yêu cầu phi chức năng và rủi ro\t8Vai trò, năng lực và ranh giới quyền\t8Yêu cầu chức năng tái dựng từ source\t10Yêu cầu phi chức năng và cách quan sát\t11Phạm vi dữ liệu, giả định và phần chưa được nghiệm thu\t122.1. PHÂN TÍCH NGHIỆP VỤ VÀ MÔ HÌNH CHỨC NĂNG\t13Phân rã chức năng và các màn hình\t13Use case chính\t14Điều kiện và luồng thay thế\t15Yêu cầu nghiệm thu nội bộ\t16Tóm tắt use case và nhánh ngoại lệ\t16UC-01. Tìm kiếm và mở văn bản\t17UC-02. Đặt câu hỏi có giới hạn phạm vi\t17UC-03. Tạo hồ sơ và đưa tài liệu vào workspace\t18UC-04. Ghim nguồn và chạy phân tích có cấu trúc\t18UC-05. Đọc nguồn chính thức và hủy một run\t18UC-06. Quản trị, phản hồi và registry hiệu lực\t19Mô hình trạng thái và phân loại ngoại lệ\t19Từ use case đến tiêu chí nghiệm thu nội bộ\t202.2. PHÂN TÍCH VÀ THIẾT KẾ HƯỚNG ĐỐI TƯỢNG\t20Đối tượng EvidenceChunk\t20RetrievalOutcome và trách nhiệm retriever\t20Quan hệ phụ thuộc và nguyên tắc thiết kế\t21Điểm cần cải thiện trong thiết kế\t22StageCandidate và RetrievalStageTrace\t22Bảng trách nhiệm đối tượng và thành phần\t22Hợp đồng dữ liệu, invariant và tính toàn vẹn\t23Phối hợp route, service, value object và repository\t24Đánh giá thiết kế và cải tiến có thể kiểm chứng\t242.3. KIẾN TRÚC, DỮ LIỆU, LỰA CHỌN CÔNG NGHỆ VÀ THIẾT KẾ THÀNH PHẦN\t25Kiến trúc web và luồng tổng quát\t25Hai hợp đồng retrieval\t26Giới hạn evidence và context\t27Ranh giới dữ liệu và an toàn\t28Đánh đổi kiến trúc\t28Pipeline nạp dữ liệu và quản lý chất lượng corpus\t28Ma trận kho dữ liệu, schema và vòng đời\t30Coverage, đồng bộ và tính nhất quán giữa chỉ mục\t31Bảo mật, quyền sở hữu và vòng đời workspace\t32Lỗi, tính sẵn sàng và giới hạn capacity\t33Lựa chọn kiến trúc và hệ quả bảo trì\t33CHƯƠNG 3: CÀI ĐẶT THỬ NGHIỆM, KẾT QUẢ VÀ ĐÁNH GIÁ\t34Luồng xử lý câu hỏi\t34Ảnh chụp runtime: màn hình hỏi đáp\t35Ảnh chụp runtime: tra cứu văn bản\t36Trạng thái giao diện đã kiểm tra trên runtime\t37Nhận xét về khả năng sử dụng\t38Luồng tra cứu metadata, toàn văn và đọc tài liệu\t38Luồng workspace, official-source read và phân tích\t38Ảnh chụp runtime các trang VietLex\t40Nhận xét UX theo khả năng tránh hiểu nhầm\t463.1. KIỂM THỬ, BẢO MẬT VÀ ĐÁNH GIÁ HỆ THỐNG\t46Bằng chứng hiện có và phương pháp đọc\t46Kết quả câu trả lời và giới hạn diễn giải\t47Bảng tổng hợp chỉ số và mẫu số\t47Tổng hợp đánh giá\t48Phân loại bằng chứng và mức diễn giải được phép\t49Đọc sâu retrieval metrics và benchmark\t50Bằng chứng vận hành và kiểm thử hiện có\t51Đánh giá theo từng lớp\t513.2. HẠN CHẾ VÀ RỦI RO CẦN THEO DÕI\t51Phân tích lỗi và rủi ro\t52Ma trận rủi ro và biện pháp kiểm soát\t523.3. ĐỀ XUẤT CẢI TIẾN VÀ KẾ HOẠCH KIỂM CHỨNG\t54Kế hoạch kiểm chứng tiếp theo\t54Giao thức đánh giá kế tiếp có thể tái lập\t54Lộ trình cải tiến theo mức rủi ro\t553.4. DANH MỤC ĐƯỜNG ĐI THEO VAI TRÒ\t56Màn hình và điểm vào theo nhóm chức năng\t56KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN\t58PHỤ LỤC A. MA TRẬN YÊU CẦU VÀ BẰNG CHỨNG\t59Ma trận claim chính và giới hạn kết luận\t59PHỤ LỤC B. ĐỊNH DANH SƠ ĐỒ VÀ NGUỒN KIỂM TRA\t62Định danh asset và trạng thái xác minh\t62PHỤ LỤC C. THUẬT NGỮ VÀ TRẠNG THÁI BẰNG CHỨNG\t64Các metric retrieval, answer và citation\t65DANH MỤC TÀI LIỆU THAM KHẢO\t66TUYÊN BỐ VỀ CÔNG CỤ HỖ TRỢ VÀ LIÊM CHÍNH HỌC THUẬT\t68",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685919\"",
+        "result": "LỜI CẢM ƠN\t2",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685919 \\h",
+        "result": "2",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685920\"",
+        "result": "LỜI CAM ĐOAN\t3",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685920 \\h",
+        "result": "3",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685921\"",
+        "result": "NHẬN XÉT CỦA GIẢNG VIÊN HƯỚNG DẪN\t4",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685921 \\h",
+        "result": "4",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685922\"",
+        "result": "NHẬN XÉT CỦA NGƯỜI PHẢN BIỆN\t5",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685922 \\h",
+        "result": "5",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685923\"",
+        "result": "LỊCH LÀM VIỆC\t6",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685923 \\h",
+        "result": "6",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685924\"",
+        "result": "TÓM TẮT ĐỒ ÁN\t7",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685924 \\h",
+        "result": "7",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685925\"",
+        "result": "MỤC LỤC\t8",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685925 \\h",
+        "result": "8",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685926\"",
+        "result": "DANH MỤC SƠ ĐỒ, HÌNH\t12",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685926 \\h",
+        "result": "12",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685927\"",
+        "result": "DANH MỤC BẢNG BIỂU\t13",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685927 \\h",
+        "result": "13",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685928\"",
+        "result": "KÍ HIỆU CÁC CỤM TỪ VIẾT TẮT\t14",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685928 \\h",
+        "result": "14",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685929\"",
+        "result": "MỞ ĐẦU\t1",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685929 \\h",
+        "result": "1",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685930\"",
+        "result": "Mục tiêu, câu hỏi và phạm vi khảo sát\t1",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685930 \\h",
+        "result": "1",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685931\"",
+        "result": "Phạm vi, phương pháp và bằng chứng\t1",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685931 \\h",
+        "result": "1",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685932\"",
+        "result": "Đóng góp và cấu trúc báo cáo\t2",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685932 \\h",
+        "result": "2",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685933\"",
+        "result": "NỘI DUNG\t3",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685933 \\h",
+        "result": "3",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685934\"",
+        "result": "CHƯƠNG 1: TỔNG QUAN TÀI LIỆU\t3",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685934 \\h",
+        "result": "3",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685935\"",
+        "result": "Retrieval và truy xuất trong tiếng Việt\t3",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685935 \\h",
+        "result": "3",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685936\"",
+        "result": "RAG, evidence và giới hạn của câu trả lời sinh\t3",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685936 \\h",
+        "result": "3",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685937\"",
+        "result": "Đánh giá theo tầng và nguyên tắc hướng đối tượng\t4",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685937 \\h",
+        "result": "4",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685938\"",
+        "result": "Khung phân tích dùng trong bài\t4",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685938 \\h",
+        "result": "4",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685939\"",
+        "result": "Sai lệch cấp văn bản trong retrieval pháp lý\t5",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685939 \\h",
+        "result": "5",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685940\"",
+        "result": "Đánh giá groundedness trong hỏi đáp pháp lý\t5",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685940 \\h",
+        "result": "5",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685941\"",
+        "result": "Tổng hợp nghiên cứu và khung phân tích riêng cho VietLex\t6",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685941 \\h",
+        "result": "6",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685942\"",
+        "result": "CHƯƠNG 2: PHƯƠNG PHÁP THỰC HIỆN\t7",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685942 \\h",
+        "result": "7",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685943\"",
+        "result": "Đối tượng và hiện trạng hệ thống\t7",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685943 \\h",
+        "result": "7",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685944\"",
+        "result": "Phạm vi người dùng và ranh giới\t7",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685944 \\h",
+        "result": "7",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685945\"",
+        "result": "Yêu cầu chức năng rút ra từ source\t8",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685945 \\h",
+        "result": "8",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685946\"",
+        "result": "Yêu cầu phi chức năng và rủi ro\t8",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685946 \\h",
+        "result": "8",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685947\"",
+        "result": "Vai trò, năng lực và ranh giới quyền\t8",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685947 \\h",
+        "result": "8",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685948\"",
+        "result": "Yêu cầu chức năng tái dựng từ source\t10",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685948 \\h",
+        "result": "10",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685949\"",
+        "result": "Yêu cầu phi chức năng và cách quan sát\t11",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685949 \\h",
+        "result": "11",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685950\"",
+        "result": "Phạm vi dữ liệu, giả định và phần chưa được nghiệm thu\t12",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685950 \\h",
+        "result": "12",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685951\"",
+        "result": "2.1. PHÂN TÍCH NGHIỆP VỤ VÀ MÔ HÌNH CHỨC NĂNG\t13",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685951 \\h",
+        "result": "13",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685952\"",
+        "result": "Phân rã chức năng và các màn hình\t13",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685952 \\h",
+        "result": "13",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685953\"",
+        "result": "Use case chính\t14",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685953 \\h",
+        "result": "14",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685954\"",
+        "result": "Điều kiện và luồng thay thế\t15",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685954 \\h",
+        "result": "15",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685955\"",
+        "result": "Yêu cầu nghiệm thu nội bộ\t16",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685955 \\h",
+        "result": "16",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685956\"",
+        "result": "Tóm tắt use case và nhánh ngoại lệ\t16",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685956 \\h",
+        "result": "16",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685957\"",
+        "result": "UC-01. Tìm kiếm và mở văn bản\t17",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685957 \\h",
+        "result": "17",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685958\"",
+        "result": "UC-02. Đặt câu hỏi có giới hạn phạm vi\t17",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685958 \\h",
+        "result": "17",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685959\"",
+        "result": "UC-03. Tạo hồ sơ và đưa tài liệu vào workspace\t18",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685959 \\h",
+        "result": "18",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685960\"",
+        "result": "UC-04. Ghim nguồn và chạy phân tích có cấu trúc\t18",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685960 \\h",
+        "result": "18",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685961\"",
+        "result": "UC-05. Đọc nguồn chính thức và hủy một run\t18",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685961 \\h",
+        "result": "18",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685962\"",
+        "result": "UC-06. Quản trị, phản hồi và registry hiệu lực\t19",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685962 \\h",
+        "result": "19",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685963\"",
+        "result": "Mô hình trạng thái và phân loại ngoại lệ\t19",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685963 \\h",
+        "result": "19",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685964\"",
+        "result": "Từ use case đến tiêu chí nghiệm thu nội bộ\t20",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685964 \\h",
+        "result": "20",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685965\"",
+        "result": "2.2. PHÂN TÍCH VÀ THIẾT KẾ HƯỚNG ĐỐI TƯỢNG\t20",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685965 \\h",
+        "result": "20",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685966\"",
+        "result": "Đối tượng EvidenceChunk\t20",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685966 \\h",
+        "result": "20",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685967\"",
+        "result": "RetrievalOutcome và trách nhiệm retriever\t20",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685967 \\h",
+        "result": "20",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685968\"",
+        "result": "Quan hệ phụ thuộc và nguyên tắc thiết kế\t21",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685968 \\h",
+        "result": "21",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685969\"",
+        "result": "Điểm cần cải thiện trong thiết kế\t22",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685969 \\h",
+        "result": "22",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685970\"",
+        "result": "StageCandidate và RetrievalStageTrace\t22",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685970 \\h",
+        "result": "22",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685971\"",
+        "result": "Bảng trách nhiệm đối tượng và thành phần\t22",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685971 \\h",
+        "result": "22",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685972\"",
+        "result": "Hợp đồng dữ liệu, invariant và tính toàn vẹn\t23",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685972 \\h",
+        "result": "23",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685973\"",
+        "result": "Phối hợp route, service, value object và repository\t24",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685973 \\h",
+        "result": "24",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685974\"",
+        "result": "Đánh giá thiết kế và cải tiến có thể kiểm chứng\t24",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685974 \\h",
+        "result": "24",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685975\"",
+        "result": "2.3. KIẾN TRÚC, DỮ LIỆU, LỰA CHỌN CÔNG NGHỆ VÀ THIẾT KẾ THÀNH PHẦN\t25",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685975 \\h",
+        "result": "25",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685976\"",
+        "result": "Kiến trúc web và luồng tổng quát\t25",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685976 \\h",
+        "result": "25",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685977\"",
+        "result": "Hai hợp đồng retrieval\t26",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685977 \\h",
+        "result": "26",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685978\"",
+        "result": "Giới hạn evidence và context\t27",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685978 \\h",
+        "result": "27",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685979\"",
+        "result": "Ranh giới dữ liệu và an toàn\t28",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685979 \\h",
+        "result": "28",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685980\"",
+        "result": "Đánh đổi kiến trúc\t28",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685980 \\h",
+        "result": "28",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685981\"",
+        "result": "Pipeline nạp dữ liệu và quản lý chất lượng corpus\t28",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685981 \\h",
+        "result": "28",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685982\"",
+        "result": "Ma trận kho dữ liệu, schema và vòng đời\t30",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685982 \\h",
+        "result": "30",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685983\"",
+        "result": "Coverage, đồng bộ và tính nhất quán giữa chỉ mục\t31",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685983 \\h",
+        "result": "31",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685984\"",
+        "result": "Bảo mật, quyền sở hữu và vòng đời workspace\t32",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685984 \\h",
+        "result": "32",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685985\"",
+        "result": "Lỗi, tính sẵn sàng và giới hạn capacity\t33",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685985 \\h",
+        "result": "33",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685986\"",
+        "result": "Lựa chọn kiến trúc và hệ quả bảo trì\t33",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685986 \\h",
+        "result": "33",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685987\"",
+        "result": "CHƯƠNG 3: CÀI ĐẶT THỬ NGHIỆM, KẾT QUẢ VÀ ĐÁNH GIÁ\t34",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685987 \\h",
+        "result": "34",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685988\"",
+        "result": "Luồng xử lý câu hỏi\t34",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685988 \\h",
+        "result": "34",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685989\"",
+        "result": "Ảnh chụp runtime: màn hình hỏi đáp\t35",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685989 \\h",
+        "result": "35",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685990\"",
+        "result": "Ảnh chụp runtime: tra cứu văn bản\t36",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685990 \\h",
+        "result": "36",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685991\"",
+        "result": "Trạng thái giao diện đã kiểm tra trên runtime\t37",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685991 \\h",
+        "result": "37",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685992\"",
+        "result": "Nhận xét về khả năng sử dụng\t38",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685992 \\h",
+        "result": "38",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685993\"",
+        "result": "Luồng tra cứu metadata, toàn văn và đọc tài liệu\t38",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685993 \\h",
+        "result": "38",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685994\"",
+        "result": "Luồng workspace, official-source read và phân tích\t38",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685994 \\h",
+        "result": "38",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685995\"",
+        "result": "Ảnh chụp runtime các trang VietLex\t40",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685995 \\h",
+        "result": "40",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685996\"",
+        "result": "Nhận xét UX theo khả năng tránh hiểu nhầm\t46",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685996 \\h",
+        "result": "46",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685997\"",
+        "result": "3.1. KIỂM THỬ, BẢO MẬT VÀ ĐÁNH GIÁ HỆ THỐNG\t46",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685997 \\h",
+        "result": "46",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685998\"",
+        "result": "Bằng chứng hiện có và phương pháp đọc\t46",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685998 \\h",
+        "result": "46",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243685999\"",
+        "result": "Kết quả câu trả lời và giới hạn diễn giải\t47",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243685999 \\h",
+        "result": "47",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686000\"",
+        "result": "Bảng tổng hợp chỉ số và mẫu số\t47",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686000 \\h",
+        "result": "47",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686001\"",
+        "result": "Tổng hợp đánh giá\t48",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686001 \\h",
+        "result": "48",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686002\"",
+        "result": "Phân loại bằng chứng và mức diễn giải được phép\t49",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686002 \\h",
+        "result": "49",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686003\"",
+        "result": "Đọc sâu retrieval metrics và benchmark\t50",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686003 \\h",
+        "result": "50",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686004\"",
+        "result": "Bằng chứng vận hành và kiểm thử hiện có\t51",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686004 \\h",
+        "result": "51",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686005\"",
+        "result": "Đánh giá theo từng lớp\t51",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686005 \\h",
+        "result": "51",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686006\"",
+        "result": "3.2. HẠN CHẾ VÀ RỦI RO CẦN THEO DÕI\t51",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686006 \\h",
+        "result": "51",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686007\"",
+        "result": "Phân tích lỗi và rủi ro\t52",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686007 \\h",
+        "result": "52",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686008\"",
+        "result": "Ma trận rủi ro và biện pháp kiểm soát\t52",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686008 \\h",
+        "result": "52",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686009\"",
+        "result": "3.3. ĐỀ XUẤT CẢI TIẾN VÀ KẾ HOẠCH KIỂM CHỨNG\t54",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686009 \\h",
+        "result": "54",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686010\"",
+        "result": "Kế hoạch kiểm chứng tiếp theo\t54",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686010 \\h",
+        "result": "54",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686011\"",
+        "result": "Giao thức đánh giá kế tiếp có thể tái lập\t54",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686011 \\h",
+        "result": "54",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686012\"",
+        "result": "Lộ trình cải tiến theo mức rủi ro\t55",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686012 \\h",
+        "result": "55",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686013\"",
+        "result": "3.4. DANH MỤC ĐƯỜNG ĐI THEO VAI TRÒ\t56",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686013 \\h",
+        "result": "56",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686014\"",
+        "result": "Màn hình và điểm vào theo nhóm chức năng\t56",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686014 \\h",
+        "result": "56",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686015\"",
+        "result": "KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN\t58",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686015 \\h",
+        "result": "58",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686016\"",
+        "result": "PHỤ LỤC A. MA TRẬN YÊU CẦU VÀ BẰNG CHỨNG\t59",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686016 \\h",
+        "result": "59",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686017\"",
+        "result": "Ma trận claim chính và giới hạn kết luận\t59",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686017 \\h",
+        "result": "59",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686018\"",
+        "result": "PHỤ LỤC B. ĐỊNH DANH SƠ ĐỒ VÀ NGUỒN KIỂM TRA\t62",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686018 \\h",
+        "result": "62",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686019\"",
+        "result": "Định danh asset và trạng thái xác minh\t62",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686019 \\h",
+        "result": "62",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686020\"",
+        "result": "PHỤ LỤC C. THUẬT NGỮ VÀ TRẠNG THÁI BẰNG CHỨNG\t64",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686020 \\h",
+        "result": "64",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686021\"",
+        "result": "Các metric retrieval, answer và citation\t65",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686021 \\h",
+        "result": "65",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686022\"",
+        "result": "DANH MỤC TÀI LIỆU THAM KHẢO\t66",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686022 \\h",
+        "result": "66",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686023\"",
+        "result": "TUYÊN BỐ VỀ CÔNG CỤ HỖ TRỢ VÀ LIÊM CHÍNH HỌC THUẬT\t68",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686023 \\h",
+        "result": "68",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 13,
+        "instruction": "TOC \\h \\z \\c \"Hinh\"",
+        "result": "HÌNH 2.1. Phân cấp màn hình HTML và thao tác chính\t14HÌNH 2.2. Use case chính và ranh giới chức năng\t15HÌNH 2.3. Mô hình lớp rút gọn của evidence retrieval\t21HÌNH 2.4. Kiến trúc retrieval theo hai cấu hình\t26HÌNH 2.5. Luồng nạp dữ liệu VietLex và tạo các chỉ mục\t30HÌNH 3.1. Luồng POST /chat từ đầu vào đến trả HTML\t35HÌNH 3.2. Ảnh chụp runtime giao diện hỏi đáp — GET /\t36HÌNH 3.3. Ảnh chụp runtime tra cứu văn bản — GET /search\t37HÌNH 3.4. Luồng đọc nguồn chính thức và hủy run trong workspace\t40HÌNH 3.5. Đọc Bộ luật Lao động 2019 — GET /documents/333670\t41HÌNH 3.6. Tra cứu sự kiện hiệu lực — GET /legal-status\t41HÌNH 3.7. Chất lượng và kiểm chứng — GET /evaluation-lab\t42HÌNH 3.8. Hồ sơ nghiên cứu — GET /workspaces\t43HÌNH 3.9. Đăng nhập — GET /login\t43HÌNH 3.10. Đăng ký — GET /register\t44HÌNH 3.11. Khôi phục mật khẩu — GET /forgot-password\t44HÌNH 3.12. Quyền riêng tư — GET /privacy\t45HÌNH 3.13. Điều khoản sử dụng — GET /terms\t45",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686024\"",
+        "result": "HÌNH 2.1. Phân cấp màn hình HTML và thao tác chính\t14",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686024 \\h",
+        "result": "14",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686025\"",
+        "result": "HÌNH 2.2. Use case chính và ranh giới chức năng\t15",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686025 \\h",
+        "result": "15",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686026\"",
+        "result": "HÌNH 2.3. Mô hình lớp rút gọn của evidence retrieval\t21",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686026 \\h",
+        "result": "21",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686027\"",
+        "result": "HÌNH 2.4. Kiến trúc retrieval theo hai cấu hình\t26",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686027 \\h",
+        "result": "26",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686028\"",
+        "result": "HÌNH 2.5. Luồng nạp dữ liệu VietLex và tạo các chỉ mục\t30",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686028 \\h",
+        "result": "30",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686029\"",
+        "result": "HÌNH 3.1. Luồng POST /chat từ đầu vào đến trả HTML\t35",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686029 \\h",
+        "result": "35",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686030\"",
+        "result": "HÌNH 3.2. Ảnh chụp runtime giao diện hỏi đáp — GET /\t36",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686030 \\h",
+        "result": "36",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686031\"",
+        "result": "HÌNH 3.3. Ảnh chụp runtime tra cứu văn bản — GET /search\t37",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686031 \\h",
+        "result": "37",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686032\"",
+        "result": "HÌNH 3.4. Luồng đọc nguồn chính thức và hủy run trong workspace\t40",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686032 \\h",
+        "result": "40",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686033\"",
+        "result": "HÌNH 3.5. Đọc Bộ luật Lao động 2019 — GET /documents/333670\t41",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686033 \\h",
+        "result": "41",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686034\"",
+        "result": "HÌNH 3.6. Tra cứu sự kiện hiệu lực — GET /legal-status\t41",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686034 \\h",
+        "result": "41",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686035\"",
+        "result": "HÌNH 3.7. Chất lượng và kiểm chứng — GET /evaluation-lab\t42",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686035 \\h",
+        "result": "42",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686036\"",
+        "result": "HÌNH 3.8. Hồ sơ nghiên cứu — GET /workspaces\t43",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686036 \\h",
+        "result": "43",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686037\"",
+        "result": "HÌNH 3.9. Đăng nhập — GET /login\t43",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686037 \\h",
+        "result": "43",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686038\"",
+        "result": "HÌNH 3.10. Đăng ký — GET /register\t44",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686038 \\h",
+        "result": "44",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686039\"",
+        "result": "HÌNH 3.11. Khôi phục mật khẩu — GET /forgot-password\t44",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686039 \\h",
+        "result": "44",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686040\"",
+        "result": "HÌNH 3.12. Quyền riêng tư — GET /privacy\t45",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686040 \\h",
+        "result": "45",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686041\"",
+        "result": "HÌNH 3.13. Điều khoản sử dụng — GET /terms\t45",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686041 \\h",
+        "result": "45",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 13,
+        "instruction": "TOC \\h \\z \\c \"Bang\"",
+        "result": "BẢNG 2.1. Vai trò và phạm vi năng lực trong source\t9BẢNG 2.2. Capability nội bộ tái dựng từ source và giới hạn nghiệm thu\t10BẢNG 2.3. Use case chính, route và nhánh thay thế\t16BẢNG 2.4. Trách nhiệm các đối tượng và thành phần chính\t23BẢNG 2.5. Hai hợp đồng retrieval và giới hạn snapshot được ghi nhận\t27BẢNG 2.6. Vai trò kho dữ liệu, chỉ mục và giới hạn độ phủ\t30BẢNG 3.1. Chỉ số đánh giá đã lưu và phạm vi diễn giải\t47BẢNG 3.2. Bằng chứng dự án đã lưu và giới hạn kết luận\t49BẢNG 3.3. Rủi ro trọng yếu, bằng chứng và biện pháp đề xuất\t52BẢNG 3.4. Màn hình, route GET và ranh giới quan sát\t56BẢNG A.1. Claim trọng yếu và đường truy vết evidence\t60BẢNG B.1. Sơ đồ và ảnh chụp runtime được dùng trong báo cáo\t63BẢNG C.1. Thuật ngữ chỉ số và trạng thái bằng chứng\t64",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686042\"",
+        "result": "BẢNG 2.1. Vai trò và phạm vi năng lực trong source\t9",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686042 \\h",
+        "result": "9",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686043\"",
+        "result": "BẢNG 2.2. Capability nội bộ tái dựng từ source và giới hạn nghiệm thu\t10",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686043 \\h",
+        "result": "10",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686044\"",
+        "result": "BẢNG 2.3. Use case chính, route và nhánh thay thế\t16",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686044 \\h",
+        "result": "16",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686045\"",
+        "result": "BẢNG 2.4. Trách nhiệm các đối tượng và thành phần chính\t23",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686045 \\h",
+        "result": "23",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686046\"",
+        "result": "BẢNG 2.5. Hai hợp đồng retrieval và giới hạn snapshot được ghi nhận\t27",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686046 \\h",
+        "result": "27",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686047\"",
+        "result": "BẢNG 2.6. Vai trò kho dữ liệu, chỉ mục và giới hạn độ phủ\t30",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686047 \\h",
+        "result": "30",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686048\"",
+        "result": "BẢNG 3.1. Chỉ số đánh giá đã lưu và phạm vi diễn giải\t47",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686048 \\h",
+        "result": "47",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686049\"",
+        "result": "BẢNG 3.2. Bằng chứng dự án đã lưu và giới hạn kết luận\t49",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686049 \\h",
+        "result": "49",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686050\"",
+        "result": "BẢNG 3.3. Rủi ro trọng yếu, bằng chứng và biện pháp đề xuất\t52",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686050 \\h",
+        "result": "52",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686051\"",
+        "result": "BẢNG 3.4. Màn hình, route GET và ranh giới quan sát\t56",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686051 \\h",
+        "result": "56",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686052\"",
+        "result": "BẢNG A.1. Claim trọng yếu và đường truy vết evidence\t60",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686052 \\h",
+        "result": "60",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686053\"",
+        "result": "BẢNG B.1. Sơ đồ và ảnh chụp runtime được dùng trong báo cáo\t63",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686053 \\h",
+        "result": "63",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc243686054\"",
+        "result": "BẢNG C.1. Thuật ngữ chỉ số và trạng thái bằng chứng\t64",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc243686054 \\h",
+        "result": "64",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Bang \\* ARABIC \\s 1",
+        "result": "1",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Bang \\* ARABIC \\s 1",
+        "result": "2",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "1",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "2",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Bang \\* ARABIC \\s 1",
+        "result": "3",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "3",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Bang \\* ARABIC \\s 1",
+        "result": "4",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "4",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Bang \\* ARABIC \\s 1",
+        "result": "5",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "5",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Bang \\* ARABIC \\s 1",
+        "result": "6",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "1",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "2",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "3",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "4",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "5",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "6",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "7",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "8",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "9",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "10",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "11",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "12",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "13",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Bang \\* ARABIC \\s 1",
+        "result": "1",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Bang \\* ARABIC \\s 1",
+        "result": "2",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Bang \\* ARABIC \\s 1",
+        "result": "3",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Bang \\* ARABIC \\s 1",
+        "result": "4",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Bang \\* ARABIC \\s 1",
+        "result": "1",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Bang \\* ARABIC \\s 1",
+        "result": "1",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Bang \\* ARABIC \\s 1",
+        "result": "1",
+        "locked": false
+      }
+    ],
+    "field_results_freshness": "UPDATED_NATIVE",
+    "evidence_path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_FieldUpdated_20261023.docx.wa-evidence.json"
+  }
+}

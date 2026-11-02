@@ -1,0 +1,60 @@
+{
+  "overall_status": "FAIL",
+  "delivery_status": "FAIL",
+  "delivery_gates": {
+    "overall": "FAIL",
+    "render": "PASS",
+    "visual": "REVIEW_REQUIRED",
+    "native_word": "PASS"
+  },
+  "structural_status": "PASS",
+  "format_status": "FAIL",
+  "numbering_status": "PASS",
+  "table_geometry_status": "PASS",
+  "field_structure_status": "PASS",
+  "field_freshness_status": "PASS",
+  "field_evaluation_status": "PASS",
+  "render_status": "PASS",
+  "native_word_status": "PASS",
+  "visual_status": "REVIEW_REQUIRED",
+  "manual_review_required": true,
+  "issues": [
+    {
+      "severity": "ERROR",
+      "code": "style_size_mismatch",
+      "message": "Style 'Heading 3' font size is unset; expected 13 pt. 0 direct run override(s) also differ."
+    }
+  ],
+  "inventory": {
+    "paragraphs": 583,
+    "tables": 15,
+    "sections": 3,
+    "images": 20,
+    "fields": {
+      "total_field_tags": 516,
+      "toc_field": true,
+      "page_field": true,
+      "page_fields": 138,
+      "toc_fields": 3,
+      "other_fields": 31
+    }
+  },
+  "render": {
+    "engine": "word",
+    "pdf_path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_Final_20261023.pdf",
+    "file_size_bytes": 2361111,
+    "page_count": 83,
+    "verified_pdf_page_count": 83
+  },
+  "visual_review_challenge": {
+    "token": "9e7db5780df87b22e9c622b61ced2683f33a45ded0d08a7bd3ef62b3645cf6cc",
+    "page_count": 83,
+    "token_scope": "document SHA-256 plus ordered page-image SHA-256 and size; PDF SHA-256 is provenance only"
+  },
+  "visual_review_reuse": {
+    "version": 1,
+    "token": "wa-visual-reuse-v1:7b8521c34d4263f4194e0bcf4d1685a19f8614e48d022e562ab2414cc8ce22e5"
+  },
+  "report_path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\qa\\verify-clickthrough-final-render-20261023.json",
+  "report_sha256": "96c073de3819a068706d32d322af5676857f7fed9d8d9418049d9bc67cdff16d"
+}

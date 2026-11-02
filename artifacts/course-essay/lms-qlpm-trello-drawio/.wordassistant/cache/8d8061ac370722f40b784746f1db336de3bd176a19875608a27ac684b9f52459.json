@@ -1,0 +1,581 @@
+{
+  "schema_version": 2,
+  "sections": [
+    {
+      "section_id": "__preamble__",
+      "title": "Document preamble",
+      "text": "TRƯỜNG ĐẠI HỌC TÀI NGUYÊN VÀ MÔI TRƯỜNG TP.HCM\n\nKHOA CÔNG NGHỆ THÔNG TIN\n\nTIỂU LUẬN MÔN HỌC\n\nĐỀ TÀI:\nQuản lý dự án xây dựng hệ thống\nquản lý học tập trực tuyến (LMS)\ncho trường đại học\n\nMôn học:\tQuản lý dự án phần mềm\nNgành:\tCông nghệ thông tin\nSinh viên thực hiện:\t\nMã số sinh viên:\t\nLớp / Khóa học:\t\nGiảng viên hướng dẫn:\n\nTP. HỒ CHÍ MINH, 2026\n\nTRƯỜNG ĐẠI HỌC TÀI NGUYÊN VÀ MÔI TRƯỜNG TP.HCM\n\nKHOA CÔNG NGHỆ THÔNG TIN\n\nTIỂU LUẬN MÔN HỌC\n\nĐỀ TÀI:\nQuản lý dự án xây dựng hệ thống\nquản lý học tập trực tuyến (LMS)\ncho trường đại học\n\nMôn học:\tQuản lý dự án phần mềm\nNgành:\tCông nghệ thông tin\nSinh viên thực hiện:\t\nMã số sinh viên:\t\nLớp / Khóa học:\t\nGiảng viên hướng dẫn:\n\nTP. HỒ CHÍ MINH, 2026\n\nLỜI CẢM ƠN\n\nBản tiểu luận được xây dựng từ hồ sơ dự án LMS, hướng dẫn trình bày và các tài liệu tham khảo được dẫn trong bài. Phần ghi nhận sự hỗ trợ cụ thể dành cho giảng viên, thành viên nhóm và đơn vị liên quan do sinh viên hoàn thiện trước khi nộp, theo đúng những đóng góp thực tế.\n\nNgười được cảm ơn và nội dung hỗ trợ:\n\nSinh viên thực hiện:\n\nLỜI CAM ĐOAN\n\nPhần cam đoan dành cho sinh viên xác nhận sau khi kiểm tra toàn bộ nội dung, nguồn trích dẫn và phạm vi hỗ trợ trong quá trình biên soạn. Bản hiện tại chưa có xác nhận hoặc chữ ký của sinh viên.\n\nCông cụ hỗ trợ đã sử dụng: WordAssistant và Codex để tổng hợp hồ sơ, biên tập, định dạng và kiểm tra tài liệu. Ảnh minh chứng được chụp trực tiếp từ Trello và website LMS; dữ liệu mô phỏng, kế hoạch và kết quả quan sát được phân biệt trong bài.\n\nNội dung cam đoan của sinh viên:\n\nNgày xác nhận:\n\nSinh viên ký và ghi rõ họ tên:\n\nNHẬN XÉT CỦA GIẢNG VIÊN HƯỚNG DẪN\n\nTrang “Nhận xét của giảng viên hướng dẫn” (không đánh số trang, xem mẫu kèm theo). Giảng viên hướng dẫn nhận xét các vấn đề:\n\nKết cấu, phương pháp trình bày.\n\nCơ sở lý luận.\n\nTính thực tiễn và khả năng ứng dụng của Đồ án tốt nghiệp\n\nKết quả: Đạt ở mức nào? (hoặc không đạt), không cho điểm vào trang nhận xét này.\n\nNội dung nhận xét:\n\nNgày nhận xét:\n\nNgười nhận xét ký và ghi rõ họ tên:\n\nNHẬN XÉT CỦA NGƯỜI PHẢN BIỆN\n\nTrang “Nhận xét của người phản biện” (không đánh số trang, xem mẫu kèm theo)\n\nCần thể hiện rõ quan điểm của người phản biện\n\nKhông cho điểm vào trang nhận xét này.\n\nNội dung nhận xét:\n\nNgày nhận xét:\n\nNgười nhận xét ký và ghi rõ họ tên:\n\nLỊCH LÀM VIỆC\n\nSTT | Nội dung công việc | Thời gian dự kiến | Xác nhận\n1 | Khởi tạo, phạm vi và các bên liên quan | Tháng 10/2026 | \n2 | Phân rã công việc, tiến độ và ngân sách | Tháng 10/2026 | \n3 | Theo dõi công việc trên Trello | Tháng 10–11/2026 | \n4 | Mô hình hóa và đối chiếu mã nguồn | Tháng 10–11/2026 | \n5 | Kiểm thử chấp nhận và xử lý tồn đọng | Tháng 11/2026 | \n6 | Hoàn thiện báo cáo và đề nghị nghiệm thu | Cuối tháng 11/2026 | \n\nLịch dự kiến theo hồ sơ kế hoạch tháng 10–11/2026; cột xác nhận để trống. Các mốc tương lai không được xem là công việc đã hoàn tất.\n\nTÓM TẮT\n\nBài tiểu luận phân tích kế hoạch quản lý dự án xây dựng hệ thống quản lý học tập (Learning Management System, LMS) cho bối cảnh đại học. Nội dung làm rõ mối liên hệ giữa mục tiêu, phạm vi, phân công trách nhiệm, tiến độ, ngân sách, rủi ro và điều kiện nghiệm thu. Trello được sử dụng để theo dõi công việc; Draw.io biểu diễn cấu trúc và quy tắc nghiệp vụ của sản phẩm.\n\nBaseline đã đối soát là 20 tuần, 1.200.000.000 VNĐ và 8,5 FTE. Mạng CPM có mốc kết thúc kế hoạch tuần 20; ACT-04 có float 1 tuần, ACT-16 có 2 tuần. Snapshot Trello ngày 23/10/2026 có 9 danh sách, 39 thẻ, 8 mốc đề xuất và 3 thẻ mô phỏng. Snapshot API không phải ảnh UI; Done chưa có xác nhận.\n\nBáo cáo bổ sung ảnh chụp trực tiếp board Trello, checklist WBS và website LMS theo ba vai trò ngày 26/10/2026. Quan sát này làm rõ trạng thái công cụ và giao diện trên dữ liệu kiểm thử. Các biểu mẫu UAT, EVM và ký duyệt vẫn được phân biệt với kết quả thực tế; những minh chứng chưa thực hiện được liệt kê tại phụ lục.\n\nMỤC LỤC",
+      "level": 0,
+      "parent_id": null,
+      "source_index": 0,
+      "metadata": {}
+    },
+    {
+      "section_id": "mo-au-1",
+      "title": "MỞ ĐẦU\t1",
+      "text": "",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 56,
+      "metadata": {}
+    },
+    {
+      "section_id": "chuong-1-tong-quan-va-khoi-tao-du-an-2",
+      "title": "CHƯƠNG 1. TỔNG QUAN VÀ KHỞI TẠO DỰ ÁN\t2",
+      "text": "1.1. Cơ sở đề xuất và mục tiêu dự án\t2\n\n1.2. Giả định và ràng buộc\t3",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 57,
+      "metadata": {}
+    },
+    {
+      "section_id": "chuong-2-cac-ben-lien-quan-va-to-chuc-du-an-4",
+      "title": "CHƯƠNG 2. CÁC BÊN LIÊN QUAN VÀ TỔ CHỨC DỰ ÁN\t4",
+      "text": "2.1. Các bên liên quan và phương án tham gia\t4\n\n2.2. Phân công trách nhiệm và xử lý vượt thẩm quyền\t5",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 60,
+      "metadata": {}
+    },
+    {
+      "section_id": "chuong-3-quan-ly-pham-vi-va-wbs-7",
+      "title": "CHƯƠNG 3. QUẢN LÝ PHẠM VI VÀ WBS\t7",
+      "text": "3.1. Ranh giới phạm vi và điều kiện chấp nhận\t7\n\n3.2. Phân rã công việc theo sản phẩm bàn giao\t8",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 63,
+      "metadata": {}
+    },
+    {
+      "section_id": "chuong-4-quan-ly-tien-o-va-cpm-10",
+      "title": "CHƯƠNG 4. QUẢN LÝ TIẾN ĐỘ VÀ CPM\t10",
+      "text": "4.1. Danh sách hoạt động và phụ thuộc\t10\n\n4.2. Theo dõi sai lệch\t12",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 66,
+      "metadata": {}
+    },
+    {
+      "section_id": "chuong-5-quan-ly-nguon-luc-va-chi-phi-13",
+      "title": "CHƯƠNG 5. QUẢN LÝ NGUỒN LỰC VÀ CHI PHÍ\t13",
+      "text": "5.1. Phân bổ nguồn lực theo vai trò\t13\n\n5.2. Kiểm soát chi phí\t14",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 69,
+      "metadata": {}
+    },
+    {
+      "section_id": "chuong-6-quan-ly-rui-ro-16",
+      "title": "CHƯƠNG 6. QUẢN LÝ RỦI RO\t16",
+      "text": "6.1. Giám sát và ứng phó\t16",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 72,
+      "metadata": {}
+    },
+    {
+      "section_id": "chuong-7-quan-ly-chat-luong-va-kiem-thu-18",
+      "title": "CHƯƠNG 7. QUẢN LÝ CHẤT LƯỢNG VÀ KIỂM THỬ\t18",
+      "text": "7.1. Cổng chất lượng và điều kiện hoàn tất\t18\n\n7.2. Kiểm thử chấp nhận và phân loại lỗi\t19",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 74,
+      "metadata": {}
+    },
+    {
+      "section_id": "chuong-8-truyen-thong-thay-oi-va-trello-21",
+      "title": "CHƯƠNG 8. TRUYỀN THÔNG, THAY ĐỔI VÀ TRELLO\t21",
+      "text": "8.1. Luồng công việc và quy ước sử dụng Trello\t21\n\n8.2. Kết nối Trello — WBS — Draw.io — Word\t24",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 77,
+      "metadata": {}
+    },
+    {
+      "section_id": "chuong-9-thiet-ke-va-bieu-o-draw-io-25",
+      "title": "CHƯƠNG 9. THIẾT KẾ VÀ BIỂU ĐỒ DRAW.IO\t25",
+      "text": "9.1. Kiến trúc và dữ liệu\t25\n\n9.2. Quy trình xuất biểu đồ\t27",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 80,
+      "metadata": {}
+    },
+    {
+      "section_id": "chuong-10-nghiem-thu-va-ong-du-an-28",
+      "title": "CHƯƠNG 10. NGHIỆM THU VÀ ĐÓNG DỰ ÁN\t28",
+      "text": "10.1. Tiêu chí nghiệm thu\t28\n\n10.2. Bài học kinh nghiệm và hướng phát triển\t28\n\nKẾT LUẬN VÀ KIẾN NGHỊ\t30\n\nPHỤ LỤC\t31\n\nPhụ lục A. Danh mục sơ đồ Draw.io\t31\n\nPhụ lục B. Checklist ảnh Trello, Draw.io và LMS\t32\n\nPhụ lục C. Loại bằng chứng và giới hạn\t33\n\nPhụ lục D. Mô hình nghiệp vụ LMS\t35\n\nVai trò và Use Case\t35\n\nLuồng nộp bài\t36\n\nTrình tự chấm bài\t37\n\nCác lớp miền của bài tập\t38\n\nTrạng thái bài nộp\t39\n\nPhụ lục E Minh chứng Trello và website LMS\t40\n\nCác cột công việc trên bảng Trello LMS\t40\n\nMô tả và checklist của thẻ WBS\t41\n\nMốc kế hoạch và trạng thái Done trên Trello\t42\n\nThẻ nghiệm thu được ghi rõ là mô phỏng\t43\n\nTrang đăng nhập của website LMS\t44\n\nTrang quản lý người dùng của quản trị viên\t45\n\nGiảng viên xem bài tập theo khóa học phụ trách\t46\n\nGiảng viên xem bài nộp văn bản của sinh viên\t47\n\nSinh viên xem bài tập và hành động cập nhật bài nộp\t48\n\nBảng điểm cá nhân trên dữ liệu kiểm thử\t49\n\nTÀI LIỆU THAM KHẢO\t50\n\nDANH MỤC SƠ ĐỒ, HÌNH\n\nHÌNH 1. Cấu trúc phân chia công việc LMS\t9\n\nHÌNH 2. Mạng phụ thuộc công việc LMS\t11\n\nHÌNH 3. Chu trình quản lý và cổng kiểm soát\t23\n\nHÌNH 4. Thống kê Trello từ snapshot API\t24\n\nHÌNH 5. Kiến trúc hệ thống LMS\t26\n\nHÌNH 6. Mô hình dữ liệu LMS\t26\n\nHÌNH 7. Use Case LMS theo vai trò\t35\n\nHÌNH 8. Luồng sinh viên nộp bài văn bản\t36\n\nHÌNH 9. Trình tự tương tác khi giảng viên chấm bài\t37\n\nHÌNH 10. Mô hình lớp khái niệm của luồng bài tập\t38\n\nHÌNH 11. Trạng thái nộp và chấm bài\t39\n\nHÌNH 12. Các cột công việc trên bảng Trello LMS\t40\n\nHÌNH 13. Mô tả và checklist của thẻ WBS\t41\n\nHÌNH 14. Mốc kế hoạch và trạng thái Done trên Trello\t42\n\nHÌNH 15. Thẻ nghiệm thu được ghi rõ là mô phỏng\t43\n\nHÌNH 16. Trang đăng nhập của website LMS\t44\n\nHÌNH 17. Trang quản lý người dùng của quản trị viên\t45\n\nHÌNH 18. Giảng viên xem bài tập theo khóa học phụ trách\t46\n\nHÌNH 19. Giảng viên xem bài nộp văn bản của sinh viên\t47\n\nHÌNH 20. Sinh viên xem bài tập và hành động cập nhật bài nộp\t48\n\nHÌNH 21. Bảng điểm cá nhân trên dữ liệu kiểm thử\t49\n\nDANH MỤC BẢNG\n\nBẢNG 1. Điều lệ dự án\t2\n\nBẢNG 2. Stakeholder register rút gọn\t5\n\nBẢNG 3. RACI cho các đầu ra chính\t6\n\nBẢNG 4. Ranh giới phạm vi\t8\n\nBẢNG 5. WBS cấp 2 và đầu ra\t8\n\nBẢNG 6. CPM 19 hoạt động, đơn vị tuần\t11\n\nBẢNG 7. Milestone baseline\t12\n\nBẢNG 8. Resource breakdown\t14\n\nBẢNG 9. Budget baseline\t15\n\nBẢNG 10. Rủi ro ưu tiên\t17\n\nBẢNG 11. Quality gates\t19\n\nBẢNG 12. UAT scenarios, SIMULATED/NOT RUN\t20\n\nBẢNG 13. Trello snapshot 23/10/2026, API aggregate\t22\n\nBẢNG 14. Quy ước card và Done\t22\n\nBẢNG 15. Kiến trúc LMS theo hồ sơ\t25\n\nBẢNG 16. EVM minh họa, không phải actuals\t28\n\nBẢNG 17. 15 sơ đồ trong ZIP\t32\n\nBẢNG 18. Checklist ảnh cần bổ sung\t33\n\nBẢNG 19. Phân loại bằng chứng\t34\n\nKÍ HIỆU CÁC CỤM TỪ VIẾT TẮT\n\nSTT | Ký hiệu | Giải thích\n1 | API | Giao diện lập trình ứng dụng.\n2 | CPM | Phương pháp đường găng trong lập kế hoạch tiến độ.\n3 | CR | Đề nghị thay đổi phạm vi hoặc đường cơ sở.\n4 | EVM | Phương pháp theo dõi giá trị đạt được; các số liệu trong bài là ví dụ giả định.\n5 | FTE | Nhân sự toàn thời gian quy đổi theo khối lượng lao động.\n6 | LMS | Hệ thống quản lý học tập.\n7 | PM | Người quản lý dự án; BA: người phân tích nghiệp vụ; QA: bảo đảm chất lượng.\n8 | RACI | Ma trận người thực hiện, người chịu trách nhiệm cuối cùng, người được tham vấn và người được thông báo.\n9 | RBAC | Kiểm soát truy cập theo vai trò.\n10 | UAT | Kiểm thử chấp nhận người dùng.\n11 | WBS | Cấu trúc phân chia công việc theo sản phẩm bàn giao.",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 83,
+      "metadata": {}
+    },
+    {
+      "section_id": "mo-au",
+      "title": "MỞ ĐẦU",
+      "text": "Trong hoạt động đào tạo đại học, tài liệu học tập, bài nộp và điểm số thường đi qua nhiều kênh trao đổi. Khi các kênh này thiếu liên kết, giảng viên khó theo dõi tiến độ và sinh viên khó xác định thông tin nào đang có hiệu lực. Đề tài LMS được xây dựng để tập trung nội dung học phần, quản lý bài tập và cung cấp bảng điểm theo vai trò. Quy mô 10.000 sinh viên và 500 giảng viên trong điều lệ là giả định thiết kế, chưa phải quy mô triển khai đã được đo lường.\n\nBài tiểu luận phân tích cách quản lý dự án LMS từ xác lập mục tiêu đến nghiệm thu sản phẩm. Trọng tâm là sự nhất quán giữa phạm vi, công việc, nguồn lực và điều kiện chấp nhận. Trello được sử dụng để quan sát trạng thái công việc; Draw.io giúp diễn giải cấu trúc và quy tắc nghiệp vụ. Hai công cụ có ý nghĩa khi từng thẻ và sơ đồ liên kết được với một đầu ra cụ thể trong kế hoạch.\n\nPhương pháp thực hiện gồm đối chiếu hồ sơ quản lý dự án với mã nguồn, kiểm tra các số liệu kế hoạch và quan sát ứng dụng trong môi trường thử nghiệm. Bộ hồ sơ đối soát ngày 21/10/2026 được dùng làm căn cứ cho đường cơ sở. Ảnh Trello và website LMS được chụp trực tiếp ngày 26/10/2026 để bổ sung bằng chứng về trạng thái giao diện; việc quan sát này không thay thế kiểm thử chấp nhận toàn bộ hệ thống.\n\nPhạm vi đánh giá dừng ở kế hoạch học thuật và bản mẫu phần mềm trong môi trường cục bộ. Những biểu mẫu nghiệm thu, chỉ số chi phí và vai trò phê duyệt trong hồ sơ được phân biệt với kết quả thực tế. Thông tin nhận dạng sinh viên, lớp và giảng viên hướng dẫn chưa được cung cấp nên không được suy đoán từ tài liệu mẫu.",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 157,
+      "metadata": {}
+    },
+    {
+      "section_id": "chuong-1-tong-quan-va-khoi-tao-du-an",
+      "title": "CHƯƠNG 1. TỔNG QUAN VÀ KHỞI TẠO DỰ ÁN",
+      "text": "Dự án PRJ-LMS-2026 hướng đến một hệ thống học tập trên web phục vụ quản trị viên, giảng viên và sinh viên. Vấn đề đặt ra không chỉ là xây dựng các màn hình chức năng mà còn là tổ chức luồng thông tin xuyên suốt từ giao bài, nộp bài đến phản hồi và tổng hợp điểm. Điều lệ vì vậy cần nêu rõ sản phẩm tối thiểu, người có trách nhiệm quyết định và giới hạn nguồn lực trước khi nhóm lập kế hoạch chi tiết.\n\nBảng điều lệ tóm tắt các ràng buộc dùng để đối chiếu tiến độ và chi phí. Đây là đường cơ sở của bài toán học thuật. Các đại diện nghiệp vụ và quyền phê duyệt trong mô hình cần được xác nhận khi chuyển sang triển khai thực tế.\n\nBẢNG 1. Điều lệ dự án\n\nTrường | Giá trị / lưu ý\nTên dự án | University Learning Management System (LMS) Implementation\nMã | PRJ-LMS-2026\nMôn học | Quản lý dự án phần mềm\nThời lượng | 20 tuần\nNgân sách | 1.200.000.000 VNĐ\nNguồn lực | 8,5 FTE; không khóa số đầu người\nTrạng thái | Kế hoạch học thuật; phê duyệt thực chưa được chứng minh\n\nNguồn: Hồ sơ dự án LMS, bản đối chiếu tại commit 72cfa37.",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 162,
+      "metadata": {}
+    },
+    {
+      "section_id": "co-so-e-xuat-va-muc-tieu-du-an",
+      "title": "Cơ sở đề xuất và mục tiêu dự án",
+      "text": "Phạm vi chức năng bao gồm quản lý tài khoản, khóa học, ghi danh, nội dung học tập, bài tập, bài kiểm tra, điểm và thông báo. Mười kịch bản AC-01 đến AC-10 cụ thể hóa điều kiện chấp nhận cho các nhóm chức năng này. Cách xác định mục tiêu theo hành vi có thể kiểm tra giúp nhóm tránh đánh giá sản phẩm chỉ bằng số màn hình đã xây dựng.\n\nĐể giữ quy mô khả thi, bản mẫu sử dụng giao diện web, dịch vụ API và SQL Server. Đăng nhập một lần, thanh toán, hội nghị video, trò chuyện thời gian thực và ứng dụng di động riêng chưa nằm trong phạm vi. Việc loại trừ này tạo ranh giới để đánh giá yêu cầu phát sinh, thay vì coi mọi chức năng có ích đều là cam kết của dự án.",
+      "level": 2,
+      "parent_id": "chuong-1-tong-quan-va-khoi-tao-du-an",
+      "source_index": 168,
+      "metadata": {}
+    },
+    {
+      "section_id": "gia-inh-va-rang-buoc",
+      "title": "Giả định và ràng buộc",
+      "text": "Đường cơ sở được đối soát là 20 tuần, 1,2 tỷ đồng và tổng phân bổ 8,5 nhân sự toàn thời gian quy đổi (FTE). FTE biểu thị khối lượng thời gian lao động, không xác định số người trong nhóm. Kế hoạch còn phụ thuộc vào khả năng cung cấp yêu cầu của đại diện nghiệp vụ, năng lực chuyên môn và việc chuẩn bị môi trường thử nghiệm; thay đổi các giả định này có thể làm thay đổi lịch hoặc chi phí.\n\nKiến trúc ứng dụng tổ chức giao diện React, dịch vụ FastAPI và lớp dữ liệu SQL Server. Việc phân chia này giúp nhóm xác định các đầu ra thiết kế, phát triển và kiểm thử riêng, đồng thời phải lập kế hoạch cho phần tích hợp giữa chúng. Ảnh giao diện trong báo cáo phản ánh môi trường thử nghiệm cục bộ, chưa xác nhận khả năng vận hành sản xuất.",
+      "level": 2,
+      "parent_id": "chuong-1-tong-quan-va-khoi-tao-du-an",
+      "source_index": 171,
+      "metadata": {}
+    },
+    {
+      "section_id": "chuong-2-cac-ben-lien-quan-va-to-chuc-du-an",
+      "title": "CHƯƠNG 2. CÁC BÊN LIÊN QUAN VÀ TỔ CHỨC DỰ ÁN",
+      "text": "Các bên liên quan có nhu cầu và quyền quyết định khác nhau. Phòng Đào tạo cung cấp yêu cầu về quy trình học vụ; bộ phận công nghệ thông tin quan tâm đến kiến trúc và vận hành; giảng viên, sinh viên phản hồi trải nghiệm sử dụng. Người quản lý dự án cần tổng hợp các yêu cầu này và xử lý xung đột giữa lợi ích nghiệp vụ với giới hạn nguồn lực.\n\nNhóm có quyền lực và mức quan tâm cao cần tham gia ở các mốc quyết định về phạm vi, thiết kế và nghiệm thu. Người sử dụng trực tiếp cần được mời quan sát bản mẫu để phát hiện bất tiện trước khi hoàn tất sản phẩm. Phản hồi sử dụng và quyết định phê duyệt là hai loại đầu vào khác nhau, vì vậy kế hoạch truyền thông phải xác định rõ mục đích của từng cuộc trao đổi.",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 174,
+      "metadata": {}
+    },
+    {
+      "section_id": "cac-ben-lien-quan-va-phuong-an-tham-gia",
+      "title": "Các bên liên quan và phương án tham gia",
+      "text": "Sổ các bên liên quan dưới đây giữ lại nhóm vai trò và cách tham gia được mô tả trong hồ sơ nguồn. Việc ghi nhận theo vai trò giúp lập kế hoạch tham vấn khi chưa có người đại diện được chỉ định; bảng không tự xác nhận rằng các đơn vị đã đồng ý tham gia dự án.\n\nBẢNG 2. Stakeholder register rút gọn\n\nNhóm | Power | Interest | Chiến lược | Điểm tham gia\nBan Giám hiệu / SH-01 (mô phỏng) | Cao | Cao | Quản lý chặt | Mốc, thay đổi\nPhòng Đào tạo / SH-02 | Cao | Cao | Quản lý chặt | Yêu cầu, scope, UAT\nPhòng CNTT / SH-03 | Cao | Cao | Quản lý chặt | Kiến trúc, backup\nGiảng viên / SH-04 | Vừa | Cao | Tham vấn | Nhu cầu, demo\nSinh viên / SH-05 | Thấp | Cao | Cập nhật | Luồng học\nNhóm dự án / SH-06 | Vừa | Cao | Cộng tác | Họp tuần, blocker\nGiảng viên môn học / SH-07 | Cao | Cao | Quản lý chặt | Đề cương/đánh giá\n\nNguồn: Hồ sơ dự án LMS, bản đối chiếu tại commit 72cfa37.",
+      "level": 2,
+      "parent_id": "chuong-2-cac-ben-lien-quan-va-to-chuc-du-an",
+      "source_index": 177,
+      "metadata": {}
+    },
+    {
+      "section_id": "phan-cong-trach-nhiem-va-xu-ly-vuot-tham-quyen",
+      "title": "Phân công trách nhiệm và xử lý vượt thẩm quyền",
+      "text": "Ma trận RACI phân biệt người thực hiện (Responsible), người chịu trách nhiệm cuối cùng (Accountable), người được tham vấn (Consulted) và người được thông báo (Informed). Mỗi đầu ra chỉ nên có một vai trò Accountable để tránh bỏ sót hoặc chồng chéo quyền quyết định. Bảng rút gọn tách việc soạn hồ sơ khỏi việc ký phê duyệt, bởi người tạo ra tài liệu và người chấp thuận tài liệu có thể khác nhau.\n\nBảng rút gọn chọn các đầu ra từ ma trận nguồn và gom vai trò kỹ thuật thành Dev/QA. Việc soạn hồ sơ và việc ký phê duyệt là các trách nhiệm riêng; mỗi dòng chỉ có một vai trò A. Sponsor là vai trò giả định trong hồ sơ học thuật. Nguồn đối chiếu: docs/project-management/03_RACI_MATRIX.md.\n\nBẢNG 3. RACI cho các đầu ra chính\n\nDeliverable | PM | BA | Dev/QA | Sponsor*\nSoạn Charter/business case | A/R | C | I | C\nĐặc tả SRS/Use Cases | A | R | C | I\nLập CPM/chi phí/rủi ro | A/R | C | C | I\nKiến trúc/API/CSDL | A | C | R | I\nPhát triển prototype | A | I | R | I\nKiểm thử và triage | A | C | R | I\nUAT sign-off | C | C | I | A\nBàn giao và ký đóng | C | I | I | A\n\nNguồn: Hồ sơ dự án LMS, bản đối chiếu tại commit 72cfa37.",
+      "level": 2,
+      "parent_id": "chuong-2-cac-ben-lien-quan-va-to-chuc-du-an",
+      "source_index": 182,
+      "metadata": {}
+    },
+    {
+      "section_id": "chuong-3-quan-ly-pham-vi-va-wbs",
+      "title": "CHƯƠNG 3. QUẢN LÝ PHẠM VI VÀ WBS",
+      "text": "Phạm vi sản phẩm xác định LMS phải làm được gì, còn phạm vi dự án xác định nhóm cần thực hiện những công việc nào để bàn giao sản phẩm đó. Trong bản mẫu, luồng cốt lõi bao gồm quản lý khóa học, ghi danh, cung cấp nội dung, nộp bài văn bản, làm bài kiểm tra và xem điểm. Công việc thiết kế, chuẩn bị dữ liệu, kiểm thử và viết hướng dẫn cũng phải được tính vào phạm vi dự án dù không trực tiếp tạo thêm màn hình.\n\nBên cạnh chức năng, nhóm cần kiểm soát phân quyền tại máy chủ, tính toàn vẹn dữ liệu và các trạng thái giao diện khi tải, thành công, rỗng hoặc lỗi. Chẳng hạn, việc sinh viên nhìn thấy nút nộp bài chưa đủ để kết luận yêu cầu được đáp ứng: API còn phải kiểm tra ghi danh, hạn nộp và quyền sửa bài. Các điều kiện này cần được chuyển thành tiêu chí kiểm thử.\n\nCấu trúc phân chia công việc (WBS) trong hồ sơ nhóm các đầu ra từ khởi tạo, phân tích, thiết kế đến phát triển, kiểm thử và bàn giao. Cách phân rã theo đầu ra hỗ trợ giao việc và ước lượng. Khi liên kết WBS với thẻ Trello, nhóm có thể theo dõi sản phẩm còn thiếu thay vì chỉ đếm số thao tác đã thực hiện.",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 188,
+      "metadata": {}
+    },
+    {
+      "section_id": "ranh-gioi-pham-vi-va-ieu-kien-chap-nhan",
+      "title": "Ranh giới phạm vi và điều kiện chấp nhận",
+      "text": "Mỗi yêu cầu cần có mã truy vết, điều kiện kiểm tra và bằng chứng dự kiến. Khi phát sinh yêu cầu mới, nhóm lập đề nghị thay đổi, phân tích tác động lên phạm vi, tiến độ, chi phí và chất lượng rồi trình người có thẩm quyền quyết định. Ví dụ, bổ sung tải tệp cho bài nộp không phải một chỉnh sửa giao diện đơn lẻ: nó còn kéo theo lưu trữ, giới hạn tệp và kiểm soát truy cập. Vì bản mẫu hiện nhận nội dung văn bản, chức năng tải tệp được giữ ngoài phạm vi đã thống nhất.\n\nTrong phạm vi là LMS core; các khả năng mở rộng được đưa ngoài phạm vi.\n\nBẢNG 4. Ranh giới phạm vi\n\nIn-scope | Out-of-scope\nAdmin/Lecturer/Student; auth/RBAC | SSO\nCourses, lecturer assignment, enrollment | Student self-enrollment\nModules/lessons | Realtime class/chat\nAssignment/submission text-only MVP | File upload in MVP\nQuiz, grading, grades, notification | AI/plagiarism\nSchema, seed, tests, demo, PM report | Payment/native app\n\nNguồn: Hồ sơ dự án LMS, bản đối chiếu tại commit 72cfa37.",
+      "level": 2,
+      "parent_id": "chuong-3-quan-ly-pham-vi-va-wbs",
+      "source_index": 192,
+      "metadata": {}
+    },
+    {
+      "section_id": "phan-ra-cong-viec-theo-san-pham-ban-giao",
+      "title": "Phân rã công việc theo sản phẩm bàn giao",
+      "text": "Một gói công việc chỉ có thể được quản lý khi xác định được đầu ra, người phụ trách, đầu vào và điều kiện hoàn tất. Với luồng bài tập, nhóm có thể phân chia thành đặc tả quy tắc nộp, thiết kế giao diện, xử lý API và kiểm tra quyền. Sự phân chia này giúp tìm nguyên nhân khi một luồng chưa hoạt động đầy đủ, thay vì xem việc có giao diện là đã bàn giao toàn bộ chức năng.\n\nBảng WBS nối nhóm công việc với đầu ra để làm căn cứ ước lượng và giao trách nhiệm.\n\nBẢNG 5. WBS cấp 2 và đầu ra\n\nWBS | Gói | Đầu ra\n1 | Khởi tạo | Charter, stakeholders, kickoff\n2 | Yêu cầu/phạm vi | SRS, use cases, scope, WBS\n3 | Thiết kế/lập kế hoạch | Architecture, API, DB, CPM, budget, risk\n4 | Prototype | Auth, course, content, assignment, quiz, grades\n5 | Quality | Unit/API/system, triage\n6 | UAT/demo | Test scenarios, evidence, demo\n7 | Closure | Handover, lessons, closure\n\nNguồn: Hồ sơ dự án LMS, bản đối chiếu tại commit 72cfa37.\n\nWBS được lấy từ ZIP, là cấu trúc bàn giao đề xuất chứ không phải rubric.\n\nHÌNH 1. Cấu trúc phân chia công việc LMS\n\nNguồn: Hồ sơ Draw.io do người dùng cung cấp; đối chiếu nguồn dự án LMS.",
+      "level": 2,
+      "parent_id": "chuong-3-quan-ly-pham-vi-va-wbs",
+      "source_index": 198,
+      "metadata": {}
+    },
+    {
+      "section_id": "chuong-4-quan-ly-tien-o-va-cpm",
+      "title": "CHƯƠNG 4. QUẢN LÝ TIẾN ĐỘ VÀ CPM",
+      "text": "Kế hoạch tiến độ gồm 19 hoạt động liên kết theo quan hệ kết thúc trước khi bắt đầu. Phương pháp đường găng (CPM) tính thời điểm bắt đầu và kết thúc sớm theo chiều thuận, sau đó tính thời điểm muộn từ mốc kết thúc dự kiến. Độ dự trữ toàn phần là chênh lệch giữa thời điểm bắt đầu muộn và sớm; chỉ số này cho biết khả năng dịch chuyển hoạt động mà chưa làm trễ dự án theo mạng lịch đã lập.\n\nKết quả đối soát cho thấy mốc kết thúc kế hoạch ở tuần 20. ACT-04 có một tuần dự trữ và ACT-16 có hai tuần; các hoạt động còn lại trong bảng có độ dự trữ bằng không. Vì vậy, chậm một hoạt động không có dự trữ có thể tác động trực tiếp đến mốc kết thúc nếu các giả định khác giữ nguyên.\n\nCác mốc điều lệ được đặt ở tuần 2, 4, 6, 12, 15, 16, 18 và 20 để tạo điểm kiểm soát từ khởi tạo đến đóng dự án. Sơ đồ mạng minh họa thứ tự phụ thuộc, còn bảng CPM là căn cứ cho thời lượng và độ dự trữ. Lịch theo tháng trong Trello là kế hoạch riêng của nhóm và không tự thay thế đường cơ sở này.",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 208,
+      "metadata": {}
+    },
+    {
+      "section_id": "danh-sach-hoat-ong-va-phu-thuoc",
+      "title": "Danh sách hoạt động và phụ thuộc",
+      "text": "Mạng lịch nối khởi tạo/phạm vi, thiết kế/môi trường, phát triển lát dọc, tích hợp, kiểm thử, UAT, demo và đóng. Hình mạng chỉ giải thích phụ thuộc, không thay bảng CPM.\n\nBảng tính cho phép đối chiếu thời điểm sớm, thời điểm muộn và khả năng dịch chuyển từng hoạt động.\n\nBẢNG 6. CPM 19 hoạt động, đơn vị tuần\n\nID | Pred. | Dur. | ES-EF | LS-LF | TF\nACT-01 | — | 2 | 0-2 | 0-2 | 0\nACT-02 | 01 | 2 | 2-4 | 2-4 | 0\nACT-03 | 02 | 2 | 4-6 | 4-6 | 0\nACT-04 | 02 | 2 | 4-6 | 5-7 | 1\nACT-05 | 02 | 2 | 4-6 | 4-6 | 0\nACT-06 | 03,05 | 1 | 6-7 | 6-7 | 0\nACT-07 | 04,06 | 1 | 7-8 | 7-8 | 0\nACT-08 | 07 | 1 | 8-9 | 8-9 | 0\nACT-09 | 08 | 1 | 9-10 | 9-10 | 0\nACT-10 | 09 | 1 | 10-11 | 10-11 | 0\nACT-11 | 10 | 1 | 11-12 | 11-12 | 0\nACT-12 | 11 | 1 | 12-13 | 12-13 | 0\nACT-13 | 12 | 2 | 13-15 | 13-15 | 0\nACT-14 | 13 | 1 | 15-16 | 15-16 | 0\nACT-15 | 13 | 1 | 15-16 | 15-16 | 0\nACT-16 | 15 | 1 | 16-17 | 18-19 | 2\nACT-17 | 14,15 | 2 | 16-18 | 16-18 | 0\nACT-18 | 17 | 1 | 18-19 | 18-19 | 0\nACT-19 | 16,18 | 1 | 19-20 | 19-20 | 0\n\nNguồn: Hồ sơ dự án LMS, bản đối chiếu tại commit 72cfa37.\n\nSơ đồ dưới đây bổ sung góc nhìn quan hệ giữa các nhóm công việc.\n\nHÌNH 2. Mạng phụ thuộc công việc LMS\n\nNguồn: Hồ sơ Draw.io do người dùng cung cấp; đối chiếu nguồn dự án LMS.",
+      "level": 2,
+      "parent_id": "chuong-4-quan-ly-tien-o-va-cpm",
+      "source_index": 212,
+      "metadata": {}
+    },
+    {
+      "section_id": "theo-doi-sai-lech",
+      "title": "Theo dõi sai lệch",
+      "text": "Ở mỗi kỳ báo cáo, người quản lý dự án cần so sánh thời điểm dự báo với lịch cơ sở, xác định hoạt động gây chậm và người xử lý. Việc khôi phục lịch có thể đòi hỏi điều chỉnh thứ tự, bổ sung nguồn lực hoặc thu hẹp phạm vi, nhưng mỗi phương án đều phải xem xét tác động chi phí và chất lượng. Khi chưa có nhật ký bắt đầu và kết thúc thực tế, báo cáo chỉ phân tích kế hoạch, chưa tính tỷ lệ hoàn thành thực hiện.\n\nMốc tuần là baseline kế hoạch, không phải actual date.\n\nBẢNG 7. Milestone baseline\n\nMốc | Thời điểm | Bàn giao\nM1 | Cuối W2 | Charter\nM2 | Cuối W4 | Scope/requirements\nM3 | Cuối W6 | PM plan, UX, architecture/DB\nM4 | Cuối W12 | Prototype feature complete\nM5 | Cuối W15 | System/integration test\nM6 | W16 | UAT plan; chưa xác nhận\nM7 | W18 | Demo/go-live simulation\nM8 | W20 | Closure package\n\nNguồn: Hồ sơ dự án LMS, bản đối chiếu tại commit 72cfa37.",
+      "level": 2,
+      "parent_id": "chuong-4-quan-ly-tien-o-va-cpm",
+      "source_index": 222,
+      "metadata": {}
+    },
+    {
+      "section_id": "chuong-5-quan-ly-nguon-luc-va-chi-phi",
+      "title": "CHƯƠNG 5. QUẢN LÝ NGUỒN LỰC VÀ CHI PHÍ",
+      "text": "Dự toán kết hợp phân rã công việc với đơn giá theo vai trò. Tổng phân bổ là 8,5 FTE trên chín dòng vai trò; một người có thể đảm nhiệm nhiều vai trò theo giai đoạn. Sáu khoản mục gồm lao động 840 triệu, hạ tầng 120 triệu, công cụ 48 triệu, đào tạo 40 triệu, hành chính 32 triệu và dự phòng 120 triệu đồng, cộng thành ngân sách cơ sở 1,2 tỷ đồng.\n\nDòng tiền dự kiến chia thành năm giai đoạn với các mức 180, 150, 450, 240 và 180 triệu đồng. Giai đoạn phát triển chiếm mức cao nhất, vì vậy chậm thiết kế hoặc thiếu đầu vào trước phát triển có thể làm nguồn lực được bố trí nhưng chưa sử dụng hiệu quả. Khoản dự phòng cần gắn với rủi ro hoặc thay đổi được chấp thuận, không mặc nhiên coi là tiền đã chi.\n\nĐánh giá chi phí trong quá trình thực hiện cần phân biệt ngân sách, giá trị công việc đã hoàn thành và chi phí thực tế có chứng từ. Ví dụ EVM ở Chương 10 chỉ minh họa phép tính theo số liệu giả định. Báo cáo không sử dụng ví dụ này để kết luận dự án đã tiết kiệm ngân sách.",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 228,
+      "metadata": {}
+    },
+    {
+      "section_id": "phan-bo-nguon-luc-theo-vai-tro",
+      "title": "Phân bổ nguồn lực theo vai trò",
+      "text": "Nguồn lực được bố trí cho quản lý dự án, phân tích nghiệp vụ, thiết kế trải nghiệm, phát triển, kiểm thử và vận hành. Kiểm thử cần tham gia từ giai đoạn đặc tả để làm rõ tiêu chí chấp nhận; vận hành cần chuẩn bị môi trường trước thời điểm tích hợp. Việc bố trí theo giai đoạn giúp hạn chế tình trạng phát triển xong nhưng chưa có dữ liệu hoặc môi trường để kiểm tra.\n\nTổng phân bổ 8,5 FTE; không suy ra số đầu người.\n\nBẢNG 8. Resource breakdown\n\nVai trò | FTE | Giai đoạn | Labor | Trọng tâm\nPM | 1.0 | 20 tuần | 150M | Tích hợp scope/time/cost/risk\nBA | 1.0 | 20 tuần | 110M | Yêu cầu/SRS/UAT\nUI/UX | 1.0 | W3-W14 | 60M | Wireframe/prototype\nBackend lead | 1.0 | 20 tuần | 125M | Architecture/DB/auth\nBackend dev | 1.0 | W5-W20 | 80M | API nghiệp vụ\nFrontend lead | 1.0 | 20 tuần | 125M | React/routing\nFrontend dev | 1.0 | W5-W20 | 80M | UI ba vai trò\nQA | 1.0 | W5-W20 | 72M | Test/UAT\nDevOps | 0.5 | 20 tuần | 38M | Môi trường/SQL/backup\nTổng | 8.5 | — | 840M | Headcount chưa chốt\n\nNguồn: Hồ sơ dự án LMS, bản đối chiếu tại commit 72cfa37.",
+      "level": 2,
+      "parent_id": "chuong-5-quan-ly-nguon-luc-va-chi-phi",
+      "source_index": 232,
+      "metadata": {}
+    },
+    {
+      "section_id": "kiem-soat-chi-phi",
+      "title": "Kiểm soát chi phí",
+      "text": "Kiểm soát chi phí cần đối chiếu ngân sách được duyệt với chi phí phát sinh có căn cứ, đồng thời cập nhật dự báo phần việc còn lại. Thẻ Trello có thể liên kết đến mã WBS và đề nghị thay đổi, nhưng không thay sổ theo dõi chi phí. Khi một yêu cầu làm tăng khối lượng phát triển hoặc kiểm thử, quyết định chấp thuận phải chỉ ra nguồn kinh phí và ảnh hưởng đến lịch.\n\nSáu khoản mục cộng đúng 1,2 tỷ VNĐ; contingency không phải chi phí đã tiêu.\n\nBẢNG 9. Budget baseline\n\nKhoản mục | VNĐ | Tỷ lệ | Kiểm soát\nLabor | 840.000.000 | 70.00% | 8.5 FTE planned\nHạ tầng | 120.000.000 | 10.00% | Dev/staging/demo\nCông cụ | 48.000.000 | 4.00% | Licenses/collaboration\nĐào tạo | 40.000.000 | 3.33% | Workshop/materials\nHành chính | 32.000.000 | 2.67% | Meetings/reviews\nContingency | 120.000.000 | 10.00% | CR/issue approval\nBAC tổng | 1.200.000.000 | 100.00% | Estimate baseline\n\nNguồn: Hồ sơ dự án LMS, bản đối chiếu tại commit 72cfa37.",
+      "level": 2,
+      "parent_id": "chuong-5-quan-ly-nguon-luc-va-chi-phi",
+      "source_index": 238,
+      "metadata": {}
+    },
+    {
+      "section_id": "chuong-6-quan-ly-rui-ro",
+      "title": "CHƯƠNG 6. QUẢN LÝ RỦI RO",
+      "text": "Sổ rủi ro sử dụng thang điểm khả năng xảy ra và mức tác động từ 1 đến 5 để sắp xếp ưu tiên. Tích hai điểm hỗ trợ so sánh trong phạm vi kế hoạch, không phải xác suất thống kê. Mỗi rủi ro cần có dấu hiệu kích hoạt, người theo dõi và phương án ứng phó để việc đánh giá dẫn đến hành động cụ thể.\n\nNhững rủi ro đáng chú ý gồm mở rộng phạm vi, truy cập sai quyền, trễ phát triển và phản hồi nghiệm thu muộn. Ví dụ, kỳ vọng nộp tệp trong khi bản mẫu chỉ nhận văn bản có thể tạo tranh luận về phạm vi ở cuối kỳ. Nhóm cần giải thích giới hạn này ngay từ đặc tả và đối chiếu nó khi trình diễn sản phẩm.\n\nBiện pháp ứng phó phải gắn với nguyên nhân rủi ro. Kiểm soát thay đổi xử lý yêu cầu ngoài phạm vi; kiểm tra quyền ở API và kịch bản từ chối truy cập xử lý nguy cơ phân quyền; trình diễn sớm giúp phát hiện khác biệt kỳ vọng. Khoản dự phòng 120 triệu đồng chỉ được sử dụng theo quyết định kiểm soát, chưa có bằng chứng giải ngân thực tế.",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 244,
+      "metadata": {}
+    },
+    {
+      "section_id": "giam-sat-va-ung-pho",
+      "title": "Giám sát và ứng phó",
+      "text": "Theo kế hoạch, sổ rủi ro được rà soát hằng tuần. Khi dấu hiệu kích hoạt xuất hiện, người phụ trách ghi nhận tình hình, đánh giá ảnh hưởng và chuyển thành vấn đề cần xử lý nếu sự kiện đã xảy ra. Những vấn đề tác động đến đường găng hoặc ngân sách phải được báo lên cấp quyết định; việc có tên trong sổ không chứng minh rằng rủi ro đã phát sinh hay đã được khắc phục.\n\nBảng ưu tiên giúp chọn rủi ro cần theo dõi trước và biện pháp tương ứng.\n\nBẢNG 10. Rủi ro ưu tiên\n\nID | Risk | P x I | Trigger | Response\nRSK-01 | Scope creep | 4x4=16 | Yêu cầu ngoài core | Freeze; CR; defer\nRSK-02 | Authorization breach | 2x5=10 | Thiếu token/role check | RBAC; denial test\nRSK-03 | Late development | 3x4=12 | Burn-down lệch >3 ngày W10 | Vertical slice; float\nRSK-04 | Low adoption | 3x4=12 | Pilot usage thấp | Workshop; feedback\nRSK-05 | PM docs inconsistency | 3x4=12 | Lệch WBS, CPM hoặc ngân sách | Reconcile docs\nRSK-07 | Late UAT feedback | 3x3=9 | Reject sát W16 | Demo sớm; triage\nRSK-09 | Upload expectation | 3x2=6 | Kỳ vọng nộp file | Text-only; CR\n\nNguồn: Hồ sơ dự án LMS, bản đối chiếu tại commit 72cfa37.",
+      "level": 2,
+      "parent_id": "chuong-6-quan-ly-rui-ro",
+      "source_index": 248,
+      "metadata": {}
+    },
+    {
+      "section_id": "chuong-7-quan-ly-chat-luong-va-kiem-thu",
+      "title": "CHƯƠNG 7. QUẢN LÝ CHẤT LƯỢNG VÀ KIỂM THỬ",
+      "text": "Chất lượng được quản lý bằng điều kiện đầu ra và các cổng kiểm soát. Định nghĩa hoàn tất yêu cầu chức năng đúng đặc tả, có kiểm tra trường hợp hợp lệ và bị từ chối, API có tài liệu và giao diện xử lý được các trạng thái cần thiết. Mục tiêu không còn lỗi nghiêm trọng P0/P1 là điều kiện của kế hoạch, chưa phải kết quả kiểm thử được xác nhận.\n\nNăm cổng chất lượng lần lượt kiểm soát phạm vi, thiết kế, chức năng, mức sẵn sàng kiểm thử chấp nhận và hồ sơ đóng dự án. Cổng không đạt phải tạo công việc khắc phục với người xử lý rõ ràng. Do đó, chuyển thẻ sang Done không thay được việc kiểm tra các tiêu chí đầu ra.\n\nKế hoạch kiểm thử chấp nhận người dùng (UAT) gồm mười kịch bản cho ba vai trò. Trong lần quan sát ngày 26/10/2026, báo cáo đã ghi nhận giao diện đăng nhập, quản trị tài khoản, xem bài nộp và bảng điểm trên dữ liệu kiểm thử. Những ảnh này xác nhận các trạng thái đã quan sát, nhưng chưa đủ để đánh dấu cả mười kịch bản UAT là đạt.",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 254,
+      "metadata": {}
+    },
+    {
+      "section_id": "cong-chat-luong-va-ieu-kien-hoan-tat",
+      "title": "Cổng chất lượng và điều kiện hoàn tất",
+      "text": "Các cổng được đặt tại tuần 4, 6, 12, 15 và 20 của đường cơ sở. Cổng đầu kiểm tra yêu cầu và phạm vi; cổng thiết kế kiểm tra kiến trúc, dữ liệu và API; các cổng sau kiểm tra chức năng, dữ liệu thử nghiệm và khả năng bàn giao. Việc đặt điều kiện tại từng mốc giúp phát hiện thiếu sót trước khi chuyển sang giai đoạn có chi phí sửa lỗi lớn hơn.\n\nGate là điều kiện kế hoạch; trạng thái phê duyệt chưa được xác nhận.\n\nBẢNG 11. Quality gates\n\nGate | Tuần | Điều kiện | Evidence\nQG1 Scope freeze | W4 | SRS/use cases/WBS/scope | Plan; thiếu sign-off\nQG2 Design freeze | W6 | Architecture/ERD/API | Plan; thiếu sign-off\nQG3 Feature complete | W12 | Vertical slices/RBAC | Chưa xác nhận chạy\nQG4 UAT readiness | W15 | 10 AC, P0/P1=0, seed | UAT chưa chạy\nQG5 Closure | W20 | UAT/docs/handover | Chưa có biên bản\n\nNguồn: Hồ sơ dự án LMS, bản đối chiếu tại commit 72cfa37.",
+      "level": 2,
+      "parent_id": "chuong-7-quan-ly-chat-luong-va-kiem-thu",
+      "source_index": 258,
+      "metadata": {}
+    },
+    {
+      "section_id": "kiem-thu-chap-nhan-va-phan-loai-loi",
+      "title": "Kiểm thử chấp nhận và phân loại lỗi",
+      "text": "Mỗi kịch bản UAT cần dữ liệu đầu vào, bước thao tác, kết quả mong đợi và bằng chứng thực hiện. Khi xuất hiện lỗi, nhóm phân loại mức ảnh hưởng, xác định người sửa và kiểm tra lại trước khi đóng. Các mẫu kết quả trong hồ sơ vẫn được giữ nhãn mô phỏng; ảnh quan sát giao diện trong phụ lục không tự chuyển các mẫu đó thành biên bản nghiệm thu.\n\nMười AC được định nghĩa; số đã xác minh chạy là 0.\n\nBẢNG 12. UAT scenarios, SIMULATED/NOT RUN\n\nID | Mục tiêu | Vai trò | Status\nAC-01 | Authentication | All | SIMULATED / NOT RUN\nAC-02 | Chặn API quản trị | Student | SIMULATED / NOT RUN\nAC-03 | Cô lập course | Lecturer | SIMULATED / NOT RUN\nAC-04 | Không enrollment trùng | Admin | SIMULATED / NOT RUN\nAC-05 | Ẩn lesson draft | Student | SIMULATED / NOT RUN\nAC-06 | Chặn nộp trễ | Student | SIMULATED / NOT RUN\nAC-07 | Chấm và đồng bộ điểm | Lecturer/Student | SIMULATED / NOT RUN\nAC-08 | Giới hạn quiz attempts | Student | SIMULATED / NOT RUN\nAC-09 | Ẩn đáp án đúng | Student | SIMULATED / NOT RUN\nAC-10 | Notification ownership | Student | SIMULATED / NOT RUN\n\nNguồn: Hồ sơ dự án LMS, bản đối chiếu tại commit 72cfa37.",
+      "level": 2,
+      "parent_id": "chuong-7-quan-ly-chat-luong-va-kiem-thu",
+      "source_index": 264,
+      "metadata": {}
+    },
+    {
+      "section_id": "chuong-8-truyen-thong-thay-oi-va-trello",
+      "title": "CHƯƠNG 8. TRUYỀN THÔNG, THAY ĐỔI VÀ TRELLO",
+      "text": "Truyền thông dự án cần bảo đảm mỗi quyết định đến đúng người và có thể truy lại căn cứ. Kế hoạch tổ chức họp nhóm hằng tuần, báo cáo theo mốc và trao đổi nghiệp vụ theo đầu ra cần xem xét. Biên bản cần ghi rõ quyết định, công việc tiếp theo, người phụ trách và thời hạn để tránh tình trạng đã trao đổi nhưng chưa có người thực hiện.\n\nKhi phát sinh thay đổi, nhóm ghi nhận đề nghị, phân tích tác động rồi trình người có thẩm quyền quyết định. Quyết định được chấp thuận mới là căn cứ cập nhật đường cơ sở. Trello phản ánh việc đang được xử lý và liên kết đến hồ sơ thay đổi, nên có vai trò hỗ trợ thực hiện và truy vết.\n\nTrello tổ chức công việc bằng bảng, danh sách và thẻ. Mỗi thẻ có thể chứa mô tả, nhãn, ngày và tài liệu đính kèm; danh sách kiểm tra chia đầu ra thành những điều kiện nhỏ hơn để rà soát. Trong dự án LMS, cách tổ chức này giúp nối thẻ quản lý dự án với sơ đồ Draw.io và bằng chứng sản phẩm.\n\nSnapshot ngày 23/10/2026 ghi nhận 9 danh sách và 39 thẻ. Quan sát trực tiếp ngày 26/10/2026 cho thấy To Do có 25 thẻ, các cột Doing, Review và Done đang trống, còn Blocked chứa yêu cầu xác nhận rubric. Vì vậy, board phản ánh việc đã được tổ chức và các câu hỏi còn tồn đọng, chưa cho phép kết luận công việc đã hoàn thành.",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 270,
+      "metadata": {}
+    },
+    {
+      "section_id": "luong-cong-viec-va-quy-uoc-su-dung-trello",
+      "title": "Luồng công việc và quy ước sử dụng Trello",
+      "text": "Luồng quản lý đề xuất đi từ Backlog qua To Do, Doing, Review rồi Done; Blocked tách những công việc chưa thể tiếp tục. Trong thẻ PM-04 được chụp trực tiếp, checklist WBS có bảy mục chưa đánh dấu hoàn tất. Nội dung yêu cầu phân biệt phạm vi sản phẩm với phạm vi dự án, xác định đầu ra và người phụ trách. Đây là minh chứng về tiêu chí quản lý đã có trên công cụ, đồng thời cho thấy việc kiểm tra hoàn tất vẫn còn mở.\n\nBảng sau lưu số liệu snapshot ngày 23/10/2026; ảnh giao diện ngày 26/10/2026 nằm ở Phụ lục E.\n\nBẢNG 13. Trello snapshot 23/10/2026, API aggregate\n\nList | Cards | Note\n00 REQUIREMENT | 2 | REQ-01/REQ-02\n01 BACKLOG | 0 | Empty\n02 TO DO | 25 | PM-01..10; DGM-01..15\n03 DOING | 0 | Empty\n04 REVIEW | 0 | Empty\n05 DONE | 0 | No confirmed Done\n06 BLOCKED | 1 | REQ-03 asks rubric\n07 MILESTONES 10-11 | 8 | Group proposal\n08 SIMULATED UAT | 3 | UAT/EVM/evidence mock\nTOTAL | 39 | Snapshot API\n\nNguồn: Snapshot Trello ngày 23/10/2026 trong hồ sơ người dùng cung cấp.\n\nQuy ước dưới đây giúp thẻ công việc chứa đủ thông tin cho người thực hiện và người kiểm tra.\n\nBẢNG 14. Quy ước card và Done\n\nField/step | Quy ước\nTitle | [WBS/REQ/AC/CR] + deliverable\nDescription | Kết quả, ranh giới, nguồn\nOwner/date | Owner rõ; date nếu thống nhất\nChecklist | Subtasks có thể review\nAttachment | Source .drawio, PNG, evidence\nReview | Reviewer, defect/CR, nhận xét\nDone | Acceptance + evidence + approval nếu cần\nBlocked/SIM | Lý do; nhãn mô phỏng\n\nNguồn: Hồ sơ dự án LMS, bản đối chiếu tại commit 72cfa37.\n\nSơ đồ Draw.io quy trình nối yêu cầu, Trello, review và thay đổi.\n\nHÌNH 3. Chu trình quản lý và cổng kiểm soát\n\nNguồn: Hồ sơ Draw.io do người dùng cung cấp; đối chiếu nguồn dự án LMS.\n\nẢnh board cho thấy việc tổ chức công việc đã có, nhưng trạng thái thực hiện cần tiếp tục được cập nhật theo bằng chứng.\n\nHÌNH 4. Thống kê Trello từ snapshot API\n\nNguồn: Tổng hợp snapshot Trello ngày 23/10/2026; không phải ảnh giao diện.",
+      "level": 2,
+      "parent_id": "chuong-8-truyen-thong-thay-oi-va-trello",
+      "source_index": 275,
+      "metadata": {}
+    },
+    {
+      "section_id": "ket-noi-trello-wbs-draw-io-word",
+      "title": "Kết nối Trello — WBS — Draw.io — Word",
+      "text": "Một đầu ra chỉ truy vết được khi tên và mã công việc giữ nhất quán giữa WBS, thẻ Trello, tệp sơ đồ và báo cáo. Chẳng hạn, thẻ thiết kế luồng nộp bài cần liên kết với sơ đồ và tiêu chí kiểm tra hạn nộp trong API. Lịch nhóm tháng 10–11 và ngân sách 27 triệu đồng trong kịch bản ZIP thuộc bối cảnh khác với đường cơ sở 20 tuần, 1,2 tỷ đồng; báo cáo không cộng gộp hoặc thay thế hai tập số liệu.",
+      "level": 2,
+      "parent_id": "chuong-8-truyen-thong-thay-oi-va-trello",
+      "source_index": 293,
+      "metadata": {}
+    },
+    {
+      "section_id": "chuong-9-thiet-ke-va-bieu-o-draw-io",
+      "title": "CHƯƠNG 9. THIẾT KẾ VÀ BIỂU ĐỒ DRAW.IO",
+      "text": "Thiết kế giúp đội dự án chuyển phạm vi thành các thành phần và quy tắc có thể kiểm tra. Kiến trúc trong repo tổ chức ba vai trò qua React/TypeScript/Vite, FastAPI/SQLAlchemy và SQL Server. Sơ đồ kiến trúc xác định ranh giới frontend, API và dữ liệu; hồ sơ này chưa cung cấp bằng chứng triển khai production.\n\nERD LMS_12 trình bày 12 bảng cùng các khóa chính và khóa ngoại; một số quan hệ được giản lược theo manifest. Phụ lục D bổ sung Use Case, luồng nộp bài, trình tự chấm bài, lớp miền và trạng thái bài nộp. Các góc nhìn này được đối chiếu với docs/02_ROLES_USE_CASES.md, database/01_schema.sql và backend/app/api/routes/assignments.py, nên có thể truy ngược từ hình về quy tắc trong project.\n\nDraw.io giữ source.drawio/XML có thể sửa và PNG để trình bày. Tài liệu chính thức phân biệt định dạng export với source , và mô tả tùy chọn PNG. Hình tĩnh không chứng minh UI editor đã được chụp.",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 295,
+      "metadata": {}
+    },
+    {
+      "section_id": "kien-truc-va-du-lieu",
+      "title": "Kiến trúc và dữ liệu",
+      "text": "Kiến trúc LMS được xem xét qua ba phần: giao diện người dùng, dịch vụ xử lý nghiệp vụ và cơ sở dữ liệu. Việc phân chia này giúp nhận diện nơi thực hiện kiểm soát quyền và lưu trữ kết quả học tập. Sơ đồ chỉ thể hiện các quan hệ cần phân tích; cấu trúc dữ liệu và hành vi xử lý cụ thể phải được đối chiếu với mã nguồn, lược đồ cơ sở dữ liệu và bằng chứng kiểm thử.\n\nKiến trúc là thiết kế trong repo, không phải runtime.\n\nBẢNG 15. Kiến trúc LMS theo hồ sơ\n\nLayer | Technology | Lưu ý\nPresentation | React 19, TypeScript, Vite | Ba vai trò UI\nAPI | FastAPI, REST, JSON, JWT | Auth/RBAC/rules\nData access | SQLAlchemy | Mapping/transaction\nDatabase | SQL Server | 12 tables, keys, seed\nCross-cutting | Validation/logging/authorization | Cần test runtime\n\nNguồn: Hồ sơ dự án LMS, bản đối chiếu tại commit 72cfa37.\n\nSơ đồ architecture trong repo mô tả thiết kế, không phải runtime.\n\nHÌNH 5. Kiến trúc hệ thống LMS\n\nNguồn: Hồ sơ Draw.io do người dùng cung cấp; đối chiếu nguồn dự án LMS.\n\nERD có quan hệ giản lược; đọc cùng schema SQL nguồn.\n\nHÌNH 6. Mô hình dữ liệu LMS\n\nNguồn: Hồ sơ Draw.io do người dùng cung cấp; đối chiếu nguồn dự án LMS.\n\nBộ mô hình ở Phụ lục D tập trung vào luồng bài tập vì luồng này kết nối cả ba yếu tố cần quản lý: quyền người dùng, trạng thái sản phẩm và toàn vẹn dữ liệu. Use Case phân chia trách nhiệm theo vai trò; sơ đồ luồng và trạng thái chỉ ra khi nào một bài nộp được chấp nhận; Sequence đặt việc kiểm tra quyền và ghi điểm tại API. Nhờ đó, nhóm có thể tách thẻ thiết kế, phát triển và kiểm thử theo cùng điều kiện chấp nhận.\n\nMột bài tập chỉ có một bài nộp hiện hành cho mỗi sinh viên theo ràng buộc UNIQUE(AssignmentId, StudentId). Sau khi chấm, sinh viên không được sửa bài nộp; giảng viên vẫn có thể điều chỉnh điểm theo quyền sở hữu khóa học. Khi chấm bài, API cập nhật Submission, insert/update Grades và tạo Notification trong luồng xử lý dữ liệu. Các điều kiện này cần xuất hiện trong checklist review và kịch bản kiểm thử; việc có sơ đồ hoặc thẻ Trello chưa xác nhận chúng đã chạy đạt.",
+      "level": 2,
+      "parent_id": "chuong-9-thiet-ke-va-bieu-o-draw-io",
+      "source_index": 299,
+      "metadata": {}
+    },
+    {
+      "section_id": "quy-trinh-xuat-bieu-o",
+      "title": "Quy trình xuất biểu đồ",
+      "text": "Mỗi sơ đồ được xây dựng để trả lời một câu hỏi cụ thể về hệ thống. Khi rà soát, cần kiểm tra tên đối tượng, quan hệ, điều kiện rẽ nhánh và chú thích dựa trên hồ sơ nghiệp vụ hoặc mã nguồn. Tệp Draw.io được lưu cùng bản xuất ảnh để có thể sửa và kiểm tra lại khi phạm vi thay đổi. Cách làm này giúp phát hiện sự không thống nhất giữa kế hoạch quản lý và sản phẩm được mô tả.",
+      "level": 2,
+      "parent_id": "chuong-9-thiet-ke-va-bieu-o-draw-io",
+      "source_index": 315,
+      "metadata": {}
+    },
+    {
+      "section_id": "chuong-10-nghiem-thu-va-ong-du-an",
+      "title": "CHƯƠNG 10. NGHIỆM THU VÀ ĐÓNG DỰ ÁN",
+      "text": "Nghiệm thu cần đối chiếu từng yêu cầu với kết quả chạy và bằng chứng tương ứng. Hồ sơ đóng dự án phải tập hợp phiên bản nguồn, kết quả kiểm thử, các vấn đề còn mở, hướng dẫn vận hành và quyết định chấp thuận. Khi thiếu chữ ký hoặc kết quả UAT, nhóm chỉ có thể trình bày mức sẵn sàng bàn giao, chưa xác nhận nghiệm thu chính thức.\n\nVí dụ EVM dùng PV=1.200M, EV=1.200M, AC=1.175M; suy ra SV=0, SPI=1, CV=+25M, CPI≈1,021. Đây là ví dụ số học; không có invoice/timesheet xác nhận AC và không có kỳ đo ngày status.\n\nQuyết định đóng dự án chỉ được xác nhận sau khi các điều kiện bàn giao được kiểm tra và người có thẩm quyền chấp thuận. Những bằng chứng còn thiếu phải được ghi thành công việc tồn đọng, có người xử lý rõ ràng.",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 317,
+      "metadata": {}
+    },
+    {
+      "section_id": "tieu-chi-nghiem-thu",
+      "title": "Tiêu chí nghiệm thu",
+      "text": "Nghiệm thu cần kiểm tra đủ mười kịch bản chấp nhận, các chức năng bắt buộc, tình trạng lỗi nghiêm trọng, dữ liệu và hướng dẫn sử dụng. Những vấn đề còn mở phải được ghi nhận cùng quyết định chấp thuận hoặc yêu cầu sửa. Kịch bản chưa thực hiện vẫn giữ trạng thái chưa chạy.\n\nKhông có invoice/timesheet hoặc kỳ đo thực tế gắn EVM.\n\nBẢNG 16. EVM minh họa, không phải actuals\n\nMetric | Value | Formula | Limitation\nPV | 1,200M | Planned Value | No status date\nEV | 1,200M | Earned Value | Illustrative\nAC | 1,175M | Actual Cost | No invoice/timesheet\nSV / SPI | 0 / 1.00 | EV-PV / EV÷PV | Not measured\nCV / CPI | +25M / ~1.021 | EV-AC / EV÷AC | Not actual saving\n\nNguồn: Hồ sơ dự án LMS, bản đối chiếu tại commit 72cfa37.",
+      "level": 2,
+      "parent_id": "chuong-10-nghiem-thu-va-ong-du-an",
+      "source_index": 321,
+      "metadata": {}
+    },
+    {
+      "section_id": "bai-hoc-kinh-nghiem-va-huong-phat-trien",
+      "title": "Bài học kinh nghiệm và hướng phát triển",
+      "text": "Qua đối chiếu hồ sơ và quan sát công cụ, bài học chính là cần quản lý thống nhất kế hoạch, trạng thái công việc và bằng chứng sản phẩm. Một thẻ có checklist chưa đủ để xác nhận đầu ra; một màn hình hiển thị được chưa đủ để xác nhận toàn bộ luồng nghiệp vụ. Ở giai đoạn tiếp theo, nhóm cần hoàn tất người phụ trách và tiêu chí review trên Trello, thực hiện các kịch bản UAT còn mở, rồi mới xem xét mở rộng tải tệp, đăng nhập một lần hoặc tích hợp lớp học.",
+      "level": 2,
+      "parent_id": "chuong-10-nghiem-thu-va-ong-du-an",
+      "source_index": 327,
+      "metadata": {}
+    },
+    {
+      "section_id": "ket-luan-va-kien-nghi",
+      "title": "KẾT LUẬN VÀ KIẾN NGHỊ",
+      "text": "Bài tiểu luận đã đối chiếu kế hoạch quản lý LMS với hồ sơ dự án, mô hình thiết kế và ứng dụng thử nghiệm. Đường cơ sở 20 tuần, 1,2 tỷ đồng và 8,5 FTE được giữ nhất quán; WBS, RACI, mạng lịch, dự toán và sổ rủi ro tạo căn cứ phân công và kiểm soát thay đổi. Trello thể hiện cách tổ chức công việc, còn bộ mô hình Draw.io làm rõ phạm vi vai trò, dữ liệu và luồng bài tập.\n\nẢnh chụp trực tiếp đã bổ sung bằng chứng về board Trello, checklist WBS và các màn hình LMS theo ba vai trò. Tuy vậy, Done còn trống và các kịch bản nghiệm thu vẫn chưa được xác nhận đầy đủ. Trước khi nộp, cần bổ sung thông tin bìa và tiêu chí môn học chính thức, hoàn tất những minh chứng còn thiếu rồi đối chiếu lại với yêu cầu của giảng viên.",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 329,
+      "metadata": {}
+    },
+    {
+      "section_id": "phu-luc",
+      "title": "PHỤ LỤC",
+      "text": "Phụ lục ghi danh mục asset và checklist bằng chứng còn thiếu. Static diagram, API aggregate, runtime screenshot và test evidence là các loại khác nhau.",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 332,
+      "metadata": {}
+    },
+    {
+      "section_id": "phu-luc-a-danh-muc-so-o-draw-io",
+      "title": "Phụ lục A. Danh mục sơ đồ Draw.io",
+      "text": "Hồ sơ gốc có 15 cặp nguồn Draw.io và PNG. Phần nội dung chính dùng WBS, chu trình quản lý, mạng phụ thuộc, kiến trúc và ERD. Phụ lục D đưa thêm năm góc nhìn nghiệp vụ; Use Case, Sequence chấm bài và lớp miền được bố trí lại để đọc trong Word, còn luồng nộp bài và trạng thái dùng hình gốc đã đối chiếu.\n\nBảng dưới ghi rõ hình được sử dụng và bản nguồn còn lưu. Mỗi bản bố cục gọn có PNG xuất từ Draw.io cùng nguồn chỉnh sửa được; chúng không được dùng làm ảnh chụp ứng dụng hay log kiểm thử.\n\nBẢNG 17. 15 sơ đồ trong ZIP\n\nID | Sơ đồ | Trong báo cáo\nLMS_01 | WBS | PNG chèn\nLMS_02 | Chu trình/cổng | PNG chèn\nLMS_03 | Use Case | Bản bố cục gọn; Phụ lục D\nLMS_04 | Activity ghi danh | Inventory\nLMS_05 | Activity nộp bài | PNG; Phụ lục D\nLMS_06 | Activity quiz | Inventory\nLMS_07 | Sequence nộp bài | Nguồn lưu; HTTP method cần đối chiếu trước khi dùng\nLMS_08 | Sequence chấm bài | Bản bố cục gọn; Phụ lục D\nLMS_09 | Sequence quiz | Modeled\nLMS_10 | Class Diagram | Bản trích luồng bài tập; Phụ lục D\nLMS_11 | State submission | PNG; Phụ lục D\nLMS_12 | ERD 12 tables | PNG chèn; compare SQL\nLMS_13 | Architecture | PNG chèn; design\nLMS_14 | Dependency no dates | PNG chèn\nLMS_15 | Requirements traceability | Inventory\n\nNguồn: Hồ sơ đề tài và hướng dẫn chụp ảnh do người dùng cung cấp; cập nhật quan sát ngày 26/10/2026.",
+      "level": 2,
+      "parent_id": "phu-luc",
+      "source_index": 334,
+      "metadata": {}
+    },
+    {
+      "section_id": "phu-luc-b-checklist-anh-trello-draw-io-va-lms",
+      "title": "Phụ lục B. Checklist ảnh Trello, Draw.io và LMS",
+      "text": "Hướng dẫn yêu cầu các nhóm ảnh T01–T05, D01–D03 và L01–L07. Ngày 26/10/2026 đã bổ sung ảnh trực tiếp của board, thẻ WBS, mốc lịch, thẻ mô phỏng và website LMS theo ba vai trò tại Phụ lục E. Calendar/Timeline, ảnh thao tác editor Draw.io, API 403 và terminal kiểm thử vẫn cần bằng chứng riêng nếu giảng viên yêu cầu.\n\nBảng dưới đây phân biệt ảnh đã chụp với những minh chứng chưa thực hiện; ảnh tĩnh xuất từ Draw.io vẫn được quản lý riêng với ảnh giao diện editor.\n\nBẢNG 18. Checklist ảnh cần bổ sung\n\nID | Đối tượng | Evidence | Status\nT01 | Trello overview | UI thật, thấy lists | ĐÃ CHỤP; Phụ lục E\nT02 | Card/checklist | Card thật | ĐÃ CHỤP; checklist 0/7\nT03 | Schedule | Calendar/timeline thật | Đã chụp mốc; chưa Calendar\nT04 | Simulated UAT | Nhãn SIMULATED thật | ĐÃ CHỤP thẻ mô phỏng\nT05 | Done | Chỉ với evidence thật | Đã quan sát Done trống\nD01-D03 | Draw.io | Editor/export/review | CHƯA CHỤP editor\nL01-L07 | LMS runtime | UI thật; route/click path | L01–L05 đã chụp; L06–L07 chưa\n\nNguồn: Hồ sơ đề tài và hướng dẫn chụp ảnh do người dùng cung cấp; cập nhật quan sát ngày 26/10/2026.",
+      "level": 2,
+      "parent_id": "phu-luc",
+      "source_index": 340,
+      "metadata": {}
+    },
+    {
+      "section_id": "phu-luc-c-loai-bang-chung-va-gioi-han",
+      "title": "Phụ lục C. Loại bằng chứng và giới hạn",
+      "text": "Baseline là kế hoạch; snapshot chỉ đúng thời điểm trích; SIMULATED không phải test; NOT RUN không phải pass/fail.\n\nKế hoạch, snapshot, mô phỏng, runtime là loại chứng cứ khác nhau.\n\nBẢNG 19. Phân loại bằng chứng\n\nLoại | Ví dụ | Có thể kết luận | Không thể kết luận\nBaseline | 20 tuần, 1.2B, 8.5 FTE | Kế hoạch | Actual time/cost/headcount\nTrello API | 9 lists, 39 cards | Số liệu snapshot | UI screenshot/Done\nDraw.io source/PNG | 15 pairs | Có nguồn biểu đồ | Runtime/test log\nUAT/EVM simulated | 10 AC, EVM | Kịch bản/số học mẫu | Test/actual cost\nCapture checklist | T01-T05/D01-D03/L01-L07 | Việc còn thiếu | Ảnh thật\n\nNguồn: Hồ sơ đề tài và hướng dẫn chụp ảnh do người dùng cung cấp; cập nhật quan sát ngày 26/10/2026.",
+      "level": 2,
+      "parent_id": "phu-luc",
+      "source_index": 346,
+      "metadata": {}
+    },
+    {
+      "section_id": "vai-tro-va-use-case",
+      "title": "Vai trò và Use Case",
+      "text": "Phụ lục D. Mô hình nghiệp vụ LMS\n\nMô hình phân chia tương tác theo ba vai trò. Giảng viên chỉ xử lý khóa học phụ trách; sinh viên cần ghi danh ACTIVE. Đăng nhập là điều kiện chung được lược. Khung nét đứt nhóm vai trò, đường nối biểu thị tác nhân tham gia. Nguồn: docs/02_ROLES_USE_CASES.md.\n\nHÌNH 7. Use Case LMS theo vai trò\n\nNguồn: Hồ sơ Draw.io do người dùng cung cấp; đối chiếu nguồn dự án LMS.",
+      "level": 3,
+      "parent_id": "phu-luc-d-mo-hinh-nghiep-vu-lms",
+      "source_index": 354,
+      "metadata": {}
+    },
+    {
+      "section_id": "luong-nop-bai",
+      "title": "Luồng nộp bài",
+      "text": "Luồng nộp bài dùng PUT /assignments/{assignment_id}/submission. API kiểm tra vai trò sinh viên, ghi danh ACTIVE, khóa học đang hoạt động, bài tập đang công bố, nội dung văn bản và chính sách nộp muộn. Nếu không đủ điều kiện, hệ thống trả lý do từ chối; nếu hợp lệ, hệ thống tạo hoặc cập nhật bài nộp hiện hành. Bài đã chấm không được sinh viên sửa.\n\nHình dùng ký pháp lưu đồ để diễn giải hoạt động, với nhánh Có/Không tại điều kiện cho phép nộp. Đây là mô hình rút gọn của mã nguồn; MVP nhận ContentText và không tải tệp bài nộp. Nguồn: backend/app/api/routes/assignments.py và docs/02_ROLES_USE_CASES.md.\n\nHÌNH 8. Luồng sinh viên nộp bài văn bản\n\nNguồn: Hồ sơ Draw.io do người dùng cung cấp; đối chiếu nguồn dự án LMS.",
+      "level": 3,
+      "parent_id": "phu-luc-d-mo-hinh-nghiep-vu-lms",
+      "source_index": 361,
+      "metadata": {}
+    },
+    {
+      "section_id": "trinh-tu-cham-bai",
+      "title": "Trình tự chấm bài",
+      "text": "Giao diện lấy bài bằng GET /assignments/{assignment_id}/submissions và gửi điểm bằng PUT /submissions/{submission_id}/grade. API kiểm tra quyền sở hữu khóa học và giới hạn điểm, cập nhật Submission và Grades, rồi tạo Notification; bước 9 là xác nhận commit. Thời gian đọc từ trên xuống, mũi tên chỉ bên gửi và nhận. Hình chỉ có nhánh thành công, lược activation và nhánh lỗi. Nguồn: backend/app/api/routes/assignments.py.\n\nHÌNH 9. Trình tự tương tác khi giảng viên chấm bài\n\nNguồn: Hồ sơ Draw.io do người dùng cung cấp; đối chiếu nguồn dự án LMS.",
+      "level": 3,
+      "parent_id": "phu-luc-d-mo-hinh-nghiep-vu-lms",
+      "source_index": 368,
+      "metadata": {}
+    },
+    {
+      "section_id": "cac-lop-mien-cua-bai-tap",
+      "title": "Các lớp miền của bài tập",
+      "text": "Sáu lớp khái niệm được trích cho luồng bài tập, không mô tả phương thức cài đặt. Đường liền là các quan hệ được chọn; số lượng và quan hệ đầy đủ đọc cùng ERD. Đường đứt logic dùng Grades.SourceType = ASSIGNMENT và SourceId = AssignmentId, không phải khóa ngoại SQL đến Assignment. Grade có các khóa ngoại CourseId, StudentId và GradedBy. Nguồn: database/01_schema.sql và backend/app/api/routes/assignments.py.\n\nHÌNH 10. Mô hình lớp khái niệm của luồng bài tập\n\nNguồn: Hồ sơ Draw.io do người dùng cung cấp; đối chiếu nguồn dự án LMS.",
+      "level": 3,
+      "parent_id": "phu-luc-d-mo-hinh-nghiep-vu-lms",
+      "source_index": 374,
+      "metadata": {}
+    },
+    {
+      "section_id": "trang-thai-bai-nop",
+      "title": "Trạng thái bài nộp",
+      "text": "Schema cho phép SUBMITTED, LATE và GRADED. Khi tiếp nhận bài hợp lệ, thời điểm nộp và AllowLate quyết định hai trạng thái đầu; thao tác chấm chuyển bài sang GRADED. Hình thể hiện lần nộp và lần chấm đầu tiên, dùng các trạng thái có tên để làm rõ vòng xử lý hiện hành.\n\nHình lược các vòng cập nhật: sinh viên có thể nộp lại khi quy tắc thời hạn cho phép và bài chưa chấm; giảng viên có thể sửa điểm đã chấm. Vì vậy, nhãn kết thúc vòng đời hiện hành không có nghĩa bản ghi bị xóa hay điểm không thể điều chỉnh. Nguồn: database/01_schema.sql và backend/app/api/routes/assignments.py.\n\nHÌNH 11. Trạng thái nộp và chấm bài\n\nNguồn: Hồ sơ Draw.io do người dùng cung cấp; đối chiếu nguồn dự án LMS.",
+      "level": 3,
+      "parent_id": "phu-luc-d-mo-hinh-nghiep-vu-lms",
+      "source_index": 380,
+      "metadata": {}
+    },
+    {
+      "section_id": "phu-luc-e-minh-chung-trello-va-website-lms",
+      "title": "Phụ lục E Minh chứng Trello và website LMS",
+      "text": "Các ảnh trong phụ lục được chụp trực tiếp từ Trello và website LMS ngày 26/10/2026 sau khi thao tác qua giao diện. Website sử dụng cơ sở dữ liệu kiểm thử UniversityLms_Test_Repeat_20261021_1027 có sẵn; không sử dụng cơ sở dữ liệu người dùng. Quan sát chỉ đọc và đăng nhập demo không làm thay đổi điểm, bài nộp hoặc trạng thái thẻ. Bằng chứng này phản ánh trạng thái đã quan sát, không xác nhận toàn bộ UAT hay triển khai sản xuất.",
+      "level": 2,
+      "parent_id": "phu-luc",
+      "source_index": 387,
+      "metadata": {}
+    },
+    {
+      "section_id": "cac-cot-cong-viec-tren-bang-trello-lms",
+      "title": "Các cột công việc trên bảng Trello LMS",
+      "text": "Ảnh cho thấy nhóm đã tổ chức công việc theo To Do, Doing, Review, Done và Blocked. Tại thời điểm chụp, To Do có 25 thẻ; Doing, Review và Done đều bằng 0. Điều này cho phép nhận xét về cấu trúc quản lý và tình trạng theo dõi, nhưng chưa cho phép báo cáo phần trăm hoàn thành. Thẻ hỏi rubric nằm ở Blocked cho thấy nhóm còn một đầu vào cần xác nhận.\n\nHÌNH 12. Các cột công việc trên bảng Trello LMS\n\nNguồn: Ảnh chụp trực tiếp ngày 26/10/2026; Trello, bảng sLfApXgV. Mã minh chứng T01.",
+      "level": 3,
+      "parent_id": "phu-luc-e-minh-chung-trello-va-website-lms",
+      "source_index": 389,
+      "metadata": {}
+    },
+    {
+      "section_id": "mo-ta-va-checklist-cua-the-wbs",
+      "title": "Mô tả và checklist của thẻ WBS",
+      "text": "Thẻ PM-04 quy định đầu ra là WBS hướng sản phẩm bàn giao và có bảy điều kiện kiểm tra. Checklist đang ở mức 0/7, gồm phân biệt phạm vi sản phẩm với phạm vi dự án, xác định người phụ trách và liên kết bằng chứng. Vì vậy, đây là minh chứng tiêu chí đã được đưa lên công cụ; chưa phải xác nhận WBS đã được review xong.\n\nHÌNH 13. Mô tả và checklist của thẻ WBS\n\nNguồn: Ảnh chụp trực tiếp ngày 26/10/2026; Trello, bảng sLfApXgV. Mã minh chứng T02.",
+      "level": 3,
+      "parent_id": "phu-luc-e-minh-chung-trello-va-website-lms",
+      "source_index": 394,
+      "metadata": {}
+    },
+    {
+      "section_id": "moc-ke-hoach-va-trang-thai-done-tren-trello",
+      "title": "Mốc kế hoạch và trạng thái Done trên Trello",
+      "text": "Các mốc tháng 10–11 được đặt cạnh danh sách nghiệm thu mô phỏng. Ngày trên thẻ là mốc kế hoạch của nhóm; ảnh không phải chế độ Calendar hoặc Timeline và không chứng minh tiến độ thực tế. Cột Done đang trống. Báo cáo ghi nhận đúng trạng thái này, thay vì tạo thêm một thẻ hoàn tất để làm minh chứng.\n\nHÌNH 14. Mốc kế hoạch và trạng thái Done trên Trello\n\nNguồn: Ảnh chụp trực tiếp ngày 26/10/2026; Trello, bảng sLfApXgV. Mã minh chứng T03.",
+      "level": 3,
+      "parent_id": "phu-luc-e-minh-chung-trello-va-website-lms",
+      "source_index": 399,
+      "metadata": {}
+    },
+    {
+      "section_id": "the-nghiem-thu-uoc-ghi-ro-la-mo-phong",
+      "title": "Thẻ nghiệm thu được ghi rõ là mô phỏng",
+      "text": "Tiêu đề SIM-01 và phần mô tả ghi rõ đây là kịch bản tương lai, không phải biên bản thật. Nội dung checklist có một bộ giả định EVM riêng, khác đường cơ sở trong bài. Nhãn này giúp tránh nhầm ví dụ phục vụ báo cáo với kết quả kiểm thử hoặc quyết định nghiệm thu.\n\nHÌNH 15. Thẻ nghiệm thu được ghi rõ là mô phỏng\n\nNguồn: Ảnh chụp trực tiếp ngày 26/10/2026; Trello, bảng sLfApXgV. Mã minh chứng T04.",
+      "level": 3,
+      "parent_id": "phu-luc-e-minh-chung-trello-va-website-lms",
+      "source_index": 404,
+      "metadata": {}
+    },
+    {
+      "section_id": "trang-ang-nhap-cua-website-lms",
+      "title": "Trang đăng nhập của website LMS",
+      "text": "Màn hình đăng nhập cung cấp trường tài khoản, mật khẩu và các tài khoản demo theo ba vai trò. Ảnh được chụp trên website đang chạy ở địa chỉ cục bộ; mật khẩu trong trường nhập được che. Sự hiện diện của giao diện này xác nhận điểm vào hệ thống, còn khả năng truy cập từng chức năng phải được quan sát sau đăng nhập.\n\nHÌNH 16. Trang đăng nhập của website LMS\n\nNguồn: Ảnh chụp trực tiếp ngày 26/10/2026; website LMS cục bộ, tài khoản demo. Mã minh chứng L01.",
+      "level": 3,
+      "parent_id": "phu-luc-e-minh-chung-trello-va-website-lms",
+      "source_index": 409,
+      "metadata": {}
+    },
+    {
+      "section_id": "trang-quan-ly-nguoi-dung-cua-quan-tri-vien",
+      "title": "Trang quản lý người dùng của quản trị viên",
+      "text": "Sau khi đăng nhập bằng vai trò quản trị, menu hiển thị chức năng Người dùng và danh sách tài khoản lấy từ cơ sở dữ liệu kiểm thử. Trang có bộ lọc vai trò và thao tác quản lý trạng thái. Các tên và email trên ảnh thuộc dữ liệu demo; lần quan sát này không thêm, sửa hoặc khóa tài khoản.\n\nHÌNH 17. Trang quản lý người dùng của quản trị viên\n\nNguồn: Ảnh chụp trực tiếp ngày 26/10/2026; website LMS cục bộ, tài khoản demo. Mã minh chứng L02.",
+      "level": 3,
+      "parent_id": "phu-luc-e-minh-chung-trello-va-website-lms",
+      "source_index": 414,
+      "metadata": {}
+    },
+    {
+      "section_id": "giang-vien-xem-bai-tap-theo-khoa-hoc-phu-trach",
+      "title": "Giảng viên xem bài tập theo khóa học phụ trách",
+      "text": "Vai trò giảng viên nhìn thấy danh sách khóa học được phân công và bài tập tương ứng. Với WEB220, bài tập REST API hiển thị trạng thái PUBLISHED, điểm tối đa và hạn nộp. Đây là đầu vào cho việc kiểm tra tính nhất quán giữa đặc tả bài tập, giao diện và dữ liệu, chưa phải kết quả kiểm thử mọi trường hợp phân quyền.\n\nHÌNH 18. Giảng viên xem bài tập theo khóa học phụ trách\n\nNguồn: Ảnh chụp trực tiếp ngày 26/10/2026; website LMS cục bộ, tài khoản demo. Mã minh chứng L03.",
+      "level": 3,
+      "parent_id": "phu-luc-e-minh-chung-trello-va-website-lms",
+      "source_index": 419,
+      "metadata": {}
+    },
+    {
+      "section_id": "giang-vien-xem-bai-nop-van-ban-cua-sinh-vien",
+      "title": "Giảng viên xem bài nộp văn bản của sinh viên",
+      "text": "Từ nút Xem và Chấm bài, giao diện mở danh sách bài nộp và nội dung văn bản đã lưu. Ảnh có tên sinh viên demo, thời điểm nộp và nút chấm điểm. Lần quan sát dừng ở bước đọc; không gửi điểm hoặc thay đổi phản hồi. Hình nối mô hình trình tự chấm bài trong Phụ lục D với một trạng thái cụ thể trên ứng dụng.\n\nHÌNH 19. Giảng viên xem bài nộp văn bản của sinh viên\n\nNguồn: Ảnh chụp trực tiếp ngày 26/10/2026; website LMS cục bộ, tài khoản demo. Mã minh chứng L03b.",
+      "level": 3,
+      "parent_id": "phu-luc-e-minh-chung-trello-va-website-lms",
+      "source_index": 424,
+      "metadata": {}
+    },
+    {
+      "section_id": "sinh-vien-xem-bai-tap-va-hanh-ong-cap-nhat-bai-nop",
+      "title": "Sinh viên xem bài tập và hành động cập nhật bài nộp",
+      "text": "Tài khoản sinh viên Nguyễn An nhìn thấy bài tập của khóa AI310 và hành động Cập nhật bài nộp. Khóa học được chọn từ những lớp tài khoản đang theo học. Ảnh phản ánh màn hình trước thao tác gửi; không được dùng để kết luận lần nộp mới đã thành công hoặc các trường hợp quá hạn đều đã được kiểm tra.\n\nHÌNH 20. Sinh viên xem bài tập và hành động cập nhật bài nộp\n\nNguồn: Ảnh chụp trực tiếp ngày 26/10/2026; website LMS cục bộ, tài khoản demo. Mã minh chứng L04.",
+      "level": 3,
+      "parent_id": "phu-luc-e-minh-chung-trello-va-website-lms",
+      "source_index": 429,
+      "metadata": {}
+    },
+    {
+      "section_id": "bang-iem-ca-nhan-tren-du-lieu-kiem-thu",
+      "title": "Bảng điểm cá nhân trên dữ liệu kiểm thử",
+      "text": "Trang bảng điểm hiển thị một cột điểm Quiz 1 của khóa AI310, giá trị 10/10 và trọng số 10%. Đây là dữ liệu kiểm thử đã tồn tại trước lần chụp, không phải kết quả bài kiểm tra vừa thực hiện. Ảnh xác nhận khả năng xem dữ liệu theo vai trò sinh viên; không được diễn giải thành chất lượng học tập hoặc hiệu quả triển khai thực tế.\n\nHÌNH 21. Bảng điểm cá nhân trên dữ liệu kiểm thử\n\nNguồn: Ảnh chụp trực tiếp ngày 26/10/2026; website LMS cục bộ, tài khoản demo. Mã minh chứng L05.",
+      "level": 3,
+      "parent_id": "phu-luc-e-minh-chung-trello-va-website-lms",
+      "source_index": 434,
+      "metadata": {}
+    },
+    {
+      "section_id": "tai-lieu-tham-khao",
+      "title": "TÀI LIỆU THAM KHẢO",
+      "text": "Tiếng Việt:\n\n[1] Kho mã nguồn LMS. Hồ sơ đối soát kế hoạch quản lý dự án LMS. 2026. https://github.com/TanNguyen234/LMS/blob/72cfa37ce5509286ee3f5990ee9c234adc452184/docs/audit/06_PM_DOCUMENT_RECONCILIATION.md.\n\n[2] Kho mã nguồn LMS. Mã nguồn luồng bài tập và cấu trúc dữ liệu LMS. 2026. https://github.com/TanNguyen234/LMS/blob/72cfa37ce5509286ee3f5990ee9c234adc452184/backend/app/api/routes/assignments.py.\n\n[3] Kho mã nguồn LMS. Ma trận phân công trách nhiệm RACI. 2026. https://github.com/TanNguyen234/LMS/blob/72cfa37ce5509286ee3f5990ee9c234adc452184/docs/project-management/03_RACI_MATRIX.md.\n\n[4] Kho mã nguồn LMS. Sổ rủi ro của dự án LMS. 2026. https://github.com/TanNguyen234/LMS/blob/72cfa37ce5509286ee3f5990ee9c234adc452184/docs/project-management/08_RISK_REGISTER.md.\n\n[5] Kho mã nguồn LMS. Tiêu chí chất lượng và các cổng kiểm soát LMS. 2026. https://github.com/TanNguyen234/LMS/blob/72cfa37ce5509286ee3f5990ee9c234adc452184/docs/project-management/09_QUALITY_PLAN_AND_GATES.md.\n\n[6] Kho mã nguồn LMS. Điều lệ dự án LMS. 2026. https://github.com/TanNguyen234/LMS/blob/72cfa37ce5509286ee3f5990ee9c234adc452184/docs/project-management/01_PROJECT_CHARTER.md.\n\nTiếng Anh:\n\n[7] Atlassian. Add and customize cards and lists. Atlassian. không ghi năm; truy cập ngày 26/10/2026. https://support.atlassian.com/trello/docs/add-and-customize-cards-and-lists/.\n\n[8] Atlassian. Add, delete, and manage checklists. Atlassian. không ghi năm; truy cập ngày 26/10/2026. https://support.atlassian.com/trello/docs/adding-checklists-to-cards/.\n\n[9] JGraph. Export a diagram to a PNG image. JGraph. không ghi năm; truy cập ngày 26/10/2026. https://www.drawio.com/docs/manual/export/export-to-png/.\n\n[10] JGraph. Export diagram formats. JGraph. không ghi năm; truy cập ngày 26/10/2026. https://www.drawio.com/docs/manual/export/export-diagram/.\n\n[11] Project Management Institute. Practice Standard for Scheduling. Project Management Institute. 2011. https://www.pmi.org/-/media/pmi/documents/public/pdf/certifications/practice-standard-scheduling.pdf.",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 439,
+      "metadata": {}
+    }
+  ]
+}

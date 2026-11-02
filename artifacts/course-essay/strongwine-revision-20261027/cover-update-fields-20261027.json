@@ -1,0 +1,4558 @@
+{
+  "status": "SUCCESS",
+  "operation": "field.update_all",
+  "backend_used": "word-native",
+  "fidelity": "native",
+  "output_path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\strongwine-revision-20261027\\StrongWine_20261027_bia_chuan_final.docx",
+  "warnings": [],
+  "manual_review_required": false,
+  "data": {
+    "updated": true,
+    "repaginated": true,
+    "passes": 2,
+    "story_ranges_updated": 30,
+    "tables_of_contents_updated": 3,
+    "tables_of_figures_updated": 0,
+    "pagination_fields_stabilized": 0,
+    "fields": [
+      {
+        "story": "document",
+        "type": 13,
+        "instruction": "TOC \\o \"1-3\" \\h \\z \\u",
+        "result": "LỜI CẢM ƠN\t3LỜI CAM ĐOAN\t4NHẬN XÉT CỦA GIẢNG VIÊN HƯỚNG DẪN\t5NHẬN XÉT CỦA GIẢNG VIÊN PHẢN BIỆN\t6LỊCH TRÌNH THỰC HIỆN TIỂU LUẬN\t7TÓM TẮT ĐỒ ÁN\t8ABSTRACT\t8MỤC LỤC\t9DANH MỤC HÌNH ẢNH\t13DANH MỤC BẢNG BIỂU\t15DANH MỤC TỪ VIẾT TẮT\t16MỞ ĐẦU\t1Mục tiêu, câu hỏi và phạm vi khảo sát\t1Phương pháp và quy ước bằng chứng\t1NỘI DUNG\t3CHƯƠNG 1: CƠ SỞ LÝ THUYẾT\t31.1\tĐối tượng, lớp và nguyên tắc trách nhiệm\t31.2\tIoC, dependency injection và cộng tác lớp\t31.3\tMẫu thiết kế và tiêu chí nhận diện\t41.4\tUML như ngôn ngữ mô hình hóa\t51.5\tTổng quan về ngôn ngữ lập trình Java\t61.5.1\tĐặc điểm nổi bật của Java trong hệ thống\t61.5.2\tJava và phát triển web\t71.5.3\tQuản lý phụ thuộc và tổ chức package\t71.6\tTổng quan về Spring Boot và mô hình web của StrongWine\t81.6.1\tJSP trong tài liệu cũ và Thymeleaf hiện tại\t81.6.2\tSpring Boot, dependency injection và giao dịch\t91.6.3\tValidation, binding và xử lý lỗi web\t91.7\tTổng quan về môi trường phát triển\t101.8\tTổng quan về cơ sở dữ liệu quan hệ\t101.9\tTổng quan về hệ quản trị cơ sở dữ liệu Microsoft SQL Server\t111.10\tTổng quan về máy chủ Tomcat\t111.11\tCác nguyên lý hướng đối tượng làm nền cho phân tích\t121.11.1\tĐơn trách nhiệm và phân lớp\t121.11.2\tMở đóng, thay thế Liskov và phân tách interface\t13CHƯƠNG 2: KHẢO SÁT TỔNG QUAN STRONGWINE\t142.1\tRanh giới kiến trúc và thành phần\t142.2\tTác nhân, mục tiêu và kết quả mong đợi\t142.3\tYêu cầu chức năng theo phân hệ\t162.4\tYêu cầu phi chức năng và điều kiện vận hành\t162.5\tTổng quan nghiệp vụ của đề tài\t172.5.1\tNghiệp vụ khách hàng\t172.5.2\tNghiệp vụ quản trị viên và quản lý kho\t182.5.3\tNghiệp vụ giao hàng của shipper\t182.6\tTổng quan về nghiệp vụ kinh doanh rượu trực tuyến\t182.7\tPhân tích yêu cầu nghiệp vụ\t192.7.1\tPhân tích yêu cầu chức năng (Functional Requirements)\t202.7.2\tPhân tích yêu cầu phi chức năng (Non-Functional Requirements)\t202.8\tPhân tích tác nhân và quyền hạn\t212.9\tQuy tắc nghiệp vụ cốt lõi\t222.10\tPhân tích yêu cầu theo nhóm màn hình\t222.11\tĐặc tả ca sử dụng: khách hàng đặt hàng\t232.12\tĐặc tả ca sử dụng: xác nhận thanh toán\t232.13\tĐặc tả ca sử dụng: quản lý sản phẩm\t242.14\tĐặc tả ca sử dụng: gửi đánh giá sản phẩm\t252.15\tPhân tích yêu cầu dữ liệu và lưu vết\t252.16\tPhân tích yêu cầu phi chức năng theo mức ưu tiên\t26CHƯƠNG 3: PHÂN TÍCH MÔ HÌNH MIỀN VÀ THIẾT KẾ HƯỚNG ĐỐI TƯỢNG\t273.1\tNhóm đối tượng sản phẩm và danh mục\t273.2\tNhóm đối tượng tài khoản, giỏ và đơn\t273.3\tNhóm đối tượng tồn kho, thanh toán và vận đơn\t283.4\tĐối chiếu các nguyên lý hướng đối tượng\t293.5\tStrategy trong nhập và xuất dữ liệu\t303.6\tSpecification trong tìm kiếm rượu\t313.7\tTemplate Method trong báo cáo Excel\t313.8\tPublisher và sự kiện sau khi giao dịch hoàn tất\t323.9\tScheduler và dispatch queue\t323.10\tFileStorageService và upload ảnh\t333.11\tAuthentication, SecurityContext và role mapping\t333.12\tAPI JWT và phiên đăng nhập\t343.13\tDịch vụ email và kết quả giao OTP\t343.14\tXử lý lỗi và observability\t353.15\tKhung frontend và state giao diện\t353.16\tRepository, event và giao dịch\t363.17\tThiết kế biểu đồ chức năng\t363.18\tThiết kế biểu đồ Use Case\t373.19\tThiết kế biểu đồ hoạt động cho checkout\t383.20\tThiết kế biểu đồ hoạt động cho đánh giá\t393.21\tThiết kế biểu đồ hoạt động cho admin tạo sản phẩm\t393.22\tThiết kế biểu đồ trình tự cho checkout\t403.23\tThiết kế biểu đồ trình tự cho thanh toán webhook\t403.24\tThiết kế biểu đồ trình tự cho admin thêm sản phẩm\t413.25\tThiết kế biểu đồ lớp miền\t413.26\tThiết kế biểu đồ trạng thái cho Order và Shipment\t423.27\tThiết kế luồng sự kiện và SSE\t433.28\tGhi chú chất lượng cho UML\t433.29\tNguyên tắc thiết kế dữ liệu\t443.30\tBảng USERS — tài khoản người dùng\t47Dữ liệu mẫu thực tế bảng USERS\t473.31\tBảng CATEGORIES — danh mục sản phẩm\t49Dữ liệu mẫu thực tế bảng CATEGORIES\t493.32\tBảng WINES — thông tin rượu\t51Dữ liệu mẫu thực tế bảng WINES\t513.33\tBảng WAREHOUSE — kho hàng\t54Dữ liệu mẫu thực tế bảng WAREHOUSE\t543.34\tBảng INVENTORY — tồn theo wine và warehouse\t56Dữ liệu mẫu thực tế bảng INVENTORY\t563.35\tBảng STOCK_LOGS — dấu vết tồn kho\t58Dữ liệu mẫu thực tế bảng STOCK_LOGS\t583.36\tBảng INVENTORY_TRANSACTIONS — giao dịch nhập xuất kho\t60Dữ liệu mẫu thực tế bảng INVENTORY_TRANSACTIONS\t603.37\tBảng CARTS — giỏ hàng\t62Dữ liệu mẫu thực tế bảng CARTS\t623.38\tBảng CART_ITEMS — dòng sản phẩm trong giỏ\t63Dữ liệu mẫu thực tế bảng CART_ITEMS\t633.39\tBảng ORDERS — đơn hàng\t64Dữ liệu mẫu thực tế bảng ORDERS\t643.40\tBảng ORDER_ITEMS — chi tiết đơn hàng\t67Dữ liệu mẫu thực tế bảng ORDER_ITEMS\t673.41\tBảng PAYMENTS — bản ghi thanh toán\t69Dữ liệu mẫu thực tế bảng PAYMENTS\t693.42\tBảng PAYMENT_TRANSACTIONS — sự kiện giao dịch thanh toán\t71Dữ liệu mẫu thực tế bảng PAYMENT_TRANSACTIONS\t713.43\tBảng REVIEWS — đánh giá\t73Dữ liệu mẫu thực tế bảng REVIEWS\t733.44\tBảng PASSWORD_RESET_TOKENS — token đặt lại mật khẩu\t75Dữ liệu mẫu thực tế bảng PASSWORD_RESET_TOKENS\t753.45\tBảng SHIPPERS — hồ sơ người giao hàng\t77Dữ liệu mẫu thực tế bảng SHIPPERS\t773.46\tBảng SHIPMENTS — vận đơn\t79Dữ liệu mẫu thực tế bảng SHIPMENTS\t793.47\tBảng SHIPMENT_STATUS_HISTORY — lịch sử trạng thái vận đơn\t82Dữ liệu mẫu thực tế bảng SHIPMENT_STATUS_HISTORY\t823.48\tBảng SHIPMENT_OTP_AUDIT_LOGS — nhật ký bảo mật OTP\t84Dữ liệu mẫu thực tế bảng SHIPMENT_OTP_AUDIT_LOGS\t843.49\tĐối chiếu các bảng bổ sung và enum miền\t87Dữ liệu mẫu thực tế bảng SYSTEM_CONFIGS\t873.50\tERD và nguyên tắc cập nhật sơ đồ\t883.51\tPhiên bản hóa schema bằng Flyway\t893.52\tBảo vệ dữ liệu cá nhân trong mô hình miền\t903.53\tLớp controller và ranh giới HTTP\t913.54\tLớp service và điều phối use case\t913.55\tRepository và truy vấn miền\t92CHƯƠNG 4: LUỒNG NGHIỆP VỤ KHÁCH HÀNG\t944.2\tGiỏ hàng và đồng bộ thông tin sản phẩm\t984.3\tCheckout và tạo đơn chờ thanh toán\t984.4\tTạo phiên thanh toán, callback và webhook\t994.6\tLịch sử, chi tiết đơn và đánh giá\t1014.7\tDuyệt danh mục và tìm kiếm rượu\t1034.8\tXem chi tiết và chọn số lượng\t1044.9\tĐăng ký, đăng nhập và đặt lại mật khẩu\t1054.10\tQuản lý giỏ hàng\t1074.11\tTạo đơn và reservation tồn\t1084.12\tKhởi tạo payment session\t1084.13\tXử lý callback, webhook và trạng thái thanh toán\t1094.14\tXem lịch sử đơn và quyền sở hữu\t1094.15\tTạo và kiểm soát review\t110CHƯƠNG 5: LUỒNG NGHIỆP VỤ QUẢN TRỊ VÀ KHO\t1114.16\tDashboard và quản lý danh mục, sản phẩm\t1124.17\tQuản lý người dùng, shipper và giao dịch\t1144.18\tSơ đồ quy trình thêm sản phẩm từ tài liệu cũ\t1145.1\tTồn đa kho, giữ chỗ và lịch sử nhập xuất\t1185.2\tNhập Excel: mẫu, preview, dry-run và ghi dữ liệu\t1195.3\tDashboard và quan sát vận hành\t1205.4\tQuản lý order/payment phía quản trị\t1275.5\tMàn hình tồn kho và cảnh báo low stock\t1295.6\tNhập kho, xuất kho và ledger\t1295.7\tNhập Excel: template, preview và dry-run\t1305.8\tXử lý lỗi theo dòng Excel\t1315.9\tExport Excel và báo cáo tồn\t131CHƯƠNG 6: LUỒNG SHIPPER, OTP VÀ THÔNG BÁO\t1336.1\tPhân công tự động và quyền xem nhiệm vụ\t1346.2\tLấy hàng, bắt đầu giao và báo giao thất bại\t1356.3\tOTP giao hàng, gửi lại và giới hạn thử\t1356.4\tSSE và phát cập nhật đến từng vai trò\t1366.5\tTạo shipment sau khi đơn thanh toán\t1376.6\tChính sách auto dispatch\t1376.7\tXác nhận lấy hàng và bắt đầu giao\t1386.8\tBáo giao thất bại, retry và hoàn trả\t1386.9\tSinh OTP giao hàng\t1396.10\tXác thực OTP khi hoàn tất\t1396.11\tAdmin override và kiểm toán\t1406.12\tSSE theo order, admin và shipper\t1416.13\tUI shipper, riêng tư và thao tác mobile\t141CHƯƠNG 7: CHẤT LƯỢNG, BẢO MẬT VÀ ĐÁNH GIÁ KIỂM THỬ\t1437.1\tXác thực, phân quyền và quyền sở hữu tài nguyên\t1437.2\tGiao dịch dữ liệu và các tác vụ ngoài database\t1437.3\tXử lý lỗi, nhật ký và khả năng phục hồi\t1447.4\tKiểm thử hiện có và khoảng trống kiểm chứng\t1447.5\tKết quả chạy ứng dụng và thay đổi dữ liệu đã được cho phép\t1457.6\t7.6 Đánh giá tính tiện dụng giao diện (UI/UX) và kiến trúc thành phần\t1457.7\tCài đặt và chuẩn bị cơ sở dữ liệu\t1467.8\tCài đặt ứng dụng và cấu hình ngoài\t1467.9\tKết quả chạy và phạm vi chứng cứ\t1477.10\tThiết kế bộ kiểm thử chức năng\t1477.11\tMa trận kiểm thử hồi quy\t1487.12\tRà soát giao diện và sửa UI\t1487.13\tKết quả và mức độ tin cậy\t149HẠN CHẾ VÀ RỦI RO CẦN THEO DÕI\t1508.1\tThanh toán và tồn kho\t1508.2\tGiao hàng, sự kiện và bảo mật\t150ĐỀ XUẤT CẢI TIẾN VÀ KẾ HOẠCH KIỂM CHỨNG\t1519.1\tƯu tiên bảo toàn đơn hàng và payment\t1519.2\tƯu tiên giao nhận, OTP và khả năng quan sát\t1519.3\tChuẩn hóa thiết kế và mở rộng kiểm thử\t151BỔ SUNG: DANH MỤC ĐƯỜNG ĐI THEO VAI TRÒ\t153Điểm vào phía khách và API công khai\t153Điểm vào phía quản trị\t153Điểm vào phía shipper và tương tác trực tiếp\t153KẾT LUẬN\t155TỔNG KẾT\t155TÀI LIỆU THAM KHẢO\t156PHỤ LỤC: THUẬT NGỮ VÀ VIẾT TẮT\t157TUYÊN BỐ VỀ CÔNG CỤ HỖ TRỢ VÀ LIÊM CHÍNH HỌC THUẬT\t158",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020938\"",
+        "result": "LỜI CẢM ƠN\t3",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020938 \\h",
+        "result": "3",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020939\"",
+        "result": "LỜI CAM ĐOAN\t4",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020939 \\h",
+        "result": "4",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020940\"",
+        "result": "NHẬN XÉT CỦA GIẢNG VIÊN HƯỚNG DẪN\t5",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020940 \\h",
+        "result": "5",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020941\"",
+        "result": "NHẬN XÉT CỦA GIẢNG VIÊN PHẢN BIỆN\t6",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020941 \\h",
+        "result": "6",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020942\"",
+        "result": "LỊCH TRÌNH THỰC HIỆN TIỂU LUẬN\t7",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020942 \\h",
+        "result": "7",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020943\"",
+        "result": "TÓM TẮT ĐỒ ÁN\t8",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020943 \\h",
+        "result": "8",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020944\"",
+        "result": "ABSTRACT\t8",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020944 \\h",
+        "result": "8",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020945\"",
+        "result": "MỤC LỤC\t9",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020945 \\h",
+        "result": "9",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020946\"",
+        "result": "DANH MỤC HÌNH ẢNH\t13",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020946 \\h",
+        "result": "13",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020947\"",
+        "result": "DANH MỤC BẢNG BIỂU\t15",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020947 \\h",
+        "result": "15",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020948\"",
+        "result": "DANH MỤC TỪ VIẾT TẮT\t16",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020948 \\h",
+        "result": "16",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020949\"",
+        "result": "MỞ ĐẦU\t1",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020949 \\h",
+        "result": "1",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020950\"",
+        "result": "Mục tiêu, câu hỏi và phạm vi khảo sát\t1",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020950 \\h",
+        "result": "1",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020951\"",
+        "result": "Phương pháp và quy ước bằng chứng\t1",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020951 \\h",
+        "result": "1",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020952\"",
+        "result": "NỘI DUNG\t3",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020952 \\h",
+        "result": "3",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020953\"",
+        "result": "CHƯƠNG 1: CƠ SỞ LÝ THUYẾT\t3",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020953 \\h",
+        "result": "3",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020954\"",
+        "result": "1.1\tĐối tượng, lớp và nguyên tắc trách nhiệm\t3",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020954 \\h",
+        "result": "3",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020955\"",
+        "result": "1.2\tIoC, dependency injection và cộng tác lớp\t3",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020955 \\h",
+        "result": "3",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020956\"",
+        "result": "1.3\tMẫu thiết kế và tiêu chí nhận diện\t4",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020956 \\h",
+        "result": "4",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020957\"",
+        "result": "1.4\tUML như ngôn ngữ mô hình hóa\t5",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020957 \\h",
+        "result": "5",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020958\"",
+        "result": "1.5\tTổng quan về ngôn ngữ lập trình Java\t6",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020958 \\h",
+        "result": "6",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020959\"",
+        "result": "1.5.1\tĐặc điểm nổi bật của Java trong hệ thống\t6",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020959 \\h",
+        "result": "6",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020960\"",
+        "result": "1.5.2\tJava và phát triển web\t7",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020960 \\h",
+        "result": "7",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020961\"",
+        "result": "1.5.3\tQuản lý phụ thuộc và tổ chức package\t7",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020961 \\h",
+        "result": "7",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020962\"",
+        "result": "1.6\tTổng quan về Spring Boot và mô hình web của StrongWine\t8",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020962 \\h",
+        "result": "8",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020963\"",
+        "result": "1.6.1\tJSP trong tài liệu cũ và Thymeleaf hiện tại\t8",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020963 \\h",
+        "result": "8",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020964\"",
+        "result": "1.6.2\tSpring Boot, dependency injection và giao dịch\t9",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020964 \\h",
+        "result": "9",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020965\"",
+        "result": "1.6.3\tValidation, binding và xử lý lỗi web\t9",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020965 \\h",
+        "result": "9",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020966\"",
+        "result": "1.7\tTổng quan về môi trường phát triển\t10",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020966 \\h",
+        "result": "10",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020967\"",
+        "result": "1.8\tTổng quan về cơ sở dữ liệu quan hệ\t10",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020967 \\h",
+        "result": "10",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020968\"",
+        "result": "1.9\tTổng quan về hệ quản trị cơ sở dữ liệu Microsoft SQL Server\t11",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020968 \\h",
+        "result": "11",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020969\"",
+        "result": "1.10\tTổng quan về máy chủ Tomcat\t11",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020969 \\h",
+        "result": "11",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020970\"",
+        "result": "1.11\tCác nguyên lý hướng đối tượng làm nền cho phân tích\t12",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020970 \\h",
+        "result": "12",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020971\"",
+        "result": "1.11.1\tĐơn trách nhiệm và phân lớp\t12",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020971 \\h",
+        "result": "12",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020972\"",
+        "result": "1.11.2\tMở đóng, thay thế Liskov và phân tách interface\t13",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020972 \\h",
+        "result": "13",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020973\"",
+        "result": "CHƯƠNG 2: KHẢO SÁT TỔNG QUAN STRONGWINE\t14",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020973 \\h",
+        "result": "14",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020974\"",
+        "result": "2.1\tRanh giới kiến trúc và thành phần\t14",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020974 \\h",
+        "result": "14",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020975\"",
+        "result": "2.2\tTác nhân, mục tiêu và kết quả mong đợi\t14",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020975 \\h",
+        "result": "14",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020976\"",
+        "result": "2.3\tYêu cầu chức năng theo phân hệ\t16",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020976 \\h",
+        "result": "16",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020977\"",
+        "result": "2.4\tYêu cầu phi chức năng và điều kiện vận hành\t16",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020977 \\h",
+        "result": "16",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020978\"",
+        "result": "2.5\tTổng quan nghiệp vụ của đề tài\t17",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020978 \\h",
+        "result": "17",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020979\"",
+        "result": "2.5.1\tNghiệp vụ khách hàng\t17",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020979 \\h",
+        "result": "17",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020980\"",
+        "result": "2.5.2\tNghiệp vụ quản trị viên và quản lý kho\t18",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020980 \\h",
+        "result": "18",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020981\"",
+        "result": "2.5.3\tNghiệp vụ giao hàng của shipper\t18",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020981 \\h",
+        "result": "18",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020982\"",
+        "result": "2.6\tTổng quan về nghiệp vụ kinh doanh rượu trực tuyến\t18",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020982 \\h",
+        "result": "18",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020983\"",
+        "result": "2.7\tPhân tích yêu cầu nghiệp vụ\t19",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020983 \\h",
+        "result": "19",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020984\"",
+        "result": "2.7.1\tPhân tích yêu cầu chức năng (Functional Requirements)\t20",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020984 \\h",
+        "result": "20",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020985\"",
+        "result": "2.7.2\tPhân tích yêu cầu phi chức năng (Non-Functional Requirements)\t20",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020985 \\h",
+        "result": "20",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020986\"",
+        "result": "2.8\tPhân tích tác nhân và quyền hạn\t21",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020986 \\h",
+        "result": "21",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020987\"",
+        "result": "2.9\tQuy tắc nghiệp vụ cốt lõi\t22",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020987 \\h",
+        "result": "22",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020988\"",
+        "result": "2.10\tPhân tích yêu cầu theo nhóm màn hình\t22",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020988 \\h",
+        "result": "22",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020989\"",
+        "result": "2.11\tĐặc tả ca sử dụng: khách hàng đặt hàng\t23",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020989 \\h",
+        "result": "23",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020990\"",
+        "result": "2.12\tĐặc tả ca sử dụng: xác nhận thanh toán\t23",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020990 \\h",
+        "result": "23",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020991\"",
+        "result": "2.13\tĐặc tả ca sử dụng: quản lý sản phẩm\t24",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020991 \\h",
+        "result": "24",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020992\"",
+        "result": "2.14\tĐặc tả ca sử dụng: gửi đánh giá sản phẩm\t25",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020992 \\h",
+        "result": "25",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020993\"",
+        "result": "2.15\tPhân tích yêu cầu dữ liệu và lưu vết\t25",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020993 \\h",
+        "result": "25",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020994\"",
+        "result": "2.16\tPhân tích yêu cầu phi chức năng theo mức ưu tiên\t26",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020994 \\h",
+        "result": "26",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020995\"",
+        "result": "CHƯƠNG 3: PHÂN TÍCH MÔ HÌNH MIỀN VÀ THIẾT KẾ HƯỚNG ĐỐI TƯỢNG\t27",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020995 \\h",
+        "result": "27",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020996\"",
+        "result": "3.1\tNhóm đối tượng sản phẩm và danh mục\t27",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020996 \\h",
+        "result": "27",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020997\"",
+        "result": "3.2\tNhóm đối tượng tài khoản, giỏ và đơn\t27",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020997 \\h",
+        "result": "27",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020998\"",
+        "result": "3.3\tNhóm đối tượng tồn kho, thanh toán và vận đơn\t28",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020998 \\h",
+        "result": "28",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244020999\"",
+        "result": "3.4\tĐối chiếu các nguyên lý hướng đối tượng\t29",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244020999 \\h",
+        "result": "29",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021000\"",
+        "result": "3.5\tStrategy trong nhập và xuất dữ liệu\t30",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021000 \\h",
+        "result": "30",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021001\"",
+        "result": "3.6\tSpecification trong tìm kiếm rượu\t31",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021001 \\h",
+        "result": "31",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021002\"",
+        "result": "3.7\tTemplate Method trong báo cáo Excel\t31",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021002 \\h",
+        "result": "31",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021003\"",
+        "result": "3.8\tPublisher và sự kiện sau khi giao dịch hoàn tất\t32",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021003 \\h",
+        "result": "32",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021004\"",
+        "result": "3.9\tScheduler và dispatch queue\t32",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021004 \\h",
+        "result": "32",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021005\"",
+        "result": "3.10\tFileStorageService và upload ảnh\t33",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021005 \\h",
+        "result": "33",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021006\"",
+        "result": "3.11\tAuthentication, SecurityContext và role mapping\t33",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021006 \\h",
+        "result": "33",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021007\"",
+        "result": "3.12\tAPI JWT và phiên đăng nhập\t34",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021007 \\h",
+        "result": "34",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021008\"",
+        "result": "3.13\tDịch vụ email và kết quả giao OTP\t34",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021008 \\h",
+        "result": "34",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021009\"",
+        "result": "3.14\tXử lý lỗi và observability\t35",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021009 \\h",
+        "result": "35",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021010\"",
+        "result": "3.15\tKhung frontend và state giao diện\t35",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021010 \\h",
+        "result": "35",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021011\"",
+        "result": "3.16\tRepository, event và giao dịch\t36",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021011 \\h",
+        "result": "36",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021012\"",
+        "result": "3.17\tThiết kế biểu đồ chức năng\t36",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021012 \\h",
+        "result": "36",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021013\"",
+        "result": "3.18\tThiết kế biểu đồ Use Case\t37",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021013 \\h",
+        "result": "37",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021014\"",
+        "result": "3.19\tThiết kế biểu đồ hoạt động cho checkout\t38",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021014 \\h",
+        "result": "38",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021015\"",
+        "result": "3.20\tThiết kế biểu đồ hoạt động cho đánh giá\t39",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021015 \\h",
+        "result": "39",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021016\"",
+        "result": "3.21\tThiết kế biểu đồ hoạt động cho admin tạo sản phẩm\t39",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021016 \\h",
+        "result": "39",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021017\"",
+        "result": "3.22\tThiết kế biểu đồ trình tự cho checkout\t40",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021017 \\h",
+        "result": "40",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021018\"",
+        "result": "3.23\tThiết kế biểu đồ trình tự cho thanh toán webhook\t40",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021018 \\h",
+        "result": "40",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021019\"",
+        "result": "3.24\tThiết kế biểu đồ trình tự cho admin thêm sản phẩm\t41",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021019 \\h",
+        "result": "41",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021020\"",
+        "result": "3.25\tThiết kế biểu đồ lớp miền\t41",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021020 \\h",
+        "result": "41",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021021\"",
+        "result": "3.26\tThiết kế biểu đồ trạng thái cho Order và Shipment\t42",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021021 \\h",
+        "result": "42",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021022\"",
+        "result": "3.27\tThiết kế luồng sự kiện và SSE\t43",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021022 \\h",
+        "result": "43",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021023\"",
+        "result": "3.28\tGhi chú chất lượng cho UML\t43",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021023 \\h",
+        "result": "43",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021024\"",
+        "result": "3.29\tNguyên tắc thiết kế dữ liệu\t44",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021024 \\h",
+        "result": "44",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021025\"",
+        "result": "3.30\tBảng USERS — tài khoản người dùng\t47",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021025 \\h",
+        "result": "47",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021026\"",
+        "result": "Dữ liệu mẫu thực tế bảng USERS\t47",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021026 \\h",
+        "result": "47",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021027\"",
+        "result": "3.31\tBảng CATEGORIES — danh mục sản phẩm\t49",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021027 \\h",
+        "result": "49",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021028\"",
+        "result": "Dữ liệu mẫu thực tế bảng CATEGORIES\t49",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021028 \\h",
+        "result": "49",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021029\"",
+        "result": "3.32\tBảng WINES — thông tin rượu\t51",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021029 \\h",
+        "result": "51",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021030\"",
+        "result": "Dữ liệu mẫu thực tế bảng WINES\t51",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021030 \\h",
+        "result": "51",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021031\"",
+        "result": "3.33\tBảng WAREHOUSE — kho hàng\t54",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021031 \\h",
+        "result": "54",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021032\"",
+        "result": "Dữ liệu mẫu thực tế bảng WAREHOUSE\t54",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021032 \\h",
+        "result": "54",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021033\"",
+        "result": "3.34\tBảng INVENTORY — tồn theo wine và warehouse\t56",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021033 \\h",
+        "result": "56",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021034\"",
+        "result": "Dữ liệu mẫu thực tế bảng INVENTORY\t56",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021034 \\h",
+        "result": "56",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021035\"",
+        "result": "3.35\tBảng STOCK_LOGS — dấu vết tồn kho\t58",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021035 \\h",
+        "result": "58",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021036\"",
+        "result": "Dữ liệu mẫu thực tế bảng STOCK_LOGS\t58",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021036 \\h",
+        "result": "58",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021037\"",
+        "result": "3.36\tBảng INVENTORY_TRANSACTIONS — giao dịch nhập xuất kho\t60",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021037 \\h",
+        "result": "60",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021038\"",
+        "result": "Dữ liệu mẫu thực tế bảng INVENTORY_TRANSACTIONS\t60",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021038 \\h",
+        "result": "60",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021039\"",
+        "result": "3.37\tBảng CARTS — giỏ hàng\t62",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021039 \\h",
+        "result": "62",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021040\"",
+        "result": "Dữ liệu mẫu thực tế bảng CARTS\t62",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021040 \\h",
+        "result": "62",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021041\"",
+        "result": "3.38\tBảng CART_ITEMS — dòng sản phẩm trong giỏ\t63",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021041 \\h",
+        "result": "63",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021042\"",
+        "result": "Dữ liệu mẫu thực tế bảng CART_ITEMS\t63",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021042 \\h",
+        "result": "63",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021043\"",
+        "result": "3.39\tBảng ORDERS — đơn hàng\t64",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021043 \\h",
+        "result": "64",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021044\"",
+        "result": "Dữ liệu mẫu thực tế bảng ORDERS\t64",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021044 \\h",
+        "result": "64",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021045\"",
+        "result": "3.40\tBảng ORDER_ITEMS — chi tiết đơn hàng\t67",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021045 \\h",
+        "result": "67",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021046\"",
+        "result": "Dữ liệu mẫu thực tế bảng ORDER_ITEMS\t67",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021046 \\h",
+        "result": "67",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021047\"",
+        "result": "3.41\tBảng PAYMENTS — bản ghi thanh toán\t69",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021047 \\h",
+        "result": "69",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021048\"",
+        "result": "Dữ liệu mẫu thực tế bảng PAYMENTS\t69",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021048 \\h",
+        "result": "69",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021049\"",
+        "result": "3.42\tBảng PAYMENT_TRANSACTIONS — sự kiện giao dịch thanh toán\t71",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021049 \\h",
+        "result": "71",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021050\"",
+        "result": "Dữ liệu mẫu thực tế bảng PAYMENT_TRANSACTIONS\t71",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021050 \\h",
+        "result": "71",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021051\"",
+        "result": "3.43\tBảng REVIEWS — đánh giá\t73",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021051 \\h",
+        "result": "73",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021052\"",
+        "result": "Dữ liệu mẫu thực tế bảng REVIEWS\t73",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021052 \\h",
+        "result": "73",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021053\"",
+        "result": "3.44\tBảng PASSWORD_RESET_TOKENS — token đặt lại mật khẩu\t75",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021053 \\h",
+        "result": "75",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021054\"",
+        "result": "Dữ liệu mẫu thực tế bảng PASSWORD_RESET_TOKENS\t75",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021054 \\h",
+        "result": "75",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021055\"",
+        "result": "3.45\tBảng SHIPPERS — hồ sơ người giao hàng\t77",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021055 \\h",
+        "result": "77",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021056\"",
+        "result": "Dữ liệu mẫu thực tế bảng SHIPPERS\t77",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021056 \\h",
+        "result": "77",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021057\"",
+        "result": "3.46\tBảng SHIPMENTS — vận đơn\t79",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021057 \\h",
+        "result": "79",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021058\"",
+        "result": "Dữ liệu mẫu thực tế bảng SHIPMENTS\t79",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021058 \\h",
+        "result": "79",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021059\"",
+        "result": "3.47\tBảng SHIPMENT_STATUS_HISTORY — lịch sử trạng thái vận đơn\t82",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021059 \\h",
+        "result": "82",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021060\"",
+        "result": "Dữ liệu mẫu thực tế bảng SHIPMENT_STATUS_HISTORY\t82",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021060 \\h",
+        "result": "82",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021061\"",
+        "result": "3.48\tBảng SHIPMENT_OTP_AUDIT_LOGS — nhật ký bảo mật OTP\t84",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021061 \\h",
+        "result": "84",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021062\"",
+        "result": "Dữ liệu mẫu thực tế bảng SHIPMENT_OTP_AUDIT_LOGS\t84",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021062 \\h",
+        "result": "84",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021063\"",
+        "result": "3.49\tĐối chiếu các bảng bổ sung và enum miền\t87",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021063 \\h",
+        "result": "87",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021064\"",
+        "result": "Dữ liệu mẫu thực tế bảng SYSTEM_CONFIGS\t87",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021064 \\h",
+        "result": "87",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021065\"",
+        "result": "3.50\tERD và nguyên tắc cập nhật sơ đồ\t88",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021065 \\h",
+        "result": "88",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021066\"",
+        "result": "3.51\tPhiên bản hóa schema bằng Flyway\t89",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021066 \\h",
+        "result": "89",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021067\"",
+        "result": "3.52\tBảo vệ dữ liệu cá nhân trong mô hình miền\t90",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021067 \\h",
+        "result": "90",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021068\"",
+        "result": "3.53\tLớp controller và ranh giới HTTP\t91",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021068 \\h",
+        "result": "91",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021069\"",
+        "result": "3.54\tLớp service và điều phối use case\t91",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021069 \\h",
+        "result": "91",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021070\"",
+        "result": "3.55\tRepository và truy vấn miền\t92",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021070 \\h",
+        "result": "92",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021071\"",
+        "result": "CHƯƠNG 4: LUỒNG NGHIỆP VỤ KHÁCH HÀNG\t94",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021071 \\h",
+        "result": "94",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021072\"",
+        "result": "4.2\tGiỏ hàng và đồng bộ thông tin sản phẩm\t98",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021072 \\h",
+        "result": "98",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021073\"",
+        "result": "4.3\tCheckout và tạo đơn chờ thanh toán\t98",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021073 \\h",
+        "result": "98",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021074\"",
+        "result": "4.4\tTạo phiên thanh toán, callback và webhook\t99",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021074 \\h",
+        "result": "99",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021075\"",
+        "result": "4.6\tLịch sử, chi tiết đơn và đánh giá\t101",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021075 \\h",
+        "result": "101",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021076\"",
+        "result": "4.7\tDuyệt danh mục và tìm kiếm rượu\t103",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021076 \\h",
+        "result": "103",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021077\"",
+        "result": "4.8\tXem chi tiết và chọn số lượng\t104",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021077 \\h",
+        "result": "104",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021078\"",
+        "result": "4.9\tĐăng ký, đăng nhập và đặt lại mật khẩu\t105",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021078 \\h",
+        "result": "105",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021079\"",
+        "result": "4.10\tQuản lý giỏ hàng\t107",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021079 \\h",
+        "result": "107",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021080\"",
+        "result": "4.11\tTạo đơn và reservation tồn\t108",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021080 \\h",
+        "result": "108",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021081\"",
+        "result": "4.12\tKhởi tạo payment session\t108",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021081 \\h",
+        "result": "108",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021082\"",
+        "result": "4.13\tXử lý callback, webhook và trạng thái thanh toán\t109",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021082 \\h",
+        "result": "109",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021083\"",
+        "result": "4.14\tXem lịch sử đơn và quyền sở hữu\t109",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021083 \\h",
+        "result": "109",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021084\"",
+        "result": "4.15\tTạo và kiểm soát review\t110",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021084 \\h",
+        "result": "110",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021085\"",
+        "result": "CHƯƠNG 5: LUỒNG NGHIỆP VỤ QUẢN TRỊ VÀ KHO\t111",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021085 \\h",
+        "result": "111",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021086\"",
+        "result": "4.16\tDashboard và quản lý danh mục, sản phẩm\t112",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021086 \\h",
+        "result": "112",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021087\"",
+        "result": "4.17\tQuản lý người dùng, shipper và giao dịch\t114",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021087 \\h",
+        "result": "114",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021088\"",
+        "result": "4.18\tSơ đồ quy trình thêm sản phẩm từ tài liệu cũ\t114",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021088 \\h",
+        "result": "114",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021089\"",
+        "result": "5.1\tTồn đa kho, giữ chỗ và lịch sử nhập xuất\t118",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021089 \\h",
+        "result": "118",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021090\"",
+        "result": "5.2\tNhập Excel: mẫu, preview, dry-run và ghi dữ liệu\t119",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021090 \\h",
+        "result": "119",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021091\"",
+        "result": "5.3\tDashboard và quan sát vận hành\t120",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021091 \\h",
+        "result": "120",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021092\"",
+        "result": "5.4\tQuản lý order/payment phía quản trị\t127",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021092 \\h",
+        "result": "127",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021093\"",
+        "result": "5.5\tMàn hình tồn kho và cảnh báo low stock\t129",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021093 \\h",
+        "result": "129",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021094\"",
+        "result": "5.6\tNhập kho, xuất kho và ledger\t129",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021094 \\h",
+        "result": "129",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021095\"",
+        "result": "5.7\tNhập Excel: template, preview và dry-run\t130",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021095 \\h",
+        "result": "130",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021096\"",
+        "result": "5.8\tXử lý lỗi theo dòng Excel\t131",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021096 \\h",
+        "result": "131",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021097\"",
+        "result": "5.9\tExport Excel và báo cáo tồn\t131",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021097 \\h",
+        "result": "131",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021098\"",
+        "result": "CHƯƠNG 6: LUỒNG SHIPPER, OTP VÀ THÔNG BÁO\t133",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021098 \\h",
+        "result": "133",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021099\"",
+        "result": "6.1\tPhân công tự động và quyền xem nhiệm vụ\t134",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021099 \\h",
+        "result": "134",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021100\"",
+        "result": "6.2\tLấy hàng, bắt đầu giao và báo giao thất bại\t135",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021100 \\h",
+        "result": "135",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021101\"",
+        "result": "6.3\tOTP giao hàng, gửi lại và giới hạn thử\t135",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021101 \\h",
+        "result": "135",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021102\"",
+        "result": "6.4\tSSE và phát cập nhật đến từng vai trò\t136",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021102 \\h",
+        "result": "136",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021103\"",
+        "result": "6.5\tTạo shipment sau khi đơn thanh toán\t137",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021103 \\h",
+        "result": "137",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021104\"",
+        "result": "6.6\tChính sách auto dispatch\t137",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021104 \\h",
+        "result": "137",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021105\"",
+        "result": "6.7\tXác nhận lấy hàng và bắt đầu giao\t138",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021105 \\h",
+        "result": "138",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021106\"",
+        "result": "6.8\tBáo giao thất bại, retry và hoàn trả\t138",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021106 \\h",
+        "result": "138",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021107\"",
+        "result": "6.9\tSinh OTP giao hàng\t139",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021107 \\h",
+        "result": "139",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021108\"",
+        "result": "6.10\tXác thực OTP khi hoàn tất\t139",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021108 \\h",
+        "result": "139",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021109\"",
+        "result": "6.11\tAdmin override và kiểm toán\t140",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021109 \\h",
+        "result": "140",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021110\"",
+        "result": "6.12\tSSE theo order, admin và shipper\t141",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021110 \\h",
+        "result": "141",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021111\"",
+        "result": "6.13\tUI shipper, riêng tư và thao tác mobile\t141",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021111 \\h",
+        "result": "141",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021112\"",
+        "result": "CHƯƠNG 7: CHẤT LƯỢNG, BẢO MẬT VÀ ĐÁNH GIÁ KIỂM THỬ\t143",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021112 \\h",
+        "result": "143",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021113\"",
+        "result": "7.1\tXác thực, phân quyền và quyền sở hữu tài nguyên\t143",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021113 \\h",
+        "result": "143",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021114\"",
+        "result": "7.2\tGiao dịch dữ liệu và các tác vụ ngoài database\t143",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021114 \\h",
+        "result": "143",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021115\"",
+        "result": "7.3\tXử lý lỗi, nhật ký và khả năng phục hồi\t144",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021115 \\h",
+        "result": "144",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021116\"",
+        "result": "7.4\tKiểm thử hiện có và khoảng trống kiểm chứng\t144",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021116 \\h",
+        "result": "144",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021117\"",
+        "result": "7.5\tKết quả chạy ứng dụng và thay đổi dữ liệu đã được cho phép\t145",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021117 \\h",
+        "result": "145",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021118\"",
+        "result": "7.6\t7.6 Đánh giá tính tiện dụng giao diện (UI/UX) và kiến trúc thành phần\t145",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021118 \\h",
+        "result": "145",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021119\"",
+        "result": "7.7\tCài đặt và chuẩn bị cơ sở dữ liệu\t146",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021119 \\h",
+        "result": "146",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021120\"",
+        "result": "7.8\tCài đặt ứng dụng và cấu hình ngoài\t146",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021120 \\h",
+        "result": "146",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021121\"",
+        "result": "7.9\tKết quả chạy và phạm vi chứng cứ\t147",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021121 \\h",
+        "result": "147",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021122\"",
+        "result": "7.10\tThiết kế bộ kiểm thử chức năng\t147",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021122 \\h",
+        "result": "147",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021123\"",
+        "result": "7.11\tMa trận kiểm thử hồi quy\t148",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021123 \\h",
+        "result": "148",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021124\"",
+        "result": "7.12\tRà soát giao diện và sửa UI\t148",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021124 \\h",
+        "result": "148",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021125\"",
+        "result": "7.13\tKết quả và mức độ tin cậy\t149",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021125 \\h",
+        "result": "149",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021126\"",
+        "result": "HẠN CHẾ VÀ RỦI RO CẦN THEO DÕI\t150",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021126 \\h",
+        "result": "150",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021127\"",
+        "result": "8.1\tThanh toán và tồn kho\t150",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021127 \\h",
+        "result": "150",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021128\"",
+        "result": "8.2\tGiao hàng, sự kiện và bảo mật\t150",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021128 \\h",
+        "result": "150",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021129\"",
+        "result": "ĐỀ XUẤT CẢI TIẾN VÀ KẾ HOẠCH KIỂM CHỨNG\t151",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021129 \\h",
+        "result": "151",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021130\"",
+        "result": "9.1\tƯu tiên bảo toàn đơn hàng và payment\t151",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021130 \\h",
+        "result": "151",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021131\"",
+        "result": "9.2\tƯu tiên giao nhận, OTP và khả năng quan sát\t151",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021131 \\h",
+        "result": "151",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021132\"",
+        "result": "9.3\tChuẩn hóa thiết kế và mở rộng kiểm thử\t151",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021132 \\h",
+        "result": "151",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021133\"",
+        "result": "BỔ SUNG: DANH MỤC ĐƯỜNG ĐI THEO VAI TRÒ\t153",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021133 \\h",
+        "result": "153",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021134\"",
+        "result": "Điểm vào phía khách và API công khai\t153",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021134 \\h",
+        "result": "153",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021135\"",
+        "result": "Điểm vào phía quản trị\t153",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021135 \\h",
+        "result": "153",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021136\"",
+        "result": "Điểm vào phía shipper và tương tác trực tiếp\t153",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021136 \\h",
+        "result": "153",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021137\"",
+        "result": "KẾT LUẬN\t155",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021137 \\h",
+        "result": "155",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021138\"",
+        "result": "TỔNG KẾT\t155",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021138 \\h",
+        "result": "155",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021139\"",
+        "result": "TÀI LIỆU THAM KHẢO\t156",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021139 \\h",
+        "result": "156",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021140\"",
+        "result": "PHỤ LỤC: THUẬT NGỮ VÀ VIẾT TẮT\t157",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021140 \\h",
+        "result": "157",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021141\"",
+        "result": "TUYÊN BỐ VỀ CÔNG CỤ HỖ TRỢ VÀ LIÊM CHÍNH HỌC THUẬT\t158",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021141 \\h",
+        "result": "158",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 13,
+        "instruction": "TOC \\t \"FigureCaptionList,1\" \\h \\z",
+        "result": "Hình 2.1: Sơ đồ phân rã cấu trúc màn hình tổng thể toàn sàn StrongWine\t15Hình 3.1: Sơ đồ lớp kiến trúc phân tầng (Presentation - Service - Repository - Entity) của StrongWine\t28Hình 3.2: Mô hình miền cốt lõi StrongWine và enum Java hiện hành\t29Hình 3.3: Sơ đồ Use Case tổng thể toàn hệ thống StrongWine\t38Hình 3.19.c: Sơ đồ luồng xác thực và kiểm toán mã bảo mật giao hàng OTP\t86Hình 4.1: Wireframe Trang chủ sàn thương mại điện tử StrongWine (Grayscale Web Mockup)\t89Hình 4.5: Wireframe Giao diện thanh toán đơn hàng Checkout (Grayscale Web Mockup)\t90Hình 4.6: Wireframe Chi tiết đơn hàng và theo dõi vận chuyển (Grayscale Web Mockup)\t93Hình 4.0: Sơ đồ phân rã màn hình phân hệ Khách hàng (Customer Screen Hierarchy Tree)\t94Hình 4.0b: Sơ đồ Use Case chi tiết phân hệ Khách hàng\t95Hình 4.2: Wireframe Danh mục rượu và bộ lọc đa tiêu chí (Grayscale Web Mockup)\t95Hình 4.2.b: Giao diện trang chủ StrongWine (ảnh giao diện từ bộ tài liệu dự án)\t96Hình 4.3: Wireframe Chi tiết sản phẩm rượu và tasting notes (Grayscale Web Mockup)\t97Hình 4.7: Wireframe Đăng nhập và tạo tài khoản thành viên (Grayscale Web Mockup)\t98Hình 4.8: Wireframe Biểu mẫu yêu cầu đặt lại mật khẩu bảo mật (Grayscale Web Mockup)\t99Hình 4.4: Wireframe Quản lý giỏ hàng và cập nhật số lượng (Grayscale Web Mockup)\t100Hình 4.1: Lịch sử đơn hàng\t101Hình 4.4: Sơ đồ hoạt động (Activity Diagram) quy trình Checkout và thanh toán trực tuyến\t102Hình 4.5: Sơ đồ tuần tự (Sequence Diagram) xử lý Đặt hàng giữa các lớp ứng dụng\t103Hình 4.2: Danh mục rượu và bộ lọc\t103Hình 4.3: Chi tiết sản phẩm rượu\t104Hình 4.4: Trang đăng nhập\t105Hình 4.5: Trang đăng ký tài khoản\t105Hình 4.6: Trang yêu cầu đặt lại mật khẩu\t106Hình 4.7: Giao diện xử lý liên kết đặt lại không hợp lệ\t106Hình 4.8: Giỏ hàng trống\t107Hình 4.9.b: Giao diện chi tiết đơn hàng và theo dõi giao nhận (ảnh giao diện từ bộ tài liệu dự án)\t110Hình 5.0: Sơ đồ phân rã màn hình phân hệ Quản trị và Thủ kho (Admin & Warehouse Screen Hierarchy Tree)\t111Hình 5.0b: Sơ đồ Use Case chi tiết phân hệ Quản trị và Thủ kho\t112Hình 5.3: Wireframe Bảng điều khiển quản trị Dashboard KPI (Grayscale Web Mockup)\t113Hình 5.7: Wireframe Quản lý tài khoản người dùng và phân quyền (Grayscale Web Mockup)\t113Hình 5.8: Wireframe Quản lý danh sách nhân viên giao hàng Shipper (Grayscale Web Mockup)\t114Hình 5.1: Sơ đồ hoạt động (Activity Diagram) Quản trị viên thêm rượu và upload ảnh\t115Hình 5.2: Sơ đồ tuần tự Admin tạo rượu qua form MVC và FileStorageService\t116Hình 5.4: Wireframe Quản lý danh mục và sản phẩm rượu vang (Grayscale Web Mockup)\t117Hình 5.5: Wireframe Thêm mới và chỉnh sửa thông tin rượu (Grayscale Web Mockup)\t118Hình 5.9: Wireframe Giám sát đơn hàng toàn sàn và trạng thái thanh toán (Grayscale Web Mockup)\t119Hình 5.1: Bảng điều khiển quản trị\t120Hình 5.10: Wireframe Bảng quản trị tồn kho và điều phối chi nhánh (Grayscale Web Mockup)\t121Hình 5.2: Danh mục và sản phẩm rượu\t121Hình 5.3: Tạo sản phẩm rượu\t122Hình 5.4: Chỉnh sửa sản phẩm rượu\t122Hình 5.6: Wireframe Nhập danh mục rượu hàng loạt từ tệp Excel (Grayscale Web Mockup)\t123Hình 5.5: Danh sách tài khoản người dùng\t124Hình 5.6: Tạo tài khoản người dùng\t124Hình 5.7: Chỉnh sửa tài khoản người dùng\t125Hình 5.8: Danh sách người giao hàng\t125Hình 5.9: Tạo hồ sơ người giao hàng\t126Hình 5.10: Giao diện chỉnh sửa hồ sơ Shipper\t126Hình 5.11: Danh sách đơn hàng quản trị\t127Hình 5.12: Quản lý thanh toán\t128Hình 5.13: Quản lý tồn kho\t129Hình 5.14: Màn hình nhập dữ liệu Excel\t130Hình 6.0: Sơ đồ phân rã màn hình phân hệ Giao hàng (Shipper Cockpit Screen Hierarchy Tree)\t133Hình 6.0b: Sơ đồ Use Case chi tiết phân hệ Giao hàng (Shipper)\t133Hình 6.1: Wireframe Bảng điều khiển công việc Shipper (Grayscale Web Mockup)\t134Hình 6.2: Wireframe trạng thái xem chi tiết vận đơn trên bảng điều khiển Shipper\t135Hình 6.3: Wireframe trạng thái nhập OTP hoàn tất giao hàng trên bảng điều khiển Shipper\t136Hình 6.1: Danh sách vận đơn\t140Hình 6.2: Chỉnh sửa vận đơn\t140Hình 6.3: Bảng điều khiển shipper\t142",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021142\"",
+        "result": "Hình 2.1: Sơ đồ phân rã cấu trúc màn hình tổng thể toàn sàn StrongWine\t15",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021142 \\h",
+        "result": "15",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021143\"",
+        "result": "Hình 3.1: Sơ đồ lớp kiến trúc phân tầng (Presentation - Service - Repository - Entity) của StrongWine\t28",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021143 \\h",
+        "result": "28",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021144\"",
+        "result": "Hình 3.2: Mô hình miền cốt lõi StrongWine và enum Java hiện hành\t29",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021144 \\h",
+        "result": "29",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021145\"",
+        "result": "Hình 3.3: Sơ đồ Use Case tổng thể toàn hệ thống StrongWine\t38",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021145 \\h",
+        "result": "38",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021146\"",
+        "result": "Hình 3.19.c: Sơ đồ luồng xác thực và kiểm toán mã bảo mật giao hàng OTP\t86",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021146 \\h",
+        "result": "86",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021147\"",
+        "result": "Hình 4.1: Wireframe Trang chủ sàn thương mại điện tử StrongWine (Grayscale Web Mockup)\t89",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021147 \\h",
+        "result": "89",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021148\"",
+        "result": "Hình 4.5: Wireframe Giao diện thanh toán đơn hàng Checkout (Grayscale Web Mockup)\t90",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021148 \\h",
+        "result": "90",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021149\"",
+        "result": "Hình 4.6: Wireframe Chi tiết đơn hàng và theo dõi vận chuyển (Grayscale Web Mockup)\t93",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021149 \\h",
+        "result": "93",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021150\"",
+        "result": "Hình 4.0: Sơ đồ phân rã màn hình phân hệ Khách hàng (Customer Screen Hierarchy Tree)\t94",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021150 \\h",
+        "result": "94",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021151\"",
+        "result": "Hình 4.0b: Sơ đồ Use Case chi tiết phân hệ Khách hàng\t95",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021151 \\h",
+        "result": "95",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021152\"",
+        "result": "Hình 4.2: Wireframe Danh mục rượu và bộ lọc đa tiêu chí (Grayscale Web Mockup)\t95",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021152 \\h",
+        "result": "95",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021153\"",
+        "result": "Hình 4.2.b: Giao diện trang chủ StrongWine (ảnh giao diện từ bộ tài liệu dự án)\t96",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021153 \\h",
+        "result": "96",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021154\"",
+        "result": "Hình 4.3: Wireframe Chi tiết sản phẩm rượu và tasting notes (Grayscale Web Mockup)\t97",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021154 \\h",
+        "result": "97",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021155\"",
+        "result": "Hình 4.7: Wireframe Đăng nhập và tạo tài khoản thành viên (Grayscale Web Mockup)\t98",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021155 \\h",
+        "result": "98",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021156\"",
+        "result": "Hình 4.8: Wireframe Biểu mẫu yêu cầu đặt lại mật khẩu bảo mật (Grayscale Web Mockup)\t99",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021156 \\h",
+        "result": "99",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021157\"",
+        "result": "Hình 4.4: Wireframe Quản lý giỏ hàng và cập nhật số lượng (Grayscale Web Mockup)\t100",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021157 \\h",
+        "result": "100",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021158\"",
+        "result": "Hình 4.1: Lịch sử đơn hàng\t101",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021158 \\h",
+        "result": "101",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021159\"",
+        "result": "Hình 4.4: Sơ đồ hoạt động (Activity Diagram) quy trình Checkout và thanh toán trực tuyến\t102",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021159 \\h",
+        "result": "102",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021160\"",
+        "result": "Hình 4.5: Sơ đồ tuần tự (Sequence Diagram) xử lý Đặt hàng giữa các lớp ứng dụng\t103",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021160 \\h",
+        "result": "103",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021161\"",
+        "result": "Hình 4.2: Danh mục rượu và bộ lọc\t103",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021161 \\h",
+        "result": "103",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021162\"",
+        "result": "Hình 4.3: Chi tiết sản phẩm rượu\t104",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021162 \\h",
+        "result": "104",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021163\"",
+        "result": "Hình 4.4: Trang đăng nhập\t105",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021163 \\h",
+        "result": "105",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021164\"",
+        "result": "Hình 4.5: Trang đăng ký tài khoản\t105",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021164 \\h",
+        "result": "105",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021165\"",
+        "result": "Hình 4.6: Trang yêu cầu đặt lại mật khẩu\t106",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021165 \\h",
+        "result": "106",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021166\"",
+        "result": "Hình 4.7: Giao diện xử lý liên kết đặt lại không hợp lệ\t106",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021166 \\h",
+        "result": "106",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021167\"",
+        "result": "Hình 4.8: Giỏ hàng trống\t107",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021167 \\h",
+        "result": "107",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021168\"",
+        "result": "Hình 4.9.b: Giao diện chi tiết đơn hàng và theo dõi giao nhận (ảnh giao diện từ bộ tài liệu dự án)\t110",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021168 \\h",
+        "result": "110",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021169\"",
+        "result": "Hình 5.0: Sơ đồ phân rã màn hình phân hệ Quản trị và Thủ kho (Admin & Warehouse Screen Hierarchy Tree)\t111",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021169 \\h",
+        "result": "111",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021170\"",
+        "result": "Hình 5.0b: Sơ đồ Use Case chi tiết phân hệ Quản trị và Thủ kho\t112",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021170 \\h",
+        "result": "112",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021171\"",
+        "result": "Hình 5.3: Wireframe Bảng điều khiển quản trị Dashboard KPI (Grayscale Web Mockup)\t113",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021171 \\h",
+        "result": "113",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021172\"",
+        "result": "Hình 5.7: Wireframe Quản lý tài khoản người dùng và phân quyền (Grayscale Web Mockup)\t113",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021172 \\h",
+        "result": "113",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021173\"",
+        "result": "Hình 5.8: Wireframe Quản lý danh sách nhân viên giao hàng Shipper (Grayscale Web Mockup)\t114",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021173 \\h",
+        "result": "114",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021174\"",
+        "result": "Hình 5.1: Sơ đồ hoạt động (Activity Diagram) Quản trị viên thêm rượu và upload ảnh\t115",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021174 \\h",
+        "result": "115",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021175\"",
+        "result": "Hình 5.2: Sơ đồ tuần tự Admin tạo rượu qua form MVC và FileStorageService\t116",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021175 \\h",
+        "result": "116",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021176\"",
+        "result": "Hình 5.4: Wireframe Quản lý danh mục và sản phẩm rượu vang (Grayscale Web Mockup)\t117",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021176 \\h",
+        "result": "117",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021177\"",
+        "result": "Hình 5.5: Wireframe Thêm mới và chỉnh sửa thông tin rượu (Grayscale Web Mockup)\t118",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021177 \\h",
+        "result": "118",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021178\"",
+        "result": "Hình 5.9: Wireframe Giám sát đơn hàng toàn sàn và trạng thái thanh toán (Grayscale Web Mockup)\t119",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021178 \\h",
+        "result": "119",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021179\"",
+        "result": "Hình 5.1: Bảng điều khiển quản trị\t120",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021179 \\h",
+        "result": "120",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021180\"",
+        "result": "Hình 5.10: Wireframe Bảng quản trị tồn kho và điều phối chi nhánh (Grayscale Web Mockup)\t121",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021180 \\h",
+        "result": "121",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021181\"",
+        "result": "Hình 5.2: Danh mục và sản phẩm rượu\t121",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021181 \\h",
+        "result": "121",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021182\"",
+        "result": "Hình 5.3: Tạo sản phẩm rượu\t122",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021182 \\h",
+        "result": "122",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021183\"",
+        "result": "Hình 5.4: Chỉnh sửa sản phẩm rượu\t122",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021183 \\h",
+        "result": "122",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021184\"",
+        "result": "Hình 5.6: Wireframe Nhập danh mục rượu hàng loạt từ tệp Excel (Grayscale Web Mockup)\t123",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021184 \\h",
+        "result": "123",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021185\"",
+        "result": "Hình 5.5: Danh sách tài khoản người dùng\t124",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021185 \\h",
+        "result": "124",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021186\"",
+        "result": "Hình 5.6: Tạo tài khoản người dùng\t124",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021186 \\h",
+        "result": "124",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021187\"",
+        "result": "Hình 5.7: Chỉnh sửa tài khoản người dùng\t125",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021187 \\h",
+        "result": "125",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021188\"",
+        "result": "Hình 5.8: Danh sách người giao hàng\t125",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021188 \\h",
+        "result": "125",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021189\"",
+        "result": "Hình 5.9: Tạo hồ sơ người giao hàng\t126",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021189 \\h",
+        "result": "126",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021190\"",
+        "result": "Hình 5.10: Giao diện chỉnh sửa hồ sơ Shipper\t126",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021190 \\h",
+        "result": "126",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021191\"",
+        "result": "Hình 5.11: Danh sách đơn hàng quản trị\t127",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021191 \\h",
+        "result": "127",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021192\"",
+        "result": "Hình 5.12: Quản lý thanh toán\t128",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021192 \\h",
+        "result": "128",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021193\"",
+        "result": "Hình 5.13: Quản lý tồn kho\t129",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021193 \\h",
+        "result": "129",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021194\"",
+        "result": "Hình 5.14: Màn hình nhập dữ liệu Excel\t130",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021194 \\h",
+        "result": "130",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021195\"",
+        "result": "Hình 6.0: Sơ đồ phân rã màn hình phân hệ Giao hàng (Shipper Cockpit Screen Hierarchy Tree)\t133",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021195 \\h",
+        "result": "133",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021196\"",
+        "result": "Hình 6.0b: Sơ đồ Use Case chi tiết phân hệ Giao hàng (Shipper)\t133",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021196 \\h",
+        "result": "133",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021197\"",
+        "result": "Hình 6.1: Wireframe Bảng điều khiển công việc Shipper (Grayscale Web Mockup)\t134",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021197 \\h",
+        "result": "134",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021198\"",
+        "result": "Hình 6.2: Wireframe trạng thái xem chi tiết vận đơn trên bảng điều khiển Shipper\t135",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021198 \\h",
+        "result": "135",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021199\"",
+        "result": "Hình 6.3: Wireframe trạng thái nhập OTP hoàn tất giao hàng trên bảng điều khiển Shipper\t136",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021199 \\h",
+        "result": "136",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021200\"",
+        "result": "Hình 6.1: Danh sách vận đơn\t140",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021200 \\h",
+        "result": "140",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021201\"",
+        "result": "Hình 6.2: Chỉnh sửa vận đơn\t140",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021201 \\h",
+        "result": "140",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021202\"",
+        "result": "Hình 6.3: Bảng điều khiển shipper\t142",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021202 \\h",
+        "result": "142",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 13,
+        "instruction": "TOC \\t \"TableCaptionList,1\" \\h \\z",
+        "result": "Bảng 0.1: Kế hoạch và tiến độ thực hiện đề tài qua các tuần\t7Bảng 0.2: Danh mục các từ viết tắt và thuật ngữ kỹ thuật sử dụng trong báo cáo\t16Bảng 3.0: Nguyên tắc thiết kế và chuẩn hóa lược đồ dữ liệu quan hệ StrongWine\t44Bảng 3.1.a: Cấu trúc lược đồ bảng USERS (Tài khoản người dùng)\t47Bảng 3.1.b: Dữ liệu mẫu bảng USERS (10 bản ghi minh họa thực tế)\t47Bảng 3.2.a: Cấu trúc lược đồ bảng CATEGORIES (Danh mục sản phẩm)\t49Bảng 3.2.b: Dữ liệu mẫu bảng CATEGORIES (10 bản ghi minh họa thực tế)\t49Bảng 3.3.a: Cấu trúc lược đồ bảng WINES (Thông tin rượu vang)\t51Bảng 3.3.b: Dữ liệu mẫu bảng WINES (10 bản ghi minh họa thực tế)\t51Bảng 3.4.a: Cấu trúc lược đồ bảng WAREHOUSE (Kho hàng và chi nhánh)\t54Bảng 3.4.b: Dữ liệu mẫu bảng WAREHOUSE (10 bản ghi minh họa thực tế)\t54Bảng 3.5.a: Cấu trúc lược đồ bảng INVENTORY (Quản lý tồn kho theo sản phẩm)\t56Bảng 3.5.b: Dữ liệu mẫu bảng INVENTORY (10 bản ghi minh họa thực tế)\t56Bảng 3.6.a: Cấu trúc lược đồ bảng STOCK_LOGS (Lịch sử biến động tồn kho)\t58Bảng 3.6.b: Dữ liệu mẫu bảng STOCK_LOGS (10 bản ghi minh họa thực tế)\t58Bảng 3.7.a: Cấu trúc lược đồ bảng INVENTORY_TRANSACTIONS (Giao dịch nhập xuất)\t60Bảng 3.7.b: Dữ liệu mẫu bảng INVENTORY_TRANSACTIONS (10 bản ghi minh họa thực tế)\t60Bảng 3.8.a: Cấu trúc lược đồ bảng CARTS (Giỏ hàng người dùng)\t62Bảng 3.8.b: Dữ liệu mẫu bảng CARTS (10 bản ghi minh họa thực tế)\t62Bảng 3.9.a: Cấu trúc lược đồ bảng CART_ITEMS (Chi tiết mặt hàng trong giỏ)\t63Bảng 3.9.b: Dữ liệu mẫu bảng CART_ITEMS (10 bản ghi minh họa thực tế)\t63Bảng 3.10.a: Cấu trúc lược đồ bảng ORDERS (Đơn hàng toàn sàn)\t64Bảng 3.10.b: Dữ liệu mẫu bảng ORDERS (10 bản ghi minh họa thực tế)\t64Bảng 3.11.a: Cấu trúc lược đồ bảng ORDER_ITEMS (Chi tiết dòng đơn hàng)\t67Bảng 3.11.b: Dữ liệu mẫu bảng ORDER_ITEMS (10 bản ghi minh họa thực tế)\t67Bảng 3.12.a: Cấu trúc lược đồ bảng PAYMENTS (Bản ghi thanh toán đơn hàng)\t69Bảng 3.12.b: Dữ liệu mẫu bảng PAYMENTS (10 bản ghi minh họa thực tế)\t69Bảng 3.13.a: Cấu trúc lược đồ bảng PAYMENT_TRANSACTIONS (Lịch sử sự kiện thanh toán)\t71Bảng 3.13.b: Dữ liệu mẫu bảng PAYMENT_TRANSACTIONS (10 bản ghi minh họa thực tế)\t71Bảng 3.14.a: Cấu trúc lược đồ bảng REVIEWS (Đánh giá và phản hồi rượu)\t73Bảng 3.14.b: Dữ liệu mẫu bảng REVIEWS (10 bản ghi minh họa thực tế)\t73Bảng 3.15.a: Cấu trúc lược đồ bảng PASSWORD_RESET_TOKENS (Token đặt lại mật khẩu)\t75Bảng 3.15.b: Dữ liệu mẫu bảng PASSWORD_RESET_TOKENS (10 bản ghi minh họa thực tế)\t75Bảng 3.16.a: Cấu trúc lược đồ bảng SHIPPERS (Hồ sơ nhân viên giao hàng)\t77Bảng 3.16.b: Dữ liệu mẫu bảng SHIPPERS (10 bản ghi minh họa thực tế)\t77Bảng 3.17.a: Cấu trúc lược đồ bảng SHIPMENTS (Vận đơn điều phối giao nhận)\t79Bảng 3.17.b: Dữ liệu mẫu bảng SHIPMENTS (10 bản ghi minh họa thực tế)\t79Bảng 3.18.a: Cấu trúc lược đồ bảng SHIPMENT_STATUS_HISTORY (Lịch sử trạng thái vận đơn)\t82Bảng 3.18.b: Dữ liệu mẫu bảng SHIPMENT_STATUS_HISTORY (10 bản ghi minh họa thực tế)\t82Bảng 3.19.a: Cấu trúc lược đồ bảng SHIPMENT_OTP_AUDIT_LOGS (Nhật ký xác thực OTP)\t84Bảng 3.19.b: Dữ liệu mẫu bảng SHIPMENT_OTP_AUDIT_LOGS (10 bản ghi minh họa thực tế)\t84Bảng 3.20.a: Cấu trúc lược đồ bảng SYSTEM_CONFIGS (Cấu hình hệ thống và tham số)\t87Bảng 3.20.b: Dữ liệu mẫu bảng SYSTEM_CONFIGS (10 bản ghi minh họa thực tế)\t87Bảng Phụ lục 0.1: Bảng đối chiếu thuật ngữ và từ viết tắt kiến trúc StrongWine\t157",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021203\"",
+        "result": "Bảng 0.1: Kế hoạch và tiến độ thực hiện đề tài qua các tuần\t7",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021203 \\h",
+        "result": "7",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021204\"",
+        "result": "Bảng 0.2: Danh mục các từ viết tắt và thuật ngữ kỹ thuật sử dụng trong báo cáo\t16",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021204 \\h",
+        "result": "16",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021205\"",
+        "result": "Bảng 3.0: Nguyên tắc thiết kế và chuẩn hóa lược đồ dữ liệu quan hệ StrongWine\t44",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021205 \\h",
+        "result": "44",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021206\"",
+        "result": "Bảng 3.1.a: Cấu trúc lược đồ bảng USERS (Tài khoản người dùng)\t47",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021206 \\h",
+        "result": "47",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021207\"",
+        "result": "Bảng 3.1.b: Dữ liệu mẫu bảng USERS (10 bản ghi minh họa thực tế)\t47",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021207 \\h",
+        "result": "47",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021208\"",
+        "result": "Bảng 3.2.a: Cấu trúc lược đồ bảng CATEGORIES (Danh mục sản phẩm)\t49",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021208 \\h",
+        "result": "49",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021209\"",
+        "result": "Bảng 3.2.b: Dữ liệu mẫu bảng CATEGORIES (10 bản ghi minh họa thực tế)\t49",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021209 \\h",
+        "result": "49",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021210\"",
+        "result": "Bảng 3.3.a: Cấu trúc lược đồ bảng WINES (Thông tin rượu vang)\t51",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021210 \\h",
+        "result": "51",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021211\"",
+        "result": "Bảng 3.3.b: Dữ liệu mẫu bảng WINES (10 bản ghi minh họa thực tế)\t51",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021211 \\h",
+        "result": "51",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021212\"",
+        "result": "Bảng 3.4.a: Cấu trúc lược đồ bảng WAREHOUSE (Kho hàng và chi nhánh)\t54",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021212 \\h",
+        "result": "54",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021213\"",
+        "result": "Bảng 3.4.b: Dữ liệu mẫu bảng WAREHOUSE (10 bản ghi minh họa thực tế)\t54",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021213 \\h",
+        "result": "54",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021214\"",
+        "result": "Bảng 3.5.a: Cấu trúc lược đồ bảng INVENTORY (Quản lý tồn kho theo sản phẩm)\t56",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021214 \\h",
+        "result": "56",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021215\"",
+        "result": "Bảng 3.5.b: Dữ liệu mẫu bảng INVENTORY (10 bản ghi minh họa thực tế)\t56",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021215 \\h",
+        "result": "56",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021216\"",
+        "result": "Bảng 3.6.a: Cấu trúc lược đồ bảng STOCK_LOGS (Lịch sử biến động tồn kho)\t58",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021216 \\h",
+        "result": "58",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021217\"",
+        "result": "Bảng 3.6.b: Dữ liệu mẫu bảng STOCK_LOGS (10 bản ghi minh họa thực tế)\t58",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021217 \\h",
+        "result": "58",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021218\"",
+        "result": "Bảng 3.7.a: Cấu trúc lược đồ bảng INVENTORY_TRANSACTIONS (Giao dịch nhập xuất)\t60",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021218 \\h",
+        "result": "60",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021219\"",
+        "result": "Bảng 3.7.b: Dữ liệu mẫu bảng INVENTORY_TRANSACTIONS (10 bản ghi minh họa thực tế)\t60",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021219 \\h",
+        "result": "60",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021220\"",
+        "result": "Bảng 3.8.a: Cấu trúc lược đồ bảng CARTS (Giỏ hàng người dùng)\t62",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021220 \\h",
+        "result": "62",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021221\"",
+        "result": "Bảng 3.8.b: Dữ liệu mẫu bảng CARTS (10 bản ghi minh họa thực tế)\t62",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021221 \\h",
+        "result": "62",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021222\"",
+        "result": "Bảng 3.9.a: Cấu trúc lược đồ bảng CART_ITEMS (Chi tiết mặt hàng trong giỏ)\t63",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021222 \\h",
+        "result": "63",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021223\"",
+        "result": "Bảng 3.9.b: Dữ liệu mẫu bảng CART_ITEMS (10 bản ghi minh họa thực tế)\t63",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021223 \\h",
+        "result": "63",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021224\"",
+        "result": "Bảng 3.10.a: Cấu trúc lược đồ bảng ORDERS (Đơn hàng toàn sàn)\t64",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021224 \\h",
+        "result": "64",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021225\"",
+        "result": "Bảng 3.10.b: Dữ liệu mẫu bảng ORDERS (10 bản ghi minh họa thực tế)\t64",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021225 \\h",
+        "result": "64",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021226\"",
+        "result": "Bảng 3.11.a: Cấu trúc lược đồ bảng ORDER_ITEMS (Chi tiết dòng đơn hàng)\t67",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021226 \\h",
+        "result": "67",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021227\"",
+        "result": "Bảng 3.11.b: Dữ liệu mẫu bảng ORDER_ITEMS (10 bản ghi minh họa thực tế)\t67",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021227 \\h",
+        "result": "67",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021228\"",
+        "result": "Bảng 3.12.a: Cấu trúc lược đồ bảng PAYMENTS (Bản ghi thanh toán đơn hàng)\t69",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021228 \\h",
+        "result": "69",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021229\"",
+        "result": "Bảng 3.12.b: Dữ liệu mẫu bảng PAYMENTS (10 bản ghi minh họa thực tế)\t69",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021229 \\h",
+        "result": "69",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021230\"",
+        "result": "Bảng 3.13.a: Cấu trúc lược đồ bảng PAYMENT_TRANSACTIONS (Lịch sử sự kiện thanh toán)\t71",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021230 \\h",
+        "result": "71",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021231\"",
+        "result": "Bảng 3.13.b: Dữ liệu mẫu bảng PAYMENT_TRANSACTIONS (10 bản ghi minh họa thực tế)\t71",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021231 \\h",
+        "result": "71",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021232\"",
+        "result": "Bảng 3.14.a: Cấu trúc lược đồ bảng REVIEWS (Đánh giá và phản hồi rượu)\t73",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021232 \\h",
+        "result": "73",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021233\"",
+        "result": "Bảng 3.14.b: Dữ liệu mẫu bảng REVIEWS (10 bản ghi minh họa thực tế)\t73",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021233 \\h",
+        "result": "73",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021234\"",
+        "result": "Bảng 3.15.a: Cấu trúc lược đồ bảng PASSWORD_RESET_TOKENS (Token đặt lại mật khẩu)\t75",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021234 \\h",
+        "result": "75",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021235\"",
+        "result": "Bảng 3.15.b: Dữ liệu mẫu bảng PASSWORD_RESET_TOKENS (10 bản ghi minh họa thực tế)\t75",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021235 \\h",
+        "result": "75",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021236\"",
+        "result": "Bảng 3.16.a: Cấu trúc lược đồ bảng SHIPPERS (Hồ sơ nhân viên giao hàng)\t77",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021236 \\h",
+        "result": "77",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021237\"",
+        "result": "Bảng 3.16.b: Dữ liệu mẫu bảng SHIPPERS (10 bản ghi minh họa thực tế)\t77",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021237 \\h",
+        "result": "77",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021238\"",
+        "result": "Bảng 3.17.a: Cấu trúc lược đồ bảng SHIPMENTS (Vận đơn điều phối giao nhận)\t79",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021238 \\h",
+        "result": "79",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021239\"",
+        "result": "Bảng 3.17.b: Dữ liệu mẫu bảng SHIPMENTS (10 bản ghi minh họa thực tế)\t79",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021239 \\h",
+        "result": "79",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021240\"",
+        "result": "Bảng 3.18.a: Cấu trúc lược đồ bảng SHIPMENT_STATUS_HISTORY (Lịch sử trạng thái vận đơn)\t82",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021240 \\h",
+        "result": "82",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021241\"",
+        "result": "Bảng 3.18.b: Dữ liệu mẫu bảng SHIPMENT_STATUS_HISTORY (10 bản ghi minh họa thực tế)\t82",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021241 \\h",
+        "result": "82",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021242\"",
+        "result": "Bảng 3.19.a: Cấu trúc lược đồ bảng SHIPMENT_OTP_AUDIT_LOGS (Nhật ký xác thực OTP)\t84",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021242 \\h",
+        "result": "84",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021243\"",
+        "result": "Bảng 3.19.b: Dữ liệu mẫu bảng SHIPMENT_OTP_AUDIT_LOGS (10 bản ghi minh họa thực tế)\t84",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021243 \\h",
+        "result": "84",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021244\"",
+        "result": "Bảng 3.20.a: Cấu trúc lược đồ bảng SYSTEM_CONFIGS (Cấu hình hệ thống và tham số)\t87",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021244 \\h",
+        "result": "87",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021245\"",
+        "result": "Bảng 3.20.b: Dữ liệu mẫu bảng SYSTEM_CONFIGS (10 bản ghi minh họa thực tế)\t87",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021245 \\h",
+        "result": "87",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 88,
+        "instruction": "HYPERLINK \\l \"_Toc244021246\"",
+        "result": "Bảng Phụ lục 0.1: Bảng đối chiếu thuật ngữ và từ viết tắt kiến trúc StrongWine\t157",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 37,
+        "instruction": "PAGEREF _Toc244021246 \\h",
+        "result": "157",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "1",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "2",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "3",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "4",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "5",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "6",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "7",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "8",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "1",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "2",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "3",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "4",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "5",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "6",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "7",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "8",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "9",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "10",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "11",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "12",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "13",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "14",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "1",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "2",
+        "locked": false
+      },
+      {
+        "story": "document",
+        "type": 12,
+        "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+        "result": "3",
+        "locked": false
+      },
+      {
+        "story": "story:9:1",
+        "type": 33,
+        "instruction": "PAGE",
+        "result": "16",
+        "locked": false
+      },
+      {
+        "story": "story:9:2",
+        "type": 33,
+        "instruction": "PAGE",
+        "result": "159",
+        "locked": false
+      }
+    ],
+    "field_results_freshness": "UPDATED_NATIVE",
+    "evidence_path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\strongwine-revision-20261027\\StrongWine_20261027_bia_chuan_final.docx.wa-evidence.json"
+  }
+}

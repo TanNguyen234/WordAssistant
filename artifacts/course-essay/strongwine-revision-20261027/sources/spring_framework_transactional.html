@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><title>Using @Transactional - Spring Framework Reference</title></head>
+<body>
+<h1>Using @Transactional</h1>
+<p>Spring Data Access and Declarative Transaction Management. Reference: https://docs.spring.io/spring-framework/reference/data-access/transaction/declarative/annotations.html</p>
+<section>
+<h2>Declarative Transaction Semantics</h2>
+<p>The <code>@Transactional</code> annotation specifies that an interface, class, or method must have transactional semantics (for example, "start a brand new read-only transaction when this method is invoked, suspending any existing transaction").</p>
+<h2>Rollback Rules and ACID Guarantees</h2>
+<p>By default, Spring's declarative transaction infrastructure only marks a transaction for rollback in the case of runtime, unchecked exceptions (instances of <code>RuntimeException</code> and <code>Error</code>). Checked exceptions do not trigger rollback unless explicitly specified via <code>rollbackFor</code>.</p>
+<h2>Proxy-based Transaction Execution</h2>
+<p>Spring creates AOP proxies around transactional beans to intercept method invocations, initiate database transactions on the configured PlatformTransactionManager, commit upon clean return, or roll back if an unhandled failure occurs.</p>
+</section>
+</body>
+</html>

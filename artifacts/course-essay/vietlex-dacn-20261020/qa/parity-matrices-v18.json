@@ -1,0 +1,36 @@
+{
+  "document_sha256": "6b023d85c5b79439c80ef60f3abe9b64c6765a1815dc99bf2e8df136b64c3cf1",
+  "checks": [
+    {
+      "check": "project_structure_inventory",
+      "status": "PASS",
+      "detail": "All 111 project-planned headings have reviewed, evidence-backed mappings."
+    },
+    {
+      "check": "project_structure_in_docx",
+      "status": "PASS",
+      "detail": "All 111 project-inventoried headings appear in the final DOCX at the planned levels and order."
+    },
+    {
+      "check": "project_toc_parity",
+      "status": "PASS",
+      "detail": "All 111 required TOC entries appear at the planned levels and order."
+    },
+    {
+      "check": "project_runtime_capture_provenance",
+      "status": "PASS",
+      "detail": "All 3 runtime screenshots are route-matched, captured after visible UI click-through, and hash-bound to their image files."
+    },
+    {
+      "check": "project_visual_inventory",
+      "status": "PASS",
+      "detail": "All 27 required captions for the 31 planned visual assets appear in the final DOCX."
+    },
+    {
+      "check": "project_visual_media",
+      "status": "PASS",
+      "detail": "All 16 embedded images are accounted for by the planned assets and attached to the expected caption sequence."
+    }
+  ],
+  "status": "PASS"
+}

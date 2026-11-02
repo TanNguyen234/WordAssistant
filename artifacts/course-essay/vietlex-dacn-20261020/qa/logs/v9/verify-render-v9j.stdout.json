@@ -1,0 +1,65 @@
+{
+  "overall_status": "FAIL",
+  "delivery_status": "FAIL",
+  "delivery_gates": {
+    "overall": "FAIL",
+    "render": "PASS",
+    "visual": "REVIEW_REQUIRED",
+    "native_word": "PASS"
+  },
+  "structural_status": "PASS",
+  "format_status": "FAIL",
+  "numbering_status": "NOT_APPLICABLE",
+  "table_geometry_status": "PASS",
+  "field_structure_status": "PASS",
+  "field_freshness_status": "STALE_OR_UNKNOWN",
+  "field_evaluation_status": "NOT_REQUESTED",
+  "render_status": "PASS",
+  "native_word_status": "PASS",
+  "visual_status": "REVIEW_REQUIRED",
+  "manual_review_required": true,
+  "issues": [
+    {
+      "severity": "ERROR",
+      "code": "header_topic_mismatch",
+      "message": "Header text does not match document topic: 'Đồ án chuyên ngành: Phân tích VietLex\tThS. Đinh Thị Hồng Loan' vs expected 'Phân tích và đánh giá hệ thống VietLex hỗ trợ tra cứu pháp luật Việt Nam theo hướng RAG'."
+    },
+    {
+      "severity": "ERROR",
+      "code": "footer_student_mismatch",
+      "message": "Footer text does not contain cover student 'Nguyễn Thành Duy Tân'."
+    }
+  ],
+  "inventory": {
+    "paragraphs": 548,
+    "tables": 15,
+    "sections": 3,
+    "images": 9,
+    "fields": {
+      "total_field_tags": 474,
+      "toc_field": true,
+      "page_field": true,
+      "page_fields": 133,
+      "toc_fields": 3,
+      "other_fields": 23
+    }
+  },
+  "render": {
+    "engine": "word",
+    "pdf_path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\qa\\staging\\VietLex_v9j_final.pdf",
+    "file_size_bytes": 1572312,
+    "page_count": 69,
+    "verified_pdf_page_count": 69
+  },
+  "visual_review_challenge": {
+    "token": "93bb8d50e289000a4eed4196e6c7f02991f11dc677aa588a9febeae3aacdd83d",
+    "page_count": 69,
+    "token_scope": "document SHA-256 plus ordered page-image SHA-256 and size; PDF SHA-256 is provenance only"
+  },
+  "visual_review_reuse": {
+    "version": 1,
+    "token": "wa-visual-reuse-v1:8dc13ccfe207c2f69d2ec633ff7f829ac1576ef599c27f8a5ddbe73a7952c9a1"
+  },
+  "report_path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\qa\\verify-render-v9j.json",
+  "report_sha256": "0c69863197cd587ff2b3684482a42fd7faaf275ea321e2fd36b70c73c5fe77db"
+}

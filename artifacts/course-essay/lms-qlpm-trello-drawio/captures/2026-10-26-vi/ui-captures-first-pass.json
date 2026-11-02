@@ -1,0 +1,169 @@
+{
+  "captures": [
+    {
+      "capture_id": "L01",
+      "screenshot_path": "D:/Download/WordAssistant/artifacts/course-essay/lms-qlpm-trello-drawio/captures/2026-10-26-vi/L01-login-vi.png",
+      "screenshot_sha256": "e0ca4067c3c2a044b55d575c9cf0c4383d83a9550f49ae9b89c845dbee68d3aa",
+      "resolved_url": "http://127.0.0.1:5174/login",
+      "captured_at": "2026-10-26T03:42:30.451Z",
+      "timezone": "Asia/Bangkok",
+      "note": "Vietnamese login and all three demo role labels; password masked in input.",
+      "arrival_history": [
+        {
+          "action": "Opened localhost application entry",
+          "url": "http://127.0.0.1:5174/login",
+          "visible": true,
+          "local_file": false,
+          "direct_route": false
+        }
+      ],
+      "browser_visible": true,
+      "headless": false,
+      "document_http_status": null
+    },
+    {
+      "capture_id": "L08",
+      "screenshot_path": "D:/Download/WordAssistant/artifacts/course-essay/lms-qlpm-trello-drawio/captures/2026-10-26-vi/L08-admin-dashboard-vi.png",
+      "screenshot_sha256": "620ee2b0a32c3c437088883b1636e2d1d94e8ff0efb3078a9f4f5428df9a616c",
+      "resolved_url": "http://127.0.0.1:5174/dashboard",
+      "captured_at": "2026-10-26T03:46:06.789Z",
+      "timezone": "Asia/Bangkok",
+      "note": "Administrator overview in Vietnamese; explicitly no monitoring data; role-appropriate shortcuts.",
+      "arrival_history": [
+        {
+          "action": "Opened localhost application entry",
+          "url": "http://127.0.0.1:5174/login",
+          "visible": true,
+          "local_file": false,
+          "direct_route": false
+        },
+        {
+          "action": "Clicked Đăng nhập with existing administrator demo account",
+          "url": "http://127.0.0.1:5174/login",
+          "visible": true
+        }
+      ],
+      "browser_visible": true,
+      "headless": false,
+      "document_http_status": null
+    },
+    {
+      "capture_id": "L02",
+      "screenshot_path": "D:/Download/WordAssistant/artifacts/course-essay/lms-qlpm-trello-drawio/captures/2026-10-26-vi/L02-admin-users-vi.png",
+      "screenshot_sha256": "ba2c2125b998b16f34690d49f97987fdde510c54b3878b6dcbee55e20bf40343",
+      "resolved_url": "http://127.0.0.1:5174/users",
+      "captured_at": "2026-10-26T03:46:24.835Z",
+      "timezone": "Asia/Bangkok",
+      "note": "Vietnamese administrator users page filtered to existing lecturer accounts; no account changed.",
+      "arrival_history": [
+        {
+          "action": "Opened localhost application entry",
+          "url": "http://127.0.0.1:5174/login",
+          "visible": true,
+          "local_file": false,
+          "direct_route": false
+        },
+        {
+          "action": "Clicked Đăng nhập with existing administrator demo account",
+          "url": "http://127.0.0.1:5174/login",
+          "visible": true
+        },
+        {
+          "action": "Clicked Người dùng in administrator navigation",
+          "url": "http://127.0.0.1:5174/users",
+          "visible": true
+        },
+        {
+          "action": "Selected Giảng viên role filter; read-only list",
+          "url": "http://127.0.0.1:5174/users",
+          "visible": true
+        }
+      ],
+      "browser_visible": true,
+      "headless": false,
+      "document_http_status": null
+    },
+    {
+      "capture_id": "L09",
+      "screenshot_path": "D:/Download/WordAssistant/artifacts/course-essay/lms-qlpm-trello-drawio/captures/2026-10-26-vi/L09-courses-vi.png",
+      "screenshot_sha256": "e946153edd373c9c0a3a996b442e450ca8ce9125f0457e5b18f51c51f3d29760",
+      "resolved_url": "http://127.0.0.1:5174/courses",
+      "captured_at": "2026-10-26T03:47:53.414Z",
+      "timezone": "Asia/Bangkok",
+      "note": "Vietnamese course management with draft/open states; stored course descriptions unchanged.",
+      "arrival_history": [
+        {
+          "action": "Opened localhost application entry",
+          "url": "http://127.0.0.1:5174/login",
+          "visible": true,
+          "local_file": false,
+          "direct_route": false
+        },
+        {
+          "action": "Clicked Đăng nhập with existing administrator demo account",
+          "url": "http://127.0.0.1:5174/login",
+          "visible": true
+        },
+        {
+          "action": "Clicked Người dùng in administrator navigation",
+          "url": "http://127.0.0.1:5174/users",
+          "visible": true
+        },
+        {
+          "action": "Selected Giảng viên role filter; read-only list",
+          "url": "http://127.0.0.1:5174/users",
+          "visible": true
+        },
+        {
+          "action": "Clicked Khóa học",
+          "url": "http://127.0.0.1:5174/courses",
+          "visible": true
+        }
+      ],
+      "browser_visible": true,
+      "headless": false,
+      "document_http_status": null
+    },
+    {
+      "capture_id": "L02",
+      "screenshot_path": "D:/Download/WordAssistant/artifacts/course-essay/lms-qlpm-trello-drawio/captures/2026-10-26-vi/L02-admin-users-final-vi.png",
+      "screenshot_sha256": "c4d50090372c22139e600d97e8cea5b1e1188f17076592a83c73c5b825c224c1",
+      "resolved_url": "http://127.0.0.1:5174/users",
+      "captured_at": "2026-10-26T03:48:21.895Z",
+      "timezone": "Asia/Bangkok",
+      "note": "Vietnamese administrator labels and search hint; lecturer filter applied; existing records only.",
+      "arrival_history": [
+        {
+          "action": "Opened localhost application entry",
+          "url": "http://127.0.0.1:5174/login",
+          "visible": true,
+          "local_file": false,
+          "direct_route": false
+        },
+        {
+          "action": "Clicked Đăng nhập with existing administrator demo account",
+          "url": "http://127.0.0.1:5174/login",
+          "visible": true
+        },
+        {
+          "action": "Clicked Người dùng in administrator navigation",
+          "url": "http://127.0.0.1:5174/users",
+          "visible": true
+        },
+        {
+          "action": "Selected Giảng viên role filter; read-only list",
+          "url": "http://127.0.0.1:5174/users",
+          "visible": true
+        },
+        {
+          "action": "Clicked Khóa học",
+          "url": "http://127.0.0.1:5174/courses",
+          "visible": true
+        }
+      ],
+      "browser_visible": true,
+      "headless": false,
+      "document_http_status": null
+    }
+  ]
+}

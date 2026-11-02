@@ -1,0 +1,54 @@
+{
+  "status": "SUCCESS",
+  "operation": "batch.apply",
+  "plan_version": 1,
+  "output_path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\qa\\staging\\VietLex_v10_source_date.docx",
+  "sha256": "f2aff6c0dd629792131224758152c6ba06575db1a20e82dc1c88e5ce97ee8db1",
+  "checkpoint_created": false,
+  "steps": [
+    {
+      "index": 0,
+      "operation": "text.edit",
+      "status": "SUCCESS",
+      "backend_used": "python-docx",
+      "fidelity": "high",
+      "before_sha256": "250ffff931c6826b74bbeb785554040964c4238b49391e4e1d2ee661789d1c6b",
+      "after_sha256": "6edfba0618db0f3a17c76eda667296ded4121fe65d1a356cd1e6b0b338211336",
+      "warnings": [],
+      "manual_review_required": false
+    },
+    {
+      "index": 1,
+      "operation": "text.edit",
+      "status": "SUCCESS",
+      "backend_used": "python-docx",
+      "fidelity": "high",
+      "before_sha256": "6edfba0618db0f3a17c76eda667296ded4121fe65d1a356cd1e6b0b338211336",
+      "after_sha256": "19bc526dd340698f568708ab705ba738917d17bc53c5f84dff6e75dcbf86ed15",
+      "warnings": [],
+      "manual_review_required": false
+    },
+    {
+      "index": 2,
+      "operation": "text.edit",
+      "status": "SUCCESS",
+      "backend_used": "python-docx",
+      "fidelity": "high",
+      "before_sha256": "19bc526dd340698f568708ab705ba738917d17bc53c5f84dff6e75dcbf86ed15",
+      "after_sha256": "2267b6b0b63c73d651aa5564b6d6425bdb5543aa71f22c1237889f21d0d5f3c4",
+      "warnings": [],
+      "manual_review_required": false
+    },
+    {
+      "index": 3,
+      "operation": "text.edit",
+      "status": "SUCCESS",
+      "backend_used": "python-docx",
+      "fidelity": "high",
+      "before_sha256": "2267b6b0b63c73d651aa5564b6d6425bdb5543aa71f22c1237889f21d0d5f3c4",
+      "after_sha256": "f2aff6c0dd629792131224758152c6ba06575db1a20e82dc1c88e5ce97ee8db1",
+      "warnings": [],
+      "manual_review_required": false
+    }
+  ]
+}

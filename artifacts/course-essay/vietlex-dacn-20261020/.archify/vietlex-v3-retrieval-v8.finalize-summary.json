@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "fail",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\.archify\\vietlex-v3-retrieval-v8.json",
+    "sha256": "f250585a57f2a73fe1203e372a5944ff0cde76efd6b3d01bfafe51329690c560",
+    "bytes": 2933
+  },
+  "artifact": {
+    "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\.archify\\vietlex-v3-retrieval-v8.html"
+  },
+  "gates": {
+    "validate": "fail",
+    "deliver": "not-run",
+    "check": "not-run",
+    "browser-check": "not-run"
+  },
+  "failedStage": "validate",
+  "diagnostics": [
+    {
+      "code": "internal/unclassified",
+      "severity": "error",
+      "message": "Renderer failed before emitting a structured diagnostic.",
+      "subject": {},
+      "evidence": {
+        "exitCode": 1
+      }
+    }
+  ],
+  "diagnosticSummary": {
+    "total": 1,
+    "shown": 1,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\.archify\\vietlex-v3-retrieval-v8.finalize.json",
+    "summaryReceipt": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\.archify\\vietlex-v3-retrieval-v8.finalize-summary.json"
+  },
+  "update": {
+    "status": "unavailable",
+    "installedVersion": null,
+    "availableVersion": null,
+    "releaseNotes": null,
+    "checkedAt": null,
+    "source": null,
+    "noticeRequired": false,
+    "noticeText": null,
+    "reason": "cache-valid"
+  },
+  "visualReview": "not-requested",
+  "durationMs": 3146,
+  "nextAction": {
+    "action": "edit-in-place",
+    "candidate": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\.archify\\vietlex-v3-retrieval-v8.json",
+    "constraint": "Preserve all semantics and user-fixed geometry. Use references/architecture-layout-repair.md to choose a local repair or connected-scene reflow; edit the existing candidate.",
+    "then": "finalize-once"
+  }
+}

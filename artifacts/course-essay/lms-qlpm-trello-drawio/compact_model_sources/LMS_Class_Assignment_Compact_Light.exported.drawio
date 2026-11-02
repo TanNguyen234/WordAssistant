@@ -1,0 +1,52 @@
+<mxfile host="app.diagrams.net" scale="2" border="0">
+  <diagram name="Page-1" id="wACvX8cb_MtiZch9dDWf">
+    <mxGraphModel dx="774" dy="586" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;align=center;fontSize=28;fontStyle=1;fontColor=#111827;" value="Các lớp miền trong luồng bài tập" vertex="1">
+          <mxGeometry height="48" width="900" x="230" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="user" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#334155;strokeWidth=2;fontSize=18;fontColor=#111827;align=left;verticalAlign=top;spacing=10;" value="&lt;b&gt;User&lt;/b&gt;&lt;hr/&gt;UserId (PK)&lt;br/&gt;Role, StudentCode" vertex="1">
+          <mxGeometry height="150" width="370" x="40" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="enroll" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#334155;strokeWidth=2;fontSize=18;fontColor=#111827;align=left;verticalAlign=top;spacing=10;" value="&lt;b&gt;Enrollment&lt;/b&gt;&lt;hr/&gt;EnrollmentId (PK)&lt;br/&gt;CourseId, StudentId (FK)&lt;br/&gt;UNIQUE(CourseId, StudentId)" vertex="1">
+          <mxGeometry height="150" width="370" x="480" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="course" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#334155;strokeWidth=2;fontSize=18;fontColor=#111827;align=left;verticalAlign=top;spacing=10;" value="&lt;b&gt;Course&lt;/b&gt;&lt;hr/&gt;CourseId (PK)&lt;br/&gt;LecturerId (FK), Status" vertex="1">
+          <mxGeometry height="150" width="370" x="920" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="sub" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#334155;strokeWidth=2;fontSize=18;fontColor=#111827;align=left;verticalAlign=top;spacing=10;" value="&lt;b&gt;Submission&lt;/b&gt;&lt;hr/&gt;SubmissionId (PK)&lt;br/&gt;AssignmentId, StudentId (FK)&lt;br/&gt;Status, Score, Feedback" vertex="1">
+          <mxGeometry height="150" width="370" x="40" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="assignment" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#334155;strokeWidth=2;fontSize=18;fontColor=#111827;align=left;verticalAlign=top;spacing=10;" value="&lt;b&gt;Assignment&lt;/b&gt;&lt;hr/&gt;AssignmentId (PK)&lt;br/&gt;CourseId (FK)&lt;br/&gt;DueAt, AllowLate, MaxScore" vertex="1">
+          <mxGeometry height="150" width="370" x="480" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="grade" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#334155;strokeWidth=2;fontSize=18;fontColor=#111827;align=left;verticalAlign=top;spacing=10;" value="&lt;b&gt;Grade&lt;/b&gt;&lt;hr/&gt;GradeId (PK)&lt;br/&gt;CourseId, StudentId, GradedBy (FK)&lt;br/&gt;SourceType, SourceId" vertex="1">
+          <mxGeometry height="150" width="370" x="920" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="r1" edge="1" parent="1" source="user" style="endArrow=none;html=1;strokeColor=#64748b;strokeWidth=2;fontSize=16;labelBackgroundColor=#ffffff;" target="enroll" value="1 : 0..*">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r2" edge="1" parent="1" source="enroll" style="endArrow=none;html=1;strokeColor=#64748b;strokeWidth=2;fontSize=16;labelBackgroundColor=#ffffff;" target="course" value="0..* : 1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r3" edge="1" parent="1" source="user" style="endArrow=none;html=1;strokeColor=#64748b;strokeWidth=2;fontSize=16;labelBackgroundColor=#ffffff;" target="sub" value="1 : 0..*">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4" edge="1" parent="1" source="course" style="endArrow=none;html=1;strokeColor=#64748b;strokeWidth=2;fontSize=16;labelBackgroundColor=#ffffff;" target="assignment" value="1 : 0..*">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r5" edge="1" parent="1" source="assignment" style="endArrow=none;html=1;strokeColor=#64748b;strokeWidth=2;fontSize=16;labelBackgroundColor=#ffffff;" target="sub" value="1 : 0..*">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r6" edge="1" parent="1" source="course" style="endArrow=none;html=1;strokeColor=#64748b;strokeWidth=2;fontSize=16;labelBackgroundColor=#ffffff;" target="grade" value="1 : 0..*">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="logical" edge="1" parent="1" source="assignment" style="endArrow=open;dashed=1;html=1;strokeColor=#7c3aed;fontSize=15;labelBackgroundColor=#ffffff;" target="grade" value="SourceType / SourceId">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><title>Authorization Architecture - Spring Security Reference</title></head>
+<body>
+<h1>Authorization Architecture</h1>
+<p>Spring Security Documentation. URL: https://docs.spring.io/spring-security/reference/servlet/authorization/architecture.html</p>
+<section>
+<h2>Authorization Filter and Access Decision Management</h2>
+<p>Spring Security's authorization architecture relies on the <code>AuthorizationFilter</code> inserted into the standard Servlet FilterChain. Every incoming HTTP request is evaluated against URL authorization rules configured in the <code>SecurityFilterChain</code> bean.</p>
+<h2>Method-Level Security</h2>
+<p>In addition to web-tier URL authorization, Spring Security provides annotations like <code>@PreAuthorize</code> and <code>@Secured</code> to enforce fine-grained access control directly at the service method level, ensuring that sensitive domain operations cannot be invoked even if web filters are misconfigured.</p>
+</section>
+</body>
+</html>

@@ -1,0 +1,451 @@
+Tra cứu pháp luật bằng ngôn ngữ tự nhiên đặt ra hai yêu cầu khác nhau: tìm được văn bản hoặc đoạn liên quan, và diễn đạt câu trả lời mà người đọc có thể kiểm tra lại căn cứ. Mô hình sinh ngôn ngữ có thể tạo câu trả lời liền mạch nhưng tính liền mạch không chứng minh nguồn được truy xuất phù hợp, trích dẫn đúng hay quy định còn hiệu lực. Với hệ thống hướng tới miền pháp lý, ranh giới giữa tra cứu, tóm lược và kết luận áp dụng cần được thiết kế rõ để tránh người dùng hiểu câu trả lời máy sinh như kết luận có thẩm quyền.
+
+VietLex là một dự án FastAPI/Jinja có màn hình hỏi đáp, tra cứu văn bản, đọc nội dung, tra cứu sự kiện hiệu lực và tạo hồ sơ nghiên cứu. Quy trình xử lý hỏi đáp nối tuyến xử lý web với truy xuất đoạn căn cứ và sinh câu trả lời; cấu hình truy xuất cho phép chọn một trong hai hợp đồng triển khai. Đối tượng nghiên cứu của đồ án chuyên ngành vì vậy là sự kết hợp giữa yêu cầu nghiệp vụ, cấu trúc phần mềm, luồng dữ liệu và bằng chứng đánh giá hiện có, không phải việc xác nhận tính đúng của một quy định cụ thể.
+
+Mục tiêu thứ nhất là mô tả chức năng và phạm vi người dùng từ tuyến xử lý/mẫu giao diện thật. Mục tiêu thứ hai là phân tích quy trình xử lý hỏi đáp, truy xuất và đối tượng dữ liệu theo hướng phân tích-thiết kế hướng đối tượng. Mục tiêu thứ ba là đối chiếu bằng chứng đánh giá với giới hạn mẫu số, ngày chạy và trạng thái hiện hành. Mục tiêu cuối cùng là đề xuất một cách kiểm chứng tiếp theo có thể tái lập, ưu tiên đo chất lượng truy xuất và độ hỗ trợ của từng claim thay vì suy ra chất lượng pháp lý từ một điểm số tổng hợp.
+
+Câu hỏi nghiên cứu gồm: (1) VietLex đang hỗ trợ những luồng người dùng nào và ranh giới giữa màn hình với thao tác POST/API được thể hiện ra sao? (2) Quy trình xử lý từ câu hỏi đến đoạn căn cứ và câu trả lời được chia thành những thành phần nào? (3) Bằng chứng đánh giá hiện có hỗ trợ được kết luận nào, và điều gì vẫn chưa biết? Bài trả lời các câu hỏi bằng khảo sát mã nguồn hiện tại, tài liệu kiến trúc/đánh giá có ngày, và năm công trình học thuật đã tải, mở và kiểm tra đoạn hỗ trợ trước khi trích dẫn.
+
+Đồ án tập trung khảo sát mã nguồn, tài liệu thiết kế và các kết quả đánh giá đã lưu của VietLex. Phần giao diện sử dụng những ảnh chụp đã có từ quá trình truy cập các trang công khai, kèm địa chỉ và thời điểm ghi nhận. Phạm vi này chưa bao gồm kiểm tra các chức năng cần quyền riêng, chạy một bộ đánh giá mới hay xác minh hiệu lực hiện hành của từng văn bản pháp luật. Vì vậy, hình ảnh giao diện được dùng để phân tích cách tổ chức thao tác và thông tin; chúng không được dùng thay cho kết quả kiểm thử chất lượng câu trả lời.
+
+Quá trình thực hiện gồm ba bước có liên hệ với nhau. Trước hết, khảo sát các tuyến xử lý và mẫu giao diện để xác định người dùng có thể thực hiện việc gì. Tiếp theo, lần theo dữ liệu qua các thành phần xử lý để xây dựng mô hình nghiệp vụ, mô hình dữ liệu và sơ đồ tương tác. Cuối cùng, đối chiếu các nhận xét về thiết kế với tài liệu đánh giá và nguồn học thuật đã được kiểm tra. Mỗi loại chứng cứ được dùng đúng mục đích: mã nguồn giải thích cách tổ chức hệ thống, ảnh chụp phản ánh trạng thái đã quan sát, còn số liệu đánh giá chỉ có ý nghĩa trong tập câu hỏi và thời điểm đã nêu.
+
+Mạch phân tích được tổ chức từ yêu cầu đến kết quả để mỗi phần trả lời một câu hỏi cụ thể. Phần khảo sát xác định nhiệm vụ của người dùng và giới hạn quyền truy cập. Phần thiết kế giải thích dữ liệu cần lưu, các quan hệ giữa đối tượng và cách thành phần xử lý phối hợp. Phần triển khai đối chiếu mô hình với tuyến xử lý và giao diện thực tế. Phần đánh giá xem xét những chứng cứ nào đủ hỗ trợ nhận xét, đồng thời chỉ ra các kiểm tra còn thiếu. Cách tổ chức này giúp tránh dùng một hình giao diện hay một chỉ số riêng lẻ để kết luận cho toàn hệ thống.
+
+Trong từng phần, đồ án phân biệt điều quan sát được với điều được đề xuất. Một nhánh có trong mã nguồn là căn cứ để mô tả thiết kế; một thao tác đã được ghi nhận khi chạy mới là căn cứ cho trạng thái quan sát tại thời điểm đó. Các khuyến nghị về cấu trúc, kiểm thử và giao diện được trình bày như hướng cải thiện cần kiểm chứng. Việc giữ các ranh giới này không làm giảm mục tiêu của đồ án mà giúp người đọc đánh giá đúng mức độ chắc chắn của mỗi kết luận.
+
+Đóng góp của đồ án là mô tả có thể truy vết về luồng tra cứu, hỏi đáp và nghiên cứu theo workspace; mô hình hướng đối tượng rút gọn tập trung vào đoạn căn cứ; phân tích dữ liệu/chỉ mục và ranh giới bảo mật; cùng đánh giá có mẫu số, ngày chạy và giới hạn. Bài không khẳng định một giải pháp đã cải thiện VietLex khi chưa có thử nghiệm đối chứng trên cùng tập văn bản và cấu hình.
+
+Bài gồm ba chương. Chương 1 tổng hợp nghiên cứu liên quan và cơ sở lý thuyết. Chương 2 trình bày phương pháp, khảo sát, yêu cầu, mô hình nghiệp vụ, phân tích thiết kế, kiến trúc và lựa chọn công nghệ. Chương 3 mô tả cài đặt, giao diện, kết quả kiểm thử và đánh giá, giới hạn cùng đề xuất cải tiến. Phần kết luận tổng hợp kết quả; các phụ lục lưu ma trận nguồn và danh mục tuyến xử lý/ảnh chụp.
+
+NỘI DUNG
+
+Chương này xác định các khái niệm cần thiết để đọc kiến trúc VietLex mà không đồng nhất truy xuất với sinh câu trả lời, hoặc một đánh giá tự động với xác nhận pháp lý.
+
+Trong hệ thống hỏi đáp có truy xuất, truy xuất là bước chọn tài liệu/đoạn làm căn cứ đầu vào cho bước trả lời. Dense truy xuất thường biểu diễn truy vấn và đoạn văn thành vector để tìm nội dung gần về ngữ nghĩa; Karpukhin và cộng sự mô tả một kiến trúc dense truy xuất hai encoder cho open-domain question answering. Đây là nền tảng khái niệm, không phải bằng chứng rằng VietLex dùng chính mô hình DPR hay tái tạo kết quả của bài báo.  
+
+Các cách tìm kiếm bằng từ khóa, tìm kiếm dense và kết hợp nhiều tín hiệu có thể cho kết quả khác nhau tùy ngôn ngữ, miền, cách chia dữ liệu và tiêu chí liên quan. Nguyen và Quan xây dựng bộ đánh giá Vietnamese IR nhiều miền với sáu miền và mười bộ dữ liệu, có miền pháp lý. Phạm vi này cho thấy cần đánh giá truy xuất tiếng Việt trên tác vụ/miền phù hợp; không thể chuyển kết quả tổng hợp của một bộ đánh giá khác thành kết luận trực tiếp về VietLex.  
+
+Trong miền pháp lý, số hiệu, tên văn bản, điều/khoản và cụm từ nội dung thường có vai trò khác nhau. Tìm chính xác 45/2019/QH14 không tương đương tìm ngữ nghĩa cho câu hỏi diễn đạt lại; tìm một đoạn chứa từ khóa cũng không xác nhận đoạn đó đang điều chỉnh đúng thời kỳ hoặc ngoại lệ. Do đó thiết kế tìm kiếm thông tin mô tả, tìm toàn văn và hỏi đáp RAG cần được mô tả thành các luồng tách biệt, đồng thời cung cấp cho người dùng dấu hiệu về phạm vi đang tìm.
+
+RAG nối một bộ nhớ bên ngoài có thể truy xuất với mô hình sinh. Quy trình tổng quát gồm nhận câu hỏi, tìm ứng viên, chọn hoặc xếp hạng đoạn căn cứ, tạo ngữ cảnh, rồi sinh văn bản. Việc đưa nội dung nguồn vào ngữ cảnh giúp người đọc có thể kiểm tra đường dẫn bằng chứng, nhưng không loại bỏ lỗi truy xuất, thiếu ngoại lệ, cắt ngữ cảnh hoặc diễn giải sai. Những bước này cần được đo riêng thay vì gom vào một nhãn đã có RAG.
+
+RAGAs trình bày các chỉ số tự động cho hệ RAG và định nghĩa faithfulness theo việc câu trả lời được neo vào ngữ cảnh cung cấp. Chỉ số này hữu ích để hỏi câu trả lời có được hỗ trợ bởi ngữ cảnh hay không; nó không chứng minh ngữ cảnh đúng luật, còn hiệu lực hay đủ bao quát, cũng không thay thế người có chuyên môn rà từng trích dẫn. Vì thế bài dùng RAGAs như khung phân biệt các chiều đánh giá, chứ không dùng một giá trị faithfulness làm chứng nhận pháp lý. 
+
+Để một câu trả lời có thể kiểm tra, đoạn căn cứ nên giữ thông tin mô tả nhận diện nguồn, vị trí hoặc heading, nội dung trích xuất, và dấu vết nguồn gốc/mã băm khi có. Hệ thống cần phản hồi riêng khi truy xuất lỗi kỹ thuật, khi không tìm thấy đoạn căn cứ đủ dùng, khi cơ chế kiểm soát an toàn từ chối và khi sinh câu trả lời hoàn tất. Các trạng thái này không thể hoán đổi: lỗi kỹ thuật không phải câu trả lời âm tính; không có kết quả trong tập văn bản không chứng minh ngoài tập văn bản không có quy định. 
+
+Đánh giá nên tách tối thiểu: chất lượng ứng viên truy xuất; độ bao phủ điều/khoản bắt buộc; độ chính xác và độ hỗ trợ của trích dẫn; nội dung câu trả lời; độ trễ/lỗi kỹ thuật; và trải nghiệm người dùng. Một hệ thống có Document Recall cao vẫn có thể bỏ sót khoản cần thiết hoặc tạo kết luận không được hỗ trợ bởi căn cứ. Tương tự, điểm đánh giá tự động cao không chứng minh bộ đánh giá đại diện hoặc nguồn law được cập nhật.
+
+Trong phân tích-thiết kế hướng đối tượng, các lớp dữ liệu biểu diễn khái niệm ổn định; thành phần dịch vụ điều phối nghiệp vụ; tuyến xử lý chuyển đổi request/response HTTP; và mẫu giao diện thể hiện trạng thái giao diện. Tính đóng gói giúp giới hạn trách nhiệm, nhưng các phụ thuộc giữa tuyến xử lý, thành phần dịch vụ, kho vector, content kho lưu trữ và dịch vụ mô hình vẫn cần được ghi nhận. Sơ đồ trong bài là mô hình rút gọn từ bản mã nguồn khảo sát; nó hỗ trợ trao đổi cấu trúc, không thay thế toàn bộ class inventory.
+
+Bài áp dụng bốn lớp quan sát. Lớp giao diện xác định tuyến xử lý GET trả HTML và các thao tác POST. Lớp nghiệp vụ xác định mục tiêu người dùng và điều kiện từ chối/không có căn cứ. Lớp thiết kế theo dõi thành phần dịch vụ và đối tượng. Lớp đánh giá xem từng kết luận có nguồn, mã băm, mẫu số và thời điểm hay không. Cách phân lớp này ngăn việc dùng ảnh giao diện làm bằng chứng cho hoạt động POST, chất lượng câu trả lời hay số liệu bộ đánh giá. T²-RAGBench đặt việc truy xuất đúng ngữ cảnh trước bước suy luận số trên dữ liệu văn bản-bảng; điều này củng cố cách đo truy xuất và câu trả lời thành hai bước riêng, chứ không suy ra chất lượng từ ảnh giao diện. 
+
+Các từ viết tắt sử dụng trong nội dung được tổng hợp tại danh mục từ viết tắt ở phần đầu đồ án.
+
+Reuter và cộng sự mô tả Document-Level Retrieval Mismatch: hệ thống có thể lấy một đoạn có vẻ liên quan nhưng đoạn đó thuộc sai văn bản trong một tập văn bản pháp lý gồm nhiều văn bản có cấu trúc và câu chữ tương tự. Nhóm tác giả nghiên cứu Summary-Augmented Chunking, đưa tóm tắt toàn văn vào từng chunk để thêm ngữ cảnh cấp văn bản; kết quả của bài báo thuộc bộ tác vụ LegalBench-RAG và không phải kết quả của VietLex. 
+
+Điểm liên hệ với VietLex là cần kiểm riêng hai câu hỏi: “đúng văn bản chưa?” và “đúng điều/khoản chưa?”. Chỉ số passage-level có thể cao trong khi bộ truy xuất chọn nhầm văn bản gần chủ đề. Mã nguồn VietLex giữ document ID, số hiệu, tiêu đề, trích dẫn và mã băm trong dữ liệu truyền/đoạn căn cứ; tuy nhiên việc có các trường đó chưa tự đảm bảo gold label và đánh giá hiện hành kiểm tra mọi lỗi mismatch. Bài xem định danh văn bản là một chiều cần đưa vào bộ kiểm chứng tiếp theo, không kết luận VietLex đã gặp đúng failure mode như bài báo.
+
+Không chuyển Summary-Augmented Chunking thành khuyến nghị triển khai ngay. Thêm summary vào chunk làm đổi dữ liệu chỉ mục, kích thước dữ liệu truyền và hợp đồng truy xuất; cần so sánh với cấu hình hiện tại bằng cùng phiên bản tập văn bản, truy vấn, gold labels và ngân sách. Nếu thử nghiệm, cần báo cáo tỷ lệ chọn sai document, recall theo văn bản/điều/khoản, lỗi trích dẫn và chi phí chỉ mục riêng.
+
+Trautmann và cộng sự khảo sát similarity metric, mô hình natural-language inference và lời nhắc cho LLM để phân loại câu trả lời pháp lý có bám ngữ cảnh nguồn hay không. Bài báo báo cáo macro-F1 tốt nhất 0,8 trên grounding classification tập văn bản của chính nghiên cứu; con số này không thể dùng làm ngưỡng hay kết quả cho VietLex. 
+
+Mối liên hệ phương pháp là mức độ bám sát căn cứ và correctness khác nhau. Một câu có thể được nguồn hỗ trợ nhưng nguồn không đầy đủ, đã cũ, không áp dụng đúng thời điểm hoặc bị chọn sai văn bản. Ngược lại, câu có thể tình cờ trùng đáp án chuẩn nhưng trích dẫn không hỗ trợ. Vì vậy báo cáo tách trích dẫn precision, invalid-trích dẫn rate, answer match, truy xuất recall và đánh giá của người có chuyên môn.
+
+Với VietLex, bộ đánh giá nên gắn mỗi claim trọng yếu trong câu trả lời với một đoạn nguồn và nhãn hỗ trợ/không hỗ trợ; người rà soát cần ghi lỗi thiếu căn cứ, sai văn bản, sai thời điểm, bỏ ngoại lệ và lỗi diễn đạt. Metric tự động có thể sàng lọc nhưng không thay quyết định của người có chuyên môn. Đây là đề xuất phương pháp, không khẳng định hệ thống đã triển khai human adjudication.
+
+Các nguồn đã rà trong đồ án đóng vai trò khác nhau. DPR cung cấp ví dụ nền tảng dense truy xuất; bộ đánh giá Vietnamese IR so sánh các hướng truy xuất trên nhiều miền tiếng Việt; RAGAs cung cấp các chiều đánh giá tự động; nghiên cứu legal-RAG nêu rủi ro mismatch cấp văn bản và cách đo mức độ bám sát căn cứ. Không nguồn nào là đánh giá độc lập của VietLex. LexGLUE cung cấp bộ đánh giá tiếng Anh gồm nhiều tác vụ NLU pháp lý; do khác ngôn ngữ và mục tiêu, đây là tham chiếu về đánh giá theo miền chứ không phải bộ đánh giá truy xuất luật Việt Nam. 
+
+Từ đó, khung phân tích đặt một yêu cầu gắn với từng tầng: đầu vào cần giữ phạm vi truy vấn; truy xuất cần định danh đúng văn bản và đoạn; đoạn căn cứ cần có vị trí/dấu vết nguồn gốc; sinh câu trả lời cần bám ngữ cảnh và thể hiện giới hạn; giao diện cần phân biệt dữ liệu sổ đăng ký với kết luận hiệu lực; đánh giá cần có denominator, trạng thái bỏ qua và kiểm tra người. Cấu trúc này giúp phân loại lỗi theo nơi phát sinh thay vì quy hết cho mô hình sinh.
+
+Hướng dẫn HCMUNRE nêu tiêu chí nhận xét nhưng không có thang điểm. Hồ sơ hiện chưa có rubric học phần, xác nhận của người duyệt, bộ đánh giá VietLex mới hay adjudication pháp lý; vì vậy báo cáo chỉ mô tả bằng chứng snapshot, không xác nhận tuân thủ học phần hoặc khả năng tư vấn pháp luật.
+
+Các nhận định chương này phản ánh mã nguồn và tài liệu hiện có tại ngày 22/10/2026. Mã nguồn project có cây mã nguồn có thay đổi chưa ghi nhận thành phiên bản; manifest ghi HEAD, trạng thái mã băm và mã băm từng file để người đọc phân biệt snapshot này với trạng thái lịch sử khác.
+
+VietLex được tổ chức thành ứng dụng web FastAPI/Jinja. Trang chủ / trả mẫu giao diện index.html với vùng hỏi đáp; /search hiển thị form tìm văn bản; /documents/{document_id} mở trang đọc; /legal-status trình bày sự kiện sổ đăng ký theo ngày; /workspaces và /workspaces/{workspace_id} phục vụ hồ sơ nghiên cứu. Nhóm /admin là giao diện quản trị. Route GET biểu diễn trang hoặc trang giao diện; POST như /chat và POST tạo workspace là thao tác, không phải màn hình độc lập. Danh sách chi tiết nằm ở screen-inventory.json và Hình 3.1.
+
+Màn hình /search có hai phạm vi logic: thông tin mô tả (số hiệu/tiêu đề) và body search. Ảnh kết quả ngày 23/10/2026 được chụp sau khi mở trang chủ, bấm Tra cứu, nhập 45/2019/QH14 và gửi biểu mẫu GET; ảnh ghi nhận kết quả Bộ luật Lao động 2019 trên deployment công khai, nhưng không chứng minh body search hoặc các trạng thái hệ thống phía sau khác. Bộ chọn phạm vi chỉ xuất hiện nếu hàm xử lý cung cấp body_coverage. Mốc ngày hiển thị sự kiện đã duyệt, không tự xác nhận hiệu lực.
+
+Trang chủ ghi rõ nguồn hỏi đáp là toàn bộ VietLex nếu chưa chọn văn bản, và mẫu giao diện có nhánh chọn một văn bản cụ thể. Route /chat tiếp nhận form, che dữ liệu nhạy cảm PII, đầu vào check, bộ nhớ đệm có điều kiện, quy trình xử lý RAG, đầu ra check và lưu trạng thái/dấu vết xử lý. Trên nhánh xử lý có nhiều trạng thái kết thúc, gồm tìm thấy trong bộ nhớ đệm, blocked đầu vào/đầu ra, technical error, no đoạn căn cứ và ok. Không thể mô tả luồng này như gửi câu hỏi rồi trả lời nếu muốn phân tích đầy đủ.
+
+Người tra cứu có thể tìm văn bản, mở nguồn và đặt câu hỏi. Người dùng đã đăng nhập có thể làm việc với hồ sơ của mình, lưu nguồn/ghi chú và quay lại phân tích. Quản trị viên có các trang giao diện quản lý vận hành. Các ranh giới quyền sở hữu và CSRF được triển khai ở tuyến xử lý/thành phần dịch vụ liên quan, nhưng bài không chạy kiểm tra role hoặc truy cập live; do đó đây là mô tả mã chương trình, không phải kết luận bảo mật môi trường chạy.
+
+Các thành phần ngoài biên bao gồm chỉ mục/kho vector, kho nội dung, bộ nhớ đệm, dịch vụ sinh ngôn ngữ, nguồn chính thức được đọc bổ sung trong một số luồng, và hệ lưu trữ trạng thái. Giao diện cho người dùng không nên trình bày những dịch vụ đó như một nguồn luật thống nhất đã được xác minh. Bài phân biệt văn bản được tìm thấy, đoạn được dùng làm ngữ cảnh và sự kiện sổ đăng ký đã duyệt.
+
+Các yêu cầu chức năng sau được tái dựng từ mã nguồn hiện có. Bảng CAP-01–CAP-12 ở phần tiếp theo trình bày căn cứ và giới hạn kiểm chứng chi tiết; các yêu cầu này chưa được đối chiếu với đề bài hoặc phỏng vấn người dùng.
+
+
+
+Bên cạnh chức năng tra cứu và hỏi đáp, hệ thống cần đáp ứng các yêu cầu về khả năng truy vết, an toàn dữ liệu, chịu lỗi và hiệu năng. Người đọc phải có cách quay lại đoạn căn cứ đã dùng; dữ liệu hồ sơ cần được giới hạn theo chủ sở hữu; sự cố truy cập kho dữ liệu cần được phân biệt với việc không tìm thấy thông tin. Các yêu cầu này liên hệ trực tiếp với cách người dùng hiểu và sử dụng kết quả, nên cần được xét cùng thiết kế giao diện và tổ chức dữ liệu.
+
+Rủi ro đáng chú ý là một câu trả lời có trích dẫn tạo cảm giác đã được xác nhận đầy đủ, trong khi đoạn được chọn có thể chưa đủ điều kiện hoặc thiếu ngoại lệ cần thiết. Việc giảm rủi ro đòi hỏi nhiều khâu phối hợp: quản lý phạm vi dữ liệu, giữ dấu vết nguồn khi truy xuất, kiểm soát cách sinh câu trả lời và trình bày giới hạn tại nơi người dùng đọc kết quả. Một cảnh báo chung ở cuối trang khó thay thế những thông tin cụ thể này.
+
+Năm nhóm caller cần được tách khi mô tả hệ thống. Khách truy cập dùng cookie client có chữ ký và bị giới hạn theo cấu hình; người dùng có tài khoản làm việc với nguồn, workspace và lịch sử của chính mình; admin có thao tác quản trị theo role; reviewer demo là chế độ giới hạn riêng chứ không phải role reviewer; người đánh giá nội bộ chạy CLI/harness và có thể bật judge theo điều kiện. Bảng capability trong handbook là mô tả mã chương trình/cấu hình, không chứng minh mọi chức năng đã mở cho mọi deployment.
+
+Một số trang GET có thể hiển thị trong môi trường mà khả năng lưu trữ trực tuyến không khả dụng. Vì vậy “nhìn thấy menu”, “tuyến xử lý trả HTML”, “tuyến xử lý đọc được dữ liệu” và “được phép ghi dữ liệu” là các mức khác nhau. GET trang giao diện thuộc lớp giao diện; POST, DELETE và JSON điểm truy cập là thao tác; chủ sở hữu/CSRF là điều kiện kiểm soát tại server. Không suy ra quyền từ nút bị ẩn trong mẫu giao diện.
+
+Bảng capability và giới hạn dưới đây dựa trên tuyến xử lý và handbook. “Mã nguồn-defined” là đối chiếu tĩnh; quyền thực tế của từng vai trò và deployment cần môi trường chạy probe có tài khoản được cấp phép.
+
+Hướng dẫn HCMUNRE có tiêu chí nhận xét nhưng không quy định thang điểm; trong hồ sơ hiện có chưa thấy đề bài hoặc rubric chấm điểm riêng. Vì vậy, mã CAP dưới đây là yêu cầu phân tích nội bộ được tái dựng từ tuyến xử lý, mẫu giao diện và handbook, không phải rubric hay yêu cầu đã được giảng viên xác nhận. Mỗi hàng có bằng chứng về hàm xử lý hoặc trang giao diện được khai báo; trạng thái môi trường chạy và chất lượng kết quả được đánh giá riêng.
+
+Ma trận capability trình bày các nhóm quan trọng được nhận diện trong VietLex. “Có trong mã nguồn” không có nghĩa đã nghiệm thu; luồng phụ thuộc Mongo, kho vector, dịch vụ mô hình hoặc nguồn ngoài cần biên bản kiểm tra ở đúng môi trường trước khi kết luận.
+
+Tính truy vết cần được đánh giá bằng tỷ lệ claim có trích dẫn hợp lệ, độ đầy đủ vị trí nguồn, giữ mã nguồn mã băm qua bước mở rộng và khả năng tái dựng request từ dấu vết xử lý. Các chỉ tiêu này có thể đo từ bộ câu hỏi đã gán nhãn; mã chương trình có trường log/dấu vết xử lý là điều kiện hỗ trợ chứ chưa phải bằng chứng dấu vết xử lý đủ hoặc không chứa dữ liệu nhạy cảm.
+
+Tính bảo mật cần kiểm tra chủ sở hữu scoping, CSRF, cookie, no-store, tải original và audit log theo nhiều vai trò. Mã nguồn mô tả cơ chế điều kiện kiểm soát và lưu trữ, nhưng bài không chạy pen-test, không kiểm tra browser thực tế và không truy cập Mongo/Production. Tính riêng tư còn cần xét che dữ liệu nhạy cảm trước khi lưu/gửi, dữ liệu tồn tại trong log/session/workspace và TTL Mongo là dọn bất đồng bộ, không phải thời điểm xoá chính xác.
+
+Tính chịu lỗi đòi phân biệt retrieval_error, no_candidate, blocked đầu vào/đầu ra, tìm thấy trong bộ nhớ đệm, nguồn partial và lỗi sinh câu trả lời. Hệ thống phải giữ thông tin chẩn đoán đủ để điều tra nhưng tránh ghi secret hoặc nội dung không cần thiết. Acceptance test tương lai cần xác nhận mỗi nhánh qua trạng thái, UI, dấu vết xử lý và side effect lưu trữ; HTTP 200 đơn lẻ không đủ.
+
+Tính hiệu năng và khả năng mở rộng phải theo dõi độ trễ từng bước xử lý, giới hạn đoạn căn cứ/ngữ cảnh, tỷ lệ bộ nhớ đệm, quota/plan kho lưu trữ, độ phủ chỉ mục và timeout. Snapshot có một phần dataset trên Qdrant/Supabase; quota và dung lượng SQL còn UNKNOWN. Không ngoại suy headroom/chi phí từ một lần audit.
+
+Tính tái lập yêu cầu lượt thực hiện lưu revision và dirty diff mã băm, dataset/gold mã băm, cấu hình dấu nhận diện cấu hình đã loại secret, mô hình/dịch vụ mô hình, metric version, cỡ mẫu, skip reason và raw biên bản kiểm tra. Nếu mã nguồn, cấu hình hoặc tập văn bản thay đổi thì biên bản kiểm tra cũ chỉ là snapshot lịch sử.
+
+Đối tượng dữ liệu pháp luật bắt đầu từ dataset pin theo revision, được công bố có 518.255 thông tin mô tả records. Capacity audit ngày 17/10/2026 cho thấy tập trực tuyến Supabase và hai collection Qdrant được đối chiếu có 14.962 document ID duy nhất; đây xấp xỉ 2,89% thông tin mô tả của snapshot đã pin, không đồng nghĩa 2,89% văn bản pháp luật đang có hiệu lực hay nội dung hợp lệ.
+
+Khái niệm “toàn VietLex” trên giao diện là phạm vi truy vấn theo đặc tả, không chứng minh toàn tập văn bản đã được ingest. Cần tách pinned dataset, local content kho lưu trữ, từng collection, body-search chỉ mục, trực tuyến Supabase và Pinecone legacy vì mỗi nơi có độ bao phủ/refresh khác nhau. Official mã nguồn ngoài tập văn bản cũng có phạm vi và thời gian đọc riêng.
+
+Giả định là bản mã nguồn khảo sát và biên bản kiểm tra có ngày làm căn cứ có thẩm quyền cho phạm vi tương ứng; không đọc secret, không kiểm tra môi trường triển khai thực tế trực tiếp và không suy diễn tình trạng luật. Các hạng mục này được ghi NOT_RUN hoặc UNKNOWN, không đánh dấu đạt trong ma trận capability.
+
+Mô hình chức năng dưới đây ưu tiên những mục tiêu được nối tới hàm xử lý/mẫu giao diện hiện có. Những chức năng đề xuất nhưng chưa xác nhận bằng mã chương trình không được thêm vào sơ đồ.
+
+Sơ đồ Hình 2.1 phân loại các tuyến xử lý GET trả về trang HTML theo nhóm chức năng. GET / là màn hình hỏi đáp; POST /chat chỉ trả fragment vào vùng hội thoại nên được ghi ở nhóm hành động. Các trang tra cứu, tài liệu, workspace, tài khoản, thông tin và quản trị được ánh xạ theo hàm xử lý; alias được gộp khi cùng một trang giao diện. POST, JSON, redirect và partial không được tính là màn hình độc lập. Danh sách tuyến xử lý, mẫu giao diện và trạng thái bảo vệ nằm trong screen-inventory-v14.json.
+
+
+
+Người tra cứu tìm văn bản theo số hiệu/tiêu đề hoặc nội dung, mở văn bản, xem sự kiện hiệu lực và gửi câu hỏi. Use case mở và đọc văn bản nối tự nhiên từ kết quả tìm kiếm nhưng có tuyến xử lý GET độc lập. Người dùng đăng nhập làm việc với workspace để lưu nguồn và xem lại. Quản trị viên sử dụng màn hình quản trị. Ranh giới đăng nhập/quyền của từng tuyến xử lý chưa được xác minh bằng phiên môi trường chạy nên sơ đồ use case mô tả vai trò ở mức chức năng, không khẳng định anonymous/role cụ thể cho mọi deployment.
+
+
+
+Luồng tìm kiếm có thể trả kết quả, không có kết quả hoặc không truy cập được hệ thống phía sau. Kết quả không có trong tập văn bản không có nghĩa là ngoài đời không tồn tại quy định. Luồng đọc văn bản có thể trả 404 khi document ID không hợp lệ hoặc không tồn tại; lỗi hệ thống phía sau được chuyển thành trạng thái không tải được. Luồng hỏi đáp có thể kết thúc bằng bộ nhớ đệm, câu trả lời, thông báo thiếu đoạn căn cứ, cơ chế kiểm soát an toàn chặn hoặc lỗi kỹ thuật. Thiết kế test nghiệp vụ nên bao gồm từng nhánh, thay vì chỉ kiểm tra đường đi thành công.
+
+Sự kiện hiệu lực cần được hiểu như dữ liệu có phạm vi review. Template cảnh báo sổ đăng ký chưa đầy đủ và không suy ra hiệu lực chỉ từ việc không có sự kiện. Vì vậy use case đối chiếu sự kiện theo mốc ngày không được đặt tên là xác định văn bản còn hiệu lực. Tên use case phải giữ đúng khả năng đã được kiểm chứng trong mã nguồn.
+
+Với tra cứu, nghiệm thu cần kiểm tra truy vấn thông tin mô tả và body riêng, phân trang, trạng thái chỉ mục unavailable, đường dẫn từ kết quả đến trang văn bản và nội dung cảnh báo. Với chat, cần kiểm tra phạm vi toàn tập văn bản và phạm vi văn bản, tìm thấy trong bộ nhớ đệm/miss, đầu vào/đầu ra cơ chế kiểm soát an toàn, truy xuất failure, no-evidence và khả năng lưu trữ/dấu vết xử lý. Với workspace, cần kiểm tra quyền sở hữu, CSRF, lưu/đọc lại nguồn và hành vi hết hạn. Đây là danh sách đề xuất cho đợt QA tương lai; các kiểm tra đó không được chạy trong lượt viết báo cáo.
+
+Các use case mô tả mục tiêu người dùng và kết quả mong đợi từ tuyến xử lý. Tác nhân được gọi theo năng lực chức năng; chỉ tuyến xử lý có điều kiện kiểm soát role/chủ sở hữu mới gắn với quyền cụ thể. Với use case phụ thuộc trực tuyến thành phần dịch vụ, luồng thành công là luồng mã nguồn-defined chứ không khẳng định đã chạy trong môi trường bàn giao.
+
+Bảng tóm tắt use case và kết quả thay thế dưới đây giúp thấy các nhánh cần kiểm thử trước khi đọc đặc tả từng luồng.
+
+Mục tiêu là tìm văn bản bằng số hiệu/tiêu đề hoặc cụm từ trong nội dung rồi mở tài liệu gốc. Tiền điều kiện là hệ thống phía sau của phạm vi tìm kiếm sẵn sàng; người dùng nhập truy vấn và chọn bộ lọc. Handler GET /search quyết định thông tin mô tả hay body search, áp dụng giới hạn và dựng kết quả. Khi chọn mục, GET /documents/{document_id} nạp tài liệu và trả trang reader.
+
+Luồng thay thế gồm truy vấn rỗng/không hợp lệ, không kết quả, body chỉ mục chưa có độ bao phủ, thành phần dịch vụ unavailable, document ID không tồn tại hoặc reader không tải được. UI phải báo đúng trạng thái; kết quả rỗng không chứng minh ngoài tập văn bản không có văn bản. Nếu người dùng xem ngày/sự kiện sổ đăng ký, màn hình chỉ trình bày sự kiện được ghi nhận theo mốc ngày, không kết luận văn bản còn hiệu lực chỉ vì không có dòng sự kiện.
+
+Tác nhân gửi câu hỏi từ trang chủ, có thể chọn toàn tập văn bản hoặc document phạm vi. POST /chat áp dụng CSRF/session, che dữ liệu nhạy cảm PII và kiểm tra đầu vào trước khi gọi bộ nhớ đệm có điều kiện hay RAG quy trình xử lý. Retrieval trả đoạn căn cứ cùng trạng thái/thông tin chẩn đoán; quy trình xử lý có thể mở rộng article, đánh giá đủ đoạn căn cứ và/hoặc thử official-mã nguồn supplement theo quy tắc. Sau sinh câu trả lời, hàm xử lý kiểm tra đầu ra, cập nhật trạng thái/dấu vết xử lý và trả fragment HTML.
+
+Nhánh thay thế gồm đầu vào bị chặn; tìm thấy trong bộ nhớ đệm; bộ nhớ đệm không đủ điều kiện; không ứng viên; lỗi hệ thống phía sau; thiếu căn cứ; sinh câu trả lời/đầu ra cơ chế kiểm soát an toàn; phạm vi một văn bản; khả năng lưu trữ thất bại. Chỉ nhánh có đoạn căn cứ được chấp nhận mới cho phép diễn đạt câu trả lời theo đặc tả. Lỗi kỹ thuật không được hiển thị như kết luận “không có quy định”; trích dẫn không tự xác nhận hiệu lực pháp lý.
+
+Người có identity được phép mở danh sách workspace, tạo hồ sơ, xem chi tiết và tải tài liệu hỗ trợ. Mỗi yêu cầu tài nguyên truy vấn theo workspace ID cùng chủ sở hữu user_id hoặc client_id; biết ID không cấp quyền. Hệ thống giữ original và dữ liệu trích xuất trong workspace record, có thể gắn nguồn, đoạn căn cứ và trạng thái phân tích.
+
+Nhánh lỗi gồm identity không hợp lệ, workspace hết hạn/không thuộc chủ sở hữu, file không hỗ trợ, vượt giới hạn bytes, lỗi parse/OCR, document trùng, checkpoint lỗi và khả năng lưu trữ unavailable. Handbook ghi điều kiện kiểm soát tối đa khoảng 12 MB và 20 tài liệu cho workspace; vì giới hạn phụ thuộc implementation/cấu hình, khi nghiệm thu phải đọc response thật thay vì hardcode vào client. GET list/detail không chứng minh upload hay extraction thành công.
+
+Người dùng chọn một hay nhiều nguồn đã lưu rồi thực hiện selected đoạn căn cứ, compare, obligations, claims, timeline, redline hoặc full review qua POST tuyến xử lý riêng. Trước khi phân tích, workspace kiểm tra chủ sở hữu và lựa chọn nguồn; thành phần dịch vụ nhận những nguồn đó và tạo kết quả có trích xuất/thông tin mô tả. User có thể chỉnh sửa báo cáo; bản xuất sau sửa cần trạng thái chưa xác minh nếu không chạy lại review.
+
+Nhánh thay thế gồm không nguồn nào được chọn, nguồn thiếu trang/không đọc được, analysis lỗi, đầu ra không hợp cấu trúc dữ liệu, nguồn hết hạn và sai chủ sở hữu. Tiêu chí nghiệm thu không dừng ở HTTP 200: cần kiểm tra đầu ra bao phủ nguồn đã chọn, link đúng mã nguồn passage, lưu/đọc lại đúng chủ sở hữu, trạng thái partial rõ và không biến nhận định mô hình thành kết luận pháp lý đã duyệt.
+
+Trong workspace, người dùng gửi topic để tạo tối đa năm truy vấn xác định; thành phần dịch vụ tìm trên cổng Nhà nước/Công báo, rồi thử đọc tối đa ba URL allowlist; tối đa hai network/truy vấn chạy đồng thời và mỗi URL có ngân sách riêng. PDF dùng smart window pypdf, tối đa 10 trang kiểm tra và 5 trang giữ lại. Route stream NDJSON sau khi lưu event; GET theo lượt thực hiện ID có thể phát lại trạng thái. Contract mã nguồn ghi luồng này không gọi LLM, OCR hay Brave.
+
+Ngân sách cấu hình tối đa 180 giây (60 giây discovery, 105 giây read, 15 giây checkpoint/save); đó là đặc tả/cấu hình, không đảm bảo mọi lượt hoàn tất trong 180 giây môi trường triển khai thực tế. Hủy yêu cầu chủ sở hữu/CSRF; update trạng thái terminal atomic, giữ nguồn/event và gỡ lease. Run có nguồn có thể kết thúc partial; chưa có nguồn có thể thành cancelled; worker cũ chỉ ghi checkpoint khi lượt thực hiện còn running, nhưng HTTP đang đọc có thể tiếp tục tới checkpoint sau. Probe live đã lưu/đọc lại PDF theo mã băm nhưng kết quả partial, không chứng minh truy xuất đầy đủ hoặc hiệu lực hiện hành.
+
+Admin có trang giao diện theo dõi evaluation, feedback, users và legal-effect sổ đăng ký. Thao tác thay đổi trạng thái hoặc publish/withdraw sổ đăng ký cần role admin, CSRF và audit event theo mã nguồn đặc tả. Registry là nhận định do người duyệt xác lập với đoạn căn cứ/dấu vết nguồn gốc; nó không tự tổng hợp mọi amendment và không bao phủ toàn bộ quy phạm pháp luật.
+
+Nhánh không được phép cần trả trạng thái phù hợp, không để UI thay authorization; session hết hạn, thiếu thành phần dịch vụ và audit-write lỗi phải quan sát riêng. Bài không dùng tài khoản admin, không tạo mutation và không kiểm tra cách môi trường triển khai thực tế triển khai cờ sổ đăng ký. Bằng chứng hỗ trợ mô tả tuyến xử lý/điều kiện kiểm soát và biên bản kiểm tra lịch sử có ngày.
+
+Một thao tác kéo dài cần được mô tả cả về các bước thực hiện lẫn trạng thái mà người dùng có thể quan sát. Sơ đồ hoạt động giúp nhận diện điểm rẽ nhánh của quá trình tra cứu; sơ đồ trạng thái giải thích một lượt đọc nguồn đang diễn ra, đã kết thúc hay bị gián đoạn. Cách phân biệt này tránh gom mọi tình huống không có câu trả lời vào cùng một loại lỗi. Chẳng hạn, không tìm thấy văn bản phù hợp có ý nghĩa khác với việc kho dữ liệu tạm thời không truy cập được.
+
+Đối với đọc nguồn trong hồ sơ nghiên cứu, mã nguồn lưu trạng thái đang thực hiện và các kết quả kết thúc như hoàn tất, một phần, đã hủy, thất bại hoặc gián đoạn. Yêu cầu hủy được xử lý cùng các điểm lưu tiến độ, nhờ đó kết quả đã thu được có thể được giữ lại. Việc đóng trang, ngắt kết nối và máy chủ xác nhận hủy là những sự kiện khác nhau; giao diện cần phản ánh trạng thái được máy chủ ghi nhận để người dùng biết có nên tiếp tục chờ hay gửi lại yêu cầu.
+
+Từ các trạng thái này có thể xác định những tình huống kiểm thử cần thiết: tra cứu không có kết quả, kho dữ liệu không sẵn sàng, yêu cầu không thuộc chủ sở hữu, hồ sơ hết hạn, hủy khi chưa có nguồn và hủy sau khi đã có kết quả một phần. Đây là các trường hợp được rút ra để thiết kế kiểm thử tiếp theo. Đồ án chưa coi sự hiện diện của nhánh xử lý trong mã nguồn là bằng chứng rằng mọi trường hợp đã được chạy thử thành công.
+
+Hoạt động tra cứu bắt đầu từ nhu cầu tìm một văn bản và kết thúc ở việc người dùng đọc được nội dung hoặc nhận biết lý do chưa thể đọc. Sơ đồ dưới đây khái quát hai cách tìm theo thông tin mô tả và theo toàn văn, sau đó nối kết quả tìm kiếm với trang đọc văn bản. Các bước được đối chiếu với legal_search và legal_document trong mã nguồn.
+
+Điểm cần phân biệt là danh sách rỗng và lỗi truy cập kho dữ liệu. Với danh sách rỗng, người dùng có thể đổi từ khóa, khoảng thời gian hoặc loại văn bản. Với lỗi dịch vụ, việc tiếp tục thay từ khóa chưa chắc giải quyết được vấn đề, vì nguyên nhân nằm ở khả năng truy cập dữ liệu. Thiết kế giao diện vì vậy cần cung cấp thông báo phù hợp với từng nhánh thay vì chỉ hiển thị một trạng thái chung là không có kết quả.
+
+Sơ đồ hoạt động còn làm rõ ranh giới giữa tìm đúng bản ghi và lấy được nội dung để đọc. Một định danh có thể xuất hiện trong kết quả tìm kiếm trong khi nội dung không khả dụng ở kho đang dùng. Tình huống này cần được kiểm tra riêng khi đối chiếu chỉ mục với kho nội dung; nó không nên được diễn giải thành việc văn bản pháp luật đó không tồn tại. Đây cũng là cơ sở để xây dựng trường hợp kiểm thử từ thao tác tìm kiếm đến mở trang đọc.
+
+Một lượt đọc nguồn trong hồ sơ có thể kéo dài qua nhiều yêu cầu mạng nên cần lưu được tiến độ và kết quả kết thúc. Sơ đồ trạng thái dưới đây thể hiện các trạng thái lưu trong cơ chế đọc nguồn: running, complete, partial, cancelled, interrupted và failed. Các nhãn tiếng Việt giải thích ý nghĩa nghiệp vụ; tên trong ngoặc giúp đối chiếu với mã nguồn.
+
+Trạng thái có kết quả một phần cần được giữ riêng vì người dùng đã có tư liệu để xem xét, dù quá trình chưa hoàn tất đầy đủ. Khi hủy sau khi đã đọc được một số nguồn, hệ thống có thể giữ kết quả đó và ghi lý do dừng. Ngược lại, hủy trước khi có nguồn sẽ không tạo cùng mức thông tin. Phân biệt này giúp giao diện giải thích điều gì đã làm được, điều gì còn thiếu và có cần thực hiện lại hay không.
+
+Cơ chế lưu tiến độ chỉ cập nhật lượt đang chạy, qua đó hạn chế một tác vụ cũ ghi đè kết quả đã kết thúc. Mã nguồn còn xử lý trường hợp lượt trước hết thời gian giữ quyền thực hiện và chuyển nó sang trạng thái gián đoạn khi nhận lượt mới phù hợp. Điểm thiết kế này hỗ trợ phục hồi sau sự cố, nhưng sự hiện diện của cơ chế chưa chứng minh mọi tình huống cạnh tranh đã được kiểm thử; các thử nghiệm về hủy, gửi lại và tiến độ đến muộn vẫn cần được tách thành từng trường hợp.
+
+Use case cần liên kết với CAP-01…CAP-12 trong ma trận chức năng và đoạn căn cứ mã chương trình/biên bản kiểm tra tại Phụ lục A. Acceptance nội bộ nên có test ID cho từng nhánh, fixture, kết quả mong đợi, trạng thái/side effects và môi trường. “Implemented” không được tính là test pass.
+
+Ví dụ, body search cần kiểm tra thông tin mô tả/body và cảnh báo độ bao phủ; official research cần kiểm mã băm, chủ sở hữu, giới hạn trang và partial; chat cần kiểm nội dung trích dẫn và answer. Muốn công bố hiệu quả cần gold set, denominators và human adjudication. CAP là tiêu chí phân tích kỹ thuật nội bộ vì hướng dẫn HCMUNRE không cung cấp thang điểm; chúng không được trình bày như tiêu chí chấm điểm chính thức.
+
+Phân tích hướng đối tượng trong đồ án được thực hiện ở hai mức. Mức nghiệp vụ xác định những đối tượng cần được lưu giữ như người dùng, cuộc hội thoại, hồ sơ nghiên cứu, tài liệu và kết quả phân tích. Mức cài đặt xem xét cách các lớp và thành phần dịch vụ phối hợp để truy xuất căn cứ và tạo câu trả lời. Hai mức này bổ sung cho nhau: mô hình dữ liệu làm rõ hệ thống ghi nhớ điều gì và quan hệ giữa các bản ghi, còn sơ đồ lớp cài đặt giải thích thành phần nào chịu trách nhiệm xử lý các dữ liệu đó.
+
+Mô hình dữ liệu thứ nhất mô tả người dùng, phiên đăng nhập, cuộc hội thoại và lượt trao đổi. Hình sử dụng ký pháp lớp UML để biểu diễn các thực thể và số lượng quan hệ, đáp ứng mục đích của một sơ đồ dữ liệu logic. Tên trong dấu góc là tên tập bản ghi MongoDB; mũi tên cho biết cách các bản ghi liên hệ qua định danh, không phải khai báo khóa ngoại do cơ sở dữ liệu tự bảo đảm.
+
+Người dùng và phiên đăng nhập phục vụ việc nhận diện tài khoản. Một tài khoản có thể có nhiều phiên đăng nhập, mỗi phiên lưu mã băm của thẻ xác thực và thời điểm hết hạn. Cuộc hội thoại lại phục vụ việc tổ chức nội dung trao đổi, do đó không được đồng nhất với phiên đăng nhập. Việc tách hai khái niệm này giúp giải thích vì sao thay đổi trạng thái xác thực và đổi tên cuộc hội thoại thuộc những trách nhiệm khác nhau.
+
+Lượt trao đổi lưu câu hỏi, câu trả lời cùng thông tin xử lý và phản hồi. Liên hệ qua session_id cho phép tập hợp lịch sử của một cuộc hội thoại; liên hệ qua user_id hoặc client_id hỗ trợ xác định phạm vi dữ liệu thuộc người đang truy cập. Giá trị user_id có thể rỗng đối với khách chưa đăng nhập, nên mô hình thể hiện quan hệ tùy chọn thay vì buộc mọi cuộc hội thoại phải có một tài khoản. Khi lấy lịch sử, điều kiện sở hữu vẫn phải được kiểm tra ở lớp ứng dụng, vì chỉ biết định danh hội thoại chưa đủ để được đọc nội dung.
+
+Từ mô hình này có thể rút ra hai yêu cầu kiểm thử dữ liệu. Thứ nhất, một phiên đăng nhập hợp lệ phải gắn được với tài khoản còn được phép sử dụng. Thứ hai, việc đổi định danh hội thoại trong yêu cầu không được làm lộ lịch sử của chủ sở hữu khác. Đây là các điều kiện kiểm soát suy ra từ quan hệ dữ liệu và cách truy vấn trong mã nguồn, chưa phải kết quả thử xâm nhập mới. Mô hình vì thế vừa hỗ trợ thiết kế lưu trữ vừa chỉ ra nơi cần kiểm chứng quyền truy cập.
+
+Mô hình dữ liệu thứ hai tập trung vào hồ sơ nghiên cứu và các thành phần được lưu cùng hồ sơ. Hình thoi đen biểu thị tài liệu, nguồn được ghim và lần phân tích là các thành phần nhúng trong bản ghi research_workspaces. Với loại phân tích đọc nguồn, danh sách sự kiện được lưu trong kết quả để hỗ trợ theo dõi và phục hồi tiến độ.
+
+Hồ sơ là đơn vị tổ chức một công việc nghiên cứu: người dùng đặt tên, ghi mô tả, đưa tài liệu vào và chọn căn cứ để phân tích. Tài liệu tải lên được phân biệt với nguồn được ghim. Tài liệu lưu nội dung do người dùng đưa vào; nguồn được ghim lưu một đoạn hoặc thông tin nguồn đã được chọn để phục vụ lập luận. Cùng xuất hiện trong một hồ sơ không có nghĩa hai loại bản ghi có thể thay thế nhau, vì mỗi loại có cách xác định nguồn và phạm vi sử dụng riêng.
+
+Mỗi lần phân tích cần được nhận diện độc lập để người dùng có thể xem lại kết quả hoặc biết lượt nào đang chạy. Một số loại phân tích chọn nguồn qua danh sách định danh căn cứ; loại đọc nguồn có thêm trạng thái và sự kiện tiến độ. Vì cấu trúc kết quả phụ thuộc loại tác vụ, sơ đồ chỉ mô tả phần chung và ghi rõ quan hệ nào áp dụng có điều kiện. Việc vẽ một quan hệ bắt buộc giữa mọi lần phân tích và mọi tài liệu sẽ làm sai thiết kế thực tế.
+
+Cách lưu nhúng thuận tiện khi đọc lại một hồ sơ cùng các thành phần liên quan, nhưng làm tăng nhu cầu kiểm soát kích thước và cập nhật đồng thời. Mã nguồn có điều kiện giới hạn dung lượng bản ghi, số lượng thành phần và thời hạn lưu. Các điều kiện đó cho thấy hệ thống đã có ranh giới lưu trữ ở lớp ứng dụng; chúng không bảo đảm dữ liệu được giữ vô hạn hoặc mọi bản sao biến mất đúng một thời điểm. Khi mở rộng, cần kiểm tra các tình huống hồ sơ gần đầy, thêm trùng nguồn và một lần phân tích hoàn thành trong lúc dữ liệu hồ sơ thay đổi.
+
+Hai sơ đồ dữ liệu bổ sung cho sơ đồ lớp truy xuất ở phần sau. Mô hình dữ liệu trả lời câu hỏi đối tượng nào được lưu và liên hệ với nhau bằng cách nào; sơ đồ lớp truy xuất trả lời thành phần nào tạo, chuyển và sử dụng căn cứ. Việc dùng cùng ký pháp UML không làm hai mô hình trở thành một: bản ghi MongoDB được dựng thành lớp khái niệm để phân tích, còn EvidenceChunk và các lớp truy xuất là những khai báo có thật trong mã chương trình. Sự phân biệt này giữ được cách nhìn hướng đối tượng mà vẫn phản ánh đúng công nghệ lưu trữ của VietLex.
+
+EvidenceChunk là đối tượng dữ liệu bất biến được khai báo trong app/ingestion/legal_text.py. Các thuộc tính gồm document ID, số hiệu, tiêu đề, địa chỉ nguồn, heading path, article, clause, trích dẫn, nội dung, token count và content mã băm tùy chọn. Phương thức formatted_context() đóng gói trích dẫn, địa chỉ nguồn, title và body thành phần có thể đưa vào ngữ cảnh. Việc gom các thuộc tính này thành một đối tượng giá trị làm rõ đơn vị đoạn căn cứ mà các bước truy xuất và sinh câu trả lời trao đổi.
+
+Một điểm thiết kế đáng chú ý là cùng đối tượng chứa cả nội dung và dấu vết nguồn. Điều này thuận lợi cho việc tạo ngữ cảnh, nhưng cần đảm bảo nhánh xử lý không đánh mất thông tin mô tả khi xếp hạng, gộp hoặc bộ nhớ đệm. Hash không tự chứng minh nguồn hợp pháp hay nội dung đúng; nó chỉ giúp phát hiện một số dạng lệch nội dung so với giá trị đã kỳ vọng. Những khẳng định về hiệu lực, nguồn căn cứ có thẩm quyền và ngày áp dụng đòi hỏi đoạn căn cứ riêng.
+
+Ở góc độ nghiệp vụ, đơn vị làm căn cứ không chỉ là tên văn bản mà còn là đoạn nội dung liên quan đến câu hỏi. Khi một tài liệu chứa nhiều điều và khoản, tìm đúng tài liệu vẫn có thể chưa đưa đúng phần cần dùng vào câu trả lời. Vì vậy, việc giữ đường dẫn tiêu đề, điều, khoản và trích dẫn trong cùng đối tượng có ý nghĩa đối với khả năng kiểm tra lại lập luận. Đây là lý do mô hình dữ liệu truy xuất cần đi sâu hơn một danh sách định danh văn bản.
+
+RetrievalOutcome gom danh sách đoạn căn cứ, độ trễ theo bước, trạng thái, thông tin chẩn đoán và error. Đây là một hợp đồng kết quả tốt hơn việc trả trần danh sách đoạn vì phía điều phối có thể phân biệt truy xuất thành công, rỗng hoặc có lỗi, đồng thời giữ thông tin quan sát. LegalRetriever triển khai một tuyến tìm kiếm hybrid; VertexQdrantRetriever chuyển dữ liệu truyền Qdrant sang EvidenceChunk/ứng viên truy xuất cho tuyến V3. Hai lớp không nên được diễn giải như hai tên gọi của cùng hệ thống phía sau; chúng nằm trong các hợp đồng cấu hình khác nhau.
+
+V3ArticleExpansion biểu diễn kết quả lựa chọn và bổ sung đoạn căn cứ, cùng trạng thái/thông tin chẩn đoán/độ trễ. Thiết kế có ranh giới riêng giữa ứng viên truy xuất ban đầu với đoạn căn cứ sau khi mở rộng. Theo tài liệu kiến trúc, mở rộng V3 đọc mã nguồn từ local kho lưu trữ hoặc Supabase và so mã băm nội dung trước khi mở; đó là một kiểm tra dấu vết nguồn gốc có ích, nhưng không đồng nghĩa mỗi đoạn đã được luật sư review.
+
+Route /chat điều phối HTTP, cơ chế kiểm soát an toàn, bộ nhớ đệm, gọi quy trình xử lý và dựng response. run_advanced_rag điều phối truy xuất, chọn đoạn căn cứ, có thể gọi mở rộng và sinh câu trả lời. Retriever biết cách làm việc với hệ thống phía sau; đối tượng đoạn căn cứ là dữ liệu chung ở ranh giới giữa các bước. Cách phân lớp này giảm việc đưa logic kho vector vào mẫu giao diện, nhưng một thay đổi cấu hình truy xuất vẫn có thể làm đổi behavior và số liệu; do đó quy trình xử lý dấu nhận diện cấu hình/mã nguồn revision cần xuất hiện trong evaluation manifest.
+
+Sơ đồ lớp rút gọn tập trung vào các quan hệ được khai báo trong mã nguồn: outcome chứa đoạn căn cứ; retriever trả kết quả hoặc tạo đoạn căn cứ; article expansion chọn/thêm đoạn căn cứ. Sơ đồ không khẳng định quan hệ kế thừa chung nếu mã nguồn không khai báo giao diện lập trình như vậy. Nó cũng không mô hình hóa collection/chỉ mục như entity class vì đó là phần hạ tầng, không phải cấu trúc dữ liệu đối tượng nghiệp vụ hoàn chỉnh.
+
+
+
+Một hướng cải thiện là thống nhất thông tin trả về của các bước truy xuất và sinh câu trả lời. Thông tin này nên cho biết câu hỏi đã đi qua cấu hình nào, căn cứ nào được chọn, vì sao một bước dừng lại và thời gian xử lý tương ứng. Khi lỗi chỉ được ghép thành một chuỗi thông báo, việc phân biệt thiếu dữ liệu với lỗi dịch vụ trở nên khó khăn. Một cấu trúc kết quả rõ ràng sẽ hỗ trợ cả giao diện, việc phân tích lỗi và so sánh giữa các phương án truy xuất, đồng thời cần giới hạn dữ liệu cá nhân được ghi lại.
+
+Việc lựa chọn nhánh truy xuất cũng cần được thể hiện như một phụ thuộc rõ ràng để có thể thay thế trong kiểm thử. Mỗi phương án nên được kiểm tra bằng cùng yêu cầu về định danh văn bản, nội dung và thông tin nguồn trước khi so sánh chất lượng. Đề xuất này nhằm giữ khả năng kiểm soát khi hệ thống thay đổi, không hàm ý mọi cơ chế tương tự đều đang vắng mặt. Khi đánh giá lại, cần ghi phiên bản mã nguồn và cấu hình để kết quả không bị gán nhầm cho một phiên bản khác.
+
+StageCandidate ghi lại một ứng viên tại từng bước truy xuất, gồm định danh văn bản, nội dung, thông tin trích dẫn và điểm xếp hạng. RetrievalStageTrace liên kết các danh sách ứng viên để có thể theo dõi một tài liệu được giữ lại hay bị loại ở bước nào. RetrievalOutcome tập hợp kết quả cuối với trạng thái, độ trễ và thông tin chẩn đoán. Ba đối tượng phục vụ những mức quan sát khác nhau, từ ứng viên đơn lẻ đến diễn biến và kết quả của cả quá trình.
+
+Trong nhánh V3, dữ liệu trả về được kiểm tra về dịch vụ tạo vector, mô hình, số chiều, phiên bản dữ liệu và các trường bắt buộc trước khi chuyển thành đối tượng căn cứ. Nếu dữ liệu không phù hợp với đặc tả, hệ thống báo lỗi truy xuất; nếu truy vấn hợp lệ nhưng không có ứng viên thì trả trạng thái rỗng tương ứng. Phân biệt này giúp người vận hành tìm đúng nguyên nhân và giúp giao diện đưa ra lời giải thích phù hợp.
+
+Điểm xếp hạng cho biết mức ưu tiên tương đối trong quá trình tìm kiếm. Khi một đoạn có điểm cao, điều có thể suy ra là nó được thuật toán ưu tiên trong điều kiện truy vấn đã chọn; vẫn cần xem nội dung để xác định đoạn đó có đủ hỗ trợ câu trả lời hay không. Dấu vết qua các bước vì thế hữu ích để tìm nơi một căn cứ quan trọng bị mất, còn kết luận về độ đúng pháp lý cần một cách đánh giá riêng.
+
+Mô hình lớp được mở rộng thành bảng trách nhiệm để nối khái niệm UML với phần mã chương trình thực hiện. Bảng không tuyên bố đây là class mô hình đầy đủ và không gán kế thừa nếu mã nguồn không khai báo.
+
+Bảng trách nhiệm object sau phân biệt đối tượng giá trị trong memory, bước xử lý dấu vết xử lý, orchestration thành phần dịch vụ và kho lưu trữ; nó không xem collection/chỉ mục như class nghiệp vụ nếu không có entity declaration tương ứng.
+
+Tính toàn vẹn cần được giữ xuyên suốt từ bản ghi nguồn đến đoạn căn cứ cuối cùng. Định danh văn bản, số hiệu, địa chỉ nguồn, vị trí điều khoản và nội dung giúp người đọc nhận diện phần được sử dụng. Khi xếp hạng, gộp hoặc cắt ngắn nội dung, hệ thống cần bảo toàn mối liên hệ giữa các thành phần này. Nếu chỉ giữ lại phần văn bản mà mất thông tin nguồn, câu trả lời có thể khó kiểm tra dù nội dung thoạt nhìn vẫn hợp lý.
+
+Việc kiểm tra dữ liệu của nhánh V3 đặt các điều kiện tương thích trước khi tạo đối tượng căn cứ. Cách làm này giúp phát hiện sớm một chỉ mục được xây bằng mô hình hoặc phiên bản dữ liệu khác với cấu hình đang truy vấn. Lỗi tương thích vì vậy cần được xử lý rõ ràng, thay vì âm thầm chuyển sang một kho khác rồi giữ nguyên cách diễn giải kết quả. Điều kiện về cấu hình là một phần của tính toàn vẹn, bên cạnh bản thân nội dung văn bản.
+
+Khi mở rộng nội dung theo điều khoản, mã băm được dùng để đối chiếu phần lấy từ kho nội dung với giá trị đã kỳ vọng. Mã băm phù hợp hỗ trợ kiểm soát sự nhất quán giữa các nơi lưu; để xác định nguồn có thẩm quyền và văn bản còn hiệu lực vẫn cần thông tin khác. Do đó, báo cáo sử dụng kiểm tra mã băm cho mục đích truy vết và phát hiện lệch nội dung, đồng thời giữ việc thẩm định pháp lý thành một yêu cầu độc lập.
+
+Tuyến xử lý web tiếp nhận yêu cầu, kiểm tra thông tin phiên và quyền sở hữu, sau đó chuyển công việc đến thành phần dịch vụ. Thành phần dịch vụ điều phối tìm kiếm và xử lý nội dung; đối tượng dữ liệu mang kết quả qua các bước; lớp truy cập kho dữ liệu thực hiện việc đọc và ghi. Mẫu giao diện nhận dữ liệu đã được chuẩn bị để hiển thị. Cách phân công này tạo cơ sở để xem xét trách nhiệm thay vì đặt toàn bộ nghiệp vụ vào một hàm xử lý trang.
+
+Các lớp vẫn có những điểm phụ thuộc cần được quản lý, nhất là nơi chọn phương án truy xuất và chuyển kết quả sang giao diện. Một thay đổi ở cấu hình kho dữ liệu có thể tác động đến nội dung trả về, cách thông báo lỗi và kết quả đánh giá. Vì vậy, mức độ tách lớp nên được xem qua khả năng thay thế và kiểm thử một thành phần mà không phải sửa nhiều nơi. Chỉ chia mã nguồn thành nhiều tệp chưa đủ để khẳng định thiết kế đã đạt mức độc lập mong muốn.
+
+Các tập bản ghi hồ sơ, hội thoại và nhật ký được thao tác qua những hàm truy cập MongoDB. Trong sơ đồ dữ liệu, chúng được biểu diễn thành lớp khái niệm để làm rõ thuộc tính và quan hệ; trong phần cài đặt, báo cáo giữ đúng cách tổ chức bằng bản ghi của dự án. Việc dựng một hệ kế thừa hoặc một lớp ánh xạ cơ sở dữ liệu không có trong mã nguồn sẽ làm sai đối tượng khảo sát.
+
+Điểm mạnh là EvidenceChunk/Outcome giữ dấu vết nguồn gốc và trạng thái; V3 retriever kiểm dữ liệu truyền và phân biệt retrieval_error với no_candidate; article expansion có bước mã băm check; bước xử lý dấu vết xử lý tạo điểm móc đánh giá. Các cơ chế này giúp điều tra hơn so với API chỉ trả danh sách văn bản.
+
+Điểm cần củng cố là cấu hình tường minh xuyên request, độ bao phủ/freshness theo hệ thống phía sau, bộ nhớ đệm eligibility với câu hỏi hiện hành và claim-level hỗ trợ bởi căn cứ thay vì chỉ trích dẫn count. Stage điểm xếp hạng/ứng viên truy xuất definition nên version hóa để metric giữa release so sánh được.
+
+Đề xuất thiết kế không giả định rewrite. Trước tiên gom đặc tả/cấu hình dấu nhận diện cấu hình vào object bất biến gắn với request; kiểm cấu trúc dữ liệu kho lưu trữ/dữ liệu truyền bằng fixture; tạo test truy vết cho từng branch và report bước xử lý survival. Nếu dữ liệu chỉ ra abstraction không đại diện mã nguồn mới cân nhắc tách giao diện lập trình. Chưa có refactor hay performance test mới.
+
+Tài liệu kiến trúc được cập nhật 19/10/2026 ghi rõ các hợp đồng truy xuất hiện hành, đồng thời cảnh báo tài liệu này không xác nhận cấu hình đang chạy trên môi trường triển khai thực tế. Mã nguồn/cấu hình là căn cứ có thẩm quyền cho mô tả dưới đây.
+
+FastAPI/Jinja phục vụ tuyến xử lý HTML và API. Route chuyển request tới thành phần dịch vụ nghiệp vụ; mẫu giao diện kết xuất form, nguồn và trạng thái; thành phần dịch vụ truy xuất giao tiếp với chỉ mục/content kho lưu trữ; quy trình xử lý tạo ngữ cảnh và gọi tầng sinh câu trả lời. Cache semantic và interaction kho lưu trữ phục vụ hai nhiệm vụ khác nhau: bộ nhớ đệm có thể trả kết quả đã được lưu theo điều kiện; interaction kho lưu trữ lưu trạng thái/dấu vết xử lý để theo dõi phiên. Sơ đồ kiến trúc thể hiện ranh giới này ở mức thành phần, không liệt kê mọi database collection hay dịch vụ mô hình.
+
+Một boolean cấu hình chọn một trong hai truy xuất đặc tả; không có cross-fallback âm thầm giữa hai đặc tả theo tài liệu hiện hành. Với USE_LEGACY_FREE_PIPELINE=false (giá trị mặc định trong cấu hình), tuyến V3 dùng Vertex gemini-embedding-2 vector 1024 chiều và Qdrant V3, trộn RRF/DBSF. Với true, tuyến legacy dùng Qdrant Cloud inference multilingual E5 384 chiều, Pinecone V1, SQLite FTS cho số hiệu/tiêu đề và local content resolution. Config mặc định không phải bằng chứng về deployment hiện tại.
+
+
+
+Tuyến V3 giữ dense và sparse IDF trong collection Qdrant; kết quả RRF và DBSF được trộn theo rank với trọng số bằng nhau theo tài liệu kiến trúc. Sau truy xuất có thể mở rộng đoạn căn cứ điều khoản bằng local/Supabase content, nhưng chỉ khi mã băm nguồn khớp ứng viên truy xuất. Tài liệu ghi dung lượng snapshot ngày 17/10/2026 có 141.798 điểm trên 14.962 document ID, tương ứng khoảng 2,89% tập 518.255 document ID của dataset được nêu. Đây là độ bao phủ snapshot của một chỉ mục, không phải tập văn bản đầy đủ và không xác nhận trạng thái mới hơn.
+
+Tuyến legacy được thiết kế như nhánh truy xuất Pinecone full-tập văn bản + SQLite FTS thông tin mô tả và local content resolution/reranking. Cấu hình tên chỉ mục không tự chứng minh count, quota hoặc độ bao phủ của remote chỉ mục. Vì vậy bảng so sánh phía dưới mô tả đặc tả và rủi ro dấu vết nguồn gốc; nó không đưa ra kết luận nhánh truy xuất nào cho kết quả tốt hơn ở môi trường triển khai thực tế.
+
+Để đối chiếu hai hợp đồng truy xuất theo cấu hình, Bảng dưới đây tóm tắt thành phần và giới hạn được ghi nhận; bảng không so sánh hiệu năng.
+
+Hai phương án truy xuất thể hiện những lựa chọn khác nhau về cách tìm thông tin và nơi giải quyết nội dung. Nhánh kết hợp kho ngữ nghĩa với chỉ mục từ khóa có thể tận dụng các thành phần sẵn có; nhánh tích hợp dữ liệu dày và thưa tạo một cách kết hợp khác trong cùng hợp đồng truy vấn. Việc chọn phương án cần dựa vào yêu cầu về dữ liệu, khả năng vận hành và kết quả đánh giá tương ứng, thay vì suy ra phương án tốt hơn chỉ từ tên công nghệ.
+
+Một phép so sánh có ý nghĩa phải giữ được tập câu hỏi, phạm vi tài liệu và cách xác định đáp án chuẩn. Nếu hai nhánh làm việc trên các tập văn bản khác nhau, chênh lệch kết quả có thể đến từ dữ liệu chứ chưa hẳn từ phương pháp truy xuất. Đồ án vì vậy xem cấu hình và định danh tập dữ liệu là một phần của điều kiện thí nghiệm. Các số liệu lịch sử vẫn hữu ích để đặt giả thuyết cải tiến, nhưng cần một lượt đánh giá được thiết kế nhất quán trước khi kết luận về lợi thế của từng phương án.
+
+Theo tài liệu kiến trúc, câu trả lời giữ tối đa ba passage trong ngân sách 720 token. Giới hạn này hữu ích để kiểm soát ngữ cảnh size và độ trễ, nhưng tạo trade-off: nguồn thiết yếu có thể bị loại bởi ranking hoặc budget; đoạn ngắn có thể thiếu điều kiện/ngoại lệ; tokenization có thể khác với ước lượng whitespace. Vì thế recall ở ứng viên truy xuất bước xử lý và đoạn căn cứ survival sau selection nên được đo song song.
+
+Quy trình xử lý có thể tìm official-mã nguồn supplement khi ngữ cảnh được xem là chưa đủ, với timeout giới hạn; kết quả ngoài tập văn bản được gắn dấu vết nguồn gốc riêng. Official supplement không biến bất kỳ trang web nào thành nguồn đã xác minh. UI cần nói rõ nguồn nào là văn bản trong tập văn bản, nguồn nào là bổ sung và thời điểm truy cập. Khi không có căn cứ đủ dùng, mã chương trình có thể trả lời từ chối thay vì tự điền kết luận; đây là trạng thái có chủ đích chứ không phải lỗi nội dung.
+
+Evidence từ vector chỉ mục, body search, bộ nhớ đệm, workspace lưu trữ và official supplement khác nhau về độ bao phủ, freshness và review state. Một định danh document_id không đảm bảo content mã nguồn đồng nhất nếu quy trình xử lý không ràng buộc mã nguồn mã băm. EvidenceChunk có source_content_sha256 tùy chọn; V3 expansion kiểm tra mã băm trước khi nối nội dung đầy đủ. Nên hiển thị nguồn, vị trí, trạng thái kiểm tra và ngày, đồng thời từ chối mở rộng khi dấu vết nguồn gốc thiếu/thay đổi.
+
+Route chat redacts PII trước khi tiếp tục; CSRF token dùng cho form POST; tài liệu hướng dẫn của mã nguồn ghi workspace/resource reads chủ sở hữu-scoped và response dynamic dùng no-store. Tuy nhiên không có kiểm thử môi trường chạy trong bài, do đó đây là mô tả cơ chế mã chương trình, chưa phải đánh giá hiệu quả security. Cần một threat mô hình riêng cho lời nhắc injection trong văn bản nguồn, data exfiltration, bộ nhớ đệm poisoning, access control và log thời hạn lưu.
+
+Hai nhánh truy xuất cho phép thử nghiệm hệ thống phía sau và giới hạn phụ thuộc nhưng tăng chi phí cấu hình, observability và khả năng tái lập. Thay đổi một boolean có thể đổi embedding số chiều, chỉ mục, sparse path, bộ xếp hạng lại và nguồn nội dung. Mỗi lượt thực hiện cần lưu resolved configuration (đã loại secret), data snapshot, mã chương trình revision, quy trình xử lý dấu nhận diện cấu hình, dataset/gold mã băm và ứng viên truy xuất budget. Nếu thiếu các trường này, hai lượt thực hiện mang cùng tên baseline có thể không so sánh được.
+
+Tách tra cứu chính xác, toàn văn và semantic RAG thành các trải nghiệm riêng có lợi cho người dùng nhưng cần giải thích khác biệt. Số hiệu/title FTS không tương đương tìm body; phrase body search không phải semantic search; câu trả lời RAG không thay thế mở văn bản gốc. Các nhãn giao diện hiện có nói một phần điều đó; bộ usability review tương lai cần kiểm tra người dùng có hiểu phạm vi hay không.
+
+Ingestion VietLex bắt đầu ở shard Parquet và revision pin trong cấu hình/runbook, không phải crawler được README của publisher mô tả. Quy trình xử lý kiểm manifest/checksum, chuẩn hóa thông tin mô tả, join body theo document ID, phát hiện thiếu/duplicate/mismatch, ghi content kho lưu trữ rồi xây FTS/vector nhánh truy xuất theo đặc tả riêng. Phân biệt bước publisher với bước ingest VietLex để không gán crawler bên ngoài cho mã nguồn hiện tại.
+
+SQLite content kho lưu trữ tách thông tin mô tả và contents. Metadata giữ số hiệu, title, URL, type, sector, issuing căn cứ có thẩm quyền, date, signer, quality flags; contents giữ body Zstandard, byte count, SHA-256, mã nguồn shard/row, token count và flags. FTS5 số hiệu/title tách riêng; local body passage FTS có cấu trúc dữ liệu/độ bao phủ khác. Checkpoint, failure row và build report là artifact để resume/audit, không phải bộ nhớ đệm rác.
+
+Quality flags gồm thiếu ID/number/title/URL, ngày sai, body rỗng, encoding damage, độ dài bất thường và duplicate mã băm. Flag giúp phân tầng/điều tra, không tự cho phép bỏ tài liệu. Hash trùng có thể là cùng byte content ở hai ID nhưng không chứng minh cùng ý nghĩa hoặc có thể gộp. Mỗi lần lọc phải nêu tiêu chí và số lượng theo lý do.
+
+Thay đổi đầu vào version, normalizer, chunking, embedding, số chiều, sparse representation hoặc dữ liệu truyền cấu trúc dữ liệu cần build/cấu trúc dữ liệu dấu nhận diện cấu hình. Resume chỉ hợp lệ nếu đặc tả khớp; nếu không checkpoint cũ có thể làm lẫn dữ liệu. Ingestion biên bản kiểm tra cần mã nguồn revision, đầu vào manifest, count read/joined/failed/flagged, mã băm, mô hình/cấu hình, destination và readback. Bài không chạy ingestion hay ghi remote.
+
+Hình dưới đây phân biệt bước kiểm/join nguồn với các nhánh tạo content kho lưu trữ, FTS và vector nhánh truy xuất; đây là flow mã nguồn-derived, không phải biên bản kiểm tra của một lần nạp mới.
+
+
+
+VietLex dùng nhiều kho lưu trữ vì mỗi nơi phục vụ loại dữ liệu và hợp đồng truy vấn khác nhau. Bảng dưới nêu vai trò, độ phủ biết được và điều không thể suy ra từ mã chương trình/biên bản kiểm tra, để tránh gọi một chỉ mục là nguồn chân lý cho mọi tác vụ.
+
+Các record người dùng có chủ sở hữu/expiry riêng với public tập văn bản; các collection/vector chỉ mục có cấu trúc dữ liệu/build lifecycle riêng. Bảng này là phân loại chức năng, không phải xác nhận chính sách môi trường triển khai thực tế đã được kiểm tra.
+
+Capacity audit read-only ngày 17/10/2026 đối chiếu Qdrant V3, Qdrant body-search và Supabase theo 14.962 document IDs và cùng ID-set mã băm. Qdrant V3 có 141.798 structural points; thông tin mô tả dataset pinned có 518.255 records. Kết quả chứng minh tập được đối chiếu tại thời điểm đó, không chứng minh full-tập văn bản, luật hiện hành, mọi point đều truy vấn được hoặc mọi collection cùng nguồn.
+
+Qdrant body-search là phrase chỉ mục dữ liệu truyền, không phải vector truy xuất. Supabase giữ thông tin mô tả/body trực tuyến trong tập audit; SQLite local FTS tìm số hiệu/title; Pinecone V1 là kho vector legacy với live độ bao phủ UNKNOWN. Vì thế search tuyến xử lý, chat RAG và reader có thể dùng nguồn/độ bao phủ khác nhau. Không thấy ở một nhánh truy xuất không đồng nghĩa mọi kho lưu trữ hoặc official sources đều không có văn bản.
+
+Corpus update cần đồng bộ thông tin mô tả, full nội dung, passage/point, mã băm, vector cấu trúc dữ liệu, bộ nhớ đệm dấu nhận diện cấu hình và đánh giá. Cần manifest so sánh ID/revision, report missing/extra/duplicate/mã băm mismatch, backfill/delete plan, quota và rollback; `count` hoặc HTTP success không chứng minh đồng bộ.
+
+Tập văn bản pháp luật dùng chung và dữ liệu nghiên cứu của người dùng có mục đích lưu trữ khác nhau. Hồ sơ nghiên cứu gắn với user_id hoặc client_id và có thời điểm hết hạn; các thao tác đọc, sửa và xóa cần giới hạn theo chủ sở hữu. Điều kiện này phải được thực hiện ở truy vấn phía máy chủ, vì việc ẩn một nút trên giao diện không ngăn người dùng gửi trực tiếp một yêu cầu với định danh khác.
+
+Bản ghi xác thực lưu mã băm của thẻ truy cập cùng thông tin thời hạn thay cho giá trị thẻ nguyên bản. Dữ liệu cần lưu trong lịch sử hội thoại lại thuộc một trách nhiệm khác và có thể chứa thông tin nhạy cảm của người hỏi. Vì vậy, cần xem đồng thời việc xác thực, lọc quyền sở hữu và giới hạn nội dung nhật ký. Chính sách hết hạn hỗ trợ quản lý vòng đời nhưng thời điểm dọn dữ liệu thực tế còn phụ thuộc cơ chế xử lý của hệ lưu trữ.
+
+Tài liệu tải lên và nguồn đọc từ bên ngoài cần được giới hạn về dung lượng, số trang và thời gian xử lý. Việc giữ mã băm, số trang và phương pháp trích xuất giúp xác định nội dung đã được dùng để phân tích. Nếu quá trình chỉ đọc được một phần tài liệu, kết quả cần nêu phạm vi đó để người dùng không hiểu phần trích xuất là toàn bộ văn bản. Đây là yêu cầu về tính minh bạch của dữ liệu bên cạnh yêu cầu chống lạm dụng tài nguyên.
+
+Các cơ chế như giới hạn tần suất, kiểm tra CSRF, chính sách truy cập chéo nguồn, tiêu đề an toàn và che dữ liệu nhạy cảm hỗ trợ giảm những nhóm rủi ro khác nhau. Khi đánh giá, cần kiểm tra từng cơ chế theo tình huống có thể xảy ra: nội dung tài liệu cố điều khiển mô hình, dữ liệu của người này xuất hiện trong kết quả của người khác, hoặc yêu cầu đọc nguồn hướng đến địa chỉ không được phép. Danh sách cơ chế có trong mã nguồn là điểm khởi đầu để lập kiểm thử bảo mật, chưa thay cho kết quả kiểm tra thực tế.
+
+Một lỗi truy cập chỉ mục, dịch vụ sinh câu trả lời hay kho nội dung cần chỉ ra được nơi phát sinh và ảnh hưởng đến tác vụ. Nếu có thực hiện lại, số lần và thời gian chờ cần nằm trong giới hạn đã định. Với đọc nguồn chính thức, quá trình có thể dừng sau khi thu được một phần nội dung; kết quả nên giữ lý do dừng và phần đã đọc để người dùng quyết định bước tiếp theo. Cách xử lý này hữu ích hơn việc biến mọi sự cố thành một thông báo không tìm thấy căn cứ.
+
+Biên bản Capacity-r2 ghi nhận năm tập dữ liệu Qdrant sử dụng khoảng 2,924 GB dung lượng đĩa, 343 MB bộ nhớ và 699 MB bộ nhớ đệm. Các con số phản ánh lượng sử dụng trong phạm vi đo, chưa cho biết dung lượng còn có thể mở rộng vì còn phụ thuộc gói dịch vụ, bản sao, chỉ mục và phần phát sinh trong vận hành. Hạn mức Qdrant và dung lượng cơ sở dữ liệu Supabase chưa được xác minh trong phạm vi báo cáo; do đó chưa thể dùng các số liệu này để chấp thuận một kế hoạch mở rộng.
+
+Trước khi nạp thêm dữ liệu, cần ước lượng chi phí lưu trữ trên mẫu có cùng cấu trúc với dữ liệu sẽ sử dụng, bao gồm vector, thông tin mô tả và phần chỉ mục. Kế hoạch thay đổi còn cần khả năng quay lại cấu hình trước nếu phát hiện sai lệch. Đồ án giữ bước này ở mức đề xuất đánh giá và quản lý rủi ro; không thực hiện thao tác ghi lên các kho dữ liệu từ xa hoặc đưa ra dự báo hạn mức từ dữ liệu giả lập.
+
+Giữ hai phương án truy xuất giúp dự án khảo sát các cách tổ chức khác nhau, đồng thời làm tăng số cấu hình và tập dữ liệu phải theo dõi. Khi một cờ lựa chọn thay đổi cả mô hình vector, kho dữ liệu và cách xếp hạng, người bảo trì cần biết kết quả đang thuộc phương án nào. Tài liệu kiến trúc của dự án nêu ranh giới giữa các phương án thay vì chuyển đổi âm thầm khi một nhánh gặp lỗi. Cách tổ chức này giúp giữ ý nghĩa của kết quả, nhưng đòi hỏi việc ghi cấu hình và phiên bản phải nhất quán.
+
+Tra cứu thông tin mô tả, tìm theo toàn văn, tìm theo ngữ nghĩa và mở rộng nội dung theo điều khoản giải quyết các nhu cầu khác nhau. Việc tách chúng giúp nhận diện nơi cần cải thiện, song cũng đặt ra yêu cầu đồng bộ định danh và nội dung giữa các kho. Nếu giao diện trình bày các kết quả như cùng xuất phát từ một tập dữ liệu đầy đủ, người dùng có thể hiểu sai phạm vi tìm kiếm. Vì vậy, lựa chọn kiến trúc cần được nối với cách công bố phạm vi dữ liệu và cách đánh giá kết quả.
+
+Mỗi quyết định thay kho văn bản, dịch vụ mô hình hoặc chỉ mục nên ghi lại bối cảnh, lựa chọn đã cân nhắc, chi phí và điều kiện kiểm tra sau thay đổi. Tài liệu quyết định giúp người bảo trì hiểu vì sao một phương án được chọn và khi nào cần xem xét lại. Đối với VietLex, các điều kiện quan trọng là sự tương thích của vector, tính nhất quán của nội dung và khả năng tái lập kết quả đánh giá sau khi chuyển đổi.
+
+Các hình trong chương được dựng từ mẫu giao diện và hàm xử lý mã chương trình. Chúng có thể giúp đọc bố cục dự kiến, nhưng không chứng minh CSS/layout hiện tại khi chạy trong browser.
+
+Khi người dùng gửi câu hỏi, tuyến POST /chat tiếp nhận nội dung, thông tin phiên làm việc và phạm vi văn bản được chọn. Trước khi tìm kiếm, hệ thống xử lý dữ liệu nhạy cảm và kiểm tra đầu vào. Trong những điều kiện cho phép, câu trả lời phù hợp đã lưu trong bộ nhớ đệm có thể được dùng lại. Nếu cần xử lý mới, yêu cầu được chuyển đến thành phần điều phối truy xuất. Trường hợp truy xuất gặp lỗi phải được phản ánh như một sự cố kỹ thuật để người dùng không nhầm đó là kết luận về nội dung pháp luật.
+
+Ở bước xử lý mới, hệ thống lựa chọn phương án truy xuất theo cấu hình, tập hợp các đoạn làm căn cứ và giới hạn lượng nội dung chuyển cho mô hình ngôn ngữ. Một số nhánh có thể mở rộng nội dung theo điều khoản hoặc bổ sung nguồn chính thức khi đáp ứng điều kiện. Khi không có căn cứ phù hợp, hệ thống trả thông báo tương ứng thay vì coi việc sinh văn bản là đủ để trả lời. Nếu có kết quả, đầu ra tiếp tục được kiểm tra, lưu cùng thông tin xử lý và chuyển thành phần hiển thị trong cuộc hội thoại.
+
+Sơ đồ tuần tự dưới đây cho thấy trách nhiệm của giao diện, tuyến xử lý, bộ nhớ đệm và thành phần truy xuất. Các nhánh lựa chọn được trình bày để giải thích vì sao hai câu hỏi có thể đi qua những bước khác nhau; sơ đồ được lập từ mã nguồn và không phải bản ghi của một lần chạy mới.
+
+
+
+Ảnh chụp GET / trong phiên ẩn danh cho thấy vùng hội thoại, trạng thái chào mừng, lối tắt đến tra cứu/hồ sơ, phạm vi nguồn tìm kiếm và ô nhập câu hỏi. Đây là trạng thái đã hiển thị; báo cáo không gửi câu hỏi, không thực hiện POST /chat và không gọi AI.
+
+
+
+Ảnh chụp GET /search trong phiên ẩn danh hiển thị truy vấn 45/2019/QH14 và kết quả Bộ luật Lao động 2019. Ảnh ghi nhận trạng thái có kết quả thật trên deployment tại thời điểm chụp; không chứng minh toàn bộ phạm vi tìm kiếm, chất lượng nội dung hay tình trạng hiệu lực pháp lý.
+
+
+
+Bộ capture ngày 23/10/2026 được ghi trong tab trình duyệt hiển thị, phiên ẩn danh, viewport 1440 × 1000 CSS px. Manifest có 13 lần chụp trên 11 tuyến xử lý; từng trạng thái được chụp sau khi điều hướng qua UI, gồm trang chủ → thẻ Tra cứu → nhập số hiệu 45/2019/QH14 → gửi form GET → mở kết quả Bộ luật Lao động 2019. Manifest lưu URL cuối, click path, timestamp +07:00, HTTP/document trạng thái, console, page_state_review và SHA-256. DOCX chỉ chọn ba ảnh chứng minh luồng chính: GET /, kết quả GET /search và GET /documents/333670. Không mở local UI/file hoặc tải tuyến xử lý đích trực tiếp. Không gửi POST/chat/AI, đăng nhập, gửi form tài khoản hoặc tạo workspace. Revision triển khai chưa được xác nhận độc lập.
+
+Sơ đồ UML mô tả cấu trúc mã nguồn; ba ảnh môi trường chạy được đối chiếu với tuyến xử lý/mẫu giao diện và manifest ngày 23/10/2026. Chúng ghi nhận UI trong phiên ẩn danh tại thời điểm đó, không đại diện cho POST/API, quyền tài khoản, chất lượng câu trả lời hay toàn bộ trạng thái động.
+
+Các lưu ý về mốc hiệu lực và phạm vi tập văn bản là phần cần giữ vì giúp ngăn suy luận sai. Cải thiện tiếp theo nên làm nổi bật trạng thái mốc ngày ngay cạnh kết quả, phân biệt nhãn đã duyệt sự kiện với kết luận, cho biết body chỉ mục có khả dụng hay không, và đưa đường dẫn về nguồn gốc bên cạnh trích dẫn. Với câu trả lời chat, cần bố cục để người dùng mở đoạn đoạn căn cứ trước khi dựa vào câu chữ tổng hợp.
+
+Ba ảnh được chọn từ lượt clickthrough ngày 23/10/2026 tại viewport desktop 1440 × 1000 CSS px bằng tab trình duyệt hiển thị. Manifest đối chiếu từng ảnh với tuyến xử lý/mẫu giao diện và lưu URL cuối, bước UI, HTTP/document trạng thái, tiêu đề trang, lỗi/cảnh báo console và SHA-256. Ảnh hỗ trợ nhận xét về bố cục, nhãn và nội dung nhìn thấy; không xác nhận khả năng responsive, khả năng truy cập hoặc trạng thái động sau thao tác khác. Revision triển khai chưa được xác nhận độc lập.
+
+Metadata lookup ưu tiên document number/title và filter type/căn cứ có thẩm quyền/date; kết quả dẫn tới `/documents/{document_id}`. Body search dùng phrase/content chỉ mục riêng và có thể chỉ hiện khi hàm xử lý nhận biết độ bao phủ. Hai đường cần nhãn khác nhau: thông tin mô tả FTS không tìm toàn thân, body phrase search không phải semantic search, chat RAG không phải truy vấn nguyên văn.
+
+Mốc thời gian trên trang có thể hiển thị sự kiện sổ đăng ký đã review theo ngày. Ngày ban hành, ngày hiệu lực và ngày truy cập là khái niệm khác; một ngày trên card không thay cho timeline hợp nhất đã thẩm định. Nếu sổ đăng ký chưa có sự kiện, UI phải hiện thiếu dữ liệu/chưa xác minh, không suy luận còn hiệu lực.
+
+Reader nên duy trì liên kết kết quả → tài liệu → heading/điều/khoản → địa chỉ nguồn/mã băm/version. Nếu body unavailable, trang cần phân biệt “không tải được” với “văn bản không có nội dung”. Đây là yêu cầu phân tích từ tuyến xử lý/mẫu giao diện; không có browser screenshot mới.
+
+Workspace detail tổng hợp nguồn upload, nguồn chính thức đã đọc, đoạn căn cứ ghim và analysis. Mỗi bản ghi nguồn cần chủ sở hữu, mã băm, URL, extraction version, timestamp và page range. Muốn tái chạy, request analysis phải tham chiếu đúng snapshot nguồn chứ không chỉ filename/title.
+
+Official-mã nguồn reader có budget foreground 180 giây, tối đa 5 truy vấn, 2 request đồng thời, 3 URL allowlist; PDF tối đa 10 trang kiểm tra/5 giữ lại. Cache 15 phút trong cùng chủ sở hữu/workspace có ngoại lệ refresh và câu hỏi hiện hành; PDF bộ nhớ đệm cần topic match. Run lưu NDJSON events, có thể phục hồi kết quả theo chủ sở hữu. `legal_effect_status` mặc định chưa xác minh nếu chưa có review đúng căn cứ.
+
+Cancellation là giao thức browser-server: nút chỉ bật sau event started, client POST cancel, chờ xác nhận durable rồi mới abort stream. Response trễ phải khớp controller/lượt thực hiện ID hiện tại. Mongo update terminal giữ event/mã nguồn và gỡ lease; checkpoint chỉ áp dụng khi lượt thực hiện đang running; HTTP đang đọc có thể tiếp tục tới checkpoint. Điều này ảnh hưởng semantics, UX và test concurrency.
+
+Structured analysis phụ thuộc nguồn được chọn và đầu ra cấu trúc dữ liệu; compare, obligations, claims/timeline/redline/full review là các thao tác riêng. Khi người dùng sửa báo cáo thủ công, bản chỉnh cần trạng thái review rõ ràng, không hiển thị như kết luận đã tự động xác minh. Export cần giữ trích dẫn, page/URL dấu vết nguồn gốc và dấu vết chỉnh sửa.
+
+Sơ đồ sequence dưới đây làm rõ chủ sở hữu/CSRF, event khả năng lưu trữ trước NDJSON, giới hạn đọc PDF và semantics của cancel; đây là mô hình từ mã nguồn/handbook, không phải dấu vết xử lý môi trường chạy mới.
+
+
+
+DOCX giữ ba ảnh môi trường chạy đã chọn trong cùng một luồng: trang hỏi đáp tại GET /, kết quả tìm Bộ luật Lao động 2019 sau khi gửi form GET tại /search, và trang đọc văn bản sau khi bấm kết quả tại /documents/333670. Ảnh được chụp riêng sau clickthrough trong phiên ẩn danh ngày 23/10/2026; mỗi caption dùng trường SEQ Word và tuyến xử lý tương ứng. Các ảnh về trang hiệu lực, evaluation lab, workspace, tài khoản và chính sách không được chèn vì không bổ sung bằng chứng trực tiếp cho hành trình tìm và mở văn bản.
+
+
+
+Các capture chỉ ghi nhận UI tại thời điểm truy cập; không chứng minh API/POST, quyền tài khoản, chất lượng câu trả lời hay tính đúng hiện hành của luật. Manifest còn có ảnh /legal-status, /evaluation-lab, /workspaces và các trang tài khoản/chính sách; chúng được giữ làm bằng chứng lưu trữ nhưng không chèn vì không trực tiếp minh họa luồng tra cứu. /settings cần session, /admin cần role admin, /verify-email và /reset-password cần token, chi tiết workspace cần workspace thuộc người dùng; /sessions là dữ liệu riêng nên không mở. Các trạng thái bảo vệ/token tiếp tục NOT_RUN.
+
+UML cần thể hiện actor, main path, conditional branch, error/return và kho lưu trữ ownership. Caption ghi mã nguồn mô hình khi không có môi trường chạy dấu vết xử lý. Class diagram chỉ đưa lớp/record có khai báo và relation có bằng chứng. Một mũi tên sai kho lưu trữ/chủ sở hữu có thể gây hiểu sai dù hình trình bày đẹp.
+
+Nhãn “Toàn bộ VietLex” cần đi cùng thông tin độ bao phủ/chỉ mục availability; audit 14.962 IDs không phải full tập văn bản. Search body và thông tin mô tả nên có selector cùng giải thích rõ. Ngày ban hành không thay trạng thái hiệu lực; sổ đăng ký event cần trạng thái review/freshness và link nguồn.
+
+Câu trả lời chat cần nhóm trích dẫn theo claim, cho mở đoạn gốc và thể hiện đoạn căn cứ insufficient/partial. “Đang đọc nguồn” khác “đã đọc” và “đã được người review”; label/icon không nên khiến snippet trông như chứng cứ pháp lý đã xác nhận.
+
+Workspace cần nêu chủ sở hữu, file type/size limit, extraction progress, số trang đọc được, lỗi/partial và expiry. Khi hủy, UI chờ server confirmation và giữ nguồn đã lưu. Đây là đề xuất từ đặc tả mã nguồn, không phải UX test đã hoàn tất.
+
+Chương này phân biệt bằng chứng lịch sử đã có với phần kiểm tra không chạy ở lượt hiện tại. Các số liệu được chép theo tài liệu đã lưu và không được trình bày như kết quả mới.
+
+Tài liệu docs/evaluation/CURRENT_STATUS.md có hai lớp thông tin. Phần đầu là cập nhật vận hành ngày 19/10/2026; bên dưới là Golden-50 snapshot lịch sử ngày 03/09/2026. Kết quả hai ngày không được gộp: snapshot cũ có bộ đánh giá truy xuất/answer quy mô 50 case; cập nhật mới ghi hai câu hỏi tự nhiên exploratory, một partial và một failure, không hình thành bộ đánh giá đại diện mới. Mỗi chỉ số cần đọc cùng thời gian, mã nguồn revision, bộ dữ liệu, denominator và điều kiện lượt thực hiện.
+
+Với truy xuất, Recall@K phải gắn với gold đoạn căn cứ hợp lệ. Tài liệu lịch sử ghi 40 case/53 đoạn căn cứ item dùng được, 10/50 skipped do thiếu nhãn verified. Document Recall@3 là 53/53, Article Recall@3 là 29/30, Clause Recall@3 là 13/14 và all-required độ bao phủ là 39/40. Các mẫu số khác nhau theo cấp tài liệu/điều/khoản nên không được rút thành 53/53 câu hỏi trả lời đúng. Đây là điểm truy xuất, không phải đáp án pháp lý.
+
+Mạch đánh giá được bắt đầu từ căn cứ trước khi xem cách diễn đạt câu trả lời. Nếu đoạn cần thiết chưa được tìm thấy hoặc bị loại trong bước chọn nội dung, mô hình sinh khó có đủ dữ kiện để giải thích đúng vấn đề. Ngược lại, khi căn cứ phù hợp đã có, câu trả lời vẫn có thể sai do suy luận quá phạm vi hoặc gắn trích dẫn không đúng. Việc tách hai khâu giúp xác định hành động cải tiến: điều chỉnh truy xuất và chọn nội dung ở khâu đầu, hoặc kiểm soát cách suy luận và trình bày ở khâu sau.
+
+Các mốc đánh giá khác ngày không được ghép thành một kết quả tổng hợp khi chưa chứng minh cùng tập câu hỏi và điều kiện thực hiện. Trong báo cáo này, số liệu đã lưu được dùng để chỉ ra dấu hiệu cần tìm hiểu tiếp; ảnh giao diện chỉ hỗ trợ nhận xét về thao tác và trạng thái quan sát. Nhận xét của người có chuyên môn vẫn cần thiết để xác định câu trả lời có lựa chọn đúng quy định, nêu đủ ngoại lệ và diễn giải phù hợp với tình huống hay không.
+
+Answer lượt thực hiện Golden-50 ngày 03/09/2026 hoàn tất 50/50 lượt sinh câu trả lời, nhưng exact match là 0/50, token F1 0,2305, character F1 0,2230, trích dẫn precision 0,9183 và invalid trích dẫn rate 0,0817. RAGAs ghi faithfulness 0,8221, answer accuracy 0,9100, ngữ cảnh precision 0,8600 và ngữ cảnh recall 0,9500. Đây là số liệu snapshot lịch sử, không phải đo lại mã chương trình dirty hiện tại; metric tự động cũng không xác nhận luật đúng hoặc còn hiệu lực.
+
+Faithfulness theo RAGAs hỏi mức độ câu trả lời bám ngữ cảnh. Đặt cạnh đó, exact match/token F1 so sánh dạng đáp án với đáp án chuẩn nhưng có thể phạt câu trả lời diễn đạt khác; trích dẫn precision đo chất lượng dẫn chiếu theo quy tắc của lượt thực hiện. Không metric đơn lẻ nào trả lời toàn bộ câu hỏi người dùng có thể dựa vào kết luận pháp lý này không. Cần rà thủ công các claim trọng yếu, thời điểm áp dụng, ngoại lệ và độ đầy đủ của mã nguồn. 
+
+Cập nhật vận hành ngày 19/10 nói hai câu hỏi whole-tập văn bản mới không có đạt đầy đủ tiêu chí: một câu trả lời partial và một câu trả lời fail; ví dụ môi trường có trích dẫn sai căn cứ có thẩm quyền-clause. Tài liệu ghi rõ đây là mẫu exploratory rất nhỏ, không phải ước lượng chất lượng tổng thể. Không có bộ đánh giá đại diện mới hoặc bằng chứng môi trường triển khai thực tế-readiness. Kết luận hợp lệ ở đây là tồn tại cảnh báo chất lượng cần xử lý và phải chạy một eval mới; không thể kết luận xác suất đúng/sai cho mọi câu hỏi.
+
+Bảng dưới tách truy xuất, answer và thử nghiệm mới để tránh trộn phạm vi. Nhãn ngày/denominator phải được giữ khi trích số ra khỏi báo cáo.
+
+VietLex đã hình thành các thành phần cần thiết để kết nối tra cứu văn bản với hỏi đáp có căn cứ, nhưng mức độ hoàn chỉnh của kiến trúc cần được phân biệt với chất lượng của từng câu trả lời. Kết quả Golden-50 là một mốc lịch sử hữu ích để nhìn lại những điểm còn hạn chế; các thử nghiệm mới hơn có quy mô nhỏ nên chưa đủ thay thế một bộ đánh giá đại diện. Từ đó, ưu tiên tiếp theo là kiểm tra nơi thông tin bị mất trong quá trình truy xuất và chọn căn cứ, sau đó mới đánh giá cách mô hình diễn đạt câu trả lời. Trình tự này giúp việc cải tiến gắn với nguyên nhân cụ thể thay vì chỉ điều chỉnh lời nhắc hoặc tăng một chỉ số tổng hợp.
+
+Bằng chứng nằm ở nhiều mức: mã nguồn và cấu hình cho thấy hàm xử lý hoặc cơ chế được khai báo; test biên bản kiểm tra xác nhận snapshot mã chương trình qua fixture đã chạy; thành phần dịch vụ probe quan sát một số request; môi trường triển khai thực tế role probe xác nhận một tập quyền/account; bộ đánh giá truy xuất/answer đo trên dataset/label cụ thể; human legal review mới xem xét áp dụng luật và độ đầy đủ. Các mức không thay thế lẫn nhau.
+
+Bảng dưới tổng hợp bằng chứng có ngày, kết luận hỗ trợ và giới hạn. Cột “không chứng minh” ngăn người đọc trích một PASS thành “VietLex đúng luật” hoặc “đã sẵn sàng nộp”.
+
+Golden-50 truy xuất snapshot 03/09/2026 ghi Document Recall@3 53/53, Article Recall@3 29/30, Clause Recall@3 13/14 và all-required độ bao phủ 39/40 trên nhãn truy xuất dùng được; 10/50 case không có verified gold phù hợp và bị skip. Denominator 53 đoạn căn cứ item ở document-level không đồng nghĩa 53 câu hỏi độc lập; article/clause có mẫu số nhỏ hơn và khác nhau. Kết quả cho thấy retriever tìm được reference được gán trong các trường hợp có nhãn, không chứng minh ranking phù hợp cho câu hỏi đời thường hoặc tập văn bản đầy đủ.
+
+Answer lượt thực hiện ghi exact match 0/50, token F1 0,2305, character F1 0,2230, trích dẫn precision 0,9183 và invalid-trích dẫn rate 0,0817. RAGAs faithfulness 0,8221, answer accuracy 0,9100, ngữ cảnh precision 0,8600, ngữ cảnh recall 0,9500 là judge metrics trên snapshot; không phải xác suất đúng luật. Exact match có thể phạt diễn đạt khác nhưng vẫn là tín hiệu phải đọc cùng các chiều khác.
+
+Metric truy xuất/ngữ cảnh khá cao nhưng answer match thấp là tín hiệu không nên gộp thành một điểm. Nguyên nhân có thể là truy vấn/reference mismatch, answer formatting, thiếu/chọn sai đoạn căn cứ, sinh câu trả lời, trích dẫn mapping hay judge; chỉ dấu vết xử lý per-case và human adjudication mới xác định. Summary hiện có không đủ để quy lỗi cho riêng một thành phần.
+
+Suite không gọi dịch vụ mô hình ngày 19/10/2026 ghi 1.715 passed, 1 skipped, 6 deselected, mã nguồn unchanged cho biên bản kiểm tra follow-up cancellation. Đây là test đoạn căn cứ trong phạm vi đã ghi; không phải suite chạy lại cho report, không xác nhận deployment hiện tại và không đo legal quality. Receipt khác (1.704 pass ngày 18/10; 941 pass/1 fail ở lượt lỗi trước) thuộc snapshot/lượt khác, không cộng thành một tổng.
+
+Production release ngày 18/10 ghi deployment Ready và role probe 90/90 qua 74 requests cho hai account được tạo riêng; giữ lại hai synthetic workspace và một file. Ba câu hỏi chat môi trường triển khai thực tế không có full legal-quality pass. Free-reader tiếng Việt lưu/phát lại hai PDF khớp mã băm nhưng discovery timeout làm lượt thực hiện partial; có biên bản kiểm tra riêng cho chủ sở hữu/cancel. Đó là quan sát giới hạn, không nghiệm thu toàn tuyến xử lý hoặc luật hiện hành.
+
+Trong lượt làm báo cáo này không khởi chạy app cục bộ, truy vấn DB, gọi dịch vụ mô hình, chạy bộ đánh giá hay suite test mới. Có mở deployment công khai trong phiên ẩn danh bằng GET qua UI; một form GET tìm số hiệu 45/2019/QH14 được gửi để ghi nhận trang kết quả, sau đó mở trang chi tiết văn bản. DOCX giữ ba ảnh đại diện cho luồng đó. Không gửi POST/chat/câu hỏi AI, đăng nhập, gửi form tài khoản hoặc truy cập dữ liệu phiên riêng. Nguồn không kiểm môi trường chạy được ghi là snapshot/mã nguồn đoạn căn cứ hoặc NOT_RUN.
+
+Ở lớp chức năng, mã nguồn mô tả không chỉ một màn hình tra cứu mà gồm chat, thông tin mô tả/body search, reader, sổ đăng ký, workspace, structured analysis, official-mã nguồn research và admin. Ở lớp kiến trúc, đoạn căn cứ/ranking/trạng thái/dấu vết nguồn gốc có các kiểm soát hữu ích nhưng nhiều kho lưu trữ/nhánh truy xuất và độ bao phủ không đồng đều. Ở lớp chất lượng, truy xuất snapshot tốt trên phần gold có nhãn nhưng answer exact match thấp, trích dẫn có lỗi và sample tự nhiên nhỏ.
+
+Kết luận phù hợp là report có thể mô tả/phân tích bản mã nguồn khảo sát; bằng chứng chưa đủ chứng nhận nghiệm thu chất lượng pháp lý, full-tập văn bản độ bao phủ hay môi trường triển khai thực tế readiness. Cần bộ đánh giá có nguồn/gold, xác minh triển khai, đánh giá của người có chuyên môn theo bốn tiêu chí của hướng dẫn HCMUNRE và adjudication pháp lý hiện hành trong phạm vi được cấp phép.
+
+Bản phân tích dựa trên bản mã nguồn khảo sát dirty có ghi mã băm; hướng dẫn HCMUNRE cung cấp tiêu chí nhận xét chính thức nhưng không nêu thang điểm/trọng số, còn đề bài hoặc rubric riêng của học phần chưa có trong hồ sơ. Lượt này không khởi chạy app cục bộ, truy vấn database/chỉ mục, gọi dịch vụ mô hình, xác minh deployment, chạy bộ đánh giá mới hoặc kiểm tra hiệu lực luật hiện hành; chỉ ghi nhận ba trang công khai qua GET clickthrough trong phiên ẩn danh ngày 23/10/2026. Các giới hạn này không cho phép xác nhận chất lượng pháp lý hay mức sẵn sàng nộp bài.
+
+Retrieval có thể tìm đúng văn bản nhưng sai điều/khoản; ranking tốt ở Document Recall chưa chắc giữ được đoạn căn cứ sau reranking hoặc cắt ngữ cảnh. Generation có thể tóm tắt quá mạnh, ghép hai đoạn khác nhau, gắn trích dẫn không hỗ trợ claim hoặc bỏ mất giới hạn thời gian. Citation có thể trỏ đúng số hiệu nhưng nguồn ngoài/thông tin mô tả chưa được kiểm tra đầy đủ. Cache có thể trả nội dung cũ nếu dấu nhận diện cấu hình/eligibility không phản ánh đủ khác biệt truy vấn. UI có thể khiến người dùng diễn giải search event như xác nhận hiệu lực.
+
+Một bộ đánh giá Vietnamese IR nhiều miền là căn cứ phù hợp để lưu ý về đánh giá theo ngôn ngữ/miền; paper Nguyen và Quan bao gồm legal trong 6 miền nhưng không đo VietLex. Do vậy bộ gold cho VietLex nên chứa truy vấn tiếng Việt thật, nhiều cách gọi cùng điều, loại câu hỏi khác nhau, ngày cần đối chiếu, mã nguồn chính xác và ngoại lệ. Cần tách câu hỏi tìm văn bản khỏi câu hỏi áp dụng pháp luật; bộ dữ liệu cần người có chuyên môn adjudicate gold và disagreement. 
+
+Rủi ro dữ liệu gồm độ bao phủ không đầy đủ (snapshot V3 chỉ 14.962/518.255 document ID), freshness, lệch mã băm, OCR/chunking, và availability/quota remote. Rủi ro vận hành gồm dịch vụ mô hình/mô hình thay đổi, độ trễ, retry, bộ nhớ đệm, branch cấu hình và dirty worktree. Rủi ro người dùng gồm over-reliance, bỏ qua nguồn chính thức và lộ PII trong logs. Rủi ro này cần được theo dõi bằng dashboard/dấu vết xử lý và quy trình incident, không chỉ bằng điểm bộ đánh giá.
+
+Bảng rủi ro xếp mức theo hậu quả với người dùng và đoạn căn cứ hiện có, không phải FMEA định lượng. Ưu tiên cao phản ánh nguy cơ sai văn bản/điều, độ bao phủ thiếu, trích dẫn invalid và dùng dữ liệu chưa xác nhận hiện hành. Biện pháp là đề xuất, chưa có nghĩa đã triển khai.
+
+Trước hết xác nhận học phần có đề bài hoặc rubric chấm điểm riêng hay không; hướng dẫn HCMUNRE đã cung cấp tiêu chí nhận xét nhưng không có thang điểm/trọng số. Sau đó đóng băng cấu hình, quy trình xử lý dấu nhận diện cấu hình, chỉ mục snapshot, dataset và gold labels. Chạy truy xuất-only eval có verified denominator, báo recall ở document/article/clause, MRR/nDCG nếu phù hợp, ứng viên truy xuất survival, technical error, độ trễ và độ bao phủ. Chạy answer eval trên cùng đoạn căn cứ với exact match/token metric, mức độ bám sát căn cứ/trích dẫn check và human legal review tách biệt. Mọi lượt thực hiện lưu log không chứa secret/PII và mã nguồn mã băm.
+
+Tiếp theo thực hiện browser QA theo tuyến xử lý/role đã được cấp phép, dùng dữ liệu an toàn; kiểm tra screenshot, response headers, form CSRF, chủ sở hữu scoping, error states và trạng thái no-evidence. Kiểm thử tìm thấy trong bộ nhớ đệm/miss, câu hỏi về hiệu lực thời gian, document phạm vi, cơ chế kiểm soát an toàn, truy xuất failure và nguồn bổ sung theo test fixture. Chỉ sau khi dấu vết xử lý/đoạn căn cứ và đánh giá của người có chuyên môn ổn định mới cân nhắc thử nghiệm với người dùng. Kế hoạch này là đề xuất, không phải kết quả đã thực hiện.
+
+Chuẩn bị cần xác nhận có rubric riêng của học phần hay không, đồng thời đóng băng mã nguồn và cấu hình/tập văn bản, lưu revision và dirty diff mã băm, tạo dataset manifest và chốt question/gold với người chuyên môn. Hướng dẫn HCMUNRE cung cấp tiêu chí nhận xét nhưng không có scoring scale. Gold item nên có câu hỏi, task type, phạm vi, target document/article/clause, trích dẫn nội dung, ngày áp dụng, ngoại lệ, supporting URL/mã băm/page và quyết định adjudication. Ghi skip khi nhãn chưa đủ; không lấp bằng đầu ra của mô hình.
+
+Retrieval-only lượt thực hiện đo document/article/clause Recall@K, MRR/nDCG nếu gold đủ, exact reference hit, độ bao phủ/multihop, ứng viên truy xuất survival theo bước xử lý, wrong-document rate, timeout/error, độ trễ và quota. Mỗi metric cần numerator/denominator, truy vấn set, version/cấu hình, chỉ mục độ bao phủ và cách aggregation. Không trộn truy vấn có nhiều gold passage với một gold document mà không nêu quy tắc.
+
+Answer lượt thực hiện đóng băng ngữ cảnh hoặc lưu mã băm từng passage, đo answer/reference, claim-level trích dẫn hỗ trợ bởi căn cứ, invalid/missing trích dẫn, trích dẫn độ bao phủ, refusal appropriateness, entity/date/number correctness và exception recall. Automated evaluation cần paired đánh giá của người có chuyên môn trên mẫu stratified; disagreement phải lưu. Groundedness không thay applicability/freshness.
+
+Security/UX lượt thực hiện dùng account và dataset an toàn, đo chủ sở hữu isolation, CSRF, bộ nhớ đệm tenancy, no-store, upload limits, mã nguồn/cancel lifecycle, response trạng thái, accessibility/mobile và PII leakage. Capacity lượt thực hiện chỉ đọc quota/size trước, lập write plan/rollback, rồi mới xin quyền mutation riêng; cấu hình hay dry-lượt thực hiện không phải remote biên bản kiểm tra.
+
+P0 là chốt tập văn bản snapshot/độ bao phủ và legal-mã nguồn policy: map ID, missing document, last updated, dấu vết nguồn gốc, review state, effective date và căn cứ có thẩm quyền. Đầu ra là versioned manifest và độ bao phủ gap list; không tăng chỉ mục trước khi biết quota/plan.
+
+P1 là xây gold bộ đánh giá tiếng Việt do người có chuyên môn adjudicate, tách truy vấn theo số hiệu, điều khoản, mô tả tình huống, multihop và câu hỏi hiệu lực theo thời gian. Báo truy xuất, answer, trích dẫn riêng; chạy baseline cố định và error taxonomy. Mọi đổi chunking/truy xuất/reranking so cùng gold set.
+
+P2 là cải thiện dấu vết xử lý/bộ nhớ đệm/UI: giữ định danh văn bản, passage mã băm, bước xử lý decision, phạm vi, freshness/trạng thái; báo tìm thấy trong bộ nhớ đệm với version/dấu nhận diện cấu hình; hiển thị partial/no-evidence/error riêng; nối trích dẫn tới nguồn. Hạn chế PII trong logs và thiết kế thời hạn lưu rõ.
+
+P3 là browser/security/dung lượng acceptance trước mở rộng: test tuyến xử lý/role, chủ sở hữu, cancellation/TTL, responsive UI, storage quota, cost, backup và rollback. Chỉ sau human legal review và operational gates mới cân nhắc tuyên bố chất lượng. Đây là roadmap, chưa có yêu cầu sửa hay chạy thử hệ thống.
+
+Bảng này liệt kê các trang giao diện GET đã đối chiếu với hàm xử lý/mẫu giao diện trong bản mã nguồn khảo sát và nhóm mục đích sử dụng. Endpoint POST/API là thao tác, không được tính thành màn hình độc lập. Đây là kiểm kê được đối chiếu với mã nguồn, không phải xác nhận giao diện đã chạy hoặc quyền đã được thử.
+
+Bảng sau đối chiếu các GET trang giao diện trong screen inventory với task và giới hạn diễn giải. Bảng không liệt kê toàn bộ API/POST; điểm truy cập tạo/sửa dữ liệu là action riêng, không phải màn hình mới.
+
+Đồ án đã khảo sát VietLex từ nhu cầu tra cứu pháp luật đến cách tổ chức dữ liệu, xử lý yêu cầu và trình bày kết quả. Các chức năng được phân tích gồm tìm kiếm và đọc văn bản, hỏi đáp có căn cứ, quản lý hồ sơ nghiên cứu và các trang quản trị có trong mã nguồn. Mô hình dữ liệu theo ký pháp lớp UML làm rõ quan hệ giữa người dùng, hội thoại và hồ sơ; các sơ đồ hoạt động, trạng thái, tuần tự và thành phần giúp giải thích cách hệ thống phối hợp khi tra cứu, đọc nguồn và xử lý các tình huống thay thế. Qua đó, báo cáo chuyển từ mô tả danh sách chức năng sang xem xét trách nhiệm, dữ liệu và điều kiện hoạt động của từng thành phần.
+
+Về đánh giá, các số liệu đã lưu cần được đọc cùng ngày thực hiện, tập câu hỏi và phạm vi dữ liệu. Mốc Golden-50 ngày 03/09/2026 ghi nhận độ bao phủ truy xuất cao trên phần đáp án chuẩn khả dụng, nhưng tỷ lệ khớp hoàn toàn là 0/50, F1 theo từ là 0,2305 và tỷ lệ trích dẫn không hợp lệ là 0,0817. Tài liệu cập nhật ngày 19/10/2026 ghi nhận hai câu hỏi thử nghiệm mới chưa đạt đầy đủ tiêu chí và chưa có một bộ đánh giá đại diện mới. Những kết quả này cho thấy hướng cải thiện cần theo dõi, đồng thời chưa đủ để suy rộng chất lượng cho mọi loại câu hỏi pháp luật.
+
+Hướng phát triển nên ưu tiên sự nhất quán giữa kho văn bản, các chỉ mục và định danh căn cứ; tiếp theo là kiểm thử những nhánh dễ gây hiểu nhầm như thiếu nguồn, lỗi dịch vụ và kết quả một phần. Khi các điều kiện đó được kiểm soát, hệ thống mới có cơ sở để đánh giá sâu hơn chất lượng câu trả lời bằng tập câu hỏi có đáp án chuẩn và nhận xét của người có chuyên môn. Các chức năng cần quyền riêng, hiệu lực pháp luật hiện hành và tiêu chí chấm điểm riêng của học phần vẫn cần xác nhận theo phạm vi tương ứng. Đồ án vì thế cung cấp một bản phân tích thiết kế và định hướng kiểm chứng, chưa thay cho việc nghiệm thu chất lượng pháp lý hay phê duyệt của giảng viên.

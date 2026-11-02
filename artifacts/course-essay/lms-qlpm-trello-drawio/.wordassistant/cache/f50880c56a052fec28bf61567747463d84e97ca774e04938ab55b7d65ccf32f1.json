@@ -1,0 +1,518 @@
+{
+  "schema_version": 2,
+  "sections": [
+    {
+      "section_id": "__preamble__",
+      "title": "Document preamble",
+      "text": "Chưa cung cấp tên trường/đơn vị đào tạo\n\nChưa cung cấp khoa/bộ môn\n\nTIỂU LUẬN MÔN HỌC\n\nBÁO CÁO\nQuản lý dự án phần mềm xây dựng hệ thống LMS\n\nHọc phần:\tQuản lý dự án phần mềm\nSinh viên / nhóm:\tChưa cung cấp\nMã số:\tChưa cung cấp\nLớp học phần:\tChưa cung cấp\nGiảng viên hướng dẫn:\tChưa cung cấp\n\n2026",
+      "level": 0,
+      "parent_id": null,
+      "source_index": 0,
+      "metadata": {}
+    },
+    {
+      "section_id": "tom-tat",
+      "title": "TÓM TẮT",
+      "text": "Báo cáo trình bày kế hoạch quản lý cho dự án học thuật xây dựng hệ thống quản lý học tập LMS của trường đại học. Nội dung thống nhất điều lệ, stakeholder, phạm vi, WBS, tiến độ, nguồn lực, ngân sách, rủi ro, chất lượng, truyền thông, thay đổi và đóng dự án; Trello và Draw.io được bổ sung để theo dõi công việc và minh họa sản phẩm bàn giao.\n\nBaseline đã đối soát là 20 tuần, 1.200.000.000 VNĐ và 8,5 FTE. Mạng CPM có mốc kết thúc kế hoạch tuần 20; ACT-04 có float 1 tuần, ACT-16 có 2 tuần. Snapshot Trello ngày 23/10/2026 có 9 danh sách, 39 thẻ, 8 mốc đề xuất và 3 thẻ mô phỏng. Snapshot API không phải ảnh UI; Done chưa có xác nhận.\n\nUAT, EVM, ký duyệt và trạng thái hoàn tất trong tài liệu kế hoạch là mô phỏng/chưa chạy. PNG Draw.io là hình tĩnh đi cùng source .drawio, không thay ảnh giao diện Draw.io/LMS. Checklist T01–T05, D01–D03, L01–L07 được đưa vào phụ lục; ảnh thật chưa có nên trạng thái là NOT RUN.",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 7,
+      "metadata": {}
+    },
+    {
+      "section_id": "muc-luc",
+      "title": "MỤC LỤC",
+      "text": "TÓM TẮT\ti\n\nMỤC LỤC\tii\n\nDANH MỤC HÌNH\tiv\n\nDANH MỤC BẢNG\tv",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 11,
+      "metadata": {}
+    },
+    {
+      "section_id": "mo-au-1",
+      "title": "MỞ ĐẦU\t1",
+      "text": "",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 16,
+      "metadata": {}
+    },
+    {
+      "section_id": "chuong-1-tong-quan-va-khoi-tao-du-an-1",
+      "title": "CHƯƠNG 1. TỔNG QUAN VÀ KHỞI TẠO DỰ ÁN\t1",
+      "text": "1.1. Business case và mục tiêu\t2\n\n1.2. Giả định và ràng buộc\t2",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 17,
+      "metadata": {}
+    },
+    {
+      "section_id": "chuong-2-cac-ben-lien-quan-va-to-chuc-du-an-3",
+      "title": "CHƯƠNG 2. CÁC BÊN LIÊN QUAN VÀ TỔ CHỨC DỰ ÁN\t3",
+      "text": "2.1. Sổ stakeholder\t3\n\n2.2. RACI và escalation\t4",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 20,
+      "metadata": {}
+    },
+    {
+      "section_id": "chuong-3-quan-ly-pham-vi-va-wbs-5",
+      "title": "CHƯƠNG 3. QUẢN LÝ PHẠM VI VÀ WBS\t5",
+      "text": "3.1. Ranh giới và acceptance\t5\n\n3.2. Work breakdown\t5",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 23,
+      "metadata": {}
+    },
+    {
+      "section_id": "chuong-4-quan-ly-tien-o-va-cpm-7",
+      "title": "CHƯƠNG 4. QUẢN LÝ TIẾN ĐỘ VÀ CPM\t7",
+      "text": "4.1. Danh sách hoạt động và phụ thuộc\t7\n\n4.2. Theo dõi sai lệch\t8",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 26,
+      "metadata": {}
+    },
+    {
+      "section_id": "chuong-5-quan-ly-nguon-luc-va-chi-phi-10",
+      "title": "CHƯƠNG 5. QUẢN LÝ NGUỒN LỰC VÀ CHI PHÍ\t10",
+      "text": "5.1. Resource breakdown\t10\n\n5.2. Kiểm soát chi phí\t11",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 29,
+      "metadata": {}
+    },
+    {
+      "section_id": "chuong-6-quan-ly-rui-ro-12",
+      "title": "CHƯƠNG 6. QUẢN LÝ RỦI RO\t12",
+      "text": "6.1. Giám sát và ứng phó\t12",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 32,
+      "metadata": {}
+    },
+    {
+      "section_id": "chuong-7-quan-ly-chat-luong-va-kiem-thu-14",
+      "title": "CHƯƠNG 7. QUẢN LÝ CHẤT LƯỢNG VÀ KIỂM THỬ\t14",
+      "text": "7.1. Gate và DoD\t14\n\n7.2. UAT và triage\t15",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 34,
+      "metadata": {}
+    },
+    {
+      "section_id": "chuong-8-truyen-thong-thay-oi-va-trello-16",
+      "title": "CHƯƠNG 8. TRUYỀN THÔNG, THAY ĐỔI VÀ TRELLO\t16",
+      "text": "8.1. Luồng board và quy ước\t16\n\n8.2. Kết nối Trello — WBS — Draw.io — Word\t19",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 37,
+      "metadata": {}
+    },
+    {
+      "section_id": "chuong-9-thiet-ke-va-bieu-o-draw-io-20",
+      "title": "CHƯƠNG 9. THIẾT KẾ VÀ BIỂU ĐỒ DRAW.IO\t20",
+      "text": "9.1. Kiến trúc và dữ liệu\t20\n\n9.2. Quy trình xuất biểu đồ\t21",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 40,
+      "metadata": {}
+    },
+    {
+      "section_id": "chuong-10-nghiem-thu-va-ong-du-an-22",
+      "title": "CHƯƠNG 10. NGHIỆM THU VÀ ĐÓNG DỰ ÁN\t22",
+      "text": "10.1. Tiêu chí nghiệm thu\t22\n\n10.2. Lessons learned và hướng phát triển\t22\n\nKẾT LUẬN VÀ KIẾN NGHỊ\t23\n\nTÀI LIỆU THAM KHẢO\t24\n\nPHỤ LỤC\t25\n\nPhụ lục A. Danh mục sơ đồ Draw.io\t25\n\nPhụ lục B. Checklist ảnh Trello, Draw.io và LMS\t26\n\nPhụ lục C. Loại bằng chứng và giới hạn\t26",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 43,
+      "metadata": {}
+    },
+    {
+      "section_id": "danh-muc-hinh",
+      "title": "DANH MỤC HÌNH",
+      "text": "HÌNH 1. WBS dự án LMS, cấu trúc bàn giao đề xuất\t6\n\nHÌNH 2. Mạng phụ thuộc công việc, không gán ngày\t8\n\nHÌNH 3. Chu trình quản lý dự án và cổng kiểm soát\t18\n\nHÌNH 4. Trello LMS — thống kê API 23/10/2026, KHÔNG PHẢI SCREENSHOT\t19\n\nHÌNH 5. Kiến trúc LMS theo hồ sơ repo, không phải runtime\t20\n\nHÌNH 6. ERD 12 bảng LMS, một số quan hệ được giản lược\t21",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 53,
+      "metadata": {}
+    },
+    {
+      "section_id": "danh-muc-bang",
+      "title": "DANH MỤC BẢNG",
+      "text": "BẢNG 1. Điều lệ dự án\t1\n\nBẢNG 2. Stakeholder register rút gọn\t3\n\nBẢNG 3. RACI cho các đầu ra chính\t4\n\nBẢNG 4. Ranh giới phạm vi\t5\n\nBẢNG 5. WBS cấp 2 và đầu ra\t6\n\nBẢNG 6. CPM 19 hoạt động, đơn vị tuần\t7\n\nBẢNG 7. Milestone baseline\t8\n\nBẢNG 8. Resource breakdown\t10\n\nBẢNG 9. Budget baseline\t11\n\nBẢNG 10. Rủi ro ưu tiên\t13\n\nBẢNG 11. Quality gates\t14\n\nBẢNG 12. UAT scenarios, SIMULATED/NOT RUN\t15\n\nBẢNG 13. Trello snapshot 23/10/2026, API aggregate\t16\n\nBẢNG 14. Quy ước card và Done\t17\n\nBẢNG 15. Kiến trúc LMS theo hồ sơ\t20\n\nBẢNG 16. EVM minh họa, không phải actuals\t22\n\nBẢNG 17. 15 sơ đồ trong ZIP\t25\n\nBẢNG 18. Checklist ảnh cần bổ sung\t26\n\nBẢNG 19. Phân loại bằng chứng\t27",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 61,
+      "metadata": {}
+    },
+    {
+      "section_id": "mo-au",
+      "title": "MỞ ĐẦU",
+      "text": "Thông tin khóa học, tài liệu, bài tập, bài kiểm tra và điểm số có thể phân tán qua nhiều kênh. Điều lệ LMS mô hình hóa nhu cầu tập trung nội dung học phần, theo dõi bài nộp/chấm điểm và cung cấp góc nhìn nhất quán cho quản lý đào tạo. Quy mô 10.000 sinh viên, 500 giảng viên là giả định trong charter, không phải số liệu triển khai đã đo.\n\nMục tiêu là lập kế hoạch có thể kiểm soát: xác định sản phẩm, tổ chức, hoạt động và phụ thuộc, dự toán nguồn lực/chi phí, xử lý rủi ro, đặt cổng chất lượng, truyền thông quyết định và lưu dấu vết thay đổi. Trello theo dõi công việc; Draw.io giữ source sơ đồ chỉnh sửa được và PNG đưa vào báo cáo. Hai công cụ không ghi đè baseline LMS.\n\nPhương pháp gồm phân tích tài liệu quản lý dự án trong repo LMS, ưu tiên hồ sơ đối soát ngày 21/10/2026, kiểm tra các quy tắc nghiệp vụ trong mã nguồn và schema SQL, rồi đối chiếu snapshot Trello và tài sản Draw.io trong ZIP. Các mô hình nghiệp vụ được dùng để làm rõ sản phẩm bàn giao, điều kiện chấp nhận và công việc cần kiểm soát; hướng dẫn chụp ảnh quy định cách lưu bằng chứng thực hiện.\n\nPhạm vi là kế hoạch và hồ sơ mô phỏng. Không tự nhận có sponsor, pilot, phê duyệt, ngày thực hiện, kết quả UAT, chi phí thực hoặc thông tin nhận dạng sinh viên. Trường/khoa/ngành/sinh viên/MSSV/lớp/GVHD để trống để bổ sung.",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 83,
+      "metadata": {}
+    },
+    {
+      "section_id": "chuong-1-tong-quan-va-khoi-tao-du-an",
+      "title": "CHƯƠNG 1. TỔNG QUAN VÀ KHỞI TẠO DỰ ÁN",
+      "text": "PRJ-LMS-2026 dự kiến xây dựng LMS web theo ba vai trò quản trị viên, giảng viên và sinh viên. Business case trong charter là giảm thất lạc tài liệu, chậm bài nộp, tổng hợp điểm thủ công và thiếu thông tin quản trị. Phạm vi sản phẩm tập trung luồng cốt lõi; tính năng mở rộng phải qua change control.\n\nBảng điều lệ dưới đây là baseline học thuật; vai trò đại diện, approvals và ngày ký vẫn cần xác nhận trước khi dùng như hồ sơ chính thức.\n\nBẢNG 1. Điều lệ dự án\n\nTrường | Giá trị / lưu ý\nTên dự án | University Learning Management System (LMS) Implementation\nMã | PRJ-LMS-2026\nMôn học | Quản lý dự án phần mềm\nThời lượng | 20 tuần\nNgân sách | 1.200.000.000 VNĐ\nNguồn lực | 8,5 FTE; không khóa số đầu người\nTrạng thái | Kế hoạch học thuật; phê duyệt thực chưa được chứng minh",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 88,
+      "metadata": {}
+    },
+    {
+      "section_id": "business-case-va-muc-tieu",
+      "title": "Business case và mục tiêu",
+      "text": "LMS dự kiến quản lý người dùng, khóa học, phân công giảng viên, ghi danh, modules/lessons, assignment/submission, quiz, grading, bảng điểm và thông báo. Mục tiêu chấp nhận được mô tả bằng 10 kịch bản AC-01–AC-10 và các cổng chất lượng. Đây là tiêu chí kế hoạch; chưa có bằng chứng các kịch bản đã chạy.\n\nĐiều lệ giới hạn kiến trúc ở web frontend, API/backend và SQL Server. SSO, thanh toán, video conference, chat thời gian thực, AI tutoring, kiểm tra đạo văn, ứng dụng native và tự đăng ký môn nằm ngoài phạm vi.",
+      "level": 2,
+      "parent_id": "chuong-1-tong-quan-va-khoi-tao-du-an",
+      "source_index": 93,
+      "metadata": {}
+    },
+    {
+      "section_id": "gia-inh-va-rang-buoc",
+      "title": "Giả định và ràng buộc",
+      "text": "Baseline là 20 tuần/1,2 tỷ VNĐ/8,5 FTE. Các bên nghiệp vụ được giả định cung cấp yêu cầu, đội ngũ có kỹ năng và môi trường demo có thể chuẩn bị. 8,5 FTE là tổng phân bổ, không khóa số đầu người.\n\nKiến trúc trong hồ sơ là modular monolith với frontend React/TypeScript/Vite, backend FastAPI/SQLAlchemy và SQL Server. Đây là thiết kế, không phải bằng chứng uptime hay deployment production.",
+      "level": 2,
+      "parent_id": "chuong-1-tong-quan-va-khoi-tao-du-an",
+      "source_index": 96,
+      "metadata": {}
+    },
+    {
+      "section_id": "chuong-2-cac-ben-lien-quan-va-to-chuc-du-an",
+      "title": "CHƯƠNG 2. CÁC BÊN LIÊN QUAN VÀ TỔ CHỨC DỰ ÁN",
+      "text": "Stakeholder register là mô hình giả định để xác định ai cần tham gia và thời điểm. Phòng Đào tạo xác nhận quy trình học vụ; Phòng CNTT review kiến trúc, môi trường và backup; giảng viên/sinh viên góp ý luồng; PM tích hợp kế hoạch và escalation.\n\nStakeholder quyền lực và quan tâm cao được quản lý chặt bằng cập nhật mốc và tham vấn thay đổi. Người dùng trực tiếp được mời review demo, workshop và phản hồi. Thu thập ý kiến không đồng nghĩa với phê duyệt.",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 99,
+      "metadata": {}
+    },
+    {
+      "section_id": "so-stakeholder",
+      "title": "Sổ stakeholder",
+      "text": "Bảng rút gọn giữ nguyên nhóm và chiến lược từ register nguồn. Tên riêng không được thêm vì hồ sơ mô tả vai trò giả định.\n\nBẢNG 2. Stakeholder register rút gọn\n\nNhóm | Power | Interest | Chiến lược | Điểm tham gia\nBan Giám hiệu / SH-01 (mô phỏng) | Cao | Cao | Quản lý chặt | Mốc, thay đổi\nPhòng Đào tạo / SH-02 | Cao | Cao | Quản lý chặt | Yêu cầu, scope, UAT\nPhòng CNTT / SH-03 | Cao | Cao | Quản lý chặt | Kiến trúc, backup\nGiảng viên / SH-04 | Vừa | Cao | Tham vấn | Nhu cầu, demo\nSinh viên / SH-05 | Thấp | Cao | Cập nhật | Luồng học\nNhóm dự án / SH-06 | Vừa | Cao | Cộng tác | Họp tuần, blocker\nGiảng viên môn học / SH-07 | Cao | Cao | Quản lý chặt | Đề cương/đánh giá",
+      "level": 2,
+      "parent_id": "chuong-2-cac-ben-lien-quan-va-to-chuc-du-an",
+      "source_index": 102,
+      "metadata": {}
+    },
+    {
+      "section_id": "raci-va-escalation",
+      "title": "RACI và escalation",
+      "text": "RACI gồm Responsible, Accountable, Consulted, Informed; mỗi gói công việc cần một A duy nhất. PM quản lý tích hợp; BA làm yêu cầu; nhóm phát triển/QA chịu trách nhiệm kỹ thuật; sponsor giả định phê duyệt scope và nghiệm thu trong mô hình.\n\nMỗi gói việc cần một A duy nhất. Sponsor là vai trò giả định trong mô hình.\n\nBẢNG 3. RACI cho các đầu ra chính\n\nDeliverable | PM | BA | Dev/QA | Sponsor*\nCharter/governance | A/R | C | I | C\nYêu cầu/scope/WBS | A | R | C | A (approve)\nCPM/cost/risk | A/R | C | C | I\nArchitecture/API/DB | A | C | R | I\nDevelopment/integration | A | I | R | I\nTest/triage | A | C | R | I\nUAT/sign-off | C | R | C | A\nHandover/lessons | A/R | R | R | A",
+      "level": 2,
+      "parent_id": "chuong-2-cac-ben-lien-quan-va-to-chuc-du-an",
+      "source_index": 106,
+      "metadata": {}
+    },
+    {
+      "section_id": "chuong-3-quan-ly-pham-vi-va-wbs",
+      "title": "CHƯƠNG 3. QUẢN LÝ PHẠM VI VÀ WBS",
+      "text": "Phạm vi sản phẩm mô tả khả năng LMS; phạm vi dự án mô tả công việc và hồ sơ để xây dựng, kiểm thử, bàn giao prototype. Trong phạm vi là 3 vai trò, khóa học/ghi danh, nội dung học, assignment/submission văn bản, quiz, điểm, thông báo, schema/seed, test và PM artifacts. Ngoài phạm vi là SSO, video, chat realtime, AI, plagiarism check, app native, thanh toán và tự đăng ký môn.\n\nYêu cầu phi chức năng tập trung bảo mật server-side/RBAC, toàn vẹn dữ liệu, trạng thái giao diện loading/success/error/empty, kiểm thử và traceability. Hiệu năng cần có tiêu chí và phép đo trong môi trường thử; hiện không có kết quả đo runtime.\n\nWBS nhóm deliverable từ khởi tạo, requirements, thiết kế, prototype, QA, UAT/demo đến closure. Hình dưới là đề xuất WBS từ ZIP, không phải rubric chính thức.",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 111,
+      "metadata": {}
+    },
+    {
+      "section_id": "ranh-gioi-va-acceptance",
+      "title": "Ranh giới và acceptance",
+      "text": "Yêu cầu cần mã truy vết, tiêu chí kiểm được, vai trò review và bằng chứng. Thay đổi phải có CR, lý do, phân tích tác động WBS/CPM/cost/risk/quality/resource và quyết định có thẩm quyền. MVP submission là văn bản; không khẳng định upload tệp thật.\n\nTrong phạm vi là LMS core; các khả năng mở rộng được đưa ngoài phạm vi.\n\nBẢNG 4. Ranh giới phạm vi\n\nIn-scope | Out-of-scope\nAdmin/Lecturer/Student; auth/RBAC | SSO\nCourses, lecturer assignment, enrollment | Student self-enrollment\nModules/lessons | Realtime class/chat\nAssignment/submission text-only MVP | File upload in MVP\nQuiz, grading, grades, notification | AI/plagiarism\nSchema, seed, tests, demo, PM report | Payment/native app",
+      "level": 2,
+      "parent_id": "chuong-3-quan-ly-pham-vi-va-wbs",
+      "source_index": 115,
+      "metadata": {}
+    },
+    {
+      "section_id": "work-breakdown",
+      "title": "Work breakdown",
+      "text": "WBS là cấu trúc phân chia công việc, không chứng minh gói việc đã hoàn tất. Mỗi work package cần deliverable, owner, đầu vào, tiêu chí Done và nguồn lực.\n\nWBS là cấu trúc công việc, không chứng minh gói việc đã hoàn tất.\n\nBẢNG 5. WBS cấp 2 và đầu ra\n\nWBS | Gói | Đầu ra\n1 | Khởi tạo | Charter, stakeholders, kickoff\n2 | Yêu cầu/phạm vi | SRS, use cases, scope, WBS\n3 | Thiết kế/lập kế hoạch | Architecture, API, DB, CPM, budget, risk\n4 | Prototype | Auth, course, content, assignment, quiz, grades\n5 | Quality | Unit/API/system, triage\n6 | UAT/demo | Test scenarios, evidence, demo\n7 | Closure | Handover, lessons, closure\n\nWBS được lấy từ ZIP, là cấu trúc bàn giao đề xuất chứ không phải rubric.\n\nHÌNH 1. WBS dự án LMS, cấu trúc bàn giao đề xuất",
+      "level": 2,
+      "parent_id": "chuong-3-quan-ly-pham-vi-va-wbs",
+      "source_index": 120,
+      "metadata": {}
+    },
+    {
+      "section_id": "chuong-4-quan-ly-tien-o-va-cpm",
+      "title": "CHƯƠNG 4. QUẢN LÝ TIẾN ĐỘ VÀ CPM",
+      "text": "Lịch baseline có 19 hoạt động theo finish-to-start. ES/EF tính xuôi từ 0; backward pass tính từ tuần 20; total float = LS−ES. ACT-03 và ACT-05 phải xong trước ACT-06; ACT-14 và ACT-15 phải xong trước ACT-17. CPM thể hiện quan hệ và phân tích lịch; mô hình cần nhất quán giữa activity, duration, logic và mốc.\n\nĐối soát cho kết thúc kế hoạch tuần 20, ACT-04 float 1 và ACT-16 float 2; hoạt động khác float 0. Đây không phải tiến độ thực tế vì chưa có actual start/finish cập nhật.\n\nMốc baseline: charter W2, scope W4, design W6, feature complete W12, system/integration test W15, UAT W16, demo W18, closure W20. Sơ đồ LMS_14 không gán ngày; bảng CPM là nguồn duration/float.",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 128,
+      "metadata": {}
+    },
+    {
+      "section_id": "danh-sach-hoat-ong-va-phu-thuoc",
+      "title": "Danh sách hoạt động và phụ thuộc",
+      "text": "Mạng lịch nối khởi tạo/phạm vi, thiết kế/môi trường, phát triển lát dọc, tích hợp, kiểm thử, UAT, demo và đóng. Hình mạng chỉ giải thích phụ thuộc, không thay bảng CPM.\n\nMạng LMS_14 không gán ngày; bảng này là nguồn duration/float baseline.\n\nBẢNG 6. CPM 19 hoạt động, đơn vị tuần\n\nID | Pred. | Dur. | ES-EF | LS-LF | TF\nACT-01 | — | 2 | 0-2 | 0-2 | 0\nACT-02 | 01 | 2 | 2-4 | 2-4 | 0\nACT-03 | 02 | 2 | 4-6 | 4-6 | 0\nACT-04 | 02 | 2 | 4-6 | 5-7 | 1\nACT-05 | 02 | 2 | 4-6 | 4-6 | 0\nACT-06 | 03,05 | 1 | 6-7 | 6-7 | 0\nACT-07 | 04,06 | 1 | 7-8 | 7-8 | 0\nACT-08 | 07 | 1 | 8-9 | 8-9 | 0\nACT-09 | 08 | 1 | 9-10 | 9-10 | 0\nACT-10 | 09 | 1 | 10-11 | 10-11 | 0\nACT-11 | 10 | 1 | 11-12 | 11-12 | 0\nACT-12 | 11 | 1 | 12-13 | 12-13 | 0\nACT-13 | 12 | 2 | 13-15 | 13-15 | 0\nACT-14 | 13 | 1 | 15-16 | 15-16 | 0\nACT-15 | 13 | 1 | 15-16 | 15-16 | 0\nACT-16 | 15 | 1 | 16-17 | 18-19 | 2\nACT-17 | 14,15 | 2 | 16-18 | 16-18 | 0\nACT-18 | 17 | 1 | 18-19 | 18-19 | 0\nACT-19 | 16,18 | 1 | 19-20 | 19-20 | 0\n\nLMS_14 không gán ngày; bảng CPM mới là nguồn duration/float.\n\nHÌNH 2. Mạng phụ thuộc công việc, không gán ngày",
+      "level": 2,
+      "parent_id": "chuong-4-quan-ly-tien-o-va-cpm",
+      "source_index": 132,
+      "metadata": {}
+    },
+    {
+      "section_id": "theo-doi-sai-lech",
+      "title": "Theo dõi sai lệch",
+      "text": "PM cập nhật forecast finish, float và đường găng ở mỗi kỳ status; ghi nguyên nhân, phương án khôi phục, owner và tác động chi phí. Chỉ dùng actual khi có nhật ký tiến độ và quy tắc đo thống nhất.\n\nMốc tuần là baseline kế hoạch, không phải actual date.\n\nBẢNG 7. Milestone baseline\n\nMốc | Thời điểm | Bàn giao\nM1 | Cuối W2 | Charter\nM2 | Cuối W4 | Scope/requirements\nM3 | Cuối W6 | PM plan, UX, architecture/DB\nM4 | Cuối W12 | Prototype feature complete\nM5 | Cuối W15 | System/integration test\nM6 | W16 | UAT plan; chưa xác nhận\nM7 | W18 | Demo/go-live simulation\nM8 | W20 | Closure package",
+      "level": 2,
+      "parent_id": "chuong-4-quan-ly-tien-o-va-cpm",
+      "source_index": 140,
+      "metadata": {}
+    },
+    {
+      "section_id": "chuong-5-quan-ly-nguon-luc-va-chi-phi",
+      "title": "CHƯƠNG 5. QUẢN LÝ NGUỒN LỰC VÀ CHI PHÍ",
+      "text": "Kế hoạch dùng bottom-up kết hợp parametric costing. Nhân sự tổng 8,5 FTE; chín dòng vai trò không đồng nghĩa chín người. Labor 840M, hạ tầng 120M, công cụ 48M, đào tạo 40M, hành chính 32M và contingency 120M cộng đúng 1,2 tỷ VNĐ.\n\nCash flow dự kiến năm giai đoạn: 180M, 150M, 450M, 240M, 180M. Dự phòng cần quyết định giải ngân qua CR/issue; budget là ước lượng chứ không phải chứng từ đã chi.\n\nEVM cần kỳ status, quy tắc PV/EV và actual cost. Ví dụ trong hồ sơ được giữ ở Chương 10 với cảnh báo minh họa.",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 145,
+      "metadata": {}
+    },
+    {
+      "section_id": "resource-breakdown",
+      "title": "Resource breakdown",
+      "text": "PM/BA/UI-UX/Backend/Frontend/QA/DevOps được bố trí theo giai đoạn. QA tham gia sớm; DevOps chuẩn bị môi trường và demo. Cần cân bằng tải để tránh bottleneck và xung đột giữa thực hiện với phê duyệt.\n\nTổng phân bổ 8,5 FTE; không suy ra số đầu người.\n\nBẢNG 8. Resource breakdown\n\nVai trò | FTE | Giai đoạn | Labor | Trọng tâm\nPM | 1.0 | 20 tuần | 150M | Tích hợp scope/time/cost/risk\nBA | 1.0 | 20 tuần | 110M | Yêu cầu/SRS/UAT\nUI/UX | 1.0 | W3-W14 | 60M | Wireframe/prototype\nBackend lead | 1.0 | 20 tuần | 125M | Architecture/DB/auth\nBackend dev | 1.0 | W5-W20 | 80M | API nghiệp vụ\nFrontend lead | 1.0 | 20 tuần | 125M | React/routing\nFrontend dev | 1.0 | W5-W20 | 80M | UI ba vai trò\nQA | 1.0 | W5-W20 | 72M | Test/UAT\nDevOps | 0.5 | 20 tuần | 38M | Môi trường/SQL/backup\nTổng | 8.5 | — | 840M | Headcount chưa chốt",
+      "level": 2,
+      "parent_id": "chuong-5-quan-ly-nguon-luc-va-chi-phi",
+      "source_index": 149,
+      "metadata": {}
+    },
+    {
+      "section_id": "kiem-soat-chi-phi",
+      "title": "Kiểm soát chi phí",
+      "text": "Theo dõi BAC, actual khi có chứng từ, forecast và variance. Trello không thay sổ chi phí; thẻ có thể trỏ mã WBS/CR và owner.\n\nSáu khoản mục cộng đúng 1,2 tỷ VNĐ; contingency không phải chi phí đã tiêu.\n\nBẢNG 9. Budget baseline\n\nKhoản mục | VNĐ | Tỷ lệ | Kiểm soát\nLabor | 840.000.000 | 70.00% | 8.5 FTE planned\nHạ tầng | 120.000.000 | 10.00% | Dev/staging/demo\nCông cụ | 48.000.000 | 4.00% | Licenses/collaboration\nĐào tạo | 40.000.000 | 3.33% | Workshop/materials\nHành chính | 32.000.000 | 2.67% | Meetings/reviews\nContingency | 120.000.000 | 10.00% | CR/issue approval\nBAC tổng | 1.200.000.000 | 100.00% | Estimate baseline",
+      "level": 2,
+      "parent_id": "chuong-5-quan-ly-nguon-luc-va-chi-phi",
+      "source_index": 154,
+      "metadata": {}
+    },
+    {
+      "section_id": "chuong-6-quan-ly-rui-ro",
+      "title": "CHƯƠNG 6. QUẢN LÝ RỦI RO",
+      "text": "Risk register là kế hoạch mô phỏng. P×I trên thang 1–5 hỗ trợ ưu tiên, không phải xác suất thống kê. Trigger báo hiệu hành động; rủi ro đã xảy ra chuyển thành issue có owner, hạn và escalation.\n\nƯu tiên scope creep, authorization breach, trễ phát triển, low adoption, bất nhất tài liệu, UAT feedback muộn và hiểu nhầm upload. Mỗi rủi ro cần phòng ngừa, contingency và cadence review. Dự phòng 120M chỉ được giải ngân theo kiểm soát.\n\nScope creep hạn chế bằng baseline và CR; quyền truy cập bằng RBAC/ownership server-side và denial tests; trễ lịch bằng vertical slices/float; kỳ vọng upload cần nêu rõ text-only MVP.",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 159,
+      "metadata": {}
+    },
+    {
+      "section_id": "giam-sat-va-ung-pho",
+      "title": "Giám sát và ứng phó",
+      "text": "Register được rà hàng tuần theo kế hoạch. PM kiểm trigger, owner/response và escalate khi ảnh hưởng đường găng hoặc cost. Trạng thái nguồn không chứng minh rủi ro thực tế đã xảy ra hay xử lý xong.\n\nRisk register là kế hoạch mô phỏng; score không chứng minh sự kiện.\n\nBẢNG 10. Rủi ro ưu tiên\n\nID | Risk | P x I | Trigger | Response\nRSK-01 | Scope creep | 4x4=16 | Yêu cầu ngoài core | Freeze; CR; defer\nRSK-02 | Authorization breach | 2x5=10 | Thiếu token/role check | RBAC; denial test\nRSK-03 | Late development | 3x4=12 | Burn-down lệch >3 ngày W10 | Vertical slice; float\nRSK-04 | Low adoption | 3x4=12 | Pilot usage thấp | Workshop; feedback\nRSK-05 | PM docs inconsistency | 3x4=12 | Lệch WBS/CPM/budget | Reconcile docs\nRSK-07 | Late UAT feedback | 3x3=9 | Reject sát W16 | Demo sớm; triage\nRSK-09 | Upload expectation | 3x2=6 | Kỳ vọng nộp file | Text-only; CR",
+      "level": 2,
+      "parent_id": "chuong-6-quan-ly-rui-ro",
+      "source_index": 163,
+      "metadata": {}
+    },
+    {
+      "section_id": "chuong-7-quan-ly-chat-luong-va-kiem-thu",
+      "title": "CHƯƠNG 7. QUẢN LÝ CHẤT LƯỢNG VÀ KIỂM THỬ",
+      "text": "Quality được kiểm qua tiêu chí đầu ra và gate. Definition of Done yêu cầu logic theo đặc tả, happy path/denial path được kiểm, API có tài liệu, UI xử lý loading/success/error/empty, không hard-code quyền phía client. Mục tiêu 0 lỗi P0/P1 là điều kiện kế hoạch.\n\nQG1–QG5 kiểm scope freeze, design freeze, feature complete, UAT readiness và closure. Gate không đạt thì giữ trạng thái, ghi defect và lập kế hoạch khắc phục; chuyển thẻ Done không thay acceptance.\n\nUAT được lên kế hoạch tuần 16 với 10 kịch bản AC-01–AC-10 cho Admin/Lecturer/Student. Mọi kết quả mẫu là SIMULATED — NOT RUN. Chỉ ghi kết quả sau khi chạy, kèm build, môi trường, người thực hiện, thời điểm, bằng chứng và defect.",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 168,
+      "metadata": {}
+    },
+    {
+      "section_id": "gate-va-dod",
+      "title": "Gate và DoD",
+      "text": "QG1/W4 kiểm SRS/use cases/WBS/scope; QG2/W6 kiến trúc/ERD/API; QG3/W12 lát chức năng/RBAC; QG4/W15 UAT readiness/test/seed/defect; QG5/W20 UAT/docs/source/handover. Đây là tuần baseline.\n\nGate là điều kiện kế hoạch; trạng thái phê duyệt chưa được xác nhận.\n\nBẢNG 11. Quality gates\n\nGate | Tuần | Điều kiện | Evidence\nQG1 Scope freeze | W4 | SRS/use cases/WBS/scope | Plan; thiếu sign-off\nQG2 Design freeze | W6 | Architecture/ERD/API | Plan; thiếu sign-off\nQG3 Feature complete | W12 | Vertical slices/RBAC | Chưa xác nhận chạy\nQG4 UAT readiness | W15 | 10 AC, P0/P1=0, seed | UAT chưa chạy\nQG5 Closure | W20 | UAT/docs/handover | Chưa có biên bản",
+      "level": 2,
+      "parent_id": "chuong-7-quan-ly-chat-luong-va-kiem-thu",
+      "source_index": 172,
+      "metadata": {}
+    },
+    {
+      "section_id": "uat-va-triage",
+      "title": "UAT và triage",
+      "text": "Kịch bản phân quyền, nộp bài, grading, quiz, notification cần test data kiểm soát. Chưa chạy thì giữ NOT RUN; không biến kết quả mẫu thành evidence.\n\nMười AC được định nghĩa; số đã xác minh chạy là 0.\n\nBẢNG 12. UAT scenarios, SIMULATED/NOT RUN\n\nID | Mục tiêu | Vai trò | Status\nAC-01 | Authentication | All | SIMULATED / NOT RUN\nAC-02 | Chặn API quản trị | Student | SIMULATED / NOT RUN\nAC-03 | Cô lập course | Lecturer | SIMULATED / NOT RUN\nAC-04 | Không enrollment trùng | Admin | SIMULATED / NOT RUN\nAC-05 | Ẩn lesson draft | Student | SIMULATED / NOT RUN\nAC-06 | Chặn nộp trễ | Student | SIMULATED / NOT RUN\nAC-07 | Chấm và đồng bộ điểm | Lecturer/Student | SIMULATED / NOT RUN\nAC-08 | Giới hạn quiz attempts | Student | SIMULATED / NOT RUN\nAC-09 | Ẩn đáp án đúng | Student | SIMULATED / NOT RUN\nAC-10 | Notification ownership | Student | SIMULATED / NOT RUN",
+      "level": 2,
+      "parent_id": "chuong-7-quan-ly-chat-luong-va-kiem-thu",
+      "source_index": 177,
+      "metadata": {}
+    },
+    {
+      "section_id": "chuong-8-truyen-thong-thay-oi-va-trello",
+      "title": "CHƯƠNG 8. TRUYỀN THÔNG, THAY ĐỔI VÀ TRELLO",
+      "text": "Kế hoạch truyền thông: nhóm họp tuần; sponsor/đại diện nghiệp vụ nhận báo cáo mốc hai tuần; review theo đầu ra; UAT theo lịch xác nhận. Biên bản ghi quyết định, action, owner và due date. Blocker chuyển PM rồi sponsor theo ảnh hưởng.\n\nChange control: ghi CR → phân tích scope/WBS/time/cost/risk/quality/resource → lựa chọn → quyết định → cập nhật baseline và thông báo. Trello phản ánh việc; chỉ quyết định có thẩm quyền mới thay baseline.\n\nTrello cards/lists hỗ trợ metadata công việc như nhãn, ngày, file đính kèm; checklist chia subtasks và đánh dấu hoàn thành. Mỗi thẻ nên có ID WBS/CR/AC, kết quả, owner, ngày nếu thống nhất, checklist, source.drawio/PNG, reviewer và evidence. Done cần acceptance/evidence.\n\nSnapshot 23/10/2026 có 9 danh sách/39 thẻ: To Do 25; yêu cầu 2; Blocked 1 (hỏi rubric); milestone đề xuất 8; mô phỏng 3; Backlog/Doing/Review/Done trống. Hình tổng hợp API không phải screenshot Trello; không chứng minh việc hoàn tất.",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 182,
+      "metadata": {}
+    },
+    {
+      "section_id": "luong-board-va-quy-uoc",
+      "title": "Luồng board và quy ước",
+      "text": "Luồng đề xuất Backlog → To Do → Doing → Review → Done; Blocked hiển thị vướng mắc. Milestone gắn deliverable/tuần baseline. SIM cần nhãn mô phỏng. Trước Done cần review, checklist, bằng chứng và quyết định cần thiết.\n\nDữ liệu API không phải ảnh UI và không chứng minh Done.\n\nBẢNG 13. Trello snapshot 23/10/2026, API aggregate\n\nList | Cards | Note\n00 REQUIREMENT | 2 | REQ-01/REQ-02\n01 BACKLOG | 0 | Empty\n02 TO DO | 25 | PM-01..10; DGM-01..15\n03 DOING | 0 | Empty\n04 REVIEW | 0 | Empty\n05 DONE | 0 | No confirmed Done\n06 BLOCKED | 1 | REQ-03 asks rubric\n07 MILESTONES 10-11 | 8 | Group proposal\n08 SIMULATED UAT | 3 | UAT/EVM/evidence mock\nTOTAL | 39 | Snapshot API\n\nCards/lists/checklists hỗ trợ công việc; approval/evidence vẫn riêng.\n\nBẢNG 14. Quy ước card và Done\n\nField/step | Quy ước\nTitle | [WBS/REQ/AC/CR] + deliverable\nDescription | Kết quả, ranh giới, nguồn\nOwner/date | Owner rõ; date nếu thống nhất\nChecklist | Subtasks có thể review\nAttachment | Source .drawio, PNG, evidence\nReview | Reviewer, defect/CR, nhận xét\nDone | Acceptance + evidence + approval nếu cần\nBlocked/SIM | Lý do; nhãn mô phỏng\n\nSơ đồ Draw.io quy trình nối yêu cầu, Trello, review và thay đổi.\n\nHÌNH 3. Chu trình quản lý dự án và cổng kiểm soát\n\nSnapshot không chứng minh phần việc đã hoàn thành.\n\nHÌNH 4. Trello LMS — thống kê API 23/10/2026, KHÔNG PHẢI SCREENSHOT",
+      "level": 2,
+      "parent_id": "chuong-8-truyen-thong-thay-oi-va-trello",
+      "source_index": 187,
+      "metadata": {}
+    },
+    {
+      "section_id": "ket-noi-trello-wbs-draw-io-word",
+      "title": "Kết nối Trello — WBS — Draw.io — Word",
+      "text": "Mã WBS/CR nối kế hoạch, card, file sơ đồ và report. Card không thay tài liệu baseline hoặc nghiệm thu. Snapshot lịch nhóm Oct–Nov/27M trong ZIP là đề xuất riêng chưa phê duyệt, không trộn vào baseline 20 tuần/1,2 tỷ.",
+      "level": 2,
+      "parent_id": "chuong-8-truyen-thong-thay-oi-va-trello",
+      "source_index": 201,
+      "metadata": {}
+    },
+    {
+      "section_id": "chuong-9-thiet-ke-va-bieu-o-draw-io",
+      "title": "CHƯƠNG 9. THIẾT KẾ VÀ BIỂU ĐỒ DRAW.IO",
+      "text": "Thiết kế giúp đội dự án chuyển phạm vi thành các thành phần và quy tắc có thể kiểm tra. Kiến trúc trong repo tổ chức ba vai trò qua React/TypeScript/Vite, FastAPI/SQLAlchemy và SQL Server. Sơ đồ kiến trúc xác định ranh giới frontend, API và dữ liệu; hồ sơ này chưa cung cấp bằng chứng triển khai production.\n\nERD LMS_12 trình bày 12 bảng cùng các khóa chính và khóa ngoại; một số quan hệ được giản lược theo manifest. Phụ lục D bổ sung Use Case, luồng nộp bài, trình tự chấm bài, lớp miền và trạng thái bài nộp. Các góc nhìn này được đối chiếu với docs/02_ROLES_USE_CASES.md, database/01_schema.sql và backend/app/api/routes/assignments.py, nên có thể truy ngược từ hình về quy tắc trong project.\n\nDraw.io giữ source.drawio/XML có thể sửa và PNG để trình bày. Tài liệu chính thức phân biệt định dạng export với source , và mô tả tùy chọn PNG. Hình tĩnh không chứng minh UI editor đã được chụp.",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 203,
+      "metadata": {}
+    },
+    {
+      "section_id": "kien-truc-va-du-lieu",
+      "title": "Kiến trúc và dữ liệu",
+      "text": "Frontend/API/database là lớp thiết kế. HTTP/JSON/JWT, RBAC và transaction cần đối chiếu code/API/test. ERD là góc nhìn; schema là nguồn chi tiết.\n\nKiến trúc là thiết kế trong repo, không phải runtime.\n\nBẢNG 15. Kiến trúc LMS theo hồ sơ\n\nLayer | Technology | Lưu ý\nPresentation | React 19, TypeScript, Vite | Ba vai trò UI\nAPI | FastAPI, REST, JSON, JWT | Auth/RBAC/rules\nData access | SQLAlchemy | Mapping/transaction\nDatabase | SQL Server | 12 tables, keys, seed\nCross-cutting | Validation/logging/authorization | Cần test runtime\n\nSơ đồ architecture trong repo mô tả thiết kế, không phải runtime.\n\nHÌNH 5. Kiến trúc LMS theo hồ sơ repo, không phải runtime\n\nERD có quan hệ giản lược; đọc cùng schema SQL nguồn.\n\nHÌNH 6. ERD 12 bảng LMS, một số quan hệ được giản lược\n\nBộ mô hình ở Phụ lục D tập trung vào luồng bài tập vì luồng này kết nối cả ba yếu tố cần quản lý: quyền người dùng, trạng thái sản phẩm và toàn vẹn dữ liệu. Use Case phân chia trách nhiệm theo vai trò; sơ đồ luồng và trạng thái chỉ ra khi nào một bài nộp được chấp nhận; Sequence đặt việc kiểm tra quyền và ghi điểm tại API. Nhờ đó, nhóm có thể tách thẻ thiết kế, phát triển và kiểm thử theo cùng điều kiện chấp nhận.\n\nMột bài tập chỉ có một bài nộp hiện hành cho mỗi sinh viên theo ràng buộc UNIQUE(AssignmentId, StudentId). Sau khi chấm, sinh viên không được sửa bài nộp; giảng viên vẫn có thể điều chỉnh điểm theo quyền sở hữu khóa học. Khi chấm bài, API cập nhật Submission, insert/update Grades và tạo Notification trong luồng xử lý dữ liệu. Các điều kiện này cần xuất hiện trong checklist review và kịch bản kiểm thử; việc có sơ đồ hoặc thẻ Trello chưa xác nhận chúng đã chạy đạt.",
+      "level": 2,
+      "parent_id": "chuong-9-thiet-ke-va-bieu-o-draw-io",
+      "source_index": 207,
+      "metadata": {}
+    },
+    {
+      "section_id": "quy-trinh-xuat-bieu-o",
+      "title": "Quy trình xuất biểu đồ",
+      "text": "Chọn câu hỏi; mở source; kiểm title/node/connector/arrow/note; lưu source; export PNG đủ biên/độ phân giải; xem ảnh; chèn inline/căn giữa/caption; giữ cặp source-output. Sau sửa phải review lại. Archive có 15 cặp; manifest path cũ sai thư mục, workspace dùng drawio/ và anh_so_do/. Sequence diagram là mô hình logic, không phải log end-to-end; LMS_14 không gán ngày.",
+      "level": 2,
+      "parent_id": "chuong-9-thiet-ke-va-bieu-o-draw-io",
+      "source_index": 220,
+      "metadata": {}
+    },
+    {
+      "section_id": "chuong-10-nghiem-thu-va-ong-du-an",
+      "title": "CHƯƠNG 10. NGHIỆM THU VÀ ĐÓNG DỰ ÁN",
+      "text": "Nghiệm thu đối chiếu từng acceptance criteria với kết quả chạy và evidence. Closure package cần baseline, source version, test/defect, UAT/sign-off thật, hướng dẫn vận hành, tồn đọng và lessons. Hồ sơ hiện có biểu mẫu mô phỏng, chưa chứng minh chữ ký/acceptance.\n\nVí dụ EVM dùng PV=1.200M, EV=1.200M, AC=1.175M; suy ra SV=0, SPI=1, CV=+25M, CPI≈1,021. Đây là ví dụ số học; không có invoice/timesheet xác nhận AC và không có kỳ đo ngày status.\n\nClosure chỉ PASS khi gate được review và người có thẩm quyền xác nhận. Thiếu bằng chứng thì ghi kế hoạch/chưa nghiệm thu.",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 222,
+      "metadata": {}
+    },
+    {
+      "section_id": "tieu-chi-nghiem-thu",
+      "title": "Tiêu chí nghiệm thu",
+      "text": "Kiểm đủ 10 AC và Must-have, defect P0/P1, dữ liệu, hướng dẫn, known issues và tồn đọng được chấp nhận. Kịch bản chưa chạy vẫn NOT RUN.\n\nKhông có invoice/timesheet hoặc kỳ đo thực tế gắn EVM.\n\nBẢNG 16. EVM minh họa, không phải actuals\n\nMetric | Value | Formula | Limitation\nPV | 1,200M | Planned Value | No status date\nEV | 1,200M | Earned Value | Illustrative\nAC | 1,175M | Actual Cost | No invoice/timesheet\nSV / SPI | 0 / 1.00 | EV-PV / EV÷PV | Not measured\nCV / CPI | +25M / ~1.021 | EV-AC / EV÷AC | Not actual saving",
+      "level": 2,
+      "parent_id": "chuong-10-nghiem-thu-va-ong-du-an",
+      "source_index": 226,
+      "metadata": {}
+    },
+    {
+      "section_id": "lessons-learned-va-huong-phat-trien",
+      "title": "Lessons learned và hướng phát triển",
+      "text": "Giữ một baseline duy nhất; tách kế hoạch với actual; một A trong RACI; cần evidence trước Done; không suy diễn runtime từ sơ đồ. Upload an toàn, SSO và tích hợp lớp học là hướng phát triển cần CR và đánh giá nguồn lực.",
+      "level": 2,
+      "parent_id": "chuong-10-nghiem-thu-va-ong-du-an",
+      "source_index": 231,
+      "metadata": {}
+    },
+    {
+      "section_id": "ket-luan-va-kien-nghi",
+      "title": "KẾT LUẬN VÀ KIẾN NGHỊ",
+      "text": "Kế hoạch quản lý LMS thống nhất baseline 20 tuần, 1,2 tỷ VNĐ và 8,5 FTE. Trello cung cấp dấu vết công việc; bộ mô hình Draw.io giải thích phạm vi vai trò, luồng bài tập, dữ liệu và các điểm kiểm soát. Việc nối WBS, thẻ công việc, mô hình và tiêu chí chấp nhận giúp nhóm xác định thay đổi nào ảnh hưởng tới tiến độ, chi phí và chất lượng. Các số liệu kế hoạch, snapshot API và kịch bản mô phỏng vẫn được đánh dấu theo đúng loại bằng chứng.\n\nTrước khi nộp cần điền metadata thật, nhận rubric/đề cương chính thức, chụp T01–T05/D01–D03/L01–L07 từ ứng dụng thật và chạy/ghi UAT nếu yêu cầu. Chỉ cập nhật trạng thái khi có chứng cứ. DOCX có thể qua kiểm tra định dạng nhưng submission readiness vẫn INCOMPLETE.",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 233,
+      "metadata": {}
+    },
+    {
+      "section_id": "tai-lieu-tham-khao",
+      "title": "TÀI LIỆU THAM KHẢO",
+      "text": "[1] Project Management Institute, \"Practice Standard for Scheduling,\" 2011. https://www.pmi.org/-/media/pmi/documents/public/pdf/certifications/practice-standard-scheduling.pdf\n\n[2] Atlassian, \"Add and customize cards and lists,\" 2026. https://support.atlassian.com/trello/docs/add-and-customize-cards-and-lists/\n\n[3] Atlassian, \"Add, delete, and manage checklists,\" 2022. https://support.atlassian.com/trello/docs/adding-checklists-to-cards/\n\n[4] JGraph, \"Export diagram formats,\" 2026. https://www.drawio.com/docs/manual/export/export-diagram/\n\n[5] JGraph, \"Export a diagram to a PNG image,\" 2026. https://www.drawio.com/docs/manual/export/export-to-png/",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 236,
+      "metadata": {}
+    },
+    {
+      "section_id": "phu-luc",
+      "title": "PHỤ LỤC",
+      "text": "Phụ lục ghi danh mục asset và checklist bằng chứng còn thiếu. Static diagram, API aggregate, runtime screenshot và test evidence là các loại khác nhau.",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 242,
+      "metadata": {}
+    },
+    {
+      "section_id": "phu-luc-a-danh-muc-so-o-draw-io",
+      "title": "Phụ lục A. Danh mục sơ đồ Draw.io",
+      "text": "Hồ sơ gốc có 15 cặp nguồn Draw.io và PNG. Phần nội dung chính dùng WBS, chu trình quản lý, mạng phụ thuộc, kiến trúc và ERD. Phụ lục D đưa thêm năm góc nhìn nghiệp vụ; Use Case, Sequence chấm bài và lớp miền được bố trí lại để đọc trong Word, còn luồng nộp bài và trạng thái dùng hình gốc đã đối chiếu.\n\nBảng dưới ghi rõ hình được sử dụng và bản nguồn còn lưu. Mỗi bản bố cục gọn có PNG xuất từ Draw.io cùng nguồn chỉnh sửa được; chúng không được dùng làm ảnh chụp ứng dụng hay log kiểm thử.\n\nBẢNG 17. 15 sơ đồ trong ZIP\n\nID | Sơ đồ | Trong báo cáo\nLMS_01 | WBS | PNG chèn\nLMS_02 | Chu trình/cổng | PNG chèn\nLMS_03 | Use Case | Bản bố cục gọn; Phụ lục D\nLMS_04 | Activity ghi danh | Inventory\nLMS_05 | Activity nộp bài | PNG; Phụ lục D\nLMS_06 | Activity quiz | Inventory\nLMS_07 | Sequence nộp bài | Nguồn lưu; HTTP method cần đối chiếu trước khi dùng\nLMS_08 | Sequence chấm bài | Bản bố cục gọn; Phụ lục D\nLMS_09 | Sequence quiz | Modeled\nLMS_10 | Class Diagram | Bản trích luồng bài tập; Phụ lục D\nLMS_11 | State submission | PNG; Phụ lục D\nLMS_12 | ERD 12 tables | PNG chèn; compare SQL\nLMS_13 | Architecture | PNG chèn; design\nLMS_14 | Dependency no dates | PNG chèn\nLMS_15 | Requirements traceability | Inventory",
+      "level": 2,
+      "parent_id": "phu-luc",
+      "source_index": 244,
+      "metadata": {}
+    },
+    {
+      "section_id": "phu-luc-b-checklist-anh-trello-draw-io-va-lms",
+      "title": "Phụ lục B. Checklist ảnh Trello, Draw.io và LMS",
+      "text": "Guide nêu T01–T05, D01–D03, L01–L07. Tất cả hiện CHƯA CHỤP — NOT RUN. Khi capture, lưu ảnh gốc, thời điểm, URL/route hoặc click path, trạng thái trang, hash và reviewer. Không dùng API aggregate thay T01, PNG thay UI Draw.io hay diagram thay LMS runtime.\n\nChecklist hướng dẫn không thay ảnh; mọi capture hiện chưa thực hiện.\n\nBẢNG 18. Checklist ảnh cần bổ sung\n\nID | Đối tượng | Evidence | Status\nT01 | Trello overview | UI thật, thấy lists | NOT RUN\nT02 | Card/checklist | Card thật | NOT RUN\nT03 | Schedule | Calendar/timeline thật | NOT RUN\nT04 | Simulated UAT | Nhãn SIMULATED thật | NOT RUN\nT05 | Done | Chỉ với evidence thật | NOT RUN\nD01-D03 | Draw.io | Editor/export/review | NOT RUN\nL01-L07 | LMS runtime | UI thật; route/click path | NOT RUN",
+      "level": 2,
+      "parent_id": "phu-luc",
+      "source_index": 249,
+      "metadata": {}
+    },
+    {
+      "section_id": "phu-luc-c-loai-bang-chung-va-gioi-han",
+      "title": "Phụ lục C. Loại bằng chứng và giới hạn",
+      "text": "Baseline là kế hoạch; snapshot chỉ đúng thời điểm trích; SIMULATED không phải test; NOT RUN không phải pass/fail.\n\nKế hoạch, snapshot, mô phỏng, runtime là loại chứng cứ khác nhau.\n\nBẢNG 19. Phân loại bằng chứng\n\nLoại | Ví dụ | Có thể kết luận | Không thể kết luận\nBaseline | 20 tuần, 1.2B, 8.5 FTE | Kế hoạch | Actual time/cost/headcount\nTrello API | 9 lists, 39 cards | Số liệu snapshot | UI screenshot/Done\nDraw.io source/PNG | 15 pairs | Có nguồn biểu đồ | Runtime/test log\nUAT/EVM simulated | 10 AC, EVM | Kịch bản/số học mẫu | Test/actual cost\nCapture checklist | T01-T05/D01-D03/L01-L07 | Việc còn thiếu | Ảnh thật",
+      "level": 2,
+      "parent_id": "phu-luc",
+      "source_index": 254,
+      "metadata": {}
+    },
+    {
+      "section_id": "vai-tro-va-use-case",
+      "title": "Vai trò và Use Case",
+      "text": "Phụ lục D. Mô hình nghiệp vụ LMS\n\nMô hình nhóm các tương tác theo Admin, giảng viên và sinh viên. Admin quản lý tài khoản, khóa học và ghi danh; giảng viên thao tác trên khóa học do mình phụ trách; sinh viên chỉ truy cập nội dung học tập khi có ghi danh ACTIVE. Đăng nhập là điều kiện chung được lược khỏi hình. Khung nét đứt chỉ nhóm vai trò; đường nối không có mũi tên biểu thị sự tham gia của tác nhân.\n\nNguồn đối chiếu: docs/02_ROLES_USE_CASES.md. Các tương tác thông báo và nhánh lỗi được lược để giữ góc nhìn tổng thể.\n\nHÌNH . Use Case LMS theo vai trò",
+      "level": 3,
+      "parent_id": "phu-luc-d-mo-hinh-nghiep-vu-lms",
+      "source_index": 261,
+      "metadata": {}
+    },
+    {
+      "section_id": "luong-nop-bai",
+      "title": "Luồng nộp bài",
+      "text": "Luồng nộp bài dùng PUT /assignments/{assignment_id}/submission. API kiểm tra vai trò sinh viên, ghi danh ACTIVE, khóa học đang hoạt động, bài tập đang công bố, nội dung văn bản và chính sách nộp muộn. Nếu không đủ điều kiện, hệ thống trả lý do từ chối; nếu hợp lệ, hệ thống tạo hoặc cập nhật bài nộp hiện hành. Bài đã chấm không được sinh viên sửa.\n\nHình dùng ký pháp lưu đồ để diễn giải hoạt động, với nhánh Có/Không tại điều kiện cho phép nộp. Đây là mô hình rút gọn của mã nguồn; MVP nhận ContentText và không tải tệp bài nộp. Nguồn: backend/app/api/routes/assignments.py và docs/02_ROLES_USE_CASES.md.\n\nHÌNH . Luồng sinh viên nộp bài văn bản",
+      "level": 3,
+      "parent_id": "phu-luc-d-mo-hinh-nghiep-vu-lms",
+      "source_index": 268,
+      "metadata": {}
+    },
+    {
+      "section_id": "trinh-tu-cham-bai",
+      "title": "Trình tự chấm bài",
+      "text": "Giao diện lấy danh sách bằng GET /assignments/{assignment_id}/submissions và gửi điểm bằng PUT /submissions/{submission_id}/grade. API xác minh giảng viên sở hữu khóa học, kiểm tra điểm từ 0 đến MaxScore, cập nhật Submission và Grades, rồi tạo Notification. Bước 9 biểu diễn xác nhận commit; kết quả sau đó trở về giao diện.\n\nThời gian đọc từ trên xuống; mũi tên chỉ bên gửi và bên nhận. Hình chỉ mô tả nhánh thành công, giản lược activation và ký pháp trả về. Các nhánh không có quyền, điểm ngoài giới hạn và lỗi giao dịch phải được kiểm riêng. Nguồn: backend/app/api/routes/assignments.py; đây không phải log chạy thực tế.\n\nHÌNH . Trình tự tương tác khi giảng viên chấm bài",
+      "level": 3,
+      "parent_id": "phu-luc-d-mo-hinh-nghiep-vu-lms",
+      "source_index": 274,
+      "metadata": {}
+    },
+    {
+      "section_id": "cac-lop-mien-cua-bai-tap",
+      "title": "Các lớp miền của bài tập",
+      "text": "Mô hình trích sáu lớp khái niệm phục vụ luồng bài tập từ schema SQL; nó không mô tả lớp dịch vụ hoặc phương thức cài đặt. Đường liền biểu diễn một số quan hệ được chọn. Enrollment nối sinh viên với khóa học; Assignment thuộc Course; Submission thuộc Assignment và sinh viên. Cặp AssignmentId, StudentId là duy nhất. Các quan hệ và số lượng đầy đủ cần đọc cùng ERD ở Chương 9.\n\nĐường đứt logic biểu diễn cách một điểm bài tập được nhận diện bằng Grades.SourceType = ASSIGNMENT và SourceId = AssignmentId; đây không phải khóa ngoại SQL từ Grade đến Assignment. Grade còn có các khóa ngoại CourseId, StudentId và GradedBy. Nguồn đối chiếu: database/01_schema.sql và backend/app/api/routes/assignments.py.\n\nHÌNH . Mô hình lớp khái niệm của luồng bài tập",
+      "level": 3,
+      "parent_id": "phu-luc-d-mo-hinh-nghiep-vu-lms",
+      "source_index": 280,
+      "metadata": {}
+    },
+    {
+      "section_id": "trang-thai-bai-nop",
+      "title": "Trạng thái bài nộp",
+      "text": "Schema cho phép SUBMITTED, LATE và GRADED. Khi tiếp nhận bài hợp lệ, thời điểm nộp và AllowLate quyết định hai trạng thái đầu; thao tác chấm chuyển bài sang GRADED. Hình thể hiện lần nộp và lần chấm đầu tiên, dùng các trạng thái có tên để làm rõ vòng xử lý hiện hành.\n\nHình lược các vòng cập nhật: sinh viên có thể nộp lại khi quy tắc thời hạn cho phép và bài chưa chấm; giảng viên có thể sửa điểm đã chấm. Vì vậy, nhãn kết thúc vòng đời hiện hành không có nghĩa bản ghi bị xóa hay điểm không thể điều chỉnh. Nguồn: database/01_schema.sql và backend/app/api/routes/assignments.py.\n\nHÌNH . Trạng thái nộp và chấm bài",
+      "level": 3,
+      "parent_id": "phu-luc-d-mo-hinh-nghiep-vu-lms",
+      "source_index": 286,
+      "metadata": {}
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "overall_status": "FAIL",
+  "delivery_status": "FAIL",
+  "delivery_gates": {
+    "overall": "FAIL",
+    "render": "PASS",
+    "visual": "REVIEW_REQUIRED",
+    "native_word": "PASS"
+  },
+  "structural_status": "PASS",
+  "format_status": "FAIL",
+  "numbering_status": "PASS",
+  "table_geometry_status": "PASS",
+  "field_structure_status": "PASS",
+  "field_freshness_status": "PASS",
+  "field_evaluation_status": "PASS",
+  "render_status": "PASS",
+  "native_word_status": "PASS",
+  "visual_status": "REVIEW_REQUIRED",
+  "manual_review_required": true,
+  "issues": [
+    {
+      "severity": "ERROR",
+      "code": "style_size_mismatch",
+      "message": "Style 'Heading 3' font size is unset; expected 13 pt. 0 direct run override(s) also differ."
+    },
+    {
+      "severity": "ERROR",
+      "code": "insufficient_references",
+      "message": "Found 5 reference item(s) in bibliography section; profile requires at least 10."
+    }
+  ],
+  "inventory": {
+    "paragraphs": 578,
+    "tables": 15,
+    "sections": 3,
+    "images": 20,
+    "fields": {
+      "total_field_tags": 516,
+      "toc_field": true,
+      "page_field": true,
+      "page_fields": 138,
+      "toc_fields": 3,
+      "other_fields": 31
+    }
+  },
+  "render": {
+    "engine": "word",
+    "pdf_path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Final_Clickthrough_VietLex_20261023.pdf",
+    "file_size_bytes": 2350091,
+    "page_count": 81,
+    "verified_pdf_page_count": 81
+  },
+  "visual_review_challenge": {
+    "token": "5d55ebcae5ab80e49f6d5dae3eae1798587d93b599aff482059a5f2526b728c8",
+    "page_count": 81,
+    "token_scope": "document SHA-256 plus ordered page-image SHA-256 and size; PDF SHA-256 is provenance only"
+  },
+  "visual_review_reuse": {
+    "version": 1,
+    "token": "wa-visual-reuse-v1:1c156617c5c0fa664b2e2fba9d5ae8132be93e5a44440b73fae6abfcd6a85efe"
+  },
+  "report_path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\qa\\verify-vietlex-final-v12-20261023.json",
+  "report_sha256": "43e692aabe7f905f835c84022b67dd09305db33bf6cdc52d026f53df039c652c"
+}

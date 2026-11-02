@@ -1,0 +1,4141 @@
+{
+  "overall_status": "INCOMPLETE",
+  "structural_status": "PASS",
+  "format_status": "PASS",
+  "numbering_status": "PASS",
+  "table_geometry_status": "PASS",
+  "field_structure_status": "PASS",
+  "field_freshness_status": "PASS",
+  "field_evaluation_status": "PASS",
+  "field_status": "PASS",
+  "render_status": "PASS",
+  "native_word_status": "PASS",
+  "visual_status": "REVIEW_REQUIRED",
+  "manual_review_required": true,
+  "issues": [],
+  "native_field_results": [
+    {
+      "story": "document",
+      "type": 13,
+      "instruction": "TOC \\o \"1-3\" \\h \\z \\u",
+      "result": "LỜI CẢM ƠN\t2LỜI CAM ĐOAN\t3NHẬN XÉT CỦA GIẢNG VIÊN HƯỚNG DẪN\t4NHẬN XÉT CỦA NGƯỜI PHẢN BIỆN\t5LỊCH LÀM VIỆC\t6TÓM TẮT ĐỒ ÁN\t7MỤC LỤC\t8DANH MỤC SƠ ĐỒ, HÌNH\t12DANH MỤC BẢNG BIỂU\t13KÍ HIỆU CÁC CỤM TỪ VIẾT TẮT\t14MỞ ĐẦU\t1Mục tiêu, câu hỏi và phạm vi khảo sát\t1Phạm vi, phương pháp và bằng chứng\t1Đóng góp và cấu trúc báo cáo\t2NỘI DUNG\t3CHƯƠNG 1: TỔNG QUAN TÀI LIỆU\t3Retrieval và truy xuất trong tiếng Việt\t3RAG, evidence và giới hạn của câu trả lời sinh\t3Đánh giá theo tầng và nguyên tắc hướng đối tượng\t4Khung phân tích dùng trong bài\t4Sai lệch cấp văn bản trong retrieval pháp lý\t5Đánh giá groundedness trong hỏi đáp pháp lý\t5Tổng hợp nghiên cứu và khung phân tích riêng cho VietLex\t6CHƯƠNG 2: PHƯƠNG PHÁP THỰC HIỆN\t7Đối tượng và hiện trạng hệ thống\t7Phạm vi người dùng và ranh giới\t7Yêu cầu chức năng rút ra từ source\t8Yêu cầu phi chức năng và rủi ro\t8Vai trò, năng lực và ranh giới quyền\t8Yêu cầu chức năng tái dựng từ source\t10Yêu cầu phi chức năng và cách quan sát\t11Phạm vi dữ liệu, giả định và phần chưa được nghiệm thu\t122.1. PHÂN TÍCH NGHIỆP VỤ VÀ MÔ HÌNH CHỨC NĂNG\t13Phân rã chức năng và các màn hình\t13Use case chính\t14Điều kiện và luồng thay thế\t15Yêu cầu nghiệm thu nội bộ\t16Tóm tắt use case và nhánh ngoại lệ\t16UC-01. Tìm kiếm và mở văn bản\t17UC-02. Đặt câu hỏi có giới hạn phạm vi\t17UC-03. Tạo hồ sơ và đưa tài liệu vào workspace\t18UC-04. Ghim nguồn và chạy phân tích có cấu trúc\t18UC-05. Đọc nguồn chính thức và hủy một run\t18UC-06. Quản trị, phản hồi và registry hiệu lực\t19Mô hình trạng thái và phân loại ngoại lệ\t19Từ use case đến tiêu chí nghiệm thu nội bộ\t202.2. PHÂN TÍCH VÀ THIẾT KẾ HƯỚNG ĐỐI TƯỢNG\t20Đối tượng EvidenceChunk\t20RetrievalOutcome và trách nhiệm retriever\t20Quan hệ phụ thuộc và nguyên tắc thiết kế\t21Điểm cần cải thiện trong thiết kế\t22StageCandidate và RetrievalStageTrace\t22Bảng trách nhiệm đối tượng và thành phần\t22Hợp đồng dữ liệu, invariant và tính toàn vẹn\t23Phối hợp route, service, value object và repository\t24Đánh giá thiết kế và cải tiến có thể kiểm chứng\t242.3. KIẾN TRÚC, DỮ LIỆU, LỰA CHỌN CÔNG NGHỆ VÀ THIẾT KẾ THÀNH PHẦN\t25Kiến trúc web và luồng tổng quát\t25Hai hợp đồng retrieval\t26Giới hạn evidence và context\t27Ranh giới dữ liệu và an toàn\t28Đánh đổi kiến trúc\t28Pipeline nạp dữ liệu và quản lý chất lượng corpus\t28Ma trận kho dữ liệu, schema và vòng đời\t30Coverage, đồng bộ và tính nhất quán giữa chỉ mục\t31Bảo mật, quyền sở hữu và vòng đời workspace\t32Lỗi, tính sẵn sàng và giới hạn capacity\t33Lựa chọn kiến trúc và hệ quả bảo trì\t33CHƯƠNG 3: CÀI ĐẶT THỬ NGHIỆM, KẾT QUẢ VÀ ĐÁNH GIÁ\t34Luồng xử lý câu hỏi\t34Ảnh chụp runtime: màn hình hỏi đáp\t35Ảnh chụp runtime: tra cứu văn bản\t36Trạng thái giao diện đã kiểm tra trên runtime\t37Nhận xét về khả năng sử dụng\t38Luồng tra cứu metadata, toàn văn và đọc tài liệu\t38Luồng workspace, official-source read và phân tích\t39Ảnh chụp runtime các trang VietLex\t40Nhận xét UX theo khả năng tránh hiểu nhầm\t463.1. KIỂM THỬ, BẢO MẬT VÀ ĐÁNH GIÁ HỆ THỐNG\t46Bằng chứng hiện có và phương pháp đọc\t46Kết quả câu trả lời và giới hạn diễn giải\t47Bảng tổng hợp chỉ số và mẫu số\t47Tổng hợp đánh giá\t48Phân loại bằng chứng và mức diễn giải được phép\t49Đọc sâu retrieval metrics và benchmark\t50Bằng chứng vận hành và kiểm thử hiện có\t51Đánh giá theo từng lớp\t513.2. HẠN CHẾ VÀ RỦI RO CẦN THEO DÕI\t51Phân tích lỗi và rủi ro\t52Ma trận rủi ro và biện pháp kiểm soát\t523.3. ĐỀ XUẤT CẢI TIẾN VÀ KẾ HOẠCH KIỂM CHỨNG\t54Kế hoạch kiểm chứng tiếp theo\t54Giao thức đánh giá kế tiếp có thể tái lập\t54Lộ trình cải tiến theo mức rủi ro\t553.4. DANH MỤC ĐƯỜNG ĐI THEO VAI TRÒ\t56Màn hình và điểm vào theo nhóm chức năng\t56KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN\t58PHỤ LỤC A. MA TRẬN YÊU CẦU VÀ BẰNG CHỨNG\t59Ma trận claim chính và giới hạn kết luận\t59PHỤ LỤC B. ĐỊNH DANH SƠ ĐỒ VÀ NGUỒN KIỂM TRA\t62Định danh asset và trạng thái xác minh\t62PHỤ LỤC C. THUẬT NGỮ VÀ TRẠNG THÁI BẰNG CHỨNG\t64Các metric retrieval, answer và citation\t65DANH MỤC TÀI LIỆU THAM KHẢO\t66TUYÊN BỐ VỀ CÔNG CỤ HỖ TRỢ VÀ LIÊM CHÍNH HỌC THUẬT\t68",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685548\"",
+      "result": "LỜI CẢM ƠN\t2",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685548 \\h",
+      "result": "2",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685549\"",
+      "result": "LỜI CAM ĐOAN\t3",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685549 \\h",
+      "result": "3",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685550\"",
+      "result": "NHẬN XÉT CỦA GIẢNG VIÊN HƯỚNG DẪN\t4",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685550 \\h",
+      "result": "4",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685551\"",
+      "result": "NHẬN XÉT CỦA NGƯỜI PHẢN BIỆN\t5",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685551 \\h",
+      "result": "5",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685552\"",
+      "result": "LỊCH LÀM VIỆC\t6",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685552 \\h",
+      "result": "6",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685553\"",
+      "result": "TÓM TẮT ĐỒ ÁN\t7",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685553 \\h",
+      "result": "7",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685554\"",
+      "result": "MỤC LỤC\t8",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685554 \\h",
+      "result": "8",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685555\"",
+      "result": "DANH MỤC SƠ ĐỒ, HÌNH\t12",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685555 \\h",
+      "result": "12",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685556\"",
+      "result": "DANH MỤC BẢNG BIỂU\t13",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685556 \\h",
+      "result": "13",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685557\"",
+      "result": "KÍ HIỆU CÁC CỤM TỪ VIẾT TẮT\t14",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685557 \\h",
+      "result": "14",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685558\"",
+      "result": "MỞ ĐẦU\t1",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685558 \\h",
+      "result": "1",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685559\"",
+      "result": "Mục tiêu, câu hỏi và phạm vi khảo sát\t1",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685559 \\h",
+      "result": "1",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685560\"",
+      "result": "Phạm vi, phương pháp và bằng chứng\t1",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685560 \\h",
+      "result": "1",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685561\"",
+      "result": "Đóng góp và cấu trúc báo cáo\t2",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685561 \\h",
+      "result": "2",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685562\"",
+      "result": "NỘI DUNG\t3",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685562 \\h",
+      "result": "3",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685563\"",
+      "result": "CHƯƠNG 1: TỔNG QUAN TÀI LIỆU\t3",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685563 \\h",
+      "result": "3",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685564\"",
+      "result": "Retrieval và truy xuất trong tiếng Việt\t3",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685564 \\h",
+      "result": "3",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685565\"",
+      "result": "RAG, evidence và giới hạn của câu trả lời sinh\t3",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685565 \\h",
+      "result": "3",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685566\"",
+      "result": "Đánh giá theo tầng và nguyên tắc hướng đối tượng\t4",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685566 \\h",
+      "result": "4",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685567\"",
+      "result": "Khung phân tích dùng trong bài\t4",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685567 \\h",
+      "result": "4",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685568\"",
+      "result": "Sai lệch cấp văn bản trong retrieval pháp lý\t5",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685568 \\h",
+      "result": "5",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685569\"",
+      "result": "Đánh giá groundedness trong hỏi đáp pháp lý\t5",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685569 \\h",
+      "result": "5",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685570\"",
+      "result": "Tổng hợp nghiên cứu và khung phân tích riêng cho VietLex\t6",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685570 \\h",
+      "result": "6",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685571\"",
+      "result": "CHƯƠNG 2: PHƯƠNG PHÁP THỰC HIỆN\t7",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685571 \\h",
+      "result": "7",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685572\"",
+      "result": "Đối tượng và hiện trạng hệ thống\t7",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685572 \\h",
+      "result": "7",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685573\"",
+      "result": "Phạm vi người dùng và ranh giới\t7",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685573 \\h",
+      "result": "7",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685574\"",
+      "result": "Yêu cầu chức năng rút ra từ source\t8",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685574 \\h",
+      "result": "8",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685575\"",
+      "result": "Yêu cầu phi chức năng và rủi ro\t8",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685575 \\h",
+      "result": "8",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685576\"",
+      "result": "Vai trò, năng lực và ranh giới quyền\t8",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685576 \\h",
+      "result": "8",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685577\"",
+      "result": "Yêu cầu chức năng tái dựng từ source\t10",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685577 \\h",
+      "result": "10",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685578\"",
+      "result": "Yêu cầu phi chức năng và cách quan sát\t11",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685578 \\h",
+      "result": "11",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685579\"",
+      "result": "Phạm vi dữ liệu, giả định và phần chưa được nghiệm thu\t12",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685579 \\h",
+      "result": "12",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685580\"",
+      "result": "2.1. PHÂN TÍCH NGHIỆP VỤ VÀ MÔ HÌNH CHỨC NĂNG\t13",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685580 \\h",
+      "result": "13",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685581\"",
+      "result": "Phân rã chức năng và các màn hình\t13",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685581 \\h",
+      "result": "13",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685582\"",
+      "result": "Use case chính\t14",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685582 \\h",
+      "result": "14",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685583\"",
+      "result": "Điều kiện và luồng thay thế\t15",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685583 \\h",
+      "result": "15",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685584\"",
+      "result": "Yêu cầu nghiệm thu nội bộ\t16",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685584 \\h",
+      "result": "16",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685585\"",
+      "result": "Tóm tắt use case và nhánh ngoại lệ\t16",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685585 \\h",
+      "result": "16",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685586\"",
+      "result": "UC-01. Tìm kiếm và mở văn bản\t17",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685586 \\h",
+      "result": "17",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685587\"",
+      "result": "UC-02. Đặt câu hỏi có giới hạn phạm vi\t17",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685587 \\h",
+      "result": "17",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685588\"",
+      "result": "UC-03. Tạo hồ sơ và đưa tài liệu vào workspace\t18",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685588 \\h",
+      "result": "18",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685589\"",
+      "result": "UC-04. Ghim nguồn và chạy phân tích có cấu trúc\t18",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685589 \\h",
+      "result": "18",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685590\"",
+      "result": "UC-05. Đọc nguồn chính thức và hủy một run\t18",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685590 \\h",
+      "result": "18",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685591\"",
+      "result": "UC-06. Quản trị, phản hồi và registry hiệu lực\t19",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685591 \\h",
+      "result": "19",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685592\"",
+      "result": "Mô hình trạng thái và phân loại ngoại lệ\t19",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685592 \\h",
+      "result": "19",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685593\"",
+      "result": "Từ use case đến tiêu chí nghiệm thu nội bộ\t20",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685593 \\h",
+      "result": "20",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685594\"",
+      "result": "2.2. PHÂN TÍCH VÀ THIẾT KẾ HƯỚNG ĐỐI TƯỢNG\t20",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685594 \\h",
+      "result": "20",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685595\"",
+      "result": "Đối tượng EvidenceChunk\t20",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685595 \\h",
+      "result": "20",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685596\"",
+      "result": "RetrievalOutcome và trách nhiệm retriever\t20",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685596 \\h",
+      "result": "20",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685597\"",
+      "result": "Quan hệ phụ thuộc và nguyên tắc thiết kế\t21",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685597 \\h",
+      "result": "21",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685598\"",
+      "result": "Điểm cần cải thiện trong thiết kế\t22",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685598 \\h",
+      "result": "22",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685599\"",
+      "result": "StageCandidate và RetrievalStageTrace\t22",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685599 \\h",
+      "result": "22",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685600\"",
+      "result": "Bảng trách nhiệm đối tượng và thành phần\t22",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685600 \\h",
+      "result": "22",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685601\"",
+      "result": "Hợp đồng dữ liệu, invariant và tính toàn vẹn\t23",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685601 \\h",
+      "result": "23",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685602\"",
+      "result": "Phối hợp route, service, value object và repository\t24",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685602 \\h",
+      "result": "24",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685603\"",
+      "result": "Đánh giá thiết kế và cải tiến có thể kiểm chứng\t24",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685603 \\h",
+      "result": "24",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685604\"",
+      "result": "2.3. KIẾN TRÚC, DỮ LIỆU, LỰA CHỌN CÔNG NGHỆ VÀ THIẾT KẾ THÀNH PHẦN\t25",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685604 \\h",
+      "result": "25",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685605\"",
+      "result": "Kiến trúc web và luồng tổng quát\t25",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685605 \\h",
+      "result": "25",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685606\"",
+      "result": "Hai hợp đồng retrieval\t26",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685606 \\h",
+      "result": "26",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685607\"",
+      "result": "Giới hạn evidence và context\t27",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685607 \\h",
+      "result": "27",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685608\"",
+      "result": "Ranh giới dữ liệu và an toàn\t28",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685608 \\h",
+      "result": "28",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685609\"",
+      "result": "Đánh đổi kiến trúc\t28",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685609 \\h",
+      "result": "28",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685610\"",
+      "result": "Pipeline nạp dữ liệu và quản lý chất lượng corpus\t28",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685610 \\h",
+      "result": "28",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685611\"",
+      "result": "Ma trận kho dữ liệu, schema và vòng đời\t30",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685611 \\h",
+      "result": "30",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685612\"",
+      "result": "Coverage, đồng bộ và tính nhất quán giữa chỉ mục\t31",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685612 \\h",
+      "result": "31",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685613\"",
+      "result": "Bảo mật, quyền sở hữu và vòng đời workspace\t32",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685613 \\h",
+      "result": "32",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685614\"",
+      "result": "Lỗi, tính sẵn sàng và giới hạn capacity\t33",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685614 \\h",
+      "result": "33",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685615\"",
+      "result": "Lựa chọn kiến trúc và hệ quả bảo trì\t33",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685615 \\h",
+      "result": "33",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685616\"",
+      "result": "CHƯƠNG 3: CÀI ĐẶT THỬ NGHIỆM, KẾT QUẢ VÀ ĐÁNH GIÁ\t34",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685616 \\h",
+      "result": "34",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685617\"",
+      "result": "Luồng xử lý câu hỏi\t34",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685617 \\h",
+      "result": "34",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685618\"",
+      "result": "Ảnh chụp runtime: màn hình hỏi đáp\t35",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685618 \\h",
+      "result": "35",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685619\"",
+      "result": "Ảnh chụp runtime: tra cứu văn bản\t36",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685619 \\h",
+      "result": "36",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685620\"",
+      "result": "Trạng thái giao diện đã kiểm tra trên runtime\t37",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685620 \\h",
+      "result": "37",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685621\"",
+      "result": "Nhận xét về khả năng sử dụng\t38",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685621 \\h",
+      "result": "38",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685622\"",
+      "result": "Luồng tra cứu metadata, toàn văn và đọc tài liệu\t38",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685622 \\h",
+      "result": "38",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685623\"",
+      "result": "Luồng workspace, official-source read và phân tích\t39",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685623 \\h",
+      "result": "39",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685624\"",
+      "result": "Ảnh chụp runtime các trang VietLex\t40",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685624 \\h",
+      "result": "40",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685625\"",
+      "result": "Nhận xét UX theo khả năng tránh hiểu nhầm\t46",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685625 \\h",
+      "result": "46",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685626\"",
+      "result": "3.1. KIỂM THỬ, BẢO MẬT VÀ ĐÁNH GIÁ HỆ THỐNG\t46",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685626 \\h",
+      "result": "46",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685627\"",
+      "result": "Bằng chứng hiện có và phương pháp đọc\t46",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685627 \\h",
+      "result": "46",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685628\"",
+      "result": "Kết quả câu trả lời và giới hạn diễn giải\t47",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685628 \\h",
+      "result": "47",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685629\"",
+      "result": "Bảng tổng hợp chỉ số và mẫu số\t47",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685629 \\h",
+      "result": "47",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685630\"",
+      "result": "Tổng hợp đánh giá\t48",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685630 \\h",
+      "result": "48",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685631\"",
+      "result": "Phân loại bằng chứng và mức diễn giải được phép\t49",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685631 \\h",
+      "result": "49",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685632\"",
+      "result": "Đọc sâu retrieval metrics và benchmark\t50",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685632 \\h",
+      "result": "50",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685633\"",
+      "result": "Bằng chứng vận hành và kiểm thử hiện có\t51",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685633 \\h",
+      "result": "51",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685634\"",
+      "result": "Đánh giá theo từng lớp\t51",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685634 \\h",
+      "result": "51",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685635\"",
+      "result": "3.2. HẠN CHẾ VÀ RỦI RO CẦN THEO DÕI\t51",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685635 \\h",
+      "result": "51",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685636\"",
+      "result": "Phân tích lỗi và rủi ro\t52",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685636 \\h",
+      "result": "52",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685637\"",
+      "result": "Ma trận rủi ro và biện pháp kiểm soát\t52",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685637 \\h",
+      "result": "52",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685638\"",
+      "result": "3.3. ĐỀ XUẤT CẢI TIẾN VÀ KẾ HOẠCH KIỂM CHỨNG\t54",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685638 \\h",
+      "result": "54",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685639\"",
+      "result": "Kế hoạch kiểm chứng tiếp theo\t54",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685639 \\h",
+      "result": "54",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685640\"",
+      "result": "Giao thức đánh giá kế tiếp có thể tái lập\t54",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685640 \\h",
+      "result": "54",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685641\"",
+      "result": "Lộ trình cải tiến theo mức rủi ro\t55",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685641 \\h",
+      "result": "55",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685642\"",
+      "result": "3.4. DANH MỤC ĐƯỜNG ĐI THEO VAI TRÒ\t56",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685642 \\h",
+      "result": "56",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685643\"",
+      "result": "Màn hình và điểm vào theo nhóm chức năng\t56",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685643 \\h",
+      "result": "56",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685644\"",
+      "result": "KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN\t58",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685644 \\h",
+      "result": "58",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685645\"",
+      "result": "PHỤ LỤC A. MA TRẬN YÊU CẦU VÀ BẰNG CHỨNG\t59",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685645 \\h",
+      "result": "59",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685646\"",
+      "result": "Ma trận claim chính và giới hạn kết luận\t59",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685646 \\h",
+      "result": "59",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685647\"",
+      "result": "PHỤ LỤC B. ĐỊNH DANH SƠ ĐỒ VÀ NGUỒN KIỂM TRA\t62",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685647 \\h",
+      "result": "62",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685648\"",
+      "result": "Định danh asset và trạng thái xác minh\t62",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685648 \\h",
+      "result": "62",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685649\"",
+      "result": "PHỤ LỤC C. THUẬT NGỮ VÀ TRẠNG THÁI BẰNG CHỨNG\t64",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685649 \\h",
+      "result": "64",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685650\"",
+      "result": "Các metric retrieval, answer và citation\t65",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685650 \\h",
+      "result": "65",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685651\"",
+      "result": "DANH MỤC TÀI LIỆU THAM KHẢO\t66",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685651 \\h",
+      "result": "66",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685652\"",
+      "result": "TUYÊN BỐ VỀ CÔNG CỤ HỖ TRỢ VÀ LIÊM CHÍNH HỌC THUẬT\t68",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685652 \\h",
+      "result": "68",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 13,
+      "instruction": "TOC \\h \\z \\c \"Hinh\"",
+      "result": "HÌNH 2.1. Phân cấp màn hình HTML và thao tác chính\t14HÌNH 2.2. Use case chính và ranh giới chức năng\t15HÌNH 2.3. Mô hình lớp rút gọn của evidence retrieval\t21HÌNH 2.4. Kiến trúc retrieval theo hai cấu hình\t26HÌNH 2.5. Luồng nạp dữ liệu VietLex và tạo các chỉ mục\t30HÌNH 3.1. Luồng POST /chat từ đầu vào đến trả HTML\t35HÌNH 3.2. Ảnh chụp runtime giao diện hỏi đáp — GET /\t36HÌNH 3.3. Ảnh chụp runtime tra cứu văn bản — GET /search\t37HÌNH 3.4. Luồng đọc nguồn chính thức và hủy run trong workspace\t40HÌNH 3.5. Đọc Bộ luật Lao động 2019 — GET /documents/333670\t41HÌNH 3.6. Tra cứu sự kiện hiệu lực — GET /legal-status\t41HÌNH 3.7. Chất lượng và kiểm chứng — GET /evaluation-lab\t42HÌNH 3.8. Hồ sơ nghiên cứu — GET /workspaces\t43HÌNH 3.9. Đăng nhập — GET /login\t43HÌNH 3.10. Đăng ký — GET /register\t44HÌNH 3.11. Khôi phục mật khẩu — GET /forgot-password\t44HÌNH 3.12. Quyền riêng tư — GET /privacy\t45HÌNH 3.13. Điều khoản sử dụng — GET /terms\t45",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685653\"",
+      "result": "HÌNH 2.1. Phân cấp màn hình HTML và thao tác chính\t14",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685653 \\h",
+      "result": "14",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685654\"",
+      "result": "HÌNH 2.2. Use case chính và ranh giới chức năng\t15",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685654 \\h",
+      "result": "15",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685655\"",
+      "result": "HÌNH 2.3. Mô hình lớp rút gọn của evidence retrieval\t21",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685655 \\h",
+      "result": "21",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685656\"",
+      "result": "HÌNH 2.4. Kiến trúc retrieval theo hai cấu hình\t26",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685656 \\h",
+      "result": "26",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685657\"",
+      "result": "HÌNH 2.5. Luồng nạp dữ liệu VietLex và tạo các chỉ mục\t30",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685657 \\h",
+      "result": "30",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685658\"",
+      "result": "HÌNH 3.1. Luồng POST /chat từ đầu vào đến trả HTML\t35",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685658 \\h",
+      "result": "35",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685659\"",
+      "result": "HÌNH 3.2. Ảnh chụp runtime giao diện hỏi đáp — GET /\t36",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685659 \\h",
+      "result": "36",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685660\"",
+      "result": "HÌNH 3.3. Ảnh chụp runtime tra cứu văn bản — GET /search\t37",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685660 \\h",
+      "result": "37",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685661\"",
+      "result": "HÌNH 3.4. Luồng đọc nguồn chính thức và hủy run trong workspace\t40",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685661 \\h",
+      "result": "40",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685662\"",
+      "result": "HÌNH 3.5. Đọc Bộ luật Lao động 2019 — GET /documents/333670\t41",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685662 \\h",
+      "result": "41",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685663\"",
+      "result": "HÌNH 3.6. Tra cứu sự kiện hiệu lực — GET /legal-status\t41",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685663 \\h",
+      "result": "41",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685664\"",
+      "result": "HÌNH 3.7. Chất lượng và kiểm chứng — GET /evaluation-lab\t42",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685664 \\h",
+      "result": "42",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685665\"",
+      "result": "HÌNH 3.8. Hồ sơ nghiên cứu — GET /workspaces\t43",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685665 \\h",
+      "result": "43",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685666\"",
+      "result": "HÌNH 3.9. Đăng nhập — GET /login\t43",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685666 \\h",
+      "result": "43",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685667\"",
+      "result": "HÌNH 3.10. Đăng ký — GET /register\t44",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685667 \\h",
+      "result": "44",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685668\"",
+      "result": "HÌNH 3.11. Khôi phục mật khẩu — GET /forgot-password\t44",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685668 \\h",
+      "result": "44",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685669\"",
+      "result": "HÌNH 3.12. Quyền riêng tư — GET /privacy\t45",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685669 \\h",
+      "result": "45",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685670\"",
+      "result": "HÌNH 3.13. Điều khoản sử dụng — GET /terms\t45",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685670 \\h",
+      "result": "45",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 13,
+      "instruction": "TOC \\h \\z \\c \"Bang\"",
+      "result": "BẢNG 2.1. Vai trò và phạm vi năng lực trong source\t9BẢNG 2.2. Capability nội bộ tái dựng từ source và giới hạn nghiệm thu\t10BẢNG 2.3. Use case chính, route và nhánh thay thế\t16BẢNG 2.4. Trách nhiệm các đối tượng và thành phần chính\t23BẢNG 2.5. Hai hợp đồng retrieval và giới hạn snapshot được ghi nhận\t27BẢNG 2.6. Vai trò kho dữ liệu, chỉ mục và giới hạn độ phủ\t30BẢNG 3.1. Chỉ số đánh giá đã lưu và phạm vi diễn giải\t47BẢNG 3.2. Bằng chứng dự án đã lưu và giới hạn kết luận\t49BẢNG 3.3. Rủi ro trọng yếu, bằng chứng và biện pháp đề xuất\t52BẢNG 3.4. Màn hình, route GET và ranh giới quan sát\t56BẢNG A.1. Claim trọng yếu và đường truy vết evidence\t60BẢNG B.1. Sơ đồ và ảnh chụp runtime được dùng trong báo cáo\t63BẢNG C.1. Thuật ngữ chỉ số và trạng thái bằng chứng\t64",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685671\"",
+      "result": "BẢNG 2.1. Vai trò và phạm vi năng lực trong source\t9",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685671 \\h",
+      "result": "9",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685672\"",
+      "result": "BẢNG 2.2. Capability nội bộ tái dựng từ source và giới hạn nghiệm thu\t10",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685672 \\h",
+      "result": "10",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685673\"",
+      "result": "BẢNG 2.3. Use case chính, route và nhánh thay thế\t16",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685673 \\h",
+      "result": "16",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685674\"",
+      "result": "BẢNG 2.4. Trách nhiệm các đối tượng và thành phần chính\t23",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685674 \\h",
+      "result": "23",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685675\"",
+      "result": "BẢNG 2.5. Hai hợp đồng retrieval và giới hạn snapshot được ghi nhận\t27",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685675 \\h",
+      "result": "27",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685676\"",
+      "result": "BẢNG 2.6. Vai trò kho dữ liệu, chỉ mục và giới hạn độ phủ\t30",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685676 \\h",
+      "result": "30",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685677\"",
+      "result": "BẢNG 3.1. Chỉ số đánh giá đã lưu và phạm vi diễn giải\t47",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685677 \\h",
+      "result": "47",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685678\"",
+      "result": "BẢNG 3.2. Bằng chứng dự án đã lưu và giới hạn kết luận\t49",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685678 \\h",
+      "result": "49",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685679\"",
+      "result": "BẢNG 3.3. Rủi ro trọng yếu, bằng chứng và biện pháp đề xuất\t52",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685679 \\h",
+      "result": "52",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685680\"",
+      "result": "BẢNG 3.4. Màn hình, route GET và ranh giới quan sát\t56",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685680 \\h",
+      "result": "56",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685681\"",
+      "result": "BẢNG A.1. Claim trọng yếu và đường truy vết evidence\t60",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685681 \\h",
+      "result": "60",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685682\"",
+      "result": "BẢNG B.1. Sơ đồ và ảnh chụp runtime được dùng trong báo cáo\t63",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685682 \\h",
+      "result": "63",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243685683\"",
+      "result": "BẢNG C.1. Thuật ngữ chỉ số và trạng thái bằng chứng\t64",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243685683 \\h",
+      "result": "64",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Bang \\* ARABIC \\s 1",
+      "result": "1",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Bang \\* ARABIC \\s 1",
+      "result": "2",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+      "result": "1",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+      "result": "2",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Bang \\* ARABIC \\s 1",
+      "result": "3",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+      "result": "3",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Bang \\* ARABIC \\s 1",
+      "result": "4",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+      "result": "4",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Bang \\* ARABIC \\s 1",
+      "result": "5",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+      "result": "5",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Bang \\* ARABIC \\s 1",
+      "result": "6",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+      "result": "1",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+      "result": "2",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+      "result": "3",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+      "result": "4",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+      "result": "5",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+      "result": "6",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+      "result": "7",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+      "result": "8",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+      "result": "9",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+      "result": "10",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+      "result": "11",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+      "result": "12",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Hinh \\* ARABIC \\s 1",
+      "result": "13",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Bang \\* ARABIC \\s 1",
+      "result": "1",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Bang \\* ARABIC \\s 1",
+      "result": "2",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Bang \\* ARABIC \\s 1",
+      "result": "3",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Bang \\* ARABIC \\s 1",
+      "result": "4",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Bang \\* ARABIC \\s 1",
+      "result": "1",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Bang \\* ARABIC \\s 1",
+      "result": "1",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Bang \\* ARABIC \\s 1",
+      "result": "1",
+      "locked": false
+    }
+  ],
+  "field_result_basis": "EVALUATED_IN_ISOLATED_MICROSOFT_WORD_SESSION",
+  "render": {
+    "engine": "word",
+    "pdf_path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023.pdf",
+    "file_size_bytes": 2359939,
+    "page_count": 83,
+    "page_images": [
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-01.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-02.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-03.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-04.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-05.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-06.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-07.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-08.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-09.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-10.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-11.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-12.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-13.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-14.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-15.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-16.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-17.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-18.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-19.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-20.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-21.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-22.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-23.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-24.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-25.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-26.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-27.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-28.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-29.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-30.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-31.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-32.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-33.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-34.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-35.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-36.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-37.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-38.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-39.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-40.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-41.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-42.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-43.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-44.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-45.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-46.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-47.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-48.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-49.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-50.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-51.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-52.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-53.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-54.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-55.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-56.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-57.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-58.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-59.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-60.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-61.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-62.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-63.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-64.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-65.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-66.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-67.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-68.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-69.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-70.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-71.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-72.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-73.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-74.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-75.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-76.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-77.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-78.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-79.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-80.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-81.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-82.png",
+      "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-83.png"
+    ],
+    "verified_pdf_page_count": 83,
+    "page_content_audit": {
+      "status": "PASS",
+      "pages": [
+        {
+          "page": 1,
+          "alphanumeric_characters": 286,
+          "near_blank": false
+        },
+        {
+          "page": 2,
+          "alphanumeric_characters": 317,
+          "near_blank": false
+        },
+        {
+          "page": 3,
+          "alphanumeric_characters": 228,
+          "near_blank": false
+        },
+        {
+          "page": 4,
+          "alphanumeric_characters": 263,
+          "near_blank": false
+        },
+        {
+          "page": 5,
+          "alphanumeric_characters": 455,
+          "near_blank": false
+        },
+        {
+          "page": 6,
+          "alphanumeric_characters": 433,
+          "near_blank": false
+        },
+        {
+          "page": 7,
+          "alphanumeric_characters": 1068,
+          "near_blank": false
+        },
+        {
+          "page": 8,
+          "alphanumeric_characters": 1547,
+          "near_blank": false
+        },
+        {
+          "page": 9,
+          "alphanumeric_characters": 715,
+          "near_blank": false
+        },
+        {
+          "page": 10,
+          "alphanumeric_characters": 954,
+          "near_blank": false
+        },
+        {
+          "page": 11,
+          "alphanumeric_characters": 983,
+          "near_blank": false
+        },
+        {
+          "page": 12,
+          "alphanumeric_characters": 950,
+          "near_blank": false
+        },
+        {
+          "page": 13,
+          "alphanumeric_characters": 832,
+          "near_blank": false
+        },
+        {
+          "page": 14,
+          "alphanumeric_characters": 714,
+          "near_blank": false
+        },
+        {
+          "page": 15,
+          "alphanumeric_characters": 962,
+          "near_blank": false
+        },
+        {
+          "page": 16,
+          "alphanumeric_characters": 1846,
+          "near_blank": false
+        },
+        {
+          "page": 17,
+          "alphanumeric_characters": 1303,
+          "near_blank": false
+        },
+        {
+          "page": 18,
+          "alphanumeric_characters": 1647,
+          "near_blank": false
+        },
+        {
+          "page": 19,
+          "alphanumeric_characters": 1892,
+          "near_blank": false
+        },
+        {
+          "page": 20,
+          "alphanumeric_characters": 1815,
+          "near_blank": false
+        },
+        {
+          "page": 21,
+          "alphanumeric_characters": 1744,
+          "near_blank": false
+        },
+        {
+          "page": 22,
+          "alphanumeric_characters": 1782,
+          "near_blank": false
+        },
+        {
+          "page": 23,
+          "alphanumeric_characters": 1906,
+          "near_blank": false
+        },
+        {
+          "page": 24,
+          "alphanumeric_characters": 1247,
+          "near_blank": false
+        },
+        {
+          "page": 25,
+          "alphanumeric_characters": 1072,
+          "near_blank": false
+        },
+        {
+          "page": 26,
+          "alphanumeric_characters": 920,
+          "near_blank": false
+        },
+        {
+          "page": 27,
+          "alphanumeric_characters": 1884,
+          "near_blank": false
+        },
+        {
+          "page": 28,
+          "alphanumeric_characters": 925,
+          "near_blank": false
+        },
+        {
+          "page": 29,
+          "alphanumeric_characters": 560,
+          "near_blank": false
+        },
+        {
+          "page": 30,
+          "alphanumeric_characters": 835,
+          "near_blank": false
+        },
+        {
+          "page": 31,
+          "alphanumeric_characters": 1284,
+          "near_blank": false
+        },
+        {
+          "page": 32,
+          "alphanumeric_characters": 1612,
+          "near_blank": false
+        },
+        {
+          "page": 33,
+          "alphanumeric_characters": 1905,
+          "near_blank": false
+        },
+        {
+          "page": 34,
+          "alphanumeric_characters": 1924,
+          "near_blank": false
+        },
+        {
+          "page": 35,
+          "alphanumeric_characters": 1805,
+          "near_blank": false
+        },
+        {
+          "page": 36,
+          "alphanumeric_characters": 1363,
+          "near_blank": false
+        },
+        {
+          "page": 37,
+          "alphanumeric_characters": 1806,
+          "near_blank": false
+        },
+        {
+          "page": 38,
+          "alphanumeric_characters": 1287,
+          "near_blank": false
+        },
+        {
+          "page": 39,
+          "alphanumeric_characters": 1756,
+          "near_blank": false
+        },
+        {
+          "page": 40,
+          "alphanumeric_characters": 1679,
+          "near_blank": false
+        },
+        {
+          "page": 41,
+          "alphanumeric_characters": 798,
+          "near_blank": false
+        },
+        {
+          "page": 42,
+          "alphanumeric_characters": 1495,
+          "near_blank": false
+        },
+        {
+          "page": 43,
+          "alphanumeric_characters": 1938,
+          "near_blank": false
+        },
+        {
+          "page": 44,
+          "alphanumeric_characters": 1162,
+          "near_blank": false
+        },
+        {
+          "page": 45,
+          "alphanumeric_characters": 581,
+          "near_blank": false
+        },
+        {
+          "page": 46,
+          "alphanumeric_characters": 1290,
+          "near_blank": false
+        },
+        {
+          "page": 47,
+          "alphanumeric_characters": 1938,
+          "near_blank": false
+        },
+        {
+          "page": 48,
+          "alphanumeric_characters": 1888,
+          "near_blank": false
+        },
+        {
+          "page": 49,
+          "alphanumeric_characters": 1167,
+          "near_blank": false
+        },
+        {
+          "page": 50,
+          "alphanumeric_characters": 380,
+          "near_blank": false
+        },
+        {
+          "page": 51,
+          "alphanumeric_characters": 407,
+          "near_blank": false
+        },
+        {
+          "page": 52,
+          "alphanumeric_characters": 1041,
+          "near_blank": false
+        },
+        {
+          "page": 53,
+          "alphanumeric_characters": 1812,
+          "near_blank": false
+        },
+        {
+          "page": 54,
+          "alphanumeric_characters": 1410,
+          "near_blank": false
+        },
+        {
+          "page": 55,
+          "alphanumeric_characters": 606,
+          "near_blank": false
+        },
+        {
+          "page": 56,
+          "alphanumeric_characters": 212,
+          "near_blank": false
+        },
+        {
+          "page": 57,
+          "alphanumeric_characters": 171,
+          "near_blank": false
+        },
+        {
+          "page": 58,
+          "alphanumeric_characters": 183,
+          "near_blank": false
+        },
+        {
+          "page": 59,
+          "alphanumeric_characters": 192,
+          "near_blank": false
+        },
+        {
+          "page": 60,
+          "alphanumeric_characters": 312,
+          "near_blank": false
+        },
+        {
+          "page": 61,
+          "alphanumeric_characters": 1738,
+          "near_blank": false
+        },
+        {
+          "page": 62,
+          "alphanumeric_characters": 1735,
+          "near_blank": false
+        },
+        {
+          "page": 63,
+          "alphanumeric_characters": 948,
+          "near_blank": false
+        },
+        {
+          "page": 64,
+          "alphanumeric_characters": 1341,
+          "near_blank": false
+        },
+        {
+          "page": 65,
+          "alphanumeric_characters": 1600,
+          "near_blank": false
+        },
+        {
+          "page": 66,
+          "alphanumeric_characters": 1819,
+          "near_blank": false
+        },
+        {
+          "page": 67,
+          "alphanumeric_characters": 1695,
+          "near_blank": false
+        },
+        {
+          "page": 68,
+          "alphanumeric_characters": 980,
+          "near_blank": false
+        },
+        {
+          "page": 69,
+          "alphanumeric_characters": 1647,
+          "near_blank": false
+        },
+        {
+          "page": 70,
+          "alphanumeric_characters": 1803,
+          "near_blank": false
+        },
+        {
+          "page": 71,
+          "alphanumeric_characters": 1104,
+          "near_blank": false
+        },
+        {
+          "page": 72,
+          "alphanumeric_characters": 388,
+          "near_blank": false
+        },
+        {
+          "page": 73,
+          "alphanumeric_characters": 1105,
+          "near_blank": false
+        },
+        {
+          "page": 74,
+          "alphanumeric_characters": 1464,
+          "near_blank": false
+        },
+        {
+          "page": 75,
+          "alphanumeric_characters": 928,
+          "near_blank": false
+        },
+        {
+          "page": 76,
+          "alphanumeric_characters": 741,
+          "near_blank": false
+        },
+        {
+          "page": 77,
+          "alphanumeric_characters": 1513,
+          "near_blank": false
+        },
+        {
+          "page": 78,
+          "alphanumeric_characters": 942,
+          "near_blank": false
+        },
+        {
+          "page": 79,
+          "alphanumeric_characters": 1034,
+          "near_blank": false
+        },
+        {
+          "page": 80,
+          "alphanumeric_characters": 1344,
+          "near_blank": false
+        },
+        {
+          "page": 81,
+          "alphanumeric_characters": 1782,
+          "near_blank": false
+        },
+        {
+          "page": 82,
+          "alphanumeric_characters": 1518,
+          "near_blank": false
+        },
+        {
+          "page": 83,
+          "alphanumeric_characters": 712,
+          "near_blank": false
+        }
+      ],
+      "near_blank_pages": [],
+      "minimum_alphanumeric": 20
+    }
+  },
+  "render_reuse_manifest": {
+    "version": 1,
+    "document_sha256": "fbc01dc0aecdfd50dcc7a92677c304ef8e3bcce7a08d29c2575f6e27252a7b54",
+    "pdf_sha256": "84e6dc902387afc9e823bb5e41e6d5ef1a86e693d3a1b194ce3b6b893e89e19f",
+    "renderer": {
+      "engine": "word",
+      "page_dpi": 120
+    },
+    "page_count": 83,
+    "pages": [
+      {
+        "page": 1,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-01.png",
+        "size_bytes": 96028,
+        "sha256": "df034a1d165ac5f7c9dec635a2f6213306407435bbbe9448983cbc06d1cb3db6"
+      },
+      {
+        "page": 2,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-02.png",
+        "size_bytes": 99616,
+        "sha256": "9f0785811069d1f42fcedf10f22ce80ec4f7d4d89dfc9ae89abe7a67ce88e8be"
+      },
+      {
+        "page": 3,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-03.png",
+        "size_bytes": 41592,
+        "sha256": "6f0ac05e31e0464390a775a151c824f067180d3d369728a79376d06b8149e565"
+      },
+      {
+        "page": 4,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-04.png",
+        "size_bytes": 47985,
+        "sha256": "984efaa809be31eaa2a792615413eae5a696fb210e760a570576170faf4a81f4"
+      },
+      {
+        "page": 5,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-05.png",
+        "size_bytes": 92850,
+        "sha256": "c437a90f0b533f54acb2419ed09851ec60294c335c3f988ef6d10b671ccb40a0"
+      },
+      {
+        "page": 6,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-06.png",
+        "size_bytes": 89541,
+        "sha256": "cd38b99c48bfd318444ef946137dff3978ab8ded95f01841ff2803e41c0718c0"
+      },
+      {
+        "page": 7,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-07.png",
+        "size_bytes": 165030,
+        "sha256": "ea7277af13919dec4872bb50acb9f264faac97a1aa993888aa6b7744fa130f5b"
+      },
+      {
+        "page": 8,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-08.png",
+        "size_bytes": 241107,
+        "sha256": "9586c06837547b27c9cad84573696003921f825211bc15e28c21b7f3d1b99dfb"
+      },
+      {
+        "page": 9,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-09.png",
+        "size_bytes": 155798,
+        "sha256": "564fec1632b0403d28c6321854e47e7a6d268ee8b1c674e8f230854d7e6d4f0a"
+      },
+      {
+        "page": 10,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-10.png",
+        "size_bytes": 184558,
+        "sha256": "fc4ac3d5055a2cd6d71b2777604e1d9e81467f55a367f5de3b1f417d2e07466b"
+      },
+      {
+        "page": 11,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-11.png",
+        "size_bytes": 189582,
+        "sha256": "576d71a1ace5eeb321085892cd8b22c1dabf33678aca673ddc63e03d3636e776"
+      },
+      {
+        "page": 12,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-12.png",
+        "size_bytes": 198924,
+        "sha256": "d05aa312427e0fe50d7dee4c80fbd8cd4a1c424cda72262f91c75d9c554ab9f3"
+      },
+      {
+        "page": 13,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-13.png",
+        "size_bytes": 165312,
+        "sha256": "52aaf1c8215a08e6e2f95f164776e1bbdde3b7b551d0ebfc379bcfbac0759d7d"
+      },
+      {
+        "page": 14,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-14.png",
+        "size_bytes": 138979,
+        "sha256": "5e88368a82afbc38164851b568ef17edd86404f10190fc72916865ef4107c5e7"
+      },
+      {
+        "page": 15,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-15.png",
+        "size_bytes": 139325,
+        "sha256": "ecc320e3b9d3b34246bb2b48caf49b7d088ad1669a47aaf243ffd1f9a3c85db5"
+      },
+      {
+        "page": 16,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-16.png",
+        "size_bytes": 286257,
+        "sha256": "12a4d57001c75e4da6e5f47553b5dfefc4358596e682e08772254210a11911c1"
+      },
+      {
+        "page": 17,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-17.png",
+        "size_bytes": 202852,
+        "sha256": "8fdc2df8e9098fb718e8418d4c5a65489fd14b4f1c2091bea20ed2c8673a57df"
+      },
+      {
+        "page": 18,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-18.png",
+        "size_bytes": 261209,
+        "sha256": "6fdb48aa08a945b75f89a25a37d3c6b46ba6923667de0f03349900f88915cb94"
+      },
+      {
+        "page": 19,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-19.png",
+        "size_bytes": 293737,
+        "sha256": "464de9b65da0eba8e0d06b8c5c3443e9eb60453b8d4b2d1ec5399ff8fb3fec5c"
+      },
+      {
+        "page": 20,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-20.png",
+        "size_bytes": 282507,
+        "sha256": "2a255fe7b45d8de655835214321c77bcf8d67ba0ce18d8ed34f8efbf33188bc5"
+      },
+      {
+        "page": 21,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-21.png",
+        "size_bytes": 269436,
+        "sha256": "d23aa62102c83512e1e51c0ff038c84db8a888342bd0a9681b8a345cd004e867"
+      },
+      {
+        "page": 22,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-22.png",
+        "size_bytes": 285944,
+        "sha256": "357fa0518595f435c07f729d81b0d8a94cd3bea6a874949147c95e1233e98241"
+      },
+      {
+        "page": 23,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-23.png",
+        "size_bytes": 294134,
+        "sha256": "1df38e1f3b06c3b53c017a81a7b1f957fdea62e3e433152cf10e04f6f63b0665"
+      },
+      {
+        "page": 24,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-24.png",
+        "size_bytes": 213607,
+        "sha256": "fe55e0e370393a7387eb68d6df2a8deacb0cd884e5d662ae14ee493c9a8428f4"
+      },
+      {
+        "page": 25,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-25.png",
+        "size_bytes": 189732,
+        "sha256": "4148e53f72d9e550d672101a313f14542e4853af036585ce18e408279ea1a9b5"
+      },
+      {
+        "page": 26,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-26.png",
+        "size_bytes": 168600,
+        "sha256": "ecb9490f3b2217e6fdb82462a14ac518f72c72f7c70f16d67ec2dc33cf4f90dd"
+      },
+      {
+        "page": 27,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-27.png",
+        "size_bytes": 287802,
+        "sha256": "a70fe2634a7f5bc4aa850559664eba91568f69f98ebb1d83cefa80f3063bc7ab"
+      },
+      {
+        "page": 28,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-28.png",
+        "size_bytes": 152371,
+        "sha256": "9606164c9103aac6e3d3f60dbbbfaa3bfbca2fc478c6bd6165d47fc25e4f59f6"
+      },
+      {
+        "page": 29,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-29.png",
+        "size_bytes": 204156,
+        "sha256": "05aaf3b6d5696d0d4b073ee6bdbf5da0b9c937ade48f0e7a13696d96b7e95582"
+      },
+      {
+        "page": 30,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-30.png",
+        "size_bytes": 203725,
+        "sha256": "723e8c4890c11360e29671fcb90d74c7deccea553afc40521f3d01d77fcf6c75"
+      },
+      {
+        "page": 31,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-31.png",
+        "size_bytes": 217441,
+        "sha256": "0ad77ace7b5282314eceee61c67cbf28808f7a1b7dbd5b08e3339541af0bb3f5"
+      },
+      {
+        "page": 32,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-32.png",
+        "size_bytes": 257499,
+        "sha256": "93fde5ee5cc9bf8959b83e1c0a932c120ccf010edff143a87fa41d54e5c0fc08"
+      },
+      {
+        "page": 33,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-33.png",
+        "size_bytes": 301611,
+        "sha256": "83e341262a1b5bb5044920b76d0944f74c8e3df6b3d65be2fec847485656c27d"
+      },
+      {
+        "page": 34,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-34.png",
+        "size_bytes": 281469,
+        "sha256": "a59fb0420b82de1378af3750b2db385d1e0b384e29ac76de92c185d944947c1a"
+      },
+      {
+        "page": 35,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-35.png",
+        "size_bytes": 274173,
+        "sha256": "073cebc1441edb89e3b6cc10f19a5f5324c4e166e5057ae6483af99347a12e06"
+      },
+      {
+        "page": 36,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-36.png",
+        "size_bytes": 263886,
+        "sha256": "570f04add1a5c495951ef59a43aa5057897610b8bbc8ce58191c921cde2e2d2a"
+      },
+      {
+        "page": 37,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-37.png",
+        "size_bytes": 273366,
+        "sha256": "b88c4bde475598df09d42ccf7b6a63409b8b81286c32f93212376970547c4575"
+      },
+      {
+        "page": 38,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-38.png",
+        "size_bytes": 207521,
+        "sha256": "e1d20059d3a8e3f2704f00b0dbdb34d03c5e022d6eb712457a01235095cccea4"
+      },
+      {
+        "page": 39,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-39.png",
+        "size_bytes": 268065,
+        "sha256": "9c7c9214f582f55e98f77484a6f04c468f4e099f100806873b7640e5ed54106c"
+      },
+      {
+        "page": 40,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-40.png",
+        "size_bytes": 254933,
+        "sha256": "676cab3f37567c9ad6563e4b09e78f55336cad3e611737218fdc44460b56ce74"
+      },
+      {
+        "page": 41,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-41.png",
+        "size_bytes": 200360,
+        "sha256": "b171fa4fdca97cf4ea257fc854b3026ad3a208ecbbd55ac5cd9a5dfba5bdbea9"
+      },
+      {
+        "page": 42,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-42.png",
+        "size_bytes": 247015,
+        "sha256": "44bd787536ffd6b1b773a9ab7f1b3389d4919609059b1e9654be9b8eae17587d"
+      },
+      {
+        "page": 43,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-43.png",
+        "size_bytes": 294017,
+        "sha256": "7b54aaa4bcaf988fe328b90dc8d9a1f5b1527a554cfeca8856ba5ef5108aba9b"
+      },
+      {
+        "page": 44,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-44.png",
+        "size_bytes": 175765,
+        "sha256": "b450c9d48e746f176010e69610b71453917f5198825ed61ff19d33c68eb19459"
+      },
+      {
+        "page": 45,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-45.png",
+        "size_bytes": 160182,
+        "sha256": "aa8693bf25a0be2c840a610070b6d3aa5e1fab27cd22761709fb856714c6a0d5"
+      },
+      {
+        "page": 46,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-46.png",
+        "size_bytes": 224886,
+        "sha256": "80a79cc9437a4ab40196ab741e3f59119cde405016580e91873ab0df5245c90a"
+      },
+      {
+        "page": 47,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-47.png",
+        "size_bytes": 294782,
+        "sha256": "23603a4377bfada4abfe3f020c1714e55c9d1b4263095bd7bba4780916567a2e"
+      },
+      {
+        "page": 48,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-48.png",
+        "size_bytes": 292589,
+        "sha256": "d4659f7678f7201f93437929d50cee983953c4b4cf622537b389f9bf3fdd751a"
+      },
+      {
+        "page": 49,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-49.png",
+        "size_bytes": 179149,
+        "sha256": "01fe2967e30526ae1cd1a39c073767a953f363423da6776c1f33eb2a22c65ba8"
+      },
+      {
+        "page": 50,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-50.png",
+        "size_bytes": 135249,
+        "sha256": "54bd9230c8199246fc88d92d39ec3894021c0d480377e5b771439bbb63cd50d7"
+      },
+      {
+        "page": 51,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-51.png",
+        "size_bytes": 135303,
+        "sha256": "142efee6d7245407fb1bc5945811f63fd56152d196a4b29d47d785d0a17d68d3"
+      },
+      {
+        "page": 52,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-52.png",
+        "size_bytes": 228417,
+        "sha256": "1522d1efa1907725b7fbf6ce0b29c48d233ae666ea3d477e77fbc6659ef786a4"
+      },
+      {
+        "page": 53,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-53.png",
+        "size_bytes": 287273,
+        "sha256": "c486d09531e1cf8fcda707044332d1e90873827e7b52d9fd542011ba40a08ab3"
+      },
+      {
+        "page": 54,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-54.png",
+        "size_bytes": 216488,
+        "sha256": "6903b3c6152acd88f5122216fae874af7bb711265cda4ac056d354cb36d6656b"
+      },
+      {
+        "page": 55,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-55.png",
+        "size_bytes": 172378,
+        "sha256": "d73a5961f0a4a049d34b20417e3fa2bab56e641cc4357f2f9e94712a12d1380e"
+      },
+      {
+        "page": 56,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-56.png",
+        "size_bytes": 156824,
+        "sha256": "95287cc4048219523bafe692b69b2dc91c510b9945edd9d463697185b21b5d8d"
+      },
+      {
+        "page": 57,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-57.png",
+        "size_bytes": 97931,
+        "sha256": "0f0e2f2d34d3b5c9a0a77e442b48c4f4d70394192fb36904656dd1cd2d4e422c"
+      },
+      {
+        "page": 58,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-58.png",
+        "size_bytes": 116583,
+        "sha256": "4447e922338af231a215b721f9355b6688853fcc73f415bc80e42a369a4bbbef"
+      },
+      {
+        "page": 59,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-59.png",
+        "size_bytes": 117700,
+        "sha256": "a5225ee37c2e04c22861a7ea81d8f94fa0d8eef1f497ebdd0e02c060d741afa7"
+      },
+      {
+        "page": 60,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-60.png",
+        "size_bytes": 124156,
+        "sha256": "10168b5bda008dd464683f72eaaa7ed8ce86ce8ebbd0f22e18a32dbdad2abcbe"
+      },
+      {
+        "page": 61,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-61.png",
+        "size_bytes": 279993,
+        "sha256": "a399e1edd2283bf769ceb2b93b75b3fb4b04b83b19c1401069aef1e05dfe4f2e"
+      },
+      {
+        "page": 62,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-62.png",
+        "size_bytes": 276892,
+        "sha256": "e45ea1f7332510d3d8dbc382906d40fe426e4b2966ad281133b7c3bdc7d65266"
+      },
+      {
+        "page": 63,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-63.png",
+        "size_bytes": 176912,
+        "sha256": "2ae38a710726a203651a79558b38c4112e7a714a41ad1b1eb155f58cf224d0dd"
+      },
+      {
+        "page": 64,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-64.png",
+        "size_bytes": 234675,
+        "sha256": "1285cbc76ad591e4924754e90a63a5d80675802105aeaa1f9af132dbd99c9705"
+      },
+      {
+        "page": 65,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-65.png",
+        "size_bytes": 257451,
+        "sha256": "c594a5e96c1776a3a584ca44d44c72a27ca42197f87b111c495f86fce5399581"
+      },
+      {
+        "page": 66,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-66.png",
+        "size_bytes": 285208,
+        "sha256": "4f78b04c7572f9b2f8295bdd264336a4053db5090366f3273c3f998f907054d5"
+      },
+      {
+        "page": 67,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-67.png",
+        "size_bytes": 264840,
+        "sha256": "2b11edc395a04df197ee8b4b0d88795b61531427661c74c8d9ffd76f647c11a4"
+      },
+      {
+        "page": 68,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-68.png",
+        "size_bytes": 175685,
+        "sha256": "70d3a430e0c5f6ca78b88de7cdfb932af216fa5f4f2ee9ccfcc38f211f87ce1a"
+      },
+      {
+        "page": 69,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-69.png",
+        "size_bytes": 257993,
+        "sha256": "412cafe458ce9f8ef9965c8f8608f94e8ca843f36a666281196e3b472d93aa73"
+      },
+      {
+        "page": 70,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-70.png",
+        "size_bytes": 259721,
+        "sha256": "777351952e6d75306c10c3fd4539dc9d27107313ebaf608e3f4e3114ff4fd9ec"
+      },
+      {
+        "page": 71,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-71.png",
+        "size_bytes": 206035,
+        "sha256": "02d270883f4e925d582580c71acb5b0cc72e968aaf7e8755ddd9b9846c4dc222"
+      },
+      {
+        "page": 72,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-72.png",
+        "size_bytes": 78042,
+        "sha256": "6ec0c137858138a2a8fa018dd25e8a6f17e510aebd312de8c106582e543f6f7d"
+      },
+      {
+        "page": 73,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-73.png",
+        "size_bytes": 172774,
+        "sha256": "62006d23e4b5fc13b06d2969a33f13c6f787672ae5883ead063c6b46caa689d3"
+      },
+      {
+        "page": 74,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-74.png",
+        "size_bytes": 240690,
+        "sha256": "9001b20e3c3a0dd48ce442f0d0575636cef312889623601b973de206fd92c0e7"
+      },
+      {
+        "page": 75,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-75.png",
+        "size_bytes": 172792,
+        "sha256": "60de7294957026afc860d4dfb023560854ae5387e4814da6c2181a1aa1a88675"
+      },
+      {
+        "page": 76,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-76.png",
+        "size_bytes": 135573,
+        "sha256": "b30aa4cf8468abf6ce7f8e3fd8083a44c608caacee3f2c4ec2eeac5ce5873435"
+      },
+      {
+        "page": 77,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-77.png",
+        "size_bytes": 247729,
+        "sha256": "9cf15703c589aa4b0fa7c2c5a560604f0bfa2b9a57f6e203fe245ac09d624635"
+      },
+      {
+        "page": 78,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-78.png",
+        "size_bytes": 177387,
+        "sha256": "efecfcd55a720bf9a0490cadceaf126ed33dc1b0f5a2117fca0a24b618974298"
+      },
+      {
+        "page": 79,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-79.png",
+        "size_bytes": 181607,
+        "sha256": "e25d96aa56e7be532179b79916ef09aa4eb35a2e221141c83297fafd6e71f1d7"
+      },
+      {
+        "page": 80,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-80.png",
+        "size_bytes": 211702,
+        "sha256": "5f365726aafe913cf97071b563ebc75a7fd1bc5d3d25abf31a0ece02758bbeae"
+      },
+      {
+        "page": 81,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-81.png",
+        "size_bytes": 314305,
+        "sha256": "2db87416e1e581c9e82ee18faefbd6ac20d797adcfcc36ed7237231b2d90c136"
+      },
+      {
+        "page": 82,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-82.png",
+        "size_bytes": 264508,
+        "sha256": "521dbc039feb5f201d253a5c3bcc4e14903666823133cc4c890fecfe1dc41e13"
+      },
+      {
+        "page": 83,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-83.png",
+        "size_bytes": 117899,
+        "sha256": "c38efefef0c05d1b56986820d89eb0c65ad832e5d730e69cad994c38043c5b6f"
+      }
+    ]
+  },
+  "visual_review_reuse": {
+    "version": 1,
+    "token": "wa-visual-reuse-v1:4afe8300ca48ad20bccbd2a2618e172114de8ea05fb80e4f1b314dd1152fbc0b"
+  },
+  "visual_review_challenge": {
+    "document_sha256": "fbc01dc0aecdfd50dcc7a92677c304ef8e3bcce7a08d29c2575f6e27252a7b54",
+    "pages": [
+      {
+        "page": 1,
+        "size_bytes": 96028,
+        "sha256": "df034a1d165ac5f7c9dec635a2f6213306407435bbbe9448983cbc06d1cb3db6"
+      },
+      {
+        "page": 2,
+        "size_bytes": 99616,
+        "sha256": "9f0785811069d1f42fcedf10f22ce80ec4f7d4d89dfc9ae89abe7a67ce88e8be"
+      },
+      {
+        "page": 3,
+        "size_bytes": 41592,
+        "sha256": "6f0ac05e31e0464390a775a151c824f067180d3d369728a79376d06b8149e565"
+      },
+      {
+        "page": 4,
+        "size_bytes": 47985,
+        "sha256": "984efaa809be31eaa2a792615413eae5a696fb210e760a570576170faf4a81f4"
+      },
+      {
+        "page": 5,
+        "size_bytes": 92850,
+        "sha256": "c437a90f0b533f54acb2419ed09851ec60294c335c3f988ef6d10b671ccb40a0"
+      },
+      {
+        "page": 6,
+        "size_bytes": 89541,
+        "sha256": "cd38b99c48bfd318444ef946137dff3978ab8ded95f01841ff2803e41c0718c0"
+      },
+      {
+        "page": 7,
+        "size_bytes": 165030,
+        "sha256": "ea7277af13919dec4872bb50acb9f264faac97a1aa993888aa6b7744fa130f5b"
+      },
+      {
+        "page": 8,
+        "size_bytes": 241107,
+        "sha256": "9586c06837547b27c9cad84573696003921f825211bc15e28c21b7f3d1b99dfb"
+      },
+      {
+        "page": 9,
+        "size_bytes": 155798,
+        "sha256": "564fec1632b0403d28c6321854e47e7a6d268ee8b1c674e8f230854d7e6d4f0a"
+      },
+      {
+        "page": 10,
+        "size_bytes": 184558,
+        "sha256": "fc4ac3d5055a2cd6d71b2777604e1d9e81467f55a367f5de3b1f417d2e07466b"
+      },
+      {
+        "page": 11,
+        "size_bytes": 189582,
+        "sha256": "576d71a1ace5eeb321085892cd8b22c1dabf33678aca673ddc63e03d3636e776"
+      },
+      {
+        "page": 12,
+        "size_bytes": 198924,
+        "sha256": "d05aa312427e0fe50d7dee4c80fbd8cd4a1c424cda72262f91c75d9c554ab9f3"
+      },
+      {
+        "page": 13,
+        "size_bytes": 165312,
+        "sha256": "52aaf1c8215a08e6e2f95f164776e1bbdde3b7b551d0ebfc379bcfbac0759d7d"
+      },
+      {
+        "page": 14,
+        "size_bytes": 138979,
+        "sha256": "5e88368a82afbc38164851b568ef17edd86404f10190fc72916865ef4107c5e7"
+      },
+      {
+        "page": 15,
+        "size_bytes": 139325,
+        "sha256": "ecc320e3b9d3b34246bb2b48caf49b7d088ad1669a47aaf243ffd1f9a3c85db5"
+      },
+      {
+        "page": 16,
+        "size_bytes": 286257,
+        "sha256": "12a4d57001c75e4da6e5f47553b5dfefc4358596e682e08772254210a11911c1"
+      },
+      {
+        "page": 17,
+        "size_bytes": 202852,
+        "sha256": "8fdc2df8e9098fb718e8418d4c5a65489fd14b4f1c2091bea20ed2c8673a57df"
+      },
+      {
+        "page": 18,
+        "size_bytes": 261209,
+        "sha256": "6fdb48aa08a945b75f89a25a37d3c6b46ba6923667de0f03349900f88915cb94"
+      },
+      {
+        "page": 19,
+        "size_bytes": 293737,
+        "sha256": "464de9b65da0eba8e0d06b8c5c3443e9eb60453b8d4b2d1ec5399ff8fb3fec5c"
+      },
+      {
+        "page": 20,
+        "size_bytes": 282507,
+        "sha256": "2a255fe7b45d8de655835214321c77bcf8d67ba0ce18d8ed34f8efbf33188bc5"
+      },
+      {
+        "page": 21,
+        "size_bytes": 269436,
+        "sha256": "d23aa62102c83512e1e51c0ff038c84db8a888342bd0a9681b8a345cd004e867"
+      },
+      {
+        "page": 22,
+        "size_bytes": 285944,
+        "sha256": "357fa0518595f435c07f729d81b0d8a94cd3bea6a874949147c95e1233e98241"
+      },
+      {
+        "page": 23,
+        "size_bytes": 294134,
+        "sha256": "1df38e1f3b06c3b53c017a81a7b1f957fdea62e3e433152cf10e04f6f63b0665"
+      },
+      {
+        "page": 24,
+        "size_bytes": 213607,
+        "sha256": "fe55e0e370393a7387eb68d6df2a8deacb0cd884e5d662ae14ee493c9a8428f4"
+      },
+      {
+        "page": 25,
+        "size_bytes": 189732,
+        "sha256": "4148e53f72d9e550d672101a313f14542e4853af036585ce18e408279ea1a9b5"
+      },
+      {
+        "page": 26,
+        "size_bytes": 168600,
+        "sha256": "ecb9490f3b2217e6fdb82462a14ac518f72c72f7c70f16d67ec2dc33cf4f90dd"
+      },
+      {
+        "page": 27,
+        "size_bytes": 287802,
+        "sha256": "a70fe2634a7f5bc4aa850559664eba91568f69f98ebb1d83cefa80f3063bc7ab"
+      },
+      {
+        "page": 28,
+        "size_bytes": 152371,
+        "sha256": "9606164c9103aac6e3d3f60dbbbfaa3bfbca2fc478c6bd6165d47fc25e4f59f6"
+      },
+      {
+        "page": 29,
+        "size_bytes": 204156,
+        "sha256": "05aaf3b6d5696d0d4b073ee6bdbf5da0b9c937ade48f0e7a13696d96b7e95582"
+      },
+      {
+        "page": 30,
+        "size_bytes": 203725,
+        "sha256": "723e8c4890c11360e29671fcb90d74c7deccea553afc40521f3d01d77fcf6c75"
+      },
+      {
+        "page": 31,
+        "size_bytes": 217441,
+        "sha256": "0ad77ace7b5282314eceee61c67cbf28808f7a1b7dbd5b08e3339541af0bb3f5"
+      },
+      {
+        "page": 32,
+        "size_bytes": 257499,
+        "sha256": "93fde5ee5cc9bf8959b83e1c0a932c120ccf010edff143a87fa41d54e5c0fc08"
+      },
+      {
+        "page": 33,
+        "size_bytes": 301611,
+        "sha256": "83e341262a1b5bb5044920b76d0944f74c8e3df6b3d65be2fec847485656c27d"
+      },
+      {
+        "page": 34,
+        "size_bytes": 281469,
+        "sha256": "a59fb0420b82de1378af3750b2db385d1e0b384e29ac76de92c185d944947c1a"
+      },
+      {
+        "page": 35,
+        "size_bytes": 274173,
+        "sha256": "073cebc1441edb89e3b6cc10f19a5f5324c4e166e5057ae6483af99347a12e06"
+      },
+      {
+        "page": 36,
+        "size_bytes": 263886,
+        "sha256": "570f04add1a5c495951ef59a43aa5057897610b8bbc8ce58191c921cde2e2d2a"
+      },
+      {
+        "page": 37,
+        "size_bytes": 273366,
+        "sha256": "b88c4bde475598df09d42ccf7b6a63409b8b81286c32f93212376970547c4575"
+      },
+      {
+        "page": 38,
+        "size_bytes": 207521,
+        "sha256": "e1d20059d3a8e3f2704f00b0dbdb34d03c5e022d6eb712457a01235095cccea4"
+      },
+      {
+        "page": 39,
+        "size_bytes": 268065,
+        "sha256": "9c7c9214f582f55e98f77484a6f04c468f4e099f100806873b7640e5ed54106c"
+      },
+      {
+        "page": 40,
+        "size_bytes": 254933,
+        "sha256": "676cab3f37567c9ad6563e4b09e78f55336cad3e611737218fdc44460b56ce74"
+      },
+      {
+        "page": 41,
+        "size_bytes": 200360,
+        "sha256": "b171fa4fdca97cf4ea257fc854b3026ad3a208ecbbd55ac5cd9a5dfba5bdbea9"
+      },
+      {
+        "page": 42,
+        "size_bytes": 247015,
+        "sha256": "44bd787536ffd6b1b773a9ab7f1b3389d4919609059b1e9654be9b8eae17587d"
+      },
+      {
+        "page": 43,
+        "size_bytes": 294017,
+        "sha256": "7b54aaa4bcaf988fe328b90dc8d9a1f5b1527a554cfeca8856ba5ef5108aba9b"
+      },
+      {
+        "page": 44,
+        "size_bytes": 175765,
+        "sha256": "b450c9d48e746f176010e69610b71453917f5198825ed61ff19d33c68eb19459"
+      },
+      {
+        "page": 45,
+        "size_bytes": 160182,
+        "sha256": "aa8693bf25a0be2c840a610070b6d3aa5e1fab27cd22761709fb856714c6a0d5"
+      },
+      {
+        "page": 46,
+        "size_bytes": 224886,
+        "sha256": "80a79cc9437a4ab40196ab741e3f59119cde405016580e91873ab0df5245c90a"
+      },
+      {
+        "page": 47,
+        "size_bytes": 294782,
+        "sha256": "23603a4377bfada4abfe3f020c1714e55c9d1b4263095bd7bba4780916567a2e"
+      },
+      {
+        "page": 48,
+        "size_bytes": 292589,
+        "sha256": "d4659f7678f7201f93437929d50cee983953c4b4cf622537b389f9bf3fdd751a"
+      },
+      {
+        "page": 49,
+        "size_bytes": 179149,
+        "sha256": "01fe2967e30526ae1cd1a39c073767a953f363423da6776c1f33eb2a22c65ba8"
+      },
+      {
+        "page": 50,
+        "size_bytes": 135249,
+        "sha256": "54bd9230c8199246fc88d92d39ec3894021c0d480377e5b771439bbb63cd50d7"
+      },
+      {
+        "page": 51,
+        "size_bytes": 135303,
+        "sha256": "142efee6d7245407fb1bc5945811f63fd56152d196a4b29d47d785d0a17d68d3"
+      },
+      {
+        "page": 52,
+        "size_bytes": 228417,
+        "sha256": "1522d1efa1907725b7fbf6ce0b29c48d233ae666ea3d477e77fbc6659ef786a4"
+      },
+      {
+        "page": 53,
+        "size_bytes": 287273,
+        "sha256": "c486d09531e1cf8fcda707044332d1e90873827e7b52d9fd542011ba40a08ab3"
+      },
+      {
+        "page": 54,
+        "size_bytes": 216488,
+        "sha256": "6903b3c6152acd88f5122216fae874af7bb711265cda4ac056d354cb36d6656b"
+      },
+      {
+        "page": 55,
+        "size_bytes": 172378,
+        "sha256": "d73a5961f0a4a049d34b20417e3fa2bab56e641cc4357f2f9e94712a12d1380e"
+      },
+      {
+        "page": 56,
+        "size_bytes": 156824,
+        "sha256": "95287cc4048219523bafe692b69b2dc91c510b9945edd9d463697185b21b5d8d"
+      },
+      {
+        "page": 57,
+        "size_bytes": 97931,
+        "sha256": "0f0e2f2d34d3b5c9a0a77e442b48c4f4d70394192fb36904656dd1cd2d4e422c"
+      },
+      {
+        "page": 58,
+        "size_bytes": 116583,
+        "sha256": "4447e922338af231a215b721f9355b6688853fcc73f415bc80e42a369a4bbbef"
+      },
+      {
+        "page": 59,
+        "size_bytes": 117700,
+        "sha256": "a5225ee37c2e04c22861a7ea81d8f94fa0d8eef1f497ebdd0e02c060d741afa7"
+      },
+      {
+        "page": 60,
+        "size_bytes": 124156,
+        "sha256": "10168b5bda008dd464683f72eaaa7ed8ce86ce8ebbd0f22e18a32dbdad2abcbe"
+      },
+      {
+        "page": 61,
+        "size_bytes": 279993,
+        "sha256": "a399e1edd2283bf769ceb2b93b75b3fb4b04b83b19c1401069aef1e05dfe4f2e"
+      },
+      {
+        "page": 62,
+        "size_bytes": 276892,
+        "sha256": "e45ea1f7332510d3d8dbc382906d40fe426e4b2966ad281133b7c3bdc7d65266"
+      },
+      {
+        "page": 63,
+        "size_bytes": 176912,
+        "sha256": "2ae38a710726a203651a79558b38c4112e7a714a41ad1b1eb155f58cf224d0dd"
+      },
+      {
+        "page": 64,
+        "size_bytes": 234675,
+        "sha256": "1285cbc76ad591e4924754e90a63a5d80675802105aeaa1f9af132dbd99c9705"
+      },
+      {
+        "page": 65,
+        "size_bytes": 257451,
+        "sha256": "c594a5e96c1776a3a584ca44d44c72a27ca42197f87b111c495f86fce5399581"
+      },
+      {
+        "page": 66,
+        "size_bytes": 285208,
+        "sha256": "4f78b04c7572f9b2f8295bdd264336a4053db5090366f3273c3f998f907054d5"
+      },
+      {
+        "page": 67,
+        "size_bytes": 264840,
+        "sha256": "2b11edc395a04df197ee8b4b0d88795b61531427661c74c8d9ffd76f647c11a4"
+      },
+      {
+        "page": 68,
+        "size_bytes": 175685,
+        "sha256": "70d3a430e0c5f6ca78b88de7cdfb932af216fa5f4f2ee9ccfcc38f211f87ce1a"
+      },
+      {
+        "page": 69,
+        "size_bytes": 257993,
+        "sha256": "412cafe458ce9f8ef9965c8f8608f94e8ca843f36a666281196e3b472d93aa73"
+      },
+      {
+        "page": 70,
+        "size_bytes": 259721,
+        "sha256": "777351952e6d75306c10c3fd4539dc9d27107313ebaf608e3f4e3114ff4fd9ec"
+      },
+      {
+        "page": 71,
+        "size_bytes": 206035,
+        "sha256": "02d270883f4e925d582580c71acb5b0cc72e968aaf7e8755ddd9b9846c4dc222"
+      },
+      {
+        "page": 72,
+        "size_bytes": 78042,
+        "sha256": "6ec0c137858138a2a8fa018dd25e8a6f17e510aebd312de8c106582e543f6f7d"
+      },
+      {
+        "page": 73,
+        "size_bytes": 172774,
+        "sha256": "62006d23e4b5fc13b06d2969a33f13c6f787672ae5883ead063c6b46caa689d3"
+      },
+      {
+        "page": 74,
+        "size_bytes": 240690,
+        "sha256": "9001b20e3c3a0dd48ce442f0d0575636cef312889623601b973de206fd92c0e7"
+      },
+      {
+        "page": 75,
+        "size_bytes": 172792,
+        "sha256": "60de7294957026afc860d4dfb023560854ae5387e4814da6c2181a1aa1a88675"
+      },
+      {
+        "page": 76,
+        "size_bytes": 135573,
+        "sha256": "b30aa4cf8468abf6ce7f8e3fd8083a44c608caacee3f2c4ec2eeac5ce5873435"
+      },
+      {
+        "page": 77,
+        "size_bytes": 247729,
+        "sha256": "9cf15703c589aa4b0fa7c2c5a560604f0bfa2b9a57f6e203fe245ac09d624635"
+      },
+      {
+        "page": 78,
+        "size_bytes": 177387,
+        "sha256": "efecfcd55a720bf9a0490cadceaf126ed33dc1b0f5a2117fca0a24b618974298"
+      },
+      {
+        "page": 79,
+        "size_bytes": 181607,
+        "sha256": "e25d96aa56e7be532179b79916ef09aa4eb35a2e221141c83297fafd6e71f1d7"
+      },
+      {
+        "page": 80,
+        "size_bytes": 211702,
+        "sha256": "5f365726aafe913cf97071b563ebc75a7fd1bc5d3d25abf31a0ece02758bbeae"
+      },
+      {
+        "page": 81,
+        "size_bytes": 314305,
+        "sha256": "2db87416e1e581c9e82ee18faefbd6ac20d797adcfcc36ed7237231b2d90c136"
+      },
+      {
+        "page": 82,
+        "size_bytes": 264508,
+        "sha256": "521dbc039feb5f201d253a5c3bcc4e14903666823133cc4c890fecfe1dc41e13"
+      },
+      {
+        "page": 83,
+        "size_bytes": 117899,
+        "sha256": "c38efefef0c05d1b56986820d89eb0c65ad832e5d730e69cad994c38043c5b6f"
+      }
+    ],
+    "pdf_sha256": "84e6dc902387afc9e823bb5e41e6d5ef1a86e693d3a1b194ce3b6b893e89e19f",
+    "pdf_path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023.pdf",
+    "page_count": 83,
+    "page_images": [
+      {
+        "page": 1,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-01.png",
+        "size_bytes": 96028,
+        "sha256": "df034a1d165ac5f7c9dec635a2f6213306407435bbbe9448983cbc06d1cb3db6"
+      },
+      {
+        "page": 2,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-02.png",
+        "size_bytes": 99616,
+        "sha256": "9f0785811069d1f42fcedf10f22ce80ec4f7d4d89dfc9ae89abe7a67ce88e8be"
+      },
+      {
+        "page": 3,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-03.png",
+        "size_bytes": 41592,
+        "sha256": "6f0ac05e31e0464390a775a151c824f067180d3d369728a79376d06b8149e565"
+      },
+      {
+        "page": 4,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-04.png",
+        "size_bytes": 47985,
+        "sha256": "984efaa809be31eaa2a792615413eae5a696fb210e760a570576170faf4a81f4"
+      },
+      {
+        "page": 5,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-05.png",
+        "size_bytes": 92850,
+        "sha256": "c437a90f0b533f54acb2419ed09851ec60294c335c3f988ef6d10b671ccb40a0"
+      },
+      {
+        "page": 6,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-06.png",
+        "size_bytes": 89541,
+        "sha256": "cd38b99c48bfd318444ef946137dff3978ab8ded95f01841ff2803e41c0718c0"
+      },
+      {
+        "page": 7,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-07.png",
+        "size_bytes": 165030,
+        "sha256": "ea7277af13919dec4872bb50acb9f264faac97a1aa993888aa6b7744fa130f5b"
+      },
+      {
+        "page": 8,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-08.png",
+        "size_bytes": 241107,
+        "sha256": "9586c06837547b27c9cad84573696003921f825211bc15e28c21b7f3d1b99dfb"
+      },
+      {
+        "page": 9,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-09.png",
+        "size_bytes": 155798,
+        "sha256": "564fec1632b0403d28c6321854e47e7a6d268ee8b1c674e8f230854d7e6d4f0a"
+      },
+      {
+        "page": 10,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-10.png",
+        "size_bytes": 184558,
+        "sha256": "fc4ac3d5055a2cd6d71b2777604e1d9e81467f55a367f5de3b1f417d2e07466b"
+      },
+      {
+        "page": 11,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-11.png",
+        "size_bytes": 189582,
+        "sha256": "576d71a1ace5eeb321085892cd8b22c1dabf33678aca673ddc63e03d3636e776"
+      },
+      {
+        "page": 12,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-12.png",
+        "size_bytes": 198924,
+        "sha256": "d05aa312427e0fe50d7dee4c80fbd8cd4a1c424cda72262f91c75d9c554ab9f3"
+      },
+      {
+        "page": 13,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-13.png",
+        "size_bytes": 165312,
+        "sha256": "52aaf1c8215a08e6e2f95f164776e1bbdde3b7b551d0ebfc379bcfbac0759d7d"
+      },
+      {
+        "page": 14,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-14.png",
+        "size_bytes": 138979,
+        "sha256": "5e88368a82afbc38164851b568ef17edd86404f10190fc72916865ef4107c5e7"
+      },
+      {
+        "page": 15,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-15.png",
+        "size_bytes": 139325,
+        "sha256": "ecc320e3b9d3b34246bb2b48caf49b7d088ad1669a47aaf243ffd1f9a3c85db5"
+      },
+      {
+        "page": 16,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-16.png",
+        "size_bytes": 286257,
+        "sha256": "12a4d57001c75e4da6e5f47553b5dfefc4358596e682e08772254210a11911c1"
+      },
+      {
+        "page": 17,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-17.png",
+        "size_bytes": 202852,
+        "sha256": "8fdc2df8e9098fb718e8418d4c5a65489fd14b4f1c2091bea20ed2c8673a57df"
+      },
+      {
+        "page": 18,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-18.png",
+        "size_bytes": 261209,
+        "sha256": "6fdb48aa08a945b75f89a25a37d3c6b46ba6923667de0f03349900f88915cb94"
+      },
+      {
+        "page": 19,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-19.png",
+        "size_bytes": 293737,
+        "sha256": "464de9b65da0eba8e0d06b8c5c3443e9eb60453b8d4b2d1ec5399ff8fb3fec5c"
+      },
+      {
+        "page": 20,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-20.png",
+        "size_bytes": 282507,
+        "sha256": "2a255fe7b45d8de655835214321c77bcf8d67ba0ce18d8ed34f8efbf33188bc5"
+      },
+      {
+        "page": 21,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-21.png",
+        "size_bytes": 269436,
+        "sha256": "d23aa62102c83512e1e51c0ff038c84db8a888342bd0a9681b8a345cd004e867"
+      },
+      {
+        "page": 22,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-22.png",
+        "size_bytes": 285944,
+        "sha256": "357fa0518595f435c07f729d81b0d8a94cd3bea6a874949147c95e1233e98241"
+      },
+      {
+        "page": 23,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-23.png",
+        "size_bytes": 294134,
+        "sha256": "1df38e1f3b06c3b53c017a81a7b1f957fdea62e3e433152cf10e04f6f63b0665"
+      },
+      {
+        "page": 24,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-24.png",
+        "size_bytes": 213607,
+        "sha256": "fe55e0e370393a7387eb68d6df2a8deacb0cd884e5d662ae14ee493c9a8428f4"
+      },
+      {
+        "page": 25,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-25.png",
+        "size_bytes": 189732,
+        "sha256": "4148e53f72d9e550d672101a313f14542e4853af036585ce18e408279ea1a9b5"
+      },
+      {
+        "page": 26,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-26.png",
+        "size_bytes": 168600,
+        "sha256": "ecb9490f3b2217e6fdb82462a14ac518f72c72f7c70f16d67ec2dc33cf4f90dd"
+      },
+      {
+        "page": 27,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-27.png",
+        "size_bytes": 287802,
+        "sha256": "a70fe2634a7f5bc4aa850559664eba91568f69f98ebb1d83cefa80f3063bc7ab"
+      },
+      {
+        "page": 28,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-28.png",
+        "size_bytes": 152371,
+        "sha256": "9606164c9103aac6e3d3f60dbbbfaa3bfbca2fc478c6bd6165d47fc25e4f59f6"
+      },
+      {
+        "page": 29,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-29.png",
+        "size_bytes": 204156,
+        "sha256": "05aaf3b6d5696d0d4b073ee6bdbf5da0b9c937ade48f0e7a13696d96b7e95582"
+      },
+      {
+        "page": 30,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-30.png",
+        "size_bytes": 203725,
+        "sha256": "723e8c4890c11360e29671fcb90d74c7deccea553afc40521f3d01d77fcf6c75"
+      },
+      {
+        "page": 31,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-31.png",
+        "size_bytes": 217441,
+        "sha256": "0ad77ace7b5282314eceee61c67cbf28808f7a1b7dbd5b08e3339541af0bb3f5"
+      },
+      {
+        "page": 32,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-32.png",
+        "size_bytes": 257499,
+        "sha256": "93fde5ee5cc9bf8959b83e1c0a932c120ccf010edff143a87fa41d54e5c0fc08"
+      },
+      {
+        "page": 33,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-33.png",
+        "size_bytes": 301611,
+        "sha256": "83e341262a1b5bb5044920b76d0944f74c8e3df6b3d65be2fec847485656c27d"
+      },
+      {
+        "page": 34,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-34.png",
+        "size_bytes": 281469,
+        "sha256": "a59fb0420b82de1378af3750b2db385d1e0b384e29ac76de92c185d944947c1a"
+      },
+      {
+        "page": 35,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-35.png",
+        "size_bytes": 274173,
+        "sha256": "073cebc1441edb89e3b6cc10f19a5f5324c4e166e5057ae6483af99347a12e06"
+      },
+      {
+        "page": 36,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-36.png",
+        "size_bytes": 263886,
+        "sha256": "570f04add1a5c495951ef59a43aa5057897610b8bbc8ce58191c921cde2e2d2a"
+      },
+      {
+        "page": 37,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-37.png",
+        "size_bytes": 273366,
+        "sha256": "b88c4bde475598df09d42ccf7b6a63409b8b81286c32f93212376970547c4575"
+      },
+      {
+        "page": 38,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-38.png",
+        "size_bytes": 207521,
+        "sha256": "e1d20059d3a8e3f2704f00b0dbdb34d03c5e022d6eb712457a01235095cccea4"
+      },
+      {
+        "page": 39,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-39.png",
+        "size_bytes": 268065,
+        "sha256": "9c7c9214f582f55e98f77484a6f04c468f4e099f100806873b7640e5ed54106c"
+      },
+      {
+        "page": 40,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-40.png",
+        "size_bytes": 254933,
+        "sha256": "676cab3f37567c9ad6563e4b09e78f55336cad3e611737218fdc44460b56ce74"
+      },
+      {
+        "page": 41,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-41.png",
+        "size_bytes": 200360,
+        "sha256": "b171fa4fdca97cf4ea257fc854b3026ad3a208ecbbd55ac5cd9a5dfba5bdbea9"
+      },
+      {
+        "page": 42,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-42.png",
+        "size_bytes": 247015,
+        "sha256": "44bd787536ffd6b1b773a9ab7f1b3389d4919609059b1e9654be9b8eae17587d"
+      },
+      {
+        "page": 43,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-43.png",
+        "size_bytes": 294017,
+        "sha256": "7b54aaa4bcaf988fe328b90dc8d9a1f5b1527a554cfeca8856ba5ef5108aba9b"
+      },
+      {
+        "page": 44,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-44.png",
+        "size_bytes": 175765,
+        "sha256": "b450c9d48e746f176010e69610b71453917f5198825ed61ff19d33c68eb19459"
+      },
+      {
+        "page": 45,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-45.png",
+        "size_bytes": 160182,
+        "sha256": "aa8693bf25a0be2c840a610070b6d3aa5e1fab27cd22761709fb856714c6a0d5"
+      },
+      {
+        "page": 46,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-46.png",
+        "size_bytes": 224886,
+        "sha256": "80a79cc9437a4ab40196ab741e3f59119cde405016580e91873ab0df5245c90a"
+      },
+      {
+        "page": 47,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-47.png",
+        "size_bytes": 294782,
+        "sha256": "23603a4377bfada4abfe3f020c1714e55c9d1b4263095bd7bba4780916567a2e"
+      },
+      {
+        "page": 48,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-48.png",
+        "size_bytes": 292589,
+        "sha256": "d4659f7678f7201f93437929d50cee983953c4b4cf622537b389f9bf3fdd751a"
+      },
+      {
+        "page": 49,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-49.png",
+        "size_bytes": 179149,
+        "sha256": "01fe2967e30526ae1cd1a39c073767a953f363423da6776c1f33eb2a22c65ba8"
+      },
+      {
+        "page": 50,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-50.png",
+        "size_bytes": 135249,
+        "sha256": "54bd9230c8199246fc88d92d39ec3894021c0d480377e5b771439bbb63cd50d7"
+      },
+      {
+        "page": 51,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-51.png",
+        "size_bytes": 135303,
+        "sha256": "142efee6d7245407fb1bc5945811f63fd56152d196a4b29d47d785d0a17d68d3"
+      },
+      {
+        "page": 52,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-52.png",
+        "size_bytes": 228417,
+        "sha256": "1522d1efa1907725b7fbf6ce0b29c48d233ae666ea3d477e77fbc6659ef786a4"
+      },
+      {
+        "page": 53,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-53.png",
+        "size_bytes": 287273,
+        "sha256": "c486d09531e1cf8fcda707044332d1e90873827e7b52d9fd542011ba40a08ab3"
+      },
+      {
+        "page": 54,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-54.png",
+        "size_bytes": 216488,
+        "sha256": "6903b3c6152acd88f5122216fae874af7bb711265cda4ac056d354cb36d6656b"
+      },
+      {
+        "page": 55,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-55.png",
+        "size_bytes": 172378,
+        "sha256": "d73a5961f0a4a049d34b20417e3fa2bab56e641cc4357f2f9e94712a12d1380e"
+      },
+      {
+        "page": 56,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-56.png",
+        "size_bytes": 156824,
+        "sha256": "95287cc4048219523bafe692b69b2dc91c510b9945edd9d463697185b21b5d8d"
+      },
+      {
+        "page": 57,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-57.png",
+        "size_bytes": 97931,
+        "sha256": "0f0e2f2d34d3b5c9a0a77e442b48c4f4d70394192fb36904656dd1cd2d4e422c"
+      },
+      {
+        "page": 58,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-58.png",
+        "size_bytes": 116583,
+        "sha256": "4447e922338af231a215b721f9355b6688853fcc73f415bc80e42a369a4bbbef"
+      },
+      {
+        "page": 59,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-59.png",
+        "size_bytes": 117700,
+        "sha256": "a5225ee37c2e04c22861a7ea81d8f94fa0d8eef1f497ebdd0e02c060d741afa7"
+      },
+      {
+        "page": 60,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-60.png",
+        "size_bytes": 124156,
+        "sha256": "10168b5bda008dd464683f72eaaa7ed8ce86ce8ebbd0f22e18a32dbdad2abcbe"
+      },
+      {
+        "page": 61,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-61.png",
+        "size_bytes": 279993,
+        "sha256": "a399e1edd2283bf769ceb2b93b75b3fb4b04b83b19c1401069aef1e05dfe4f2e"
+      },
+      {
+        "page": 62,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-62.png",
+        "size_bytes": 276892,
+        "sha256": "e45ea1f7332510d3d8dbc382906d40fe426e4b2966ad281133b7c3bdc7d65266"
+      },
+      {
+        "page": 63,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-63.png",
+        "size_bytes": 176912,
+        "sha256": "2ae38a710726a203651a79558b38c4112e7a714a41ad1b1eb155f58cf224d0dd"
+      },
+      {
+        "page": 64,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-64.png",
+        "size_bytes": 234675,
+        "sha256": "1285cbc76ad591e4924754e90a63a5d80675802105aeaa1f9af132dbd99c9705"
+      },
+      {
+        "page": 65,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-65.png",
+        "size_bytes": 257451,
+        "sha256": "c594a5e96c1776a3a584ca44d44c72a27ca42197f87b111c495f86fce5399581"
+      },
+      {
+        "page": 66,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-66.png",
+        "size_bytes": 285208,
+        "sha256": "4f78b04c7572f9b2f8295bdd264336a4053db5090366f3273c3f998f907054d5"
+      },
+      {
+        "page": 67,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-67.png",
+        "size_bytes": 264840,
+        "sha256": "2b11edc395a04df197ee8b4b0d88795b61531427661c74c8d9ffd76f647c11a4"
+      },
+      {
+        "page": 68,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-68.png",
+        "size_bytes": 175685,
+        "sha256": "70d3a430e0c5f6ca78b88de7cdfb932af216fa5f4f2ee9ccfcc38f211f87ce1a"
+      },
+      {
+        "page": 69,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-69.png",
+        "size_bytes": 257993,
+        "sha256": "412cafe458ce9f8ef9965c8f8608f94e8ca843f36a666281196e3b472d93aa73"
+      },
+      {
+        "page": 70,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-70.png",
+        "size_bytes": 259721,
+        "sha256": "777351952e6d75306c10c3fd4539dc9d27107313ebaf608e3f4e3114ff4fd9ec"
+      },
+      {
+        "page": 71,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-71.png",
+        "size_bytes": 206035,
+        "sha256": "02d270883f4e925d582580c71acb5b0cc72e968aaf7e8755ddd9b9846c4dc222"
+      },
+      {
+        "page": 72,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-72.png",
+        "size_bytes": 78042,
+        "sha256": "6ec0c137858138a2a8fa018dd25e8a6f17e510aebd312de8c106582e543f6f7d"
+      },
+      {
+        "page": 73,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-73.png",
+        "size_bytes": 172774,
+        "sha256": "62006d23e4b5fc13b06d2969a33f13c6f787672ae5883ead063c6b46caa689d3"
+      },
+      {
+        "page": 74,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-74.png",
+        "size_bytes": 240690,
+        "sha256": "9001b20e3c3a0dd48ce442f0d0575636cef312889623601b973de206fd92c0e7"
+      },
+      {
+        "page": 75,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-75.png",
+        "size_bytes": 172792,
+        "sha256": "60de7294957026afc860d4dfb023560854ae5387e4814da6c2181a1aa1a88675"
+      },
+      {
+        "page": 76,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-76.png",
+        "size_bytes": 135573,
+        "sha256": "b30aa4cf8468abf6ce7f8e3fd8083a44c608caacee3f2c4ec2eeac5ce5873435"
+      },
+      {
+        "page": 77,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-77.png",
+        "size_bytes": 247729,
+        "sha256": "9cf15703c589aa4b0fa7c2c5a560604f0bfa2b9a57f6e203fe245ac09d624635"
+      },
+      {
+        "page": 78,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-78.png",
+        "size_bytes": 177387,
+        "sha256": "efecfcd55a720bf9a0490cadceaf126ed33dc1b0f5a2117fca0a24b618974298"
+      },
+      {
+        "page": 79,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-79.png",
+        "size_bytes": 181607,
+        "sha256": "e25d96aa56e7be532179b79916ef09aa4eb35a2e221141c83297fafd6e71f1d7"
+      },
+      {
+        "page": 80,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-80.png",
+        "size_bytes": 211702,
+        "sha256": "5f365726aafe913cf97071b563ebc75a7fd1bc5d3d25abf31a0ece02758bbeae"
+      },
+      {
+        "page": 81,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-81.png",
+        "size_bytes": 314305,
+        "sha256": "2db87416e1e581c9e82ee18faefbd6ac20d797adcfcc36ed7237231b2d90c136"
+      },
+      {
+        "page": 82,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-82.png",
+        "size_bytes": 264508,
+        "sha256": "521dbc039feb5f201d253a5c3bcc4e14903666823133cc4c890fecfe1dc41e13"
+      },
+      {
+        "page": 83,
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023-pages\\set-a3bf64af2de74e81b91c682038b8ac25\\page-83.png",
+        "size_bytes": 117899,
+        "sha256": "c38efefef0c05d1b56986820d89eb0c65ad832e5d730e69cad994c38043c5b6f"
+      }
+    ],
+    "token": "9e8fd534d060eb17b405e339e41cb136595a4283b3eb62766e28e466a4f7f8a5",
+    "token_scope": "document SHA-256 plus ordered page-image SHA-256 and size; PDF SHA-256 is provenance only"
+  },
+  "delivery_status": "INCOMPLETE",
+  "delivery_gates": {
+    "overall": "INCOMPLETE",
+    "render": "PASS",
+    "visual": "REVIEW_REQUIRED",
+    "native_word": "PASS"
+  },
+  "file": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_NativeTest_20261023.docx",
+  "profile": "hcmunre_dacn_2026_2027",
+  "variant": "report",
+  "validation_status": "PASS",
+  "valid": false,
+  "delivery_valid": false,
+  "inventory": {
+    "paragraphs": 583,
+    "tables": 15,
+    "sections": 3,
+    "images": 20,
+    "fields": {
+      "total_field_tags": 516,
+      "toc_field": true,
+      "page_field": true,
+      "page_fields": 138,
+      "toc_fields": 3,
+      "other_fields": 31
+    }
+  }
+}

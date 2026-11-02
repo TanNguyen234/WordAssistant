@@ -1,0 +1,349 @@
+{
+  "schema_version": 1,
+  "project_dir": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020",
+  "output_docx": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_20261028_bia_dong_bo.docx",
+  "document_sha256": "23abd0e334c41ecaf928ac91e75a9a8999b928868828e30102853b1f7cd68210",
+  "status": "FAIL",
+  "gates": {
+    "word_delivery": {
+      "status": "FAIL",
+      "checks": [
+        {
+          "check": "output_docx",
+          "status": "PASS",
+          "detail": "Found DOCX with SHA-256 23abd0e334c41ecaf928ac91e75a9a8999b928868828e30102853b1f7cd68210."
+        },
+        {
+          "check": "verify.delivery_status",
+          "status": "PASS",
+          "detail": "WordAssistant reports delivery PASS."
+        },
+        {
+          "check": "verify_status_consistency",
+          "status": "PASS",
+          "detail": "Verify overall and delivery statuses are consistent."
+        },
+        {
+          "check": "verify.render_status",
+          "status": "PASS",
+          "detail": "render_status passed."
+        },
+        {
+          "check": "verify.visual_status",
+          "status": "PASS",
+          "detail": "visual_status passed."
+        },
+        {
+          "check": "selected_profile_validation",
+          "status": "PASS",
+          "detail": "Selected profile validation passed."
+        },
+        {
+          "check": "validate.valid",
+          "status": "INCOMPLETE",
+          "detail": "Saved validate report does not match the selected profile, variant, or DOCX."
+        },
+        {
+          "check": "verify_document_hash",
+          "status": "FAIL",
+          "detail": "Verify report refers to a different DOCX hash."
+        }
+      ]
+    },
+    "content_and_sources": {
+      "status": "FAIL",
+      "checks": [
+        {
+          "check": "rubric",
+          "status": "PASS",
+          "detail": "Rubric is present: C:\\Users\\VI TINH THANH AN\\Documents\\Huong dan trinh bay B\u00e1o c\u00e1o \u0110ACN_2026-2027.docx"
+        },
+        {
+          "check": "assignment",
+          "status": "PASS",
+          "detail": "A recorded assignment summary is present."
+        },
+        {
+          "check": "requirement_row_2",
+          "status": "PASS",
+          "detail": "Requirement has existing evidence files and a verification record."
+        },
+        {
+          "check": "requirement_row_3",
+          "status": "INCOMPLETE",
+          "detail": "Requirement is NOT_RUN."
+        },
+        {
+          "check": "official_rubric_in_docx",
+          "status": "FAIL",
+          "detail": "Rubric inclusion review is not bound to the current output DOCX SHA-256."
+        },
+        {
+          "check": "cover_metadata",
+          "status": "PASS",
+          "detail": "All cover identity fields have a verified authority or an explicit placeholder/non-applicability record."
+        },
+        {
+          "check": "project_structure_inventory",
+          "status": "PASS",
+          "detail": "All 111 project-planned headings have reviewed, evidence-backed mappings."
+        },
+        {
+          "check": "project_structure_in_docx",
+          "status": "PASS",
+          "detail": "All 111 project-inventoried headings appear in the final DOCX at the planned levels and order."
+        },
+        {
+          "check": "project_toc_parity",
+          "status": "PASS",
+          "detail": "All 111 required TOC entries appear at the planned levels and order."
+        },
+        {
+          "check": "project_runtime_capture_provenance",
+          "status": "PASS",
+          "detail": "All 3 runtime screenshots are route-matched, captured after visible UI click-through, and hash-bound to their image files."
+        },
+        {
+          "check": "project_visual_inventory",
+          "status": "PASS",
+          "detail": "All 27 required captions for the 31 planned visual assets appear in the final DOCX."
+        },
+        {
+          "check": "project_visual_media",
+          "status": "FAIL",
+          "detail": "Embedded image coverage differs from asset-parity.csv: expected 16 images total, found 15; caption-bound mismatches=['F01']."
+        },
+        {
+          "check": "claim_row_2",
+          "status": "PASS",
+          "detail": "Claim PROJECT-HOME maps to reviewed source app/main.py with a current hash."
+        },
+        {
+          "check": "claim_row_3",
+          "status": "FAIL",
+          "detail": "Evidence source hash changed for app/api/legal_routes.py."
+        },
+        {
+          "check": "claim_row_4",
+          "status": "PASS",
+          "detail": "Claim PROJECT-SEARCH-UI maps to reviewed source app/templates/legal_search.html with a current hash."
+        },
+        {
+          "check": "claim_row_5",
+          "status": "FAIL",
+          "detail": "Evidence source hash changed for app/api/legal_routes.py."
+        },
+        {
+          "check": "claim_row_6",
+          "status": "FAIL",
+          "detail": "Evidence source hash changed for app/api/routes.py."
+        },
+        {
+          "check": "claim_row_7",
+          "status": "FAIL",
+          "detail": "Evidence source hash changed for app/templates/index.html."
+        },
+        {
+          "check": "claim_row_8",
+          "status": "FAIL",
+          "detail": "Evidence source hash changed for app/services/rag_pipeline.py."
+        },
+        {
+          "check": "claim_row_9",
+          "status": "FAIL",
+          "detail": "Evidence source hash changed for app/services/retrieval.py."
+        },
+        {
+          "check": "claim_row_10",
+          "status": "PASS",
+          "detail": "Claim PROJECT-V3-RETRIEVAL maps to reviewed source app/services/vertex_qdrant_retrieval.py with a current hash."
+        },
+        {
+          "check": "claim_row_11",
+          "status": "FAIL",
+          "detail": "Evidence source hash changed for app/services/v3_article_expansion.py."
+        },
+        {
+          "check": "claim_row_12",
+          "status": "PASS",
+          "detail": "Claim PROJECT-EVIDENCE-CHUNK maps to reviewed source app/ingestion/legal_text.py with a current hash."
+        },
+        {
+          "check": "claim_row_13",
+          "status": "FAIL",
+          "detail": "Evidence source hash changed for docs/CURRENT_ARCHITECTURE.md."
+        },
+        {
+          "check": "claim_row_14",
+          "status": "PASS",
+          "detail": "Claim PROJECT-EVALUATION maps to reviewed source docs/evaluation/CURRENT_STATUS.md with a current hash."
+        },
+        {
+          "check": "claim_row_15",
+          "status": "PASS",
+          "detail": "Claim LITERATURE-doi-10-18653-v1-2020-emnlp-main-550 maps to reviewed source D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\sources\\doi-10-18653-v1-2020-emnlp-main-550.pdf with a current hash."
+        },
+        {
+          "check": "claim_row_16",
+          "status": "PASS",
+          "detail": "Claim LITERATURE-doi-10-18653-v1-2024-eacl-demo-16 maps to reviewed source D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\sources\\doi-10-18653-v1-2024-eacl-demo-16.pdf with a current hash."
+        },
+        {
+          "check": "claim_row_17",
+          "status": "PASS",
+          "detail": "Claim LITERATURE-doi-10-18653-v1-2026-findings-eacl-110 maps to reviewed source D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\sources\\doi-10-18653-v1-2026-findings-eacl-110.pdf with a current hash."
+        },
+        {
+          "check": "claim_row_18",
+          "status": "PASS",
+          "detail": "Claim PROJECT-OPS-STATUS maps to reviewed source docs/handbook/09-operations-and-evaluation.md with a current hash."
+        },
+        {
+          "check": "claim_row_19",
+          "status": "PASS",
+          "detail": "Claim PROJECT-ACCOUNT-DATA maps to reviewed source app/account_database.py with a current hash."
+        },
+        {
+          "check": "claim_row_20",
+          "status": "FAIL",
+          "detail": "Evidence source hash changed for app/database.py."
+        },
+        {
+          "check": "claim_row_21",
+          "status": "PASS",
+          "detail": "Claim PROJECT-WORKSPACE-DATA maps to reviewed source app/research_database.py with a current hash."
+        },
+        {
+          "check": "claim_row_22",
+          "status": "PASS",
+          "detail": "Claim PROJECT-RESEARCH-STATES maps to reviewed source app/services/free_web_research.py with a current hash."
+        },
+        {
+          "check": "acceptance_assignment_and_rubric_checked",
+          "status": "INCOMPLETE",
+          "detail": "Required human review has not been recorded as complete."
+        },
+        {
+          "check": "acceptance_cover_metadata_fields_verified",
+          "status": "PASS",
+          "detail": "Required human review is recorded as complete."
+        },
+        {
+          "check": "acceptance_project_structure_inventory_reviewed",
+          "status": "INCOMPLETE",
+          "detail": "Required human review has not been recorded as complete."
+        },
+        {
+          "check": "acceptance_project_visual_inventory_reviewed",
+          "status": "INCOMPLETE",
+          "detail": "Required human review has not been recorded as complete."
+        },
+        {
+          "check": "acceptance_all_required_claims_mapped_to_reviewed_evidence",
+          "status": "INCOMPLETE",
+          "detail": "Required human review has not been recorded as complete."
+        },
+        {
+          "check": "acceptance_all_integrity_warnings_reviewed_and_dispositioned",
+          "status": "INCOMPLETE",
+          "detail": "Required human review has not been recorded as complete."
+        },
+        {
+          "check": "acceptance_source_routes_and_templates_checked",
+          "status": "INCOMPLETE",
+          "detail": "Required human review has not been recorded as complete."
+        },
+        {
+          "check": "acceptance_wireframes_and_runtime_captures_distinguished",
+          "status": "PASS",
+          "detail": "Required human review is recorded as complete."
+        },
+        {
+          "check": "acceptance_figure_list_rebuilt_from_captions",
+          "status": "PASS",
+          "detail": "Required human review is recorded as complete."
+        },
+        {
+          "check": "acceptance_word_fields_updated_and_saved",
+          "status": "INCOMPLETE",
+          "detail": "Required human review has not been recorded as complete."
+        },
+        {
+          "check": "acceptance_all_rendered_pages_visually_reviewed",
+          "status": "INCOMPLETE",
+          "detail": "Required human review has not been recorded as complete."
+        },
+        {
+          "check": "acceptance_chapter1_multilevel_numbering_verified",
+          "status": "PASS",
+          "detail": "Required human review is recorded as complete."
+        },
+        {
+          "check": "acceptance_acknowledgements_content_complete",
+          "status": "PASS",
+          "detail": "Required human review is recorded as complete."
+        },
+        {
+          "check": "acceptance_crosswalk",
+          "status": "FAIL",
+          "detail": "Crosswalk has duplicate IDs, unknown categories, failed criteria, or stale DOCX bindings: ['AC-ABSTRACT:stale-document-hash', 'AC-ACKNOWLEDGEMENTS:stale-document-hash', 'AC-ASSIGNMENT-RUBRIC-NOT-PROVIDED:stale-document-hash', 'AC-BODY-INDENT:stale-document-hash', 'AC-CAPTIONS:stale-document-hash', 'AC-CH1-NUMBERING:stale-document-hash', 'AC-CITATION-COVERAGE:stale-document-hash', 'AC-CITATION:stale-document-hash']."
+        },
+        {
+          "check": "integrity_document_hash",
+          "status": "FAIL",
+          "detail": "Integrity audit refers to a different DOCX hash."
+        },
+        {
+          "check": "integrity_gate_statuses",
+          "status": "PASS",
+          "detail": "Every integrity gate has a recognized status."
+        },
+        {
+          "check": "integrity_registry_hash",
+          "status": "PASS",
+          "detail": "Integrity audit is bound to the current evidence registry."
+        },
+        {
+          "check": "integrity_source_evidence",
+          "status": "PASS",
+          "detail": "Integrity source_evidence passed and covers 10 unique in-text citation numbers."
+        },
+        {
+          "check": "integrity_hard_gates",
+          "status": "PASS",
+          "detail": "No integrity gate is marked FAIL."
+        },
+        {
+          "check": "integrity_report_consistency",
+          "status": "PASS",
+          "detail": "Overall audit status matches its warning gates."
+        },
+        {
+          "check": "integrity_warning_dispositions",
+          "status": "PASS",
+          "detail": "Every integrity warning has a recorded human disposition."
+        },
+        {
+          "check": "project_content_review",
+          "status": "FAIL",
+          "detail": "Content review is stale for the current DOCX.; source evidence is missing or stale; source evidence is missing or stale; source evidence is missing or stale; source evidence is missing or stale; source evidence is missing or stale; source evidence is missing or stale; source evidence is missing or stale; source evidence is missing or stale; source evidence is missing or stale; source evidence is missing or stale; source evidence is missing or stale; source evidence is missing or stale; source evidence is missing or stale; source evidence is missing or stale; source evidence is missing or stale; source evidence is missing or stale"
+        }
+      ]
+    },
+    "submission_readiness": {
+      "status": "FAIL",
+      "checks": [
+        {
+          "check": "word_delivery",
+          "status": "FAIL",
+          "detail": "See word_delivery checks."
+        },
+        {
+          "check": "content_and_sources",
+          "status": "FAIL",
+          "detail": "See content_and_sources checks."
+        }
+      ]
+    }
+  }
+}

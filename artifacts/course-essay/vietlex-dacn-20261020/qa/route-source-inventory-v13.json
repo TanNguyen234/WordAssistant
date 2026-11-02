@@ -1,0 +1,1356 @@
+[
+  {
+    "file": "app/api/account_routes.py",
+    "sha256": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+    "line": 110,
+    "method": "GET",
+    "route": "/register",
+    "handler": "register_page",
+    "response_class": "HTMLResponse",
+    "html_view": true,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/account_routes.py",
+    "sha256": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+    "line": 128,
+    "method": "POST",
+    "route": "/register",
+    "handler": "register",
+    "response_class": "HTMLResponse",
+    "html_view": true,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/account_routes.py",
+    "sha256": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+    "line": 181,
+    "method": "GET",
+    "route": "/login",
+    "handler": "login_page",
+    "response_class": "HTMLResponse",
+    "html_view": true,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/account_routes.py",
+    "sha256": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+    "line": 190,
+    "method": "POST",
+    "route": "/login",
+    "handler": "login",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "RedirectResponse"
+    ]
+  },
+  {
+    "file": "app/api/account_routes.py",
+    "sha256": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+    "line": 232,
+    "method": "POST",
+    "route": "/logout",
+    "handler": "logout",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "RedirectResponse"
+    ]
+  },
+  {
+    "file": "app/api/account_routes.py",
+    "sha256": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+    "line": 243,
+    "method": "GET",
+    "route": "/verify-email",
+    "handler": "verify_email",
+    "response_class": "HTMLResponse",
+    "html_view": true,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/account_routes.py",
+    "sha256": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+    "line": 258,
+    "method": "POST",
+    "route": "/verify-email",
+    "handler": "verify_email_submit",
+    "response_class": "HTMLResponse",
+    "html_view": true,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/account_routes.py",
+    "sha256": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+    "line": 275,
+    "method": "GET",
+    "route": "/forgot-password",
+    "handler": "forgot_password_page",
+    "response_class": "HTMLResponse",
+    "html_view": true,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/account_routes.py",
+    "sha256": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+    "line": 284,
+    "method": "POST",
+    "route": "/forgot-password",
+    "handler": "forgot_password",
+    "response_class": "HTMLResponse",
+    "html_view": true,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/account_routes.py",
+    "sha256": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+    "line": 310,
+    "method": "GET",
+    "route": "/reset-password",
+    "handler": "reset_password_page",
+    "response_class": "HTMLResponse",
+    "html_view": true,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/account_routes.py",
+    "sha256": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+    "line": 319,
+    "method": "POST",
+    "route": "/reset-password",
+    "handler": "reset_password",
+    "response_class": "HTMLResponse",
+    "html_view": true,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/account_routes.py",
+    "sha256": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+    "line": 342,
+    "method": "GET",
+    "route": "/account",
+    "handler": "account_entry",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "RedirectResponse"
+    ]
+  },
+  {
+    "file": "app/api/account_routes.py",
+    "sha256": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+    "line": 348,
+    "method": "GET",
+    "route": "/settings",
+    "handler": "account_settings",
+    "response_class": "HTMLResponse",
+    "html_view": true,
+    "template": null,
+    "response_calls": [
+      "TemplateResponse"
+    ]
+  },
+  {
+    "file": "app/api/account_routes.py",
+    "sha256": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+    "line": 374,
+    "method": "POST",
+    "route": "/account/sessions/{session_id}/revoke",
+    "handler": "account_session_revoke",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "RedirectResponse"
+    ]
+  },
+  {
+    "file": "app/api/account_routes.py",
+    "sha256": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+    "line": 386,
+    "method": "POST",
+    "route": "/account/sessions/revoke-others",
+    "handler": "account_sessions_revoke_others",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "RedirectResponse"
+    ]
+  },
+  {
+    "file": "app/api/account_routes.py",
+    "sha256": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+    "line": 398,
+    "method": "GET",
+    "route": "/account/export",
+    "handler": "account_export",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/account_routes.py",
+    "sha256": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+    "line": 412,
+    "method": "POST",
+    "route": "/account/history/delete",
+    "handler": "account_history_delete",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "RedirectResponse"
+    ]
+  },
+  {
+    "file": "app/api/account_routes.py",
+    "sha256": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+    "line": 423,
+    "method": "POST",
+    "route": "/account/delete",
+    "handler": "account_delete",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "RedirectResponse"
+    ]
+  },
+  {
+    "file": "app/api/claim_verification_routes.py",
+    "sha256": "d93fc6eee5fb320b48f5fff09c2ec0801497803db77cb33b243558dbc674b47c",
+    "line": 36,
+    "method": "POST",
+    "route": "/workspaces/{workspace_id}/analyses/claims",
+    "handler": "claim_verification",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "JSONResponse"
+    ]
+  },
+  {
+    "file": "app/api/document_redline_routes.py",
+    "sha256": "a22ba05bef1ecfec65f8fb573dbb25abdb07b13f59085ea7080cf6caedfab0a6",
+    "line": 22,
+    "method": "POST",
+    "route": "/workspaces/{workspace_id}/analyses/redline",
+    "handler": "document_redline",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "JSONResponse"
+    ]
+  },
+  {
+    "file": "app/api/evaluation_lab_routes.py",
+    "sha256": "dfd5d15bebfdd16a6b743e6d1f10f6e15361c40c3dd0db12e8898a79f6282409",
+    "line": 44,
+    "method": "GET",
+    "route": "/admin/evaluations",
+    "handler": "admin_evaluations",
+    "response_class": "HTMLResponse",
+    "html_view": true,
+    "template": null,
+    "response_calls": [
+      "TemplateResponse"
+    ]
+  },
+  {
+    "file": "app/api/evaluation_lab_routes.py",
+    "sha256": "dfd5d15bebfdd16a6b743e6d1f10f6e15361c40c3dd0db12e8898a79f6282409",
+    "line": 96,
+    "method": "GET",
+    "route": "/evaluation-lab",
+    "handler": "evaluation_lab",
+    "response_class": "HTMLResponse",
+    "html_view": true,
+    "template": null,
+    "response_calls": [
+      "TemplateResponse"
+    ]
+  },
+  {
+    "file": "app/api/finding_routes.py",
+    "sha256": "1edd25ab296ad7372c74ec9ce42394e6c4f60c81e6963fa3a242a3b2cde23c28",
+    "line": 28,
+    "method": "GET",
+    "route": "/workspaces/{workspace_id}/findings/{analysis_id}",
+    "handler": "finding_board",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/finding_routes.py",
+    "sha256": "1edd25ab296ad7372c74ec9ce42394e6c4f60c81e6963fa3a242a3b2cde23c28",
+    "line": 37,
+    "method": "POST",
+    "route": "/workspaces/{workspace_id}/findings/{analysis_id}/{finding_index}",
+    "handler": "finding_update",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "RedirectResponse"
+    ]
+  },
+  {
+    "file": "app/api/free_web_research_routes.py",
+    "sha256": "50dc8bb6d95429dadb380d438281e52c975d8ef86a8da73bb3073f9bd92175cf",
+    "line": 296,
+    "method": "POST",
+    "route": "/workspaces/{workspace_id}/research/read",
+    "handler": "free_web_research_read",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/free_web_research_routes.py",
+    "sha256": "50dc8bb6d95429dadb380d438281e52c975d8ef86a8da73bb3073f9bd92175cf",
+    "line": 430,
+    "method": "GET",
+    "route": "/workspaces/{workspace_id}/research/runs/{run_id}",
+    "handler": "free_web_research_run_status",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "JSONResponse"
+    ]
+  },
+  {
+    "file": "app/api/free_web_research_routes.py",
+    "sha256": "50dc8bb6d95429dadb380d438281e52c975d8ef86a8da73bb3073f9bd92175cf",
+    "line": 455,
+    "method": "POST",
+    "route": "/workspaces/{workspace_id}/research/runs/{run_id}/cancel",
+    "handler": "free_web_research_cancel",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "JSONResponse"
+    ]
+  },
+  {
+    "file": "app/api/full_document_review_routes.py",
+    "sha256": "67b904e73675cf43f9dd43a26e8ff5757c627912e21f10f300f8187373eccd55",
+    "line": 55,
+    "method": "POST",
+    "route": "/workspaces/{workspace_id}/documents/{document_id}/analyses/full-review/plan",
+    "handler": "full_document_review_plan",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "JSONResponse"
+    ]
+  },
+  {
+    "file": "app/api/full_document_review_routes.py",
+    "sha256": "67b904e73675cf43f9dd43a26e8ff5757c627912e21f10f300f8187373eccd55",
+    "line": 86,
+    "method": "POST",
+    "route": "/workspaces/{workspace_id}/analyses/full-review",
+    "handler": "run_full_document_review",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "JSONResponse"
+    ]
+  },
+  {
+    "file": "app/api/legal_effect_routes.py",
+    "sha256": "78c493040c2add2d46aa78832eef54f84e6ec914751f7e7c373970bf3202fc61",
+    "line": 36,
+    "method": "POST",
+    "route": "/workspaces/{workspace_id}/analyses/legal-effect",
+    "handler": "legal_effect_review",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "JSONResponse"
+    ]
+  },
+  {
+    "file": "app/api/legal_effect_routes.py",
+    "sha256": "78c493040c2add2d46aa78832eef54f84e6ec914751f7e7c373970bf3202fc61",
+    "line": 135,
+    "method": "GET",
+    "route": "/workspaces/{workspace_id}/analyses/legal-effect",
+    "handler": "legal_effect_history",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "JSONResponse"
+    ]
+  },
+  {
+    "file": "app/api/legal_registry_routes.py",
+    "sha256": "6a274c68c2a757465538f38a4b765ca9e19e323d6aba98d4a5d9faa6b88928b3",
+    "line": 25,
+    "method": "GET",
+    "route": "/legal-status",
+    "handler": "legal_status",
+    "response_class": null,
+    "html_view": true,
+    "template": null,
+    "response_calls": [
+      "TemplateResponse"
+    ]
+  },
+  {
+    "file": "app/api/legal_registry_routes.py",
+    "sha256": "6a274c68c2a757465538f38a4b765ca9e19e323d6aba98d4a5d9faa6b88928b3",
+    "line": 62,
+    "method": "GET",
+    "route": "/admin/legal-registry",
+    "handler": "registry_admin",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/legal_registry_routes.py",
+    "sha256": "6a274c68c2a757465538f38a4b765ca9e19e323d6aba98d4a5d9faa6b88928b3",
+    "line": 98,
+    "method": "POST",
+    "route": "/workspaces/{workspace_id}/analyses/{analysis_id}/publish-legal-effect",
+    "handler": "publish_legal_effect",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "RedirectResponse"
+    ]
+  },
+  {
+    "file": "app/api/legal_registry_routes.py",
+    "sha256": "6a274c68c2a757465538f38a4b765ca9e19e323d6aba98d4a5d9faa6b88928b3",
+    "line": 133,
+    "method": "POST",
+    "route": "/admin/legal-registry/{review_id}/withdraw",
+    "handler": "withdraw_legal_effect",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "RedirectResponse"
+    ]
+  },
+  {
+    "file": "app/api/legal_routes.py",
+    "sha256": "dd8174fb644746f903419b022a62be05419b0ec1cd2718f6bb345c1dacc26f67",
+    "line": 82,
+    "method": "GET",
+    "route": "/search",
+    "handler": "legal_search",
+    "response_class": "HTMLResponse",
+    "html_view": true,
+    "template": null,
+    "response_calls": [
+      "TemplateResponse"
+    ]
+  },
+  {
+    "file": "app/api/legal_routes.py",
+    "sha256": "dd8174fb644746f903419b022a62be05419b0ec1cd2718f6bb345c1dacc26f67",
+    "line": 130,
+    "method": "GET",
+    "route": "/documents/{document_id}",
+    "handler": "legal_document",
+    "response_class": "HTMLResponse",
+    "html_view": true,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/legal_routes.py",
+    "sha256": "dd8174fb644746f903419b022a62be05419b0ec1cd2718f6bb345c1dacc26f67",
+    "line": 155,
+    "method": "POST",
+    "route": "/documents/{document_id}/sections/{section_id}/pin",
+    "handler": "pin_document_section",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/legal_routes.py",
+    "sha256": "dd8174fb644746f903419b022a62be05419b0ec1cd2718f6bb345c1dacc26f67",
+    "line": 187,
+    "method": "GET",
+    "route": "/privacy",
+    "handler": "privacy_page",
+    "response_class": "HTMLResponse",
+    "html_view": true,
+    "template": null,
+    "response_calls": [
+      "TemplateResponse"
+    ]
+  },
+  {
+    "file": "app/api/legal_routes.py",
+    "sha256": "dd8174fb644746f903419b022a62be05419b0ec1cd2718f6bb345c1dacc26f67",
+    "line": 192,
+    "method": "GET",
+    "route": "/terms",
+    "handler": "terms_page",
+    "response_class": "HTMLResponse",
+    "html_view": true,
+    "template": null,
+    "response_calls": [
+      "TemplateResponse"
+    ]
+  },
+  {
+    "file": "app/api/legal_timeline_routes.py",
+    "sha256": "fd04db00254e0d61fd47a5400056444f514cdc4183e0d0ad76c349f75cc5b41a",
+    "line": 18,
+    "method": "POST",
+    "route": "/workspaces/{workspace_id}/analyses/timeline",
+    "handler": "timeline",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "JSONResponse"
+    ]
+  },
+  {
+    "file": "app/api/model_comparison_routes.py",
+    "sha256": "9e6ca7c886b1d02f804987da3d30cf9bf6960f5b09a8ceabe241186cdb8795ce",
+    "line": 32,
+    "method": "POST",
+    "route": "/workspaces/{workspace_id}/analyses/models",
+    "handler": "model_comparison",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "JSONResponse"
+    ]
+  },
+  {
+    "file": "app/api/product_quality_routes.py",
+    "sha256": "726e077eb4941d8e55e64dc1cba2c4a8cfe1f17d8e04fa2e468dc42aaf4c04ed",
+    "line": 22,
+    "method": "GET",
+    "route": "/admin/corpus",
+    "handler": "corpus_queue",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/product_quality_routes.py",
+    "sha256": "726e077eb4941d8e55e64dc1cba2c4a8cfe1f17d8e04fa2e468dc42aaf4c04ed",
+    "line": 62,
+    "method": "GET",
+    "route": "/admin/feedback",
+    "handler": "feedback_queue",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/product_quality_routes.py",
+    "sha256": "726e077eb4941d8e55e64dc1cba2c4a8cfe1f17d8e04fa2e468dc42aaf4c04ed",
+    "line": 73,
+    "method": "POST",
+    "route": "/admin/feedback/{trace_id}",
+    "handler": "feedback_triage",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "RedirectResponse"
+    ]
+  },
+  {
+    "file": "app/api/product_quality_routes.py",
+    "sha256": "726e077eb4941d8e55e64dc1cba2c4a8cfe1f17d8e04fa2e468dc42aaf4c04ed",
+    "line": 96,
+    "method": "GET",
+    "route": "/admin/feedback/{trace_id}/regression-draft",
+    "handler": "regression_draft",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "JSONResponse"
+    ]
+  },
+  {
+    "file": "app/api/research_report_routes.py",
+    "sha256": "46391ff2e29b782698348bbfdeadf63742948e043696d7c5037b2285d38c091a",
+    "line": 39,
+    "method": "GET",
+    "route": "/workspaces/{workspace_id}/reports/{analysis_id}",
+    "handler": "report_editor",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/research_report_routes.py",
+    "sha256": "46391ff2e29b782698348bbfdeadf63742948e043696d7c5037b2285d38c091a",
+    "line": 48,
+    "method": "POST",
+    "route": "/workspaces/{workspace_id}/reports/{analysis_id}",
+    "handler": "report_save_version",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "RedirectResponse"
+    ]
+  },
+  {
+    "file": "app/api/research_report_routes.py",
+    "sha256": "46391ff2e29b782698348bbfdeadf63742948e043696d7c5037b2285d38c091a",
+    "line": 69,
+    "method": "GET",
+    "route": "/workspaces/{workspace_id}/reports/{analysis_id}/export",
+    "handler": "report_export",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/research_report_routes.py",
+    "sha256": "46391ff2e29b782698348bbfdeadf63742948e043696d7c5037b2285d38c091a",
+    "line": 91,
+    "method": "POST",
+    "route": "/workspaces/{workspace_id}/analyses/report",
+    "handler": "research_report",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "JSONResponse"
+    ]
+  },
+  {
+    "file": "app/api/retained_source_routes.py",
+    "sha256": "5c1dd10cefae0b5ae734292d8e9670e2eb43082c4adec8908423af627cb7c123",
+    "line": 26,
+    "method": "POST",
+    "route": "/workspaces/{workspace_id}/analyses/retained-source",
+    "handler": "retained_source_answer",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "RedirectResponse"
+    ]
+  },
+  {
+    "file": "app/api/retained_source_routes.py",
+    "sha256": "5c1dd10cefae0b5ae734292d8e9670e2eb43082c4adec8908423af627cb7c123",
+    "line": 123,
+    "method": "GET",
+    "route": "/workspaces/{workspace_id}/source-analysis/{analysis_id}",
+    "handler": "retained_source_result",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/routes.py",
+    "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+    "line": 213,
+    "method": "GET",
+    "route": "/healthz",
+    "handler": "healthz",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/routes.py",
+    "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+    "line": 218,
+    "method": "GET",
+    "route": "/readyz",
+    "handler": "readyz",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "JSONResponse"
+    ]
+  },
+  {
+    "file": "app/api/routes.py",
+    "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+    "line": 232,
+    "method": "GET",
+    "route": "/api/progress/{request_id}",
+    "handler": "chat_progress_status",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/routes.py",
+    "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+    "line": 243,
+    "method": "GET",
+    "route": "/api/interactions/{trace_id}/retrieval",
+    "handler": "retrieval_inspector",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/routes.py",
+    "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+    "line": 261,
+    "method": "GET",
+    "route": "/api/progress/{request_id}/stream",
+    "handler": "chat_progress_stream",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "StreamingResponse"
+    ]
+  },
+  {
+    "file": "app/api/routes.py",
+    "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+    "line": 289,
+    "method": "POST",
+    "route": "/chat",
+    "handler": "chat",
+    "response_class": "HTMLResponse",
+    "html_view": true,
+    "template": null,
+    "response_calls": [
+      "TemplateResponse"
+    ]
+  },
+  {
+    "file": "app/api/routes.py",
+    "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+    "line": 933,
+    "method": "POST",
+    "route": "/api/feedback",
+    "handler": "feedback",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/routes.py",
+    "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+    "line": 958,
+    "method": "POST",
+    "route": "/api/evaluation/{trace_id}",
+    "handler": "public_evaluation",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "JSONResponse"
+    ]
+  },
+  {
+    "file": "app/api/routes.py",
+    "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+    "line": 1026,
+    "method": "GET",
+    "route": "/sessions",
+    "handler": "list_sessions",
+    "response_class": "HTMLResponse",
+    "html_view": true,
+    "template": null,
+    "response_calls": [
+      "TemplateResponse"
+    ]
+  },
+  {
+    "file": "app/api/routes.py",
+    "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+    "line": 1045,
+    "method": "POST",
+    "route": "/sessions",
+    "handler": "new_session",
+    "response_class": "HTMLResponse",
+    "html_view": true,
+    "template": null,
+    "response_calls": [
+      "HTMLResponse"
+    ]
+  },
+  {
+    "file": "app/api/routes.py",
+    "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+    "line": 1074,
+    "method": "GET",
+    "route": "/sessions/{session_id}",
+    "handler": "get_session_history",
+    "response_class": "HTMLResponse",
+    "html_view": true,
+    "template": null,
+    "response_calls": [
+      "TemplateResponse"
+    ]
+  },
+  {
+    "file": "app/api/routes.py",
+    "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+    "line": 1105,
+    "method": "DELETE",
+    "route": "/sessions/{session_id}",
+    "handler": "remove_session",
+    "response_class": null,
+    "html_view": true,
+    "template": null,
+    "response_calls": [
+      "HTMLResponse"
+    ]
+  },
+  {
+    "file": "app/api/routes.py",
+    "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+    "line": 1122,
+    "method": "POST",
+    "route": "/sessions/{session_id}/rename",
+    "handler": "rename_sess",
+    "response_class": "HTMLResponse",
+    "html_view": true,
+    "template": null,
+    "response_calls": [
+      "TemplateResponse"
+    ]
+  },
+  {
+    "file": "app/api/routes.py",
+    "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+    "line": 1149,
+    "method": "GET",
+    "route": "/sessions/{session_id}/export",
+    "handler": "export_session",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/routes.py",
+    "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+    "line": 1188,
+    "method": "GET",
+    "route": "/admin",
+    "handler": "admin_page",
+    "response_class": "HTMLResponse",
+    "html_view": true,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/routes.py",
+    "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+    "line": 1206,
+    "method": "GET",
+    "route": "/admin/requests",
+    "handler": "admin_requests_page",
+    "response_class": "HTMLResponse",
+    "html_view": true,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/routes.py",
+    "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+    "line": 1220,
+    "method": "GET",
+    "route": "/admin/usage",
+    "handler": "admin_usage_page",
+    "response_class": "HTMLResponse",
+    "html_view": true,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/routes.py",
+    "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+    "line": 1230,
+    "method": "GET",
+    "route": "/admin/providers",
+    "handler": "admin_providers_page",
+    "response_class": "HTMLResponse",
+    "html_view": true,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/routes.py",
+    "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+    "line": 1237,
+    "method": "GET",
+    "route": "/admin/system",
+    "handler": "admin_system_page",
+    "response_class": "HTMLResponse",
+    "html_view": true,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/routes.py",
+    "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+    "line": 1249,
+    "method": "GET",
+    "route": "/admin/stats",
+    "handler": "admin_stats_partial",
+    "response_class": "HTMLResponse",
+    "html_view": true,
+    "template": null,
+    "response_calls": [
+      "TemplateResponse"
+    ]
+  },
+  {
+    "file": "app/api/routes.py",
+    "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+    "line": 1259,
+    "method": "GET",
+    "route": "/admin/logs",
+    "handler": "admin_logs_partial",
+    "response_class": "HTMLResponse",
+    "html_view": true,
+    "template": null,
+    "response_calls": [
+      "TemplateResponse"
+    ]
+  },
+  {
+    "file": "app/api/routes.py",
+    "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+    "line": 1280,
+    "method": "GET",
+    "route": "/admin/export.csv",
+    "handler": "admin_export",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/routes.py",
+    "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+    "line": 1304,
+    "method": "GET",
+    "route": "/admin/details/{trace_id}",
+    "handler": "admin_details_partial",
+    "response_class": "HTMLResponse",
+    "html_view": true,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/routes.py",
+    "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+    "line": 1322,
+    "method": "GET",
+    "route": "/admin/users",
+    "handler": "admin_users_partial",
+    "response_class": "HTMLResponse",
+    "html_view": true,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/routes.py",
+    "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+    "line": 1340,
+    "method": "POST",
+    "route": "/admin/users/{user_id}/status",
+    "handler": "admin_set_user_status",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "RedirectResponse"
+    ]
+  },
+  {
+    "file": "app/api/routes.py",
+    "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+    "line": 1367,
+    "method": "POST",
+    "route": "/admin/users/{user_id}/revoke-sessions",
+    "handler": "admin_revoke_user_sessions",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "RedirectResponse"
+    ]
+  },
+  {
+    "file": "app/api/routes.py",
+    "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+    "line": 1387,
+    "method": "GET",
+    "route": "/admin/audit",
+    "handler": "admin_audit_partial",
+    "response_class": "HTMLResponse",
+    "html_view": true,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/trusted_source_routes.py",
+    "sha256": "02dc2c017e91100ab35dc6fca0959f2976a5dc600c9f1477d3c637af3cca9fe2",
+    "line": 29,
+    "method": "GET",
+    "route": "/workspaces/{workspace_id}/sources/{analysis_id}",
+    "handler": "saved_source_reader",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/trusted_source_routes.py",
+    "sha256": "02dc2c017e91100ab35dc6fca0959f2976a5dc600c9f1477d3c637af3cca9fe2",
+    "line": 43,
+    "method": "POST",
+    "route": "/workspaces/{workspace_id}/evidence/{evidence_id}/review",
+    "handler": "evidence_review",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "RedirectResponse"
+    ]
+  },
+  {
+    "file": "app/api/trusted_source_routes.py",
+    "sha256": "02dc2c017e91100ab35dc6fca0959f2976a5dc600c9f1477d3c637af3cca9fe2",
+    "line": 68,
+    "method": "POST",
+    "route": "/workspaces/{workspace_id}/analyses/sources",
+    "handler": "source_read",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "JSONResponse"
+    ]
+  },
+  {
+    "file": "app/api/trusted_source_routes.py",
+    "sha256": "02dc2c017e91100ab35dc6fca0959f2976a5dc600c9f1477d3c637af3cca9fe2",
+    "line": 135,
+    "method": "POST",
+    "route": "/workspaces/{workspace_id}/sources/pin",
+    "handler": "pin_source",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "JSONResponse"
+    ]
+  },
+  {
+    "file": "app/api/workspace_routes.py",
+    "sha256": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c",
+    "line": 147,
+    "method": "GET",
+    "route": "/workspaces",
+    "handler": "workspace_list",
+    "response_class": "HTMLResponse",
+    "html_view": true,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/workspace_routes.py",
+    "sha256": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c",
+    "line": 158,
+    "method": "GET",
+    "route": "/api/workspaces",
+    "handler": "workspace_options",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/workspace_routes.py",
+    "sha256": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c",
+    "line": 174,
+    "method": "POST",
+    "route": "/workspaces",
+    "handler": "workspace_create",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "RedirectResponse"
+    ]
+  },
+  {
+    "file": "app/api/workspace_routes.py",
+    "sha256": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c",
+    "line": 191,
+    "method": "GET",
+    "route": "/workspaces/{workspace_id}",
+    "handler": "workspace_detail",
+    "response_class": "HTMLResponse",
+    "html_view": true,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/workspace_routes.py",
+    "sha256": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c",
+    "line": 237,
+    "method": "POST",
+    "route": "/workspaces/{workspace_id}/documents",
+    "handler": "workspace_document_upload",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "JSONResponse"
+    ]
+  },
+  {
+    "file": "app/api/workspace_routes.py",
+    "sha256": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c",
+    "line": 318,
+    "method": "GET",
+    "route": "/workspaces/{workspace_id}/documents/{document_id}/original",
+    "handler": "workspace_original_download",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/workspace_routes.py",
+    "sha256": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c",
+    "line": 335,
+    "method": "DELETE",
+    "route": "/workspaces/{workspace_id}/documents/{document_id}",
+    "handler": "workspace_document_delete",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/workspace_routes.py",
+    "sha256": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c",
+    "line": 357,
+    "method": "POST",
+    "route": "/workspaces/{workspace_id}/documents/{document_id}/clauses/{clause_id}/pin",
+    "handler": "workspace_document_clause_pin",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "JSONResponse"
+    ]
+  },
+  {
+    "file": "app/api/workspace_routes.py",
+    "sha256": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c",
+    "line": 413,
+    "method": "POST",
+    "route": "/workspaces/{workspace_id}/documents/{document_id}/review",
+    "handler": "workspace_contract_review",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "JSONResponse"
+    ]
+  },
+  {
+    "file": "app/api/workspace_routes.py",
+    "sha256": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c",
+    "line": 540,
+    "method": "POST",
+    "route": "/workspaces/{workspace_id}/research/plan",
+    "handler": "deep_research_plan",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/workspace_routes.py",
+    "sha256": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c",
+    "line": 570,
+    "method": "POST",
+    "route": "/workspaces/{workspace_id}/research/run",
+    "handler": "deep_research_run",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "JSONResponse"
+    ]
+  },
+  {
+    "file": "app/api/workspace_routes.py",
+    "sha256": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c",
+    "line": 652,
+    "method": "POST",
+    "route": "/workspaces/{workspace_id}",
+    "handler": "workspace_update",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "RedirectResponse"
+    ]
+  },
+  {
+    "file": "app/api/workspace_routes.py",
+    "sha256": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c",
+    "line": 677,
+    "method": "DELETE",
+    "route": "/workspaces/{workspace_id}",
+    "handler": "workspace_delete",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "JSONResponse"
+    ]
+  },
+  {
+    "file": "app/api/workspace_routes.py",
+    "sha256": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c",
+    "line": 692,
+    "method": "POST",
+    "route": "/workspaces/{workspace_id}/evidence",
+    "handler": "workspace_pin_evidence",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "JSONResponse"
+    ]
+  },
+  {
+    "file": "app/api/workspace_routes.py",
+    "sha256": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c",
+    "line": 739,
+    "method": "DELETE",
+    "route": "/workspaces/{workspace_id}/evidence/{evidence_id}",
+    "handler": "workspace_unpin_evidence",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/workspace_routes.py",
+    "sha256": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c",
+    "line": 760,
+    "method": "POST",
+    "route": "/workspaces/{workspace_id}/analyses/selected",
+    "handler": "selected_evidence_analysis",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "JSONResponse"
+    ]
+  },
+  {
+    "file": "app/api/workspace_routes.py",
+    "sha256": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c",
+    "line": 848,
+    "method": "POST",
+    "route": "/workspaces/{workspace_id}/analyses/compare",
+    "handler": "compare_evidence",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/api/workspace_routes.py",
+    "sha256": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c",
+    "line": 875,
+    "method": "POST",
+    "route": "/workspaces/{workspace_id}/analyses/obligations",
+    "handler": "obligation_matrix",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": []
+  },
+  {
+    "file": "app/main.py",
+    "sha256": "5868c8f169e3fa3d895cc047b2c3f7285bd1fde49553225972d369c1e94bd254",
+    "line": 173,
+    "method": "GET",
+    "route": "/",
+    "handler": "get_index",
+    "response_class": "HTMLResponse",
+    "html_view": true,
+    "template": null,
+    "response_calls": [
+      "TemplateResponse"
+    ]
+  },
+  {
+    "file": "app/main.py",
+    "sha256": "5868c8f169e3fa3d895cc047b2c3f7285bd1fde49553225972d369c1e94bd254",
+    "line": 215,
+    "method": "GET",
+    "route": "/favicon.ico",
+    "handler": "favicon",
+    "response_class": null,
+    "html_view": false,
+    "template": null,
+    "response_calls": [
+      "RedirectResponse"
+    ]
+  }
+]

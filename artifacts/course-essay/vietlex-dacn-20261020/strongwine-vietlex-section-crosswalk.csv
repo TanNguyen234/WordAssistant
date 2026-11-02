@@ -1,0 +1,30 @@
+﻿strongwine_section,vietlex_section,decision,source_basis,adaptation_note
+Bìa trước,Bìa trước và khung bìa đầu tiên,MATCHED,VietLex cover metadata; profile style,Giữ tên loại bài/GVHD của VietLex; khung chỉ trên bìa ngoài.
+Bìa trong,Bìa trong căn giữa,MATCHED,StrongWine visual reference + VietLex profile,"Giữ nội dung VietLex, không lấy metadata mẫu."
+LỜI CẢM ƠN,LỜI CẢM ƠN,MATCHED,content-depth-v9.json,Giữ placeholder trung thực; không tự ghi nhận cá nhân chưa xác nhận.
+LỜI CAM ĐOAN,LỜI CAM ĐOAN,MATCHED,content-depth-v9.json,Dùng lời nhắc xác nhận và ký của sinh viên; không tự khai thay.
+NHẬN XÉT CỦA GIẢNG VIÊN HƯỚNG DẪN,NHẬN XÉT CỦA GIẢNG VIÊN HƯỚNG DẪN,MATCHED,cover-metadata.csv,GVHD: ThS. Đinh Thị Hồng Loan.
+NHẬN XÉT CỦA GIẢNG VIÊN PHẢN BIỆN,NHẬN XÉT CỦA GIẢNG VIÊN PHẢN BIỆN,MATCHED,content-depth-v9.json,Giữ chỗ trống cho phản biện.
+LỊCH TRÌNH THỰC HIỆN TIỂU LUẬN,LỊCH TRÌNH THỰC HIỆN ĐỒ ÁN,ADAPTED,document_type = Đồ án chuyên ngành,Giữ bảng kế hoạch dạng điền; không giả định ngày/tiến độ đã được duyệt.
+TÓM TẮT ĐỒ ÁN,TÓM TẮT ĐỒ ÁN,MATCHED,content-depth-v9.json,Tóm tắt bám snapshot/evidence VietLex.
+ABSTRACT,ABSTRACT (front matter),MATCHED,build_capstone_frontmatter.py,Chỉ có một bản abstract; không lặp trong body.
+MỤC LỤC,MỤC LỤC,MATCHED,StrongWine report structure,Đứng trước danh mục hình/bảng.
+DANH MỤC HÌNH ẢNH,DANH MỤC HÌNH,ADAPTED,dynamic caption fields,Dựng từ SEQ/caption VietLex; số mục do bài quyết định.
+DANH MỤC BẢNG BIỂU,DANH MỤC BẢNG,ADAPTED,dynamic caption fields,Dựng từ SEQ/caption VietLex; số mục do bài quyết định.
+DANH MỤC TỪ VIẾT TẮT,DANH MỤC TỪ VIẾT TẮT,MATCHED,content-depth-v9.json,Giữ thuật ngữ RAG/database/web.
+MỞ ĐẦU,MỞ ĐẦU,MATCHED,content-depth-v9.json,Có mục tiêu/câu hỏi/phạm vi/phương pháp/đóng góp.
+NỘI DUNG,NỘI DUNG,MATCHED,StrongWine report structure,Phân trang trước Chương 1.
+CHƯƠNG 1: CƠ SỞ LÝ THUYẾT,CHƯƠNG 1: CƠ SỞ LÝ THUYẾT VÀ NGHIÊN CỨU LIÊN QUAN,ADAPTED,VietLex RAG/legal retrieval topic,Giữ chiều sâu lý thuyết phù hợp domain.
+CHƯƠNG 2: KHẢO SÁT TỔNG QUAN STRONGWINE,CHƯƠNG 2: KHẢO SÁT HIỆN TRẠNG VÀ XÁC ĐỊNH YÊU CẦU,ADAPTED,VietLex routes/config/source,Không đưa nghiệp vụ StrongWine sang.
+CHƯƠNG 3: PHÂN TÍCH MÔ HÌNH MIỀN VÀ THIẾT KẾ HƯỚNG ĐỐI TƯỢNG,CHƯƠNG 3: PHÂN TÍCH NGHIỆP VỤ VÀ MÔ HÌNH CHỨC NĂNG,ADAPTED,VietLex use cases/evidence registry,Use case và ngoại lệ theo web RAG.
+CHƯƠNG 4: LUỒNG NGHIỆP VỤ KHÁCH HÀNG,"CHƯƠNG 4–6: use case, retrieval, workspace, reader, UI",ADAPTED,screen-inventory.json + source evidence,Luồng theo nhóm sử dụng VietLex; không sao chép customer flow.
+CHƯƠNG 5: LUỒNG NGHIỆP VỤ QUẢN TRỊ VÀ KHO,"CHƯƠNG 5: KIẾN TRÚC, DỮ LIỆU VÀ THIẾT KẾ THÀNH PHẦN",ADAPTED,VietLex store/schema/index plan,"Đổi kho sản phẩm sang corpus, local/vector stores và workspace."
+"CHƯƠNG 6: LUỒNG SHIPPER, OTP VÀ THÔNG BÁO","CHƯƠNG 6: CÀI ĐẶT, LUỒNG XỬ LÝ VÀ GIAO DIỆN",ADAPTED,VietLex web routes/NDJSON/cancel,Không có shipper/OTP tương đương; các route/API được phân tích theo source.
+"CHƯƠNG 7: CHẤT LƯỢNG, BẢO MẬT VÀ ĐÁNH GIÁ KIỂM THỬ","CHƯƠNG 7: KIỂM THỬ, BẢO MẬT VÀ ĐÁNH GIÁ HỆ THỐNG",ADAPTED,Stored evaluation and test receipts,Dữ liệu đánh giá lịch sử; không nhận là benchmark mới.
+HẠN CHẾ VÀ RỦI RO CẦN THEO DÕI,HẠN CHẾ VÀ RỦI RO CẦN THEO DÕI,MATCHED,moved report limitations and risk matrix,Tách riêng khỏi phần test results.
+ĐỀ XUẤT CẢI TIẾN VÀ KẾ HOẠCH KIỂM CHỨNG,ĐỀ XUẤT CẢI TIẾN VÀ KẾ HOẠCH KIỂM CHỨNG,MATCHED,moved reproducible evaluation protocol and roadmap,Đề xuất; không tuyên bố đã triển khai.
+BỔ SUNG: DANH MỤC ĐƯỜNG ĐI THEO VAI TRÒ,BỔ SUNG: DANH MỤC ĐƯỜNG ĐI THEO VAI TRÒ,ADAPTED,screen-inventory.json,"Bảng nhóm hỏi đáp, tra cứu, workspace, admin; view GET, không phải runtime screenshot."
+KẾT LUẬN / TỔNG KẾT,KẾT LUẬN / TỔNG KẾT,ADAPTED,content-depth-v9.json,Bỏ ghi chú meta về phiên bản và page count.
+TÀI LIỆU THAM KHẢO,TÀI LIỆU THAM KHẢO,MATCHED,reviewed source registry,Giữ citation [1]–[5] theo nguồn đã review.
+PHỤ LỤC: THUẬT NGỮ VÀ VIẾT TẮT,PHỤ LỤC C. THUẬT NGỮ VÀ TRẠNG THÁI BẰNG CHỨNG,ADAPTED,content-depth-v9.json,Giải thích metric và trạng thái evidence VietLex.
+TUYÊN BỐ VỀ CÔNG CỤ HỖ TRỢ VÀ LIÊM CHÍNH HỌC THUẬT,TUYÊN BỐ VỀ CÔNG CỤ HỖ TRỢ VÀ LIÊM CHÍNH HỌC THUẬT,ADAPTED,actual report-production workflow,Công khai phạm vi hỗ trợ; chưa có rubric/chính sách trường để kết luận compliance.

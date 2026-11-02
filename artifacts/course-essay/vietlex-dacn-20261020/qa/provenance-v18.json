@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.0",
+  "manifest_kind": "WORDASSISTANT_ACADEMIC_PROVENANCE",
+  "generated_at_utc": "2026-10-25T11:35:20.758864+00:00",
+  "document": {
+    "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_20261025_v18-final.docx",
+    "sha256": "6b023d85c5b79439c80ef60f3abe9b64c6765a1815dc99bf2e8df136b64c3cf1",
+    "size_bytes": 1252888,
+    "modified_at_utc": "2026-10-25T11:32:24.121411+00:00"
+  },
+  "producer": {
+    "name": "wordassistant",
+    "version": "2.0.0",
+    "integrity_schema_version": "1.0"
+  },
+  "source_registry": {
+    "evidence": {
+      "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\report-evidence.json",
+      "exists": true,
+      "sha256": "6657cf261451ce4f11612fdac4485ba10ba59ebb8e627ce711288f5710ed0e16",
+      "record_count": 10,
+      "record_ids": [
+        "doi-10-18653-v1-2020-emnlp-main-550",
+        "doi-10-18653-v1-2021-naacl-main-200",
+        "doi-10-18653-v1-2022-acl-long-297",
+        "doi-10-18653-v1-2023-eacl-main-148",
+        "doi-10-18653-v1-2024-eacl-demo-16",
+        "doi-10-18653-v1-2024-nllp-1-14",
+        "doi-10-18653-v1-2025-nllp-1-3",
+        "doi-10-18653-v1-2026-eacl-long-8",
+        "doi-10-18653-v1-2026-findings-eacl-110",
+        "doi-10-18653-v1-d19-1410"
+      ]
+    },
+    "record_count": 10,
+    "metadata": {}
+  },
+  "profile": {
+    "profile_id": "hcmunre_dacn_2026_2027",
+    "profile_version": 2,
+    "minimum_references": 10,
+    "prefer_primary_source": true,
+    "require_reviewed_sources": false,
+    "long_quote_words": 40,
+    "quote_citation_words": 8,
+    "repeated_opening_words": 3,
+    "repeated_opening_minimum": 4,
+    "ngram_size": 5,
+    "repeated_ngram_minimum": 4,
+    "review_punctuation": [
+      "em_dash",
+      "left_curly_double_quote",
+      "right_curly_double_quote",
+      "left_curly_single_quote",
+      "right_curly_single_quote",
+      "ellipsis",
+      "non_breaking_space"
+    ]
+  },
+  "disclosure": {
+    "declared": true,
+    "source": "document",
+    "statement": null
+  },
+  "audit_summary": {
+    "status": "WARN",
+    "gate_counts": {
+      "PASS": 6,
+      "WARN": 4,
+      "FAIL": 0
+    },
+    "document_sha256": "6b023d85c5b79439c80ef60f3abe9b64c6765a1815dc99bf2e8df136b64c3cf1",
+    "ai_detection_performed": false,
+    "detector_evasion_assistance": false
+  }
+}

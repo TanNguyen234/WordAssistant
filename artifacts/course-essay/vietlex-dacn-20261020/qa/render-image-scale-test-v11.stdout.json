@@ -1,0 +1,60 @@
+{
+  "overall_status": "FAIL",
+  "delivery_status": "FAIL",
+  "delivery_gates": {
+    "overall": "FAIL",
+    "render": "PASS",
+    "visual": "REVIEW_REQUIRED",
+    "native_word": "PASS"
+  },
+  "structural_status": "PASS",
+  "format_status": "FAIL",
+  "numbering_status": "PASS",
+  "table_geometry_status": "PASS",
+  "field_structure_status": "PASS",
+  "field_freshness_status": "STALE_OR_UNKNOWN",
+  "field_evaluation_status": "NOT_REQUESTED",
+  "render_status": "PASS",
+  "native_word_status": "PASS",
+  "visual_status": "REVIEW_REQUIRED",
+  "manual_review_required": true,
+  "issues": [
+    {
+      "severity": "ERROR",
+      "code": "insufficient_references",
+      "message": "Found 5 reference item(s) in bibliography section; profile requires at least 10."
+    }
+  ],
+  "inventory": {
+    "paragraphs": 583,
+    "tables": 15,
+    "sections": 3,
+    "images": 20,
+    "fields": {
+      "total_field_tags": 519,
+      "toc_field": true,
+      "page_field": true,
+      "page_fields": 139,
+      "toc_fields": 3,
+      "other_fields": 31
+    }
+  },
+  "render": {
+    "engine": "word",
+    "pdf_path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\.build-20261022\\image-scale-5-5in-test-v11.pdf",
+    "file_size_bytes": 2423971,
+    "page_count": 81,
+    "verified_pdf_page_count": 81
+  },
+  "visual_review_challenge": {
+    "token": "6bd79ecf971233a1bc0ccceaa6fe5596588afa79b358bd1182cc442abfa37406",
+    "page_count": 81,
+    "token_scope": "document SHA-256 plus ordered page-image SHA-256 and size; PDF SHA-256 is provenance only"
+  },
+  "visual_review_reuse": {
+    "version": 1,
+    "token": "wa-visual-reuse-v1:d5259e16b473fa83b7cba613e28ffe99c23cd9e4adde120eb0f6656782115f67"
+  },
+  "report_path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\qa\\render-image-scale-test-v11.json",
+  "report_sha256": "5fe91865545799016ebc7c7275e4bbbdd261a94f9efd67c9b3647c382447fcaa"
+}

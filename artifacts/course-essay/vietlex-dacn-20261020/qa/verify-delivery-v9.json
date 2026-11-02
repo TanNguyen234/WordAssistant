@@ -1,0 +1,57 @@
+{
+  "overall_status": "FAIL",
+  "structural_status": "PASS",
+  "format_status": "PASS",
+  "numbering_status": "NOT_APPLICABLE",
+  "table_geometry_status": "PASS",
+  "field_structure_status": "PASS",
+  "field_freshness_status": "STALE_OR_UNKNOWN",
+  "field_evaluation_status": "NOT_REQUESTED",
+  "field_status": "PASS",
+  "render_status": "FAIL",
+  "native_word_status": "NOT_REQUESTED",
+  "visual_status": "FAIL",
+  "manual_review_required": true,
+  "issues": [
+    {
+      "severity": "ERROR",
+      "code": "render_reuse_invalid",
+      "message": "Versioned visual-reuse token is missing or invalid."
+    }
+  ],
+  "field_evidence": {
+    "version": 1,
+    "operation": "field.update_all",
+    "sha256": "250ffff931c6826b74bbeb785554040964c4238b49391e4e1d2ee661789d1c6b",
+    "created_at": "2026-10-22T01:15:07.002017+00:00",
+    "backend": "word-native"
+  },
+  "field_evidence_status": "INFORMATIONAL_UNTRUSTED",
+  "delivery_status": "FAIL",
+  "delivery_gates": {
+    "overall": "FAIL",
+    "render": "FAIL",
+    "visual": "FAIL",
+    "native_word": "NOT_REQUESTED"
+  },
+  "file": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\qa\\staging\\VietLex_v9v_fields.docx",
+  "profile": "vietlex-course-essay-style-v9",
+  "variant": "capstone",
+  "validation_status": "PASS",
+  "valid": false,
+  "delivery_valid": false,
+  "inventory": {
+    "paragraphs": 556,
+    "tables": 15,
+    "sections": 3,
+    "images": 11,
+    "fields": {
+      "total_field_tags": 474,
+      "toc_field": true,
+      "page_field": true,
+      "page_fields": 133,
+      "toc_fields": 3,
+      "other_fields": 22
+    }
+  }
+}

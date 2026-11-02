@@ -1,0 +1,28 @@
+{
+  "file": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\qa\\staging\\VietLex_v9g_final_styled.docx",
+  "profile": "vietlex-course-essay-style-v9",
+  "variant": "capstone",
+  "valid": false,
+  "issues": [
+    {
+      "severity": "warning",
+      "code": "inner_cover_not_distinct",
+      "message": "Profile requires a separate inner cover page, but the second cover block does not start on a new page."
+    },
+    {
+      "severity": "warning",
+      "code": "blueprint_heading_level_mismatch",
+      "message": "Section 'KẾT LUẬN' has heading level 2 ('Heading 2'), expected level 1."
+    },
+    {
+      "severity": "warning",
+      "code": "blueprint_page_break_missing",
+      "message": "Section 'KẾT LUẬN' is required to start on a new page, but no page break was found before its heading."
+    },
+    {
+      "severity": "error",
+      "code": "blueprint_order",
+      "message": "Blueprint sections appear out of sequence in document."
+    }
+  ]
+}

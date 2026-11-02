@@ -1,0 +1,422 @@
+{
+  "schema_version": 1,
+  "document_sha256": "375c00fcccb9ff7f01a1f93888c11ed1cad53f8c9814ffa88bcbb1b95267c658",
+  "domain": "software",
+  "model_scope_reason": "Project-specific analysis; basic UML decisions are explicit rather than a fixed diagram quota.",
+  "model_decisions": [
+    {
+      "dimension": "use_case",
+      "disposition": "REQUIRED",
+      "reason": "User goals and permission boundaries need an explicit view.",
+      "authority": "User request for basic UML, HCMUNRE report analysis/design scope and current VietLex source",
+      "status": "REVIEWED",
+      "reviewer": "Codex source/content reviewer",
+      "review_date": "2026-10-25",
+      "assets": [
+        {
+          "editable_file": "assets/uml/02-use-cases.puml",
+          "editable_sha256": "d6ee0f9d1e9ce4d78a154b78aad924aafa3e7a886ac1118e16302bcfb388f53e",
+          "rendered_file": "assets/uml/02-use-cases.png",
+          "rendered_sha256": "b94f3df9f34a523c3a504ed9288ea1d32977ad7770bcce93d93798b75c983991",
+          "caption_title": "Use case chính và ranh giới chức năng",
+          "sources": [
+            {
+              "file": "D:\\Download\\ProfessionalLegalRAG\\app\\main.py",
+              "sha256": "5868c8f169e3fa3d895cc047b2c3f7285bd1fde49553225972d369c1e94bd254"
+            },
+            {
+              "file": "D:\\Download\\ProfessionalLegalRAG\\app\\api\\legal_routes.py",
+              "sha256": "dd8174fb644746f903419b022a62be05419b0ec1cd2718f6bb345c1dacc26f67"
+            },
+            {
+              "file": "D:\\Download\\ProfessionalLegalRAG\\app\\api\\workspace_routes.py",
+              "sha256": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c"
+            },
+            {
+              "file": "D:\\Download\\ProfessionalLegalRAG\\app\\api\\routes.py",
+              "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4"
+            }
+          ],
+          "semantic_review": "Main user/system goals. GET /; GET /search; GET /documents/{document_id}; GET /workspaces; POST /workspaces; GET /admin",
+          "notation_review": "Existing editable view reviewed; arrows and boundaries describe the stated static/source scope, not runtime verification."
+        }
+      ]
+    },
+    {
+      "dimension": "data",
+      "disposition": "REQUIRED",
+      "reason": "Implementation classes alone do not describe account/chat/workspace information relationships; two logical data views use class notation.",
+      "authority": "User request for basic UML, HCMUNRE report analysis/design scope and current VietLex source",
+      "status": "REVIEWED",
+      "reviewer": "Codex source/content reviewer",
+      "review_date": "2026-10-25",
+      "assets": [
+        {
+          "editable_file": "assets/uml/08-account-data-model.puml",
+          "editable_sha256": "1875af827c8f4b017a9a71b38ead915a904b6e23ae6d33af6689a15ac0e349ff",
+          "rendered_file": "assets/uml/08-account-data-model.png",
+          "rendered_sha256": "4eff42917d756dc0d194fcf36a330f7077757fa96be01005f15944debbd2d1e3",
+          "caption_title": "Mô hình dữ liệu tài khoản và hội thoại theo ký pháp lớp UML",
+          "sources": [
+            {
+              "file": "D:\\Download\\ProfessionalLegalRAG\\app\\account_database.py",
+              "sha256": "ea45262418275dff6566f2a245bd1063c2623cc7e5130306eb15df690fb26010"
+            },
+            {
+              "file": "D:\\Download\\ProfessionalLegalRAG\\app\\database.py",
+              "sha256": "303d772d30fe86c5bce45310381dd069176dcac6f7791e74f359266c795fe693"
+            }
+          ],
+          "semantic_review": "Account, authentication, conversation and interaction relationships. users/auth_sessions/chat_sessions/evaluation_logs; optional references",
+          "notation_review": "Reviewed actual rendered PlantUML. Multiplicities and embedded composition in data views are logical, not invented SQL constraints. Alternatives and terminal states are explicitly labelled."
+        },
+        {
+          "editable_file": "assets/uml/09-workspace-data-model.puml",
+          "editable_sha256": "93987eb2020cb8320213ac6082ccdbd9a4f0a572151ff602a0b9fdd9988847f7",
+          "rendered_file": "assets/uml/09-workspace-data-model.png",
+          "rendered_sha256": "4d3572fb1d8a02e45e57cee01eb9499521c6591981220bf5895e7d1a3749786d",
+          "caption_title": "Mô hình dữ liệu hồ sơ nghiên cứu theo ký pháp lớp UML",
+          "sources": [
+            {
+              "file": "D:\\Download\\ProfessionalLegalRAG\\app\\research_database.py",
+              "sha256": "33deda2a3a274f763731e2297d80f0261eb413c1906118a7f3421f7b1fc6e3b1"
+            },
+            {
+              "file": "D:\\Download\\ProfessionalLegalRAG\\app\\api\\workspace_routes.py",
+              "sha256": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c"
+            },
+            {
+              "file": "D:\\Download\\ProfessionalLegalRAG\\app\\services\\workspace_documents.py",
+              "sha256": "150499b525276c2c4e47add93fb08ddbb706160c807e84c1e63b658d4424c74e"
+            },
+            {
+              "file": "D:\\Download\\ProfessionalLegalRAG\\app\\api\\free_web_research_routes.py",
+              "sha256": "50dc8bb6d95429dadb380d438281e52c975d8ef86a8da73bb3073f9bd92175cf"
+            }
+          ],
+          "semantic_review": "Workspace embedded records, evidence selection and conditional events. documents/evidence/analyses/result.events; analysis_id",
+          "notation_review": "Reviewed actual rendered PlantUML. Multiplicities and embedded composition in data views are logical, not invented SQL constraints. Alternatives and terminal states are explicitly labelled."
+        }
+      ]
+    },
+    {
+      "dimension": "class",
+      "disposition": "REQUIRED",
+      "reason": "Retrieval data objects and retriever responsibilities support the OOP design discussion.",
+      "authority": "User request for basic UML, HCMUNRE report analysis/design scope and current VietLex source",
+      "status": "REVIEWED",
+      "reviewer": "Codex source/content reviewer",
+      "review_date": "2026-10-25",
+      "assets": [
+        {
+          "editable_file": "assets/uml/05-retrieval-classes.puml",
+          "editable_sha256": "bb6876da7eb85b0771d8faee844d941cccf7357f8da02eb4dd19016df4563f91",
+          "rendered_file": "assets/uml/05-retrieval-classes.png",
+          "rendered_sha256": "27b4195e2c40f47ad689057b4e8b0589b5b4c857c29beac282f31c9ee46eb5b5",
+          "caption_title": "Mô hình lớp cài đặt phục vụ truy xuất căn cứ",
+          "sources": [
+            {
+              "file": "D:\\Download\\ProfessionalLegalRAG\\app\\ingestion\\legal_text.py",
+              "sha256": "5f50ebe560b16640a541d216f4320cc5057906806e14e2cca1c6496e59602d34"
+            },
+            {
+              "file": "D:\\Download\\ProfessionalLegalRAG\\app\\services\\retrieval.py",
+              "sha256": "d03e94fa5dd7e09a291115317ed4dc57a98417212bc546c6a3c45f5909351411"
+            },
+            {
+              "file": "D:\\Download\\ProfessionalLegalRAG\\app\\services\\vertex_qdrant_retrieval.py",
+              "sha256": "982b40e14084ab2e9ec6dc8b8fed8b18d3f4c3ee3e4fce7e517dce68834716d6"
+            },
+            {
+              "file": "D:\\Download\\ProfessionalLegalRAG\\app\\services\\v3_article_expansion.py",
+              "sha256": "8cf50b03ef4a1fda62a39552baba97723a8214206776d4c5d8f5bcfbc7070cfe"
+            }
+          ],
+          "semantic_review": "Evidence and retrieval value objects. EvidenceChunk; RetrievalOutcome; LegalRetriever; VertexQdrantRetriever; V3ArticleExpansion",
+          "notation_review": "Existing editable view reviewed; arrows and boundaries describe the stated static/source scope, not runtime verification."
+        }
+      ]
+    },
+    {
+      "dimension": "activity",
+      "disposition": "REQUIRED",
+      "reason": "The search-to-document process requires decisions and failure/empty branches.",
+      "authority": "User request for basic UML, HCMUNRE report analysis/design scope and current VietLex source",
+      "status": "REVIEWED",
+      "reviewer": "Codex source/content reviewer",
+      "review_date": "2026-10-25",
+      "assets": [
+        {
+          "editable_file": "assets/uml/10-search-activity.puml",
+          "editable_sha256": "acb7a4d5c87814ca77faaf2776c08ed9ee88f2918de8cbfe1ff2706d24d34192",
+          "rendered_file": "assets/uml/10-search-activity.png",
+          "rendered_sha256": "e8f60bbac421bd29f10c56f14219a853a2434cbc64e1dc5f1d284df72757fbd3",
+          "caption_title": "Sơ đồ hoạt động tra cứu và mở văn bản",
+          "sources": [
+            {
+              "file": "D:\\Download\\ProfessionalLegalRAG\\app\\api\\legal_routes.py",
+              "sha256": "dd8174fb644746f903419b022a62be05419b0ec1cd2718f6bb345c1dacc26f67"
+            },
+            {
+              "file": "D:\\Download\\ProfessionalLegalRAG\\app\\services\\legal_browser.py",
+              "sha256": "a6c42cb32494ec2019d0e63306fb3c6c010534729908af23dc24489602770a96"
+            }
+          ],
+          "semantic_review": "Search, empty result, document opening and unavailable service branches. legal_search/legal_document; metadata/fulltext; 404/503",
+          "notation_review": "Reviewed actual rendered PlantUML. Multiplicities and embedded composition in data views are logical, not invented SQL constraints. Alternatives and terminal states are explicitly labelled."
+        }
+      ]
+    },
+    {
+      "dimension": "sequence",
+      "disposition": "REQUIRED",
+      "reason": "Chat and asynchronous source reading require temporal interaction views.",
+      "authority": "User request for basic UML, HCMUNRE report analysis/design scope and current VietLex source",
+      "status": "REVIEWED",
+      "reviewer": "Codex source/content reviewer",
+      "review_date": "2026-10-25",
+      "assets": [
+        {
+          "editable_file": "assets/uml/03-chat-sequence.puml",
+          "editable_sha256": "450814e3ece77cb86d5de821b8d25928d799afd4bc17938df3c3e5c8a56a6dcd",
+          "rendered_file": "assets/uml/03-chat-sequence.png",
+          "rendered_sha256": "2efacd08165f9b1a7d5a23bac90f6805ab5609777688133fcf848552c8ddeaa4",
+          "caption_title": "Luồng POST /chat từ đầu vào đến trả HTML",
+          "sources": [
+            {
+              "file": "D:\\Download\\ProfessionalLegalRAG\\app\\api\\routes.py",
+              "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4"
+            },
+            {
+              "file": "D:\\Download\\ProfessionalLegalRAG\\app\\services\\rag_pipeline.py",
+              "sha256": "c9a3a7cca1449962b684432a6cd3cc518a0d6262756941d9ef61d16d37c7ab21"
+            },
+            {
+              "file": "D:\\Download\\ProfessionalLegalRAG\\app\\services\\retrieval.py",
+              "sha256": "d03e94fa5dd7e09a291115317ed4dc57a98417212bc546c6a3c45f5909351411"
+            }
+          ],
+          "semantic_review": "Chat request/cache/retrieval/response branches. chat; run_advanced_rag; configured retrieval; cache/input/output branches",
+          "notation_review": "Existing editable view reviewed; arrows and boundaries describe the stated static/source scope, not runtime verification."
+        },
+        {
+          "editable_file": "assets/uml/07-official-source-read-sequence.puml",
+          "editable_sha256": "867a40670be319e38d40762450701799a2c520c9b9a7ab97a33111054f48386b",
+          "rendered_file": "assets/uml/07-official-source-read-sequence.png",
+          "rendered_sha256": "c44598d80fa6195faeb837371d4d744e6b9f24f385aedeb634eb1d0bb52032c5",
+          "caption_title": "Luồng đọc nguồn chính thức và hủy lượt thực hiện trong hồ sơ",
+          "sources": [
+            {
+              "file": "D:\\Download\\ProfessionalLegalRAG\\app\\api\\free_web_research_routes.py",
+              "sha256": "50dc8bb6d95429dadb380d438281e52c975d8ef86a8da73bb3073f9bd92175cf"
+            },
+            {
+              "file": "D:\\Download\\ProfessionalLegalRAG\\app\\research_database.py",
+              "sha256": "33deda2a3a274f763731e2297d80f0261eb413c1906118a7f3421f7b1fc6e3b1"
+            },
+            {
+              "file": "D:\\Download\\ProfessionalLegalRAG\\app\\services\\free_web_research.py",
+              "sha256": "e55f4315786dc598102bcf55ef7c75b37823c8297298a67b4c3c246bbef1116f"
+            },
+            {
+              "file": "D:\\Download\\ProfessionalLegalRAG\\app\\services\\official_document_reader.py",
+              "sha256": "2918df210c1ac4e8cb1c1dd04f53ae00aafef858a93082ee4cb5d483ceabb470"
+            },
+            {
+              "file": "D:\\Download\\ProfessionalLegalRAG\\docs\\CURRENT_ARCHITECTURE.md",
+              "sha256": "a7b2daa8605223f45afc0e16bcdf8f3b8b57a07b9700bbba9e0787ed2ab1ebab"
+            }
+          ],
+          "semantic_review": "How an owner-scoped official-source read persists events, replays results, and handles cancel.. POST /workspaces/{workspace_id}/research/read; GET /workspaces/{workspace_id}/research/runs/{run_id}; POST /workspaces/{workspace_id}/research/runs/{run_id}/cancel; owner, CSRF, checkpoints",
+          "notation_review": "Existing editable view reviewed; arrows and boundaries describe the stated static/source scope, not runtime verification."
+        }
+      ]
+    },
+    {
+      "dimension": "state",
+      "disposition": "REQUIRED",
+      "reason": "Cancellation, partial results, terminal states and stale leases require a lifecycle view.",
+      "authority": "User request for basic UML, HCMUNRE report analysis/design scope and current VietLex source",
+      "status": "REVIEWED",
+      "reviewer": "Codex source/content reviewer",
+      "review_date": "2026-10-25",
+      "assets": [
+        {
+          "editable_file": "assets/uml/11-research-state.puml",
+          "editable_sha256": "5e8dbfc83ca60f0b37c360c4e313add0f88e10bf51c4b5bcacdc1122e33648c8",
+          "rendered_file": "assets/uml/11-research-state.png",
+          "rendered_sha256": "6c5ea972f854d0f2531de6e9060b213a3ae8326666fdc7e562f802ec8bc2c8d7",
+          "caption_title": "Sơ đồ trạng thái của lượt đọc nguồn trong hồ sơ",
+          "sources": [
+            {
+              "file": "D:\\Download\\ProfessionalLegalRAG\\app\\research_database.py",
+              "sha256": "33deda2a3a274f763731e2297d80f0261eb413c1906118a7f3421f7b1fc6e3b1"
+            },
+            {
+              "file": "D:\\Download\\ProfessionalLegalRAG\\app\\services\\free_web_research.py",
+              "sha256": "e55f4315786dc598102bcf55ef7c75b37823c8297298a67b4c3c246bbef1116f"
+            },
+            {
+              "file": "D:\\Download\\ProfessionalLegalRAG\\app\\api\\free_web_research_routes.py",
+              "sha256": "50dc8bb6d95429dadb380d438281e52c975d8ef86a8da73bb3073f9bd92175cf"
+            }
+          ],
+          "semantic_review": "Legal-source research terminal states, cancellation and expired lease. running/complete/partial/failed/cancelled/interrupted; checkpoint guards",
+          "notation_review": "Reviewed actual rendered PlantUML. Multiplicities and embedded composition in data views are logical, not invented SQL constraints. Alternatives and terminal states are explicitly labelled."
+        }
+      ]
+    },
+    {
+      "dimension": "component",
+      "disposition": "REQUIRED",
+      "reason": "Retrieval alternatives, stores and ingestion boundaries support architecture tradeoffs.",
+      "authority": "User request for basic UML, HCMUNRE report analysis/design scope and current VietLex source",
+      "status": "REVIEWED",
+      "reviewer": "Codex source/content reviewer",
+      "review_date": "2026-10-25",
+      "assets": [
+        {
+          "editable_file": "assets/uml/04-retrieval-architecture.puml",
+          "editable_sha256": "21fda7a258f223face03a696b092d5e7d256995c23806240cafb548ad17b4eca",
+          "rendered_file": "assets/uml/04-retrieval-architecture.png",
+          "rendered_sha256": "65c393dd12b6195b1947410300ac852ccf925f8e5c508253f4a80283d7e114f3",
+          "caption_title": "Kiến trúc truy xuất theo hai cấu hình",
+          "sources": [
+            {
+              "file": "D:\\Download\\ProfessionalLegalRAG\\docs\\CURRENT_ARCHITECTURE.md",
+              "sha256": "a7b2daa8605223f45afc0e16bcdf8f3b8b57a07b9700bbba9e0787ed2ab1ebab"
+            },
+            {
+              "file": "D:\\Download\\ProfessionalLegalRAG\\app\\config.py",
+              "sha256": "ae7f36073064051f9414f5a2c07ca9aecf6ceb05a9e5039fd231324fc7333df4"
+            },
+            {
+              "file": "D:\\Download\\ProfessionalLegalRAG\\app\\services\\retrieval.py",
+              "sha256": "d03e94fa5dd7e09a291115317ed4dc57a98417212bc546c6a3c45f5909351411"
+            },
+            {
+              "file": "D:\\Download\\ProfessionalLegalRAG\\app\\services\\vertex_qdrant_retrieval.py",
+              "sha256": "982b40e14084ab2e9ec6dc8b8fed8b18d3f4c3ee3e4fce7e517dce68834716d6"
+            },
+            {
+              "file": "D:\\Download\\ProfessionalLegalRAG\\app\\services\\v3_article_expansion.py",
+              "sha256": "8cf50b03ef4a1fda62a39552baba97723a8214206776d4c5d8f5bcfbc7070cfe"
+            }
+          ],
+          "semantic_review": "Current explicit retrieval contracts. USE_LEGACY_FREE_PIPELINE; VertexQdrantRetriever; LegalRetriever; article expansion",
+          "notation_review": "Existing editable view reviewed; arrows and boundaries describe the stated static/source scope, not runtime verification."
+        },
+        {
+          "editable_file": "assets/uml/06-ingestion-dataflow.puml",
+          "editable_sha256": "dc16de2592458182717e383ad42c418e70f6e02409dc11b29b29c03d15c06a5e",
+          "rendered_file": "assets/uml/06-ingestion-dataflow.png",
+          "rendered_sha256": "f02091158db87ef5457fe164ad45118a6380629025fc625a2a349695e1077e2f",
+          "caption_title": "Luồng nạp dữ liệu VietLex và tạo các chỉ mục",
+          "sources": [
+            {
+              "file": "D:\\Download\\ProfessionalLegalRAG\\docs\\handbook\\02-ingestion-and-indexes.md",
+              "sha256": "729a9de3be2831ee5fb22702d27528dd00338d7519621e85e6a6d7ba4c39aa84"
+            },
+            {
+              "file": "D:\\Download\\ProfessionalLegalRAG\\docs\\CURRENT_ARCHITECTURE.md",
+              "sha256": "a7b2daa8605223f45afc0e16bcdf8f3b8b57a07b9700bbba9e0787ed2ab1ebab"
+            }
+          ],
+          "semantic_review": "How pinned source records become content stores and separate search/vector lanes.. Pinned manifest/checksum; metadata/body join; content hash; FTS and vector contracts; capacity-r2 limits",
+          "notation_review": "Existing editable view reviewed; arrows and boundaries describe the stated static/source scope, not runtime verification."
+        }
+      ]
+    },
+    {
+      "dimension": "deployment",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The report analyzes application/component design; no checked host/network deployment specification or deployed revision parity was supplied. Architecture views remain logical. A physical deployment model would invent topology.",
+      "authority": "Current project evidence boundary; no new production deployment claim",
+      "status": "REVIEWED",
+      "reviewer": "Codex source/content reviewer",
+      "review_date": "2026-10-25"
+    }
+  ],
+  "section_reviews": [
+    {
+      "heading": "MỞ ĐẦU",
+      "status": "REVIEWED",
+      "reviewer": "Codex editorial/source reviewer",
+      "review_date": "2026-10-25",
+      "argument": "Research questions, limited project scope and contributions lead into the chapter plan.",
+      "evidence": "Distinguishes saved historical evidence from public UI observation and fresh experiments not run.",
+      "terminology": "Explains research scope in Vietnamese.",
+      "sufficiency": "Substantive opening, no numeric performance promise."
+    },
+    {
+      "heading": "Cơ sở lý thuyết và khung phân tích",
+      "status": "REVIEWED",
+      "reviewer": "Codex editorial/source reviewer",
+      "review_date": "2026-10-25",
+      "argument": "Connects retrieval, grounding, evaluation layers and OOP to the project questions.",
+      "evidence": "Existing reviewed academic references preserved.",
+      "terminology": "Technical terms introduced with Vietnamese explanations.",
+      "sufficiency": "Theory is used to derive analysis criteria, not just define acronyms."
+    },
+    {
+      "heading": "PHÂN TÍCH NGHIỆP VỤ VÀ MÔ HÌNH CHỨC NĂNG",
+      "status": "REVIEWED",
+      "reviewer": "Codex editorial/source reviewer",
+      "review_date": "2026-10-25",
+      "argument": "Roles lead to use cases, alternate outcomes, activity/state behavior and acceptance criteria.",
+      "evidence": "Current route/service evidence; UI observations are separate.",
+      "terminology": "61 final paragraph rewrites include all six use cases.",
+      "sufficiency": "Each operation explains purpose and permission/error consequences."
+    },
+    {
+      "heading": "PHÂN TÍCH VÀ THIẾT KẾ HƯỚNG ĐỐI TƯỢNG",
+      "status": "REVIEWED",
+      "reviewer": "Codex editorial/source reviewer",
+      "review_date": "2026-10-25",
+      "argument": "Domain-data relationships precede implementation class responsibilities and maintainability tradeoffs.",
+      "evidence": "Account/chat/workspace records checked; no ORM/foreign-key invention.",
+      "terminology": "Logical record and implementation class are explicitly distinguished.",
+      "sufficiency": "Each new data figure has substantive analysis of ownership, optionality and integrity."
+    },
+    {
+      "heading": "KIẾN TRÚC, DỮ LIỆU, LỰA CHỌN CÔNG NGHỆ VÀ THIẾT KẾ THÀNH PHẦN",
+      "status": "REVIEWED",
+      "reviewer": "Codex editorial/source reviewer",
+      "review_date": "2026-10-25",
+      "argument": "Explains why alternatives affect consistency, grounding, capacity and maintenance.",
+      "evidence": "V3 and legacy configuration snapshots remain separately bounded.",
+      "terminology": "Narrative recast in Vietnamese; exact store/model identifiers retained for traceability.",
+      "sufficiency": "Architecture tradeoffs and ingestion risks developed instead of source-file inventories."
+    },
+    {
+      "heading": "KIỂM THỬ, BẢO MẬT VÀ ĐÁNH GIÁ HỆ THỐNG",
+      "status": "REVIEWED",
+      "reviewer": "Codex editorial/source reviewer",
+      "review_date": "2026-10-25",
+      "argument": "Separates test success, retrieval quality, answer quality and evidence sufficiency.",
+      "evidence": "Historical suite/benchmark denominators and non-comparability retained; no fresh-run claim.",
+      "terminology": "Evaluation prose fully revised, including metric definitions, dates and denominator interpretation; numeric facts and citation fields preserved.",
+      "sufficiency": "No inference of legal correctness from infrastructure success."
+    },
+    {
+      "heading": "ĐỀ XUẤT CẢI TIẾN VÀ KẾ HOẠCH KIỂM CHỨNG",
+      "status": "REVIEWED",
+      "reviewer": "Codex editorial/source reviewer",
+      "review_date": "2026-10-25",
+      "argument": "Prioritizes source integrity and permissions, then evaluation and maintenance.",
+      "evidence": "Future protocol is explicitly proposed; not described as completed results.",
+      "terminology": "Technical acceptance plans rewritten as academic reasoning.",
+      "sufficiency": "Clear reason, method and result boundary for each proposed improvement."
+    },
+    {
+      "heading": "KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN",
+      "status": "REVIEWED",
+      "reviewer": "Codex editorial/source reviewer",
+      "review_date": "2026-10-25",
+      "argument": "Returns to research scope and practical limitations.",
+      "evidence": "No current-law validity or protected-route execution invented.",
+      "terminology": "Vietnamese academic closing retained.",
+      "sufficiency": "Conclusion tied to analyzed evidence and remaining work."
+    }
+  ]
+}

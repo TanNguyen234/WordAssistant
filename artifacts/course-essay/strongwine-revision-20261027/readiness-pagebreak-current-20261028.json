@@ -1,0 +1,194 @@
+{
+  "schema_version": 1,
+  "project_dir": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\strongwine-revision-20261027",
+  "output_docx": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\strongwine-revision-20261027\\StrongWine_20261027_pagebreak_final.docx",
+  "document_sha256": "ea7c4f45cdb4d8009a7184b57f6db2eee701f8589fe5bd1eb7e4dfa6e267f8bd",
+  "status": "FAIL",
+  "gates": {
+    "word_delivery": {
+      "status": "FAIL",
+      "checks": [
+        {
+          "check": "output_docx",
+          "status": "PASS",
+          "detail": "Found DOCX with SHA-256 ea7c4f45cdb4d8009a7184b57f6db2eee701f8589fe5bd1eb7e4dfa6e267f8bd."
+        },
+        {
+          "check": "verify.delivery_status",
+          "status": "FAIL",
+          "detail": "WordAssistant reports delivery FAIL."
+        },
+        {
+          "check": "verify_status_consistency",
+          "status": "PASS",
+          "detail": "Verify overall and delivery statuses are consistent."
+        },
+        {
+          "check": "verify.render_status",
+          "status": "PASS",
+          "detail": "render_status passed."
+        },
+        {
+          "check": "verify.visual_status",
+          "status": "INCOMPLETE",
+          "detail": "visual_status is 'REVIEW_REQUIRED'."
+        },
+        {
+          "check": "verify_document_hash",
+          "status": "PASS",
+          "detail": "Verify render is bound to the current DOCX hash."
+        }
+      ]
+    },
+    "content_and_sources": {
+      "status": "INCOMPLETE",
+      "checks": [
+        {
+          "check": "rubric",
+          "status": "INCOMPLETE",
+          "detail": "Rubric is missing; its requirements cannot be confirmed."
+        },
+        {
+          "check": "assignment",
+          "status": "INCOMPLETE",
+          "detail": "Assignment source and assignment_summary are missing."
+        },
+        {
+          "check": "requirements_matrix",
+          "status": "INCOMPLETE",
+          "detail": "requirements-matrix.csv is missing."
+        },
+        {
+          "check": "official_rubric_in_docx",
+          "status": "PASS",
+          "detail": "Official rubric appendix was not requested for this project."
+        },
+        {
+          "check": "cover_metadata",
+          "status": "INCOMPLETE",
+          "detail": "cover-metadata.csv is missing."
+        },
+        {
+          "check": "project_structure_inventory",
+          "status": "INCOMPLETE",
+          "detail": "structure-parity.csv is missing."
+        },
+        {
+          "check": "project_visual_inventory",
+          "status": "INCOMPLETE",
+          "detail": "asset-parity.csv is missing."
+        },
+        {
+          "check": "claim_evidence",
+          "status": "INCOMPLETE",
+          "detail": "claim-evidence.csv is missing."
+        },
+        {
+          "check": "acceptance_assignment_and_rubric_checked",
+          "status": "INCOMPLETE",
+          "detail": "Required acceptance check is not defined."
+        },
+        {
+          "check": "acceptance_cover_metadata_fields_verified",
+          "status": "INCOMPLETE",
+          "detail": "Required acceptance check is not defined."
+        },
+        {
+          "check": "acceptance_project_structure_inventory_reviewed",
+          "status": "INCOMPLETE",
+          "detail": "Required acceptance check is not defined."
+        },
+        {
+          "check": "acceptance_project_visual_inventory_reviewed",
+          "status": "INCOMPLETE",
+          "detail": "Required acceptance check is not defined."
+        },
+        {
+          "check": "acceptance_all_required_claims_mapped_to_reviewed_evidence",
+          "status": "INCOMPLETE",
+          "detail": "Required acceptance check is not defined."
+        },
+        {
+          "check": "acceptance_all_integrity_warnings_reviewed_and_dispositioned",
+          "status": "INCOMPLETE",
+          "detail": "Required acceptance check is not defined."
+        },
+        {
+          "check": "acceptance_source_routes_and_templates_checked",
+          "status": "INCOMPLETE",
+          "detail": "Required acceptance check is not defined."
+        },
+        {
+          "check": "acceptance_wireframes_and_runtime_captures_distinguished",
+          "status": "INCOMPLETE",
+          "detail": "Required acceptance check is not defined."
+        },
+        {
+          "check": "acceptance_figure_list_rebuilt_from_captions",
+          "status": "INCOMPLETE",
+          "detail": "Required acceptance check is not defined."
+        },
+        {
+          "check": "acceptance_word_fields_updated_and_saved",
+          "status": "INCOMPLETE",
+          "detail": "Required acceptance check is not defined."
+        },
+        {
+          "check": "acceptance_all_rendered_pages_visually_reviewed",
+          "status": "INCOMPLETE",
+          "detail": "Required acceptance check is not defined."
+        },
+        {
+          "check": "acceptance_crosswalk",
+          "status": "INCOMPLETE",
+          "detail": "Acceptance rows need complete, evidence-backed review: rows=['S01', 'S02', 'S03', 'S04', 'S05', 'S06', 'S07', 'S08'], missing_categories=[]."
+        },
+        {
+          "check": "integrity_document_hash",
+          "status": "PASS",
+          "detail": "Integrity audit is bound to the current DOCX hash."
+        },
+        {
+          "check": "integrity_gate_statuses",
+          "status": "PASS",
+          "detail": "Every integrity gate has a recognized status."
+        },
+        {
+          "check": "integrity_source_evidence",
+          "status": "INCOMPLETE",
+          "detail": "Integrity source_evidence gate is 'WARN'."
+        },
+        {
+          "check": "integrity_hard_gates",
+          "status": "PASS",
+          "detail": "No integrity gate is marked FAIL."
+        },
+        {
+          "check": "integrity_report_consistency",
+          "status": "PASS",
+          "detail": "Overall audit status matches its warning gates."
+        },
+        {
+          "check": "integrity_warning_dispositions",
+          "status": "INCOMPLETE",
+          "detail": "Integrity warnings exist but no disposition file is present."
+        }
+      ]
+    },
+    "submission_readiness": {
+      "status": "FAIL",
+      "checks": [
+        {
+          "check": "word_delivery",
+          "status": "FAIL",
+          "detail": "See word_delivery checks."
+        },
+        {
+          "check": "content_and_sources",
+          "status": "INCOMPLETE",
+          "detail": "See content_and_sources checks."
+        }
+      ]
+    }
+  }
+}

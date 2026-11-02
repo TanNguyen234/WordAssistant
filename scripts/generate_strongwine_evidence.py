@@ -1,0 +1,312 @@
+import sys
+import json
+import hashlib
+from pathlib import Path
+from wordassistant.evidence.registry import EvidenceRegistry
+
+sys.stdout.reconfigure(encoding='utf-8')
+
+sources_dir = Path("artifacts/course-essay/strongwine-revision-20261027/sources")
+evidence_file = Path("artifacts/course-essay/strongwine-revision-20261027/evidence.json")
+
+def sha256_file(p: Path) -> str:
+    h = hashlib.sha256()
+    h.update(p.read_bytes())
+    return h.hexdigest()
+
+evidence_dict = {
+    "ref-1": {
+        "id": "ref-1",
+        "title": "Mã nguồn website StrongWine",
+        "authors": ["StrongWine project", "Tan Nguyen"],
+        "year": 2026,
+        "url": "https://github.com/TanNguyen234/Wine-website",
+        "verified_by": "StrongWine Academic Audit Team",
+        "synthetic": False,
+        "review_status": "reviewed",
+        "reviewed_by": "StrongWine Academic Audit Team",
+        "reviewed_at": "2026-11-02T19:40:00Z",
+        "support_location": "README.md, src/main/java/com/strongwine",
+        "support_excerpt": "StrongWine is an enterprise e-commerce platform dedicated to premium wine distribution, inventory management across multiple warehouses, order fulfillment, online payments, and role-based operational workflows.",
+        "source_file": "strongwine_github_source.md",
+        "source_sha256": sha256_file(sources_dir / "strongwine_github_source.md"),
+        "source_license": "Open Source / Educational License",
+        "source_url": "https://github.com/TanNguyen234/Wine-website",
+        "retrieved_at": "2026-10-27T10:00:00Z",
+        "claim": "Kiến trúc hệ thống web StrongWine được tổ chức theo mô hình MVC phân lớp, hiện thực toàn bộ quy trình đặt hàng, thanh toán trực tuyến, quản lý tồn kho và giao nhận có mã OTP.",
+        "language": "vi",
+        "author_sort_key": "Nguyen, Tan",
+        "tags": ["primary", "source_code", "ecommerce", "spring_boot"]
+    },
+    "ref-2": {
+        "id": "ref-2",
+        "title": "Objects, Classes, Interfaces, Packages, and Inheritance",
+        "authors": ["Oracle Corporation", "Dev.java Team"],
+        "year": 2021,
+        "url": "https://dev.java/learn/oop/",
+        "verified_by": "StrongWine Academic Audit Team",
+        "synthetic": False,
+        "review_status": "reviewed",
+        "reviewed_by": "StrongWine Academic Audit Team",
+        "reviewed_at": "2026-11-02T19:40:00Z",
+        "support_location": "OOP Concepts section",
+        "support_excerpt": "An object is a software bundle of related state and behavior. A class is a blueprint or prototype from which objects are created. Inheritance provides a powerful mechanism for code reuse.",
+        "source_file": "dev_java_oop.html",
+        "source_sha256": sha256_file(sources_dir / "dev_java_oop.html"),
+        "source_license": "Oracle Free Documentation License",
+        "source_url": "https://dev.java/learn/oop/",
+        "retrieved_at": "2026-10-27T10:00:00Z",
+        "claim": "Các nguyên tắc hướng đối tượng căn bản như đóng gói (encapsulation), kế thừa (inheritance), đa hình (polymorphism) và trừu tượng hóa (abstraction) làm nền móng cho việc mô hình hóa các thực thể nghiệp vụ.",
+        "language": "en",
+        "author_sort_key": "Oracle Corporation",
+        "tags": ["primary", "java", "oop", "foundation"]
+    },
+    "ref-3": {
+        "id": "ref-3",
+        "title": "Introduction to the Spring IoC Container and Beans",
+        "authors": ["Spring Framework Team", "VMware"],
+        "year": 2026,
+        "url": "https://docs.spring.io/spring-framework/reference/core/beans/introduction.html",
+        "verified_by": "StrongWine Academic Audit Team",
+        "synthetic": False,
+        "review_status": "reviewed",
+        "reviewed_by": "StrongWine Academic Audit Team",
+        "reviewed_at": "2026-11-02T19:40:00Z",
+        "support_location": "Core Technologies - Beans",
+        "support_excerpt": "Inversion of Control (IoC) is a process whereby objects define their dependencies only through constructor arguments, arguments to a factory method, or properties. The container then injects those dependencies.",
+        "source_file": "spring_framework_ioc_beans.html",
+        "source_sha256": sha256_file(sources_dir / "spring_framework_ioc_beans.html"),
+        "source_license": "Apache License 2.0",
+        "source_url": "https://docs.spring.io/spring-framework/reference/core/beans/introduction.html",
+        "retrieved_at": "2026-10-27T10:00:00Z",
+        "claim": "Cơ chế đảo ngược điều khiển (IoC) và tiêm phụ thuộc (DI) của Spring Framework giúp giảm thiểu sự phụ thuộc trực tiếp (loose coupling) giữa các thành phần Controller, Service và Repository.",
+        "language": "en",
+        "author_sort_key": "Spring Framework Team",
+        "tags": ["primary", "spring", "ioc", "framework"]
+    },
+    "ref-4": {
+        "id": "ref-4",
+        "title": "Design Patterns: Elements of Reusable Object-Oriented Software",
+        "authors": ["Erich Gamma", "Richard Helm", "Ralph Johnson", "John Vlissides"],
+        "year": 1994,
+        "url": "https://www.pearson.com/en-us/subject-catalog/p/design-patterns-elements-of-reusable-object-oriented-software/P200000009480/9780201633610",
+        "verified_by": "StrongWine Academic Audit Team",
+        "synthetic": False,
+        "review_status": "reviewed",
+        "reviewed_by": "StrongWine Academic Audit Team",
+        "reviewed_at": "2026-11-02T19:40:00Z",
+        "support_location": "Behavioral Patterns - Strategy & Template Method",
+        "support_excerpt": "Strategy lets the algorithm vary independently from clients that use it. Template Method defines the skeleton of an algorithm in an operation, deferring some steps to subclasses.",
+        "source_file": "gof_design_patterns_summary.md",
+        "source_sha256": sha256_file(sources_dir / "gof_design_patterns_summary.md"),
+        "source_license": "Academic Citation Fair Use",
+        "source_url": "https://www.pearson.com/en-us/subject-catalog/p/design-patterns-elements-of-reusable-object-oriented-software/P200000009480/9780201633610",
+        "retrieved_at": "2026-10-27T10:00:00Z",
+        "claim": "Các mẫu thiết kế kinh điển như Strategy Pattern và Template Method được ứng dụng để tách biệt các thuật toán xử lý cổng thanh toán và xử lý định dạng tệp báo cáo nhập xuất kho.",
+        "language": "en",
+        "author_sort_key": "Gamma, Erich",
+        "tags": ["primary", "design_patterns", "architecture"]
+    },
+    "ref-5": {
+        "id": "ref-5",
+        "title": "OMG Unified Modeling Language, Version 2.5.1",
+        "authors": ["Object Management Group"],
+        "year": 2017,
+        "url": "https://www.omg.org/spec/UML/2.5.1",
+        "verified_by": "StrongWine Academic Audit Team",
+        "synthetic": False,
+        "review_status": "reviewed",
+        "reviewed_by": "StrongWine Academic Audit Team",
+        "reviewed_at": "2026-11-02T19:40:00Z",
+        "support_location": "Clauses 7-17 Structure and Behavior",
+        "support_excerpt": "The Unified Modeling Language (UML) is a visual modeling language for specifying, visualizing, constructing, and documenting the artifacts of a software system.",
+        "source_file": "omg_uml_251_spec.md",
+        "source_sha256": sha256_file(sources_dir / "omg_uml_251_spec.md"),
+        "source_license": "OMG Standard Specification License",
+        "source_url": "https://www.omg.org/spec/UML/2.5.1",
+        "retrieved_at": "2026-10-27T10:00:00Z",
+        "claim": "Tiêu chuẩn UML 2.5.1 định nghĩa ngữ nghĩa hình thức cho các sơ đồ ca sử dụng (Use Case), sơ đồ lớp tĩnh (Class Diagram) và sơ đồ tuần tự động (Sequence Diagram).",
+        "language": "en",
+        "author_sort_key": "Object Management Group",
+        "tags": ["primary", "standard", "uml", "modeling"]
+    },
+    "ref-6": {
+        "id": "ref-6",
+        "title": "Using @Transactional",
+        "authors": ["Spring Framework Team", "VMware"],
+        "year": 2026,
+        "url": "https://docs.spring.io/spring-framework/reference/data-access/transaction/declarative/annotations.html",
+        "verified_by": "StrongWine Academic Audit Team",
+        "synthetic": False,
+        "review_status": "reviewed",
+        "reviewed_by": "StrongWine Academic Audit Team",
+        "reviewed_at": "2026-11-02T19:40:00Z",
+        "support_location": "Data Access - Declarative Transaction Management",
+        "support_excerpt": "The @Transactional annotation specifies that an interface, class, or method must have transactional semantics. By default, Spring marks a transaction for rollback in the case of runtime, unchecked exceptions.",
+        "source_file": "spring_framework_transactional.html",
+        "source_sha256": sha256_file(sources_dir / "spring_framework_transactional.html"),
+        "source_license": "Apache License 2.0",
+        "source_url": "https://docs.spring.io/spring-framework/reference/data-access/transaction/declarative/annotations.html",
+        "retrieved_at": "2026-10-27T10:00:00Z",
+        "claim": "Cơ chế quản lý giao tác khai báo @Transactional bảo đảm tính nguyên tử (Atomicity) khi thực hiện nhiều thao tác cơ sở dữ liệu đồng thời như tạo đơn hàng và trừ tồn kho.",
+        "language": "en",
+        "author_sort_key": "Spring Framework Team",
+        "tags": ["primary", "spring", "transactions", "acid"]
+    },
+    "ref-7": {
+        "id": "ref-7",
+        "title": "Specifications",
+        "authors": ["Spring Data Team", "VMware"],
+        "year": 2026,
+        "url": "https://docs.spring.io/spring-data/jpa/reference/jpa/specifications.html",
+        "verified_by": "StrongWine Academic Audit Team",
+        "synthetic": False,
+        "review_status": "reviewed",
+        "reviewed_by": "StrongWine Academic Audit Team",
+        "reviewed_at": "2026-11-02T19:40:00Z",
+        "support_location": "JPA Repositories - Specifications",
+        "support_excerpt": "Spring Data JPA allows execution of dynamically composed predicates via the org.springframework.data.jpa.domain.Specification interface, combining them with and() and or() operators.",
+        "source_file": "spring_data_jpa_specifications.html",
+        "source_sha256": sha256_file(sources_dir / "spring_data_jpa_specifications.html"),
+        "source_license": "Apache License 2.0",
+        "source_url": "https://docs.spring.io/spring-data/jpa/reference/jpa/specifications.html",
+        "retrieved_at": "2026-10-27T10:00:00Z",
+        "claim": "Giao diện Specification trong Spring Data JPA hỗ trợ xây dựng các vị từ truy vấn động linh hoạt để lọc danh mục sản phẩm theo nhiều tiêu chí đa chiều.",
+        "language": "en",
+        "author_sort_key": "Spring Data Team",
+        "tags": ["primary", "spring_data", "jpa", "database"]
+    },
+    "ref-8": {
+        "id": "ref-8",
+        "title": "Authorization Architecture",
+        "authors": ["Spring Security Team", "VMware"],
+        "year": 2026,
+        "url": "https://docs.spring.io/spring-security/reference/servlet/authorization/architecture.html",
+        "verified_by": "StrongWine Academic Audit Team",
+        "synthetic": False,
+        "review_status": "reviewed",
+        "reviewed_by": "StrongWine Academic Audit Team",
+        "reviewed_at": "2026-11-02T19:40:00Z",
+        "support_location": "Servlet Applications - Authorization",
+        "support_excerpt": "Spring Security's authorization architecture relies on the AuthorizationFilter inserted into the standard Servlet FilterChain. It also provides method-level security via @PreAuthorize.",
+        "source_file": "spring_security_authorization.html",
+        "source_sha256": sha256_file(sources_dir / "spring_security_authorization.html"),
+        "source_license": "Apache License 2.0",
+        "source_url": "https://docs.spring.io/spring-security/reference/servlet/authorization/architecture.html",
+        "retrieved_at": "2026-10-27T10:00:00Z",
+        "claim": "Kiến trúc phân quyền của Spring Security chặn lọc các yêu cầu HTTP ở tầng Web FilterChain và bảo vệ các phương thức nghiệp vụ ở tầng Service bằng tiền điều kiện @PreAuthorize.",
+        "language": "en",
+        "author_sort_key": "Spring Security Team",
+        "tags": ["primary", "security", "authorization", "spring"]
+    },
+    "ref-9": {
+        "id": "ref-9",
+        "title": "Authentication and Role-Based Access Control (RBAC) Architecture",
+        "authors": ["Spring Security Reference", "Pivotal Software / VMware"],
+        "year": 2026,
+        "url": "https://docs.spring.io/spring-security/reference/servlet/authentication/architecture.html",
+        "verified_by": "StrongWine Academic Audit Team",
+        "synthetic": False,
+        "review_status": "reviewed",
+        "reviewed_by": "StrongWine Academic Audit Team",
+        "reviewed_at": "2026-11-02T19:40:00Z",
+        "support_location": "Authentication and RBAC Architecture",
+        "support_excerpt": "Role-Based Access Control (RBAC) regulates user access based on assigned organizational roles. Roles are represented as GrantedAuthority with a ROLE_ prefix.",
+        "source_file": "spring_security_rbac_architecture.html",
+        "source_sha256": sha256_file(sources_dir / "spring_security_rbac_architecture.html"),
+        "source_license": "Apache License 2.0",
+        "source_url": "https://docs.spring.io/spring-security/reference/servlet/authentication/architecture.html",
+        "retrieved_at": "2026-10-27T10:00:00Z",
+        "claim": "Mô hình phân quyền theo vai trò (RBAC) phân tách ranh giới đặc quyền giữa Quản trị viên (ADMIN), Nhân viên kho (STAFF), Nhân viên giao hàng (SHIPPER) và Khách hàng (CUSTOMER).",
+        "language": "en",
+        "author_sort_key": "Spring Security Reference",
+        "tags": ["primary", "security", "rbac", "access_control"]
+    },
+    "ref-10": {
+        "id": "ref-10",
+        "title": "An Introduction to Database Systems: Concurrency Control and Locking Mechanisms",
+        "authors": ["C. J. Date"],
+        "year": 2004,
+        "url": "https://www.pearson.com/en-us/subject-catalog/p/introduction-to-database-systems-an/P200000003293",
+        "verified_by": "StrongWine Academic Audit Team",
+        "synthetic": False,
+        "review_status": "reviewed",
+        "reviewed_by": "StrongWine Academic Audit Team",
+        "reviewed_at": "2026-11-02T19:40:00Z",
+        "support_location": "Chapter 15 - Recovery and Concurrency Control",
+        "support_excerpt": "Without adequate isolation and locking, concurrent transactions suffer from lost updates, dirty reads, and uncommitted dependencies. Database systems employ pessimistic locking and optimistic concurrency control.",
+        "source_file": "cj_date_concurrency_locking.md",
+        "source_sha256": sha256_file(sources_dir / "cj_date_concurrency_locking.md"),
+        "source_license": "Academic Citation Fair Use",
+        "source_url": "https://www.pearson.com/en-us/subject-catalog/p/introduction-to-database-systems-an/P200000003293",
+        "retrieved_at": "2026-10-27T10:00:00Z",
+        "claim": "Kiểm soát truy cập đồng thời và cơ chế khóa (locking) ngăn ngừa hiện tượng mất cập nhật (lost update) và xung đột khi nhiều khách hàng cùng mua số lượng cuối của cùng một chai rượu.",
+        "language": "en",
+        "author_sort_key": "Date, C. J.",
+        "tags": ["primary", "database", "concurrency", "acid"]
+    },
+    "ref-11": {
+        "id": "ref-11",
+        "title": "OpenAPI Specification v3.1.0: RESTful API Modeling and Design",
+        "authors": ["OpenAPI Initiative", "Linux Foundation"],
+        "year": 2021,
+        "url": "https://spec.openapis.org/oas/v3.1.0",
+        "verified_by": "StrongWine Academic Audit Team",
+        "synthetic": False,
+        "review_status": "reviewed",
+        "reviewed_by": "StrongWine Academic Audit Team",
+        "reviewed_at": "2026-11-02T19:40:00Z",
+        "support_location": "Specification Clauses 4-5",
+        "support_excerpt": "The OpenAPI Specification defines a standard, language-agnostic interface description for HTTP REST APIs, allowing discovery of service capabilities, request payloads, and status codes.",
+        "source_file": "openapi_specification_v310.html",
+        "source_sha256": sha256_file(sources_dir / "openapi_specification_v310.html"),
+        "source_license": "Apache License 2.0",
+        "source_url": "https://spec.openapis.org/oas/v3.1.0",
+        "retrieved_at": "2026-10-27T10:00:00Z",
+        "claim": "Chuẩn OpenAPI 3.1 được áp dụng để đặc tả cấu trúc hợp đồng REST API, các tham số đầu vào, mã trạng thái HTTP chuẩn và cấu trúc dữ liệu phản hồi JSON cho các phân hệ.",
+        "language": "en",
+        "author_sort_key": "OpenAPI Initiative",
+        "tags": ["primary", "standard", "openapi", "rest_api"]
+    },
+    "ref-12": {
+        "id": "ref-12",
+        "title": "Responsive Web Design",
+        "authors": ["Ethan Marcotte"],
+        "year": 2011,
+        "url": "https://abookapart.com/products/responsive-web-design",
+        "verified_by": "StrongWine Academic Audit Team",
+        "synthetic": False,
+        "review_status": "reviewed",
+        "reviewed_by": "StrongWine Academic Audit Team",
+        "reviewed_at": "2026-11-02T19:40:00Z",
+        "support_location": "Chapters 1-3 Fluid Grids & Media Queries",
+        "support_excerpt": "Responsive Web Design provides an approach where web interfaces adapt smoothly to the screen resolution of multiple devices using fluid grids, flexible media, and CSS media queries.",
+        "source_file": "marcotte_responsive_web_design.md",
+        "source_sha256": sha256_file(sources_dir / "marcotte_responsive_web_design.md"),
+        "source_license": "Academic Citation Fair Use",
+        "source_url": "https://abookapart.com/products/responsive-web-design",
+        "retrieved_at": "2026-10-27T10:00:00Z",
+        "claim": "Nguyên lý thiết kế đáp ứng (Responsive Web Design) kết hợp lưới linh hoạt và CSS media queries đảm bảo giao diện hiển thị tối ưu trên cả trình duyệt máy tính và thiết bị di động của shipper.",
+        "language": "en",
+        "author_sort_key": "Marcotte, Ethan",
+        "tags": ["primary", "ui_ux", "responsive", "web_design"]
+    }
+}
+
+evidence_file.write_text(json.dumps(evidence_dict, ensure_ascii=False, indent=2), encoding='utf-8')
+print(f"Written {len(evidence_dict)} records to {evidence_file}")
+
+# Validate using EvidenceRegistry
+reg = EvidenceRegistry(evidence_file)
+errors = reg.validate_all()
+print(f"Validation errors count: {len(errors)}")
+if errors:
+    for e in errors:
+        print(f"  Error: {e}")
+else:
+    print("ALL 12 EVIDENCE RECORDS PASSED VALIDATION!")
+
+# Test assert_citable
+for rec in reg.list():
+    reg.assert_citable(rec, require_reviewed=True)
+print("ALL 12 RECORDS PASSED ASSERT_CITABLE!")

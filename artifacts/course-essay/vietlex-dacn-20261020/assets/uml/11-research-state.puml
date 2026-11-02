@@ -1,0 +1,23 @@
+@startuml
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName "Times New Roman"
+skinparam defaultFontSize 21
+skinparam nodesep 65
+skinparam ranksep 80
+state "Đang thực hiện\n(running)" as Running
+state "Hoàn tất\n(complete)" as Complete
+state "Có kết quả một phần\n(partial)" as Partial
+state "Đã hủy\n(cancelled)" as Cancelled
+state "Bị gián đoạn\n(interrupted)" as Interrupted
+state "Không thu được nguồn\n(failed)" as Error
+[*] --> Running : nhận lượt mới hợp lệ
+Running -right-> Complete : đọc xong
+Running -down-> Partial : còn thiếu nguồn\nhoặc hủy sau khi có nguồn
+Running -left-> Cancelled : hủy / chưa có nguồn
+Running --> Interrupted : hết hạn lượt cũ
+Running --> Error : không có nguồn
+Cancelled -[hidden]down-> Interrupted
+Complete -[hidden]down-> Error
+Partial -[hidden]down-> Interrupted
+@enduml

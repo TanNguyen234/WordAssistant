@@ -1,0 +1,141 @@
+{
+  "version": 1,
+  "steps": [
+    {
+      "operation": "image.insert",
+      "selector": {
+        "type": "text",
+        "text": "Hoạt động tra cứu bắt đầu từ nhu cầu tìm một văn bản và kết thúc ở việc người dùng đọc được nội dung hoặc nhận biết lý do chưa thể đọc. Sơ đồ dưới đây khái quát hai cách tìm theo thông tin mô tả và theo toàn văn, sau đó nối kết quả tìm kiếm với trang đọc văn bản. Các bước được đối chiếu với legal_search và legal_document trong mã nguồn."
+      },
+      "options": {
+        "image_path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\assets\\uml\\10-search-activity.png",
+        "width_cm": 15.8,
+        "alt_text": "Sơ đồ hoạt động tra cứu và mở văn bản",
+        "caption": "Sơ đồ hoạt động tra cứu và mở văn bản",
+        "caption_label": "HÌNH",
+        "caption_sequence": "Hinh",
+        "caption_chapter_number": 2,
+        "placement": "after",
+        "alignment": "center",
+        "preserve_aspect_ratio": true,
+        "auto_shrink": true
+      }
+    },
+    {
+      "operation": "image.insert",
+      "selector": {
+        "type": "text",
+        "text": "Một lượt đọc nguồn trong hồ sơ có thể kéo dài qua nhiều yêu cầu mạng nên cần lưu được tiến độ và kết quả kết thúc. Sơ đồ trạng thái dưới đây thể hiện các trạng thái lưu trong cơ chế đọc nguồn: running, complete, partial, cancelled, interrupted và failed. Các nhãn tiếng Việt giải thích ý nghĩa nghiệp vụ; tên trong ngoặc giúp đối chiếu với mã nguồn."
+      },
+      "options": {
+        "image_path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\assets\\uml\\11-research-state.png",
+        "width_cm": 15.8,
+        "alt_text": "Sơ đồ trạng thái của lượt đọc nguồn trong hồ sơ",
+        "caption": "Sơ đồ trạng thái của lượt đọc nguồn trong hồ sơ",
+        "caption_label": "HÌNH",
+        "caption_sequence": "Hinh",
+        "caption_chapter_number": 2,
+        "placement": "after",
+        "alignment": "center",
+        "preserve_aspect_ratio": true,
+        "auto_shrink": true
+      }
+    },
+    {
+      "operation": "image.insert",
+      "selector": {
+        "type": "text",
+        "text": "Mô hình dữ liệu thứ nhất mô tả người dùng, phiên đăng nhập, cuộc hội thoại và lượt trao đổi. Hình sử dụng ký pháp lớp UML để biểu diễn các thực thể và số lượng quan hệ, đáp ứng mục đích của một sơ đồ dữ liệu logic. Tên trong dấu góc là tên tập bản ghi MongoDB; mũi tên cho biết cách các bản ghi liên hệ qua định danh, không phải khai báo khóa ngoại do cơ sở dữ liệu tự bảo đảm."
+      },
+      "options": {
+        "image_path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\assets\\uml\\08-account-data-model.png",
+        "width_cm": 10.623,
+        "alt_text": "Mô hình dữ liệu tài khoản và hội thoại theo ký pháp lớp UML",
+        "caption": "Mô hình dữ liệu tài khoản và hội thoại theo ký pháp lớp UML",
+        "caption_label": "HÌNH",
+        "caption_sequence": "Hinh",
+        "caption_chapter_number": 2,
+        "placement": "after",
+        "alignment": "center",
+        "preserve_aspect_ratio": true,
+        "auto_shrink": true
+      }
+    },
+    {
+      "operation": "image.insert",
+      "selector": {
+        "type": "text",
+        "text": "Mô hình dữ liệu thứ hai tập trung vào hồ sơ nghiên cứu và các thành phần được lưu cùng hồ sơ. Hình thoi đen biểu thị tài liệu, nguồn được ghim và lần phân tích là các thành phần nhúng trong bản ghi research_workspaces. Với loại phân tích đọc nguồn, danh sách sự kiện được lưu trong kết quả để hỗ trợ theo dõi và phục hồi tiến độ."
+      },
+      "options": {
+        "image_path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\assets\\uml\\09-workspace-data-model.png",
+        "width_cm": 14.325,
+        "alt_text": "Mô hình dữ liệu hồ sơ nghiên cứu theo ký pháp lớp UML",
+        "caption": "Mô hình dữ liệu hồ sơ nghiên cứu theo ký pháp lớp UML",
+        "caption_label": "HÌNH",
+        "caption_sequence": "Hinh",
+        "caption_chapter_number": 2,
+        "placement": "after",
+        "alignment": "center",
+        "preserve_aspect_ratio": true,
+        "auto_shrink": true
+      }
+    },
+    {
+      "operation": "format.run",
+      "selector": {
+        "type": "style",
+        "style": "Heading 2"
+      },
+      "options": {
+        "font_family": "Times New Roman",
+        "font_size_pt": 14,
+        "bold": true,
+        "italic": false,
+        "font_color": "000000"
+      }
+    },
+    {
+      "operation": "format.paragraph",
+      "selector": {
+        "type": "style",
+        "style": "Heading 2"
+      },
+      "options": {
+        "first_line_indent_cm": 0,
+        "keep_with_next": true,
+        "keep_lines_together": true,
+        "space_before_pt": 12,
+        "space_after_pt": 6
+      }
+    },
+    {
+      "operation": "format.run",
+      "selector": {
+        "type": "style",
+        "style": "Heading 3"
+      },
+      "options": {
+        "font_family": "Times New Roman",
+        "font_size_pt": 13,
+        "bold": true,
+        "italic": false,
+        "font_color": "000000"
+      }
+    },
+    {
+      "operation": "format.paragraph",
+      "selector": {
+        "type": "style",
+        "style": "Heading 3"
+      },
+      "options": {
+        "first_line_indent_cm": 0,
+        "keep_with_next": true,
+        "keep_lines_together": true,
+        "space_before_pt": 12,
+        "space_after_pt": 6
+      }
+    }
+  ]
+}

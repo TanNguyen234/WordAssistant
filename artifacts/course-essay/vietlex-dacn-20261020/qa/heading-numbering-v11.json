@@ -1,0 +1,692 @@
+{
+  "status": "SUCCESS",
+  "operation": "heading.numbering_inspect",
+  "backend_used": "ooxml",
+  "fidelity": "high",
+  "output_path": null,
+  "warnings": [],
+  "manual_review_required": false,
+  "data": {
+    "result": {
+      "linked_levels": [],
+      "heading_paragraphs": 107,
+      "numbered_heading_count": 84,
+      "unnumbered_heading_count": 23,
+      "paragraph_numbering": [
+        {
+          "paragraph_index": 227,
+          "text": "CHƯƠNG 1: TỔNG QUAN TÀI LIỆU",
+          "style": "Heading 1",
+          "num_id": 1,
+          "level": 0,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 229,
+          "text": "Cơ sở lý thuyết và khung phân tích",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 230,
+          "text": "Retrieval và truy xuất trong tiếng Việt",
+          "style": "Heading 3",
+          "num_id": 1,
+          "level": 2,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 234,
+          "text": "RAG, evidence và giới hạn của câu trả lời sinh",
+          "style": "Heading 3",
+          "num_id": 1,
+          "level": 2,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 238,
+          "text": "Đánh giá theo tầng và nguyên tắc hướng đối tượng",
+          "style": "Heading 3",
+          "num_id": 1,
+          "level": 2,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 241,
+          "text": "Khung phân tích dùng trong bài",
+          "style": "Heading 3",
+          "num_id": 1,
+          "level": 2,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 244,
+          "text": "Nghiên cứu liên quan",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 245,
+          "text": "Sai lệch cấp văn bản trong retrieval pháp lý",
+          "style": "Heading 3",
+          "num_id": 1,
+          "level": 2,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 249,
+          "text": "Đánh giá groundedness trong hỏi đáp pháp lý",
+          "style": "Heading 3",
+          "num_id": 1,
+          "level": 2,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 253,
+          "text": "Định hướng phân tích cho VietLex",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 254,
+          "text": "Tổng hợp nghiên cứu và giới hạn suy luận",
+          "style": "Heading 3",
+          "num_id": 1,
+          "level": 2,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 258,
+          "text": "CHƯƠNG 2: PHƯƠNG PHÁP THỰC HIỆN",
+          "style": "Heading 1",
+          "num_id": 1,
+          "level": 0,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 260,
+          "text": "Đối tượng và hiện trạng hệ thống",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 264,
+          "text": "Phạm vi người dùng và ranh giới",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 267,
+          "text": "Yêu cầu chức năng rút ra từ source",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 270,
+          "text": "Yêu cầu phi chức năng và rủi ro",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 273,
+          "text": "Vai trò, năng lực và ranh giới quyền",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 278,
+          "text": "Yêu cầu chức năng tái dựng từ source",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 282,
+          "text": "Yêu cầu phi chức năng và cách quan sát",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 288,
+          "text": "Phạm vi dữ liệu, giả định và phần chưa được nghiệm thu",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 292,
+          "text": "PHÂN TÍCH NGHIỆP VỤ VÀ MÔ HÌNH CHỨC NĂNG",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 294,
+          "text": "Phân rã chức năng và các màn hình",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 298,
+          "text": "Use case chính",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 302,
+          "text": "Điều kiện và luồng thay thế",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 305,
+          "text": "Yêu cầu nghiệm thu nội bộ",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 307,
+          "text": "Tóm tắt use case và nhánh ngoại lệ",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 311,
+          "text": "UC-01. Tìm kiếm và mở văn bản",
+          "style": "Heading 3",
+          "num_id": 1,
+          "level": 2,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 314,
+          "text": "UC-02. Đặt câu hỏi có giới hạn phạm vi",
+          "style": "Heading 3",
+          "num_id": 1,
+          "level": 2,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 317,
+          "text": "UC-03. Tạo hồ sơ và đưa tài liệu vào workspace",
+          "style": "Heading 3",
+          "num_id": 1,
+          "level": 2,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 320,
+          "text": "UC-04. Ghim nguồn và chạy phân tích có cấu trúc",
+          "style": "Heading 3",
+          "num_id": 1,
+          "level": 2,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 323,
+          "text": "UC-05. Đọc nguồn chính thức và hủy một run",
+          "style": "Heading 3",
+          "num_id": 1,
+          "level": 2,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 326,
+          "text": "UC-06. Quản trị, phản hồi và registry hiệu lực",
+          "style": "Heading 3",
+          "num_id": 1,
+          "level": 2,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 329,
+          "text": "Mô hình trạng thái và phân loại ngoại lệ",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 333,
+          "text": "Từ use case đến tiêu chí nghiệm thu nội bộ",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 336,
+          "text": "PHÂN TÍCH VÀ THIẾT KẾ HƯỚNG ĐỐI TƯỢNG",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 338,
+          "text": "Đối tượng EvidenceChunk",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 341,
+          "text": "RetrievalOutcome và trách nhiệm retriever",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 344,
+          "text": "Quan hệ phụ thuộc và nguyên tắc thiết kế",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 349,
+          "text": "Điểm cần cải thiện trong thiết kế",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 352,
+          "text": "StageCandidate và RetrievalStageTrace",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 356,
+          "text": "Bảng trách nhiệm đối tượng và thành phần",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 360,
+          "text": "Hợp đồng dữ liệu, invariant và tính toàn vẹn",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 364,
+          "text": "Phối hợp route, service, value object và repository",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 368,
+          "text": "Đánh giá thiết kế và cải tiến có thể kiểm chứng",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 372,
+          "text": "KIẾN TRÚC, DỮ LIỆU, LỰA CHỌN CÔNG NGHỆ VÀ THIẾT KẾ THÀNH PHẦN",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 374,
+          "text": "Kiến trúc web và luồng tổng quát",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 379,
+          "text": "Hai hợp đồng retrieval",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 384,
+          "text": "Giới hạn evidence và context",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 387,
+          "text": "Ranh giới dữ liệu và an toàn",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 390,
+          "text": "Đánh đổi kiến trúc",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 393,
+          "text": "Pipeline nạp dữ liệu và quản lý chất lượng corpus",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 401,
+          "text": "Ma trận kho dữ liệu, schema và vòng đời",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 405,
+          "text": "Coverage, đồng bộ và tính nhất quán giữa chỉ mục",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 409,
+          "text": "Bảo mật, quyền sở hữu và vòng đời workspace",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 414,
+          "text": "Lỗi, tính sẵn sàng và giới hạn capacity",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 418,
+          "text": "Lựa chọn kiến trúc và hệ quả bảo trì",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 422,
+          "text": "CHƯƠNG 3: CÀI ĐẶT THỬ NGHIỆM, KẾT QUẢ VÀ ĐÁNH GIÁ",
+          "style": "Heading 1",
+          "num_id": 1,
+          "level": 0,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 424,
+          "text": "Luồng xử lý câu hỏi",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 430,
+          "text": "Ảnh chụp runtime: màn hình hỏi đáp",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 434,
+          "text": "Ảnh chụp runtime: tra cứu văn bản",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 438,
+          "text": "Trạng thái giao diện đã kiểm tra trên runtime",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 441,
+          "text": "Nhận xét về khả năng sử dụng",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 444,
+          "text": "Luồng tra cứu metadata, toàn văn và đọc tài liệu",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 448,
+          "text": "Luồng workspace, official-source read và phân tích",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 456,
+          "text": "Ảnh chụp runtime: luồng tra cứu chính",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 462,
+          "text": "Nhận xét UX theo khả năng tránh hiểu nhầm",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 466,
+          "text": "KIỂM THỬ, BẢO MẬT VÀ ĐÁNH GIÁ HỆ THỐNG",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 468,
+          "text": "Bằng chứng hiện có và phương pháp đọc",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 471,
+          "text": "Kết quả câu trả lời và giới hạn diễn giải",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 475,
+          "text": "Bảng tổng hợp chỉ số và mẫu số",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 478,
+          "text": "Tổng hợp đánh giá",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 480,
+          "text": "Phân loại bằng chứng và mức diễn giải được phép",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 484,
+          "text": "Đọc sâu retrieval metrics và benchmark",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 488,
+          "text": "Bằng chứng vận hành và kiểm thử hiện có",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 492,
+          "text": "Đánh giá theo từng lớp",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 495,
+          "text": "HẠN CHẾ VÀ RỦI RO CẦN THEO DÕI",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 497,
+          "text": "Phân tích lỗi và rủi ro",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 501,
+          "text": "Ma trận rủi ro và biện pháp kiểm soát",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 504,
+          "text": "ĐỀ XUẤT CẢI TIẾN VÀ KẾ HOẠCH KIỂM CHỨNG",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 505,
+          "text": "Kế hoạch kiểm chứng tiếp theo",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 508,
+          "text": "Giao thức đánh giá kế tiếp có thể tái lập",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 513,
+          "text": "Lộ trình cải tiến theo mức rủi ro",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 518,
+          "text": "DANH MỤC ĐƯỜNG ĐI THEO VAI TRÒ",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        },
+        {
+          "paragraph_index": 520,
+          "text": "Màn hình và điểm vào theo nhóm chức năng",
+          "style": "Heading 2",
+          "num_id": 1,
+          "level": 1,
+          "source": "paragraph"
+        }
+      ],
+      "literal_prefixes": []
+    }
+  }
+}

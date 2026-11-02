@@ -1,0 +1,54 @@
+{
+  "overall_status": "INCOMPLETE",
+  "delivery_status": "INCOMPLETE",
+  "delivery_gates": {
+    "overall": "INCOMPLETE",
+    "render": "PASS",
+    "visual": "REVIEW_REQUIRED",
+    "native_word": "PASS"
+  },
+  "structural_status": "PASS",
+  "format_status": "PASS",
+  "numbering_status": "NOT_APPLICABLE",
+  "table_geometry_status": "PASS",
+  "field_structure_status": "PASS",
+  "field_freshness_status": "STALE_OR_UNKNOWN",
+  "field_evaluation_status": "NOT_REQUESTED",
+  "render_status": "PASS",
+  "native_word_status": "PASS",
+  "visual_status": "REVIEW_REQUIRED",
+  "manual_review_required": true,
+  "issues": [],
+  "inventory": {
+    "paragraphs": 548,
+    "tables": 15,
+    "sections": 3,
+    "images": 9,
+    "fields": {
+      "total_field_tags": 474,
+      "toc_field": true,
+      "page_field": true,
+      "page_fields": 133,
+      "toc_fields": 3,
+      "other_fields": 22
+    }
+  },
+  "render": {
+    "engine": "word",
+    "pdf_path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\qa\\staging\\VietLex_v9k_final.pdf",
+    "file_size_bytes": 1590865,
+    "page_count": 69,
+    "verified_pdf_page_count": 69
+  },
+  "visual_review_challenge": {
+    "token": "57fd68d8c769b030ac0e9842e739f061619a3283f1ded58c5d2ab31417155822",
+    "page_count": 69,
+    "token_scope": "document SHA-256 plus ordered page-image SHA-256 and size; PDF SHA-256 is provenance only"
+  },
+  "visual_review_reuse": {
+    "version": 1,
+    "token": "wa-visual-reuse-v1:1203842fac7b2cd2534ec2c311f0b937f5b188953d85633d46c796f72c73cc08"
+  },
+  "report_path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\qa\\verify-render-v9k.json",
+  "report_sha256": "67d88d701cfd8d05d0b46feebe89f678397d9ec191d52e9e8b9fbdf9713fde00"
+}

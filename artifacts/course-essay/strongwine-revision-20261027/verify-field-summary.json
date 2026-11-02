@@ -1,0 +1,165 @@
+{
+  "overall_status": "FAIL",
+  "delivery_status": "FAIL",
+  "delivery_gates": {
+    "overall": "FAIL",
+    "render": "PASS",
+    "visual": "REVIEW_REQUIRED",
+    "native_word": "PASS"
+  },
+  "structural_status": "PASS",
+  "format_status": "FAIL",
+  "numbering_status": "PASS",
+  "table_geometry_status": "FAIL",
+  "field_structure_status": "PASS",
+  "field_freshness_status": "STALE_OR_UNKNOWN",
+  "field_evaluation_status": "NOT_REQUESTED",
+  "render_status": "PASS",
+  "native_word_status": "PASS",
+  "visual_status": "REVIEW_REQUIRED",
+  "manual_review_required": true,
+  "issues": [
+    {
+      "severity": "WARNING",
+      "code": "chapter_heading_numbering_missing",
+      "message": "Chapter 3 has unnumbered child heading(s): Heading 3: Dữ liệu mẫu thực tế bảng USERS, Heading 3: Dữ liệu mẫu thực tế bảng CATEGORIES, Heading 3: Dữ liệu mẫu thực tế bảng WINES, Heading 3: Dữ liệu mẫu thực tế bảng WAREHOUSE, Heading 3: Dữ liệu mẫu thực tế bảng INVENTORY"
+    },
+    {
+      "severity": "ERROR",
+      "code": "page_geometry",
+      "message": "Section 1 top_margin: measured 2.00 cm, expected 2.54 cm."
+    },
+    {
+      "severity": "ERROR",
+      "code": "page_geometry",
+      "message": "Section 1 bottom_margin: measured 2.00 cm, expected 2.54 cm."
+    },
+    {
+      "severity": "ERROR",
+      "code": "page_geometry",
+      "message": "Section 1 left_margin: measured 3.00 cm, expected 2.54 cm."
+    },
+    {
+      "severity": "ERROR",
+      "code": "page_geometry",
+      "message": "Section 1 right_margin: measured 2.00 cm, expected 2.54 cm."
+    },
+    {
+      "severity": "ERROR",
+      "code": "page_geometry",
+      "message": "Section 2 top_margin: measured 2.00 cm, expected 2.54 cm."
+    },
+    {
+      "severity": "ERROR",
+      "code": "page_geometry",
+      "message": "Section 2 bottom_margin: measured 2.00 cm, expected 2.54 cm."
+    },
+    {
+      "severity": "ERROR",
+      "code": "page_geometry",
+      "message": "Section 2 left_margin: measured 3.00 cm, expected 2.54 cm."
+    },
+    {
+      "severity": "ERROR",
+      "code": "page_geometry",
+      "message": "Section 2 right_margin: measured 2.00 cm, expected 2.54 cm."
+    },
+    {
+      "severity": "ERROR",
+      "code": "page_geometry",
+      "message": "Section 3 top_margin: measured 2.00 cm, expected 2.54 cm."
+    },
+    {
+      "severity": "ERROR",
+      "code": "page_geometry",
+      "message": "Section 3 bottom_margin: measured 2.00 cm, expected 2.54 cm."
+    },
+    {
+      "severity": "ERROR",
+      "code": "page_geometry",
+      "message": "Section 3 left_margin: measured 3.00 cm, expected 2.54 cm."
+    },
+    {
+      "severity": "ERROR",
+      "code": "page_geometry",
+      "message": "Section 3 right_margin: measured 2.00 cm, expected 2.54 cm."
+    },
+    {
+      "severity": "ERROR",
+      "code": "page_geometry",
+      "message": "Section 4 top_margin: measured 2.00 cm, expected 2.54 cm."
+    },
+    {
+      "severity": "ERROR",
+      "code": "page_geometry",
+      "message": "Section 4 bottom_margin: measured 2.00 cm, expected 2.54 cm."
+    },
+    {
+      "severity": "ERROR",
+      "code": "page_geometry",
+      "message": "Section 4 left_margin: measured 3.00 cm, expected 2.54 cm."
+    },
+    {
+      "severity": "ERROR",
+      "code": "page_geometry",
+      "message": "Section 4 right_margin: measured 2.00 cm, expected 2.54 cm."
+    },
+    {
+      "severity": "ERROR",
+      "code": "typography_size",
+      "message": "Body font size mismatch detected in 1032 text run(s); expected 12.0 pt."
+    },
+    {
+      "severity": "ERROR",
+      "code": "line_spacing",
+      "message": "Line spacing mismatch detected in 517 paragraph(s); expected 1.15."
+    },
+    {
+      "severity": "WARNING",
+      "code": "unresolvable_formatting",
+      "message": "Could not resolve 146 expected text-formatting value(s). Examples (zero-based paragraph indexes): paragraph 48 [Normal]: line spacing; paragraph 49 [Normal]: line spacing; paragraph 50 [Normal]: line spacing; paragraph 51 [Normal]: line spacing; paragraph 52 [Normal]: line spacing."
+    },
+    {
+      "severity": "ERROR",
+      "code": "style_size_mismatch",
+      "message": "Style 'Title' font size is 18 pt; expected 20 pt. 0 direct run override(s) also differ."
+    },
+    {
+      "severity": "ERROR",
+      "code": "style_size_mismatch",
+      "message": "Style 'Heading 3' font size is 13 pt; expected 12 pt. 0 direct run override(s) also differ."
+    }
+  ],
+  "inventory": {
+    "paragraphs": 1293,
+    "tables": 44,
+    "sections": 4,
+    "images": 63,
+    "fields": {
+      "total_field_tags": 1032,
+      "toc_field": true,
+      "page_field": true,
+      "page_fields": 316,
+      "toc_fields": 3,
+      "other_fields": 25
+    }
+  },
+  "render": {
+    "engine": "word",
+    "pdf_path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\strongwine-revision-20261027\\StrongWine_field_300.pdf",
+    "file_size_bytes": 6198234,
+    "page_count": 175,
+    "verified_pdf_page_count": 175
+  },
+  "visual_review_challenge": {
+    "token": "36907e53cb35b3d75f6749fb2df9024c2a5be909132f0050406b7a49f7f2d036",
+    "page_count": 175,
+    "token_scope": "document SHA-256 plus ordered page-image SHA-256 and size; PDF SHA-256 is provenance only"
+  },
+  "visual_review_reuse": {
+    "version": 1,
+    "token": "wa-visual-reuse-v1:93379bdc4bb66e826525e5f04c0ebede2200caf780be1d46a50c4b62f5d0eaf2"
+  },
+  "report_path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\strongwine-revision-20261027\\verify-field.json",
+  "report_sha256": "12243f6e3cb77cb934c65aae04c12db591d030cae0313624df10cefcdbb96813"
+}

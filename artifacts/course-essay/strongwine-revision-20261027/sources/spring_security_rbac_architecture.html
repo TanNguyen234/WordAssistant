@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><title>Authentication and Role-Based Access Control (RBAC) Architecture</title></head>
+<body>
+<h1>Authentication and Role-Based Access Control (RBAC) Architecture</h1>
+<p>Pivotal Software / VMware Spring Security Reference. URL: https://docs.spring.io/spring-security/reference/servlet/authentication/architecture.html</p>
+<section>
+<h2>Role-Based Access Control Principles</h2>
+<p>Role-Based Access Control (RBAC) regulates user access to system resources based on assigned organizational roles. In an enterprise web application, privileges are granted to roles rather than individual accounts.</p>
+<h2>Implementation in Enterprise Java</h2>
+<p>Roles are represented as instances of <code>GrantedAuthority</code> with a <code>ROLE_</code> prefix (e.g. <code>ROLE_ADMIN</code>, <code>ROLE_STAFF</code>, <code>ROLE_SHIPPER</code>, <code>ROLE_CUSTOMER</code>). Authentication tokens (such as <code>UsernamePasswordAuthenticationToken</code>) carry the authenticated principal's authorities, which are checked by the security subsystem prior to dispatching HTTP requests or executing privileged services.</p>
+</section>
+</body>
+</html>

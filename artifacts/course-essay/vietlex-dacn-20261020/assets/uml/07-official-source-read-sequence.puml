@@ -1,0 +1,65 @@
+@startuml
+title VietLex - Đọc nguồn chính thức trong workspace
+hide footbox
+autonumber
+actor "Người dùng" as User
+participant "Trình duyệt" as Browser
+participant "Workspace route" as Route
+participant "Owner / CSRF guard" as Guard
+participant "Discovery service" as Discover
+participant "Cổng chính thức" as Official
+participant "PDF worker" as PDF
+database "Mongo workspace events" as Mongo
+
+User -> Browser: Gửi topic / yêu cầu đọc
+Browser -> Route: POST /workspaces/{workspace_id}/research/read
+Route -> Guard: Kiểm owner + CSRF
+Guard --> Route: Cho phép
+Route -> Mongo: Lưu run started + event
+Mongo --> Route: Checkpoint đã lưu
+Route --> Browser: NDJSON started
+loop Tối đa 5 truy vấn xác định
+  Route -> Discover: Tìm URL allowlist
+  Discover -> Official: Request giới hạn
+  Official --> Discover: URL / kết quả / timeout
+  Discover --> Route: Tối đa 3 URL được chọn
+end
+loop Mỗi URL được thử đọc tối đa 1 lần
+  Route -> PDF: Đọc smart window
+  note right of PDF
+    Mỗi PDF: tối đa 10 trang kiểm tra,
+    tối đa 5 trang giữ lại; OCR tắt.
+  end note
+  PDF --> Route: Text + page range + hash / error
+  Route -> Mongo: Lưu event/source theo owner
+  Mongo --> Route: Trạng thái đã lưu
+  Route --> Browser: NDJSON source / partial / error
+end
+Route -> Mongo: Lưu terminal complete / partial
+Mongo --> Route: Run có thể replay theo owner
+Route --> Browser: NDJSON terminal event
+
+Browser -> Route: GET /workspaces/{workspace_id}/research/runs/{run_id}
+Route -> Guard: Kiểm owner
+Guard --> Route: Đúng owner
+Route -> Mongo: Đọc run đã lưu
+Mongo --> Route: analysis + outcome
+Route --> Browser: JSON replay (no-store)
+
+User -> Browser: Bấm Hủy
+Browser -> Route: POST /workspaces/{workspace_id}/research/runs/{run_id}/cancel
+Route -> Guard: Kiểm owner + CSRF
+Guard --> Route: Cho phép
+Route -> Mongo: Atomic terminal update nếu run còn running
+Mongo --> Route: user_cancelled / partial / cancelled
+Route --> Browser: Xác nhận durable cancel
+Browser -> Browser: Đóng stream sau xác nhận
+note over Route,PDF
+  Worker cũ chỉ ghi checkpoint khi run còn running;
+  HTTP đang đọc có thể tiếp tục tới checkpoint kế tiếp.
+  Contract này không hứa kill tiến trình ngay lập tức.
+end note
+note over Route,Official
+  Source contract không gọi LLM, OCR hay Brave.
+end note
+@enduml

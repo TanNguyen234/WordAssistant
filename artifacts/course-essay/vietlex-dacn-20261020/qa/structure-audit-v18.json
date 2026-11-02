@@ -1,0 +1,485 @@
+{
+  "document_sha256": "6b023d85c5b79439c80ef60f3abe9b64c6765a1815dc99bf2e8df136b64c3cf1",
+  "headings": [
+    [
+      "LỜI CẢM ƠN",
+      1
+    ],
+    [
+      "LỜI CAM ĐOAN",
+      1
+    ],
+    [
+      "NHẬN XÉT CỦA GIẢNG VIÊN HƯỚNG DẪN",
+      1
+    ],
+    [
+      "NHẬN XÉT CỦA NGƯỜI PHẢN BIỆN",
+      1
+    ],
+    [
+      "LỊCH LÀM VIỆC",
+      1
+    ],
+    [
+      "TÓM TẮT ĐỒ ÁN",
+      1
+    ],
+    [
+      "MỤC LỤC",
+      1
+    ],
+    [
+      "DANH MỤC SƠ ĐỒ, HÌNH",
+      1
+    ],
+    [
+      "DANH MỤC BẢNG BIỂU",
+      1
+    ],
+    [
+      "KÍ HIỆU CÁC CỤM TỪ VIẾT TẮT",
+      1
+    ],
+    [
+      "MỞ ĐẦU",
+      1
+    ],
+    [
+      "Mục tiêu, câu hỏi và phạm vi khảo sát",
+      2
+    ],
+    [
+      "Phạm vi, phương pháp và bằng chứng",
+      2
+    ],
+    [
+      "Đóng góp và cấu trúc báo cáo",
+      2
+    ],
+    [
+      "CHƯƠNG 1: TỔNG QUAN TÀI LIỆU",
+      1
+    ],
+    [
+      "Cơ sở lý thuyết và khung phân tích",
+      2
+    ],
+    [
+      "Truy xuất thông tin trong tiếng Việt",
+      3
+    ],
+    [
+      "RAG, căn cứ và giới hạn của câu trả lời được sinh",
+      3
+    ],
+    [
+      "Đánh giá theo tầng và nguyên tắc hướng đối tượng",
+      3
+    ],
+    [
+      "Khung phân tích dùng trong bài",
+      3
+    ],
+    [
+      "Nghiên cứu liên quan",
+      2
+    ],
+    [
+      "Sai lệch cấp văn bản trong truy xuất pháp lý",
+      3
+    ],
+    [
+      "Đánh giá mức độ bám sát căn cứ trong hỏi đáp pháp lý",
+      3
+    ],
+    [
+      "Định hướng phân tích cho VietLex",
+      2
+    ],
+    [
+      "Tổng hợp nghiên cứu và giới hạn suy luận",
+      3
+    ],
+    [
+      "CHƯƠNG 2: PHƯƠNG PHÁP THỰC HIỆN",
+      1
+    ],
+    [
+      "Khảo sát hiện trạng và xác định yêu cầu",
+      2
+    ],
+    [
+      "Đối tượng và hiện trạng hệ thống",
+      3
+    ],
+    [
+      "Phạm vi người dùng và ranh giới",
+      3
+    ],
+    [
+      "Khái quát yêu cầu của hệ thống",
+      3
+    ],
+    [
+      "Vai trò, năng lực và ranh giới quyền",
+      3
+    ],
+    [
+      "Đặc tả yêu cầu chức năng",
+      3
+    ],
+    [
+      "Yêu cầu chất lượng và cách đánh giá",
+      3
+    ],
+    [
+      "Phạm vi dữ liệu, giả định và phần chưa được nghiệm thu",
+      3
+    ],
+    [
+      "PHÂN TÍCH NGHIỆP VỤ VÀ MÔ HÌNH CHỨC NĂNG",
+      2
+    ],
+    [
+      "Phân rã chức năng và các màn hình",
+      3
+    ],
+    [
+      "Use case chính",
+      3
+    ],
+    [
+      "Điều kiện và luồng thay thế",
+      3
+    ],
+    [
+      "Yêu cầu nghiệm thu nội bộ",
+      3
+    ],
+    [
+      "Tóm tắt use case và nhánh ngoại lệ",
+      3
+    ],
+    [
+      "UC-01. Tìm kiếm và mở văn bản",
+      3
+    ],
+    [
+      "UC-02. Đặt câu hỏi có giới hạn phạm vi",
+      3
+    ],
+    [
+      "UC-03. Tạo hồ sơ và đưa tài liệu vào workspace",
+      3
+    ],
+    [
+      "UC-04. Ghim nguồn và chạy phân tích có cấu trúc",
+      3
+    ],
+    [
+      "UC-05. Đọc nguồn chính thức và hủy một run",
+      3
+    ],
+    [
+      "UC-06. Quản trị, phản hồi và registry hiệu lực",
+      3
+    ],
+    [
+      "Mô hình trạng thái và phân loại ngoại lệ",
+      3
+    ],
+    [
+      "Sơ đồ hoạt động tra cứu văn bản",
+      3
+    ],
+    [
+      "Sơ đồ trạng thái của lượt đọc nguồn",
+      3
+    ],
+    [
+      "Từ use case đến tiêu chí nghiệm thu nội bộ",
+      3
+    ],
+    [
+      "PHÂN TÍCH VÀ THIẾT KẾ HƯỚNG ĐỐI TƯỢNG",
+      2
+    ],
+    [
+      "Mô hình dữ liệu tài khoản và hội thoại",
+      3
+    ],
+    [
+      "Mô hình dữ liệu hồ sơ nghiên cứu",
+      3
+    ],
+    [
+      "Đối tượng EvidenceChunk",
+      3
+    ],
+    [
+      "RetrievalOutcome và trách nhiệm retriever",
+      3
+    ],
+    [
+      "Quan hệ phụ thuộc và nguyên tắc thiết kế",
+      3
+    ],
+    [
+      "Điểm cần cải thiện trong thiết kế",
+      3
+    ],
+    [
+      "Theo dõi ứng viên qua các bước truy xuất",
+      3
+    ],
+    [
+      "Bảng trách nhiệm đối tượng và thành phần",
+      3
+    ],
+    [
+      "Đặc tả dữ liệu và điều kiện toàn vẹn",
+      3
+    ],
+    [
+      "Phối hợp tuyến xử lý, dịch vụ và đối tượng dữ liệu",
+      3
+    ],
+    [
+      "Đánh giá thiết kế và cải tiến có thể kiểm chứng",
+      3
+    ],
+    [
+      "KIẾN TRÚC, DỮ LIỆU, LỰA CHỌN CÔNG NGHỆ VÀ THIẾT KẾ THÀNH PHẦN",
+      2
+    ],
+    [
+      "Kiến trúc web và luồng tổng quát",
+      3
+    ],
+    [
+      "Hai phương án truy xuất",
+      3
+    ],
+    [
+      "Giới hạn căn cứ và ngữ cảnh trả lời",
+      3
+    ],
+    [
+      "Ranh giới dữ liệu và an toàn",
+      3
+    ],
+    [
+      "Đánh đổi kiến trúc",
+      3
+    ],
+    [
+      "Quy trình nạp dữ liệu và quản lý chất lượng tập văn bản",
+      3
+    ],
+    [
+      "Vai trò kho dữ liệu, cấu trúc và vòng đời",
+      3
+    ],
+    [
+      "Độ bao phủ và tính nhất quán giữa các chỉ mục",
+      3
+    ],
+    [
+      "Bảo mật, quyền sở hữu và vòng đời hồ sơ",
+      3
+    ],
+    [
+      "Lỗi, tính sẵn sàng và giới hạn dung lượng",
+      3
+    ],
+    [
+      "Lựa chọn kiến trúc và hệ quả bảo trì",
+      3
+    ],
+    [
+      "CHƯƠNG 3: CÀI ĐẶT THỬ NGHIỆM, KẾT QUẢ VÀ ĐÁNH GIÁ",
+      1
+    ],
+    [
+      "Cài đặt và khảo sát giao diện",
+      2
+    ],
+    [
+      "Luồng xử lý câu hỏi",
+      3
+    ],
+    [
+      "Giao diện hỏi đáp đã khảo sát",
+      3
+    ],
+    [
+      "Giao diện tra cứu đã khảo sát",
+      3
+    ],
+    [
+      "Các trạng thái giao diện đã quan sát",
+      3
+    ],
+    [
+      "Nhận xét về khả năng sử dụng",
+      3
+    ],
+    [
+      "Tra cứu thông tin, toàn văn và đọc tài liệu",
+      3
+    ],
+    [
+      "Xử lý hồ sơ, đọc nguồn chính thức và phân tích",
+      3
+    ],
+    [
+      "Minh họa luồng tra cứu chính",
+      3
+    ],
+    [
+      "Đánh giá giao diện theo khả năng tránh hiểu nhầm",
+      3
+    ],
+    [
+      "KIỂM THỬ, BẢO MẬT VÀ ĐÁNH GIÁ HỆ THỐNG",
+      2
+    ],
+    [
+      "Bằng chứng hiện có và phương pháp đọc",
+      3
+    ],
+    [
+      "Kết quả câu trả lời và giới hạn diễn giải",
+      3
+    ],
+    [
+      "Bảng tổng hợp chỉ số và mẫu số",
+      3
+    ],
+    [
+      "Tổng hợp đánh giá",
+      3
+    ],
+    [
+      "Phân loại bằng chứng và mức diễn giải được phép",
+      3
+    ],
+    [
+      "Phân tích chỉ số truy xuất và bộ đánh giá",
+      3
+    ],
+    [
+      "Bằng chứng vận hành và kiểm thử hiện có",
+      3
+    ],
+    [
+      "Đánh giá theo từng lớp",
+      3
+    ],
+    [
+      "HẠN CHẾ VÀ RỦI RO CẦN THEO DÕI",
+      2
+    ],
+    [
+      "Phân tích lỗi và rủi ro",
+      3
+    ],
+    [
+      "Ma trận rủi ro và biện pháp kiểm soát",
+      3
+    ],
+    [
+      "ĐỀ XUẤT CẢI TIẾN VÀ KẾ HOẠCH KIỂM CHỨNG",
+      2
+    ],
+    [
+      "Kế hoạch kiểm chứng tiếp theo",
+      3
+    ],
+    [
+      "Giao thức đánh giá kế tiếp có thể tái lập",
+      3
+    ],
+    [
+      "Lộ trình cải tiến theo mức rủi ro",
+      3
+    ],
+    [
+      "Phạm vi tuyến xử lý phục vụ kiểm chứng",
+      3
+    ],
+    [
+      "KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN",
+      1
+    ],
+    [
+      "PHỤ LỤC A. MA TRẬN YÊU CẦU VÀ BẰNG CHỨNG",
+      1
+    ],
+    [
+      "Ma trận claim chính và giới hạn kết luận",
+      2
+    ],
+    [
+      "PHỤ LỤC B. ĐỊNH DANH SƠ ĐỒ VÀ NGUỒN KIỂM TRA",
+      1
+    ],
+    [
+      "Định danh asset và trạng thái xác minh",
+      2
+    ],
+    [
+      "PHỤ LỤC C. THUẬT NGỮ VÀ TRẠNG THÁI BẰNG CHỨNG",
+      1
+    ],
+    [
+      "Các metric retrieval, answer và citation",
+      2
+    ],
+    [
+      "DANH MỤC TÀI LIỆU THAM KHẢO",
+      1
+    ],
+    [
+      "TUYÊN BỐ VỀ CÔNG CỤ HỖ TRỢ VÀ LIÊM CHÍNH HỌC THUẬT",
+      1
+    ]
+  ],
+  "heading_count": 111,
+  "table_count": 15,
+  "captions": [
+    "BẢNG 2.1. Vai trò người dùng và phạm vi chức năng",
+    "BẢNG 2.2. Đặc tả chức năng và giới hạn kiểm chứng",
+    "HÌNH 2.1. Phân cấp màn hình HTML và thao tác chính",
+    "HÌNH 2.2. Use case chính và ranh giới chức năng",
+    "BẢNG 2.3. Use case chính, route và nhánh thay thế",
+    "HÌNH 2.3. Sơ đồ hoạt động tra cứu và mở văn bản",
+    "HÌNH 2.4. Sơ đồ trạng thái của lượt đọc nguồn trong hồ sơ",
+    "HÌNH 2.5. Mô hình dữ liệu tài khoản và hội thoại theo ký pháp lớp UML",
+    "HÌNH 2.6. Mô hình dữ liệu hồ sơ nghiên cứu theo ký pháp lớp UML",
+    "HÌNH 2.7. Mô hình lớp cài đặt phục vụ truy xuất căn cứ",
+    "BẢNG 2.4. Trách nhiệm các đối tượng và thành phần chính",
+    "HÌNH 2.8. Kiến trúc truy xuất theo hai cấu hình",
+    "BẢNG 2.5. Hai phương án truy xuất và giới hạn dữ liệu đã ghi nhận",
+    "HÌNH 2.9. Luồng nạp dữ liệu VietLex và tạo các chỉ mục",
+    "BẢNG 2.6. Vai trò kho dữ liệu, chỉ mục và giới hạn độ phủ",
+    "HÌNH 3.1. Luồng POST /chat từ đầu vào đến trả HTML",
+    "HÌNH 3.2. Giao diện hỏi đáp tại trang chủ",
+    "HÌNH 3.3. Giao diện tra cứu văn bản",
+    "HÌNH 3.4. Luồng đọc nguồn chính thức và hủy lượt thực hiện trong hồ sơ",
+    "HÌNH 3.5. Đọc Bộ luật Lao động 2019 — GET /documents/333670",
+    "BẢNG 3.1. Chỉ số đánh giá đã lưu và phạm vi diễn giải",
+    "BẢNG 3.2. Bằng chứng dự án đã lưu và giới hạn kết luận",
+    "BẢNG 3.3. Rủi ro trọng yếu, bằng chứng và biện pháp đề xuất",
+    "BẢNG 3.4. Màn hình, địa chỉ truy cập và phạm vi khảo sát",
+    "BẢNG A.1. Nhận định chính và chứng cứ đối chiếu",
+    "BẢNG B.1. Sơ đồ và ảnh giao diện dùng trong báo cáo",
+    "BẢNG C.1. Thuật ngữ chỉ số và trạng thái bằng chứng"
+  ],
+  "media_placements": 16,
+  "planned_visual_assets": 31,
+  "status": "PASS",
+  "reviewer": "Codex structural/source reviewer",
+  "date": "2026-10-25"
+}

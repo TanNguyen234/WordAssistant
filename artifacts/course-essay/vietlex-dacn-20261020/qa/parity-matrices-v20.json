@@ -1,0 +1,36 @@
+{
+  "document_sha256": "aa6bae6a26b3d077d6d90d7282b0c724a09bec6ba0e5415ebff6f15082dd6c9b",
+  "status": "PASS",
+  "checks": [
+    {
+      "check": "project_structure_inventory",
+      "status": "PASS",
+      "detail": "All 111 project-planned headings have reviewed, evidence-backed mappings."
+    },
+    {
+      "check": "project_structure_in_docx",
+      "status": "PASS",
+      "detail": "All 111 project-inventoried headings appear in the final DOCX at the planned levels and order."
+    },
+    {
+      "check": "project_toc_parity",
+      "status": "PASS",
+      "detail": "All 111 required TOC entries appear at the planned levels and order."
+    },
+    {
+      "check": "project_runtime_capture_provenance",
+      "status": "PASS",
+      "detail": "All 3 runtime screenshots are route-matched, captured after visible UI click-through, and hash-bound to their image files."
+    },
+    {
+      "check": "acceptance_project_structure_inventory_reviewed",
+      "status": "PASS",
+      "detail": "Required human review is recorded as complete."
+    },
+    {
+      "check": "acceptance_wireframes_and_runtime_captures_distinguished",
+      "status": "PASS",
+      "detail": "Required human review is recorded as complete."
+    }
+  ]
+}

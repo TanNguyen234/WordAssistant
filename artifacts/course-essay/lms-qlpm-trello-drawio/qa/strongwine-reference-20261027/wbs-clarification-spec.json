@@ -1,0 +1,30 @@
+{
+  "input_sha256": "86f6aed1c6aa1cbe66c855372e097cd44619c0ee0542b0b1550b13eb85d5e15a",
+  "scope_start": "Phân rã công việc theo sản phẩm bàn giao",
+  "scope_end": "CHƯƠNG 4. QUẢN LÝ TIẾN ĐỘ VÀ CPM",
+  "require_complete_hierarchy": false,
+  "rewrites": [
+    {
+      "section": "Phân rã công việc theo sản phẩm bàn giao",
+      "paragraph_index": 4,
+      "text": "Bảng và hình là hai bản tóm tắt phục vụ giải thích, chưa phải từ điển WBS đầy đủ. Đặc biệt, bảng gom đóng dự án vào nhóm 7, trong khi hồ sơ WBS chi tiết của dự án dùng nhóm 7 cho triển khai demo và nhóm 8 cho đóng dự án. Vì vậy không đối chiếu trực tiếp mã nhóm của bảng tóm tắt với mã trong tiến độ CPM; cần thống nhất cấu trúc trước khi sử dụng chúng như một baseline duy nhất. Hồ sơ WBS chi tiết nằm tại docs/project-management/04_SCOPE_BASELINE_WBS.md trong mã nguồn LMS, commit 72cfa37."
+    }
+  ],
+  "caption_titles": [
+    {
+      "old": "WBS cấp 2 và đầu ra",
+      "new": "Tóm tắt các nhóm công việc và đầu ra"
+    }
+  ],
+  "insertions": [
+    {
+      "before_heading": "CHƯƠNG 4. QUẢN LÝ TIẾN ĐỘ VÀ CPM",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Trong WBS chi tiết, gói 4.5 về bài tập và chấm điểm được phân thành cấu hình bài tập và hạn nộp, sinh viên nộp hoặc cập nhật bài, và giảng viên xem, chấm và nhận xét. Phân rã đến các đầu ra này giúp xác định trách nhiệm và điều kiện kiểm tra từng phần; một ảnh giao diện riêng lẻ chưa chứng minh cả gói đã hoàn tất. Đây là nội dung kế hoạch dự án, không phải biên bản nghiệm thu."
+        }
+      ]
+    }
+  ]
+}

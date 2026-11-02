@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" type="device" version="24.7.17">
+  <diagram id="LMS_Class_Domain_Compact" name="Class Domain">
+    <mxGraphModel dx="1350" dy="850" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1350" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Mô hình lớp khái niệm LMS" style="text;html=1;align=center;verticalAlign=middle;fontSize=28;fontStyle=1;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="300" y="18" width="760" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="note" value="Trích lớp nghiệp vụ cốt lõi; không thể hiện phương thức triển khai" style="text;html=1;align=center;verticalAlign=middle;fontSize=15;fontColor=#475569;" vertex="1" parent="1">
+          <mxGeometry x="220" y="65" width="920" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="user" value="&lt;b&gt;User&lt;/b&gt;&lt;br/&gt;UserId (PK)&lt;br/&gt;Role, StudentCode" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#334155;strokeWidth=2;fontSize=16;fontColor=#111827;align=left;verticalAlign=top;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="40" y="130" width="370" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="course" value="&lt;b&gt;Course&lt;/b&gt;&lt;br/&gt;CourseId (PK)&lt;br/&gt;LecturerId (FK), Status" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#334155;strokeWidth=2;fontSize=16;fontColor=#111827;align=left;verticalAlign=top;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="480" y="130" width="370" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="assignment" value="&lt;b&gt;Assignment&lt;/b&gt;&lt;br/&gt;AssignmentId (PK)&lt;br/&gt;CourseId (FK), MaxScore" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#334155;strokeWidth=2;fontSize=16;fontColor=#111827;align=left;verticalAlign=top;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="920" y="130" width="370" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="enrollment" value="&lt;b&gt;Enrollment&lt;/b&gt;&lt;br/&gt;CourseId + StudentId (unique)&lt;br/&gt;Status" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#334155;strokeWidth=2;fontSize=16;fontColor=#111827;align=left;verticalAlign=top;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="40" y="315" width="370" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="module" value="&lt;b&gt;Module&lt;/b&gt;&lt;br/&gt;ModuleId (PK)&lt;br/&gt;CourseId (FK), Title" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#334155;strokeWidth=2;fontSize=16;fontColor=#111827;align=left;verticalAlign=top;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="480" y="315" width="370" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="submission" value="&lt;b&gt;Submission&lt;/b&gt;&lt;br/&gt;SubmissionId (PK)&lt;br/&gt;AssignmentId, StudentId, Status" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#334155;strokeWidth=2;fontSize=16;fontColor=#111827;align=left;verticalAlign=top;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="920" y="315" width="370" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="quiz" value="&lt;b&gt;Quiz&lt;/b&gt;&lt;br/&gt;QuizId (PK)&lt;br/&gt;CourseId (FK), Status" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#334155;strokeWidth=2;fontSize=16;fontColor=#111827;align=left;verticalAlign=top;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="40" y="500" width="370" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="lesson" value="&lt;b&gt;Lesson&lt;/b&gt;&lt;br/&gt;LessonId (PK)&lt;br/&gt;ModuleId (FK), Title" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#334155;strokeWidth=2;fontSize=16;fontColor=#111827;align=left;verticalAlign=top;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="480" y="500" width="370" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="grade" value="&lt;b&gt;Grade&lt;/b&gt;&lt;br/&gt;GradeId (PK)&lt;br/&gt;CourseId, StudentId, SourceType / SourceId" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#334155;strokeWidth=2;fontSize=16;fontColor=#111827;align=left;verticalAlign=top;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="920" y="500" width="370" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="attempt" value="&lt;b&gt;QuizAttempt&lt;/b&gt;&lt;br/&gt;AttemptId (PK)&lt;br/&gt;QuizId, StudentId, Status" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#334155;strokeWidth=2;fontSize=16;fontColor=#111827;align=left;verticalAlign=top;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="260" y="685" width="370" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="notification" value="&lt;b&gt;Notification&lt;/b&gt;&lt;br/&gt;NotificationId (PK)&lt;br/&gt;UserId (FK), Type" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#334155;strokeWidth=2;fontSize=16;fontColor=#111827;align=left;verticalAlign=top;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="700" y="685" width="370" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="r1" value="lecturer" style="endArrow=none;startArrow=none;html=1;strokeColor=#64748b;strokeWidth=2;fontSize=13;fontColor=#334155;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="user" target="course">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r2" value="1 : N" style="endArrow=none;startArrow=none;html=1;strokeColor=#64748b;strokeWidth=2;fontSize=13;fontColor=#334155;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="course" target="assignment">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r3" value="1 : N" style="endArrow=none;startArrow=none;html=1;strokeColor=#64748b;strokeWidth=2;fontSize=13;fontColor=#334155;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="course" target="enrollment">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4" value="student" style="endArrow=none;startArrow=none;html=1;strokeColor=#64748b;strokeWidth=2;fontSize=13;fontColor=#334155;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="user" target="enrollment">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r5" value="1 : N" style="endArrow=none;startArrow=none;html=1;strokeColor=#64748b;strokeWidth=2;fontSize=13;fontColor=#334155;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="course" target="module">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r6" value="1 : N" style="endArrow=none;startArrow=none;html=1;strokeColor=#64748b;strokeWidth=2;fontSize=13;fontColor=#334155;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="module" target="lesson">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r7" value="1 : N" style="endArrow=none;startArrow=none;html=1;strokeColor=#64748b;strokeWidth=2;fontSize=13;fontColor=#334155;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="assignment" target="submission">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r8" value="1 : N" style="endArrow=none;startArrow=none;html=1;strokeColor=#64748b;strokeWidth=2;fontSize=13;fontColor=#334155;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="course" target="quiz">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r9" value="1 : N" style="endArrow=none;startArrow=none;html=1;strokeColor=#64748b;strokeWidth=2;fontSize=13;fontColor=#334155;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="quiz" target="attempt">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r10" value="assignment grade" style="endArrow=none;startArrow=none;html=1;strokeColor=#64748b;strokeWidth=2;fontSize=13;fontColor=#334155;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="submission" target="grade">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r11" value="recipient" style="endArrow=none;startArrow=none;html=1;strokeColor=#64748b;strokeWidth=2;fontSize=13;fontColor=#334155;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="user" target="notification">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

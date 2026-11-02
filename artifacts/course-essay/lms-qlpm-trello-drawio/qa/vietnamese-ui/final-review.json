@@ -1,0 +1,35 @@
+{
+  "document": "output/LMS_HCMUNRE_Viet_hoa.docx",
+  "document_sha256": "6f68151f42380f8935737823c2a55f6cd37a55b5023ec7c707d4f7d4dffeaf5b",
+  "pages": 70,
+  "headings": 59,
+  "images": 27,
+  "tables": 21,
+  "references": 15,
+  "capture_count": 14,
+  "asset_rows": 48,
+  "warning_dispositions": 121,
+  "word_delivery": "PASS",
+  "remaining_unknown": [
+    "original browser document HTTP status",
+    "actual scored course rubric",
+    "unrun capture categories and complete UAT"
+  ],
+  "verification_commands": [
+    "node --test tests/vi-presentation.test.mjs",
+    "tsc -p tsconfig.app.json --noEmit",
+    "vite build",
+    "oxlint",
+    "git diff --check",
+    "wordassistant field update-all",
+    "wordassistant validate --profile hcmunre-lms-full-profile.json --variant report",
+    "wordassistant verify --render --engine word",
+    "wordassistant verify --delivery --native-fields --reuse-render-report",
+    "wordassistant integrity audit/provenance",
+    "wordassistant caption audit",
+    "check_course_essay_readiness.py"
+  ],
+  "task_brief": "task-brief.md",
+  "code_review": "D:/Download/LMS/docs/audit/2026-10-26-vietnamese-ui/review.json",
+  "changed_files_manifest": "D:/Download/LMS/docs/audit/2026-10-26-vietnamese-ui/source-hashes.json"
+}

@@ -1,0 +1,20 @@
+{
+  "authoring_input": "output/LMS_HCMUNRE_toc_refined.docx",
+  "input_sha256": "79757568eb558bb4aa22e8895d581a783ce904e58e29265fe87556403bd424ca",
+  "output": "output/LMS_HCMUNRE_day_du.docx",
+  "output_sha256": "8d8061ac370722f40b784746f1db336de3bd176a19875608a27ac684b9f52459",
+  "profile_file": "hcmunre-lms-full-profile.json",
+  "profile_sha256": "4c1ace0ea406c4d8fa6747fdaf7ea594387943dd48269c3730b37d56479cc98c",
+  "refinements": [
+    "Exact user title and course",
+    "Two bundled logos and original source outer frame",
+    "Full front matter and blank identities/confirmations",
+    "Unnumbered front matter; Introduction Arabic 1",
+    "Front titles nonitalic bold left",
+    "TOC spacing 1.5 with no added paragraph spacing",
+    "Image/caption/source blocks kept together",
+    "Native tables kept with their source notes; form tables given appropriate widths"
+  ],
+  "native_command": "wordassistant field update-all INPUT --output OUTPUT --json",
+  "evidence_level": "native Word integration; actual UI screenshot provenance recorded separately"
+}

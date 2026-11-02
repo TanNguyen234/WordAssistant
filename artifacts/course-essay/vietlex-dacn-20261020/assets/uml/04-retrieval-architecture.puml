@@ -1,0 +1,44 @@
+@startuml
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName "Times New Roman"
+skinparam defaultFontSize 22
+top to bottom direction
+component "FastAPI / Jinja\nGET /, /search, /documents/{id}" as Web
+component "POST /chat\napp/api/routes.py" as Chat
+component "run_advanced_rag\napp/services/rag_pipeline.py" as Pipeline
+component "Legacy hybrid\nLegalRetriever" as Legacy
+component "V3 retrieval\nVertexQdrantRetriever" as V3
+component "V3 article expansion\nsource + content hash check" as Expand
+component "Bounded context\n≤ 3 passages / 720 tokens" as Context
+component "LLM generation" as Generate
+component "Input / output checks\nconfigurable guardrails" as Guard
+ database "Cache + interaction store" as State
+Web --> Chat
+Chat --> Guard : input check
+Chat --> State : cache lookup
+Chat --> Pipeline : cache miss
+Pipeline --> Legacy : USE_LEGACY_FREE_PIPELINE = true
+Pipeline --> V3 : USE_LEGACY_FREE_PIPELINE = false (default)
+V3 --> Expand : optional evidence expansion
+Legacy --> Context
+Expand --> Context
+Legacy --> Context
+Context --> Generate
+Generate --> Guard : output check
+Guard --> State : persist status and trace
+note bottom of V3
+Vertex embedding 1024d + Qdrant v3;
+RRF / DBSF rank blend.
+Observed capacity snapshot is partial,
+not full corpus coverage.
+end note
+note bottom of Legacy
+Qdrant E5 384d + Pinecone v1;
+SQLite FTS for number/title and local
+content resolution. No silent cross-fallback.
+end note
+@enduml
+
+
+

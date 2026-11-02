@@ -1,0 +1,635 @@
+{
+  "schema_version": 1,
+  "acceptance_status": "ACCEPTED_UI_CLICKTHROUGH_CAPTURE",
+  "capture_method": "visible UI interaction; screenshots from real pages",
+  "capture_context": {
+    "browser_surface": "visible_browser_tab",
+    "headless": false,
+    "navigation_policy": "visible_ui_clickthrough"
+  },
+  "verification_limit": "Original document HTTP status remains UNKNOWN. Historical HMR AuthProvider error at 03:45:17Z is preserved in browser-console.json; final captures begin 03:57Z after reload and show loaded screens. No new console errors recorded during final capture sequence. No full UAT claimed.",
+  "captures": [
+    {
+      "capture_id": "T01",
+      "route": "https://trello.com/b/sLfApXgV/qlda-xay-d%E1%BB%B1ng-h%E1%BB%87-th%E1%BB%91ng-lms-cho-tr%C6%B0%E1%BB%9Dng-d%E1%BA%A1i-h%E1%BB%8Dc",
+      "resolved_url": "https://trello.com/b/sLfApXgV/qlda-xay-d%E1%BB%B1ng-h%E1%BB%87-th%E1%BB%91ng-lms-cho-tr%C6%B0%E1%BB%9Dng-d%E1%BA%A1i-h%E1%BB%8Dc",
+      "screenshot_path": "captures/2026-10-26/T01-board-workflow.png",
+      "screenshot_sha256": "c2628190d549c84f74fcf3091e84263e18d8aa8fe0fbe785a728e55546043ae6",
+      "captured_at_local": "2026-10-26T00:17:30.919000+07:00",
+      "page_title": "Các cột công việc trên bảng Trello LMS",
+      "acceptance_status": "ACCEPTED_UI_CLICKTHROUGH_CAPTURE",
+      "capture_method": "visible UI click-through in ChatGPT in-app browser",
+      "arrival": {
+        "from": "https://trello.com",
+        "local_file_open_for_this_capture": false,
+        "direct_route_load_for_this_capture": false,
+        "ui_steps": [
+          "Open Trello home",
+          "Click LMS project board in Recent boards",
+          "Observe desktop workflow columns including empty Done; no cards modified"
+        ]
+      },
+      "external_side_effect": false,
+      "http_status": null,
+      "network": {
+        "document_status": null,
+        "note": "IAB did not expose main-document HTTP response; not inferred from visible success."
+      },
+      "console": {
+        "errors": [],
+        "warnings": [
+          {
+            "message": "Object",
+            "source": "Trello asset warning; no visible page error"
+          }
+        ]
+      },
+      "page_state_review": {
+        "status": "PASS",
+        "summary": "Ảnh cho thấy nhóm đã tổ chức công việc theo To Do, Doing, Review, Done và Blocked. Tại thời điểm chụp, To Do có 25 thẻ; Doing, Review và Done đều bằng 0. Điều này cho phép nhận xét về cấu trúc quản lý và tình trạng theo dõi, nhưng chưa cho phép báo cáo phần trăm hoàn thành. Thẻ hỏi rubric nằm ở Blocked cho thấy nhóm còn một đầu vào cần xác nhận.",
+        "reviewed_by": "Codex visual source review",
+        "reviewed_at": "2026-10-26",
+        "screenshot_path": "captures/2026-10-26/T01-board-workflow.png",
+        "screenshot_sha256": "c2628190d549c84f74fcf3091e84263e18d8aa8fe0fbe785a728e55546043ae6"
+      },
+      "viewport": [
+        1600,
+        1000
+      ]
+    },
+    {
+      "capture_id": "T02",
+      "route": "https://trello.com/c/krphAN2A/7-pm-04-wbs-v%C3%A0-t%E1%BB%AB-%C4%91i%E1%BB%83n-c%C3%B4ng-vi%E1%BB%87c",
+      "resolved_url": "https://trello.com/c/krphAN2A/7-pm-04-wbs-v%C3%A0-t%E1%BB%AB-%C4%91i%E1%BB%83n-c%C3%B4ng-vi%E1%BB%87c",
+      "screenshot_path": "captures/2026-10-26/T02-wbs-checklist.png",
+      "screenshot_sha256": "2d3ba6732ad561ff2127456ef1999e82c14b2e46dc494283ceb1b390c4b940ae",
+      "captured_at_local": "2026-10-26T00:18:32.782000+07:00",
+      "page_title": "Mô tả và checklist của thẻ WBS",
+      "acceptance_status": "ACCEPTED_UI_CLICKTHROUGH_CAPTURE",
+      "capture_method": "visible UI click-through in ChatGPT in-app browser",
+      "arrival": {
+        "from": "https://trello.com",
+        "local_file_open_for_this_capture": false,
+        "direct_route_load_for_this_capture": false,
+        "ui_steps": [
+          "Open Trello home",
+          "Click LMS project board in Recent boards",
+          "Open PM-04 via visible card; verify WBS title and checklist 0/7"
+        ]
+      },
+      "external_side_effect": false,
+      "http_status": null,
+      "network": {
+        "document_status": null,
+        "note": "IAB did not expose main-document HTTP response; not inferred from visible success."
+      },
+      "console": {
+        "errors": [],
+        "warnings": [
+          {
+            "message": "Object",
+            "source": "Trello asset warning; no visible page error"
+          }
+        ]
+      },
+      "page_state_review": {
+        "status": "PASS",
+        "summary": "Thẻ PM-04 quy định đầu ra là WBS hướng sản phẩm bàn giao và có bảy điều kiện kiểm tra. Checklist đang ở mức 0/7, gồm phân biệt phạm vi sản phẩm với phạm vi dự án, xác định người phụ trách và liên kết bằng chứng. Vì vậy, đây là minh chứng tiêu chí đã được đưa lên công cụ; chưa phải xác nhận WBS đã được review xong.",
+        "reviewed_by": "Codex visual source review",
+        "reviewed_at": "2026-10-26",
+        "screenshot_path": "captures/2026-10-26/T02-wbs-checklist.png",
+        "screenshot_sha256": "2d3ba6732ad561ff2127456ef1999e82c14b2e46dc494283ceb1b390c4b940ae"
+      },
+      "viewport": [
+        1600,
+        1000
+      ]
+    },
+    {
+      "capture_id": "T03",
+      "route": "https://trello.com/b/sLfApXgV/qlda-xay-d%E1%BB%B1ng-h%E1%BB%87-th%E1%BB%91ng-lms-cho-tr%C6%B0%E1%BB%9Dng-d%E1%BA%A1i-h%E1%BB%8Dc",
+      "resolved_url": "https://trello.com/b/sLfApXgV/qlda-xay-d%E1%BB%B1ng-h%E1%BB%87-th%E1%BB%91ng-lms-cho-tr%C6%B0%E1%BB%9Dng-d%E1%BA%A1i-h%E1%BB%8Dc",
+      "screenshot_path": "captures/2026-10-26/T03-milestones-and-done.png",
+      "screenshot_sha256": "d673bda723cfd005d354a22e8de9ac6e573b6c58ab72d86c1297d281cab6b188",
+      "captured_at_local": "2026-10-26T00:19:12.231000+07:00",
+      "page_title": "Mốc kế hoạch và trạng thái Done trên Trello",
+      "acceptance_status": "ACCEPTED_UI_CLICKTHROUGH_CAPTURE",
+      "capture_method": "visible UI click-through in ChatGPT in-app browser",
+      "arrival": {
+        "from": "https://trello.com",
+        "local_file_open_for_this_capture": false,
+        "direct_route_load_for_this_capture": false,
+        "ui_steps": [
+          "Open Trello home",
+          "Click LMS project board in Recent boards",
+          "Horizontally scroll board to milestones, simulation, Blocked and empty Done"
+        ]
+      },
+      "external_side_effect": false,
+      "http_status": null,
+      "network": {
+        "document_status": null,
+        "note": "IAB did not expose main-document HTTP response; not inferred from visible success."
+      },
+      "console": {
+        "errors": [],
+        "warnings": [
+          {
+            "message": "Object",
+            "source": "Trello asset warning; no visible page error"
+          }
+        ]
+      },
+      "page_state_review": {
+        "status": "PASS",
+        "summary": "Các mốc tháng 10–11 được đặt cạnh danh sách nghiệm thu mô phỏng. Ngày trên thẻ là mốc kế hoạch của nhóm; ảnh không phải chế độ Calendar hoặc Timeline và không chứng minh tiến độ thực tế. Cột Done đang trống. Báo cáo ghi nhận đúng trạng thái này, thay vì tạo thêm một thẻ hoàn tất để làm minh chứng.",
+        "reviewed_by": "Codex visual source review",
+        "reviewed_at": "2026-10-26",
+        "screenshot_path": "captures/2026-10-26/T03-milestones-and-done.png",
+        "screenshot_sha256": "d673bda723cfd005d354a22e8de9ac6e573b6c58ab72d86c1297d281cab6b188"
+      },
+      "viewport": [
+        1600,
+        1000
+      ]
+    },
+    {
+      "capture_id": "T04",
+      "route": "https://trello.com/c/lD5frqkU/37-sim-01-m%E1%BA%ABu-bi%C3%AAn-b%E1%BA%A3n-nghi%E1%BB%87m-thu-30-11-kh%C3%B4ng-ph%E1%BA%A3i-bi%C3%AAn-b%E1%BA%A3n-th%E1%BA%ADt",
+      "resolved_url": "https://trello.com/c/lD5frqkU/37-sim-01-m%E1%BA%ABu-bi%C3%AAn-b%E1%BA%A3n-nghi%E1%BB%87m-thu-30-11-kh%C3%B4ng-ph%E1%BA%A3i-bi%C3%AAn-b%E1%BA%A3n-th%E1%BA%ADt",
+      "screenshot_path": "captures/2026-10-26/T04-simulated-acceptance.png",
+      "screenshot_sha256": "ca619652cdcfd2ef00833f866461efa5ad61606ebdecb2bed881e9f38b2d9a39",
+      "captured_at_local": "2026-10-26T00:19:26.783000+07:00",
+      "page_title": "Thẻ nghiệm thu được ghi rõ là mô phỏng",
+      "acceptance_status": "ACCEPTED_UI_CLICKTHROUGH_CAPTURE",
+      "capture_method": "visible UI click-through in ChatGPT in-app browser",
+      "arrival": {
+        "from": "https://trello.com",
+        "local_file_open_for_this_capture": false,
+        "direct_route_load_for_this_capture": false,
+        "ui_steps": [
+          "Open Trello home",
+          "Click LMS project board in Recent boards",
+          "Scroll right and open SIM-01; verify explicit not-real-acceptance notice"
+        ]
+      },
+      "external_side_effect": false,
+      "http_status": null,
+      "network": {
+        "document_status": null,
+        "note": "IAB did not expose main-document HTTP response; not inferred from visible success."
+      },
+      "console": {
+        "errors": [],
+        "warnings": [
+          {
+            "message": "Object",
+            "source": "Trello asset warning; no visible page error"
+          }
+        ]
+      },
+      "page_state_review": {
+        "status": "PASS",
+        "summary": "Tiêu đề SIM-01 và phần mô tả ghi rõ đây là kịch bản tương lai, không phải biên bản thật. Nội dung checklist có một bộ giả định EVM riêng, khác đường cơ sở trong bài. Nhãn này giúp tránh nhầm ví dụ phục vụ báo cáo với kết quả kiểm thử hoặc quyết định nghiệm thu.",
+        "reviewed_by": "Codex visual source review",
+        "reviewed_at": "2026-10-26",
+        "screenshot_path": "captures/2026-10-26/T04-simulated-acceptance.png",
+        "screenshot_sha256": "ca619652cdcfd2ef00833f866461efa5ad61606ebdecb2bed881e9f38b2d9a39"
+      },
+      "viewport": [
+        1600,
+        1000
+      ]
+    },
+    {
+      "capture_id": "L02",
+      "route": "http://127.0.0.1:5174/users",
+      "resolved_url": "http://127.0.0.1:5174/users",
+      "screenshot_path": "captures/2026-10-26-vi/L02-admin-users-actual-vi.png",
+      "screenshot_sha256": "0aee2050504e94172b14319ec65636baf799cccdf0bd19bd0f6b1ba4bcdae355",
+      "captured_at_local": "2026-10-26T10:57:17.022000+07:00",
+      "page_title": "Trang quản lý người dùng của quản trị viên",
+      "acceptance_status": "ACCEPTED_UI_CLICKTHROUGH_CAPTURE",
+      "capture_method": "visible UI click-through in ChatGPT in-app browser",
+      "arrival": {
+        "from": "http://127.0.0.1:5174/",
+        "local_file_open_for_this_capture": false,
+        "direct_route_load_for_this_capture": false,
+        "ui_steps": [
+          "Đăng nhập quản trị; menu Người dùng; bộ lọc Tất cả vai trò."
+        ],
+        "note": "Summarized from observed tool interactions; raw arrival_history is retained separately and contains earlier exploration."
+      },
+      "external_side_effect": false,
+      "http_status": null,
+      "network": {
+        "document_status": null,
+        "note": "Original main-document status not exposed; UNKNOWN."
+      },
+      "console": {
+        "errors": [],
+        "warnings": [],
+        "historical_log_file": "browser-console.json"
+      },
+      "page_state_review": {
+        "status": "PASS",
+        "summary": "Sau khi đăng nhập bằng vai trò quản trị, menu hiển thị chức năng Người dùng và danh sách tài khoản lấy từ cơ sở dữ liệu kiểm thử. Trang có bộ lọc vai trò và thao tác quản lý trạng thái. Các tên và email trên ảnh thuộc dữ liệu demo; lần quan sát này không thêm, sửa hoặc khóa tài khoản.",
+        "reviewed_by": "Codex actual screenshot visual review",
+        "reviewed_at": "2026-10-26",
+        "screenshot_path": "captures/2026-10-26-vi/L02-admin-users-actual-vi.png",
+        "screenshot_sha256": "0aee2050504e94172b14319ec65636baf799cccdf0bd19bd0f6b1ba4bcdae355"
+      },
+      "viewport": [
+        1265,
+        712
+      ]
+    },
+    {
+      "capture_id": "L08",
+      "route": "http://127.0.0.1:5174/dashboard",
+      "resolved_url": "http://127.0.0.1:5174/dashboard",
+      "screenshot_path": "captures/2026-10-26-vi/L08-admin-dashboard-actual-vi.png",
+      "screenshot_sha256": "81c6303f5f8b3182d9fa2f300146c9bb8ee248674016fc32b19c0748545aae74",
+      "captured_at_local": "2026-10-26T10:57:29.405000+07:00",
+      "page_title": "Trang tổng quan của quản trị viên",
+      "acceptance_status": "ACCEPTED_UI_CLICKTHROUGH_CAPTURE",
+      "capture_method": "visible UI click-through in ChatGPT in-app browser",
+      "arrival": {
+        "from": "http://127.0.0.1:5174/",
+        "local_file_open_for_this_capture": false,
+        "direct_route_load_for_this_capture": false,
+        "ui_steps": [
+          "Quản trị: menu Tổng quan."
+        ],
+        "note": "Summarized from observed tool interactions; raw arrival_history is retained separately and contains earlier exploration."
+      },
+      "external_side_effect": false,
+      "http_status": null,
+      "network": {
+        "document_status": null,
+        "note": "Original main-document status not exposed; UNKNOWN."
+      },
+      "console": {
+        "errors": [],
+        "warnings": [],
+        "historical_log_file": "browser-console.json"
+      },
+      "page_state_review": {
+        "status": "PASS",
+        "summary": "Tổng quan hiển thị số liệu tài khoản và khóa học từ dữ liệu mẫu. Ô theo dõi hệ thống ghi rõ chưa có dữ liệu giám sát; không hiển thị kết luận máy chủ hoạt động bình thường khi chưa có phép đo.",
+        "reviewed_by": "Codex actual screenshot visual review",
+        "reviewed_at": "2026-10-26",
+        "screenshot_path": "captures/2026-10-26-vi/L08-admin-dashboard-actual-vi.png",
+        "screenshot_sha256": "81c6303f5f8b3182d9fa2f300146c9bb8ee248674016fc32b19c0748545aae74"
+      },
+      "viewport": [
+        1265,
+        712
+      ]
+    },
+    {
+      "capture_id": "L10",
+      "route": "http://127.0.0.1:5174/notifications",
+      "resolved_url": "http://127.0.0.1:5174/notifications",
+      "screenshot_path": "captures/2026-10-26-vi/L10-notifications-actual-vi.png",
+      "screenshot_sha256": "a52365ad1d146c978e5f1adf47cdec69d9bb49f719eaa82bd25c4572cfd7af66",
+      "captured_at_local": "2026-10-26T10:57:34.906000+07:00",
+      "page_title": "Hộp thư thông báo của quản trị viên",
+      "acceptance_status": "ACCEPTED_UI_CLICKTHROUGH_CAPTURE",
+      "capture_method": "visible UI click-through in ChatGPT in-app browser",
+      "arrival": {
+        "from": "http://127.0.0.1:5174/",
+        "local_file_open_for_this_capture": false,
+        "direct_route_load_for_this_capture": false,
+        "ui_steps": [
+          "Quản trị: menu Thông báo."
+        ],
+        "note": "Summarized from observed tool interactions; raw arrival_history is retained separately and contains earlier exploration."
+      },
+      "external_side_effect": false,
+      "http_status": null,
+      "network": {
+        "document_status": null,
+        "note": "Original main-document status not exposed; UNKNOWN."
+      },
+      "console": {
+        "errors": [],
+        "warnings": [],
+        "historical_log_file": "browser-console.json"
+      },
+      "page_state_review": {
+        "status": "PASS",
+        "summary": "Tài khoản quản trị hiện chưa có thông báo. Ảnh ghi nhận trạng thái rỗng thực tế, không bổ sung thông báo giả hoặc đánh dấu đã đọc để chuẩn bị ảnh.",
+        "reviewed_by": "Codex actual screenshot visual review",
+        "reviewed_at": "2026-10-26",
+        "screenshot_path": "captures/2026-10-26-vi/L10-notifications-actual-vi.png",
+        "screenshot_sha256": "a52365ad1d146c978e5f1adf47cdec69d9bb49f719eaa82bd25c4572cfd7af66"
+      },
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "capture_id": "L01",
+      "route": "http://127.0.0.1:5174/login",
+      "resolved_url": "http://127.0.0.1:5174/login",
+      "screenshot_path": "captures/2026-10-26-vi/L01-login-actual-vi.png",
+      "screenshot_sha256": "8aba26d7d564ca7ab34e0b2d65b3e5584c7bc0a0f1c9f70947a71741444871e1",
+      "captured_at_local": "2026-10-26T10:57:47.920000+07:00",
+      "page_title": "Trang đăng nhập của website LMS",
+      "acceptance_status": "ACCEPTED_UI_CLICKTHROUGH_CAPTURE",
+      "capture_method": "visible UI click-through in ChatGPT in-app browser",
+      "arrival": {
+        "from": "http://127.0.0.1:5174/",
+        "local_file_open_for_this_capture": false,
+        "direct_route_load_for_this_capture": false,
+        "ui_steps": [
+          "Mở trang đăng nhập qua nút Đăng xuất."
+        ],
+        "note": "Summarized from observed tool interactions; raw arrival_history is retained separately and contains earlier exploration."
+      },
+      "external_side_effect": false,
+      "http_status": null,
+      "network": {
+        "document_status": null,
+        "note": "Original main-document status not exposed; UNKNOWN."
+      },
+      "console": {
+        "errors": [],
+        "warnings": [],
+        "historical_log_file": "browser-console.json"
+      },
+      "page_state_review": {
+        "status": "PASS",
+        "summary": "Màn hình đăng nhập cung cấp trường tài khoản, mật khẩu và các tài khoản demo theo ba vai trò. Ảnh được chụp trên website đang chạy ở địa chỉ cục bộ; mật khẩu trong trường nhập được che. Sự hiện diện của giao diện này xác nhận điểm vào hệ thống, còn khả năng truy cập từng chức năng phải được quan sát sau đăng nhập.",
+        "reviewed_by": "Codex actual screenshot visual review",
+        "reviewed_at": "2026-10-26",
+        "screenshot_path": "captures/2026-10-26-vi/L01-login-actual-vi.png",
+        "screenshot_sha256": "8aba26d7d564ca7ab34e0b2d65b3e5584c7bc0a0f1c9f70947a71741444871e1"
+      },
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "capture_id": "L03",
+      "route": "http://127.0.0.1:5174/assignments",
+      "resolved_url": "http://127.0.0.1:5174/assignments",
+      "screenshot_path": "captures/2026-10-26-vi/L03-lecturer-assignments-actual-vi.png",
+      "screenshot_sha256": "10633f093e4d0b7c17ba6fac269427653b4f1c944076dfce1ab32c1022f2bea1",
+      "captured_at_local": "2026-10-26T10:58:12.968000+07:00",
+      "page_title": "Giảng viên xem bài tập theo khóa học phụ trách",
+      "acceptance_status": "ACCEPTED_UI_CLICKTHROUGH_CAPTURE",
+      "capture_method": "visible UI click-through in ChatGPT in-app browser",
+      "arrival": {
+        "from": "http://127.0.0.1:5174/",
+        "local_file_open_for_this_capture": false,
+        "direct_route_load_for_this_capture": false,
+        "ui_steps": [
+          "Đăng xuất; chọn demo Giảng viên TS. Nam; Đăng nhập; menu Bài tập; WEB220."
+        ],
+        "note": "Summarized from observed tool interactions; raw arrival_history is retained separately and contains earlier exploration."
+      },
+      "external_side_effect": false,
+      "http_status": null,
+      "network": {
+        "document_status": null,
+        "note": "Original main-document status not exposed; UNKNOWN."
+      },
+      "console": {
+        "errors": [],
+        "warnings": [],
+        "historical_log_file": "browser-console.json"
+      },
+      "page_state_review": {
+        "status": "PASS",
+        "summary": "Vai trò giảng viên nhìn thấy danh sách khóa học được phân công và bài tập tương ứng. Với WEB220, bài tập REST API hiển thị trạng thái Đã giao, điểm tối đa và hạn nộp. Đây là đầu vào cho việc kiểm tra tính nhất quán giữa đặc tả bài tập, giao diện và dữ liệu, chưa phải kết quả kiểm thử mọi trường hợp phân quyền.",
+        "reviewed_by": "Codex actual screenshot visual review",
+        "reviewed_at": "2026-10-26",
+        "screenshot_path": "captures/2026-10-26-vi/L03-lecturer-assignments-actual-vi.png",
+        "screenshot_sha256": "10633f093e4d0b7c17ba6fac269427653b4f1c944076dfce1ab32c1022f2bea1"
+      },
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "capture_id": "L03b",
+      "route": "http://127.0.0.1:5174/assignments",
+      "resolved_url": "http://127.0.0.1:5174/assignments",
+      "screenshot_path": "captures/2026-10-26-vi/L03b-lecturer-submissions-actual-vi.png",
+      "screenshot_sha256": "94726b70142b1fa2a0a6d7c97a6caae19e888239817bc1e5b257af937371a3a7",
+      "captured_at_local": "2026-10-26T10:58:36.566000+07:00",
+      "page_title": "Giảng viên xem bài nộp văn bản của sinh viên",
+      "acceptance_status": "ACCEPTED_UI_CLICKTHROUGH_CAPTURE",
+      "capture_method": "visible UI click-through in ChatGPT in-app browser",
+      "arrival": {
+        "from": "http://127.0.0.1:5174/",
+        "local_file_open_for_this_capture": false,
+        "direct_route_load_for_this_capture": false,
+        "ui_steps": [
+          "Giảng viên: WEB220; nút Xem & Chấm bài."
+        ],
+        "note": "Summarized from observed tool interactions; raw arrival_history is retained separately and contains earlier exploration."
+      },
+      "external_side_effect": false,
+      "http_status": null,
+      "network": {
+        "document_status": null,
+        "note": "Original main-document status not exposed; UNKNOWN."
+      },
+      "console": {
+        "errors": [],
+        "warnings": [],
+        "historical_log_file": "browser-console.json"
+      },
+      "page_state_review": {
+        "status": "PASS",
+        "summary": "Từ nút Xem và Chấm bài, giao diện mở danh sách bài nộp và nội dung văn bản đã lưu. Ảnh có tên sinh viên demo, thời điểm nộp và nút chấm điểm. Lần quan sát dừng ở bước đọc; không gửi điểm hoặc thay đổi phản hồi. Hình nối mô hình trình tự chấm bài trong Phụ lục D với một trạng thái cụ thể trên ứng dụng.",
+        "reviewed_by": "Codex actual screenshot visual review",
+        "reviewed_at": "2026-10-26",
+        "screenshot_path": "captures/2026-10-26-vi/L03b-lecturer-submissions-actual-vi.png",
+        "screenshot_sha256": "94726b70142b1fa2a0a6d7c97a6caae19e888239817bc1e5b257af937371a3a7"
+      },
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "capture_id": "L12",
+      "route": "http://127.0.0.1:5174/quizzes",
+      "resolved_url": "http://127.0.0.1:5174/quizzes",
+      "screenshot_path": "captures/2026-10-26-vi/L12-quizzes-actual-vi.png",
+      "screenshot_sha256": "c4c22f1f1b0f92f4b04fd105953e403a9df057687e4dcf9381c3a47088805919",
+      "captured_at_local": "2026-10-26T10:58:54.905000+07:00",
+      "page_title": "Danh sách bài kiểm tra theo học phần",
+      "acceptance_status": "ACCEPTED_UI_CLICKTHROUGH_CAPTURE",
+      "capture_method": "visible UI click-through in ChatGPT in-app browser",
+      "arrival": {
+        "from": "http://127.0.0.1:5174/",
+        "local_file_open_for_this_capture": false,
+        "direct_route_load_for_this_capture": false,
+        "ui_steps": [
+          "Giảng viên: đóng danh sách bài nộp; menu Bài kiểm tra; WEB220."
+        ],
+        "note": "Summarized from observed tool interactions; raw arrival_history is retained separately and contains earlier exploration."
+      },
+      "external_side_effect": false,
+      "http_status": null,
+      "network": {
+        "document_status": null,
+        "note": "Original main-document status not exposed; UNKNOWN."
+      },
+      "console": {
+        "errors": [],
+        "warnings": [],
+        "historical_log_file": "browser-console.json"
+      },
+      "page_state_review": {
+        "status": "PASS",
+        "summary": "Giảng viên xem các bài kiểm tra của WEB220. Nhãn chức năng và trạng thái dùng tiếng Việt; tiêu đề và nội dung bài mẫu giữ nguyên. Không tạo câu hỏi, xuất bản hoặc bắt đầu lượt làm bài trong lần quan sát.",
+        "reviewed_by": "Codex actual screenshot visual review",
+        "reviewed_at": "2026-10-26",
+        "screenshot_path": "captures/2026-10-26-vi/L12-quizzes-actual-vi.png",
+        "screenshot_sha256": "c4c22f1f1b0f92f4b04fd105953e403a9df057687e4dcf9381c3a47088805919"
+      },
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "capture_id": "L04",
+      "route": "http://127.0.0.1:5174/assignments",
+      "resolved_url": "http://127.0.0.1:5174/assignments",
+      "screenshot_path": "captures/2026-10-26-vi/L04-student-assignment-actual-vi.png",
+      "screenshot_sha256": "076e53047b294d544d0dc47327e821d7e0995921229e5f06432e0e9ba296e320",
+      "captured_at_local": "2026-10-26T10:59:30.270000+07:00",
+      "page_title": "Sinh viên xem bài tập và hành động cập nhật bài nộp",
+      "acceptance_status": "ACCEPTED_UI_CLICKTHROUGH_CAPTURE",
+      "capture_method": "visible UI click-through in ChatGPT in-app browser",
+      "arrival": {
+        "from": "http://127.0.0.1:5174/",
+        "local_file_open_for_this_capture": false,
+        "direct_route_load_for_this_capture": false,
+        "ui_steps": [
+          "Đăng xuất; chọn demo Sinh viên Nguyễn An; Đăng nhập; menu Bài tập; AI310."
+        ],
+        "note": "Summarized from observed tool interactions; raw arrival_history is retained separately and contains earlier exploration."
+      },
+      "external_side_effect": false,
+      "http_status": null,
+      "network": {
+        "document_status": null,
+        "note": "Original main-document status not exposed; UNKNOWN."
+      },
+      "console": {
+        "errors": [],
+        "warnings": [],
+        "historical_log_file": "browser-console.json"
+      },
+      "page_state_review": {
+        "status": "PASS",
+        "summary": "Tài khoản sinh viên Nguyễn An nhìn thấy bài tập của khóa AI310 và hành động Cập nhật bài nộp. Khóa học được chọn từ những lớp tài khoản đang theo học. Ảnh phản ánh màn hình trước thao tác gửi; không được dùng để kết luận lần nộp mới đã thành công hoặc các trường hợp quá hạn đều đã được kiểm tra.",
+        "reviewed_by": "Codex actual screenshot visual review",
+        "reviewed_at": "2026-10-26",
+        "screenshot_path": "captures/2026-10-26-vi/L04-student-assignment-actual-vi.png",
+        "screenshot_sha256": "076e53047b294d544d0dc47327e821d7e0995921229e5f06432e0e9ba296e320"
+      },
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "capture_id": "L05",
+      "route": "http://127.0.0.1:5174/grades",
+      "resolved_url": "http://127.0.0.1:5174/grades",
+      "screenshot_path": "captures/2026-10-26-vi/L05-student-grades-actual-vi.png",
+      "screenshot_sha256": "e6dc42f581b491881ab9d6a0ad1787c80236487702114a12720d97589565ef70",
+      "captured_at_local": "2026-10-26T10:59:53.098000+07:00",
+      "page_title": "Bảng điểm cá nhân trên dữ liệu kiểm thử",
+      "acceptance_status": "ACCEPTED_UI_CLICKTHROUGH_CAPTURE",
+      "capture_method": "visible UI click-through in ChatGPT in-app browser",
+      "arrival": {
+        "from": "http://127.0.0.1:5174/",
+        "local_file_open_for_this_capture": false,
+        "direct_route_load_for_this_capture": false,
+        "ui_steps": [
+          "Sinh viên: menu Bảng điểm; AI310."
+        ],
+        "note": "Summarized from observed tool interactions; raw arrival_history is retained separately and contains earlier exploration."
+      },
+      "external_side_effect": false,
+      "http_status": null,
+      "network": {
+        "document_status": null,
+        "note": "Original main-document status not exposed; UNKNOWN."
+      },
+      "console": {
+        "errors": [],
+        "warnings": [],
+        "historical_log_file": "browser-console.json"
+      },
+      "page_state_review": {
+        "status": "PASS",
+        "summary": "Bảng điểm AI310 hiển thị điểm thành phần 10/10 và trọng số 10% đã lưu trước lần chụp. Giao diện giải thích trung bình chỉ là tạm tính, chưa áp dụng trọng số học phần và chưa xác định việc đạt học phần. Không thực hiện bài kiểm tra hoặc thay đổi điểm để tạo hình minh chứng.",
+        "reviewed_by": "Codex actual screenshot visual review",
+        "reviewed_at": "2026-10-26",
+        "screenshot_path": "captures/2026-10-26-vi/L05-student-grades-actual-vi.png",
+        "screenshot_sha256": "e6dc42f581b491881ab9d6a0ad1787c80236487702114a12720d97589565ef70"
+      },
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "capture_id": "L13",
+      "route": "http://127.0.0.1:5174/grades",
+      "resolved_url": "http://127.0.0.1:5174/grades",
+      "screenshot_path": "captures/2026-10-26-vi/L13-mobile-grades-actual-vi.png",
+      "screenshot_sha256": "94c76b20583f0f8fef3aedab37fc03d3ec3e443c010313f450311b14331c7849",
+      "captured_at_local": "2026-10-26T11:00:10.314000+07:00",
+      "page_title": "Bảng điểm trên màn hình điện thoại",
+      "acceptance_status": "ACCEPTED_UI_CLICKTHROUGH_CAPTURE",
+      "capture_method": "visible UI click-through in ChatGPT in-app browser",
+      "arrival": {
+        "from": "http://127.0.0.1:5174/",
+        "local_file_open_for_this_capture": false,
+        "direct_route_load_for_this_capture": false,
+        "ui_steps": [
+          "Sinh viên: bảng điểm AI310; đổi khung xem 390 × 844; tải lại."
+        ],
+        "note": "Summarized from observed tool interactions; raw arrival_history is retained separately and contains earlier exploration."
+      },
+      "external_side_effect": false,
+      "http_status": null,
+      "network": {
+        "document_status": null,
+        "note": "Original main-document status not exposed; UNKNOWN."
+      },
+      "console": {
+        "errors": [],
+        "warnings": [],
+        "historical_log_file": "browser-console.json"
+      },
+      "page_state_review": {
+        "status": "PASS",
+        "summary": "Khung xem 390 × 844 cho thấy các thẻ điểm xếp thành một cột và phần đầu trang được thu gọn. Bảng dữ liệu có vùng cuộn riêng. Ảnh phản ánh một kích thước kiểm tra; chưa thay được đánh giá trên nhiều thiết bị hoặc kiểm thử khả năng tiếp cận.",
+        "reviewed_by": "Codex actual screenshot visual review",
+        "reviewed_at": "2026-10-26",
+        "screenshot_path": "captures/2026-10-26-vi/L13-mobile-grades-actual-vi.png",
+        "screenshot_sha256": "94c76b20583f0f8fef3aedab37fc03d3ec3e443c010313f450311b14331c7849"
+      },
+      "viewport": [
+        375,
+        812
+      ]
+    }
+  ]
+}

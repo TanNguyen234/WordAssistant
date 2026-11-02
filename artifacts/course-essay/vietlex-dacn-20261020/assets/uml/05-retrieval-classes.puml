@@ -1,0 +1,52 @@
+@startuml
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName "Times New Roman"
+skinparam defaultFontSize 22
+left to right direction
+class "EvidenceChunk" as EvidenceChunk {
+  document_id: int
+  document_number: str
+  title: str
+  source_url: str
+  heading_path: str
+  article: str?
+  clause: str?
+  citation: str
+  text: str
+  token_count: int
+  source_content_sha256: str?
+}
+class "RetrievalOutcome" as RetrievalOutcome {
+  evidence: list[EvidenceChunk]
+  latency: dict[str, float]
+  status: str
+  diagnostics: dict
+  error: str?
+}
+class "LegalRetriever" as LegalRetriever {
+  retrieve_detailed(query, ...)
+}
+class "VertexQdrantRetriever" as VertexQdrantRetriever {
+  retrieve_detailed(query, ...)
+  _evidence(point)
+}
+class "V3ArticleExpansion" as V3ArticleExpansion {
+  status: str
+  selected_evidence: list[EvidenceChunk]
+  added_evidence: list[EvidenceChunk]
+  diagnostics: dict
+  latency_seconds: float
+}
+RetrievalOutcome "1" o-- "0..*" EvidenceChunk : evidence
+LegalRetriever ..> RetrievalOutcome : returns
+VertexQdrantRetriever ..> EvidenceChunk : creates from point payload
+VertexQdrantRetriever ..> RetrievalOutcome : retrieval result contract
+V3ArticleExpansion ..> EvidenceChunk : selects / adds
+note bottom
+Simplified code model from inspected declarations;
+not a complete persistence or database schema.
+end note
+@enduml
+
+

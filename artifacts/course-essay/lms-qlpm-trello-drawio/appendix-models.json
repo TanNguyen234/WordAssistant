@@ -1,0 +1,135 @@
+{
+  "appendix_heading": "Phụ lục D. Mô hình nghiệp vụ LMS",
+  "models": [
+    {
+      "heading": "Vai trò và Use Case",
+      "orientation": "landscape",
+      "paragraphs": [
+        "Mô hình phân chia tương tác theo ba vai trò. Giảng viên chỉ xử lý khóa học phụ trách; sinh viên cần ghi danh ACTIVE. Đăng nhập là điều kiện chung được lược. Khung nét đứt nhóm vai trò, đường nối biểu thị tác nhân tham gia. Nguồn: docs/02_ROLES_USE_CASES.md."
+      ],
+      "image": "compact_model_sources/LMS_Use_Case_Compact_Light.png",
+      "editable": "compact_model_sources/LMS_Use_Case_Compact_Light.exported.drawio",
+      "caption": "Use Case LMS theo vai trò",
+      "max_width_cm": 24.0,
+      "max_height_cm": 11.5,
+      "alt": "Ba nhóm tác nhân Admin, giảng viên và sinh viên với các tương tác LMS chính."
+    },
+    {
+      "heading": "Luồng nộp bài",
+      "orientation": "portrait",
+      "paragraphs": [
+        "Luồng nộp bài dùng PUT /assignments/{assignment_id}/submission. API kiểm tra vai trò sinh viên, ghi danh ACTIVE, khóa học đang hoạt động, bài tập đang công bố, nội dung văn bản và chính sách nộp muộn. Nếu không đủ điều kiện, hệ thống trả lý do từ chối; nếu hợp lệ, hệ thống tạo hoặc cập nhật bài nộp hiện hành. Bài đã chấm không được sinh viên sửa.",
+        "Hình dùng ký pháp lưu đồ để diễn giải hoạt động, với nhánh Có/Không tại điều kiện cho phép nộp. Đây là mô hình rút gọn của mã nguồn; MVP nhận ContentText và không tải tệp bài nộp. Nguồn: backend/app/api/routes/assignments.py và docs/02_ROLES_USE_CASES.md."
+      ],
+      "image": "sources/archive/LMS_QLDA_10-11_2026/anh_so_do/LMS_05.png",
+      "editable": "sources/archive/LMS_QLDA_10-11_2026/drawio/LMS_05.drawio",
+      "caption": "Luồng sinh viên nộp bài văn bản",
+      "max_width_cm": 12.0,
+      "max_height_cm": 16.0,
+      "alt": "Luồng kiểm tra quyền, ghi danh, thời hạn và tạo hoặc cập nhật bài nộp văn bản."
+    },
+    {
+      "heading": "Trình tự chấm bài",
+      "orientation": "landscape",
+      "paragraphs": [
+        "Giao diện lấy bài bằng GET /assignments/{assignment_id}/submissions và gửi điểm bằng PUT /submissions/{submission_id}/grade. API kiểm tra quyền sở hữu khóa học và giới hạn điểm, cập nhật Submission và Grades, rồi tạo Notification; bước 9 là xác nhận commit. Thời gian đọc từ trên xuống, mũi tên chỉ bên gửi và nhận. Hình chỉ có nhánh thành công, lược activation và nhánh lỗi. Nguồn: backend/app/api/routes/assignments.py."
+      ],
+      "image": "compact_model_sources/LMS_Sequence_Grade_Reviewed_Light.png",
+      "editable": "compact_model_sources/LMS_Sequence_Grade_Reviewed_Light.exported.drawio",
+      "caption": "Trình tự tương tác khi giảng viên chấm bài",
+      "max_width_cm": 24.0,
+      "max_height_cm": 10.8,
+      "alt": "Trình tự tương tác giữa giảng viên, React, FastAPI và SQL Server trong nhánh chấm bài thành công."
+    },
+    {
+      "heading": "Các lớp miền của bài tập",
+      "orientation": "landscape",
+      "paragraphs": [
+        "Sáu lớp khái niệm được trích cho luồng bài tập, không mô tả phương thức cài đặt. Đường liền là các quan hệ được chọn; số lượng và quan hệ đầy đủ đọc cùng ERD. Đường đứt logic dùng Grades.SourceType = ASSIGNMENT và SourceId = AssignmentId, không phải khóa ngoại SQL đến Assignment. Grade có các khóa ngoại CourseId, StudentId và GradedBy. Nguồn: database/01_schema.sql và backend/app/api/routes/assignments.py."
+      ],
+      "image": "compact_model_sources/LMS_Class_Assignment_Reviewed_Light.png",
+      "editable": "compact_model_sources/LMS_Class_Assignment_Reviewed_Light.exported.drawio",
+      "caption": "Mô hình lớp khái niệm của luồng bài tập",
+      "max_width_cm": 24.0,
+      "max_height_cm": 11.8,
+      "alt": "Sáu lớp khái niệm User, Enrollment, Course, Assignment, Submission và Grade với các quan hệ được chọn."
+    },
+    {
+      "heading": "Trạng thái bài nộp",
+      "orientation": "portrait",
+      "paragraphs": [
+        "Schema cho phép SUBMITTED, LATE và GRADED. Khi tiếp nhận bài hợp lệ, thời điểm nộp và AllowLate quyết định hai trạng thái đầu; thao tác chấm chuyển bài sang GRADED. Hình thể hiện lần nộp và lần chấm đầu tiên, dùng các trạng thái có tên để làm rõ vòng xử lý hiện hành.",
+        "Hình lược các vòng cập nhật: sinh viên có thể nộp lại khi quy tắc thời hạn cho phép và bài chưa chấm; giảng viên có thể sửa điểm đã chấm. Vì vậy, nhãn kết thúc vòng đời hiện hành không có nghĩa bản ghi bị xóa hay điểm không thể điều chỉnh. Nguồn: database/01_schema.sql và backend/app/api/routes/assignments.py."
+      ],
+      "image": "sources/archive/LMS_QLDA_10-11_2026/anh_so_do/LMS_11.png",
+      "editable": "sources/archive/LMS_QLDA_10-11_2026/drawio/LMS_11.drawio",
+      "caption": "Trạng thái nộp và chấm bài",
+      "max_width_cm": 15.5,
+      "max_height_cm": 14.5,
+      "alt": "Bài nộp hợp lệ vào SUBMITTED hoặc LATE, sau khi giảng viên chấm chuyển sang GRADED."
+    }
+  ],
+  "table_updates": [
+    {
+      "match_cell": "Charter/governance",
+      "rows": [
+        [
+          "Soạn Charter/business case",
+          "A/R",
+          "C",
+          "I",
+          "C"
+        ],
+        [
+          "Đặc tả SRS/Use Cases",
+          "A",
+          "R",
+          "C",
+          "I"
+        ],
+        [
+          "Lập CPM/chi phí/rủi ro",
+          "A/R",
+          "C",
+          "C",
+          "I"
+        ],
+        [
+          "Kiến trúc/API/CSDL",
+          "A",
+          "C",
+          "R",
+          "I"
+        ],
+        [
+          "Phát triển prototype",
+          "A",
+          "I",
+          "R",
+          "I"
+        ],
+        [
+          "Kiểm thử và triage",
+          "A",
+          "C",
+          "R",
+          "I"
+        ],
+        [
+          "UAT sign-off",
+          "C",
+          "C",
+          "I",
+          "A"
+        ],
+        [
+          "Bàn giao và ký đóng",
+          "C",
+          "I",
+          "I",
+          "A"
+        ]
+      ]
+    }
+  ]
+}

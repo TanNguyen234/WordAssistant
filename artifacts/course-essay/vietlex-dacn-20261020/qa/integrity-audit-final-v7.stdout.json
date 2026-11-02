@@ -1,0 +1,648 @@
+{
+  "schema_version": "1.0",
+  "audit_kind": "ETHICAL_ACADEMIC_INTEGRITY",
+  "ai_detection_performed": false,
+  "detector_evasion_assistance": false,
+  "document": {
+    "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Final.docx",
+    "sha256": "7ff79d15628a447fdfa0c4fc96705ab9858662f3634d45e450a3820a5e8a09d8",
+    "size_bytes": 527030
+  },
+  "profile": {
+    "profile_id": "vietlex-course-essay-style",
+    "profile_version": 1,
+    "minimum_references": 0,
+    "prefer_primary_source": true,
+    "require_reviewed_sources": true,
+    "long_quote_words": 40,
+    "quote_citation_words": 8,
+    "repeated_opening_words": 3,
+    "repeated_opening_minimum": 3,
+    "ngram_size": 5,
+    "repeated_ngram_minimum": 3,
+    "review_punctuation": [
+      "em_dash",
+      "en_dash",
+      "left_curly_double_quote",
+      "right_curly_double_quote",
+      "left_curly_single_quote",
+      "right_curly_single_quote",
+      "ellipsis",
+      "non_breaking_space"
+    ]
+  },
+  "coverage": {
+    "paragraph_records": 356,
+    "nonempty_story_counts": {
+      "body": 275,
+      "footer": 2,
+      "header": 2,
+      "table": 46
+    },
+    "stories": [
+      "body",
+      "table",
+      "header",
+      "footer"
+    ]
+  },
+  "status": "WARN",
+  "summary": {
+    "PASS": 6,
+    "WARN": 4,
+    "FAIL": 0
+  },
+  "gates": {
+    "invisible_unicode": {
+      "status": "PASS",
+      "finding_count": 0,
+      "findings": [],
+      "classification": "DETERMINISTIC_INTEGRITY_CHECK"
+    },
+    "typography_punctuation_review": {
+      "status": "WARN",
+      "finding_count": 1,
+      "findings": [
+        {
+          "punctuation": "em_dash",
+          "codepoint": "U+2014",
+          "occurrences": 25
+        }
+      ],
+      "classification": "STYLE_REVIEW_NOT_AI_EVIDENCE",
+      "configured": [
+        "em_dash",
+        "en_dash",
+        "left_curly_double_quote",
+        "right_curly_double_quote",
+        "left_curly_single_quote",
+        "right_curly_single_quote",
+        "ellipsis",
+        "non_breaking_space"
+      ]
+    },
+    "long_verbatim_quotes": {
+      "status": "PASS",
+      "finding_count": 0,
+      "findings": [],
+      "classification": "HUMAN_REVIEW_REQUIRED",
+      "word_threshold": 40
+    },
+    "quotes_lacking_adjacent_citation": {
+      "status": "PASS",
+      "finding_count": 0,
+      "findings": [],
+      "classification": "HUMAN_REVIEW_REQUIRED",
+      "word_threshold": 8,
+      "adjacency": "same, previous, or next paragraph in the same story"
+    },
+    "numeric_citation_bibliography_consistency": {
+      "status": "PASS",
+      "finding_count": 0,
+      "findings": [],
+      "classification": "DETERMINISTIC_CROSS_CHECK",
+      "citation_numbers": [
+        1,
+        2,
+        3
+      ],
+      "bibliography_numbers": [
+        1,
+        2,
+        3
+      ]
+    },
+    "source_evidence": {
+      "status": "PASS",
+      "finding_count": 0,
+      "findings": [],
+      "classification": "REGISTRY_AND_DOCUMENT_CROSS_CHECK",
+      "minimum_references": 0,
+      "document_reference_count": 3,
+      "registry": {
+        "path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\report-evidence.json",
+        "exists": true,
+        "sha256": "7030375b63d9a2349bafe466600f6298571e10e361041317437d4f51577c90ab",
+        "record_count": 3,
+        "record_ids": [
+          "doi-10-18653-v1-2020-emnlp-main-550",
+          "doi-10-18653-v1-2024-eacl-demo-16",
+          "doi-10-18653-v1-2026-findings-eacl-110"
+        ]
+      },
+      "verified_record_count": 3,
+      "primary_record_count": 3,
+      "synthetic_record_count": 0,
+      "linked_evidence_id_count": 3,
+      "require_reviewed_sources": true,
+      "primary_status": "EXPLICIT_TAG_ONLY"
+    },
+    "quantitative_claims_lacking_citation": {
+      "status": "WARN",
+      "finding_count": 14,
+      "findings": [
+        {
+          "story": "body",
+          "paragraph_index": 71,
+          "excerpt": "Đồ án chuyên ngành phân tích VietLex như một hệ thống phần mềm hỗ trợ tra cứu và nghiên cứu pháp luật tiếng Việt theo hướng retrieval-augmented generation (RAG). Khảo sát dựa trên mã nguồn và tài liệu hiện có tại snapsho"
+        },
+        {
+          "story": "body",
+          "paragraph_index": 73,
+          "excerpt": "Đánh giá cũng chỉ ra giới hạn quan trọng. Snapshot Golden-50 ngày 03/09/2026 là số liệu lịch sử với mẫu và mẫu số cụ thể; exact match của câu trả lời là 0/50 và token F1 là 0,2305. Báo cáo hiện hành ngày 19/10/2026 ghi n"
+        },
+        {
+          "story": "body",
+          "paragraph_index": 156,
+          "excerpt": "Câu hỏi nghiên cứu gồm: (1) VietLex đang hỗ trợ những luồng người dùng nào và ranh giới giữa màn hình với thao tác POST/API được thể hiện ra sao? (2) Pipeline từ câu hỏi đến evidence và câu trả lời được chia thành những "
+        },
+        {
+          "story": "body",
+          "paragraph_index": 158,
+          "excerpt": "Bài gồm bảy chương. Chương 1 nêu cơ sở RAG, retrieval và đánh giá. Chương 2 mô tả hiện trạng cùng yêu cầu. Chương 3 phân tích nghiệp vụ/use case. Chương 4 trình bày mô hình hướng đối tượng rút gọn. Chương 5 mô tả kiến tr"
+        },
+        {
+          "story": "body",
+          "paragraph_index": 164,
+          "excerpt": "Trong miền pháp lý, số hiệu, tên văn bản, điều/khoản và cụm từ nội dung thường có vai trò khác nhau. Tìm chính xác 45/2019/QH14 không tương đương tìm ngữ nghĩa cho câu hỏi diễn đạt lại; tìm một đoạn chứa từ khóa cũng khô"
+        },
+        {
+          "story": "body",
+          "paragraph_index": 222,
+          "excerpt": "Tài liệu kiến trúc được cập nhật 19/10/2026 ghi rõ các hợp đồng retrieval hiện hành, đồng thời cảnh báo tài liệu này không xác nhận config đang chạy trên production. Source/config là authority cho mô tả dưới đây."
+        },
+        {
+          "story": "body",
+          "paragraph_index": 229,
+          "excerpt": "Tuyến V3 giữ dense và sparse IDF trong collection Qdrant; kết quả RRF và DBSF được trộn theo rank với trọng số bằng nhau theo tài liệu kiến trúc. Sau truy xuất có thể mở rộng evidence điều khoản bằng local/Supabase conte"
+        },
+        {
+          "story": "body",
+          "paragraph_index": 234,
+          "excerpt": "Theo tài liệu kiến trúc, câu trả lời giữ tối đa ba passage trong ngân sách 720 token. Giới hạn này hữu ích để kiểm soát context size và latency, nhưng tạo trade-off: nguồn thiết yếu có thể bị loại bởi ranking hoặc budget"
+        },
+        {
+          "story": "body",
+          "paragraph_index": 267,
+          "excerpt": "Tài liệu docs/evaluation/CURRENT_STATUS.md có hai lớp thông tin. Phần đầu là cập nhật vận hành ngày 19/10/2026; bên dưới là Golden-50 snapshot lịch sử ngày 03/09/2026. Kết quả hai ngày không được gộp: snapshot cũ có benc"
+        },
+        {
+          "story": "body",
+          "paragraph_index": 270,
+          "excerpt": "Answer run Golden-50 ngày 03/09/2026 hoàn tất 50/50 lượt generation, nhưng exact match là 0/50, token F1 0,2305, character F1 0,2230, citation precision 0,9183 và invalid citation rate 0,0817. RAGAs ghi faithfulness 0,82"
+        },
+        {
+          "story": "body",
+          "paragraph_index": 279,
+          "excerpt": "Rủi ro dữ liệu gồm coverage không đầy đủ (snapshot V3 chỉ 14.962/518.255 document ID), freshness, lệch hash, OCR/chunking, và availability/quota remote. Rủi ro vận hành gồm provider/model thay đổi, latency, retry, cache,"
+        },
+        {
+          "story": "body",
+          "paragraph_index": 284,
+          "excerpt": "VietLex có kiến trúc nhiều lớp và các cơ chế kiểm soát evidence hữu ích, nhưng bằng chứng hiện có chưa đủ để xác nhận chất lượng trả lời pháp luật ở production. Golden-50 có giá trị làm mốc lịch sử nhưng tỷ lệ match thấp"
+        },
+        {
+          "story": "body",
+          "paragraph_index": 287,
+          "excerpt": "Bằng chứng đánh giá cần được diễn giải theo ngày và mẫu số. Snapshot Golden-50 03/09/2026 cho thấy retrieval recall cao trên một phần gold khả dụng, nhưng exact match 0/50, token F1 0,2305 và citation invalid 0,0817; cập"
+        },
+        {
+          "story": "body",
+          "paragraph_index": 288,
+          "excerpt": "Hướng phát triển ưu tiên: (1) nhận rubric và xác định acceptance criteria với giảng viên; (2) đóng băng source/config/dataset và công bố manifest; (3) xây bộ gold Vietnamese legal QA có review chuyên môn; (4) đo retrieva"
+        }
+      ],
+      "classification": "HUMAN_REVIEW_HEURISTIC_NOT_PROOF",
+      "scope": "Explicit units, percentages, measurements, or count/performance context; structural labels, software versions, and database cells are excluded."
+    },
+    "repetitive_prose_review": {
+      "status": "WARN",
+      "finding_count": 16,
+      "findings": [
+        {
+          "kind": "repeated_sentence_opening",
+          "text": "hồ chí minh",
+          "occurrences": 6,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 0,
+              "sentence_index": 1
+            },
+            {
+              "story": "body",
+              "paragraph_index": 5,
+              "sentence_index": 1
+            },
+            {
+              "story": "body",
+              "paragraph_index": 7,
+              "sentence_index": 1
+            },
+            {
+              "story": "body",
+              "paragraph_index": 12,
+              "sentence_index": 1
+            },
+            {
+              "story": "body",
+              "paragraph_index": 34,
+              "sentence_index": 1
+            },
+            {
+              "story": "body",
+              "paragraph_index": 59,
+              "sentence_index": 1
+            }
+          ]
+        },
+        {
+          "kind": "repeated_sentence_opening",
+          "text": "mục tiêu thứ",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 155,
+              "sentence_index": 0
+            },
+            {
+              "story": "body",
+              "paragraph_index": 155,
+              "sentence_index": 1
+            },
+            {
+              "story": "body",
+              "paragraph_index": 155,
+              "sentence_index": 2
+            }
+          ]
+        },
+        {
+          "kind": "repeated_sentence_opening",
+          "text": "nhận xét về",
+          "occurrences": 4,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 22,
+              "sentence_index": 1
+            },
+            {
+              "story": "body",
+              "paragraph_index": 25,
+              "sentence_index": 1
+            },
+            {
+              "story": "body",
+              "paragraph_index": 47,
+              "sentence_index": 1
+            },
+            {
+              "story": "body",
+              "paragraph_index": 50,
+              "sentence_index": 1
+            }
+          ]
+        },
+        {
+          "kind": "repeated_sentence_opening",
+          "text": "sinh viên thực",
+          "occurrences": 4,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 4,
+              "sentence_index": 0
+            },
+            {
+              "story": "body",
+              "paragraph_index": 11,
+              "sentence_index": 0
+            },
+            {
+              "story": "body",
+              "paragraph_index": 20,
+              "sentence_index": 0
+            },
+            {
+              "story": "body",
+              "paragraph_index": 45,
+              "sentence_index": 0
+            }
+          ]
+        },
+        {
+          "kind": "repeated_sentence_opening",
+          "text": "sơ đồ không",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 193,
+              "sentence_index": 6
+            },
+            {
+              "story": "body",
+              "paragraph_index": 215,
+              "sentence_index": 1
+            },
+            {
+              "story": "body",
+              "paragraph_index": 220,
+              "sentence_index": 2
+            }
+          ]
+        },
+        {
+          "kind": "repeated_sentence_opening",
+          "text": "đinh thị hồng",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 4,
+              "sentence_index": 1
+            },
+            {
+              "story": "body",
+              "paragraph_index": 11,
+              "sentence_index": 1
+            },
+            {
+              "story": "body",
+              "paragraph_index": 19,
+              "sentence_index": 1
+            }
+          ]
+        },
+        {
+          "kind": "repeated_sentence_opening",
+          "text": "đồ án chuyên",
+          "occurrences": 4,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 2,
+              "sentence_index": 0
+            },
+            {
+              "story": "body",
+              "paragraph_index": 9,
+              "sentence_index": 0
+            },
+            {
+              "story": "body",
+              "paragraph_index": 71,
+              "sentence_index": 0
+            },
+            {
+              "story": "body",
+              "paragraph_index": 286,
+              "sentence_index": 0
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "dẫn ths đinh thị hồng",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 4,
+              "token_offset": 20
+            },
+            {
+              "story": "body",
+              "paragraph_index": 11,
+              "token_offset": 20
+            },
+            {
+              "story": "body",
+              "paragraph_index": 19,
+              "token_offset": 6
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "hướng dẫn ths đinh thị",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 4,
+              "token_offset": 19
+            },
+            {
+              "story": "body",
+              "paragraph_index": 11,
+              "token_offset": 19
+            },
+            {
+              "story": "body",
+              "paragraph_index": 19,
+              "token_offset": 5
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "sinh viên thực hiện nguyễn",
+          "occurrences": 4,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 4,
+              "token_offset": 0
+            },
+            {
+              "story": "body",
+              "paragraph_index": 11,
+              "token_offset": 0
+            },
+            {
+              "story": "body",
+              "paragraph_index": 20,
+              "token_offset": 0
+            },
+            {
+              "story": "body",
+              "paragraph_index": 45,
+              "token_offset": 0
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "theo tài liệu kiến trúc",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 212,
+              "token_offset": 31
+            },
+            {
+              "story": "body",
+              "paragraph_index": 229,
+              "token_offset": 24
+            },
+            {
+              "story": "body",
+              "paragraph_index": 234,
+              "token_offset": 0
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "ths đinh thị hồng loan",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 4,
+              "token_offset": 21
+            },
+            {
+              "story": "body",
+              "paragraph_index": 11,
+              "token_offset": 21
+            },
+            {
+              "story": "body",
+              "paragraph_index": 19,
+              "token_offset": 7
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "thực hiện nguyễn thành duy",
+          "occurrences": 4,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 4,
+              "token_offset": 2
+            },
+            {
+              "story": "body",
+              "paragraph_index": 11,
+              "token_offset": 2
+            },
+            {
+              "story": "body",
+              "paragraph_index": 20,
+              "token_offset": 2
+            },
+            {
+              "story": "body",
+              "paragraph_index": 45,
+              "token_offset": 2
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "viên hướng dẫn ths đinh",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 4,
+              "token_offset": 18
+            },
+            {
+              "story": "body",
+              "paragraph_index": 11,
+              "token_offset": 18
+            },
+            {
+              "story": "body",
+              "paragraph_index": 19,
+              "token_offset": 4
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "viên thực hiện nguyễn thành",
+          "occurrences": 4,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 4,
+              "token_offset": 1
+            },
+            {
+              "story": "body",
+              "paragraph_index": 11,
+              "token_offset": 1
+            },
+            {
+              "story": "body",
+              "paragraph_index": 20,
+              "token_offset": 1
+            },
+            {
+              "story": "body",
+              "paragraph_index": 45,
+              "token_offset": 1
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "văn bản còn hiệu lực",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 179,
+              "token_offset": 86
+            },
+            {
+              "story": "body",
+              "paragraph_index": 185,
+              "token_offset": 91
+            },
+            {
+              "story": "body",
+              "paragraph_index": 202,
+              "token_offset": 52
+            }
+          ]
+        }
+      ],
+      "classification": "HUMAN_REVIEW_HEURISTIC_NOT_AI_DETECTION",
+      "finding_count_total": 16,
+      "ngram_size": 5,
+      "scope": "Sentence openings and content-bearing phrases repeated across distinct body paragraphs; headings, captions, and table cells are excluded."
+    },
+    "unresolved_placeholders": {
+      "status": "PASS",
+      "finding_count": 0,
+      "findings": [],
+      "classification": "DETERMINISTIC_COMPLETENESS_CHECK"
+    },
+    "ai_use_disclosure_provenance": {
+      "status": "WARN",
+      "finding_count": 1,
+      "findings": [
+        {
+          "kind": "ai_use_disclosure_not_found"
+        }
+      ],
+      "classification": "DISCLOSURE_CHECK_NOT_AI_DETECTION",
+      "declared": false
+    }
+  },
+  "limitations": [
+    "Similarity to external publications is not measured because no corpus or external provider is used.",
+    "Prose repetition and citation-adjacency findings are review heuristics, not proof of misconduct or AI authorship.",
+    "Primary-source status is accepted only from an explicit primary tag in the evidence registry."
+  ]
+}

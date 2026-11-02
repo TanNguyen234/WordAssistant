@@ -1,0 +1,373 @@
+{
+  "schema_version": 1,
+  "input_sha256": "74af94bbc5d79cf21be242000764f8d3e47e934c041c498112b333dcb929c3c2",
+  "require_complete_hierarchy": true,
+  "edits": [
+    {
+      "section": "Vai trò, năng lực và ranh giới quyền",
+      "paragraph_index": 0,
+      "expected_text_sha256": "0139064aba19246c1c27d7b0935a5a5cea10127206cb56a9d5e9ea75e8bc0c05",
+      "text": "Các nhóm truy cập được phân biệt theo công việc có thể thực hiện và điều kiện nhận diện. Khách sử dụng cookie có chữ ký để thực hiện các thao tác công khai trong giới hạn cấu hình. Người có tài khoản làm việc với lịch sử, nguồn và hồ sơ của mình; quản trị viên thực hiện các thao tác quản trị theo vai trò. Chế độ đánh giá minh họa là một lựa chọn riêng có giới hạn, không tương đương với vai trò quản trị hay một quyền đánh giá được cấp chung."
+    },
+    {
+      "section": "Vai trò, năng lực và ranh giới quyền",
+      "paragraph_index": 1,
+      "expected_text_sha256": "6ef496668f4a6ff4ef5738d0ad9128a3e9f6341d29ec62daad61be538ff83c72",
+      "text": "Một trang hiển thị được chưa đủ chứng minh dữ liệu phía sau đã được đọc hoặc ghi thành công. Việc kiểm quyền cần được thực hiện trên máy chủ ở từng thao tác, kể cả khi giao diện đã ẩn các chức năng không phù hợp. Khi lập kiểm thử, cần tách ba câu hỏi: trang có mở được không, dữ liệu có khả dụng không và người đang truy cập có quyền thực hiện hành động không."
+    },
+    {
+      "section": "Vai trò, năng lực và ranh giới quyền",
+      "paragraph_index": 2,
+      "expected_text_sha256": "4f7f497cbf8c7a5c068b94cc6b5f7d073636625335f43541a9e60ce3639dbb74",
+      "text": "Bảng dưới tổng hợp các nhóm chức năng theo mã nguồn và tài liệu hướng dẫn. Các giới hạn được ghi cùng chức năng để tránh hiểu rằng một mục xuất hiện trên menu đồng nghĩa mọi người dùng đều được sử dụng. Quyền thực tế trên từng bản triển khai cần được kiểm tra bằng các tài khoản phù hợp trong phạm vi được cho phép."
+    },
+    {
+      "section": "UC-01. Tìm kiếm và mở văn bản",
+      "paragraph_index": 0,
+      "expected_text_sha256": "201921ca8b82340e971a63b2331a5aec68ca3d0c52a35ec82995e2cf1f71d784",
+      "text": "Mục tiêu của ca sử dụng là tìm được văn bản theo số hiệu, tiêu đề hoặc nội dung, sau đó mở phần văn bản để đọc. Người dùng chọn phạm vi và bộ lọc trước khi gửi truy vấn. Tuyến /search xử lý điều kiện tìm kiếm và trả danh sách; khi người dùng chọn kết quả, tuyến /documents/{document_id} lấy thông tin cùng nội dung tương ứng. Chuỗi thao tác này nối nhu cầu tìm kiếm với việc kiểm tra trực tiếp tài liệu."
+    },
+    {
+      "section": "UC-01. Tìm kiếm và mở văn bản",
+      "paragraph_index": 1,
+      "expected_text_sha256": "3e5da9cf1fd47b38fb49445cde799c8aab0b96706187f0d6aede1705ea8b1972",
+      "text": "Các nhánh thay thế gồm truy vấn không hợp lệ, không có kết quả, chỉ mục chưa sẵn sàng và văn bản không thể tải. Giao diện cần giải thích đúng nguyên nhân để người dùng biết nên đổi điều kiện hay thử lại sau. Nếu có thông tin sự kiện hiệu lực, cần nêu nguồn và mốc ngày của dữ liệu đó. Việc không tìm thấy kết quả hoặc không có sự kiện đã đăng ký chưa đủ để kết luận ngoài tập dữ liệu không có văn bản hay quy định liên quan."
+    },
+    {
+      "section": "UC-02. Đặt câu hỏi có giới hạn phạm vi",
+      "paragraph_index": 0,
+      "expected_text_sha256": "5f86b70d7341660d5429f25bf7f1a697d7acd9207f3fa428139ca5455ca2c6e4",
+      "text": "Người dùng đặt câu hỏi từ trang chủ và có thể chọn tập văn bản chung hoặc một văn bản cụ thể làm phạm vi. Tuyến POST /chat tiếp nhận yêu cầu, kiểm tra thông tin phiên và đầu vào, xử lý dữ liệu nhạy cảm rồi lựa chọn cách trả lời. Hệ thống có thể dùng lại kết quả trong bộ nhớ đệm khi đủ điều kiện, hoặc tìm các đoạn căn cứ để tạo câu trả lời mới. Phạm vi đã chọn cần được giữ nhất quán qua các bước này."
+    },
+    {
+      "section": "UC-02. Đặt câu hỏi có giới hạn phạm vi",
+      "paragraph_index": 1,
+      "expected_text_sha256": "6f49ec4bbafb07e9c7f52a22dfd20dd103d56813f5363c4f9059924e50777e91",
+      "text": "Luồng thay thế cần phân biệt đầu vào bị chặn, không tìm được căn cứ, sự cố dịch vụ và câu trả lời được tạo thành công. Một thông báo về lỗi truy xuất không được trình bày như nhận định rằng pháp luật không quy định vấn đề đó. Khi có kết quả, người dùng cần xem được đoạn căn cứ và nguồn liên quan; nhãn có trích dẫn chỉ có ý nghĩa khi nội dung được dẫn thực sự hỗ trợ nhận định."
+    },
+    {
+      "section": "UC-03. Tạo hồ sơ và đưa tài liệu vào workspace",
+      "paragraph_index": 0,
+      "expected_text_sha256": "5d25540f569a78c809159f35d76e6ce7beece14ef80b7c85b097b46869536cfc",
+      "text": "Hồ sơ nghiên cứu giúp người dùng tập hợp tài liệu và các kết quả liên quan đến một công việc. Người truy cập tạo hồ sơ, xem danh sách, mở chi tiết rồi tải tài liệu được hỗ trợ vào hồ sơ của mình. Mỗi yêu cầu cần kiểm tra chủ sở hữu bằng thông tin người dùng hoặc khách tương ứng. Định danh hồ sơ là phương tiện xác định bản ghi, không tự tạo quyền đọc hay sửa bản ghi đó."
+    },
+    {
+      "section": "UC-03. Tạo hồ sơ và đưa tài liệu vào workspace",
+      "paragraph_index": 1,
+      "expected_text_sha256": "13d21f3ede61731c1a64e2fafb3329f07d80a91af787b92462c66913a137e379",
+      "text": "Những trường hợp cần kiểm gồm sai chủ sở hữu, hồ sơ hết hạn, tệp không được hỗ trợ, vượt dung lượng, tài liệu trùng hoặc trích xuất lỗi. Tài liệu hướng dẫn ghi giới hạn khoảng 12 MB cho bản ghi và 20 tài liệu trong một hồ sơ; khi kiểm thử cần đối chiếu giá trị cấu hình đang dùng. Việc mở được danh sách hồ sơ chưa chứng minh thao tác tải lên, đọc bản gốc và trích xuất nội dung đều thành công."
+    },
+    {
+      "section": "UC-04. Ghim nguồn và chạy phân tích có cấu trúc",
+      "paragraph_index": 0,
+      "expected_text_sha256": "8c0aa478690446af2c78830825d0b97a244d3ec8f7f524df59daa5a9d6d7ad06",
+      "text": "Người dùng chọn nguồn đã lưu để thực hiện một loại phân tích, chẳng hạn so sánh nội dung, xác định nghĩa vụ hoặc xem xét nhận định. Hệ thống kiểm tra hồ sơ, quyền sở hữu và danh sách nguồn trước khi gọi thành phần xử lý. Kết quả cần gắn với những nguồn đã chọn để người dùng có thể xem lại căn cứ của từng phần phân tích. Nếu người dùng sửa báo cáo thủ công, bản xuất cần thể hiện trạng thái đó."
+    },
+    {
+      "section": "UC-04. Ghim nguồn và chạy phân tích có cấu trúc",
+      "paragraph_index": 1,
+      "expected_text_sha256": "80169ae31402772e5777d6d574561808a6e08fdc1a8731c01c0bd1f95a2f4d48",
+      "text": "Các nhánh thay thế gồm chưa chọn nguồn, nguồn đã hết hạn, nội dung chỉ đọc được một phần và kết quả không đúng cấu trúc dự kiến. Kiểm tra thành công cần xem cả trạng thái phản hồi, nội dung kết quả, liên kết nguồn và dữ liệu được lưu trong đúng hồ sơ. Chỉ một phản hồi HTTP 200 không trả lời được những câu hỏi này; đặc biệt không nên biến một nhận định do mô hình tạo ra thành kết luận đã được người phụ trách phê duyệt."
+    },
+    {
+      "section": "UC-05. Đọc nguồn chính thức và hủy một run",
+      "paragraph_index": 0,
+      "expected_text_sha256": "08e6a00cf8537a2ef2f0fa25bb517b85b00ede8641d1eb2f04515c5170040561",
+      "text": "Người dùng gửi chủ đề từ hồ sơ nghiên cứu để hệ thống tìm và đọc một số nguồn thuộc phạm vi cho phép. Cấu hình được khảo sát giới hạn tối đa năm truy vấn, ba địa chỉ nguồn và hai tác vụ thực hiện đồng thời. Với PDF, hệ thống sử dụng cửa sổ đọc tối đa 10 trang kiểm tra và giữ lại tối đa 5 trang. Những giới hạn này xác định khối lượng công việc của một lượt, vì vậy kết quả cần nêu phần đã đọc thay vì tạo cảm giác toàn bộ nguồn đều đã được khảo sát."
+    },
+    {
+      "section": "UC-05. Đọc nguồn chính thức và hủy một run",
+      "paragraph_index": 1,
+      "expected_text_sha256": "4c00a545c90b28d83d68bf24ead37fb2c2397f19172eaa39b6ba08d03a37f7d9",
+      "text": "Ngân sách thời gian được mô tả là 180 giây, gồm tìm nguồn, đọc và lưu tiến độ; đây là giới hạn thiết kế, không phải cam kết thời gian hoàn thành trong mọi môi trường. Khi nhận yêu cầu hủy hợp lệ, máy chủ giữ lại sự kiện và kết quả đã có, đồng thời ghi trạng thái kết thúc. Tác vụ đang chờ mạng có thể chỉ dừng tại điểm kiểm tra tiếp theo. Bằng chứng đọc và phục hồi PDF đã lưu xác nhận một phạm vi quan sát cụ thể, chưa chứng minh độ bao phủ nguồn hay hiệu lực hiện hành của nội dung."
+    },
+    {
+      "section": "UC-06. Quản trị, phản hồi và registry hiệu lực",
+      "paragraph_index": 0,
+      "expected_text_sha256": "30eec26a7914f88b9ddcac052df9e2b7fc76b11393d1be18f64aba7e73a7661b",
+      "text": "Nhóm quản trị hỗ trợ xem thông tin vận hành, tài khoản, phản hồi và dữ liệu đăng ký sự kiện hiệu lực. Những hành động thay đổi trạng thái hoặc công bố sự kiện cần được kiểm tra vai trò, bảo vệ yêu cầu và ghi nhật ký. Dữ liệu sự kiện hiệu lực là thông tin do quy trình quản lý nguồn xác lập; hệ thống chưa thể tự suy ra đầy đủ mọi sửa đổi, bãi bỏ hay quan hệ thay thế chỉ từ việc có một bản ghi."
+    },
+    {
+      "section": "UC-06. Quản trị, phản hồi và registry hiệu lực",
+      "paragraph_index": 1,
+      "expected_text_sha256": "5d1c45ec5679cf523c47b993067fbe9939bd3f4794a34734e85d8bd1f7796917",
+      "text": "Khi không đủ quyền, hết phiên hoặc không truy cập được dịch vụ lưu trữ, hệ thống cần trả trạng thái rõ ràng và giữ dấu vết phù hợp. Kiểm tra quyền phải đặt tại hành động phía máy chủ, không chỉ ở giao diện. Báo cáo đối chiếu các tuyến quản trị và điều kiện kiểm soát trong mã nguồn; lượt biên tập này không sử dụng tài khoản quản trị để thực hiện thao tác thay đổi dữ liệu trên bản triển khai."
+    },
+    {
+      "section": "Từ use case đến tiêu chí nghiệm thu nội bộ",
+      "paragraph_index": 0,
+      "expected_text_sha256": "1c817ec0f34639cae68f3fdaa5b2d984f83e7f15b338db3fae3181c55719c03a",
+      "text": "Mỗi ca sử dụng cần được nối với một hoặc nhiều yêu cầu CAP-01 đến CAP-12 và chứng cứ tương ứng. Từ đó có thể lập trường hợp kiểm thử gồm dữ liệu đầu vào, điều kiện trước, thao tác, kết quả mong đợi và thông tin cần lưu lại. Việc có chức năng trong mã nguồn là căn cứ để lập kiểm thử, còn kết luận đạt cần dựa vào kết quả thực hiện từng trường hợp."
+    },
+    {
+      "section": "Từ use case đến tiêu chí nghiệm thu nội bộ",
+      "paragraph_index": 1,
+      "expected_text_sha256": "d5868ce06a52c3d99c4d9b9d576c3a0540c97c1e7873f5ff904699ad3ea9f58d",
+      "text": "Chẳng hạn, tra cứu cần kiểm riêng tìm theo thông tin và theo toàn văn; hỏi đáp cần kiểm căn cứ được chọn và cách thông báo thiếu nguồn; hồ sơ cần kiểm chủ sở hữu, tài liệu hết hạn và thao tác hủy. Các tiêu chí này giúp chuyển mô hình phân tích thành kế hoạch kiểm chứng có thể theo dõi. Chúng là tiêu chí kỹ thuật nội bộ rút ra từ dự án, được phân biệt với tiêu chí nhận xét chính thức và thang điểm của học phần."
+    },
+    {
+      "section": "Đánh giá thiết kế và cải tiến có thể kiểm chứng",
+      "paragraph_index": 0,
+      "expected_text_sha256": "6418d6c6a9124ca53df3c887253ac0471ed4777bf5e1b549361ff72415f7526d",
+      "text": "Các đối tượng dữ liệu giữ định danh, thông tin nguồn và trạng thái giúp giải thích quá trình tạo câu trả lời. Nhánh V3 phân biệt lỗi dữ liệu với kết quả tìm kiếm rỗng; bước mở rộng nội dung có kiểm tra mã băm. Những đặc điểm này tạo điều kiện tìm nguyên nhân khi kết quả chưa phù hợp, vì người phân tích có thể xem xét từng bước thay vì chỉ đọc câu trả lời cuối."
+    },
+    {
+      "section": "Đánh giá thiết kế và cải tiến có thể kiểm chứng",
+      "paragraph_index": 1,
+      "expected_text_sha256": "04bed6907bf0d875883bccf4d4f780be85fd8d42c70a46c7d265be40eb8bf490",
+      "text": "Phần cần tiếp tục làm rõ là sự nhất quán của cấu hình giữa các thành phần, điều kiện dùng bộ nhớ đệm và cách xác định mức độ hỗ trợ của trích dẫn. Điểm xếp hạng của một ứng viên không trực tiếp cho biết nhận định được hỗ trợ đến đâu. Để so sánh các lần thay đổi, định nghĩa chỉ số và điều kiện chọn căn cứ cần được giữ ổn định hoặc ghi rõ khi thay đổi."
+    },
+    {
+      "section": "Đánh giá thiết kế và cải tiến có thể kiểm chứng",
+      "paragraph_index": 2,
+      "expected_text_sha256": "04d84632bc464ffbabd9b46ed72ed67c169ee6f5a2bc0b1742e0e32decbfd327",
+      "text": "Hướng cải tiến phù hợp là tăng khả năng kiểm tra ở những ranh giới đã có: tách cấu hình khỏi yêu cầu người dùng, thử dữ liệu không tương thích và theo dõi căn cứ qua từng bước. Chỉ khi kết quả đo cho thấy một ranh giới đang gây khó khăn mới cần xem xét tách thêm thành phần. Cách tiếp cận này tránh đề xuất tổ chức lại toàn hệ thống khi chưa xác định được nguyên nhân và lợi ích cần đạt."
+    },
+    {
+      "section": "Kiến trúc web và luồng tổng quát",
+      "paragraph_index": 0,
+      "expected_text_sha256": "417427ce5c82a8b3dc04a74dee05aa87244cec5c6357fbcabe0deeffaefc9a38",
+      "text": "Kiến trúc VietLex có thể được đọc theo đường đi từ yêu cầu người dùng đến dữ liệu và kết quả. Lớp web tiếp nhận yêu cầu và tạo nội dung hiển thị; thành phần nghiệp vụ điều phối công việc; các kho dữ liệu và chỉ mục cung cấp thông tin cần tìm. Bộ nhớ đệm phục vụ việc dùng lại kết quả có điều kiện, còn kho hội thoại lưu lịch sử và thông tin xử lý. Hai nhiệm vụ này cần được phân biệt khi phân tích tính đúng và vòng đời dữ liệu."
+    },
+    {
+      "section": "Kiến trúc web và luồng tổng quát",
+      "paragraph_index": 1,
+      "expected_text_sha256": "2ed7fd129031441ef99169d8777d21319897b6371d08d08e8f966290b72cddb4",
+      "text": "Cấu hình lựa chọn giữa hai phương án truy xuất. Giá trị mặc định USE_LEGACY_FREE_PIPELINE=false chọn nhánh V3 với Vertex 1024 chiều và Qdrant V3, kết hợp RRF hoặc DBSF theo cấu hình. Nhánh còn lại sử dụng Qdrant Cloud E5 384 chiều, Pinecone V1 và chỉ mục SQLite FTS. Sự hiện diện của cấu hình cho biết các lựa chọn được cài đặt; để xác định lựa chọn đang chạy trên một bản triển khai vẫn cần chứng cứ từ môi trường đó."
+    },
+    {
+      "section": "Hai phương án truy xuất",
+      "paragraph_index": 0,
+      "expected_text_sha256": "7564776ca75e73a6d5d5b65d882e24a043645806d9eeac51562b60232739eafd",
+      "text": "Phương án V3 kết hợp vector dày với vector thưa IDF trên Qdrant rồi hợp nhất các danh sách xếp hạng. Khi đáp ứng điều kiện, nội dung có thể được mở rộng theo điều khoản từ kho cục bộ hoặc Supabase, kèm kiểm tra mã băm. Biên bản ngày 17/10/2026 ghi 141.798 điểm trên 14.962 định danh văn bản, tương ứng khoảng 2,89% danh mục 518.255 văn bản. Con số này thể hiện phạm vi dữ liệu đã đối chiếu, không phải độ bao phủ toàn bộ pháp luật Việt Nam."
+    },
+    {
+      "section": "Hai phương án truy xuất",
+      "paragraph_index": 1,
+      "expected_text_sha256": "e0978bb51e6fa571b31dea4acf14329e97c24f31c5ab10b8623d41ecaec0615b",
+      "text": "Phương án kế thừa sử dụng tìm kiếm ngữ nghĩa qua Pinecone cùng tra cứu thông tin mô tả bằng SQLite FTS và giải quyết nội dung cục bộ. Các thành phần này có phạm vi và điều kiện vận hành riêng. Vì vậy, mô tả kiến trúc của một phương án chưa đủ xác nhận số bản ghi, hạn mức hay mức cập nhật thực tế của các kho từ xa. Bảng dưới tổng hợp thành phần và giới hạn đã ghi nhận để làm cơ sở cho việc so sánh tiếp theo."
+    },
+    {
+      "section": "Giới hạn căn cứ và ngữ cảnh trả lời",
+      "paragraph_index": 0,
+      "expected_text_sha256": "dfb3907b1920989ed0ab5e5a88b33cd1d3ac967e9743fa52282071f3aa81b6de",
+      "text": "Tài liệu kiến trúc giới hạn ngữ cảnh trả lời ở tối đa ba đoạn trong ngân sách 720 token. Giới hạn này giúp kiểm soát lượng dữ liệu chuyển cho mô hình và thời gian xử lý, nhưng có thể làm mất điều kiện hoặc ngoại lệ quan trọng nếu việc chọn đoạn chưa phù hợp. Do đó, cần đo cả khả năng tìm thấy căn cứ ban đầu và khả năng giữ lại căn cứ sau khi chọn, gộp hoặc cắt ngắn nội dung."
+    },
+    {
+      "section": "Giới hạn căn cứ và ngữ cảnh trả lời",
+      "paragraph_index": 1,
+      "expected_text_sha256": "6b140241444f7063641f60019ca42f7e7cb583aeeb6cb07cede093a68a52fab9",
+      "text": "Một số điều kiện cho phép bổ sung nguồn chính thức khi nội dung trong tập văn bản chưa đủ. Nguồn được bổ sung cần có địa chỉ, thời điểm và phạm vi đọc riêng; một trang được tải về chưa mặc nhiên trở thành nguồn đã được thẩm định. Nếu vẫn thiếu căn cứ, hệ thống cần nêu rõ điều chưa thể trả lời. Cách thể hiện này giúp người dùng phân biệt thiếu thông tin với lỗi dịch vụ và biết khi nào cần kiểm tra tài liệu gốc."
+    },
+    {
+      "section": "Ranh giới dữ liệu và an toàn",
+      "paragraph_index": 0,
+      "expected_text_sha256": "0d8c64cb62f97c3375cc04b3ea26d4cc047d1ea0ad513ace039c4e006b79338e",
+      "text": "Căn cứ lấy từ chỉ mục, bộ nhớ đệm, hồ sơ người dùng và nguồn bên ngoài có nguồn gốc và thời điểm cập nhật khác nhau. Cùng một document_id chưa bảo đảm các nơi đang giữ cùng nội dung nếu quá trình nạp và đồng bộ không được kiểm soát. Khi có dữ liệu mã băm, hệ thống có thể đối chiếu sự nhất quán; việc xác định thẩm quyền nguồn và hiệu lực pháp luật vẫn cần thông tin bổ sung."
+    },
+    {
+      "section": "Ranh giới dữ liệu và an toàn",
+      "paragraph_index": 1,
+      "expected_text_sha256": "4946b8ea536eadbed47376942d4811c0ff5774ee2097b6669d203cff16812bd3",
+      "text": "Tuyến hỏi đáp có xử lý dữ liệu nhạy cảm và kiểm tra yêu cầu trước khi tiếp tục; các thao tác hồ sơ cần giới hạn theo chủ sở hữu. Tuy vậy, đánh giá an toàn cần xem những tình huống cụ thể: nội dung nguồn cố điều khiển mô hình, kết quả chứa dữ liệu riêng của người khác hoặc yêu cầu đọc đi đến địa chỉ không được phép. Các biện pháp có trong mã nguồn là căn cứ để xây dựng kiểm thử, chưa thay cho kết quả kiểm tra an toàn của môi trường triển khai."
+    },
+    {
+      "section": "Đánh đổi kiến trúc",
+      "paragraph_index": 0,
+      "expected_text_sha256": "3638299a360101c4d6a32003c613b473051bfbbd525ee68cb8b0cd105443d04a",
+      "text": "Việc hỗ trợ nhiều phương án truy xuất tạo điều kiện thử nghiệm, đồng thời tăng số cấu hình và kho dữ liệu cần quản lý. Khi thay mô hình vector hoặc cách xếp hạng, kết quả có thể thay đổi ngay cả với cùng câu hỏi. Mỗi lượt đánh giá vì vậy cần ghi phiên bản mã nguồn, cấu hình đã sử dụng, tập văn bản và đáp án chuẩn. Những thông tin này giúp xác định chênh lệch bắt nguồn từ phương pháp hay từ điều kiện thực hiện."
+    },
+    {
+      "section": "Đánh đổi kiến trúc",
+      "paragraph_index": 1,
+      "expected_text_sha256": "f213cf3d4e7f4b27857a233c0373f9a5a545adccc190bf14b8bfcf759ba121e4",
+      "text": "Tách tra cứu theo số hiệu, tìm theo toàn văn và hỏi đáp theo ngữ nghĩa giúp phục vụ những nhu cầu khác nhau. Đổi lại, giao diện phải làm rõ người dùng đang tìm trong phạm vi nào và kết quả có ý nghĩa gì. Một phép thử về khả năng sử dụng nên xem người đọc có phân biệt được danh sách tìm kiếm, đoạn căn cứ và câu trả lời tổng hợp hay không. Đây là hệ quả của lựa chọn kiến trúc đối với trải nghiệm sử dụng, không chỉ là vấn đề cách bố trí màn hình."
+    },
+    {
+      "section": "Quy trình nạp dữ liệu và quản lý chất lượng tập văn bản",
+      "paragraph_index": 0,
+      "expected_text_sha256": "4fe6eb892c428e4c7b3ce7e60d7c0e945f8162955dfa696dc6c9f4f6f5dc8d1b",
+      "text": "Quy trình nạp của VietLex bắt đầu từ các phần dữ liệu Parquet được cố định theo phiên bản và cấu hình. Báo cáo phân biệt quy trình này với công cụ thu thập dữ liệu của đơn vị công bố bộ dữ liệu. Các bước chính gồm kiểm tra danh mục và tổng kiểm, chuẩn hóa thông tin, nối nội dung theo định danh văn bản rồi tạo kho lưu trữ cùng các chỉ mục phục vụ truy vấn."
+    },
+    {
+      "section": "Quy trình nạp dữ liệu và quản lý chất lượng tập văn bản",
+      "paragraph_index": 1,
+      "expected_text_sha256": "1af56e2a11a28300120a2564efdfe6dd51d9f3d9eb43d0737f593b436ed9fd76",
+      "text": "Kho nội dung SQLite tách thông tin mô tả khỏi nội dung được nén bằng Zstandard. Các trường như số hiệu, tiêu đề, cơ quan ban hành và ngày được dùng để nhận diện, lọc và kiểm tra bản ghi; nội dung cùng mã băm hỗ trợ giải quyết phần văn bản cần đọc. Chỉ mục tìm theo số hiệu, tiêu đề và chỉ mục đoạn toàn văn có mục đích riêng, nên không thể suy ra độ bao phủ của chỉ mục này từ sự tồn tại của chỉ mục khác."
+    },
+    {
+      "section": "Quy trình nạp dữ liệu và quản lý chất lượng tập văn bản",
+      "paragraph_index": 2,
+      "expected_text_sha256": "ec179b73d20fbab5590e3de06bbdfd1c908f980ec2f3a222377b25912e6d4721",
+      "text": "Các dấu hiệu chất lượng dữ liệu gồm thiếu định danh, tiêu đề hoặc địa chỉ nguồn; ngày không hợp lệ; nội dung rỗng, lỗi ký tự hoặc trùng mã băm. Việc gắn cờ giúp chọn trường hợp cần xem lại thay vì tự động loại mọi bản ghi. Hai nội dung có cùng mã băm cho biết sự trùng nhau ở mức dữ liệu được đo, nhưng chưa đủ để khẳng định hai văn bản có cùng ý nghĩa hoặc có thể gộp về nghiệp vụ."
+    },
+    {
+      "section": "Quy trình nạp dữ liệu và quản lý chất lượng tập văn bản",
+      "paragraph_index": 3,
+      "expected_text_sha256": "984f719a878519386f80473b0fa141eddbaee14147c85e39c7cbc2c01410ee17",
+      "text": "Khi thay cách chuẩn hóa, chia đoạn, tạo vector hoặc cấu trúc thông tin, cần xác định lại những phần phải xây dựng. Tiếp tục từ một điểm lưu tiến độ cũ chỉ phù hợp khi điều kiện dữ liệu còn tương thích. Biên bản nạp nên ghi số bản ghi đã đọc, nối thành công, lỗi và cần xem lại, cùng phiên bản đầu vào và cấu hình. Cách ghi này giúp tìm nguyên nhân sai lệch mà không nhầm một lần xây chỉ mục thành chứng nhận chất lượng toàn bộ tập văn bản."
+    },
+    {
+      "section": "Quy trình nạp dữ liệu và quản lý chất lượng tập văn bản",
+      "paragraph_index": 4,
+      "expected_text_sha256": "cfe06b060e19a10ebb80c21389c73b709edcec339269f694f1e4c65ef1b49b27",
+      "text": "Sơ đồ dưới mô tả đường đi của dữ liệu từ đầu vào đã cố định phiên bản đến kho nội dung, chỉ mục từ khóa và các nhánh vector. Mô hình được đối chiếu với mã nguồn và tài liệu hướng dẫn; báo cáo không thực hiện một lần nạp mới để tạo các kết quả đo trong phần này."
+    },
+    {
+      "section": "Độ bao phủ và tính nhất quán giữa các chỉ mục",
+      "paragraph_index": 0,
+      "expected_text_sha256": "fbf6d69097c76ecfd74a1396bc87910c95d0df1a77ee81f079904a8e5baabe29",
+      "text": "Biên bản đối chiếu ngày 17/10/2026 ghi nhận Qdrant V3, chỉ mục toàn văn và Supabase cùng tập 14.962 định danh văn bản. Qdrant V3 chứa 141.798 điểm trong khi danh mục đầu vào có 518.255 bản ghi. Sự khớp nhau của tập định danh trong lần đối chiếu là một kết quả về tính nhất quán trong phạm vi đo; nó không chứng minh toàn bộ văn bản, nội dung hay hiệu lực pháp luật đã được bao phủ."
+    },
+    {
+      "section": "Độ bao phủ và tính nhất quán giữa các chỉ mục",
+      "paragraph_index": 1,
+      "expected_text_sha256": "ba12189a2ee1f2db4e7774d498822ab92c3aaa4825101721a694a9068c35334c",
+      "text": "Mỗi đường truy cập có thể sử dụng nguồn và phạm vi khác nhau: Supabase phục vụ dữ liệu trực tuyến đã nạp, SQLite phục vụ nội dung hoặc thông tin cục bộ, còn các chỉ mục vector hỗ trợ truy xuất theo cấu hình. Vì vậy, việc một câu hỏi không có kết quả trên một nhánh không đủ để kết luận mọi kho đều thiếu văn bản. Đây là thông tin cần được giữ rõ khi trình bày phạm vi tìm kiếm cho người dùng."
+    },
+    {
+      "section": "Độ bao phủ và tính nhất quán giữa các chỉ mục",
+      "paragraph_index": 2,
+      "expected_text_sha256": "274b4bcd9ac118db4254a3092de14506b55301ce87c2eac2402fd7eb857bde98",
+      "text": "Khi cập nhật tập văn bản, cần đối chiếu cả định danh, phiên bản, nội dung, đoạn chia và các chỉ mục liên quan. Một kế hoạch đồng bộ nên chỉ ra bản ghi thiếu, thừa, trùng hoặc lệch mã băm, kèm cách xử lý và khả năng quay lại trạng thái trước. Đếm đủ số bản ghi hoặc nhận phản hồi thành công từ dịch vụ mới chỉ kiểm tra một phần của quá trình, chưa thay cho việc đối chiếu nội dung giữa các nơi lưu."
+    },
+    {
+      "section": "CHƯƠNG 3: CÀI ĐẶT THỬ NGHIỆM, KẾT QUẢ VÀ ĐÁNH GIÁ",
+      "paragraph_index": 0,
+      "expected_text_sha256": "c2822b3cd39822083cbef7f74799258f50b99ca2c30008a09aaeed5da7736b9d",
+      "text": "Chương này nối các mô hình phân tích với luồng xử lý và giao diện của VietLex, sau đó xem xét kết quả đánh giá đã lưu. Các sơ đồ giải thích cấu trúc và hành vi theo mã nguồn; ba ảnh giao diện minh họa trạng thái công khai đã quan sát, có ghi địa chỉ và thời điểm. Phần đánh giá giữ riêng chứng cứ lịch sử, quan sát giao diện và các kiểm tra còn cần thực hiện."
+    },
+    {
+      "section": "Xử lý hồ sơ, đọc nguồn chính thức và phân tích",
+      "paragraph_index": 0,
+      "expected_text_sha256": "f5799afadeaaf4faa7d639ccdbca978a9f35d868bcd6d725ea5fcb9c1551d637",
+      "text": "Trang chi tiết hồ sơ tập hợp tài liệu người dùng tải lên, nguồn đã đọc, đoạn được ghim và các kết quả phân tích. Mỗi nguồn cần giữ được thông tin nhận diện, địa chỉ, mã băm và phạm vi trích xuất thích hợp. Khi chạy lại một phân tích, cần xác định đúng bản nội dung đã sử dụng; chỉ tên tệp hoặc tiêu đề không đủ để bảo đảm đó là cùng dữ liệu."
+    },
+    {
+      "section": "Xử lý hồ sơ, đọc nguồn chính thức và phân tích",
+      "paragraph_index": 1,
+      "expected_text_sha256": "b84f3a664ba3b03fa4d40878203e9a63207d7a42b3f6154e1433717c4510ecc1",
+      "text": "Chức năng đọc nguồn có giới hạn thời gian 180 giây, tối đa năm truy vấn và ba địa chỉ nguồn, với hai yêu cầu thực hiện đồng thời. PDF được kiểm tra tối đa 10 trang và giữ lại tối đa 5 trang theo cơ chế cửa sổ. Kết quả đã lưu có thể được dùng lại trong 15 phút khi đáp ứng điều kiện hồ sơ, chủ sở hữu và truy vấn. Khi phân tích kết quả, các giới hạn này cần đi cùng số nguồn và phần nội dung thực sự đọc được."
+    },
+    {
+      "section": "Xử lý hồ sơ, đọc nguồn chính thức và phân tích",
+      "paragraph_index": 2,
+      "expected_text_sha256": "5e3e6f84dcbaf35ef1a29a7ee2bfe2947f8cb36ff07d4959071defd0a8557bde",
+      "text": "Hủy tác vụ là một quá trình phối hợp giữa trình duyệt và máy chủ. Người dùng gửi yêu cầu hủy, máy chủ ghi trạng thái cùng dữ liệu đã thu được, rồi giao diện phản ánh kết quả xác nhận. Việc chỉ đóng trang hoặc ngắt luồng tải dữ liệu chưa chứng minh tác vụ phía máy chủ đã dừng. Cơ chế lưu tiến độ giúp giữ phần kết quả hợp lệ và tránh cập nhật muộn ghi đè lượt đã kết thúc."
+    },
+    {
+      "section": "Xử lý hồ sơ, đọc nguồn chính thức và phân tích",
+      "paragraph_index": 3,
+      "expected_text_sha256": "a0ca57ed2ad154d62fa62a619a3644b0960232e0e269bd4346ca9a50a605f0ab",
+      "text": "Các loại phân tích như so sánh, nghĩa vụ và kiểm tra nhận định sử dụng nguồn được người dùng chọn cùng cấu trúc đầu ra tương ứng. Khi kiểm tra chức năng, cần xem kết quả có gắn đúng nguồn và có phản ánh phần dữ liệu thiếu hay không. Bản báo cáo do người dùng chỉnh sửa cần được phân biệt với kết quả tạo ban đầu; khi xuất tài liệu vẫn cần giữ trích dẫn, thông tin nguồn và dấu vết chỉnh sửa."
+    },
+    {
+      "section": "Xử lý hồ sơ, đọc nguồn chính thức và phân tích",
+      "paragraph_index": 4,
+      "expected_text_sha256": "d235f53e24f4a293b3623ef5e5e913eab51b4a3d9014ac2c3cb4489489eda9c3",
+      "text": "Sơ đồ tuần tự dưới làm rõ các bước kiểm tra chủ sở hữu, lưu sự kiện, đọc PDF và nhận yêu cầu hủy. Đây là mô hình hành vi được lập từ mã nguồn và tài liệu thiết kế, hỗ trợ xác định trách nhiệm giữa các thành phần và lập trường hợp kiểm thử tiếp theo."
+    },
+    {
+      "section": "Phân loại bằng chứng và mức diễn giải được phép",
+      "paragraph_index": 0,
+      "expected_text_sha256": "7a35108ca4960e8c351620f09e909af0659637d4a8ce9fe3e249c80131c62d42",
+      "text": "Chứng cứ về hệ thống cần được phân loại theo điều nó có thể xác nhận. Mã nguồn và cấu hình giải thích chức năng được khai báo; kiểm thử tự động ghi nhận hành vi trên dữ liệu và điều kiện đã chạy; quan sát dịch vụ hoặc bản triển khai cho biết một phạm vi hoạt động tại thời điểm cụ thể. Bộ đánh giá câu trả lời cần tập câu hỏi và đáp án chuẩn, còn việc xem xét tính phù hợp pháp lý cần người có chuyên môn. Những loại chứng cứ này bổ sung cho nhau, không thể thay thế lẫn nhau."
+    },
+    {
+      "section": "Phân loại bằng chứng và mức diễn giải được phép",
+      "paragraph_index": 1,
+      "expected_text_sha256": "e8e758507299cd12f103e778b4ea10e25dcba22aaa5c6df32a3dfe3ea3cca09d",
+      "text": "Bảng dưới ghi thời điểm, kết quả đã lưu và phạm vi có thể sử dụng của từng chứng cứ. Cột giới hạn giúp ngăn việc suy rộng một lần kiểm tra đạt thành kết luận rằng toàn hệ thống trả lời đúng pháp luật. Cách trình bày này cũng cho biết cần bổ sung loại kiểm tra nào trước khi đưa ra một nhận xét mạnh hơn."
+    },
+    {
+      "section": "Bằng chứng vận hành và kiểm thử hiện có",
+      "paragraph_index": 0,
+      "expected_text_sha256": "c1fab4825e3ef165e8aef951018f4cb0ba16540f5cc4da1c8a78e42197651fa6",
+      "text": "Biên bản kiểm thử không gọi dịch vụ mô hình ngày 19/10/2026 ghi nhận 1.715 trường hợp đạt, 1 bỏ qua và 6 không được chọn. Mã nguồn trong phạm vi biên bản được ghi là không thay đổi ở phần theo dõi hủy tác vụ. Đây là kết quả của bộ kiểm thử và điều kiện đã nêu; các mốc khác như 1.704 trường hợp đạt ngày 18/10 hoặc 941 đạt và 1 lỗi ở lượt trước cần được giữ riêng, tránh cộng gộp thành một kết quả chung."
+    },
+    {
+      "section": "Bằng chứng vận hành và kiểm thử hiện có",
+      "paragraph_index": 1,
+      "expected_text_sha256": "eff24493da08fb7989aa37836d36fb37a36c6c7e02259d95dcaee4d33f1617db",
+      "text": "Biên bản triển khai ngày 18/10 ghi nhận 90/90 kiểm tra qua 74 yêu cầu với hai tài khoản thử, có sử dụng hai hồ sơ và một tệp tạo riêng cho thử nghiệm. Ba câu hỏi tự nhiên chưa có kết quả đạt đầy đủ chất lượng pháp lý. Phần đọc nguồn đã lưu và phục hồi hai PDF phù hợp mã băm nhưng còn giới hạn ở kết quả một phần do thời gian tìm nguồn. Các kết quả này có ích để nhận diện hành vi và điểm cần cải thiện trong phạm vi đã quan sát."
+    },
+    {
+      "section": "Bằng chứng vận hành và kiểm thử hiện có",
+      "paragraph_index": 2,
+      "expected_text_sha256": "54e57e0acdd692b6ef5a27b4418dfb026fc1b2043f8d1a32c83b1dc5e7fa2dea",
+      "text": "Trong quá trình hoàn thiện báo cáo, ứng dụng không được khởi chạy lại để chạy bộ đánh giá mới hoặc kiểm tra cơ sở dữ liệu. Những ảnh sử dụng trong bài đến từ lượt truy cập công khai bằng trình duyệt hiển thị: mở trang chủ, tra cứu số hiệu 45/2019/QH14 và mở trang đọc kết quả. Không có câu hỏi mới được gửi đến mô hình hay thao tác tài khoản được thực hiện trong lượt đó. Phạm vi quan sát giao diện được giữ riêng với các kết quả kiểm thử lịch sử."
+    },
+    {
+      "section": "Đánh giá theo từng lớp",
+      "paragraph_index": 0,
+      "expected_text_sha256": "dd15b2c2aa9b90afdb0176c9195c496964572fe0abe12172ad18d45d55df94cb",
+      "text": "Ở mức chức năng, mã nguồn cho thấy VietLex kết hợp tra cứu, hỏi đáp và tổ chức hồ sơ nghiên cứu. Ở mức thiết kế, các đối tượng căn cứ và trạng thái xử lý hỗ trợ theo dõi nguồn thông tin, trong khi nhiều kho dữ liệu đặt ra yêu cầu đồng bộ. Ở mức chất lượng kết quả, các số liệu lịch sử cho thấy cần phân biệt khả năng tìm thấy văn bản với việc chọn đủ điều khoản và tạo câu trả lời được hỗ trợ. Mỗi lớp đưa ra một loại nhận xét và hướng cải thiện khác nhau."
+    },
+    {
+      "section": "Đánh giá theo từng lớp",
+      "paragraph_index": 1,
+      "expected_text_sha256": "1e8c243fb8ff570f7b0b50477a1c1ffc4afb1f3804e7350c74f6fbfefa5ffdaf",
+      "text": "Báo cáo vì vậy có thể mô tả và đánh giá các lựa chọn thiết kế trên bản mã nguồn đã khảo sát, nhưng chưa nghiệm thu chất lượng pháp lý của toàn bộ hệ thống. Bước tiếp theo cần một tập câu hỏi có nguồn và đáp án chuẩn, ghi rõ bản triển khai và cấu hình, cùng đánh giá của người có chuyên môn. Tiêu chí nhận xét trong hướng dẫn HCMUNRE hỗ trợ việc xem xét đồ án; tiêu chí chấm điểm riêng và thẩm định pháp lý vẫn cần được xác nhận theo thẩm quyền tương ứng."
+    },
+    {
+      "section": "Kế hoạch kiểm chứng tiếp theo",
+      "paragraph_index": 0,
+      "expected_text_sha256": "08355b45f63d06e8bf923050ad43bd1a6090999e3fe241f1ae0ce51626a76e07",
+      "text": "Bước đầu là chốt tập văn bản, phiên bản mã nguồn và cấu hình được đánh giá, đồng thời xác nhận tiêu chí học phần. Với truy xuất, cần kiểm tra riêng việc chọn đúng văn bản, đúng điều khoản và giữ đủ căn cứ sau bước giới hạn nội dung. Với câu trả lời, cần xem mức hỗ trợ của từng nhận định, độ chính xác trích dẫn và cách nêu ngoại lệ. Tách các mục tiêu này giúp kết quả kiểm chứng dẫn đến hành động cải tiến cụ thể."
+    },
+    {
+      "section": "Kế hoạch kiểm chứng tiếp theo",
+      "paragraph_index": 1,
+      "expected_text_sha256": "3db8ccbf46c4300b1a347cacb8854c1ce82f23186332d1d04534606faf21c705",
+      "text": "Tiếp theo, thực hiện các trường hợp về giao diện và quyền truy cập bằng tài khoản được phép và dữ liệu thử an toàn. Cần quan sát cả thông báo trên trang, phản hồi máy chủ và dữ liệu được lưu đối với tình huống thiếu nguồn, lỗi dịch vụ, hết hạn và hủy tác vụ. Khi các điều kiện cơ bản ổn định mới nên khảo sát khả năng sử dụng với người dùng. Kế hoạch này là đề xuất cho lượt kiểm chứng sau, chưa được trình bày như kết quả đã thực hiện."
+    },
+    {
+      "section": "Giao thức đánh giá kế tiếp có thể tái lập",
+      "paragraph_index": 0,
+      "expected_text_sha256": "644843c8a51e2a6d3c8510e79493ec814b43a0ca01d5aa04f7ba5d9e0574e017",
+      "text": "Trước mỗi lượt đánh giá, ghi phiên bản mã nguồn, cấu hình và danh mục dữ liệu cùng mã băm cần thiết. Tập câu hỏi nên được người có chuyên môn rà soát, gồm nội dung hỏi, phạm vi văn bản, thời điểm áp dụng, đáp án chuẩn và đoạn nguồn hỗ trợ. Những trường hợp chưa đủ nhãn cần được ghi rõ là chưa đánh giá, thay vì lấy chính câu trả lời của mô hình làm đáp án chuẩn."
+    },
+    {
+      "section": "Giao thức đánh giá kế tiếp có thể tái lập",
+      "paragraph_index": 1,
+      "expected_text_sha256": "09ad42cddb5539afdc1c6ea5f2808939bb2b4f7941db22dd6abb4c6964d938c1",
+      "text": "Đánh giá truy xuất nên tách các mức văn bản, điều và khoản, sử dụng Recall@K hoặc các thước đo xếp hạng khi có đủ nhãn phù hợp. Cần ghi rõ tử số, mẫu số, số trường hợp bị bỏ qua và số căn cứ còn lại sau mỗi bước. Các chỉ số về thời gian và lỗi dịch vụ được theo dõi riêng để biết hạn chế đến từ chất lượng tìm kiếm hay khả năng vận hành."
+    },
+    {
+      "section": "Giao thức đánh giá kế tiếp có thể tái lập",
+      "paragraph_index": 2,
+      "expected_text_sha256": "04cf97ab357ab52bee794f0e2414251459ef0699ace072869e7b15d269c37b11",
+      "text": "Đánh giá câu trả lời cần giữ lại chính các đoạn đã chuyển cho mô hình, rồi xem xét từng nhận định và trích dẫn. Phần đối chiếu cần chú ý đúng thực thể, mốc thời gian, số liệu và ngoại lệ. Kết quả chấm tự động có thể hỗ trợ sàng lọc, nhưng cần đọc cùng nhận xét chuyên môn trên các nhóm câu hỏi và lưu lại trường hợp người đánh giá bất đồng."
+    },
+    {
+      "section": "Giao thức đánh giá kế tiếp có thể tái lập",
+      "paragraph_index": 3,
+      "expected_text_sha256": "3ea31ab7c81755d7018165eccfd640de9b492c673590e36e6c029bc193014031",
+      "text": "Đối với bảo mật và khả năng sử dụng, cần kiểm tra việc cách ly chủ sở hữu, bảo vệ yêu cầu, lưu trữ bộ nhớ đệm, tải tài liệu, hủy tác vụ và thông báo lỗi. Kiểm tra dung lượng bắt đầu bằng việc đọc thông tin sử dụng và hạn mức; thử ghi, chuyển dữ liệu hay quay lại cấu hình trước chỉ thực hiện trong phạm vi được cho phép. Mọi lượt đều cần ghi điều kiện và kết quả để có thể đối chiếu khi hệ thống thay đổi."
+    },
+    {
+      "section": "Lộ trình cải tiến theo mức rủi ro",
+      "paragraph_index": 0,
+      "expected_text_sha256": "10b8ab76d44da9e10b1d4e77abd74b06dfc3790ceaab2ec44db56518ef1ff119",
+      "text": "Ưu tiên đầu tiên là làm rõ phạm vi và tính nhất quán của dữ liệu. Cần đối chiếu định danh, nội dung, thời điểm cập nhật và nguồn gốc giữa các kho, đồng thời lập danh sách phần thiếu hoặc lệch. Kết quả mong đợi là một danh mục dữ liệu có thể truy vết và một cách công bố độ bao phủ rõ ràng, trước khi xem xét mở rộng chỉ mục theo khả năng của gói dịch vụ."
+    },
+    {
+      "section": "Lộ trình cải tiến theo mức rủi ro",
+      "paragraph_index": 1,
+      "expected_text_sha256": "acdf9fe16311fab185eb4d283683e029392093e2bbccd4f23076e79800a2690e",
+      "text": "Ưu tiên tiếp theo là xây dựng tập câu hỏi pháp luật tiếng Việt có đáp án chuẩn được rà soát. Tập này nên có câu hỏi theo số hiệu, điều khoản, tình huống, nhiều bước và mốc hiệu lực. Giữ riêng chỉ số truy xuất, câu trả lời và trích dẫn giúp biết cải tiến tác động đến khâu nào. Mỗi lần thay cách chia đoạn, xếp hạng hay lựa chọn căn cứ cần được so sánh với một mốc đã xác định."
+    },
+    {
+      "section": "Lộ trình cải tiến theo mức rủi ro",
+      "paragraph_index": 2,
+      "expected_text_sha256": "82fc5b0e9e6631e8f3674a200841298b8838179e226020358c6b81526c503a91",
+      "text": "Sau đó, hoàn thiện khả năng truy vết và thông tin trên giao diện. Người dùng cần biết câu trả lời lấy từ nguồn nào, phần nào chỉ có kết quả một phần và trường hợp nào sử dụng bộ nhớ đệm. Thông tin phiên bản, thời điểm và phạm vi nên được trình bày ở nơi giúp người dùng quyết định bước kiểm tra tiếp theo; nhật ký chỉ giữ dữ liệu cần thiết trong thời hạn phù hợp."
+    },
+    {
+      "section": "Lộ trình cải tiến theo mức rủi ro",
+      "paragraph_index": 3,
+      "expected_text_sha256": "0906c7c773ad59b3c4dc07dfd48130c98ab47b4ad409d14b6848ceb48841d5d5",
+      "text": "Cuối cùng, thực hiện kiểm tra bảo mật, khả năng sử dụng và dung lượng trước khi mở rộng phạm vi vận hành. Các tình huống quan trọng gồm truy cập chéo hồ sơ, hủy tác vụ, hết hạn, lỗi dịch vụ và thay đổi chỉ mục có khả năng quay lại. Chỉ sau khi có kết quả phù hợp của các bước này mới có cơ sở nâng mức tuyên bố về chất lượng và phạm vi sử dụng của hệ thống."
+    }
+  ]
+}

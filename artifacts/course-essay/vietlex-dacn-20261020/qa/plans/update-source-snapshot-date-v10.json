@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "steps": [
+    {
+      "operation": "text.edit",
+      "selector": {
+        "type": "text",
+        "text": "Đồ án chuyên ngành phân tích VietLex như một hệ thống phần mềm hỗ trợ tra cứu và nghiên cứu pháp luật tiếng Việt theo hướng retrieval-augmented generation (RAG). Khảo sát dựa trên mã nguồn và tài liệu hiện có tại snapshot ngày 20/10/2026; repo ở trạng thái working tree dirty nên các mô tả được gắn với file và hash, không đồng nhất với một bản phát hành sạch hoặc cấu hình đang chạy trên production. Phạm vi gồm giao diện server-rendered, các route tra cứu, pipeline hỏi đáp, hai hợp đồng retrieval được chọn bởi cấu hình, đối tượng evidence và các số liệu đánh giá đã lưu.",
+        "case_sensitive": true
+      },
+      "options": {
+        "action": "replace",
+        "pattern": "20/10/2026",
+        "replacement": "22/10/2026",
+        "case_sensitive": true,
+        "regex": false,
+        "whole_word": false
+      }
+    },
+    {
+      "operation": "text.edit",
+      "selector": {
+        "type": "text",
+        "text": "This capstone examines VietLex, a Vietnamese legal research and retrieval system. The analysis is based on source code and project documents captured on 20 October 2026. Because the repository working tree was dirty, findings are tied to the observed files and hashes and do not represent a clean release or a verified production configuration. The scope covers server-rendered views, search routes, the question-answering pipeline, configuration-selected retrieval contracts, evidence objects, and existing evaluation records.",
+        "case_sensitive": true
+      },
+      "options": {
+        "action": "replace",
+        "pattern": "20 October 2026",
+        "replacement": "22 October 2026",
+        "case_sensitive": true,
+        "regex": false,
+        "whole_word": false
+      }
+    },
+    {
+      "operation": "text.edit",
+      "selector": {
+        "type": "text",
+        "text": "Các nhận định chương này phản ánh source và tài liệu hiện có tại ngày 21/10/2026. Source project có working tree dirty; manifest ghi HEAD, status hash và hash từng file để người đọc phân biệt snapshot này với trạng thái lịch sử khác.",
+        "case_sensitive": true
+      },
+      "options": {
+        "action": "replace",
+        "pattern": "21/10/2026",
+        "replacement": "22/10/2026",
+        "case_sensitive": true,
+        "regex": false,
+        "whole_word": false
+      }
+    },
+    {
+      "operation": "text.edit",
+      "selector": {
+        "type": "text",
+        "text": "Ma trận dưới đây là bản đồ evidence của báo cáo, không thay thế rubric. Các record src-vietlex-* là review nội bộ trên source snapshot dirty ngày 20/10/2026; chúng được lưu trong evidence.json cùng hash và vị trí. Các record doi-* trỏ tới PDF học thuật đã tải và review đoạn hỗ trợ. Claim code được kiểm bằng source; claim học thuật được citation trong Word. Không có record nào ở đây xác nhận luật hiện hành hoặc runtime.",
+        "case_sensitive": true
+      },
+      "options": {
+        "action": "replace",
+        "pattern": "20/10/2026",
+        "replacement": "22/10/2026",
+        "case_sensitive": true,
+        "regex": false,
+        "whole_word": false
+      }
+    }
+  ]
+}

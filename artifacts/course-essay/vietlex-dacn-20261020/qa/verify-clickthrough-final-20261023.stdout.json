@@ -1,0 +1,70 @@
+{
+  "overall_status": "FAIL",
+  "delivery_status": "FAIL",
+  "delivery_gates": {
+    "overall": "FAIL",
+    "render": "PASS",
+    "visual": "REVIEW_REQUIRED",
+    "native_word": "PASS"
+  },
+  "structural_status": "PASS",
+  "format_status": "FAIL",
+  "numbering_status": "PASS",
+  "table_geometry_status": "PASS",
+  "field_structure_status": "FAIL",
+  "field_freshness_status": "STALE_OR_UNKNOWN",
+  "field_evaluation_status": "PASS",
+  "render_status": "PASS",
+  "native_word_status": "PASS",
+  "visual_status": "REVIEW_REQUIRED",
+  "manual_review_required": true,
+  "issues": [
+    {
+      "severity": "ERROR",
+      "code": "insufficient_references",
+      "message": "Found 5 reference item(s) in bibliography section; profile requires at least 10."
+    },
+    {
+      "severity": "ERROR",
+      "code": "dangling_reference",
+      "message": "{'story': 'document', 'code': 'dangling_reference', 'instruction': 'PAGEREF _Toc243587332 \\\\h'}"
+    },
+    {
+      "severity": "WARNING",
+      "code": "native_evaluation_not_persisted",
+      "message": "Microsoft Word evaluated a temporary copy successfully, but its results differed from the cached results in the source. Run field update-all to a distinct output before delivery."
+    }
+  ],
+  "inventory": {
+    "paragraphs": 579,
+    "tables": 15,
+    "sections": 3,
+    "images": 20,
+    "fields": {
+      "total_field_tags": 519,
+      "toc_field": true,
+      "page_field": true,
+      "page_fields": 139,
+      "toc_fields": 3,
+      "other_fields": 31
+    }
+  },
+  "render": {
+    "engine": "word",
+    "pdf_path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Final_ClickthroughRepair_20261023.pdf",
+    "file_size_bytes": 2352264,
+    "page_count": 81,
+    "verified_pdf_page_count": 81
+  },
+  "visual_review_challenge": {
+    "token": "073969b3275068ff81e519e1fc7181278b1412889007b1d03e9c9165549b7af1",
+    "page_count": 81,
+    "token_scope": "document SHA-256 plus ordered page-image SHA-256 and size; PDF SHA-256 is provenance only"
+  },
+  "visual_review_reuse": {
+    "version": 1,
+    "token": "wa-visual-reuse-v1:b0bb678520a3c6f9a4ba9e601b381125a36a1b600a25d4ab8899590b863ba915"
+  },
+  "report_path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\qa\\verify-clickthrough-final-20261023.json",
+  "report_sha256": "1bae9303bb54ecf48e3d69dc8f88eee158e473bfb7323a34453d3b22d00ba1b1"
+}

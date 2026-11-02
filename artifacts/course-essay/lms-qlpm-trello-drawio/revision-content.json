@@ -1,0 +1,58 @@
+{
+  "input_sha256": "81bd50274bb0e7ee19ee3b57a20967755b3a73189530324cefad23ea52963ff5",
+  "scope_start": "MỞ ĐẦU",
+  "scope_end": "Phụ lục C. Loại bằng chứng và giới hạn",
+  "first_line_indent_cm": 0,
+  "rewrites": [
+    {
+      "section": "MỞ ĐẦU",
+      "paragraph_index": 2,
+      "text": "Phương pháp gồm phân tích tài liệu quản lý dự án trong repo LMS, ưu tiên hồ sơ đối soát ngày 21/10/2026, kiểm tra các quy tắc nghiệp vụ trong mã nguồn và schema SQL, rồi đối chiếu snapshot Trello và tài sản Draw.io trong ZIP. Các mô hình nghiệp vụ được dùng để làm rõ sản phẩm bàn giao, điều kiện chấp nhận và công việc cần kiểm soát; hướng dẫn chụp ảnh quy định cách lưu bằng chứng thực hiện."
+    },
+    {
+      "section": "CHƯƠNG 9. THIẾT KẾ VÀ BIỂU ĐỒ DRAW.IO",
+      "paragraph_index": 0,
+      "text": "Thiết kế giúp đội dự án chuyển phạm vi thành các thành phần và quy tắc có thể kiểm tra. Kiến trúc trong repo tổ chức ba vai trò qua React/TypeScript/Vite, FastAPI/SQLAlchemy và SQL Server. Sơ đồ kiến trúc xác định ranh giới frontend, API và dữ liệu; hồ sơ này chưa cung cấp bằng chứng triển khai production."
+    },
+    {
+      "section": "CHƯƠNG 9. THIẾT KẾ VÀ BIỂU ĐỒ DRAW.IO",
+      "paragraph_index": 1,
+      "text": "ERD LMS_12 trình bày 12 bảng cùng các khóa chính và khóa ngoại; một số quan hệ được giản lược theo manifest. Phụ lục D bổ sung Use Case, luồng nộp bài, trình tự chấm bài, lớp miền và trạng thái bài nộp. Các góc nhìn này được đối chiếu với docs/02_ROLES_USE_CASES.md, database/01_schema.sql và backend/app/api/routes/assignments.py, nên có thể truy ngược từ hình về quy tắc trong project."
+    },
+    {
+      "section": "KẾT LUẬN VÀ KIẾN NGHỊ",
+      "paragraph_index": 0,
+      "text": "Kế hoạch quản lý LMS thống nhất baseline 20 tuần, 1,2 tỷ VNĐ và 8,5 FTE. Trello cung cấp dấu vết công việc; bộ mô hình Draw.io giải thích phạm vi vai trò, luồng bài tập, dữ liệu và các điểm kiểm soát. Việc nối WBS, thẻ công việc, mô hình và tiêu chí chấp nhận giúp nhóm xác định thay đổi nào ảnh hưởng tới tiến độ, chi phí và chất lượng. Các số liệu kế hoạch, snapshot API và kịch bản mô phỏng vẫn được đánh dấu theo đúng loại bằng chứng."
+    },
+    {
+      "section": "Phụ lục A. Danh mục sơ đồ Draw.io",
+      "paragraph_index": 0,
+      "text": "Hồ sơ gốc có 15 cặp nguồn Draw.io và PNG. Phần nội dung chính dùng WBS, chu trình quản lý, mạng phụ thuộc, kiến trúc và ERD. Phụ lục D đưa thêm năm góc nhìn nghiệp vụ; Use Case, Sequence chấm bài và lớp miền được bố trí lại để đọc trong Word, còn luồng nộp bài và trạng thái dùng hình gốc đã đối chiếu."
+    },
+    {
+      "section": "Phụ lục A. Danh mục sơ đồ Draw.io",
+      "paragraph_index": 1,
+      "text": "Bảng dưới ghi rõ hình được sử dụng và bản nguồn còn lưu. Mỗi bản bố cục gọn có PNG xuất từ Draw.io cùng nguồn chỉnh sửa được; chúng không được dùng làm ảnh chụp ứng dụng hay log kiểm thử."
+    },
+    {
+      "section": "RACI và escalation",
+      "paragraph_index": 1,
+      "text": "Bảng rút gọn chọn các đầu ra từ ma trận nguồn và gom vai trò kỹ thuật thành Dev/QA. Việc soạn hồ sơ và việc ký phê duyệt là các trách nhiệm riêng; mỗi dòng chỉ có một vai trò A. Sponsor là vai trò giả định trong hồ sơ học thuật. Nguồn đối chiếu: docs/project-management/03_RACI_MATRIX.md."
+    }
+  ],
+  "insertions": [
+    {
+      "before_heading": "Quy trình xuất biểu đồ",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Bộ mô hình ở Phụ lục D tập trung vào luồng bài tập vì luồng này kết nối cả ba yếu tố cần quản lý: quyền người dùng, trạng thái sản phẩm và toàn vẹn dữ liệu. Use Case phân chia trách nhiệm theo vai trò; sơ đồ luồng và trạng thái chỉ ra khi nào một bài nộp được chấp nhận; Sequence đặt việc kiểm tra quyền và ghi điểm tại API. Nhờ đó, nhóm có thể tách thẻ thiết kế, phát triển và kiểm thử theo cùng điều kiện chấp nhận."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Một bài tập chỉ có một bài nộp hiện hành cho mỗi sinh viên theo ràng buộc UNIQUE(AssignmentId, StudentId). Sau khi chấm, sinh viên không được sửa bài nộp; giảng viên vẫn có thể điều chỉnh điểm theo quyền sở hữu khóa học. Khi chấm bài, API cập nhật Submission, insert/update Grades và tạo Notification trong luồng xử lý dữ liệu. Các điều kiện này cần xuất hiện trong checklist review và kịch bản kiểm thử; việc có sơ đồ hoặc thẻ Trello chưa xác nhận chúng đã chạy đạt."
+        }
+      ]
+    }
+  ]
+}

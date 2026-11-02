@@ -1,0 +1,59 @@
+{
+  "overall_status": "FAIL",
+  "structural_status": "PASS",
+  "format_status": "FAIL",
+  "numbering_status": "PASS",
+  "table_geometry_status": "PASS",
+  "field_structure_status": "PASS",
+  "field_freshness_status": "FAIL",
+  "field_evaluation_status": "FAIL",
+  "field_status": "PASS",
+  "render_status": "FAIL",
+  "native_word_status": "FAIL",
+  "visual_status": "NOT_REQUESTED",
+  "manual_review_required": true,
+  "issues": [
+    {
+      "severity": "ERROR",
+      "code": "style_size_mismatch",
+      "message": "Style 'Heading 3' font size is unset; expected 13 pt. 0 direct run override(s) also differ."
+    },
+    {
+      "severity": "ERROR",
+      "code": "native_field_verification_failed",
+      "message": "[WinError 32] The process cannot access the file because it is being used by another process: 'C:\\\\Users\\\\VITINH~1\\\\AppData\\\\Local\\\\Temp\\\\wordassistant-verify-fields-8xtalzi1\\\\VietLex_DoAnChuyenNganh_RubricCriteria_FinalQA_20261025_v2.docx'"
+    },
+    {
+      "severity": "ERROR",
+      "code": "render_failed",
+      "message": "Command '['taskkill', '/PID', '10856', '/F']' timed out after 5 seconds"
+    }
+  ],
+  "delivery_status": "FAIL",
+  "delivery_gates": {
+    "overall": "FAIL",
+    "render": "FAIL",
+    "visual": "NOT_REQUESTED",
+    "native_word": "FAIL"
+  },
+  "file": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_RubricCriteria_FinalQA_20261025_v2.docx",
+  "profile": "hcmunre_dacn_2026_2027",
+  "variant": "report",
+  "validation_status": "FAIL",
+  "valid": false,
+  "delivery_valid": false,
+  "inventory": {
+    "paragraphs": 583,
+    "tables": 15,
+    "sections": 3,
+    "images": 20,
+    "fields": {
+      "total_field_tags": 516,
+      "toc_field": true,
+      "page_field": true,
+      "page_fields": 138,
+      "toc_fields": 3,
+      "other_fields": 31
+    }
+  }
+}

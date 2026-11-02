@@ -1,0 +1,309 @@
+{
+  "status": "ERROR",
+  "operation": "batch.apply",
+  "error": {
+    "code": "BATCH_STEP_FAILED",
+    "message": "Batch step 27 (caption.insert) failed: ValueError: chapter_number does not match the nearest Heading 1 automatic number",
+    "completed_steps": [
+      {
+        "index": 0,
+        "operation": "table.create",
+        "status": "SUCCESS",
+        "backend_used": "python-docx",
+        "fidelity": "high",
+        "before_sha256": "a504fcca11f3c564ab15c9b411427c1dde6a00856c8294e9fcb2e8f23e2ebf56",
+        "after_sha256": "55c4763ffa4c56140a8690ba099baf6c3537afd31b946bc1af8628f21f48145b",
+        "warnings": [],
+        "manual_review_required": false
+      },
+      {
+        "index": 1,
+        "operation": "caption.insert",
+        "status": "SUCCESS",
+        "backend_used": "ooxml",
+        "fidelity": "high",
+        "before_sha256": "55c4763ffa4c56140a8690ba099baf6c3537afd31b946bc1af8628f21f48145b",
+        "after_sha256": "272f33487c7f7d149f6ff0596c45c44093c4237bb19cddce8550a3c4d4905016",
+        "warnings": [],
+        "manual_review_required": true
+      },
+      {
+        "index": 2,
+        "operation": "table.create",
+        "status": "SUCCESS",
+        "backend_used": "python-docx",
+        "fidelity": "high",
+        "before_sha256": "272f33487c7f7d149f6ff0596c45c44093c4237bb19cddce8550a3c4d4905016",
+        "after_sha256": "79a13e76dbe4317f6ca796b68e0d2c18a37bf06913e2337e1837b1dfcba62939",
+        "warnings": [],
+        "manual_review_required": false
+      },
+      {
+        "index": 3,
+        "operation": "caption.insert",
+        "status": "SUCCESS",
+        "backend_used": "ooxml",
+        "fidelity": "high",
+        "before_sha256": "79a13e76dbe4317f6ca796b68e0d2c18a37bf06913e2337e1837b1dfcba62939",
+        "after_sha256": "fe3a532425c74c4b0b40ac20e47068788907567e728f94ecd70867e7cbc7971e",
+        "warnings": [],
+        "manual_review_required": true
+      },
+      {
+        "index": 4,
+        "operation": "image.insert",
+        "status": "SUCCESS",
+        "backend_used": "python-docx",
+        "fidelity": "high",
+        "before_sha256": "fe3a532425c74c4b0b40ac20e47068788907567e728f94ecd70867e7cbc7971e",
+        "after_sha256": "82bbb1d1505996000bf18d22a344822ce282bf9ed9ee1f3e672bcd63c906419f",
+        "warnings": [],
+        "manual_review_required": true
+      },
+      {
+        "index": 5,
+        "operation": "image.insert",
+        "status": "SUCCESS",
+        "backend_used": "python-docx",
+        "fidelity": "high",
+        "before_sha256": "82bbb1d1505996000bf18d22a344822ce282bf9ed9ee1f3e672bcd63c906419f",
+        "after_sha256": "381f8afb3c8b437107508f73b4c121d5caa0a44e5193d65e75e71f10fc8ffd17",
+        "warnings": [],
+        "manual_review_required": true
+      },
+      {
+        "index": 6,
+        "operation": "image.insert",
+        "status": "SUCCESS",
+        "backend_used": "python-docx",
+        "fidelity": "high",
+        "before_sha256": "381f8afb3c8b437107508f73b4c121d5caa0a44e5193d65e75e71f10fc8ffd17",
+        "after_sha256": "f19bdd9b7ff0f0d6071cc28a9eed5aff2c485820597d76166b3cbf1b2519cc62",
+        "warnings": [],
+        "manual_review_required": true
+      },
+      {
+        "index": 7,
+        "operation": "image.insert",
+        "status": "SUCCESS",
+        "backend_used": "python-docx",
+        "fidelity": "high",
+        "before_sha256": "f19bdd9b7ff0f0d6071cc28a9eed5aff2c485820597d76166b3cbf1b2519cc62",
+        "after_sha256": "48a0cc797d8c3fcddd688173c6ab4d36fdaaefd2177b5131edf3ad6922d53e01",
+        "warnings": [],
+        "manual_review_required": true
+      },
+      {
+        "index": 8,
+        "operation": "image.insert",
+        "status": "SUCCESS",
+        "backend_used": "python-docx",
+        "fidelity": "high",
+        "before_sha256": "48a0cc797d8c3fcddd688173c6ab4d36fdaaefd2177b5131edf3ad6922d53e01",
+        "after_sha256": "816c30b6cf6cf35cfa3179508ef15ef5b4a35e5266bf52dfa6a6cd43749901c7",
+        "warnings": [],
+        "manual_review_required": true
+      },
+      {
+        "index": 9,
+        "operation": "image.insert",
+        "status": "SUCCESS",
+        "backend_used": "python-docx",
+        "fidelity": "high",
+        "before_sha256": "816c30b6cf6cf35cfa3179508ef15ef5b4a35e5266bf52dfa6a6cd43749901c7",
+        "after_sha256": "0333551c01b1965256784579eccfd92868f207fee38eb7f06b2ed26a08bfe38b",
+        "warnings": [],
+        "manual_review_required": true
+      },
+      {
+        "index": 10,
+        "operation": "image.insert",
+        "status": "SUCCESS",
+        "backend_used": "python-docx",
+        "fidelity": "high",
+        "before_sha256": "0333551c01b1965256784579eccfd92868f207fee38eb7f06b2ed26a08bfe38b",
+        "after_sha256": "29e7ca36704aeb236640e864067ed1aefd0662b76a9fb7ced3a32c87096f5348",
+        "warnings": [],
+        "manual_review_required": true
+      },
+      {
+        "index": 11,
+        "operation": "format.paragraph",
+        "status": "SUCCESS",
+        "backend_used": "python-docx",
+        "fidelity": "high",
+        "before_sha256": "29e7ca36704aeb236640e864067ed1aefd0662b76a9fb7ced3a32c87096f5348",
+        "after_sha256": "5935e2611edd02ca601b3cb79145642d329125a3c2f905cae5c8e0a65238b53a",
+        "warnings": [],
+        "manual_review_required": false
+      },
+      {
+        "index": 12,
+        "operation": "style.update",
+        "status": "SUCCESS",
+        "backend_used": "python-docx",
+        "fidelity": "high",
+        "before_sha256": "5935e2611edd02ca601b3cb79145642d329125a3c2f905cae5c8e0a65238b53a",
+        "after_sha256": "53f81308f0e488d37a2cf64dc4163b48602b6e86795981c21e078fd0eb9768c4",
+        "warnings": [],
+        "manual_review_required": false
+      },
+      {
+        "index": 13,
+        "operation": "style.update",
+        "status": "SUCCESS",
+        "backend_used": "python-docx",
+        "fidelity": "high",
+        "before_sha256": "53f81308f0e488d37a2cf64dc4163b48602b6e86795981c21e078fd0eb9768c4",
+        "after_sha256": "d87ca5aed56b6598ede80f3ccdf907705f22536d46b4684e9aa0c5bedcfe1465",
+        "warnings": [],
+        "manual_review_required": false
+      },
+      {
+        "index": 14,
+        "operation": "style.update",
+        "status": "SUCCESS",
+        "backend_used": "python-docx",
+        "fidelity": "high",
+        "before_sha256": "d87ca5aed56b6598ede80f3ccdf907705f22536d46b4684e9aa0c5bedcfe1465",
+        "after_sha256": "12000df57cd8fb19a8ccf82c2325deda3c6dd85d21d4730677184ebacaea1e21",
+        "warnings": [],
+        "manual_review_required": false
+      },
+      {
+        "index": 15,
+        "operation": "style.update",
+        "status": "SUCCESS",
+        "backend_used": "python-docx",
+        "fidelity": "high",
+        "before_sha256": "12000df57cd8fb19a8ccf82c2325deda3c6dd85d21d4730677184ebacaea1e21",
+        "after_sha256": "22bfbf82cbaea8304c6033e9bb2a3ce5c48c18bab99be2732295f63b773d4fd8",
+        "warnings": [],
+        "manual_review_required": false
+      },
+      {
+        "index": 16,
+        "operation": "table.create",
+        "status": "SUCCESS",
+        "backend_used": "python-docx",
+        "fidelity": "high",
+        "before_sha256": "22bfbf82cbaea8304c6033e9bb2a3ce5c48c18bab99be2732295f63b773d4fd8",
+        "after_sha256": "96bcda2031e89849a62283ab5c4b46d18e62ec89026e608964175b5525419c7c",
+        "warnings": [],
+        "manual_review_required": false
+      },
+      {
+        "index": 17,
+        "operation": "caption.insert",
+        "status": "SUCCESS",
+        "backend_used": "ooxml",
+        "fidelity": "high",
+        "before_sha256": "96bcda2031e89849a62283ab5c4b46d18e62ec89026e608964175b5525419c7c",
+        "after_sha256": "22f3f20e01f67ed2dbf44bb5544b055dc99782582d7ef7304e3892ec2bd1746d",
+        "warnings": [],
+        "manual_review_required": true
+      },
+      {
+        "index": 18,
+        "operation": "table.create",
+        "status": "SUCCESS",
+        "backend_used": "python-docx",
+        "fidelity": "high",
+        "before_sha256": "22f3f20e01f67ed2dbf44bb5544b055dc99782582d7ef7304e3892ec2bd1746d",
+        "after_sha256": "4096edaefe8c32cf748f4de98f0ee64a749d17acc108b30d0924878e24192a0d",
+        "warnings": [],
+        "manual_review_required": false
+      },
+      {
+        "index": 19,
+        "operation": "caption.insert",
+        "status": "SUCCESS",
+        "backend_used": "ooxml",
+        "fidelity": "high",
+        "before_sha256": "4096edaefe8c32cf748f4de98f0ee64a749d17acc108b30d0924878e24192a0d",
+        "after_sha256": "09b64f4238a0a09af8f03f015c35953b9c6aafce6b70abbb0ae737beb99ab3b0",
+        "warnings": [],
+        "manual_review_required": true
+      },
+      {
+        "index": 20,
+        "operation": "table.create",
+        "status": "SUCCESS",
+        "backend_used": "python-docx",
+        "fidelity": "high",
+        "before_sha256": "09b64f4238a0a09af8f03f015c35953b9c6aafce6b70abbb0ae737beb99ab3b0",
+        "after_sha256": "64f9769b4cf6290794e5b265f83617b1a786d18488c46d090c38d4664606cb6c",
+        "warnings": [],
+        "manual_review_required": false
+      },
+      {
+        "index": 21,
+        "operation": "caption.insert",
+        "status": "SUCCESS",
+        "backend_used": "ooxml",
+        "fidelity": "high",
+        "before_sha256": "64f9769b4cf6290794e5b265f83617b1a786d18488c46d090c38d4664606cb6c",
+        "after_sha256": "dc786f60b8104f62d3f8d431086743bdb8ce1e4ed3962edfa3dc143260e1eb38",
+        "warnings": [],
+        "manual_review_required": true
+      },
+      {
+        "index": 22,
+        "operation": "table.create",
+        "status": "SUCCESS",
+        "backend_used": "python-docx",
+        "fidelity": "high",
+        "before_sha256": "dc786f60b8104f62d3f8d431086743bdb8ce1e4ed3962edfa3dc143260e1eb38",
+        "after_sha256": "ad2a2129d3705d498aa25d6c2fff1761ae8dc292b75dad157f5d908e9a6165cc",
+        "warnings": [],
+        "manual_review_required": false
+      },
+      {
+        "index": 23,
+        "operation": "caption.insert",
+        "status": "SUCCESS",
+        "backend_used": "ooxml",
+        "fidelity": "high",
+        "before_sha256": "ad2a2129d3705d498aa25d6c2fff1761ae8dc292b75dad157f5d908e9a6165cc",
+        "after_sha256": "cc26277f297018dfb67043f913b05fdfa960ee086e321814b6b222151e398832",
+        "warnings": [],
+        "manual_review_required": true
+      },
+      {
+        "index": 24,
+        "operation": "table.create",
+        "status": "SUCCESS",
+        "backend_used": "python-docx",
+        "fidelity": "high",
+        "before_sha256": "cc26277f297018dfb67043f913b05fdfa960ee086e321814b6b222151e398832",
+        "after_sha256": "f45d6dac91bb3f2f916fe63af585415c4561e6cf24be808ef387571f6faaec16",
+        "warnings": [],
+        "manual_review_required": false
+      },
+      {
+        "index": 25,
+        "operation": "caption.insert",
+        "status": "SUCCESS",
+        "backend_used": "ooxml",
+        "fidelity": "high",
+        "before_sha256": "f45d6dac91bb3f2f916fe63af585415c4561e6cf24be808ef387571f6faaec16",
+        "after_sha256": "f2b90666e167f363b493ac3c6294b30e33cb730aa486a53fba21839c4bb5ebd6",
+        "warnings": [],
+        "manual_review_required": true
+      },
+      {
+        "index": 26,
+        "operation": "table.create",
+        "status": "SUCCESS",
+        "backend_used": "python-docx",
+        "fidelity": "high",
+        "before_sha256": "f2b90666e167f363b493ac3c6294b30e33cb730aa486a53fba21839c4bb5ebd6",
+        "after_sha256": "24c4b71e845feab6c96bc73c7718536f2e3cb1e1c7253323f261ca68bb101b51",
+        "warnings": [],
+        "manual_review_required": false
+      }
+    ],
+    "step_index": 27,
+    "operation": "caption.insert"
+  }
+}

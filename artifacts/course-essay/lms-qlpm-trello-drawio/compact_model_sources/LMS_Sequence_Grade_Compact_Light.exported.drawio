@@ -1,0 +1,115 @@
+<mxfile host="app.diagrams.net" scale="2" border="0">
+  <diagram name="Page-1" id="wACvX8cb_MtiZch9dDWf">
+    <mxGraphModel dx="774" dy="586" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;align=center;fontSize=26;fontStyle=1;fontColor=#111827;" value="Trình tự chấm bài của giảng viên" vertex="1">
+          <mxGeometry height="48" width="880" x="250" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="lecturer" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eff6ff;strokeColor=#1d4ed8;strokeWidth=2;fontSize=18;fontStyle=1;" value="Giảng viên" vertex="1">
+          <mxGeometry height="58" width="210" x="90" y="105" as="geometry" />
+        </mxCell>
+        <mxCell id="react" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eff6ff;strokeColor=#1d4ed8;strokeWidth=2;fontSize=18;fontStyle=1;" value="React / Vite" vertex="1">
+          <mxGeometry height="58" width="210" x="410" y="105" as="geometry" />
+        </mxCell>
+        <mxCell id="api" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eff6ff;strokeColor=#1d4ed8;strokeWidth=2;fontSize=18;fontStyle=1;" value="FastAPI" vertex="1">
+          <mxGeometry height="58" width="210" x="730" y="105" as="geometry" />
+        </mxCell>
+        <mxCell id="sql" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eff6ff;strokeColor=#1d4ed8;strokeWidth=2;fontSize=18;fontStyle=1;" value="SQL Server" vertex="1">
+          <mxGeometry height="58" width="210" x="1050" y="105" as="geometry" />
+        </mxCell>
+        <mxCell id="life-lecturer" edge="1" parent="1" style="endArrow=none;dashed=1;strokeColor=#94a3b8;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="195" y="163" as="sourcePoint" />
+            <mxPoint x="195" y="850" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="life-react" edge="1" parent="1" style="endArrow=none;dashed=1;strokeColor=#94a3b8;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="515" y="163" as="sourcePoint" />
+            <mxPoint x="515" y="850" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="life-api" edge="1" parent="1" style="endArrow=none;dashed=1;strokeColor=#94a3b8;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="835" y="163" as="sourcePoint" />
+            <mxPoint x="835" y="850" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="life-sql" edge="1" parent="1" style="endArrow=none;dashed=1;strokeColor=#94a3b8;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1155" y="163" as="sourcePoint" />
+            <mxPoint x="1155" y="850" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg-0" edge="1" parent="1" style="edgeStyle=none;endArrow=block;html=1;strokeColor=#475569;strokeWidth=2;fontSize=16;fontColor=#111827;labelBackgroundColor=#ffffff;" value="1. Chọn bài cần chấm">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="195" y="220" as="sourcePoint" />
+            <mxPoint x="515" y="220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg-1" edge="1" parent="1" style="edgeStyle=none;endArrow=block;html=1;strokeColor=#475569;strokeWidth=2;fontSize=16;fontColor=#111827;labelBackgroundColor=#ffffff;" value="2. GET submissions">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="515" y="276" as="sourcePoint" />
+            <mxPoint x="835" y="276" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg-2" edge="1" parent="1" style="edgeStyle=none;endArrow=block;html=1;strokeColor=#475569;strokeWidth=2;fontSize=16;fontColor=#111827;labelBackgroundColor=#ffffff;" value="3. Kiểm tra quyền; đọc bài nộp">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="835" y="332" as="sourcePoint" />
+            <mxPoint x="1155" y="332" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg-3" edge="1" parent="1" style="edgeStyle=none;endArrow=block;html=1;strokeColor=#475569;strokeWidth=2;fontSize=16;fontColor=#111827;labelBackgroundColor=#ffffff;" value="4. Danh sách bài nộp">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1155" y="388" as="sourcePoint" />
+            <mxPoint x="835" y="388" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg-4" edge="1" parent="1" style="edgeStyle=none;endArrow=block;html=1;strokeColor=#475569;strokeWidth=2;fontSize=16;fontColor=#111827;labelBackgroundColor=#ffffff;" value="5. Dữ liệu để hiển thị">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="835" y="444" as="sourcePoint" />
+            <mxPoint x="515" y="444" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg-5" edge="1" parent="1" style="edgeStyle=none;endArrow=block;html=1;strokeColor=#475569;strokeWidth=2;fontSize=16;fontColor=#111827;labelBackgroundColor=#ffffff;" value="6. Nhập điểm và phản hồi">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="195" y="500" as="sourcePoint" />
+            <mxPoint x="515" y="500" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg-6" edge="1" parent="1" style="edgeStyle=none;endArrow=block;html=1;strokeColor=#475569;strokeWidth=2;fontSize=16;fontColor=#111827;labelBackgroundColor=#ffffff;" value="7. PUT grade">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="515" y="556" as="sourcePoint" />
+            <mxPoint x="835" y="556" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg-7" edge="1" parent="1" style="edgeStyle=none;endArrow=block;html=1;strokeColor=#475569;strokeWidth=2;fontSize=16;fontColor=#111827;labelBackgroundColor=#ffffff;" value="8. Kiểm tra điểm; ghi dữ liệu">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="835" y="612" as="sourcePoint" />
+            <mxPoint x="1155" y="612" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg-8" edge="1" parent="1" style="edgeStyle=none;endArrow=block;html=1;strokeColor=#475569;strokeWidth=2;fontSize=16;fontColor=#111827;labelBackgroundColor=#ffffff;" value="9. Commit">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1155" y="668" as="sourcePoint" />
+            <mxPoint x="835" y="668" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg-9" edge="1" parent="1" style="edgeStyle=none;endArrow=block;html=1;strokeColor=#475569;strokeWidth=2;fontSize=16;fontColor=#111827;labelBackgroundColor=#ffffff;" value="10. Kết quả chấm">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="835" y="724" as="sourcePoint" />
+            <mxPoint x="515" y="724" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg-10" edge="1" parent="1" style="edgeStyle=none;endArrow=block;html=1;strokeColor=#475569;strokeWidth=2;fontSize=16;fontColor=#111827;labelBackgroundColor=#ffffff;" value="11. Hiển thị kết quả">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="515" y="780" as="sourcePoint" />
+            <mxPoint x="195" y="780" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,60 @@
+{
+  "overall_status": "FAIL",
+  "delivery_status": "FAIL",
+  "delivery_gates": {
+    "overall": "FAIL",
+    "render": "PASS",
+    "visual": "REVIEW_REQUIRED",
+    "native_word": "PASS"
+  },
+  "structural_status": "PASS",
+  "format_status": "FAIL",
+  "numbering_status": "PASS",
+  "table_geometry_status": "PASS",
+  "field_structure_status": "PASS",
+  "field_freshness_status": "STALE_OR_UNKNOWN",
+  "field_evaluation_status": "NOT_REQUESTED",
+  "render_status": "PASS",
+  "native_word_status": "PASS",
+  "visual_status": "REVIEW_REQUIRED",
+  "manual_review_required": true,
+  "issues": [
+    {
+      "severity": "ERROR",
+      "code": "line_spacing",
+      "message": "Line spacing mismatch detected in 40 paragraph(s); expected 1.5."
+    }
+  ],
+  "inventory": {
+    "paragraphs": 405,
+    "tables": 19,
+    "sections": 9,
+    "images": 21,
+    "fields": {
+      "total_field_tags": 453,
+      "toc_field": true,
+      "page_field": true,
+      "page_fields": 108,
+      "toc_fields": 3,
+      "other_fields": 40
+    }
+  },
+  "render": {
+    "engine": "word",
+    "pdf_path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\LMS_Tieu_luan_QLDA_sua_day_du.pdf",
+    "file_size_bytes": 2491342,
+    "page_count": 56,
+    "verified_pdf_page_count": 56
+  },
+  "visual_review_challenge": {
+    "token": "01c71605aea67fd941eb7038fbe7339466c7c76fc11986851f54274ad5a7975c",
+    "page_count": 56,
+    "token_scope": "document SHA-256 plus ordered page-image SHA-256 and size; PDF SHA-256 is provenance only"
+  },
+  "visual_review_reuse": {
+    "version": 1,
+    "token": "wa-visual-reuse-v1:71e8a90123c154bc01fc567046165068b02f884ed8982995f0e1ff8133560201"
+  },
+  "report_path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\qa\\reviewed-render.json",
+  "report_sha256": "aaf0dd64471964088426ce7cdf32052b787cc7b4f4577b393f118b35779d09cc"
+}

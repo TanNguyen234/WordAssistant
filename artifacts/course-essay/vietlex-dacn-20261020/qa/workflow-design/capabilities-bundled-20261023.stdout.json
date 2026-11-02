@@ -1,0 +1,5029 @@
+{
+  "version": 1,
+  "core": {
+    "ready": true,
+    "commands": [
+      "doctor",
+      "capabilities",
+      "inspect",
+      "context",
+      "create",
+      "edit",
+      "format",
+      "list",
+      "table",
+      "image",
+      "section",
+      "page-number",
+      "field",
+      "toc",
+      "caption",
+      "reference",
+      "comment",
+      "revision",
+      "protect",
+      "properties",
+      "mail-merge",
+      "compare",
+      "merge",
+      "validate",
+      "verify",
+      "render",
+      "profiles"
+    ],
+    "api_key_required": false
+  },
+  "advanced_word": {
+    "installed": true,
+    "adapter_supported": false,
+    "operational": false,
+    "reason": "docx-mcp probe failed: No module named 'docx_mcp'",
+    "capabilities": {
+      "comments": "UNSUPPORTED",
+      "tracked_changes": "UNSUPPORTED",
+      "footnotes": "UNSUPPORTED",
+      "endnotes": "UNSUPPORTED",
+      "bookmarks": "UNSUPPORTED",
+      "fields": "UNSUPPORTED",
+      "captions": "UNSUPPORTED",
+      "rich_merge": "UNSUPPORTED",
+      "compare": "UNSUPPORTED",
+      "ooxml_audit": "UNSUPPORTED"
+    },
+    "advanced_capabilities": {
+      "comments": "UNSUPPORTED",
+      "tracked_changes": "UNSUPPORTED",
+      "footnotes": "UNSUPPORTED",
+      "endnotes": "UNSUPPORTED",
+      "bookmarks": "UNSUPPORTED",
+      "fields": "UNSUPPORTED",
+      "captions": "UNSUPPORTED",
+      "rich_merge": "UNSUPPORTED",
+      "compare": "UNSUPPORTED",
+      "ooxml_audit": "UNSUPPORTED"
+    },
+    "core_capabilities": [
+      "inspect",
+      "context",
+      "scaffold",
+      "replace",
+      "validate",
+      "verify",
+      "render",
+      "evidence"
+    ],
+    "engine": "python-docx-core",
+    "notes": "Running on fast deterministic core backend (python-docx). docx-mcp is optional."
+  },
+  "selector_schema": {
+    "allowed_keys": [
+      "type",
+      "text",
+      "index",
+      "style",
+      "case_sensitive"
+    ],
+    "types": {
+      "document": {
+        "required": [
+          "type"
+        ],
+        "example": {
+          "type": "document"
+        },
+        "meaning": "all top-level paragraphs"
+      },
+      "heading": {
+        "required": [
+          "type",
+          "text"
+        ],
+        "example": {
+          "type": "heading",
+          "text": "Introduction"
+        },
+        "meaning": "the uniquely named real Word Heading paragraph"
+      },
+      "paragraph": {
+        "required": [
+          "type",
+          "index"
+        ],
+        "example": {
+          "type": "paragraph",
+          "index": 0
+        },
+        "meaning": "zero-based top-level paragraph index; negative indexes are allowed"
+      },
+      "text": {
+        "required": [
+          "type",
+          "text"
+        ],
+        "example": {
+          "type": "text",
+          "text": "Exact anchor text"
+        },
+        "meaning": "paragraph whose full text matches exactly"
+      },
+      "style": {
+        "required": [
+          "type",
+          "style"
+        ],
+        "example": {
+          "type": "style",
+          "style": "Caption"
+        },
+        "meaning": "paragraphs with the named Word style"
+      }
+    },
+    "defaults": {
+      "case_sensitive": false
+    },
+    "single_target_policy": "fail closed when zero or multiple paragraphs match"
+  },
+  "backends": {
+    "libreoffice": {
+      "backend": "libreoffice",
+      "available": false,
+      "operational": false,
+      "reason": "LibreOffice executable was not found",
+      "details": {
+        "executable": null
+      }
+    },
+    "ooxml": {
+      "backend": "ooxml",
+      "available": true,
+      "operational": true,
+      "reason": "direct OOXML package support is available",
+      "details": {}
+    },
+    "python-docx": {
+      "backend": "python-docx",
+      "available": true,
+      "operational": true,
+      "reason": "python-docx is importable",
+      "details": {}
+    },
+    "word-native": {
+      "backend": "word-native",
+      "available": true,
+      "operational": false,
+      "reason": "Microsoft Word isolated COM launch probe failed: Microsoft Word COM launch probe failed: No module named 'pythoncom'",
+      "details": {
+        "executable": "C:\\Program Files\\Microsoft Office\\Office15\\WINWORD.EXE",
+        "isolated": true,
+        "word_version": null
+      }
+    }
+  },
+  "operations": [
+    "bibliography.generate",
+    "bookmark.create",
+    "bookmark.delete",
+    "bookmark.inspect",
+    "bookmark.rename",
+    "caption.insert",
+    "chart.insert",
+    "citation.insert",
+    "citation.list",
+    "citation.remove",
+    "comment.create",
+    "comment.delete",
+    "comment.list",
+    "comment.reopen",
+    "comment.reply",
+    "comment.resolve",
+    "compare.documents",
+    "content-control.create",
+    "content-control.delete",
+    "content-control.list",
+    "content-control.set",
+    "equation.insert",
+    "field.insert",
+    "field.inspect",
+    "field.lock",
+    "field.remove",
+    "field.unlock",
+    "field.update_all",
+    "format.paragraph",
+    "format.run",
+    "header-footer.set_text",
+    "heading.numbering_apply",
+    "heading.numbering_inspect",
+    "heading.numbering_remove",
+    "image.insert",
+    "image.metadata",
+    "image.remove",
+    "image.replace",
+    "image.resize",
+    "list.continue",
+    "list.create",
+    "list.restart",
+    "list.set_level",
+    "mail-merge.execute",
+    "merge.documents",
+    "page-number.apply",
+    "page-number.inspect",
+    "properties.get",
+    "properties.set",
+    "protect.native",
+    "protection.inspect",
+    "protection.protect",
+    "protection.unprotect",
+    "reference.cross_reference",
+    "reference.hyperlink",
+    "render.pdf",
+    "revision.accept",
+    "revision.accept_all",
+    "revision.disable",
+    "revision.enable",
+    "revision.list",
+    "revision.reject",
+    "revision.reject_all",
+    "section.add",
+    "section.layout",
+    "section.link",
+    "style.apply",
+    "style.clone",
+    "style.create",
+    "style.delete",
+    "style.update",
+    "table.create",
+    "table.delete",
+    "table.delete_column",
+    "table.delete_row",
+    "table.insert_column",
+    "table.insert_row",
+    "table.layout",
+    "table.merge",
+    "table.set_cell",
+    "table.set_column",
+    "table.set_row",
+    "text.edit",
+    "toc.insert"
+  ],
+  "operation_statuses": {
+    "bibliography.generate": "SUPPORTED_CORE",
+    "bookmark.create": "SUPPORTED_OOXML",
+    "bookmark.delete": "SUPPORTED_OOXML",
+    "bookmark.inspect": "READ_ONLY",
+    "bookmark.rename": "SUPPORTED_OOXML",
+    "caption.insert": "SUPPORTED_OOXML",
+    "chart.insert": "UNSUPPORTED",
+    "citation.insert": "SUPPORTED_OOXML",
+    "citation.list": "READ_ONLY",
+    "citation.remove": "SUPPORTED_OOXML",
+    "comment.create": "UNAVAILABLE",
+    "comment.delete": "UNAVAILABLE",
+    "comment.list": "UNAVAILABLE",
+    "comment.reopen": "UNSUPPORTED",
+    "comment.reply": "UNSUPPORTED",
+    "comment.resolve": "UNSUPPORTED",
+    "compare.documents": "UNAVAILABLE",
+    "content-control.create": "SUPPORTED_OOXML",
+    "content-control.delete": "UNVERIFIED",
+    "content-control.list": "READ_ONLY",
+    "content-control.set": "SUPPORTED_OOXML",
+    "equation.insert": "SUPPORTED_OOXML",
+    "field.insert": "SUPPORTED_OOXML",
+    "field.inspect": "READ_ONLY",
+    "field.lock": "SUPPORTED_OOXML",
+    "field.remove": "SUPPORTED_OOXML",
+    "field.unlock": "SUPPORTED_OOXML",
+    "field.update_all": "UNAVAILABLE",
+    "format.paragraph": "SUPPORTED_CORE",
+    "format.run": "SUPPORTED_CORE",
+    "header-footer.set_text": "UNVERIFIED",
+    "heading.numbering_apply": "SUPPORTED_OOXML",
+    "heading.numbering_inspect": "READ_ONLY",
+    "heading.numbering_remove": "SUPPORTED_OOXML",
+    "image.insert": "SUPPORTED_CORE",
+    "image.metadata": "UNVERIFIED",
+    "image.remove": "SUPPORTED_OOXML",
+    "image.replace": "UNVERIFIED",
+    "image.resize": "SUPPORTED_OOXML",
+    "list.continue": "UNVERIFIED",
+    "list.create": "SUPPORTED_OOXML",
+    "list.restart": "SUPPORTED_OOXML",
+    "list.set_level": "SUPPORTED_OOXML",
+    "mail-merge.execute": "UNSUPPORTED",
+    "merge.documents": "UNSUPPORTED",
+    "page-number.apply": "SUPPORTED_OOXML",
+    "page-number.inspect": "READ_ONLY",
+    "properties.get": "READ_ONLY",
+    "properties.set": "SUPPORTED_OOXML",
+    "protect.native": "UNSUPPORTED",
+    "protection.inspect": "READ_ONLY",
+    "protection.protect": "SUPPORTED_OOXML",
+    "protection.unprotect": "SUPPORTED_OOXML",
+    "reference.cross_reference": "SUPPORTED_OOXML",
+    "reference.hyperlink": "SUPPORTED_OOXML",
+    "render.pdf": "UNAVAILABLE",
+    "revision.accept": "UNSUPPORTED",
+    "revision.accept_all": "UNAVAILABLE",
+    "revision.disable": "UNAVAILABLE",
+    "revision.enable": "UNAVAILABLE",
+    "revision.list": "UNAVAILABLE",
+    "revision.reject": "UNSUPPORTED",
+    "revision.reject_all": "UNSUPPORTED",
+    "section.add": "SUPPORTED_CORE",
+    "section.layout": "SUPPORTED_CORE",
+    "section.link": "UNVERIFIED",
+    "style.apply": "SUPPORTED_CORE",
+    "style.clone": "UNVERIFIED",
+    "style.create": "SUPPORTED_CORE",
+    "style.delete": "SUPPORTED_CORE",
+    "style.update": "SUPPORTED_CORE",
+    "table.create": "SUPPORTED_CORE",
+    "table.delete": "UNVERIFIED",
+    "table.delete_column": "SUPPORTED_CORE",
+    "table.delete_row": "UNVERIFIED",
+    "table.insert_column": "SUPPORTED_CORE",
+    "table.insert_row": "SUPPORTED_CORE",
+    "table.layout": "SUPPORTED_CORE",
+    "table.merge": "SUPPORTED_CORE",
+    "table.set_cell": "SUPPORTED_CORE",
+    "table.set_column": "UNVERIFIED",
+    "table.set_row": "UNVERIFIED",
+    "text.edit": "SUPPORTED_CORE",
+    "toc.insert": "SUPPORTED_OOXML"
+  },
+  "matrix": {
+    "bibliography": {
+      "generate": "SUPPORTED_CORE"
+    },
+    "bookmark": {
+      "create": "SUPPORTED_OOXML",
+      "delete": "SUPPORTED_OOXML",
+      "inspect": "READ_ONLY",
+      "rename": "SUPPORTED_OOXML"
+    },
+    "caption": {
+      "insert": "SUPPORTED_OOXML"
+    },
+    "charts": {
+      "create": "UNSUPPORTED"
+    },
+    "citation": {
+      "insert": "SUPPORTED_OOXML",
+      "list": "READ_ONLY",
+      "remove": "SUPPORTED_OOXML"
+    },
+    "comments": {
+      "create": "UNAVAILABLE",
+      "delete": "UNAVAILABLE",
+      "read": "UNAVAILABLE",
+      "advanced_edit": "UNSUPPORTED"
+    },
+    "compare": {
+      "create": "UNAVAILABLE"
+    },
+    "content-control": {
+      "create": "SUPPORTED_OOXML",
+      "delete": "UNVERIFIED",
+      "list": "READ_ONLY",
+      "set": "SUPPORTED_OOXML"
+    },
+    "equation": {
+      "insert": "SUPPORTED_OOXML"
+    },
+    "field": {
+      "insert": "SUPPORTED_OOXML",
+      "inspect": "READ_ONLY",
+      "lock": "SUPPORTED_OOXML",
+      "remove": "SUPPORTED_OOXML",
+      "unlock": "SUPPORTED_OOXML"
+    },
+    "fields": {
+      "update": "UNAVAILABLE"
+    },
+    "format": {
+      "paragraph": "SUPPORTED_CORE",
+      "run": "SUPPORTED_CORE"
+    },
+    "header-footer": {
+      "set_text": "UNVERIFIED"
+    },
+    "heading": {
+      "numbering_apply": "SUPPORTED_OOXML",
+      "numbering_inspect": "READ_ONLY",
+      "numbering_remove": "SUPPORTED_OOXML"
+    },
+    "image": {
+      "insert": "SUPPORTED_CORE",
+      "metadata": "UNVERIFIED",
+      "remove": "SUPPORTED_OOXML",
+      "replace": "UNVERIFIED",
+      "resize": "SUPPORTED_OOXML"
+    },
+    "list": {
+      "continue": "UNVERIFIED",
+      "create": "SUPPORTED_OOXML",
+      "restart": "SUPPORTED_OOXML",
+      "set_level": "SUPPORTED_OOXML"
+    },
+    "mail_merge": {
+      "create": "UNSUPPORTED"
+    },
+    "merge": {
+      "create": "UNSUPPORTED"
+    },
+    "page-number": {
+      "apply": "SUPPORTED_OOXML",
+      "inspect": "READ_ONLY"
+    },
+    "properties": {
+      "get": "READ_ONLY",
+      "set": "SUPPORTED_OOXML"
+    },
+    "protection": {
+      "native_word": "UNSUPPORTED",
+      "inspect": "READ_ONLY",
+      "protect": "SUPPORTED_OOXML",
+      "unprotect": "SUPPORTED_OOXML"
+    },
+    "reference": {
+      "cross_reference": "SUPPORTED_OOXML",
+      "hyperlink": "SUPPORTED_OOXML"
+    },
+    "render": {
+      "create": "UNAVAILABLE"
+    },
+    "tracked_changes": {
+      "advanced_edit": "UNAVAILABLE",
+      "write": "UNAVAILABLE",
+      "read": "UNAVAILABLE"
+    },
+    "section": {
+      "add": "SUPPORTED_CORE",
+      "layout": "SUPPORTED_CORE",
+      "link": "UNVERIFIED"
+    },
+    "style": {
+      "apply": "SUPPORTED_CORE",
+      "clone": "UNVERIFIED",
+      "create": "SUPPORTED_CORE",
+      "delete": "SUPPORTED_CORE",
+      "update": "SUPPORTED_CORE"
+    },
+    "table": {
+      "create": "SUPPORTED_CORE",
+      "delete": "UNVERIFIED",
+      "delete_column": "SUPPORTED_CORE",
+      "delete_row": "UNVERIFIED",
+      "insert_column": "SUPPORTED_CORE",
+      "insert_row": "SUPPORTED_CORE",
+      "layout": "SUPPORTED_CORE",
+      "merge": "SUPPORTED_CORE",
+      "set_cell": "SUPPORTED_CORE",
+      "set_column": "UNVERIFIED",
+      "set_row": "UNVERIFIED"
+    },
+    "text": {
+      "edit": "SUPPORTED_CORE"
+    },
+    "toc": {
+      "insert": "SUPPORTED_OOXML"
+    }
+  },
+  "operation_contracts": {
+    "bibliography.generate": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "evidence_registry",
+          "required": true,
+          "type": "path"
+        },
+        {
+          "name": "style",
+          "required": false,
+          "type": "string",
+          "default": null
+        },
+        {
+          "name": "heading",
+          "required": false,
+          "type": "string",
+          "default": null
+        }
+      ],
+      "options_example": {
+        "evidence_registry": "EVIDENCE.json"
+      },
+      "cli_routes": [
+        {
+          "family": "reference",
+          "action": "bibliography",
+          "command_template": "wordassistant reference bibliography INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "evidence_registry",
+              "required": true,
+              "type": "path"
+            },
+            {
+              "name": "style",
+              "required": false,
+              "type": "string",
+              "default": null
+            },
+            {
+              "name": "heading",
+              "required": false,
+              "type": "string",
+              "default": null
+            }
+          ],
+          "options_example": {
+            "evidence_registry": "EVIDENCE.json"
+          }
+        }
+      ]
+    },
+    "bookmark.create": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": true,
+      "options": [
+        {
+          "name": "name",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "options_example": {
+        "name": "value"
+      },
+      "cli_routes": [
+        {
+          "family": "reference",
+          "action": "bookmark-create",
+          "command_template": "wordassistant reference bookmark-create INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "name",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "options_example": {
+            "name": "value"
+          }
+        }
+      ]
+    },
+    "bookmark.delete": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "name",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "options_example": {
+        "name": "value"
+      },
+      "cli_routes": [
+        {
+          "family": "reference",
+          "action": "bookmark-delete",
+          "command_template": "wordassistant reference bookmark-delete INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "name",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "options_example": {
+            "name": "value"
+          }
+        }
+      ]
+    },
+    "bookmark.inspect": {
+      "mutating": false,
+      "output_required": false,
+      "selector_supported": false,
+      "options": [],
+      "options_example": {},
+      "cli_routes": [
+        {
+          "family": "reference",
+          "action": "bookmark-inspect",
+          "command_template": "wordassistant reference bookmark-inspect INPUT.docx --json",
+          "options": [],
+          "options_example": {}
+        }
+      ]
+    },
+    "bookmark.rename": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "old_name",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "new_name",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "options_example": {
+        "old_name": "OldBookmark",
+        "new_name": "NewBookmark"
+      },
+      "cli_routes": [
+        {
+          "family": "reference",
+          "action": "bookmark-rename",
+          "command_template": "wordassistant reference bookmark-rename INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "old_name",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "new_name",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "options_example": {
+            "old_name": "OldBookmark",
+            "new_name": "NewBookmark"
+          }
+        }
+      ]
+    },
+    "caption.insert": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": true,
+      "options": [
+        {
+          "name": "label",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "title",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "sequence_id",
+          "required": false,
+          "type": "string",
+          "default": null
+        },
+        {
+          "name": "chapter_number",
+          "required": false,
+          "type": "integer",
+          "default": null
+        },
+        {
+          "name": "caption_separator",
+          "required": false,
+          "type": "string",
+          "default": "."
+        }
+      ],
+      "options_example": {
+        "label": "Figure",
+        "title": "value"
+      },
+      "cli_routes": [
+        {
+          "family": "caption",
+          "action": "insert",
+          "command_template": "wordassistant caption insert INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "label",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "title",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "sequence_id",
+              "required": false,
+              "type": "string",
+              "default": null
+            },
+            {
+              "name": "chapter_number",
+              "required": false,
+              "type": "integer",
+              "default": null
+            },
+            {
+              "name": "caption_separator",
+              "required": false,
+              "type": "string",
+              "default": "."
+            }
+          ],
+          "options_example": {
+            "label": "Figure",
+            "title": "value"
+          }
+        }
+      ]
+    },
+    "chart.insert": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "chart_type",
+          "required": false,
+          "type": "integer",
+          "default": 51
+        },
+        {
+          "name": "title",
+          "required": false,
+          "type": "string",
+          "default": "Chart"
+        }
+      ],
+      "options_example": {},
+      "cli_routes": [
+        {
+          "family": "image",
+          "action": "chart-insert",
+          "command_template": "wordassistant image chart-insert INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "chart_type",
+              "required": false,
+              "type": "integer",
+              "default": 51
+            },
+            {
+              "name": "title",
+              "required": false,
+              "type": "string",
+              "default": "Chart"
+            }
+          ],
+          "options_example": {}
+        }
+      ]
+    },
+    "citation.insert": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": true,
+      "options": [
+        {
+          "name": "evidence_registry",
+          "required": true,
+          "type": "path"
+        },
+        {
+          "name": "evidence_id",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "style",
+          "required": false,
+          "type": "string",
+          "default": null
+        }
+      ],
+      "options_example": {
+        "evidence_registry": "EVIDENCE.json",
+        "evidence_id": "value"
+      },
+      "cli_routes": [
+        {
+          "family": "reference",
+          "action": "citation-insert",
+          "command_template": "wordassistant reference citation-insert INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "evidence_registry",
+              "required": true,
+              "type": "path"
+            },
+            {
+              "name": "evidence_id",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "style",
+              "required": false,
+              "type": "string",
+              "default": null
+            }
+          ],
+          "options_example": {
+            "evidence_registry": "EVIDENCE.json",
+            "evidence_id": "value"
+          }
+        }
+      ]
+    },
+    "citation.list": {
+      "mutating": false,
+      "output_required": false,
+      "selector_supported": false,
+      "options": [],
+      "options_example": {},
+      "cli_routes": [
+        {
+          "family": "reference",
+          "action": "citation-list",
+          "command_template": "wordassistant reference citation-list INPUT.docx --json",
+          "options": [],
+          "options_example": {}
+        }
+      ]
+    },
+    "citation.remove": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "citation_index",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "options_example": {
+        "citation_index": 0
+      },
+      "cli_routes": [
+        {
+          "family": "reference",
+          "action": "citation-remove",
+          "command_template": "wordassistant reference citation-remove INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "citation_index",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "options_example": {
+            "citation_index": 0
+          }
+        }
+      ]
+    },
+    "comment.create": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "text",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "start",
+          "required": false,
+          "type": "integer",
+          "default": 0
+        },
+        {
+          "name": "end",
+          "required": false,
+          "type": "integer",
+          "default": null
+        },
+        {
+          "name": "author",
+          "required": false,
+          "type": "string",
+          "default": null
+        }
+      ],
+      "options_example": {
+        "text": "value"
+      },
+      "cli_routes": [
+        {
+          "family": "comment",
+          "action": "create",
+          "command_template": "wordassistant comment create INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "text",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "start",
+              "required": false,
+              "type": "integer",
+              "default": 0
+            },
+            {
+              "name": "end",
+              "required": false,
+              "type": "integer",
+              "default": null
+            },
+            {
+              "name": "author",
+              "required": false,
+              "type": "string",
+              "default": null
+            }
+          ],
+          "options_example": {
+            "text": "value"
+          }
+        }
+      ]
+    },
+    "comment.delete": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "index",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "options_example": {
+        "index": 1
+      },
+      "cli_routes": [
+        {
+          "family": "comment",
+          "action": "delete",
+          "command_template": "wordassistant comment delete INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "index",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "options_example": {
+            "index": 1
+          }
+        }
+      ]
+    },
+    "comment.list": {
+      "mutating": false,
+      "output_required": false,
+      "selector_supported": false,
+      "options": [],
+      "options_example": {},
+      "cli_routes": [
+        {
+          "family": "comment",
+          "action": "list",
+          "command_template": "wordassistant comment list INPUT.docx --json",
+          "options": [],
+          "options_example": {}
+        }
+      ]
+    },
+    "comment.reopen": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "index",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "options_example": {
+        "index": 1
+      },
+      "cli_routes": [
+        {
+          "family": "comment",
+          "action": "reopen",
+          "command_template": "wordassistant comment reopen INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "index",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "options_example": {
+            "index": 1
+          }
+        }
+      ]
+    },
+    "comment.reply": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "index",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "text",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "options_example": {
+        "index": 1,
+        "text": "value"
+      },
+      "cli_routes": [
+        {
+          "family": "comment",
+          "action": "reply",
+          "command_template": "wordassistant comment reply INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "index",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "text",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "options_example": {
+            "index": 1,
+            "text": "value"
+          }
+        }
+      ]
+    },
+    "comment.resolve": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "index",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "options_example": {
+        "index": 1
+      },
+      "cli_routes": [
+        {
+          "family": "comment",
+          "action": "resolve",
+          "command_template": "wordassistant comment resolve INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "index",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "options_example": {
+            "index": 1
+          }
+        }
+      ]
+    },
+    "compare.documents": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [],
+      "options_example": {},
+      "cli_routes": [
+        {
+          "family": "compare",
+          "action": null,
+          "command_template": "wordassistant compare INPUT.docx OTHER.docx --output OUTPUT.docx --json",
+          "options": [],
+          "options_example": {}
+        }
+      ]
+    },
+    "content-control.create": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "control_type",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "title",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "tag",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "value",
+          "required": false,
+          "type": "string",
+          "default": ""
+        },
+        {
+          "name": "locked",
+          "required": false,
+          "type": "boolean",
+          "default": false
+        }
+      ],
+      "options_example": {
+        "control_type": "plain_text",
+        "title": "value",
+        "tag": "value"
+      },
+      "cli_routes": [
+        {
+          "family": "field",
+          "action": "content-control-create",
+          "command_template": "wordassistant field content-control-create INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "control_type",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "title",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "tag",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "value",
+              "required": false,
+              "type": "string",
+              "default": ""
+            },
+            {
+              "name": "locked",
+              "required": false,
+              "type": "boolean",
+              "default": false
+            }
+          ],
+          "options_example": {
+            "control_type": "plain_text",
+            "title": "value",
+            "tag": "value"
+          }
+        }
+      ]
+    },
+    "content-control.delete": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "tag",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "keep_content",
+          "required": false,
+          "type": "boolean",
+          "default": true
+        }
+      ],
+      "options_example": {
+        "tag": "value"
+      },
+      "cli_routes": [
+        {
+          "family": "field",
+          "action": "content-control-delete",
+          "command_template": "wordassistant field content-control-delete INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "tag",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "keep_content",
+              "required": false,
+              "type": "boolean",
+              "default": true
+            }
+          ],
+          "options_example": {
+            "tag": "value"
+          }
+        }
+      ]
+    },
+    "content-control.list": {
+      "mutating": false,
+      "output_required": false,
+      "selector_supported": false,
+      "options": [],
+      "options_example": {},
+      "cli_routes": [
+        {
+          "family": "field",
+          "action": "content-control-list",
+          "command_template": "wordassistant field content-control-list INPUT.docx --json",
+          "options": [],
+          "options_example": {}
+        }
+      ]
+    },
+    "content-control.set": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "tag",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "value",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "options_example": {
+        "tag": "value",
+        "value": "value"
+      },
+      "cli_routes": [
+        {
+          "family": "field",
+          "action": "content-control-set",
+          "command_template": "wordassistant field content-control-set INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "tag",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "value",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "options_example": {
+            "tag": "value",
+            "value": "value"
+          }
+        }
+      ]
+    },
+    "equation.insert": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "latex",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "number",
+          "required": false,
+          "type": "boolean",
+          "default": false
+        }
+      ],
+      "options_example": {
+        "latex": "value"
+      },
+      "cli_routes": [
+        {
+          "family": "reference",
+          "action": "equation-insert",
+          "command_template": "wordassistant reference equation-insert INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "latex",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "number",
+              "required": false,
+              "type": "boolean",
+              "default": false
+            }
+          ],
+          "options_example": {
+            "latex": "value"
+          }
+        }
+      ]
+    },
+    "field.insert": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": true,
+      "options": [
+        {
+          "name": "field_type",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "argument",
+          "required": false,
+          "type": "string",
+          "default": null
+        },
+        {
+          "name": "switches",
+          "required": false,
+          "type": "string",
+          "default": null
+        },
+        {
+          "name": "display_text",
+          "required": false,
+          "type": "string",
+          "default": "0"
+        },
+        {
+          "name": "locked",
+          "required": false,
+          "type": "boolean",
+          "default": false
+        }
+      ],
+      "options_example": {
+        "field_type": "PAGE"
+      },
+      "cli_routes": [
+        {
+          "family": "field",
+          "action": "insert",
+          "command_template": "wordassistant field insert INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "field_type",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "argument",
+              "required": false,
+              "type": "string",
+              "default": null
+            },
+            {
+              "name": "switches",
+              "required": false,
+              "type": "string",
+              "default": null
+            },
+            {
+              "name": "display_text",
+              "required": false,
+              "type": "string",
+              "default": "0"
+            },
+            {
+              "name": "locked",
+              "required": false,
+              "type": "boolean",
+              "default": false
+            }
+          ],
+          "options_example": {
+            "field_type": "PAGE"
+          }
+        }
+      ]
+    },
+    "field.inspect": {
+      "mutating": false,
+      "output_required": false,
+      "selector_supported": false,
+      "options": [],
+      "options_example": {},
+      "cli_routes": [
+        {
+          "family": "field",
+          "action": "inspect",
+          "command_template": "wordassistant field inspect INPUT.docx --json",
+          "options": [],
+          "options_example": {}
+        }
+      ]
+    },
+    "field.lock": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "locked",
+          "required": false,
+          "type": "boolean",
+          "default": true
+        },
+        {
+          "name": "field_type",
+          "required": false,
+          "type": "string",
+          "default": null
+        }
+      ],
+      "options_example": {},
+      "cli_routes": [
+        {
+          "family": "field",
+          "action": "lock",
+          "command_template": "wordassistant field lock INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "locked",
+              "required": false,
+              "type": "boolean",
+              "default": true
+            },
+            {
+              "name": "field_type",
+              "required": false,
+              "type": "string",
+              "default": null
+            }
+          ],
+          "options_example": {}
+        }
+      ]
+    },
+    "field.remove": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "field_type",
+          "required": false,
+          "type": "string",
+          "default": null
+        }
+      ],
+      "options_example": {},
+      "cli_routes": [
+        {
+          "family": "field",
+          "action": "remove",
+          "command_template": "wordassistant field remove INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "field_type",
+              "required": false,
+              "type": "string",
+              "default": null
+            }
+          ],
+          "options_example": {}
+        }
+      ]
+    },
+    "field.unlock": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "field_type",
+          "required": false,
+          "type": "string",
+          "default": null
+        }
+      ],
+      "options_example": {},
+      "cli_routes": [
+        {
+          "family": "field",
+          "action": "unlock",
+          "command_template": "wordassistant field unlock INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "field_type",
+              "required": false,
+              "type": "string",
+              "default": null
+            }
+          ],
+          "options_example": {}
+        }
+      ]
+    },
+    "field.update_all": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [],
+      "options_example": {},
+      "cli_routes": [
+        {
+          "family": "field",
+          "action": "update-all",
+          "command_template": "wordassistant field update-all INPUT.docx --output OUTPUT.docx --json",
+          "options": [],
+          "options_example": {}
+        }
+      ]
+    },
+    "format.paragraph": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": true,
+      "options": [
+        {
+          "name": "alignment",
+          "required": false,
+          "type": "string",
+          "default": null
+        },
+        {
+          "name": "left_indent_cm",
+          "required": false,
+          "type": "number",
+          "default": null
+        },
+        {
+          "name": "right_indent_cm",
+          "required": false,
+          "type": "number",
+          "default": null
+        },
+        {
+          "name": "first_line_indent_cm",
+          "required": false,
+          "type": "number",
+          "default": null
+        },
+        {
+          "name": "hanging_indent_cm",
+          "required": false,
+          "type": "number",
+          "default": null
+        },
+        {
+          "name": "space_before_pt",
+          "required": false,
+          "type": "number",
+          "default": null
+        },
+        {
+          "name": "space_after_pt",
+          "required": false,
+          "type": "number",
+          "default": null
+        },
+        {
+          "name": "line_spacing",
+          "required": false,
+          "type": "number",
+          "default": null
+        },
+        {
+          "name": "exact_line_spacing_pt",
+          "required": false,
+          "type": "number",
+          "default": null
+        },
+        {
+          "name": "keep_with_next",
+          "required": false,
+          "type": "boolean",
+          "default": null
+        },
+        {
+          "name": "keep_lines_together",
+          "required": false,
+          "type": "boolean",
+          "default": null
+        },
+        {
+          "name": "page_break_before",
+          "required": false,
+          "type": "boolean",
+          "default": null
+        },
+        {
+          "name": "widow_orphan",
+          "required": false,
+          "type": "boolean",
+          "default": null
+        }
+      ],
+      "options_example": {},
+      "cli_routes": [
+        {
+          "family": "format",
+          "action": "paragraph",
+          "command_template": "wordassistant format paragraph INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "alignment",
+              "required": false,
+              "type": "string",
+              "default": null
+            },
+            {
+              "name": "left_indent_cm",
+              "required": false,
+              "type": "number",
+              "default": null
+            },
+            {
+              "name": "right_indent_cm",
+              "required": false,
+              "type": "number",
+              "default": null
+            },
+            {
+              "name": "first_line_indent_cm",
+              "required": false,
+              "type": "number",
+              "default": null
+            },
+            {
+              "name": "hanging_indent_cm",
+              "required": false,
+              "type": "number",
+              "default": null
+            },
+            {
+              "name": "space_before_pt",
+              "required": false,
+              "type": "number",
+              "default": null
+            },
+            {
+              "name": "space_after_pt",
+              "required": false,
+              "type": "number",
+              "default": null
+            },
+            {
+              "name": "line_spacing",
+              "required": false,
+              "type": "number",
+              "default": null
+            },
+            {
+              "name": "exact_line_spacing_pt",
+              "required": false,
+              "type": "number",
+              "default": null
+            },
+            {
+              "name": "keep_with_next",
+              "required": false,
+              "type": "boolean",
+              "default": null
+            },
+            {
+              "name": "keep_lines_together",
+              "required": false,
+              "type": "boolean",
+              "default": null
+            },
+            {
+              "name": "page_break_before",
+              "required": false,
+              "type": "boolean",
+              "default": null
+            },
+            {
+              "name": "widow_orphan",
+              "required": false,
+              "type": "boolean",
+              "default": null
+            }
+          ],
+          "options_example": {}
+        }
+      ]
+    },
+    "format.run": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": true,
+      "options": [
+        {
+          "name": "font_family",
+          "required": false,
+          "type": "string",
+          "default": null
+        },
+        {
+          "name": "font_size_pt",
+          "required": false,
+          "type": "number",
+          "default": null
+        },
+        {
+          "name": "bold",
+          "required": false,
+          "type": "boolean",
+          "default": null
+        },
+        {
+          "name": "italic",
+          "required": false,
+          "type": "boolean",
+          "default": null
+        },
+        {
+          "name": "underline",
+          "required": false,
+          "type": "boolean",
+          "default": null
+        },
+        {
+          "name": "strike",
+          "required": false,
+          "type": "boolean",
+          "default": null
+        },
+        {
+          "name": "superscript",
+          "required": false,
+          "type": "boolean",
+          "default": null
+        },
+        {
+          "name": "subscript",
+          "required": false,
+          "type": "boolean",
+          "default": null
+        },
+        {
+          "name": "small_caps",
+          "required": false,
+          "type": "boolean",
+          "default": null
+        },
+        {
+          "name": "all_caps",
+          "required": false,
+          "type": "boolean",
+          "default": null
+        },
+        {
+          "name": "hidden",
+          "required": false,
+          "type": "boolean",
+          "default": null
+        },
+        {
+          "name": "highlight",
+          "required": false,
+          "type": "string",
+          "default": null
+        },
+        {
+          "name": "font_color",
+          "required": false,
+          "type": "string",
+          "default": null
+        }
+      ],
+      "options_example": {},
+      "cli_routes": [
+        {
+          "family": "format",
+          "action": "run",
+          "command_template": "wordassistant format run INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "font_family",
+              "required": false,
+              "type": "string",
+              "default": null
+            },
+            {
+              "name": "font_size_pt",
+              "required": false,
+              "type": "number",
+              "default": null
+            },
+            {
+              "name": "bold",
+              "required": false,
+              "type": "boolean",
+              "default": null
+            },
+            {
+              "name": "italic",
+              "required": false,
+              "type": "boolean",
+              "default": null
+            },
+            {
+              "name": "underline",
+              "required": false,
+              "type": "boolean",
+              "default": null
+            },
+            {
+              "name": "strike",
+              "required": false,
+              "type": "boolean",
+              "default": null
+            },
+            {
+              "name": "superscript",
+              "required": false,
+              "type": "boolean",
+              "default": null
+            },
+            {
+              "name": "subscript",
+              "required": false,
+              "type": "boolean",
+              "default": null
+            },
+            {
+              "name": "small_caps",
+              "required": false,
+              "type": "boolean",
+              "default": null
+            },
+            {
+              "name": "all_caps",
+              "required": false,
+              "type": "boolean",
+              "default": null
+            },
+            {
+              "name": "hidden",
+              "required": false,
+              "type": "boolean",
+              "default": null
+            },
+            {
+              "name": "highlight",
+              "required": false,
+              "type": "string",
+              "default": null
+            },
+            {
+              "name": "font_color",
+              "required": false,
+              "type": "string",
+              "default": null
+            }
+          ],
+          "options_example": {}
+        }
+      ]
+    },
+    "header-footer.set_text": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "section_index",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "story",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "text",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "variant",
+          "required": false,
+          "type": "string",
+          "default": "primary"
+        },
+        {
+          "name": "alignment",
+          "required": false,
+          "type": "string",
+          "default": "left"
+        },
+        {
+          "name": "link_previous",
+          "required": false,
+          "type": "boolean",
+          "default": null
+        }
+      ],
+      "options_example": {
+        "section_index": 0,
+        "story": "header",
+        "text": "value"
+      },
+      "cli_routes": [
+        {
+          "family": "section",
+          "action": "header-text",
+          "command_template": "wordassistant section header-text INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "section_index",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "story",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "text",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "variant",
+              "required": false,
+              "type": "string",
+              "default": "primary"
+            },
+            {
+              "name": "alignment",
+              "required": false,
+              "type": "string",
+              "default": "left"
+            },
+            {
+              "name": "link_previous",
+              "required": false,
+              "type": "boolean",
+              "default": null
+            }
+          ],
+          "options_example": {
+            "section_index": 0,
+            "story": "header",
+            "text": "value"
+          }
+        },
+        {
+          "family": "section",
+          "action": "footer-text",
+          "command_template": "wordassistant section footer-text INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "section_index",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "story",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "text",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "variant",
+              "required": false,
+              "type": "string",
+              "default": "primary"
+            },
+            {
+              "name": "alignment",
+              "required": false,
+              "type": "string",
+              "default": "left"
+            },
+            {
+              "name": "link_previous",
+              "required": false,
+              "type": "boolean",
+              "default": null
+            }
+          ],
+          "options_example": {
+            "section_index": 0,
+            "story": "header",
+            "text": "value"
+          }
+        }
+      ]
+    },
+    "heading.numbering_apply": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "levels",
+          "required": false,
+          "type": "integer",
+          "default": 9
+        },
+        {
+          "name": "allow_literal_prefixes",
+          "required": false,
+          "type": "boolean",
+          "default": false
+        },
+        {
+          "name": "suppress_first_level_label",
+          "required": false,
+          "type": "boolean",
+          "default": false
+        },
+        {
+          "name": "start_text",
+          "required": false,
+          "type": "string",
+          "default": null
+        },
+        {
+          "name": "end_text",
+          "required": false,
+          "type": "string",
+          "default": null
+        }
+      ],
+      "options_example": {},
+      "cli_routes": [
+        {
+          "family": "list",
+          "action": "heading-numbering-apply",
+          "command_template": "wordassistant list heading-numbering-apply INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "levels",
+              "required": false,
+              "type": "integer",
+              "default": 9
+            },
+            {
+              "name": "allow_literal_prefixes",
+              "required": false,
+              "type": "boolean",
+              "default": false
+            },
+            {
+              "name": "suppress_first_level_label",
+              "required": false,
+              "type": "boolean",
+              "default": false
+            },
+            {
+              "name": "start_text",
+              "required": false,
+              "type": "string",
+              "default": null
+            },
+            {
+              "name": "end_text",
+              "required": false,
+              "type": "string",
+              "default": null
+            }
+          ],
+          "options_example": {}
+        }
+      ]
+    },
+    "heading.numbering_inspect": {
+      "mutating": false,
+      "output_required": false,
+      "selector_supported": false,
+      "options": [],
+      "options_example": {},
+      "cli_routes": [
+        {
+          "family": "list",
+          "action": "heading-numbering-inspect",
+          "command_template": "wordassistant list heading-numbering-inspect INPUT.docx --json",
+          "options": [],
+          "options_example": {}
+        }
+      ]
+    },
+    "heading.numbering_remove": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [],
+      "options_example": {},
+      "cli_routes": [
+        {
+          "family": "list",
+          "action": "heading-numbering-remove",
+          "command_template": "wordassistant list heading-numbering-remove INPUT.docx --output OUTPUT.docx --json",
+          "options": [],
+          "options_example": {}
+        }
+      ]
+    },
+    "image.insert": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": true,
+      "options": [
+        {
+          "name": "image_path",
+          "required": true,
+          "type": "path"
+        },
+        {
+          "name": "width_cm",
+          "required": false,
+          "type": "number",
+          "default": null
+        },
+        {
+          "name": "height_cm",
+          "required": false,
+          "type": "number",
+          "default": null
+        },
+        {
+          "name": "alt_text",
+          "required": false,
+          "type": "string",
+          "default": null
+        },
+        {
+          "name": "title",
+          "required": false,
+          "type": "string",
+          "default": null
+        },
+        {
+          "name": "caption",
+          "required": false,
+          "type": "string",
+          "default": null
+        },
+        {
+          "name": "caption_label",
+          "required": false,
+          "type": "string",
+          "default": "Figure"
+        },
+        {
+          "name": "caption_sequence",
+          "required": false,
+          "type": "string",
+          "default": null
+        },
+        {
+          "name": "caption_chapter_number",
+          "required": false,
+          "type": "integer",
+          "default": null
+        },
+        {
+          "name": "caption_separator",
+          "required": false,
+          "type": "string",
+          "default": "."
+        },
+        {
+          "name": "placement",
+          "required": false,
+          "type": "string",
+          "default": "after"
+        },
+        {
+          "name": "alignment",
+          "required": false,
+          "type": "string",
+          "default": "center"
+        },
+        {
+          "name": "preserve_aspect_ratio",
+          "required": false,
+          "type": "boolean",
+          "default": true
+        },
+        {
+          "name": "auto_shrink",
+          "required": false,
+          "type": "boolean",
+          "default": true
+        },
+        {
+          "name": "inline",
+          "required": false,
+          "type": "boolean",
+          "default": true
+        }
+      ],
+      "options_example": {
+        "image_path": "IMAGE.png"
+      },
+      "cli_routes": [
+        {
+          "family": "image",
+          "action": "insert",
+          "command_template": "wordassistant image insert INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "image_path",
+              "required": true,
+              "type": "path"
+            },
+            {
+              "name": "width_cm",
+              "required": false,
+              "type": "number",
+              "default": null
+            },
+            {
+              "name": "height_cm",
+              "required": false,
+              "type": "number",
+              "default": null
+            },
+            {
+              "name": "alt_text",
+              "required": false,
+              "type": "string",
+              "default": null
+            },
+            {
+              "name": "title",
+              "required": false,
+              "type": "string",
+              "default": null
+            },
+            {
+              "name": "caption",
+              "required": false,
+              "type": "string",
+              "default": null
+            },
+            {
+              "name": "caption_label",
+              "required": false,
+              "type": "string",
+              "default": "Figure"
+            },
+            {
+              "name": "caption_sequence",
+              "required": false,
+              "type": "string",
+              "default": null
+            },
+            {
+              "name": "caption_chapter_number",
+              "required": false,
+              "type": "integer",
+              "default": null
+            },
+            {
+              "name": "caption_separator",
+              "required": false,
+              "type": "string",
+              "default": "."
+            },
+            {
+              "name": "placement",
+              "required": false,
+              "type": "string",
+              "default": "after"
+            },
+            {
+              "name": "alignment",
+              "required": false,
+              "type": "string",
+              "default": "center"
+            },
+            {
+              "name": "preserve_aspect_ratio",
+              "required": false,
+              "type": "boolean",
+              "default": true
+            },
+            {
+              "name": "auto_shrink",
+              "required": false,
+              "type": "boolean",
+              "default": true
+            },
+            {
+              "name": "inline",
+              "required": false,
+              "type": "boolean",
+              "default": true
+            }
+          ],
+          "options_example": {
+            "image_path": "IMAGE.png"
+          }
+        }
+      ]
+    },
+    "image.metadata": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "image_index",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "alt_text",
+          "required": false,
+          "type": "string",
+          "default": null
+        },
+        {
+          "name": "title",
+          "required": false,
+          "type": "string",
+          "default": null
+        }
+      ],
+      "options_example": {
+        "image_index": 0
+      },
+      "cli_routes": [
+        {
+          "family": "image",
+          "action": "metadata",
+          "command_template": "wordassistant image metadata INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "image_index",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "alt_text",
+              "required": false,
+              "type": "string",
+              "default": null
+            },
+            {
+              "name": "title",
+              "required": false,
+              "type": "string",
+              "default": null
+            }
+          ],
+          "options_example": {
+            "image_index": 0
+          }
+        }
+      ]
+    },
+    "image.remove": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "image_index",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "options_example": {
+        "image_index": 0
+      },
+      "cli_routes": [
+        {
+          "family": "image",
+          "action": "remove",
+          "command_template": "wordassistant image remove INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "image_index",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "options_example": {
+            "image_index": 0
+          }
+        }
+      ]
+    },
+    "image.replace": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "image_index",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "image_path",
+          "required": true,
+          "type": "path"
+        }
+      ],
+      "options_example": {
+        "image_index": 0,
+        "image_path": "IMAGE.png"
+      },
+      "cli_routes": [
+        {
+          "family": "image",
+          "action": "replace",
+          "command_template": "wordassistant image replace INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "image_index",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "image_path",
+              "required": true,
+              "type": "path"
+            }
+          ],
+          "options_example": {
+            "image_index": 0,
+            "image_path": "IMAGE.png"
+          }
+        }
+      ]
+    },
+    "image.resize": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "image_index",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "width_cm",
+          "required": false,
+          "type": "number",
+          "default": null
+        },
+        {
+          "name": "height_cm",
+          "required": false,
+          "type": "number",
+          "default": null
+        },
+        {
+          "name": "preserve_aspect_ratio",
+          "required": false,
+          "type": "boolean",
+          "default": true
+        }
+      ],
+      "options_example": {
+        "image_index": 0,
+        "width_cm": 5.0
+      },
+      "cli_routes": [
+        {
+          "family": "image",
+          "action": "resize",
+          "command_template": "wordassistant image resize INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "image_index",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "width_cm",
+              "required": false,
+              "type": "number",
+              "default": null
+            },
+            {
+              "name": "height_cm",
+              "required": false,
+              "type": "number",
+              "default": null
+            },
+            {
+              "name": "preserve_aspect_ratio",
+              "required": false,
+              "type": "boolean",
+              "default": true
+            }
+          ],
+          "options_example": {
+            "image_index": 0,
+            "width_cm": 5.0
+          }
+        }
+      ]
+    },
+    "list.continue": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "paragraph_index",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "source_paragraph_index",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "options_example": {
+        "paragraph_index": 0,
+        "source_paragraph_index": 0
+      },
+      "cli_routes": [
+        {
+          "family": "list",
+          "action": "continue",
+          "command_template": "wordassistant list continue INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "paragraph_index",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "source_paragraph_index",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "options_example": {
+            "paragraph_index": 0,
+            "source_paragraph_index": 0
+          }
+        }
+      ]
+    },
+    "list.create": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "items",
+          "required": true,
+          "type": "array[string]"
+        },
+        {
+          "name": "kind",
+          "required": false,
+          "type": "string",
+          "default": "bullet"
+        },
+        {
+          "name": "levels",
+          "required": false,
+          "type": "array[integer]",
+          "default": null
+        },
+        {
+          "name": "formats",
+          "required": false,
+          "type": "array[string]",
+          "default": null
+        },
+        {
+          "name": "start",
+          "required": false,
+          "type": "integer",
+          "default": 1
+        }
+      ],
+      "options_example": {
+        "items": [
+          "value"
+        ]
+      },
+      "cli_routes": [
+        {
+          "family": "list",
+          "action": "create",
+          "command_template": "wordassistant list create INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "items",
+              "required": true,
+              "type": "array[string]"
+            },
+            {
+              "name": "kind",
+              "required": false,
+              "type": "string",
+              "default": "bullet"
+            },
+            {
+              "name": "levels",
+              "required": false,
+              "type": "array[integer]",
+              "default": null
+            },
+            {
+              "name": "formats",
+              "required": false,
+              "type": "array[string]",
+              "default": null
+            },
+            {
+              "name": "start",
+              "required": false,
+              "type": "integer",
+              "default": 1
+            }
+          ],
+          "options_example": {
+            "items": [
+              "value"
+            ]
+          }
+        }
+      ]
+    },
+    "list.restart": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "paragraph_index",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "start",
+          "required": false,
+          "type": "integer",
+          "default": 1
+        }
+      ],
+      "options_example": {
+        "paragraph_index": 0
+      },
+      "cli_routes": [
+        {
+          "family": "list",
+          "action": "restart",
+          "command_template": "wordassistant list restart INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "paragraph_index",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "start",
+              "required": false,
+              "type": "integer",
+              "default": 1
+            }
+          ],
+          "options_example": {
+            "paragraph_index": 0
+          }
+        }
+      ]
+    },
+    "list.set_level": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "paragraph_index",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "level",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "options_example": {
+        "paragraph_index": 0,
+        "level": 0
+      },
+      "cli_routes": [
+        {
+          "family": "list",
+          "action": "set-level",
+          "command_template": "wordassistant list set-level INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "paragraph_index",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "level",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "options_example": {
+            "paragraph_index": 0,
+            "level": 0
+          }
+        }
+      ]
+    },
+    "mail-merge.execute": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "data_source",
+          "required": true,
+          "type": "path"
+        }
+      ],
+      "options_example": {
+        "data_source": "DATA.csv"
+      },
+      "cli_routes": [
+        {
+          "family": "mail-merge",
+          "action": "execute",
+          "command_template": "wordassistant mail-merge execute INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "data_source",
+              "required": true,
+              "type": "path"
+            }
+          ],
+          "options_example": {
+            "data_source": "DATA.csv"
+          }
+        }
+      ]
+    },
+    "merge.documents": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [],
+      "options_example": {},
+      "cli_routes": [
+        {
+          "family": "merge",
+          "action": null,
+          "command_template": "wordassistant merge INPUT.docx OTHER.docx --output OUTPUT.docx --json",
+          "options": [],
+          "options_example": {}
+        }
+      ]
+    },
+    "page-number.apply": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "section_index",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "position",
+          "required": false,
+          "type": "string",
+          "default": "footer"
+        },
+        {
+          "name": "alignment",
+          "required": false,
+          "type": "string",
+          "default": "right"
+        },
+        {
+          "name": "number_format",
+          "required": false,
+          "type": "string",
+          "default": "decimal"
+        },
+        {
+          "name": "start",
+          "required": false,
+          "type": "integer",
+          "default": 1
+        },
+        {
+          "name": "field",
+          "required": false,
+          "type": "string",
+          "default": "PAGE"
+        },
+        {
+          "name": "page_x_of_y",
+          "required": false,
+          "type": "boolean",
+          "default": false
+        },
+        {
+          "name": "hide_first_page",
+          "required": false,
+          "type": "boolean",
+          "default": false
+        },
+        {
+          "name": "different_odd_even",
+          "required": false,
+          "type": "boolean",
+          "default": null
+        },
+        {
+          "name": "unlink_previous",
+          "required": false,
+          "type": "boolean",
+          "default": false
+        },
+        {
+          "name": "continue_from_previous",
+          "required": false,
+          "type": "boolean",
+          "default": false
+        }
+      ],
+      "options_example": {
+        "section_index": 0
+      },
+      "cli_routes": [
+        {
+          "family": "page-number",
+          "action": "apply",
+          "command_template": "wordassistant page-number apply INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "section_index",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "position",
+              "required": false,
+              "type": "string",
+              "default": "footer"
+            },
+            {
+              "name": "alignment",
+              "required": false,
+              "type": "string",
+              "default": "right"
+            },
+            {
+              "name": "number_format",
+              "required": false,
+              "type": "string",
+              "default": "decimal"
+            },
+            {
+              "name": "start",
+              "required": false,
+              "type": "integer",
+              "default": 1
+            },
+            {
+              "name": "field",
+              "required": false,
+              "type": "string",
+              "default": "PAGE"
+            },
+            {
+              "name": "page_x_of_y",
+              "required": false,
+              "type": "boolean",
+              "default": false
+            },
+            {
+              "name": "hide_first_page",
+              "required": false,
+              "type": "boolean",
+              "default": false
+            },
+            {
+              "name": "different_odd_even",
+              "required": false,
+              "type": "boolean",
+              "default": null
+            },
+            {
+              "name": "unlink_previous",
+              "required": false,
+              "type": "boolean",
+              "default": false
+            },
+            {
+              "name": "continue_from_previous",
+              "required": false,
+              "type": "boolean",
+              "default": false
+            }
+          ],
+          "options_example": {
+            "section_index": 0
+          }
+        }
+      ]
+    },
+    "page-number.inspect": {
+      "mutating": false,
+      "output_required": false,
+      "selector_supported": false,
+      "options": [],
+      "options_example": {},
+      "cli_routes": [
+        {
+          "family": "page-number",
+          "action": "inspect",
+          "command_template": "wordassistant page-number inspect INPUT.docx --json",
+          "options": [],
+          "options_example": {}
+        }
+      ]
+    },
+    "properties.get": {
+      "mutating": false,
+      "output_required": false,
+      "selector_supported": false,
+      "options": [],
+      "options_example": {},
+      "cli_routes": [
+        {
+          "family": "properties",
+          "action": "get",
+          "command_template": "wordassistant properties get INPUT.docx --json",
+          "options": [],
+          "options_example": {}
+        }
+      ]
+    },
+    "properties.set": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "custom",
+          "required": false,
+          "type": "object",
+          "default": null
+        },
+        {
+          "name": "title",
+          "required": false,
+          "type": "string",
+          "default": null
+        },
+        {
+          "name": "subject",
+          "required": false,
+          "type": "string",
+          "default": null
+        },
+        {
+          "name": "author",
+          "required": false,
+          "type": "string",
+          "default": null
+        },
+        {
+          "name": "keywords",
+          "required": false,
+          "type": "string",
+          "default": null
+        },
+        {
+          "name": "category",
+          "required": false,
+          "type": "string",
+          "default": null
+        },
+        {
+          "name": "comments",
+          "required": false,
+          "type": "string",
+          "default": null
+        },
+        {
+          "name": "last_modified_by",
+          "required": false,
+          "type": "string",
+          "default": null
+        }
+      ],
+      "options_example": {},
+      "cli_routes": [
+        {
+          "family": "properties",
+          "action": "set",
+          "command_template": "wordassistant properties set INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "custom",
+              "required": false,
+              "type": "object",
+              "default": null
+            },
+            {
+              "name": "title",
+              "required": false,
+              "type": "string",
+              "default": null
+            },
+            {
+              "name": "subject",
+              "required": false,
+              "type": "string",
+              "default": null
+            },
+            {
+              "name": "author",
+              "required": false,
+              "type": "string",
+              "default": null
+            },
+            {
+              "name": "keywords",
+              "required": false,
+              "type": "string",
+              "default": null
+            },
+            {
+              "name": "category",
+              "required": false,
+              "type": "string",
+              "default": null
+            },
+            {
+              "name": "comments",
+              "required": false,
+              "type": "string",
+              "default": null
+            },
+            {
+              "name": "last_modified_by",
+              "required": false,
+              "type": "string",
+              "default": null
+            }
+          ],
+          "options_example": {}
+        }
+      ]
+    },
+    "protect.native": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "type",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "password",
+          "required": false,
+          "type": "string",
+          "default": ""
+        }
+      ],
+      "options_example": {
+        "type": 0
+      },
+      "cli_routes": [
+        {
+          "family": "protect",
+          "action": "native",
+          "command_template": "wordassistant protect native INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "type",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "password",
+              "required": false,
+              "type": "string",
+              "default": ""
+            }
+          ],
+          "options_example": {
+            "type": 0
+          }
+        }
+      ]
+    },
+    "protection.inspect": {
+      "mutating": false,
+      "output_required": false,
+      "selector_supported": false,
+      "options": [],
+      "options_example": {},
+      "cli_routes": [
+        {
+          "family": "protect",
+          "action": "inspect",
+          "command_template": "wordassistant protect inspect INPUT.docx --json",
+          "options": [],
+          "options_example": {}
+        }
+      ]
+    },
+    "protection.protect": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "mode",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "password",
+          "required": false,
+          "type": "string",
+          "default": null
+        }
+      ],
+      "options_example": {
+        "mode": "read_only"
+      },
+      "cli_routes": [
+        {
+          "family": "protect",
+          "action": "protect",
+          "command_template": "wordassistant protect protect INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "mode",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "password",
+              "required": false,
+              "type": "string",
+              "default": null
+            }
+          ],
+          "options_example": {
+            "mode": "read_only"
+          }
+        }
+      ]
+    },
+    "protection.unprotect": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [],
+      "options_example": {},
+      "cli_routes": [
+        {
+          "family": "protect",
+          "action": "unprotect",
+          "command_template": "wordassistant protect unprotect INPUT.docx --output OUTPUT.docx --json",
+          "options": [],
+          "options_example": {}
+        }
+      ]
+    },
+    "reference.cross_reference": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": true,
+      "options": [
+        {
+          "name": "bookmark",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "include_page",
+          "required": false,
+          "type": "boolean",
+          "default": false
+        }
+      ],
+      "options_example": {
+        "bookmark": "value"
+      },
+      "cli_routes": [
+        {
+          "family": "reference",
+          "action": "cross-reference",
+          "command_template": "wordassistant reference cross-reference INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "bookmark",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "include_page",
+              "required": false,
+              "type": "boolean",
+              "default": false
+            }
+          ],
+          "options_example": {
+            "bookmark": "value"
+          }
+        }
+      ]
+    },
+    "reference.hyperlink": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": true,
+      "options": [
+        {
+          "name": "text",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "url",
+          "required": false,
+          "type": "string",
+          "default": null
+        },
+        {
+          "name": "email",
+          "required": false,
+          "type": "string",
+          "default": null
+        },
+        {
+          "name": "bookmark",
+          "required": false,
+          "type": "string",
+          "default": null
+        }
+      ],
+      "options_example": {
+        "text": "value",
+        "url": "https://example.com"
+      },
+      "cli_routes": [
+        {
+          "family": "reference",
+          "action": "hyperlink",
+          "command_template": "wordassistant reference hyperlink INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "text",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "url",
+              "required": false,
+              "type": "string",
+              "default": null
+            },
+            {
+              "name": "email",
+              "required": false,
+              "type": "string",
+              "default": null
+            },
+            {
+              "name": "bookmark",
+              "required": false,
+              "type": "string",
+              "default": null
+            }
+          ],
+          "options_example": {
+            "text": "value",
+            "url": "https://example.com"
+          }
+        }
+      ]
+    },
+    "render.pdf": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [],
+      "options_example": {},
+      "cli_routes": [
+        {
+          "family": "render",
+          "action": null,
+          "command_template": "wordassistant render INPUT.docx --json",
+          "options": [],
+          "options_example": {}
+        }
+      ]
+    },
+    "revision.accept": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "index",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "options_example": {
+        "index": 1
+      },
+      "cli_routes": [
+        {
+          "family": "revision",
+          "action": "accept",
+          "command_template": "wordassistant revision accept INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "index",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "options_example": {
+            "index": 1
+          }
+        }
+      ]
+    },
+    "revision.accept_all": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [],
+      "options_example": {},
+      "cli_routes": [
+        {
+          "family": "revision",
+          "action": "accept-all",
+          "command_template": "wordassistant revision accept-all INPUT.docx --output OUTPUT.docx --json",
+          "options": [],
+          "options_example": {}
+        }
+      ]
+    },
+    "revision.disable": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [],
+      "options_example": {},
+      "cli_routes": [
+        {
+          "family": "revision",
+          "action": "disable",
+          "command_template": "wordassistant revision disable INPUT.docx --output OUTPUT.docx --json",
+          "options": [],
+          "options_example": {}
+        }
+      ]
+    },
+    "revision.enable": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [],
+      "options_example": {},
+      "cli_routes": [
+        {
+          "family": "revision",
+          "action": "enable",
+          "command_template": "wordassistant revision enable INPUT.docx --output OUTPUT.docx --json",
+          "options": [],
+          "options_example": {}
+        }
+      ]
+    },
+    "revision.list": {
+      "mutating": false,
+      "output_required": false,
+      "selector_supported": false,
+      "options": [],
+      "options_example": {},
+      "cli_routes": [
+        {
+          "family": "revision",
+          "action": "list",
+          "command_template": "wordassistant revision list INPUT.docx --json",
+          "options": [],
+          "options_example": {}
+        }
+      ]
+    },
+    "revision.reject": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "index",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "options_example": {
+        "index": 1
+      },
+      "cli_routes": [
+        {
+          "family": "revision",
+          "action": "reject",
+          "command_template": "wordassistant revision reject INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "index",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "options_example": {
+            "index": 1
+          }
+        }
+      ]
+    },
+    "revision.reject_all": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [],
+      "options_example": {},
+      "cli_routes": [
+        {
+          "family": "revision",
+          "action": "reject-all",
+          "command_template": "wordassistant revision reject-all INPUT.docx --output OUTPUT.docx --json",
+          "options": [],
+          "options_example": {}
+        }
+      ]
+    },
+    "section.add": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": true,
+      "options": [
+        {
+          "name": "break_type",
+          "required": false,
+          "type": "string",
+          "default": "next_page"
+        }
+      ],
+      "options_example": {},
+      "cli_routes": [
+        {
+          "family": "section",
+          "action": "add",
+          "command_template": "wordassistant section add INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "break_type",
+              "required": false,
+              "type": "string",
+              "default": "next_page"
+            }
+          ],
+          "options_example": {}
+        }
+      ]
+    },
+    "section.layout": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "section_index",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "page_size",
+          "required": false,
+          "type": "string",
+          "default": null
+        },
+        {
+          "name": "width_cm",
+          "required": false,
+          "type": "number",
+          "default": null
+        },
+        {
+          "name": "height_cm",
+          "required": false,
+          "type": "number",
+          "default": null
+        },
+        {
+          "name": "orientation",
+          "required": false,
+          "type": "string",
+          "default": null
+        },
+        {
+          "name": "margins",
+          "required": false,
+          "type": "object",
+          "default": null
+        },
+        {
+          "name": "gutter_cm",
+          "required": false,
+          "type": "number",
+          "default": null
+        },
+        {
+          "name": "mirrored_margins",
+          "required": false,
+          "type": "boolean",
+          "default": null
+        },
+        {
+          "name": "columns",
+          "required": false,
+          "type": "integer",
+          "default": null
+        },
+        {
+          "name": "different_first_page",
+          "required": false,
+          "type": "boolean",
+          "default": null
+        },
+        {
+          "name": "different_odd_even",
+          "required": false,
+          "type": "boolean",
+          "default": null
+        },
+        {
+          "name": "page_border_space_pt",
+          "required": false,
+          "type": "number",
+          "default": null
+        }
+      ],
+      "options_example": {
+        "section_index": 0
+      },
+      "cli_routes": [
+        {
+          "family": "section",
+          "action": "layout",
+          "command_template": "wordassistant section layout INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "section_index",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "page_size",
+              "required": false,
+              "type": "string",
+              "default": null
+            },
+            {
+              "name": "width_cm",
+              "required": false,
+              "type": "number",
+              "default": null
+            },
+            {
+              "name": "height_cm",
+              "required": false,
+              "type": "number",
+              "default": null
+            },
+            {
+              "name": "orientation",
+              "required": false,
+              "type": "string",
+              "default": null
+            },
+            {
+              "name": "margins",
+              "required": false,
+              "type": "object",
+              "default": null
+            },
+            {
+              "name": "gutter_cm",
+              "required": false,
+              "type": "number",
+              "default": null
+            },
+            {
+              "name": "mirrored_margins",
+              "required": false,
+              "type": "boolean",
+              "default": null
+            },
+            {
+              "name": "columns",
+              "required": false,
+              "type": "integer",
+              "default": null
+            },
+            {
+              "name": "different_first_page",
+              "required": false,
+              "type": "boolean",
+              "default": null
+            },
+            {
+              "name": "different_odd_even",
+              "required": false,
+              "type": "boolean",
+              "default": null
+            },
+            {
+              "name": "page_border_space_pt",
+              "required": false,
+              "type": "number",
+              "default": null
+            }
+          ],
+          "options_example": {
+            "section_index": 0
+          }
+        }
+      ]
+    },
+    "section.link": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "section_index",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "linked",
+          "required": true,
+          "type": "boolean"
+        },
+        {
+          "name": "story",
+          "required": false,
+          "type": "string",
+          "default": "both"
+        }
+      ],
+      "options_example": {
+        "section_index": 0,
+        "linked": true
+      },
+      "cli_routes": [
+        {
+          "family": "section",
+          "action": "link",
+          "command_template": "wordassistant section link INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "section_index",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "linked",
+              "required": true,
+              "type": "boolean"
+            },
+            {
+              "name": "story",
+              "required": false,
+              "type": "string",
+              "default": "both"
+            }
+          ],
+          "options_example": {
+            "section_index": 0,
+            "linked": true
+          }
+        }
+      ]
+    },
+    "style.apply": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": true,
+      "options": [
+        {
+          "name": "name",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "options_example": {
+        "name": "value"
+      },
+      "cli_routes": [
+        {
+          "family": "format",
+          "action": "style-apply",
+          "command_template": "wordassistant format style-apply INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "name",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "options_example": {
+            "name": "value"
+          }
+        }
+      ]
+    },
+    "style.clone": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "source_name",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "name",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "options_example": {
+        "source_name": "Normal",
+        "name": "value"
+      },
+      "cli_routes": [
+        {
+          "family": "format",
+          "action": "style-clone",
+          "command_template": "wordassistant format style-clone INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "source_name",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "name",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "options_example": {
+            "source_name": "Normal",
+            "name": "value"
+          }
+        }
+      ]
+    },
+    "style.create": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "name",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "base_style",
+          "required": false,
+          "type": "string",
+          "default": "Normal"
+        },
+        {
+          "name": "font_family",
+          "required": false,
+          "type": "string",
+          "default": null
+        },
+        {
+          "name": "font_size_pt",
+          "required": false,
+          "type": "number",
+          "default": null
+        },
+        {
+          "name": "bold",
+          "required": false,
+          "type": "boolean",
+          "default": null
+        },
+        {
+          "name": "italic",
+          "required": false,
+          "type": "boolean",
+          "default": null
+        }
+      ],
+      "options_example": {
+        "name": "value"
+      },
+      "cli_routes": [
+        {
+          "family": "format",
+          "action": "style-create",
+          "command_template": "wordassistant format style-create INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "name",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "base_style",
+              "required": false,
+              "type": "string",
+              "default": "Normal"
+            },
+            {
+              "name": "font_family",
+              "required": false,
+              "type": "string",
+              "default": null
+            },
+            {
+              "name": "font_size_pt",
+              "required": false,
+              "type": "number",
+              "default": null
+            },
+            {
+              "name": "bold",
+              "required": false,
+              "type": "boolean",
+              "default": null
+            },
+            {
+              "name": "italic",
+              "required": false,
+              "type": "boolean",
+              "default": null
+            }
+          ],
+          "options_example": {
+            "name": "value"
+          }
+        }
+      ]
+    },
+    "style.delete": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "name",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "options_example": {
+        "name": "value"
+      },
+      "cli_routes": [
+        {
+          "family": "format",
+          "action": "style-delete",
+          "command_template": "wordassistant format style-delete INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "name",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "options_example": {
+            "name": "value"
+          }
+        }
+      ]
+    },
+    "style.update": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "name",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "font_family",
+          "required": false,
+          "type": "string",
+          "default": null
+        },
+        {
+          "name": "font_size_pt",
+          "required": false,
+          "type": "number",
+          "default": null
+        },
+        {
+          "name": "bold",
+          "required": false,
+          "type": "boolean",
+          "default": null
+        },
+        {
+          "name": "italic",
+          "required": false,
+          "type": "boolean",
+          "default": null
+        },
+        {
+          "name": "font_color",
+          "required": false,
+          "type": "string",
+          "default": null
+        },
+        {
+          "name": "left_indent_pt",
+          "required": false,
+          "type": "number",
+          "default": null
+        },
+        {
+          "name": "first_line_indent_pt",
+          "required": false,
+          "type": "number",
+          "default": null
+        }
+      ],
+      "options_example": {
+        "name": "value"
+      },
+      "cli_routes": [
+        {
+          "family": "format",
+          "action": "style-update",
+          "command_template": "wordassistant format style-update INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "name",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "font_family",
+              "required": false,
+              "type": "string",
+              "default": null
+            },
+            {
+              "name": "font_size_pt",
+              "required": false,
+              "type": "number",
+              "default": null
+            },
+            {
+              "name": "bold",
+              "required": false,
+              "type": "boolean",
+              "default": null
+            },
+            {
+              "name": "italic",
+              "required": false,
+              "type": "boolean",
+              "default": null
+            },
+            {
+              "name": "font_color",
+              "required": false,
+              "type": "string",
+              "default": null
+            },
+            {
+              "name": "left_indent_pt",
+              "required": false,
+              "type": "number",
+              "default": null
+            },
+            {
+              "name": "first_line_indent_pt",
+              "required": false,
+              "type": "number",
+              "default": null
+            }
+          ],
+          "options_example": {
+            "name": "value"
+          }
+        }
+      ]
+    },
+    "table.create": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": true,
+      "options": [
+        {
+          "name": "rows",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "columns",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "data",
+          "required": false,
+          "type": "array[array[string]]",
+          "default": null
+        },
+        {
+          "name": "style",
+          "required": false,
+          "type": "string",
+          "default": null
+        },
+        {
+          "name": "caption",
+          "required": false,
+          "type": "string",
+          "default": null
+        },
+        {
+          "name": "nested",
+          "required": false,
+          "type": "object",
+          "default": null
+        }
+      ],
+      "options_example": {
+        "rows": 2,
+        "columns": 2
+      },
+      "cli_routes": [
+        {
+          "family": "table",
+          "action": "create",
+          "command_template": "wordassistant table create INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "rows",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "columns",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "data",
+              "required": false,
+              "type": "array[array[string]]",
+              "default": null
+            },
+            {
+              "name": "style",
+              "required": false,
+              "type": "string",
+              "default": null
+            },
+            {
+              "name": "caption",
+              "required": false,
+              "type": "string",
+              "default": null
+            },
+            {
+              "name": "nested",
+              "required": false,
+              "type": "object",
+              "default": null
+            }
+          ],
+          "options_example": {
+            "rows": 2,
+            "columns": 2
+          }
+        }
+      ]
+    },
+    "table.delete": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "table_index",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "options_example": {
+        "table_index": 0
+      },
+      "cli_routes": [
+        {
+          "family": "table",
+          "action": "delete",
+          "command_template": "wordassistant table delete INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "table_index",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "options_example": {
+            "table_index": 0
+          }
+        }
+      ]
+    },
+    "table.delete_column": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "table_index",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "index",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "options_example": {
+        "table_index": 0,
+        "index": 0
+      },
+      "cli_routes": [
+        {
+          "family": "table",
+          "action": "delete-column",
+          "command_template": "wordassistant table delete-column INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "table_index",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "index",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "options_example": {
+            "table_index": 0,
+            "index": 0
+          }
+        }
+      ]
+    },
+    "table.delete_row": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "table_index",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "index",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "options_example": {
+        "table_index": 0,
+        "index": 0
+      },
+      "cli_routes": [
+        {
+          "family": "table",
+          "action": "delete-row",
+          "command_template": "wordassistant table delete-row INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "table_index",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "index",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "options_example": {
+            "table_index": 0,
+            "index": 0
+          }
+        }
+      ]
+    },
+    "table.insert_column": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "table_index",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "index",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "values",
+          "required": false,
+          "type": "array[string]",
+          "default": null
+        }
+      ],
+      "options_example": {
+        "table_index": 0,
+        "index": 0
+      },
+      "cli_routes": [
+        {
+          "family": "table",
+          "action": "insert-column",
+          "command_template": "wordassistant table insert-column INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "table_index",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "index",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "values",
+              "required": false,
+              "type": "array[string]",
+              "default": null
+            }
+          ],
+          "options_example": {
+            "table_index": 0,
+            "index": 0
+          }
+        }
+      ]
+    },
+    "table.insert_row": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "table_index",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "index",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "values",
+          "required": false,
+          "type": "array[string]",
+          "default": null
+        }
+      ],
+      "options_example": {
+        "table_index": 0,
+        "index": 0
+      },
+      "cli_routes": [
+        {
+          "family": "table",
+          "action": "insert-row",
+          "command_template": "wordassistant table insert-row INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "table_index",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "index",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "values",
+              "required": false,
+              "type": "array[string]",
+              "default": null
+            }
+          ],
+          "options_example": {
+            "table_index": 0,
+            "index": 0
+          }
+        }
+      ]
+    },
+    "table.layout": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "table_index",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "width_cm",
+          "required": false,
+          "type": "number",
+          "default": null
+        },
+        {
+          "name": "row_height_pt",
+          "required": false,
+          "type": "number",
+          "default": null
+        },
+        {
+          "name": "autofit",
+          "required": false,
+          "type": "boolean",
+          "default": null
+        },
+        {
+          "name": "alignment",
+          "required": false,
+          "type": "string",
+          "default": null
+        },
+        {
+          "name": "vertical_alignment",
+          "required": false,
+          "type": "string",
+          "default": null
+        },
+        {
+          "name": "repeat_header",
+          "required": false,
+          "type": "boolean",
+          "default": null
+        },
+        {
+          "name": "keep_rows_together",
+          "required": false,
+          "type": "boolean",
+          "default": null
+        },
+        {
+          "name": "style",
+          "required": false,
+          "type": "string",
+          "default": null
+        }
+      ],
+      "options_example": {
+        "table_index": 0
+      },
+      "cli_routes": [
+        {
+          "family": "table",
+          "action": "layout",
+          "command_template": "wordassistant table layout INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "table_index",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "width_cm",
+              "required": false,
+              "type": "number",
+              "default": null
+            },
+            {
+              "name": "row_height_pt",
+              "required": false,
+              "type": "number",
+              "default": null
+            },
+            {
+              "name": "autofit",
+              "required": false,
+              "type": "boolean",
+              "default": null
+            },
+            {
+              "name": "alignment",
+              "required": false,
+              "type": "string",
+              "default": null
+            },
+            {
+              "name": "vertical_alignment",
+              "required": false,
+              "type": "string",
+              "default": null
+            },
+            {
+              "name": "repeat_header",
+              "required": false,
+              "type": "boolean",
+              "default": null
+            },
+            {
+              "name": "keep_rows_together",
+              "required": false,
+              "type": "boolean",
+              "default": null
+            },
+            {
+              "name": "style",
+              "required": false,
+              "type": "string",
+              "default": null
+            }
+          ],
+          "options_example": {
+            "table_index": 0
+          }
+        }
+      ]
+    },
+    "table.merge": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "table_index",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "start",
+          "required": true,
+          "type": "array[integer, integer]"
+        },
+        {
+          "name": "end",
+          "required": true,
+          "type": "array[integer, integer]"
+        }
+      ],
+      "options_example": {
+        "table_index": 0,
+        "start": [
+          0,
+          0
+        ],
+        "end": [
+          0,
+          0
+        ]
+      },
+      "cli_routes": [
+        {
+          "family": "table",
+          "action": "merge",
+          "command_template": "wordassistant table merge INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "table_index",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "start",
+              "required": true,
+              "type": "array[integer, integer]"
+            },
+            {
+              "name": "end",
+              "required": true,
+              "type": "array[integer, integer]"
+            }
+          ],
+          "options_example": {
+            "table_index": 0,
+            "start": [
+              0,
+              0
+            ],
+            "end": [
+              0,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    "table.set_cell": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "table_index",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "row",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "column",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "text",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "options_example": {
+        "table_index": 0,
+        "row": 0,
+        "column": 0,
+        "text": "value"
+      },
+      "cli_routes": [
+        {
+          "family": "table",
+          "action": "set-cell",
+          "command_template": "wordassistant table set-cell INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "table_index",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "row",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "column",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "text",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "options_example": {
+            "table_index": 0,
+            "row": 0,
+            "column": 0,
+            "text": "value"
+          }
+        }
+      ]
+    },
+    "table.set_column": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "table_index",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "column",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "values",
+          "required": true,
+          "type": "array[string]"
+        }
+      ],
+      "options_example": {
+        "table_index": 0,
+        "column": 0,
+        "values": [
+          "value"
+        ]
+      },
+      "cli_routes": [
+        {
+          "family": "table",
+          "action": "set-column",
+          "command_template": "wordassistant table set-column INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "table_index",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "column",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "values",
+              "required": true,
+              "type": "array[string]"
+            }
+          ],
+          "options_example": {
+            "table_index": 0,
+            "column": 0,
+            "values": [
+              "value"
+            ]
+          }
+        }
+      ]
+    },
+    "table.set_row": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": false,
+      "options": [
+        {
+          "name": "table_index",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "row",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "values",
+          "required": true,
+          "type": "array[string]"
+        }
+      ],
+      "options_example": {
+        "table_index": 0,
+        "row": 0,
+        "values": [
+          "value"
+        ]
+      },
+      "cli_routes": [
+        {
+          "family": "table",
+          "action": "set-row",
+          "command_template": "wordassistant table set-row INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "table_index",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "row",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "values",
+              "required": true,
+              "type": "array[string]"
+            }
+          ],
+          "options_example": {
+            "table_index": 0,
+            "row": 0,
+            "values": [
+              "value"
+            ]
+          }
+        }
+      ]
+    },
+    "text.edit": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": true,
+      "options": [
+        {
+          "name": "text",
+          "required": false,
+          "type": "string",
+          "default": null
+        },
+        {
+          "name": "pattern",
+          "required": false,
+          "type": "string",
+          "default": null
+        },
+        {
+          "name": "replacement",
+          "required": false,
+          "type": "string",
+          "default": ""
+        },
+        {
+          "name": "regex",
+          "required": false,
+          "type": "boolean",
+          "default": false
+        },
+        {
+          "name": "case_sensitive",
+          "required": false,
+          "type": "boolean",
+          "default": true
+        },
+        {
+          "name": "whole_word",
+          "required": false,
+          "type": "boolean",
+          "default": false
+        },
+        {
+          "name": "max_count",
+          "required": false,
+          "type": "integer",
+          "default": null
+        }
+      ],
+      "options_example": {},
+      "cli_routes": [
+        {
+          "family": "edit",
+          "action": "replace",
+          "command_template": "wordassistant edit replace INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "pattern",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "replacement",
+              "required": false,
+              "type": "string",
+              "default": ""
+            },
+            {
+              "name": "regex",
+              "required": false,
+              "type": "boolean",
+              "default": false
+            },
+            {
+              "name": "case_sensitive",
+              "required": false,
+              "type": "boolean",
+              "default": true
+            },
+            {
+              "name": "whole_word",
+              "required": false,
+              "type": "boolean",
+              "default": false
+            },
+            {
+              "name": "max_count",
+              "required": false,
+              "type": "integer",
+              "default": null
+            }
+          ],
+          "options_example": {
+            "pattern": "value"
+          }
+        },
+        {
+          "family": "edit",
+          "action": "append",
+          "command_template": "wordassistant edit append INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "text",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "options_example": {
+            "text": "value"
+          }
+        },
+        {
+          "family": "edit",
+          "action": "prepend",
+          "command_template": "wordassistant edit prepend INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "text",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "options_example": {
+            "text": "value"
+          }
+        },
+        {
+          "family": "edit",
+          "action": "insert",
+          "command_template": "wordassistant edit insert INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "text",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "options_example": {
+            "text": "value"
+          }
+        }
+      ]
+    },
+    "toc.insert": {
+      "mutating": true,
+      "output_required": true,
+      "selector_supported": true,
+      "options": [
+        {
+          "name": "kind",
+          "required": false,
+          "type": "string",
+          "default": "contents"
+        },
+        {
+          "name": "heading_depth",
+          "required": false,
+          "type": "integer",
+          "default": 3
+        },
+        {
+          "name": "caption_label",
+          "required": false,
+          "type": "string",
+          "default": null
+        },
+        {
+          "name": "hyperlinks",
+          "required": false,
+          "type": "boolean",
+          "default": true
+        },
+        {
+          "name": "page_numbers",
+          "required": false,
+          "type": "boolean",
+          "default": true
+        }
+      ],
+      "options_example": {},
+      "cli_routes": [
+        {
+          "family": "toc",
+          "action": "insert",
+          "command_template": "wordassistant toc insert INPUT.docx --output OUTPUT.docx --options '{...}' --json",
+          "options": [
+            {
+              "name": "kind",
+              "required": false,
+              "type": "string",
+              "default": "contents"
+            },
+            {
+              "name": "heading_depth",
+              "required": false,
+              "type": "integer",
+              "default": 3
+            },
+            {
+              "name": "caption_label",
+              "required": false,
+              "type": "string",
+              "default": null
+            },
+            {
+              "name": "hyperlinks",
+              "required": false,
+              "type": "boolean",
+              "default": true
+            },
+            {
+              "name": "page_numbers",
+              "required": false,
+              "type": "boolean",
+              "default": true
+            }
+          ],
+          "options_example": {}
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "overall_status": "INCOMPLETE",
+  "delivery_status": "INCOMPLETE",
+  "delivery_gates": {
+    "overall": "INCOMPLETE",
+    "render": "PASS",
+    "visual": "REVIEW_REQUIRED",
+    "native_word": "PASS"
+  },
+  "structural_status": "PASS",
+  "format_status": "PASS",
+  "numbering_status": "PASS",
+  "table_geometry_status": "PASS",
+  "field_structure_status": "PASS",
+  "field_freshness_status": "STALE_OR_UNKNOWN",
+  "field_evaluation_status": "PASS",
+  "render_status": "PASS",
+  "native_word_status": "PASS",
+  "visual_status": "REVIEW_REQUIRED",
+  "manual_review_required": true,
+  "issues": [
+    {
+      "severity": "WARNING",
+      "code": "native_evaluation_not_persisted",
+      "message": "Microsoft Word evaluated a temporary copy successfully, but its results differed from the cached results in the source. Run field update-all to a distinct output before delivery."
+    }
+  ],
+  "inventory": {
+    "paragraphs": 583,
+    "tables": 15,
+    "sections": 3,
+    "images": 20,
+    "fields": {
+      "total_field_tags": 516,
+      "toc_field": true,
+      "page_field": true,
+      "page_fields": 138,
+      "toc_fields": 3,
+      "other_fields": 31
+    }
+  },
+  "render": {
+    "engine": "word",
+    "pdf_path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_Clickthrough_FinalReviewed_20261023.pdf",
+    "file_size_bytes": 2361155,
+    "page_count": 83,
+    "verified_pdf_page_count": 83
+  },
+  "visual_review_challenge": {
+    "token": "8489856aaacff3c2584104a633d3c3683bf9ab7e21bcc76611e55ab447b86dc7",
+    "page_count": 83,
+    "token_scope": "document SHA-256 plus ordered page-image SHA-256 and size; PDF SHA-256 is provenance only"
+  },
+  "visual_review_reuse": {
+    "version": 1,
+    "token": "wa-visual-reuse-v1:bee3d7699e29664c017ef556aaf5decfea29463b1d9327a73d7ed60fa94ac169"
+  },
+  "report_path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\qa\\verify-vietlex-final-clickthrough-20261023.json",
+  "report_sha256": "8281b6fd036795932340abea3df52354e545b416665ea69b5fb7415109aff265"
+}

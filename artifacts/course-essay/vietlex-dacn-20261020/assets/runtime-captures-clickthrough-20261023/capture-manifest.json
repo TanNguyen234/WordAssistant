@@ -1,0 +1,855 @@
+{
+  "schema_version": 2,
+  "deployment": "https://vietlex-legal-rag.vercel.app",
+  "source_root": "D:\\Download\\ProfessionalLegalRAG",
+  "source_revision": "7519cd1aea4a3639140b9188de1843ebf0ddb1c0 (dirty source worktree; status SHA-256 99998923e7c4e16ced532789c68d5e76d36fa72a8bde5e3970ea3a9653781e1d)",
+  "capture_run_date": "2026-10-23",
+  "role": "anonymous",
+  "browser": "Chrome DevTools MCP; isolated anonymous review context",
+  "capture_method": "User-style website flow: enter at the homepage, click visible navigation/CTAs, fill and submit only a public GET search, then capture the resulting page. No final DOCX image comes from direct-route/headless captures.",
+  "viewport_css_px": {
+    "width": 1440,
+    "height": 1000
+  },
+  "acceptance_status": "ACCEPTED_UI_CLICKTHROUGH_CAPTURE",
+  "captured_route_count": 11,
+  "capture_count": 13,
+  "captures": [
+    {
+      "capture_id": "home",
+      "route": "/",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/",
+      "http_status": 200,
+      "page_title": "VietLex · Không gian nghiên cứu pháp luật",
+      "h1": [
+        "Hội thoại",
+        "Từ câu hỏi đến hồ sơ có căn cứ."
+      ],
+      "arrival": {
+        "from": "Mở trang chủ như điểm vào website; sau đó kiểm tra bằng cách bấm liên kết Hỏi đáp trên thanh điều hướng.",
+        "ui_steps": [
+          "Mở trang VietLex",
+          "Bấm Hỏi đáp trên thanh điều hướng",
+          "Chờ /readyz trả 200 và trạng thái Hệ thống sẵn sàng"
+        ],
+        "direct_route_load_for_this_capture": false,
+        "local_file_open_for_this_capture": false
+      },
+      "capture_method": "Chrome DevTools UI screenshot after visible link/form interaction; page reached by user-style click-through.",
+      "capture_mode": "full_page",
+      "viewport_css_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_dimensions_px": {
+        "width": 1424,
+        "height": 1126
+      },
+      "screenshot_path": "assets/runtime-captures-clickthrough-20261023/clickthrough-home.png",
+      "screenshot_sha256": "451c3e43c0b4a178f32c817e5ffce3786bc370155bd7a21d6b75e90c7ac496c2",
+      "captured_at_local": "2026-10-23T19:50:02+07:00",
+      "source_revision": "7519cd1aea4a3639140b9188de1843ebf0ddb1c0 (dirty source worktree; status SHA-256 99998923e7c4e16ced532789c68d5e76d36fa72a8bde5e3970ea3a9653781e1d)",
+      "source_files": [
+        "app/main.py",
+        "app/templates/index.html"
+      ],
+      "source_sha256": {
+        "app/main.py": "5868c8f169e3fa3d895cc047b2c3f7285bd1fde49553225972d369c1e94bd254",
+        "app/templates/index.html": "eef1ab9d2472d33ffe5b75f6dbb08f4ef9aa9f5d959f9c7903265d968cdbb15c"
+      },
+      "network": {
+        "document_status": 200
+      },
+      "console": {
+        "errors": [],
+        "warnings": []
+      },
+      "form_submitted": false,
+      "external_side_effect": false,
+      "acceptance_status": "ACCEPTED_UI_CLICKTHROUGH_CAPTURE",
+      "page_state_review": {
+        "status": "PASS",
+        "summary": "Visible page state reviewed; expected page heading/content is present and no error screen or visible error state was observed.",
+        "reviewed_by": "Codex visual review",
+        "reviewed_at": "2026-10-23",
+        "screenshot_path": "assets/runtime-captures-clickthrough-20261023/clickthrough-home.png",
+        "screenshot_sha256": "451c3e43c0b4a178f32c817e5ffce3786bc370155bd7a21d6b75e90c7ac496c2"
+      }
+    },
+    {
+      "capture_id": "legal-search",
+      "route": "/search",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/search",
+      "http_status": 200,
+      "page_title": "Tìm văn bản · VietLex",
+      "h1": [
+        "Tìm văn bản pháp luật"
+      ],
+      "arrival": {
+        "from": "Trang chủ → thẻ Tra cứu Tìm và đọc văn bản.",
+        "ui_steps": [
+          "Bấm thẻ 01 / Tra cứu"
+        ],
+        "direct_route_load_for_this_capture": false,
+        "local_file_open_for_this_capture": false
+      },
+      "capture_method": "Chrome DevTools UI screenshot after visible link/form interaction; page reached by user-style click-through.",
+      "capture_mode": "full_page",
+      "viewport_css_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_dimensions_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_path": "assets/runtime-captures-clickthrough-20261023/legal-search.png",
+      "screenshot_sha256": "048a2c77f613612126b396adb39fa9ae00a40a9516574e6a8cfcd536b7d6fe33",
+      "captured_at_local": "2026-10-23T19:46:52+07:00",
+      "source_revision": "7519cd1aea4a3639140b9188de1843ebf0ddb1c0 (dirty source worktree; status SHA-256 99998923e7c4e16ced532789c68d5e76d36fa72a8bde5e3970ea3a9653781e1d)",
+      "source_files": [
+        "app/api/legal_routes.py",
+        "app/templates/legal_search.html"
+      ],
+      "source_sha256": {
+        "app/api/legal_routes.py": "dd8174fb644746f903419b022a62be05419b0ec1cd2718f6bb345c1dacc26f67",
+        "app/templates/legal_search.html": "7df991ce48351d050b83905e73544c28840b0e3bf01865abca4e036d8841918a"
+      },
+      "network": {
+        "document_status": 200
+      },
+      "console": {
+        "errors": [],
+        "warnings": []
+      },
+      "form_submitted": false,
+      "external_side_effect": false,
+      "acceptance_status": "ACCEPTED_UI_CLICKTHROUGH_CAPTURE",
+      "page_state_review": {
+        "status": "PASS",
+        "summary": "Visible page state reviewed; expected page heading/content is present and no error screen or visible error state was observed.",
+        "reviewed_by": "Codex visual review",
+        "reviewed_at": "2026-10-23",
+        "screenshot_path": "assets/runtime-captures-clickthrough-20261023/legal-search.png",
+        "screenshot_sha256": "048a2c77f613612126b396adb39fa9ae00a40a9516574e6a8cfcd536b7d6fe33"
+      },
+      "route_correction_note": "Recorded route includes the submitted query string and matches resolved_url; screenshot, click-through history, status and hashes are unchanged."
+    },
+    {
+      "capture_id": "search-results",
+      "route": "/search?scope=metadata&q=45%2F2019%2FQH14&as_of=2026-10-23&legal_type=&authority=&issued_from=&issued_to=&sort=default",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/search?scope=metadata&q=45%2F2019%2FQH14&as_of=2026-10-23&legal_type=&authority=&issued_from=&issued_to=&sort=default",
+      "http_status": 200,
+      "page_title": "Tìm văn bản · VietLex",
+      "h1": [
+        "Tìm văn bản pháp luật"
+      ],
+      "arrival": {
+        "from": "Trang Tìm văn bản mở bằng thẻ Tra cứu.",
+        "ui_steps": [
+          "Nhập số hiệu công khai 45/2019/QH14",
+          "Bấm Tìm (GET; không tạo dữ liệu)"
+        ],
+        "direct_route_load_for_this_capture": false,
+        "local_file_open_for_this_capture": false
+      },
+      "capture_method": "Chrome DevTools UI screenshot after visible link/form interaction; page reached by user-style click-through.",
+      "capture_mode": "full_page",
+      "viewport_css_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_dimensions_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_path": "assets/runtime-captures-clickthrough-20261023/search-results.png",
+      "screenshot_sha256": "a8d5f4787d026e39d99d4155ac3832b71a83a55f9c9d1e5cd4e3ff4969405a87",
+      "captured_at_local": "2026-10-23T19:46:13+07:00",
+      "source_revision": "7519cd1aea4a3639140b9188de1843ebf0ddb1c0 (dirty source worktree; status SHA-256 99998923e7c4e16ced532789c68d5e76d36fa72a8bde5e3970ea3a9653781e1d)",
+      "source_files": [
+        "app/api/legal_routes.py",
+        "app/templates/legal_search.html"
+      ],
+      "source_sha256": {
+        "app/api/legal_routes.py": "dd8174fb644746f903419b022a62be05419b0ec1cd2718f6bb345c1dacc26f67",
+        "app/templates/legal_search.html": "7df991ce48351d050b83905e73544c28840b0e3bf01865abca4e036d8841918a"
+      },
+      "network": {
+        "document_status": 200
+      },
+      "console": {
+        "errors": [],
+        "warnings": []
+      },
+      "form_submitted": true,
+      "external_side_effect": false,
+      "acceptance_status": "ACCEPTED_UI_CLICKTHROUGH_CAPTURE",
+      "page_state_review": {
+        "status": "PASS",
+        "summary": "Visible page state reviewed; expected page heading/content is present and no error screen or visible error state was observed.",
+        "reviewed_by": "Codex visual review",
+        "reviewed_at": "2026-10-23",
+        "screenshot_path": "assets/runtime-captures-clickthrough-20261023/search-results.png",
+        "screenshot_sha256": "a8d5f4787d026e39d99d4155ac3832b71a83a55f9c9d1e5cd4e3ff4969405a87"
+      },
+      "route_correction_note": "Recorded route includes the submitted query string and matches resolved_url; screenshot, click-through history, status and hashes are unchanged."
+    },
+    {
+      "capture_id": "legal-document",
+      "route": "/documents/333670?as_of=2026-10-23",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/documents/333670?as_of=2026-10-23",
+      "http_status": 200,
+      "page_title": "Bộ luật Lao động 2019 · VietLex",
+      "h1": [
+        "Bộ luật Lao động 2019"
+      ],
+      "arrival": {
+        "from": "Trang kết quả tìm kiếm số hiệu 45/2019/QH14.",
+        "ui_steps": [
+          "Bấm kết quả Bộ luật Lao động 2019"
+        ],
+        "direct_route_load_for_this_capture": false,
+        "local_file_open_for_this_capture": false
+      },
+      "capture_method": "Chrome DevTools UI screenshot after visible link/form interaction; page reached by user-style click-through.",
+      "capture_mode": "viewport",
+      "viewport_css_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_dimensions_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_path": "assets/runtime-captures-clickthrough-20261023/legal-document-top.png",
+      "screenshot_sha256": "50f866d068ed0c0d5f82f990cc0c70ffe056afd4b028d4b071ea76fdfbfb3407",
+      "captured_at_local": "2026-10-23T19:46:33+07:00",
+      "source_revision": "7519cd1aea4a3639140b9188de1843ebf0ddb1c0 (dirty source worktree; status SHA-256 99998923e7c4e16ced532789c68d5e76d36fa72a8bde5e3970ea3a9653781e1d)",
+      "source_files": [
+        "app/api/legal_routes.py",
+        "app/templates/legal_document.html"
+      ],
+      "source_sha256": {
+        "app/api/legal_routes.py": "dd8174fb644746f903419b022a62be05419b0ec1cd2718f6bb345c1dacc26f67",
+        "app/templates/legal_document.html": "0dbb35da2ac9caa67e3b07f7aa2ddb1a4854d88aff2f919e23d63b374ba2558a"
+      },
+      "network": {
+        "document_status": 200
+      },
+      "console": {
+        "errors": [],
+        "warnings": []
+      },
+      "form_submitted": false,
+      "external_side_effect": false,
+      "acceptance_status": "ACCEPTED_UI_CLICKTHROUGH_CAPTURE",
+      "page_state_review": {
+        "status": "PASS",
+        "summary": "Visible page state reviewed; expected page heading/content is present and no error screen or visible error state was observed.",
+        "reviewed_by": "Codex visual review",
+        "reviewed_at": "2026-10-23",
+        "screenshot_path": "assets/runtime-captures-clickthrough-20261023/legal-document-top.png",
+        "screenshot_sha256": "50f866d068ed0c0d5f82f990cc0c70ffe056afd4b028d4b071ea76fdfbfb3407"
+      }
+    },
+    {
+      "capture_id": "legal-status",
+      "route": "/legal-status",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/legal-status",
+      "http_status": 200,
+      "page_title": "Hiệu lực theo ngày · VietLex",
+      "h1": [
+        "Tra cứu sự kiện hiệu lực"
+      ],
+      "arrival": {
+        "from": "Trang Tìm văn bản.",
+        "ui_steps": [
+          "Bấm Đối chiếu sự kiện hiệu lực theo ngày"
+        ],
+        "direct_route_load_for_this_capture": false,
+        "local_file_open_for_this_capture": false
+      },
+      "capture_method": "Chrome DevTools UI screenshot after visible link/form interaction; page reached by user-style click-through.",
+      "capture_mode": "full_page",
+      "viewport_css_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_dimensions_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_path": "assets/runtime-captures-clickthrough-20261023/legal-status.png",
+      "screenshot_sha256": "dc170c2c2e28917578514fc6af9634b60255ecfe72d937238c45bc202400965b",
+      "captured_at_local": "2026-10-23T19:46:57+07:00",
+      "source_revision": "7519cd1aea4a3639140b9188de1843ebf0ddb1c0 (dirty source worktree; status SHA-256 99998923e7c4e16ced532789c68d5e76d36fa72a8bde5e3970ea3a9653781e1d)",
+      "source_files": [
+        "app/api/legal_registry_routes.py",
+        "app/templates/legal_status.html"
+      ],
+      "source_sha256": {
+        "app/api/legal_registry_routes.py": "6a274c68c2a757465538f38a4b765ca9e19e323d6aba98d4a5d9faa6b88928b3",
+        "app/templates/legal_status.html": "3cde8725e86034011035a9ecddc82412b0d27292224312863ddd26e85db215ba"
+      },
+      "network": {
+        "document_status": 200
+      },
+      "console": {
+        "errors": [],
+        "warnings": []
+      },
+      "form_submitted": false,
+      "external_side_effect": false,
+      "acceptance_status": "ACCEPTED_UI_CLICKTHROUGH_CAPTURE",
+      "page_state_review": {
+        "status": "PASS",
+        "summary": "Visible page state reviewed; expected page heading/content is present and no error screen or visible error state was observed.",
+        "reviewed_by": "Codex visual review",
+        "reviewed_at": "2026-10-23",
+        "screenshot_path": "assets/runtime-captures-clickthrough-20261023/legal-status.png",
+        "screenshot_sha256": "dc170c2c2e28917578514fc6af9634b60255ecfe72d937238c45bc202400965b"
+      }
+    },
+    {
+      "capture_id": "evaluation-lab-top",
+      "route": "/evaluation-lab",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/evaluation-lab",
+      "http_status": 200,
+      "page_title": "Chất lượng và kiểm chứng · VietLex",
+      "h1": [
+        "Chất lượng được kiểm chứng như thế nào?"
+      ],
+      "arrival": {
+        "from": "Menu Tìm hiểu thêm trên trang Hiệu lực theo ngày.",
+        "ui_steps": [
+          "Mở menu Tìm hiểu thêm",
+          "Bấm Chất lượng và kiểm chứng"
+        ],
+        "direct_route_load_for_this_capture": false,
+        "local_file_open_for_this_capture": false
+      },
+      "capture_method": "Chrome DevTools UI screenshot after visible link/form interaction; page reached by user-style click-through.",
+      "capture_mode": "viewport",
+      "viewport_css_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_dimensions_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_path": "assets/runtime-captures-clickthrough-20261023/evaluation-lab-top.png",
+      "screenshot_sha256": "1f3443cd129b0037b1d799cf462ec42120dd3bd5de577b853bde30e5c217732d",
+      "captured_at_local": "2026-10-23T19:47:19+07:00",
+      "source_revision": "7519cd1aea4a3639140b9188de1843ebf0ddb1c0 (dirty source worktree; status SHA-256 99998923e7c4e16ced532789c68d5e76d36fa72a8bde5e3970ea3a9653781e1d)",
+      "source_files": [
+        "app/api/evaluation_lab_routes.py",
+        "app/templates/evaluation_lab.html"
+      ],
+      "source_sha256": {
+        "app/api/evaluation_lab_routes.py": "dfd5d15bebfdd16a6b743e6d1f10f6e15361c40c3dd0db12e8898a79f6282409",
+        "app/templates/evaluation_lab.html": "3c46f6e42298ae02ad9e4b1db8745a7f2f459efeca86d62d186d28c05830d40f"
+      },
+      "network": {
+        "document_status": 200
+      },
+      "console": {
+        "errors": [],
+        "warnings": []
+      },
+      "form_submitted": false,
+      "external_side_effect": false,
+      "acceptance_status": "ACCEPTED_UI_CLICKTHROUGH_CAPTURE",
+      "page_state_review": {
+        "status": "PASS",
+        "summary": "Visible page state reviewed; expected page heading/content is present and no error screen or visible error state was observed.",
+        "reviewed_by": "Codex visual review",
+        "reviewed_at": "2026-10-23",
+        "screenshot_path": "assets/runtime-captures-clickthrough-20261023/evaluation-lab-top.png",
+        "screenshot_sha256": "1f3443cd129b0037b1d799cf462ec42120dd3bd5de577b853bde30e5c217732d"
+      }
+    },
+    {
+      "capture_id": "evaluation-lab-full",
+      "route": "/evaluation-lab",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/evaluation-lab",
+      "http_status": 200,
+      "page_title": "Chất lượng và kiểm chứng · VietLex",
+      "h1": [
+        "Chất lượng được kiểm chứng như thế nào?"
+      ],
+      "arrival": {
+        "from": "Cùng trang đã mở bằng menu Tìm hiểu thêm.",
+        "ui_steps": [
+          "Chụp toàn trang sau khi trang đã tải"
+        ],
+        "direct_route_load_for_this_capture": false,
+        "local_file_open_for_this_capture": false
+      },
+      "capture_method": "Chrome DevTools UI screenshot after visible link/form interaction; page reached by user-style click-through.",
+      "capture_mode": "full_page",
+      "viewport_css_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_dimensions_px": {
+        "width": 1424,
+        "height": 4831
+      },
+      "screenshot_path": "assets/runtime-captures-clickthrough-20261023/evaluation-lab-full.png",
+      "screenshot_sha256": "13fa59635463a41f7e8a459c27900e2b58c05120e2983030228df56c2a56b0d5",
+      "captured_at_local": "2026-10-23T19:49:21+07:00",
+      "source_revision": "7519cd1aea4a3639140b9188de1843ebf0ddb1c0 (dirty source worktree; status SHA-256 99998923e7c4e16ced532789c68d5e76d36fa72a8bde5e3970ea3a9653781e1d)",
+      "source_files": [
+        "app/api/evaluation_lab_routes.py",
+        "app/templates/evaluation_lab.html"
+      ],
+      "source_sha256": {
+        "app/api/evaluation_lab_routes.py": "dfd5d15bebfdd16a6b743e6d1f10f6e15361c40c3dd0db12e8898a79f6282409",
+        "app/templates/evaluation_lab.html": "3c46f6e42298ae02ad9e4b1db8745a7f2f459efeca86d62d186d28c05830d40f"
+      },
+      "network": {
+        "document_status": 200
+      },
+      "console": {
+        "errors": [],
+        "warnings": []
+      },
+      "form_submitted": false,
+      "external_side_effect": false,
+      "acceptance_status": "ACCEPTED_UI_CLICKTHROUGH_CAPTURE",
+      "page_state_review": {
+        "status": "PASS",
+        "summary": "Visible page state reviewed; expected page heading/content is present and no error screen or visible error state was observed.",
+        "reviewed_by": "Codex visual review",
+        "reviewed_at": "2026-10-23",
+        "screenshot_path": "assets/runtime-captures-clickthrough-20261023/evaluation-lab-full.png",
+        "screenshot_sha256": "13fa59635463a41f7e8a459c27900e2b58c05120e2983030228df56c2a56b0d5"
+      }
+    },
+    {
+      "capture_id": "workspaces",
+      "route": "/workspaces",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/workspaces",
+      "http_status": 200,
+      "page_title": "Hồ sơ nghiên cứu · VietLex",
+      "h1": [
+        "Hồ sơ nghiên cứu"
+      ],
+      "arrival": {
+        "from": "Thanh điều hướng trên trang Chất lượng và kiểm chứng.",
+        "ui_steps": [
+          "Bấm Hồ sơ nghiên cứu"
+        ],
+        "direct_route_load_for_this_capture": false,
+        "local_file_open_for_this_capture": false
+      },
+      "capture_method": "Chrome DevTools UI screenshot after visible link/form interaction; page reached by user-style click-through.",
+      "capture_mode": "full_page",
+      "viewport_css_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_dimensions_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_path": "assets/runtime-captures-clickthrough-20261023/workspaces.png",
+      "screenshot_sha256": "d822b1f101f6fe1590fcc32dbe42bb2ced7182305c2a868edf4ec91f1e8df2a8",
+      "captured_at_local": "2026-10-23T19:47:33+07:00",
+      "source_revision": "7519cd1aea4a3639140b9188de1843ebf0ddb1c0 (dirty source worktree; status SHA-256 99998923e7c4e16ced532789c68d5e76d36fa72a8bde5e3970ea3a9653781e1d)",
+      "source_files": [
+        "app/api/workspace_routes.py",
+        "app/templates/research_workspaces.html"
+      ],
+      "source_sha256": {
+        "app/api/workspace_routes.py": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c",
+        "app/templates/research_workspaces.html": "0b39d14346346c50813791217b6c31a7f372a864da27b8585188b4dbad22a3d7"
+      },
+      "network": {
+        "document_status": 200
+      },
+      "console": {
+        "errors": [],
+        "warnings": []
+      },
+      "form_submitted": false,
+      "external_side_effect": false,
+      "acceptance_status": "ACCEPTED_UI_CLICKTHROUGH_CAPTURE",
+      "page_state_review": {
+        "status": "PASS",
+        "summary": "Visible page state reviewed; expected page heading/content is present and no error screen or visible error state was observed.",
+        "reviewed_by": "Codex visual review",
+        "reviewed_at": "2026-10-23",
+        "screenshot_path": "assets/runtime-captures-clickthrough-20261023/workspaces.png",
+        "screenshot_sha256": "d822b1f101f6fe1590fcc32dbe42bb2ced7182305c2a868edf4ec91f1e8df2a8"
+      }
+    },
+    {
+      "capture_id": "login",
+      "route": "/login",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/login",
+      "http_status": 200,
+      "page_title": "Tài khoản · VietLex",
+      "h1": [
+        "Đăng nhập"
+      ],
+      "arrival": {
+        "from": "Banner Đăng nhập trên trang Hồ sơ nghiên cứu.",
+        "ui_steps": [
+          "Bấm Đăng nhập; không nhập thông tin đăng nhập"
+        ],
+        "direct_route_load_for_this_capture": false,
+        "local_file_open_for_this_capture": false
+      },
+      "capture_method": "Chrome DevTools UI screenshot after visible link/form interaction; page reached by user-style click-through.",
+      "capture_mode": "full_page",
+      "viewport_css_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_dimensions_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_path": "assets/runtime-captures-clickthrough-20261023/login.png",
+      "screenshot_sha256": "768e2bb66326c3c54ea54daeb8ff1d7f9c3d7ffe1ec73b749f5783d1c82666b1",
+      "captured_at_local": "2026-10-23T19:47:47+07:00",
+      "source_revision": "7519cd1aea4a3639140b9188de1843ebf0ddb1c0 (dirty source worktree; status SHA-256 99998923e7c4e16ced532789c68d5e76d36fa72a8bde5e3970ea3a9653781e1d)",
+      "source_files": [
+        "app/api/account_routes.py",
+        "app/templates/account_form.html"
+      ],
+      "source_sha256": {
+        "app/api/account_routes.py": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+        "app/templates/account_form.html": "e6112144e4cecca26e23bb5a8931236b66a1f60d632d0925d3bf041469f5f143"
+      },
+      "network": {
+        "document_status": 200
+      },
+      "console": {
+        "errors": [],
+        "warnings": []
+      },
+      "form_submitted": false,
+      "external_side_effect": false,
+      "acceptance_status": "ACCEPTED_UI_CLICKTHROUGH_CAPTURE",
+      "page_state_review": {
+        "status": "PASS",
+        "summary": "Visible page state reviewed; expected page heading/content is present and no error screen or visible error state was observed.",
+        "reviewed_by": "Codex visual review",
+        "reviewed_at": "2026-10-23",
+        "screenshot_path": "assets/runtime-captures-clickthrough-20261023/login.png",
+        "screenshot_sha256": "768e2bb66326c3c54ea54daeb8ff1d7f9c3d7ffe1ec73b749f5783d1c82666b1"
+      }
+    },
+    {
+      "capture_id": "register",
+      "route": "/register",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/register",
+      "http_status": 200,
+      "page_title": "Tài khoản · VietLex",
+      "h1": [
+        "Đăng ký"
+      ],
+      "arrival": {
+        "from": "Trang Đăng nhập.",
+        "ui_steps": [
+          "Bấm Đăng ký; không tạo tài khoản, không gửi biểu mẫu"
+        ],
+        "direct_route_load_for_this_capture": false,
+        "local_file_open_for_this_capture": false
+      },
+      "capture_method": "Chrome DevTools UI screenshot after visible link/form interaction; page reached by user-style click-through.",
+      "capture_mode": "full_page",
+      "viewport_css_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_dimensions_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_path": "assets/runtime-captures-clickthrough-20261023/register.png",
+      "screenshot_sha256": "ba3c30967064211fbaa3e848598bccd725f42bf4a149745c20ab830621f1e9df",
+      "captured_at_local": "2026-10-23T19:47:52+07:00",
+      "source_revision": "7519cd1aea4a3639140b9188de1843ebf0ddb1c0 (dirty source worktree; status SHA-256 99998923e7c4e16ced532789c68d5e76d36fa72a8bde5e3970ea3a9653781e1d)",
+      "source_files": [
+        "app/api/account_routes.py",
+        "app/templates/account_form.html"
+      ],
+      "source_sha256": {
+        "app/api/account_routes.py": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+        "app/templates/account_form.html": "e6112144e4cecca26e23bb5a8931236b66a1f60d632d0925d3bf041469f5f143"
+      },
+      "network": {
+        "document_status": 200
+      },
+      "console": {
+        "errors": [],
+        "warnings": []
+      },
+      "form_submitted": false,
+      "external_side_effect": false,
+      "acceptance_status": "ACCEPTED_UI_CLICKTHROUGH_CAPTURE",
+      "page_state_review": {
+        "status": "PASS",
+        "summary": "Visible page state reviewed; expected page heading/content is present and no error screen or visible error state was observed.",
+        "reviewed_by": "Codex visual review",
+        "reviewed_at": "2026-10-23",
+        "screenshot_path": "assets/runtime-captures-clickthrough-20261023/register.png",
+        "screenshot_sha256": "ba3c30967064211fbaa3e848598bccd725f42bf4a149745c20ab830621f1e9df"
+      }
+    },
+    {
+      "capture_id": "forgot-password",
+      "route": "/forgot-password",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/forgot-password",
+      "http_status": 200,
+      "page_title": "Tài khoản · VietLex",
+      "h1": [
+        "Khôi phục mật khẩu"
+      ],
+      "arrival": {
+        "from": "Trang Đăng nhập qua liên kết Đã có tài khoản? từ trang Đăng ký.",
+        "ui_steps": [
+          "Bấm Quên mật khẩu?; không nhập email và không gửi hướng dẫn"
+        ],
+        "direct_route_load_for_this_capture": false,
+        "local_file_open_for_this_capture": false
+      },
+      "capture_method": "Chrome DevTools UI screenshot after visible link/form interaction; page reached by user-style click-through.",
+      "capture_mode": "full_page",
+      "viewport_css_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_dimensions_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_path": "assets/runtime-captures-clickthrough-20261023/forgot-password.png",
+      "screenshot_sha256": "988f1456d15a85f18448a7ca0e02d044a40dc9ac2de2eeaf51ef45361bb83bac",
+      "captured_at_local": "2026-10-23T19:48:01+07:00",
+      "source_revision": "7519cd1aea4a3639140b9188de1843ebf0ddb1c0 (dirty source worktree; status SHA-256 99998923e7c4e16ced532789c68d5e76d36fa72a8bde5e3970ea3a9653781e1d)",
+      "source_files": [
+        "app/api/account_routes.py",
+        "app/templates/account_form.html"
+      ],
+      "source_sha256": {
+        "app/api/account_routes.py": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+        "app/templates/account_form.html": "e6112144e4cecca26e23bb5a8931236b66a1f60d632d0925d3bf041469f5f143"
+      },
+      "network": {
+        "document_status": 200
+      },
+      "console": {
+        "errors": [],
+        "warnings": []
+      },
+      "form_submitted": false,
+      "external_side_effect": false,
+      "acceptance_status": "ACCEPTED_UI_CLICKTHROUGH_CAPTURE",
+      "page_state_review": {
+        "status": "PASS",
+        "summary": "Visible page state reviewed; expected page heading/content is present and no error screen or visible error state was observed.",
+        "reviewed_by": "Codex visual review",
+        "reviewed_at": "2026-10-23",
+        "screenshot_path": "assets/runtime-captures-clickthrough-20261023/forgot-password.png",
+        "screenshot_sha256": "988f1456d15a85f18448a7ca0e02d044a40dc9ac2de2eeaf51ef45361bb83bac"
+      }
+    },
+    {
+      "capture_id": "privacy",
+      "route": "/privacy",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/privacy",
+      "http_status": 200,
+      "page_title": "Quyền riêng tư · VietLex",
+      "h1": [
+        "Quyền riêng tư"
+      ],
+      "arrival": {
+        "from": "Menu Tìm hiểu thêm trên trang Khôi phục mật khẩu.",
+        "ui_steps": [
+          "Mở menu Tìm hiểu thêm",
+          "Bấm Quyền riêng tư"
+        ],
+        "direct_route_load_for_this_capture": false,
+        "local_file_open_for_this_capture": false
+      },
+      "capture_method": "Chrome DevTools UI screenshot after visible link/form interaction; page reached by user-style click-through.",
+      "capture_mode": "full_page",
+      "viewport_css_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_dimensions_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_path": "assets/runtime-captures-clickthrough-20261023/privacy.png",
+      "screenshot_sha256": "2f2320d3754eab0344ff8034d05c56a89dead92fd72d3590be76d32c47ca666f",
+      "captured_at_local": "2026-10-23T19:48:09+07:00",
+      "source_revision": "7519cd1aea4a3639140b9188de1843ebf0ddb1c0 (dirty source worktree; status SHA-256 99998923e7c4e16ced532789c68d5e76d36fa72a8bde5e3970ea3a9653781e1d)",
+      "source_files": [
+        "app/api/legal_routes.py",
+        "app/templates/privacy.html"
+      ],
+      "source_sha256": {
+        "app/api/legal_routes.py": "dd8174fb644746f903419b022a62be05419b0ec1cd2718f6bb345c1dacc26f67",
+        "app/templates/privacy.html": "14c210ee8b1ba01c69eb6182dd58e19461a94f00e7e0835ec101645625cb8ac3"
+      },
+      "network": {
+        "document_status": 200
+      },
+      "console": {
+        "errors": [],
+        "warnings": []
+      },
+      "form_submitted": false,
+      "external_side_effect": false,
+      "acceptance_status": "ACCEPTED_UI_CLICKTHROUGH_CAPTURE",
+      "page_state_review": {
+        "status": "PASS",
+        "summary": "Visible page state reviewed; expected page heading/content is present and no error screen or visible error state was observed.",
+        "reviewed_by": "Codex visual review",
+        "reviewed_at": "2026-10-23",
+        "screenshot_path": "assets/runtime-captures-clickthrough-20261023/privacy.png",
+        "screenshot_sha256": "2f2320d3754eab0344ff8034d05c56a89dead92fd72d3590be76d32c47ca666f"
+      }
+    },
+    {
+      "capture_id": "terms",
+      "route": "/terms",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/terms",
+      "http_status": 200,
+      "page_title": "Điều khoản · VietLex",
+      "h1": [
+        "Điều khoản sử dụng"
+      ],
+      "arrival": {
+        "from": "Menu Tìm hiểu thêm trên trang Quyền riêng tư.",
+        "ui_steps": [
+          "Mở menu Tìm hiểu thêm",
+          "Bấm Điều khoản"
+        ],
+        "direct_route_load_for_this_capture": false,
+        "local_file_open_for_this_capture": false
+      },
+      "capture_method": "Chrome DevTools UI screenshot after visible link/form interaction; page reached by user-style click-through.",
+      "capture_mode": "full_page",
+      "viewport_css_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_dimensions_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_path": "assets/runtime-captures-clickthrough-20261023/terms.png",
+      "screenshot_sha256": "3931624759b9489b79969b261a1a2326ae05ab4a612c9b99915f17f4996d4653",
+      "captured_at_local": "2026-10-23T19:48:21+07:00",
+      "source_revision": "7519cd1aea4a3639140b9188de1843ebf0ddb1c0 (dirty source worktree; status SHA-256 99998923e7c4e16ced532789c68d5e76d36fa72a8bde5e3970ea3a9653781e1d)",
+      "source_files": [
+        "app/api/legal_routes.py",
+        "app/templates/terms.html"
+      ],
+      "source_sha256": {
+        "app/api/legal_routes.py": "dd8174fb644746f903419b022a62be05419b0ec1cd2718f6bb345c1dacc26f67",
+        "app/templates/terms.html": "fcdf67cf307e146340ea33a149ae7a6116ed1fe21a82af31d757ba9d39b07cd2"
+      },
+      "network": {
+        "document_status": 200
+      },
+      "console": {
+        "errors": [],
+        "warnings": []
+      },
+      "form_submitted": false,
+      "external_side_effect": false,
+      "acceptance_status": "ACCEPTED_UI_CLICKTHROUGH_CAPTURE",
+      "page_state_review": {
+        "status": "PASS",
+        "summary": "Visible page state reviewed; expected page heading/content is present and no error screen or visible error state was observed.",
+        "reviewed_by": "Codex visual review",
+        "reviewed_at": "2026-10-23",
+        "screenshot_path": "assets/runtime-captures-clickthrough-20261023/terms.png",
+        "screenshot_sha256": "3931624759b9489b79969b261a1a2326ae05ab4a612c9b99915f17f4996d4653"
+      }
+    }
+  ],
+  "observed_findings": [
+    {
+      "route": "/evaluation-lab",
+      "severity": "functional-evidence-gap",
+      "visible_text": "Quality gate đã lưu: Chưa ghi nhận. Không có quality_gate.json. Không suy ra đạt từ điểm trung bình.",
+      "interpretation": "Dashboard displays historical 50/50 case counts and provenance metadata but does not expose a saved quality gate; do not describe this as a quality-pass certificate."
+    },
+    {
+      "route": "/documents/333670?as_of=2026-10-23",
+      "severity": "legal-status-limitation",
+      "visible_text": "Chưa xác định; Registry chưa bao phủ đầy đủ lịch sử pháp luật; VietLex chưa xác minh tình trạng hiệu lực.",
+      "interpretation": "The application explicitly does not certify current legal validity; report language must preserve this limitation."
+    },
+    {
+      "route": "/",
+      "severity": "transient-loading",
+      "visible_text": "Initial load displayed “Đang kiểm tra hệ thống” and “Đang tải lịch sử”; subsequent visible UI state changed to “Hệ thống sẵn sàng” and the /readyz and /sessions GETs returned 200.",
+      "interpretation": "Transient startup state resolved before the accepted homepage screenshot; no console errors or warnings were observed."
+    }
+  ],
+  "not_captured": [
+    {
+      "route": "/verify-email",
+      "reason": "Requires an email verification token; reaching it through the UI requires account creation and email transmission, neither was performed."
+    },
+    {
+      "route": "/reset-password",
+      "reason": "Requires a reset token; forgot-password form was viewed but no email was entered or sent."
+    },
+    {
+      "route": "/settings",
+      "reason": "Requires an authenticated session."
+    },
+    {
+      "route": "/admin/*",
+      "reason": "Role-protected administrative pages; no admin role used."
+    },
+    {
+      "route": "/workspaces/{workspace_id}",
+      "reason": "Requires an owned workspace ID; no workspace was created."
+    },
+    {
+      "route": "/sessions and /sessions/{session_id}",
+      "reason": "HTMX/user-owned fragments, not standalone public screens; no private session was opened."
+    },
+    {
+      "route": "/healthz and /readyz",
+      "reason": "Operational endpoints, not UI pages."
+    }
+  ],
+  "provisional_not_accepted": {
+    "manifest": "assets/runtime-captures-20261023/capture-manifest.json",
+    "reason": "Previous 13 screenshots were captured by direct route loads/headless Chrome and violate the user’s requirement for page-by-page UI click-through capture. Retained for reconnaissance only; excluded from the report."
+  },
+  "safety": {
+    "no_login": true,
+    "no_registration": true,
+    "no_email_submission": true,
+    "no_password_reset": true,
+    "no_workspace_creation": true,
+    "no_admin_access": true,
+    "no_sensitive_data_transmitted": true
+  },
+  "docx_binding": {
+    "document_sha256": null,
+    "status": "NOT_BOUND_YET: captures are prepared for insertion into the distinct output copy; refresh matrices and QA against final DOCX hash."
+  },
+  "live_deployment_revision_confirmation": "NOT_RUN: deployed source revision was not independently confirmed against the dirty source snapshot.",
+  "capture_context": {
+    "browser_surface": "visible_browser_tab",
+    "headless": false,
+    "navigation_policy": "visible_ui_clickthrough"
+  }
+}

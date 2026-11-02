@@ -1,0 +1,293 @@
+{
+  "id": "vietlex-course-essay-style-v9",
+  "name": "VietLex capstone layout aligned to the supplied StrongWine report (not an institutional compliance profile)",
+  "version": 2,
+  "source_policy": "visual-structure-reference-only; StrongWine is the approved complete-report depth and style comparator; rubric not supplied; all section and asset counts are project-specific; the two-cover requirement is enabled and checked by the current generic validator",
+  "variants": {
+    "capstone": {
+      "page": {
+        "size": "A4",
+        "width_cm": 21.0,
+        "height_cm": 29.7,
+        "margins_cm": {
+          "top": 2.0,
+          "bottom": 2.0,
+          "left": 3.0,
+          "right": 2.0
+        },
+        "one_sided": true,
+        "allow_mixed_orientation": true
+      },
+      "typography": {
+        "body_font": "Times New Roman",
+        "body_size_pt": 13,
+        "styles": {
+          "title": {
+            "size_pt": 18,
+            "bold": true,
+            "alignment": "center",
+            "line_spacing": 1.0,
+            "space_after_pt": 15
+          },
+          "heading1": {
+            "size_pt": 16,
+            "bold": true,
+            "alignment": "center",
+            "space_before_pt": 24
+          },
+          "heading2": {
+            "size_pt": 14,
+            "bold": true,
+            "alignment": "left",
+            "space_before_pt": 10
+          },
+          "heading3": {
+            "font": "Times New Roman",
+            "bold": true,
+            "alignment": "left",
+            "space_before_pt": 10
+          },
+          "Caption": {
+            "font": "Times New Roman",
+            "size_pt": 11,
+            "bold": true,
+            "italic": true,
+            "alignment": "left",
+            "line_spacing": 1.0
+          },
+          "Normal": {
+            "alignment": "justify",
+            "line_spacing": 1.15
+          }
+        },
+        "paragraph_spacing_after_pt": 2
+      },
+      "header_footer": {
+        "header_left": "literal:Đồ án chuyên ngành: Phân tích VietLex",
+        "header_right": "supervisor",
+        "footer_left": "student",
+        "footer_right": "page_number",
+        "page_number_start": "inner_cover",
+        "front_matter_page_number_format": "decimal"
+      },
+      "cover": {
+        "institution_lines": [
+          "TRƯỜNG ĐẠI HỌC TÀI NGUYÊN VÀ MÔI TRƯỜNG TP. HỒ CHÍ MINH",
+          "KHOA CÔNG NGHỆ THÔNG TIN"
+        ],
+        "document_type": "ĐỒ ÁN CHUYÊN NGÀNH",
+        "title_prefix": "ĐỀ TÀI:",
+        "metadata_fields": [
+          {
+            "label": "Sinh viên thực hiện",
+            "value_key": "student",
+            "default": "Nguyễn Thành Duy Tân"
+          },
+          {
+            "label": "MSSV",
+            "value_key": "student_id",
+            "default": "1250080266"
+          },
+          {
+            "label": "Lớp",
+            "value_key": "class",
+            "default": "12_ĐH_CNPM3"
+          },
+          {
+            "label": "Loại báo cáo",
+            "value_key": "document_type",
+            "default": "Đồ án chuyên ngành"
+          },
+          {
+            "label": "Giảng viên hướng dẫn",
+            "value_key": "supervisor",
+            "default": "ThS. Đinh Thị Hồng Loan"
+          }
+        ],
+        "location_year": "TP. HỒ CHÍ MINH, 2026",
+        "require_distinct_inner_cover": true,
+        "border": {
+          "display": "firstPage",
+          "offset_from": "page",
+          "edges": {
+            "top": {
+              "style": "double",
+              "size_eighth_points": 8,
+              "space_points": 4
+            },
+            "bottom": {
+              "style": "double",
+              "size_eighth_points": 8,
+              "space_points": 4
+            },
+            "left": {
+              "style": "double",
+              "size_eighth_points": 8,
+              "space_points": 4
+            },
+            "right": {
+              "style": "double",
+              "size_eighth_points": 8,
+              "space_points": 4
+            }
+          }
+        },
+        "logo_asset": "assets/university-seal-strongwine-reference.png"
+      },
+      "front_matter": [
+        "cover",
+        "inner_cover",
+        "acknowledgements",
+        "declaration",
+        "supervisor_review",
+        "reviewer_review",
+        "schedule",
+        "abstract",
+        "abstract_english",
+        "table_of_contents",
+        "list_of_figures",
+        "list_of_tables",
+        "abbreviations"
+      ],
+      "front_matter_titles": {
+        "cover": "TRANG BÌA",
+        "inner_cover": "TRANG BÌA TRONG",
+        "acknowledgements": "LỜI CẢM ƠN",
+        "declaration": "LỜI CAM ĐOAN",
+        "supervisor_review": "NHẬN XÉT CỦA GIẢNG VIÊN HƯỚNG DẪN",
+        "reviewer_review": "NHẬN XÉT CỦA GIẢNG VIÊN PHẢN BIỆN",
+        "schedule": "LỊCH TRÌNH THỰC HIỆN ĐỒ ÁN",
+        "abstract": "TÓM TẮT ĐỒ ÁN",
+        "abstract_english": "ABSTRACT",
+        "abbreviations": "DANH MỤC TỪ VIẾT TẮT",
+        "table_of_contents": "MỤC LỤC",
+        "list_of_figures": "DANH MỤC HÌNH ẢNH",
+        "list_of_tables": "DANH MỤC BẢNG BIỂU"
+      },
+      "section_blueprint": [
+        {
+          "title": "MỞ ĐẦU",
+          "level": 1
+        },
+        {
+          "title": "NỘI DUNG",
+          "level": 1,
+          "page_break_before": true
+        },
+        {
+          "title": "CHƯƠNG 1: CƠ SỞ LÝ THUYẾT VÀ NGHIÊN CỨU LIÊN QUAN",
+          "level": 1
+        },
+        {
+          "title": "CHƯƠNG 2: KHẢO SÁT HIỆN TRẠNG VÀ XÁC ĐỊNH YÊU CẦU",
+          "level": 1,
+          "page_break_before": true
+        },
+        {
+          "title": "CHƯƠNG 3: PHÂN TÍCH NGHIỆP VỤ VÀ MÔ HÌNH CHỨC NĂNG",
+          "level": 1,
+          "page_break_before": true
+        },
+        {
+          "title": "CHƯƠNG 4: PHÂN TÍCH VÀ THIẾT KẾ HƯỚNG ĐỐI TƯỢNG",
+          "level": 1,
+          "page_break_before": true
+        },
+        {
+          "title": "CHƯƠNG 5: KIẾN TRÚC, DỮ LIỆU VÀ THIẾT KẾ THÀNH PHẦN",
+          "level": 1,
+          "page_break_before": true
+        },
+        {
+          "title": "CHƯƠNG 6: CÀI ĐẶT, LUỒNG XỬ LÝ VÀ GIAO DIỆN",
+          "level": 1,
+          "page_break_before": true
+        },
+        {
+          "title": "CHƯƠNG 7: KIỂM THỬ, BẢO MẬT VÀ ĐÁNH GIÁ HỆ THỐNG",
+          "level": 1,
+          "page_break_before": true
+        },
+        {
+          "title": "HẠN CHẾ VÀ RỦI RO CẦN THEO DÕI",
+          "level": 1,
+          "page_break_before": true
+        },
+        {
+          "title": "ĐỀ XUẤT CẢI TIẾN VÀ KẾ HOẠCH KIỂM CHỨNG",
+          "level": 1,
+          "page_break_before": true
+        },
+        {
+          "title": "BỔ SUNG: DANH MỤC ĐƯỜNG ĐI THEO VAI TRÒ",
+          "level": 1,
+          "page_break_before": true
+        },
+        {
+          "title": "KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN",
+          "level": 1,
+          "page_break_before": true
+        },
+        {
+          "title": "TÀI LIỆU THAM KHẢO",
+          "level": 1,
+          "page_break_before": true
+        },
+        {
+          "title": "PHỤ LỤC A. MA TRẬN YÊU CẦU VÀ BẰNG CHỨNG",
+          "level": 1,
+          "page_break_before": true
+        },
+        {
+          "title": "PHỤ LỤC B. ĐỊNH DANH SƠ ĐỒ VÀ NGUỒN KIỂM TRA",
+          "level": 1,
+          "page_break_before": true
+        },
+        {
+          "title": "PHỤ LỤC C. THUẬT NGỮ VÀ TRẠNG THÁI BẰNG CHỨNG",
+          "level": 1,
+          "page_break_before": true
+        },
+        {
+          "title": "TUYÊN BỐ VỀ CÔNG CỤ HỖ TRỢ VÀ LIÊM CHÍNH HỌC THUẬT",
+          "level": 1,
+          "page_break_before": true
+        }
+      ],
+      "citations": {
+        "style": "numeric",
+        "in_text": "numeric_brackets",
+        "bibliography_order": "citation_order",
+        "prefer_primary_source": true,
+        "require_reviewed_sources": true
+      },
+      "captions": {
+        "figure_labels": [
+          {
+            "display": "HÌNH",
+            "sequence": "Hinh"
+          }
+        ],
+        "table_label": {
+          "display": "BẢNG",
+          "sequence": "Bang"
+        },
+        "numbering": {
+          "format": "chapter.sequence",
+          "mode": "verified_literal_chapter",
+          "heading_style": "Heading 1",
+          "heading_level": 1,
+          "separator": ".",
+          "chapter_option": "chapter_number",
+          "image_chapter_option": "caption_chapter_number"
+        }
+      },
+      "field_requirements": {
+        "table_of_contents": true,
+        "page_number": true,
+        "list_of_figures": true,
+        "list_of_tables": true
+      }
+    }
+  }
+}

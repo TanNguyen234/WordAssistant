@@ -1,0 +1,98 @@
+{
+  "status": "SUCCESS",
+  "operation": "batch.apply",
+  "plan_version": 1,
+  "output_path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\qa\\staging\\VietLex_v12_prefields.docx",
+  "sha256": "4b2a9f2943c1141f927e3356092e42b4921eda442527c822e44d6bcf14ca4937",
+  "checkpoint_created": false,
+  "steps": [
+    {
+      "index": 0,
+      "operation": "image.insert",
+      "status": "SUCCESS",
+      "backend_used": "python-docx",
+      "fidelity": "high",
+      "before_sha256": "8838b35aef06976c0ce32ab5453a88fd95323e323a14a02e9cc4709e1fd929b4",
+      "after_sha256": "cdc9dd36772cffadf11e343162168a0097c5ec46f24af5bb4d533ead1ff0f579",
+      "warnings": [],
+      "manual_review_required": true
+    },
+    {
+      "index": 1,
+      "operation": "image.insert",
+      "status": "SUCCESS",
+      "backend_used": "python-docx",
+      "fidelity": "high",
+      "before_sha256": "cdc9dd36772cffadf11e343162168a0097c5ec46f24af5bb4d533ead1ff0f579",
+      "after_sha256": "a2a00fe3f1410c35041d2bbb521bb3ad672548408470fa2e2fe49d8ea0fa236e",
+      "warnings": [],
+      "manual_review_required": true
+    },
+    {
+      "index": 2,
+      "operation": "image.insert",
+      "status": "SUCCESS",
+      "backend_used": "python-docx",
+      "fidelity": "high",
+      "before_sha256": "a2a00fe3f1410c35041d2bbb521bb3ad672548408470fa2e2fe49d8ea0fa236e",
+      "after_sha256": "187fdaccd43eb94406df10f04b99f604c4f4aa7e3924b7a815a845f104f6af5c",
+      "warnings": [],
+      "manual_review_required": true
+    },
+    {
+      "index": 3,
+      "operation": "image.insert",
+      "status": "SUCCESS",
+      "backend_used": "python-docx",
+      "fidelity": "high",
+      "before_sha256": "187fdaccd43eb94406df10f04b99f604c4f4aa7e3924b7a815a845f104f6af5c",
+      "after_sha256": "fe2faf2fdf7eaba7b52dd8657027d4349665e4eb421016f6f7c0b09ba15974d3",
+      "warnings": [],
+      "manual_review_required": true
+    },
+    {
+      "index": 4,
+      "operation": "format.run",
+      "status": "SUCCESS",
+      "backend_used": "python-docx",
+      "fidelity": "high",
+      "before_sha256": "fe2faf2fdf7eaba7b52dd8657027d4349665e4eb421016f6f7c0b09ba15974d3",
+      "after_sha256": "b278ea520b1a3a0e2c431989a7c44aebdf080cf9168ae11b6ffad247b91102ef",
+      "warnings": [],
+      "manual_review_required": false
+    },
+    {
+      "index": 5,
+      "operation": "format.paragraph",
+      "status": "SUCCESS",
+      "backend_used": "python-docx",
+      "fidelity": "high",
+      "before_sha256": "b278ea520b1a3a0e2c431989a7c44aebdf080cf9168ae11b6ffad247b91102ef",
+      "after_sha256": "41ece9894b4deb271762f08ec3d532ea22cb3f426ffd67893d62cfad42e92d4a",
+      "warnings": [],
+      "manual_review_required": false
+    },
+    {
+      "index": 6,
+      "operation": "format.run",
+      "status": "SUCCESS",
+      "backend_used": "python-docx",
+      "fidelity": "high",
+      "before_sha256": "41ece9894b4deb271762f08ec3d532ea22cb3f426ffd67893d62cfad42e92d4a",
+      "after_sha256": "3c7f8058fdb5308909b9767e32ccb0479a2ce6fc2688810c25b541dc6defa3f5",
+      "warnings": [],
+      "manual_review_required": false
+    },
+    {
+      "index": 7,
+      "operation": "format.paragraph",
+      "status": "SUCCESS",
+      "backend_used": "python-docx",
+      "fidelity": "high",
+      "before_sha256": "3c7f8058fdb5308909b9767e32ccb0479a2ce6fc2688810c25b541dc6defa3f5",
+      "after_sha256": "4b2a9f2943c1141f927e3356092e42b4921eda442527c822e44d6bcf14ca4937",
+      "warnings": [],
+      "manual_review_required": false
+    }
+  ]
+}

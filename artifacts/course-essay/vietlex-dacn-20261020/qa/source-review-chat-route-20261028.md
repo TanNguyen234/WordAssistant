@@ -1,0 +1,1 @@
+Mã hiện tại POST /chat: redaction, input guard có điều kiện, kiểm tra cache có điều kiện, gọi RAG, output guard có điều kiện, ghi tương tác và HTML partial. Có nhánh lỗi, scope văn bản và chế độ local stateless; đây không xác nhận chạy runtime hay độ an toàn thực tế. Hash 3edd3d0d3ba581164fa8e4512dc161ac2dd01c40b2e920601e3c864d9a3207e4.

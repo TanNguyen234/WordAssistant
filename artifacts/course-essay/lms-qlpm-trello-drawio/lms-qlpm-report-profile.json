@@ -1,0 +1,228 @@
+{
+  "id": "generic-lms-project-report",
+  "name": "Generic LMS course report",
+  "version": 1,
+  "source_policy": "user-profile-wins",
+  "variants": {
+    "default": {
+      "page": {
+        "size": "A4",
+        "width_cm": 21,
+        "height_cm": 29.7,
+        "margins_cm": {
+          "top": 2.5,
+          "bottom": 2.5,
+          "left": 3,
+          "right": 2
+        },
+        "one_sided": true,
+        "allow_mixed_orientation": true
+      },
+      "typography": {
+        "body_font": "Times New Roman",
+        "body_size_pt": 12,
+        "line_spacing": 1.15,
+        "paragraph_spacing_after_pt": 6,
+        "styles": {
+          "title": {
+            "font": "Times New Roman",
+            "size_pt": 20,
+            "bold": true,
+            "alignment": "center"
+          },
+          "heading1": {
+            "font": "Times New Roman",
+            "size_pt": 16,
+            "bold": true,
+            "space_before_pt": 10,
+            "space_after_pt": 6
+          },
+          "heading2": {
+            "font": "Times New Roman",
+            "size_pt": 14,
+            "bold": true,
+            "space_before_pt": 8,
+            "space_after_pt": 4
+          },
+          "heading3": {
+            "font": "Times New Roman",
+            "bold": true
+          },
+          "Normal": {
+            "font": "Times New Roman",
+            "alignment": "justify",
+            "line_spacing": 1.15,
+            "space_after_pt": 6
+          }
+        }
+      },
+      "front_matter": [
+        "cover",
+        "abstract",
+        "table_of_contents",
+        "list_of_figures",
+        "list_of_tables"
+      ],
+      "front_matter_titles": {
+        "abstract": "TÓM TẮT",
+        "table_of_contents": "MỤC LỤC",
+        "list_of_figures": "DANH MỤC HÌNH",
+        "list_of_tables": "DANH MỤC BẢNG"
+      },
+      "cover": {
+        "institution_lines": [
+          "Chưa cung cấp tên trường/đơn vị đào tạo",
+          "Chưa cung cấp khoa/bộ môn"
+        ],
+        "document_type": "TIỂU LUẬN MÔN HỌC",
+        "title_prefix": "BÁO CÁO",
+        "metadata_fields": [
+          {
+            "label": "Học phần",
+            "value_key": "course_name",
+            "default": "Quản lý dự án phần mềm"
+          },
+          {
+            "label": "Sinh viên / nhóm",
+            "value_key": "student",
+            "default": "[Bổ sung thông tin thật]"
+          },
+          {
+            "label": "Mã số",
+            "value_key": "student_id",
+            "default": "[Bổ sung]"
+          },
+          {
+            "label": "Lớp học phần",
+            "value_key": "class_or_cohort",
+            "default": "[Bổ sung]"
+          },
+          {
+            "label": "Giảng viên hướng dẫn",
+            "value_key": "supervisor",
+            "default": "[Bổ sung]"
+          }
+        ],
+        "location_year": "2026",
+        "styles": {
+          "institution": "Normal",
+          "faculty": "Normal",
+          "document_type": "Normal",
+          "title": "Title",
+          "metadata": "Normal",
+          "location_year": "Normal"
+        }
+      },
+      "section_blueprint": [
+        {
+          "title": "MỞ ĐẦU",
+          "level": 1,
+          "required": true,
+          "page_break_before": false
+        },
+        {
+          "title": "CHƯƠNG 1. TỔNG QUAN VÀ KHỞI TẠO DỰ ÁN",
+          "level": 1,
+          "required": true,
+          "page_break_before": false
+        },
+        {
+          "title": "CHƯƠNG 2. CÁC BÊN LIÊN QUAN VÀ TỔ CHỨC DỰ ÁN",
+          "level": 1,
+          "required": true,
+          "page_break_before": true
+        },
+        {
+          "title": "CHƯƠNG 3. QUẢN LÝ PHẠM VI VÀ WBS",
+          "level": 1,
+          "required": true,
+          "page_break_before": true
+        },
+        {
+          "title": "CHƯƠNG 4. QUẢN LÝ TIẾN ĐỘ VÀ CPM",
+          "level": 1,
+          "required": true,
+          "page_break_before": true
+        },
+        {
+          "title": "CHƯƠNG 5. QUẢN LÝ NGUỒN LỰC VÀ CHI PHÍ",
+          "level": 1,
+          "required": true,
+          "page_break_before": true
+        },
+        {
+          "title": "CHƯƠNG 6. QUẢN LÝ RỦI RO",
+          "level": 1,
+          "required": true,
+          "page_break_before": true
+        },
+        {
+          "title": "CHƯƠNG 7. QUẢN LÝ CHẤT LƯỢNG VÀ KIỂM THỬ",
+          "level": 1,
+          "required": true,
+          "page_break_before": true
+        },
+        {
+          "title": "CHƯƠNG 8. TRUYỀN THÔNG, THAY ĐỔI VÀ TRELLO",
+          "level": 1,
+          "required": true,
+          "page_break_before": true
+        },
+        {
+          "title": "CHƯƠNG 9. THIẾT KẾ VÀ BIỂU ĐỒ DRAW.IO",
+          "level": 1,
+          "required": true,
+          "page_break_before": true
+        },
+        {
+          "title": "CHƯƠNG 10. NGHIỆM THU VÀ ĐÓNG DỰ ÁN",
+          "level": 1,
+          "required": true,
+          "page_break_before": true
+        },
+        {
+          "title": "KẾT LUẬN VÀ KIẾN NGHỊ",
+          "level": 1,
+          "required": true,
+          "page_break_before": true
+        },
+        {
+          "title": "TÀI LIỆU THAM KHẢO",
+          "level": 1,
+          "required": true,
+          "page_break_before": true
+        },
+        {
+          "title": "PHỤ LỤC",
+          "level": 1,
+          "required": true,
+          "page_break_before": true
+        }
+      ],
+      "citations": {
+        "style": "numeric",
+        "bibliography_order": "citation_order",
+        "minimum_references": 4,
+        "prefer_primary_source": true,
+        "require_reviewed_sources": true
+      },
+      "header_footer": {
+        "footer_right": "page_number",
+        "page_number_start": "introduction",
+        "front_matter_page_number_format": "lowerRoman"
+      },
+      "captions": {
+        "figure_labels": [
+          {
+            "display": "HÌNH",
+            "sequence": "Hinh"
+          }
+        ],
+        "table_label": {
+          "display": "BẢNG",
+          "sequence": "Bang"
+        }
+      }
+    }
+  }
+}

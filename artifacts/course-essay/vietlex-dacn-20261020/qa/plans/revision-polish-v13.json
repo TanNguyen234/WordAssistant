@@ -1,0 +1,798 @@
+{
+  "schema_version": 1,
+  "input_sha256": "48854031b23629249c68862b4d1c98e12ef37f18c20d453f195f849cc15e9629",
+  "first_line_indent_cm": 1,
+  "edits": [
+    {
+      "section": "Mục tiêu, câu hỏi và phạm vi khảo sát",
+      "paragraph_index": 2,
+      "expected_text_sha256": "b0b298fc85b36b83f8d0f670295675ccd99b5315cf41c37de82d21cb23687d54",
+      "text": "Mục tiêu thứ nhất là mô tả chức năng và phạm vi người dùng từ tuyến xử lý/mẫu giao diện thật. Mục tiêu thứ hai là phân tích quy trình xử lý hỏi đáp, truy xuất và đối tượng dữ liệu theo hướng phân tích-thiết kế hướng đối tượng. Mục tiêu thứ ba là đối chiếu bằng chứng đánh giá với giới hạn mẫu số, ngày chạy và trạng thái hiện hành. Mục tiêu cuối cùng là đề xuất một cách kiểm chứng tiếp theo có thể tái lập, ưu tiên đo chất lượng truy xuất và độ hỗ trợ của từng nhận định thay vì suy ra chất lượng pháp lý từ một điểm số tổng hợp."
+    },
+    {
+      "section": "Đóng góp và cấu trúc báo cáo",
+      "paragraph_index": 0,
+      "expected_text_sha256": "1c426de2f79c4e87ec2f3ba090262943b868dd231696f93be553399616fd75af",
+      "text": "Đóng góp của đồ án là hệ thống hóa mối liên hệ giữa nhu cầu tra cứu, dữ liệu được lưu, trách nhiệm của thành phần xử lý và cách đánh giá kết quả của VietLex. Mô hình dữ liệu nghiệp vụ bổ sung cho mô hình lớp cài đặt; các sơ đồ hành vi giải thích những tình huống thành công, thiếu thông tin và dừng tác vụ. Các nhận xét được đối chiếu với mã nguồn và chứng cứ đã lưu, từ đó đề xuất hướng kiểm tra tiếp theo. Giá trị của phần phân tích nằm ở việc làm rõ những liên hệ này, thay vì chỉ liệt kê công nghệ hay chức năng."
+    },
+    {
+      "section": "Đánh giá theo tầng và nguyên tắc hướng đối tượng",
+      "paragraph_index": 0,
+      "expected_text_sha256": "001ce18f2ce47a667ea3e0ef9014256c5fd247af5b10c7f6f0dc74bda522fd84",
+      "text": "Đánh giá nên tách tối thiểu: chất lượng ứng viên truy xuất; độ bao phủ điều/khoản bắt buộc; độ chính xác và độ hỗ trợ của trích dẫn; nội dung câu trả lời; độ trễ/lỗi kỹ thuật; và trải nghiệm người dùng. Một hệ thống có Document Recall cao vẫn có thể bỏ sót khoản cần thiết hoặc tạo kết luận không được hỗ trợ bởi căn cứ. Tương tự, điểm đánh giá tự động cao không chứng minh bộ đánh giá đại diện hoặc nguồn pháp luật được cập nhật."
+    },
+    {
+      "section": "Đánh giá theo tầng và nguyên tắc hướng đối tượng",
+      "paragraph_index": 1,
+      "expected_text_sha256": "67eac31709476a6941a351f47e0e1d37bfa590475c7776e565a4936474b7e8d4",
+      "text": "Trong phân tích-thiết kế hướng đối tượng, các lớp dữ liệu biểu diễn khái niệm ổn định; thành phần dịch vụ điều phối nghiệp vụ; tuyến xử lý chuyển đổi yêu cầu và phản hồi HTTP; và mẫu giao diện thể hiện trạng thái giao diện. Tính đóng gói giúp giới hạn trách nhiệm, nhưng các phụ thuộc giữa tuyến xử lý, thành phần dịch vụ, kho vector, kho nội dung và dịch vụ mô hình vẫn cần được ghi nhận. Sơ đồ trong bài là mô hình rút gọn từ bản mã nguồn khảo sát; nó hỗ trợ trao đổi cấu trúc, không thay thế toàn bộ danh mục lớp."
+    },
+    {
+      "section": "Sai lệch cấp văn bản trong truy xuất pháp lý",
+      "paragraph_index": 1,
+      "expected_text_sha256": "4a8bcf216ea1658fed84cac9c58c0d1076dadf4bb1e60e0002650bf0d136b3af",
+      "text": "Điểm liên hệ với VietLex là cần kiểm riêng hai câu hỏi: “đúng văn bản chưa?” và “đúng điều/khoản chưa?”. Chỉ số passage-level có thể cao trong khi bộ truy xuất chọn nhầm văn bản gần chủ đề. Mã nguồn VietLex giữ định danh văn bản, số hiệu, tiêu đề, trích dẫn và mã băm trong dữ liệu truyền/đoạn căn cứ; tuy nhiên việc có các trường đó chưa tự đảm bảo đáp án chuẩn label và đánh giá hiện hành kiểm tra mọi lỗi mismatch. Bài xem định danh văn bản là một chiều cần đưa vào bộ kiểm chứng tiếp theo, không kết luận VietLex đã gặp đúng dạng lỗi như bài báo."
+    },
+    {
+      "section": "Sai lệch cấp văn bản trong truy xuất pháp lý",
+      "paragraph_index": 2,
+      "expected_text_sha256": "5dc787e317371f04d8dc8b2c65fa053ab267f134f889623dd95e1d160fa0dfc9",
+      "text": "Không chuyển Summary-Augmented Chunking thành khuyến nghị triển khai ngay. Thêm bản tóm tắt vào đoạn làm đổi dữ liệu chỉ mục, kích thước dữ liệu truyền và hợp đồng truy xuất; cần so sánh với cấu hình hiện tại bằng cùng phiên bản tập văn bản, truy vấn, nhãn đáp án chuẩn và ngân sách. Nếu thử nghiệm, cần báo cáo tỷ lệ chọn sai văn bản, độ bao phủ theo văn bản/điều/khoản, lỗi trích dẫn và chi phí chỉ mục riêng."
+    },
+    {
+      "section": "Đánh giá mức độ bám sát căn cứ trong hỏi đáp pháp lý",
+      "paragraph_index": 1,
+      "expected_text_sha256": "5e5d8dad3f322f80cd83bd5569b393722a53c262aadff8fa8d00935edaaee307",
+      "text": "Mối liên hệ phương pháp là mức độ bám sát căn cứ và độ đúng khác nhau. Một câu có thể được nguồn hỗ trợ nhưng nguồn không đầy đủ, đã cũ, không áp dụng đúng thời điểm hoặc bị chọn sai văn bản. Ngược lại, câu có thể tình cờ trùng đáp án chuẩn nhưng trích dẫn không hỗ trợ. Vì vậy báo cáo tách độ chính xác trích dẫn, tỷ lệ trích dẫn không hợp lệ, mức khớp câu trả lời, độ bao phủ truy xuất và đánh giá của người có chuyên môn."
+    },
+    {
+      "section": "Đánh giá mức độ bám sát căn cứ trong hỏi đáp pháp lý",
+      "paragraph_index": 2,
+      "expected_text_sha256": "58a8a5bb0553ad7f80b3c7dcdbfdc8f8d2574c552f0e8e7eff6d387ff293fb67",
+      "text": "Với VietLex, bộ đánh giá nên gắn mỗi nhận định trọng yếu trong câu trả lời với một đoạn nguồn và nhãn hỗ trợ/không hỗ trợ; người rà soát cần ghi lỗi thiếu căn cứ, sai văn bản, sai thời điểm, bỏ ngoại lệ và lỗi diễn đạt. Metric tự động có thể sàng lọc nhưng không thay quyết định của người có chuyên môn. Đây là đề xuất phương pháp, không khẳng định hệ thống đã triển khai thẩm định chuyên môn."
+    },
+    {
+      "section": "Tổng hợp nghiên cứu và giới hạn suy luận",
+      "paragraph_index": 1,
+      "expected_text_sha256": "73bcb480a881b240e22615312fa901895b750a4fb06d01a07da87240ef6d5d0a",
+      "text": "Từ đó, khung phân tích đặt một yêu cầu gắn với từng tầng: đầu vào cần giữ phạm vi truy vấn; truy xuất cần định danh đúng văn bản và đoạn; đoạn căn cứ cần có vị trí/dấu vết nguồn gốc; sinh câu trả lời cần bám ngữ cảnh và thể hiện giới hạn; giao diện cần phân biệt dữ liệu sổ đăng ký với kết luận hiệu lực; đánh giá cần có mẫu số, trạng thái bỏ qua và kiểm tra người. Cấu trúc này giúp phân loại lỗi theo nơi phát sinh thay vì quy hết cho mô hình sinh."
+    },
+    {
+      "section": "Tổng hợp nghiên cứu và giới hạn suy luận",
+      "paragraph_index": 2,
+      "expected_text_sha256": "3f6110f6ac0c97660164c9274d8dfe438a8a72184e31dcd9e8a076a0a53334c6",
+      "text": "Hướng dẫn HCMUNRE nêu tiêu chí nhận xét nhưng không có thang điểm. Hồ sơ hiện chưa có rubric học phần, xác nhận của người duyệt, bộ đánh giá VietLex mới hay adjudication pháp lý; vì vậy báo cáo chỉ mô tả bằng chứng bản chụp dữ liệu, không xác nhận tuân thủ học phần hoặc khả năng tư vấn pháp luật."
+    },
+    {
+      "section": "CHƯƠNG 2: PHƯƠNG PHÁP THỰC HIỆN",
+      "paragraph_index": 0,
+      "expected_text_sha256": "80aaa9549e65ce9daf365720caa6c572b21e80d3cbf37491941c3db98c74e052",
+      "text": "Các nhận định chương này phản ánh mã nguồn và tài liệu hiện có tại ngày 22/10/2026. Mã nguồn project có cây mã nguồn có thay đổi chưa ghi nhận thành phiên bản; manifest ghi HEAD, trạng thái mã băm và mã băm từng file để người đọc phân biệt bản chụp dữ liệu này với trạng thái lịch sử khác."
+    },
+    {
+      "section": "Đối tượng và hiện trạng hệ thống",
+      "paragraph_index": 0,
+      "expected_text_sha256": "6554f448e77c681f9287a447ecd00b1af149e6afcc5049805c80186fc1b3966f",
+      "text": "VietLex là ứng dụng web xây dựng bằng FastAPI và Jinja, cung cấp các trang hỏi đáp, tra cứu, đọc văn bản và quản lý hồ sơ nghiên cứu. Một nhóm trang khác phục vụ tài khoản và quản trị. Trong quá trình khảo sát, báo cáo phân biệt trang giao diện với thao tác gửi dữ liệu: một trang có thể hỗ trợ nhiều hành động nhưng các hành động đó không được đếm thành các màn hình riêng. Danh sách tuyến xử lý và mẫu giao diện được lưu trong kiểm kê dự án để đối chiếu với sơ đồ phân cấp màn hình ở phần nghiệp vụ."
+    },
+    {
+      "section": "Đối tượng và hiện trạng hệ thống",
+      "paragraph_index": 1,
+      "expected_text_sha256": "c12ef6cc00b21a45bae5da9ab4d3ef766cbe07f9a3bfe6b68ca8ad9263326e62",
+      "text": "Trang tra cứu hỗ trợ tìm theo thông tin mô tả và tìm theo nội dung khi chỉ mục tương ứng khả dụng. Ảnh đã ghi ngày 23/10/2026 cho thấy quá trình từ trang chủ đến trang tra cứu, gửi số hiệu 45/2019/QH14 và mở kết quả Bộ luật Lao động 2019. Quan sát này xác nhận trạng thái của luồng công khai tại thời điểm chụp; nó chưa bao phủ các bộ lọc, mọi kho dữ liệu hoặc các trường hợp lỗi. Thông tin sự kiện hiệu lực được trình bày riêng theo dữ liệu đã đăng ký, cần được phân biệt với kết luận thẩm định hiệu lực của văn bản."
+    },
+    {
+      "section": "Đối tượng và hiện trạng hệ thống",
+      "paragraph_index": 2,
+      "expected_text_sha256": "830f892e81ef3ecf4e58264915b83967e6b787388b51b97f473b06267fc0b2fd",
+      "text": "Trang hỏi đáp cho phép đặt câu hỏi theo phạm vi tập văn bản chung hoặc gắn với một văn bản cụ thể. Yêu cầu đi qua kiểm tra đầu vào, lựa chọn căn cứ, sinh câu trả lời và kiểm tra đầu ra; một số trường hợp có thể dùng lại bộ nhớ đệm hoặc dừng trước bước sinh. Khảo sát hiện trạng vì vậy cần mô tả cả các nhánh thay thế, đặc biệt là thiếu căn cứ và sự cố kỹ thuật. Những khác biệt này ảnh hưởng trực tiếp đến cách người dùng hiểu thông báo trên giao diện."
+    },
+    {
+      "section": "Phạm vi người dùng và ranh giới",
+      "paragraph_index": 0,
+      "expected_text_sha256": "46846b7e6d180e80ac4cce76b0f39e52467311728ace6b3c3b0e6a2e0d37af03",
+      "text": "Người tra cứu có thể tìm văn bản, mở nguồn và đặt câu hỏi. Người dùng đã đăng nhập có thể làm việc với hồ sơ của mình, lưu nguồn/ghi chú và quay lại phân tích. Quản trị viên có các trang giao diện quản lý vận hành. Các ranh giới quyền sở hữu và CSRF được triển khai ở tuyến xử lý/thành phần dịch vụ liên quan, nhưng bài không chạy kiểm tra vai trò hoặc truy cập trực tiếp khi chạy; do đó đây là mô tả mã chương trình, không phải kết luận bảo mật môi trường chạy."
+    },
+    {
+      "section": "Vai trò, năng lực và ranh giới quyền",
+      "paragraph_index": 0,
+      "expected_text_sha256": "dfdaa5391120db5e40e7fc08cde92876af55e0d9d864852aa1de603c6e642c4d",
+      "text": "Năm nhóm nhóm truy cập cần được tách khi mô tả hệ thống. Khách truy cập dùng cookie client có chữ ký và bị giới hạn theo cấu hình; người dùng có tài khoản làm việc với nguồn, hồ sơ nghiên cứu và lịch sử của chính mình; quản trị viên có thao tác quản trị theo vai trò; chế độ đánh giá minh họa là chế độ giới hạn riêng chứ không phải vai trò người đánh giá; người đánh giá nội bộ chạy CLI/harness và có thể bật bộ chấm tự động theo điều kiện. Bảng capability trong tài liệu hướng dẫn là mô tả mã chương trình/cấu hình, không chứng minh mọi chức năng đã mở cho mọi bản triển khai."
+    },
+    {
+      "section": "Vai trò, năng lực và ranh giới quyền",
+      "paragraph_index": 1,
+      "expected_text_sha256": "dace4b289c89fdab2eb4cb6ce09afbee6686f7ce4840357311f03eed45edfb64",
+      "text": "Một số trang GET có thể hiển thị trong môi trường mà khả năng lưu trữ trực tuyến không khả dụng. Vì vậy “nhìn thấy menu”, “tuyến xử lý trả HTML”, “tuyến xử lý đọc được dữ liệu” và “được phép ghi dữ liệu” là các mức khác nhau. GET trang giao diện thuộc lớp giao diện; POST, DELETE và JSON điểm truy cập là thao tác; chủ sở hữu/CSRF là điều kiện kiểm soát tại máy chủ. Không suy ra quyền từ nút bị ẩn trong mẫu giao diện."
+    },
+    {
+      "section": "Vai trò, năng lực và ranh giới quyền",
+      "paragraph_index": 2,
+      "expected_text_sha256": "8d447199f43b845a7cb6ca15bb9d0835a6e2e4ae80d8cda7d6f1a8581b0c3f9e",
+      "text": "Bảng capability và giới hạn dưới đây dựa trên tuyến xử lý và tài liệu hướng dẫn. “Mã nguồn-defined” là đối chiếu tĩnh; quyền thực tế của từng vai trò và bản triển khai cần môi trường chạy kiểm tra có tài khoản được cấp phép."
+    },
+    {
+      "section": "Đặc tả yêu cầu chức năng",
+      "paragraph_index": 0,
+      "expected_text_sha256": "531077b756d16a5ecde7503616ad9b3d58b3802a395c098971f9b1f4e5367b5f",
+      "text": "Hướng dẫn HCMUNRE có tiêu chí nhận xét nhưng không quy định thang điểm; trong hồ sơ hiện có chưa thấy đề bài hoặc rubric chấm điểm riêng. Vì vậy, mã CAP dưới đây là yêu cầu phân tích nội bộ được tái dựng từ tuyến xử lý, mẫu giao diện và tài liệu hướng dẫn, không phải rubric hay yêu cầu đã được giảng viên xác nhận. Mỗi hàng có bằng chứng về hàm xử lý hoặc trang giao diện được khai báo; trạng thái môi trường chạy và chất lượng kết quả được đánh giá riêng."
+    },
+    {
+      "section": "Yêu cầu chất lượng và cách đánh giá",
+      "paragraph_index": 0,
+      "expected_text_sha256": "6437319e85a7d9e7aa7db330d2032ccb391a452fdfb8137f111b78143a9287e2",
+      "text": "Tính truy vết cần được đánh giá bằng tỷ lệ nhận định có trích dẫn hợp lệ, độ đầy đủ vị trí nguồn, giữ mã nguồn mã băm qua bước mở rộng và khả năng tái dựng yêu cầu từ dấu vết xử lý. Các chỉ tiêu này có thể đo từ bộ câu hỏi đã gán nhãn; mã chương trình có trường log/dấu vết xử lý là điều kiện hỗ trợ chứ chưa phải bằng chứng dấu vết xử lý đủ hoặc không chứa dữ liệu nhạy cảm."
+    },
+    {
+      "section": "Yêu cầu chất lượng và cách đánh giá",
+      "paragraph_index": 1,
+      "expected_text_sha256": "de15c84810433a2230d8f51ae23d2f59296717bbec6d3177e2d6e79daf613329",
+      "text": "Tính bảo mật cần kiểm tra chủ sở hữu scoping, CSRF, cookie, no-store, tải original và audit log theo nhiều vai trò. Mã nguồn mô tả cơ chế điều kiện kiểm soát và lưu trữ, nhưng bài không chạy pen-kiểm thử, không kiểm tra browser thực tế và không truy cập Mongo/Production. Tính riêng tư còn cần xét che dữ liệu nhạy cảm trước khi lưu/gửi, dữ liệu tồn tại trong log/session/hồ sơ nghiên cứu và TTL Mongo là dọn bất đồng bộ, không phải thời điểm xoá chính xác."
+    },
+    {
+      "section": "Yêu cầu chất lượng và cách đánh giá",
+      "paragraph_index": 2,
+      "expected_text_sha256": "133c11e400b6ea0949a84c5f08a396c5432dc52c7f1516a2755b76a1a172ff1b",
+      "text": "Tính chịu lỗi đòi phân biệt retrieval_error, no_candidate, blocked đầu vào/đầu ra, tìm thấy trong bộ nhớ đệm, nguồn partial và lỗi sinh câu trả lời. Hệ thống phải giữ thông tin chẩn đoán đủ để điều tra nhưng tránh ghi secret hoặc nội dung không cần thiết. Nghiệm thu kiểm thử tương lai cần xác nhận mỗi nhánh qua trạng thái, giao diện, dấu vết xử lý và side effect lưu trữ; HTTP 200 đơn lẻ không đủ."
+    },
+    {
+      "section": "Yêu cầu chất lượng và cách đánh giá",
+      "paragraph_index": 4,
+      "expected_text_sha256": "9cb1d9fe598e31b43fc9193f8d9f1c2ba3796d99e987f9477bc80a22d5cb47ac",
+      "text": "Tính tái lập yêu cầu lượt thực hiện lưu revision và dirty diff mã băm, dataset/đáp án chuẩn mã băm, cấu hình dấu nhận diện cấu hình đã loại secret, mô hình/dịch vụ mô hình, chỉ số version, cỡ mẫu, skip reason và raw biên bản kiểm tra. Nếu mã nguồn, cấu hình hoặc tập văn bản thay đổi thì biên bản kiểm tra cũ chỉ là bản chụp dữ liệu lịch sử."
+    },
+    {
+      "section": "Phạm vi dữ liệu, giả định và phần chưa được nghiệm thu",
+      "paragraph_index": 0,
+      "expected_text_sha256": "e07e8d07a358cf2eb104b9ed3c2a9e27d6da48aaa6e9521b9bd1092b0d865f9a",
+      "text": "Đối tượng dữ liệu pháp luật bắt đầu từ dataset pin theo revision, được công bố có 518.255 bản ghi thông tin mô tả. Capacity audit ngày 17/10/2026 cho thấy tập trực tuyến Supabase và hai collection Qdrant được đối chiếu có 14.962 định danh văn bản duy nhất; đây xấp xỉ 2,89% thông tin mô tả của bản chụp dữ liệu đã pin, không đồng nghĩa 2,89% văn bản pháp luật đang có hiệu lực hay nội dung hợp lệ."
+    },
+    {
+      "section": "Phạm vi dữ liệu, giả định và phần chưa được nghiệm thu",
+      "paragraph_index": 1,
+      "expected_text_sha256": "265a6d00add5ee4b9b39fcaba828f32a21e38a2e2dd136172ee7c9f1d0edb799",
+      "text": "Khái niệm “toàn VietLex” trên giao diện là phạm vi truy vấn theo đặc tả, không chứng minh toàn tập văn bản đã được ingest. Cần tách pinned dataset, kho nội dung cục bộ, từng collection, chỉ mục toàn văn, trực tuyến Supabase và Pinecone legacy vì mỗi nơi có độ bao phủ/refresh khác nhau. Nguồn chính thức ngoài tập văn bản cũng có phạm vi và thời gian đọc riêng."
+    },
+    {
+      "section": "Phân rã chức năng và các màn hình",
+      "paragraph_index": 0,
+      "expected_text_sha256": "8a95b3f9e460d1c19e07d76a24980b8ed29287db6139119200a5267961164537",
+      "text": "Sơ đồ Hình 2.1 phân loại các tuyến xử lý GET trả về trang HTML theo nhóm chức năng. GET / là màn hình hỏi đáp; POST /chat chỉ trả fragment vào vùng hội thoại nên được ghi ở nhóm hành động. Các trang tra cứu, tài liệu, hồ sơ nghiên cứu, tài khoản, thông tin và quản trị được ánh xạ theo hàm xử lý; alias được gộp khi cùng một trang giao diện. POST, JSON, redirect và partial không được tính là màn hình độc lập. Danh sách tuyến xử lý, mẫu giao diện và trạng thái bảo vệ nằm trong screen-inventory-v14.json."
+    },
+    {
+      "section": "Use case chính",
+      "paragraph_index": 0,
+      "expected_text_sha256": "acc0f552eeeefe463d22eaedca0feeb33138abcf183cfa39a18eed85d26c03ab",
+      "text": "Người tra cứu tìm văn bản theo số hiệu/tiêu đề hoặc nội dung, mở văn bản, xem sự kiện hiệu lực và gửi câu hỏi. Use case mở và đọc văn bản nối tự nhiên từ kết quả tìm kiếm nhưng có tuyến xử lý GET độc lập. Người dùng đăng nhập làm việc với hồ sơ nghiên cứu để lưu nguồn và xem lại. Quản trị viên sử dụng màn hình quản trị. Ranh giới đăng nhập/quyền của từng tuyến xử lý chưa được xác minh bằng phiên môi trường chạy nên sơ đồ use case mô tả vai trò ở mức chức năng, không khẳng định anonymous/vai trò cụ thể cho mọi bản triển khai."
+    },
+    {
+      "section": "Điều kiện và luồng thay thế",
+      "paragraph_index": 0,
+      "expected_text_sha256": "51bc517da9926df02e5a15e5b3466dbb9c3596192007e647de7ed86ad9a3cd6c",
+      "text": "Luồng tìm kiếm có thể trả kết quả, không có kết quả hoặc không truy cập được hệ thống phía sau. Kết quả không có trong tập văn bản không có nghĩa là ngoài đời không tồn tại quy định. Luồng đọc văn bản có thể trả 404 khi định danh văn bản không hợp lệ hoặc không tồn tại; lỗi hệ thống phía sau được chuyển thành trạng thái không tải được. Luồng hỏi đáp có thể kết thúc bằng bộ nhớ đệm, câu trả lời, thông báo thiếu đoạn căn cứ, cơ chế kiểm soát an toàn chặn hoặc lỗi kỹ thuật. Thiết kế kiểm thử nghiệp vụ nên bao gồm từng nhánh, thay vì chỉ kiểm tra đường đi thành công."
+    },
+    {
+      "section": "Yêu cầu nghiệm thu nội bộ",
+      "paragraph_index": 0,
+      "expected_text_sha256": "cd6dc856ac0dac355aa9f0057e0a6f551a79f878f71d85aa59df519c43477f0e",
+      "text": "Với tra cứu, nghiệm thu cần kiểm tra truy vấn thông tin mô tả và body riêng, phân trang, trạng thái chỉ mục unavailable, đường dẫn từ kết quả đến trang văn bản và nội dung cảnh báo. Với chat, cần kiểm tra phạm vi toàn tập văn bản và phạm vi văn bản, tìm thấy trong bộ nhớ đệm/miss, đầu vào/đầu ra cơ chế kiểm soát an toàn, truy xuất failure, no-evidence và khả năng lưu trữ/dấu vết xử lý. Với hồ sơ nghiên cứu, cần kiểm tra quyền sở hữu, CSRF, lưu/đọc lại nguồn và hành vi hết hạn. Đây là danh sách đề xuất cho đợt QA tương lai; các kiểm tra đó không được chạy trong lượt viết báo cáo."
+    },
+    {
+      "section": "Tóm tắt use case và nhánh ngoại lệ",
+      "paragraph_index": 0,
+      "expected_text_sha256": "04a97361816900f15377f294166419caae1e955401be582ef2bed8553fb4cde8",
+      "text": "Các use case mô tả mục tiêu người dùng và kết quả mong đợi từ tuyến xử lý. Tác nhân được gọi theo năng lực chức năng; chỉ tuyến xử lý có điều kiện kiểm soát vai trò/chủ sở hữu mới gắn với quyền cụ thể. Với use case phụ thuộc trực tuyến thành phần dịch vụ, luồng thành công là luồng mã nguồn-defined chứ không khẳng định đã chạy trong môi trường bàn giao."
+    },
+    {
+      "section": "UC-01. Tìm kiếm và mở văn bản",
+      "paragraph_index": 0,
+      "expected_text_sha256": "f2cce0f849206e160f9c8afe543653b4438022465f91123fe421b6dc31eca594",
+      "text": "Mục tiêu là tìm văn bản bằng số hiệu/tiêu đề hoặc cụm từ trong nội dung rồi mở tài liệu gốc. Tiền điều kiện là hệ thống phía sau của phạm vi tìm kiếm sẵn sàng; người dùng nhập truy vấn và chọn bộ lọc. Handler GET /search quyết định thông tin mô tả hay tìm kiếm toàn văn, áp dụng giới hạn và dựng kết quả. Khi chọn mục, GET /documents/{document_id} nạp tài liệu và trả trang reader."
+    },
+    {
+      "section": "UC-01. Tìm kiếm và mở văn bản",
+      "paragraph_index": 1,
+      "expected_text_sha256": "56bb03e735c2c2943e7f598a18c2579814dcaf50dc0f87c4221c0b373ec76187",
+      "text": "Luồng thay thế gồm truy vấn rỗng/không hợp lệ, không kết quả, body chỉ mục chưa có độ bao phủ, thành phần dịch vụ unavailable, định danh văn bản không tồn tại hoặc reader không tải được. giao diện phải báo đúng trạng thái; kết quả rỗng không chứng minh ngoài tập văn bản không có văn bản. Nếu người dùng xem ngày/sự kiện sổ đăng ký, màn hình chỉ trình bày sự kiện được ghi nhận theo mốc ngày, không kết luận văn bản còn hiệu lực chỉ vì không có dòng sự kiện."
+    },
+    {
+      "section": "UC-02. Đặt câu hỏi có giới hạn phạm vi",
+      "paragraph_index": 0,
+      "expected_text_sha256": "b3ac64216d1fe286d2d8259c3c9e6fed54ce1d47ba2b290829ce0b4ab09f2b00",
+      "text": "Tác nhân gửi câu hỏi từ trang chủ, có thể chọn toàn tập văn bản hoặc văn bản phạm vi. POST /chat áp dụng CSRF/session, che dữ liệu nhạy cảm PII và kiểm tra đầu vào trước khi gọi bộ nhớ đệm có điều kiện hay RAG quy trình xử lý. Retrieval trả đoạn căn cứ cùng trạng thái/thông tin chẩn đoán; quy trình xử lý có thể mở rộng article, đánh giá đủ đoạn căn cứ và/hoặc thử official-mã nguồn supplement theo quy tắc. Sau sinh câu trả lời, hàm xử lý kiểm tra đầu ra, cập nhật trạng thái/dấu vết xử lý và trả fragment HTML."
+    },
+    {
+      "section": "UC-03. Tạo hồ sơ và đưa tài liệu vào workspace",
+      "paragraph_index": 0,
+      "expected_text_sha256": "f84ce13392379925296e8b91b2ea4926471de477a6610048cd7dd5516e3fc650",
+      "text": "Người có identity được phép mở danh sách hồ sơ nghiên cứu, tạo hồ sơ, xem chi tiết và tải tài liệu hỗ trợ. Mỗi yêu cầu tài nguyên truy vấn theo hồ sơ nghiên cứu ID cùng chủ sở hữu user_id hoặc client_id; biết ID không cấp quyền. Hệ thống giữ original và dữ liệu trích xuất trong hồ sơ nghiên cứu record, có thể gắn nguồn, đoạn căn cứ và trạng thái phân tích."
+    },
+    {
+      "section": "UC-03. Tạo hồ sơ và đưa tài liệu vào workspace",
+      "paragraph_index": 1,
+      "expected_text_sha256": "d5180a5da231535a9ea99997168a08d262dfaf888ba84acccecf226329d8dc78",
+      "text": "Nhánh lỗi gồm identity không hợp lệ, hồ sơ nghiên cứu hết hạn/không thuộc chủ sở hữu, file không hỗ trợ, vượt giới hạn bytes, lỗi parse/OCR, văn bản trùng, checkpoint lỗi và khả năng lưu trữ unavailable. Handbook ghi điều kiện kiểm soát tối đa khoảng 12 MB và 20 tài liệu cho hồ sơ nghiên cứu; vì giới hạn phụ thuộc implementation/cấu hình, khi nghiệm thu phải đọc phản hồi thật thay vì hardcode vào client. GET list/detail không chứng minh upload hay extraction thành công."
+    },
+    {
+      "section": "UC-04. Ghim nguồn và chạy phân tích có cấu trúc",
+      "paragraph_index": 0,
+      "expected_text_sha256": "ef609748bbeb221115de718067241efebaba17912ae02edb8abbefaebeec51f3",
+      "text": "Người dùng chọn một hay nhiều nguồn đã lưu rồi thực hiện selected đoạn căn cứ, compare, obligations, claims, timeline, redline hoặc full review qua POST tuyến xử lý riêng. Trước khi phân tích, hồ sơ nghiên cứu kiểm tra chủ sở hữu và lựa chọn nguồn; thành phần dịch vụ nhận những nguồn đó và tạo kết quả có trích xuất/thông tin mô tả. User có thể chỉnh sửa báo cáo; bản xuất sau sửa cần trạng thái chưa xác minh nếu không chạy lại review."
+    },
+    {
+      "section": "UC-05. Đọc nguồn chính thức và hủy một run",
+      "paragraph_index": 0,
+      "expected_text_sha256": "a6f5ace7bb7c8a9459825c712d0b2d813307e8684da9b506479f288acc69a330",
+      "text": "Trong hồ sơ nghiên cứu, người dùng gửi topic để tạo tối đa năm truy vấn xác định; thành phần dịch vụ tìm trên cổng Nhà nước/Công báo, rồi thử đọc tối đa ba địa chỉ nguồn allowlist; tối đa hai network/truy vấn chạy đồng thời và mỗi địa chỉ nguồn có ngân sách riêng. PDF dùng smart window pypdf, tối đa 10 trang kiểm tra và 5 trang giữ lại. Route stream NDJSON sau khi lưu event; GET theo lượt thực hiện ID có thể phát lại trạng thái. Contract mã nguồn ghi luồng này không gọi LLM, OCR hay Brave."
+    },
+    {
+      "section": "UC-05. Đọc nguồn chính thức và hủy một run",
+      "paragraph_index": 1,
+      "expected_text_sha256": "7a4f12a343df32c2dbbc407efaab15a060849dd1b75a23939669c7959deeb153",
+      "text": "Ngân sách cấu hình tối đa 180 giây (60 giây discovery, 105 giây read, 15 giây checkpoint/save); đó là đặc tả/cấu hình, không đảm bảo mọi lượt hoàn tất trong 180 giây môi trường triển khai thực tế. Hủy yêu cầu chủ sở hữu/CSRF; update trạng thái terminal atomic, giữ nguồn/event và gỡ lease. Run có nguồn có thể kết thúc partial; chưa có nguồn có thể thành cancelled; worker cũ chỉ ghi checkpoint khi lượt thực hiện còn running, nhưng HTTP đang đọc có thể tiếp tục tới checkpoint sau. Probe trực tiếp khi chạy đã lưu/đọc lại PDF theo mã băm nhưng kết quả partial, không chứng minh truy xuất đầy đủ hoặc hiệu lực hiện hành."
+    },
+    {
+      "section": "UC-06. Quản trị, phản hồi và registry hiệu lực",
+      "paragraph_index": 0,
+      "expected_text_sha256": "f8ececea2e1856f70e113c723cd82e7f4b643d81ae3195ae56b263e297384581",
+      "text": "Admin có trang giao diện theo dõi evaluation, feedback, users và legal-effect sổ đăng ký. Thao tác thay đổi trạng thái hoặc publish/withdraw sổ đăng ký cần vai trò quản trị viên, CSRF và audit event theo mã nguồn đặc tả. Registry là nhận định do người duyệt xác lập với đoạn căn cứ/dấu vết nguồn gốc; nó không tự tổng hợp mọi amendment và không bao phủ toàn bộ quy phạm pháp luật."
+    },
+    {
+      "section": "UC-06. Quản trị, phản hồi và registry hiệu lực",
+      "paragraph_index": 1,
+      "expected_text_sha256": "174da284e03a93958b221e433d1b8bf9f6ac43d6deb8eadb52d5eb8ddc20980a",
+      "text": "Nhánh không được phép cần trả trạng thái phù hợp, không để giao diện thay authorization; session hết hạn, thiếu thành phần dịch vụ và audit-write lỗi phải quan sát riêng. Bài không dùng tài khoản quản trị viên, không tạo mutation và không kiểm tra cách môi trường triển khai thực tế triển khai cờ sổ đăng ký. Bằng chứng hỗ trợ mô tả tuyến xử lý/điều kiện kiểm soát và biên bản kiểm tra lịch sử có ngày."
+    },
+    {
+      "section": "Từ use case đến tiêu chí nghiệm thu nội bộ",
+      "paragraph_index": 0,
+      "expected_text_sha256": "8046f6be2c1b8984725b8ba9563c399334dd07244db7ee46f6e3909560ad5733",
+      "text": "Use case cần liên kết với CAP-01…CAP-12 trong ma trận chức năng và đoạn căn cứ mã chương trình/biên bản kiểm tra tại Phụ lục A. Nghiệm thu nội bộ nên có kiểm thử ID cho từng nhánh, fixture, kết quả mong đợi, trạng thái/side effects và môi trường. “Implemented” không được tính là kiểm thử pass."
+    },
+    {
+      "section": "Từ use case đến tiêu chí nghiệm thu nội bộ",
+      "paragraph_index": 1,
+      "expected_text_sha256": "113eef79f794c4f25ba645c1977537294779cf16356357b10dc46ef5cd655466",
+      "text": "Ví dụ, tìm kiếm toàn văn cần kiểm tra thông tin mô tả/body và cảnh báo độ bao phủ; official research cần kiểm mã băm, chủ sở hữu, giới hạn trang và partial; chat cần kiểm nội dung trích dẫn và answer. Muốn công bố hiệu quả cần đáp án chuẩn set, denominators và thẩm định chuyên môn. CAP là tiêu chí phân tích kỹ thuật nội bộ vì hướng dẫn HCMUNRE không cung cấp thang điểm; chúng không được trình bày như tiêu chí chấm điểm chính thức."
+    },
+    {
+      "section": "Đối tượng EvidenceChunk",
+      "paragraph_index": 0,
+      "expected_text_sha256": "7ddb112784b1e798836cbdaa365b9f73802b24578c5ca580f5afa7a233fcded0",
+      "text": "EvidenceChunk là đối tượng dữ liệu bất biến được khai báo trong app/ingestion/legal_text.py. Các thuộc tính gồm định danh văn bản, số hiệu, tiêu đề, địa chỉ nguồn, heading path, article, clause, trích dẫn, nội dung, token count và content mã băm tùy chọn. Phương thức formatted_context() đóng gói trích dẫn, địa chỉ nguồn, title và body thành phần có thể đưa vào ngữ cảnh. Việc gom các thuộc tính này thành một đối tượng giá trị làm rõ đơn vị đoạn căn cứ mà các bước truy xuất và sinh câu trả lời trao đổi."
+    },
+    {
+      "section": "Quan hệ phụ thuộc và nguyên tắc thiết kế",
+      "paragraph_index": 0,
+      "expected_text_sha256": "e0f7238bbdb1c97da627e9d9788e2860cfec76c6dfadf673ae77b04df0305063",
+      "text": "Route /chat điều phối HTTP, cơ chế kiểm soát an toàn, bộ nhớ đệm, gọi quy trình xử lý và dựng phản hồi. run_advanced_rag điều phối truy xuất, chọn đoạn căn cứ, có thể gọi mở rộng và sinh câu trả lời. Retriever biết cách làm việc với hệ thống phía sau; đối tượng đoạn căn cứ là dữ liệu chung ở ranh giới giữa các bước. Cách phân lớp này giảm việc đưa logic kho vector vào mẫu giao diện, nhưng một thay đổi cấu hình truy xuất vẫn có thể làm đổi behavior và số liệu; do đó quy trình xử lý dấu nhận diện cấu hình/mã nguồn revision cần xuất hiện trong evaluation manifest."
+    },
+    {
+      "section": "Đánh giá thiết kế và cải tiến có thể kiểm chứng",
+      "paragraph_index": 1,
+      "expected_text_sha256": "208c3fae3156d3818742eda2a2e84fd3e7b3eccbe23843e5a7e374e947def434",
+      "text": "Điểm cần củng cố là cấu hình tường minh xuyên yêu cầu, độ bao phủ/freshness theo hệ thống phía sau, bộ nhớ đệm eligibility với câu hỏi hiện hành và nhận định-level hỗ trợ bởi căn cứ thay vì chỉ trích dẫn count. Stage điểm xếp hạng/ứng viên truy xuất definition nên version hóa để chỉ số giữa release so sánh được."
+    },
+    {
+      "section": "Đánh giá thiết kế và cải tiến có thể kiểm chứng",
+      "paragraph_index": 2,
+      "expected_text_sha256": "d2a954c91399c604b0b88a883ac9b93c41d016b6036fc2fd5a8dc7c74388703f",
+      "text": "Đề xuất thiết kế không giả định rewrite. Trước tiên gom đặc tả/cấu hình dấu nhận diện cấu hình vào object bất biến gắn với yêu cầu; kiểm cấu trúc dữ liệu kho lưu trữ/dữ liệu truyền bằng fixture; tạo kiểm thử truy vết cho từng branch và report bước xử lý survival. Nếu dữ liệu chỉ ra abstraction không đại diện mã nguồn mới cân nhắc tách giao diện lập trình. Chưa có refactor hay performance kiểm thử mới."
+    },
+    {
+      "section": "Kiến trúc web và luồng tổng quát",
+      "paragraph_index": 0,
+      "expected_text_sha256": "e7f3b05f5eac62a172eb0d4bd9de6563ca559c0ee3426d6e80734bfe60502e5c",
+      "text": "FastAPI/Jinja phục vụ tuyến xử lý HTML và API. Route chuyển yêu cầu tới thành phần dịch vụ nghiệp vụ; mẫu giao diện kết xuất biểu mẫu, nguồn và trạng thái; thành phần dịch vụ truy xuất giao tiếp với chỉ mục/kho nội dung; quy trình xử lý tạo ngữ cảnh và gọi tầng sinh câu trả lời. Cache semantic và interaction kho lưu trữ phục vụ hai nhiệm vụ khác nhau: bộ nhớ đệm có thể trả kết quả đã được lưu theo điều kiện; interaction kho lưu trữ lưu trạng thái/dấu vết xử lý để theo dõi phiên. Sơ đồ kiến trúc thể hiện ranh giới này ở mức thành phần, không liệt kê mọi database collection hay dịch vụ mô hình."
+    },
+    {
+      "section": "Kiến trúc web và luồng tổng quát",
+      "paragraph_index": 1,
+      "expected_text_sha256": "3afded981ee842255d343e88452eea928e67b46dff2711fe07a114c68b8524f3",
+      "text": "Một boolean cấu hình chọn một trong hai truy xuất đặc tả; không có cross-fallback âm thầm giữa hai đặc tả theo tài liệu hiện hành. Với USE_LEGACY_FREE_PIPELINE=false (giá trị mặc định trong cấu hình), tuyến V3 dùng Vertex gemini-embedding-2 vector 1024 chiều và Qdrant V3, trộn RRF/DBSF. Với true, tuyến legacy dùng Qdrant Cloud inference multilingual E5 384 chiều, Pinecone V1, SQLite FTS cho số hiệu/tiêu đề và local content resolution. Config mặc định không phải bằng chứng về bản triển khai hiện tại."
+    },
+    {
+      "section": "Hai phương án truy xuất",
+      "paragraph_index": 0,
+      "expected_text_sha256": "62451dddccefbf86476e818e51d119c27fcdd5fa9941a57ce29b555ed7bd1278",
+      "text": "Tuyến V3 giữ vector dày và vector thưa IDF trong collection Qdrant; kết quả RRF và DBSF được trộn theo rank với trọng số bằng nhau theo tài liệu kiến trúc. Sau truy xuất có thể mở rộng đoạn căn cứ điều khoản bằng local/Supabase content, nhưng chỉ khi mã băm nguồn khớp ứng viên truy xuất. Tài liệu ghi dung lượng bản chụp dữ liệu ngày 17/10/2026 có 141.798 điểm trên 14.962 định danh văn bản, tương ứng khoảng 2,89% tập 518.255 định danh văn bản của dataset được nêu. Đây là độ bao phủ bản chụp dữ liệu của một chỉ mục, không phải tập văn bản đầy đủ và không xác nhận trạng thái mới hơn."
+    },
+    {
+      "section": "Giới hạn căn cứ và ngữ cảnh trả lời",
+      "paragraph_index": 0,
+      "expected_text_sha256": "6ddfea76b1d5db2994552002635604f8a0ee3b532ba20eb377c88fda477aaf13",
+      "text": "Theo tài liệu kiến trúc, câu trả lời giữ tối đa ba passage trong ngân sách 720 token. Giới hạn này hữu ích để kiểm soát ngữ cảnh size và độ trễ, nhưng tạo trade-off: nguồn thiết yếu có thể bị loại bởi ranking hoặc budget; đoạn ngắn có thể thiếu điều kiện/ngoại lệ; tokenization có thể khác với ước lượng whitespace. Vì thế độ bao phủ ở ứng viên truy xuất bước xử lý và đoạn căn cứ survival sau selection nên được đo song song."
+    },
+    {
+      "section": "Giới hạn căn cứ và ngữ cảnh trả lời",
+      "paragraph_index": 1,
+      "expected_text_sha256": "5b3bae914b9fefe6f90e3cfa15da5642c9ef9fcf927f22556b7269eaa06c28d8",
+      "text": "Quy trình xử lý có thể tìm official-mã nguồn supplement khi ngữ cảnh được xem là chưa đủ, với timeout giới hạn; kết quả ngoài tập văn bản được gắn dấu vết nguồn gốc riêng. Official supplement không biến bất kỳ trang web nào thành nguồn đã xác minh. giao diện cần nói rõ nguồn nào là văn bản trong tập văn bản, nguồn nào là bổ sung và thời điểm truy cập. Khi không có căn cứ đủ dùng, mã chương trình có thể trả lời từ chối thay vì tự điền kết luận; đây là trạng thái có chủ đích chứ không phải lỗi nội dung."
+    },
+    {
+      "section": "Ranh giới dữ liệu và an toàn",
+      "paragraph_index": 0,
+      "expected_text_sha256": "52683a5f8ba28656d58ba19953aec2f02bb53adf2d3d25d33908731157b8e16d",
+      "text": "Evidence từ vector chỉ mục, tìm kiếm toàn văn, bộ nhớ đệm, hồ sơ nghiên cứu lưu trữ và official supplement khác nhau về độ bao phủ, freshness và review state. Một định danh document_id không đảm bảo content mã nguồn đồng nhất nếu quy trình xử lý không ràng buộc mã nguồn mã băm. EvidenceChunk có source_content_sha256 tùy chọn; V3 expansion kiểm tra mã băm trước khi nối nội dung đầy đủ. Nên hiển thị nguồn, vị trí, trạng thái kiểm tra và ngày, đồng thời từ chối mở rộng khi dấu vết nguồn gốc thiếu/thay đổi."
+    },
+    {
+      "section": "Ranh giới dữ liệu và an toàn",
+      "paragraph_index": 1,
+      "expected_text_sha256": "c965efb8eee3c013a1e9f2ce0d874cc282d3ed41301a122d39fa67c21019b640",
+      "text": "Route chat redacts PII trước khi tiếp tục; CSRF token dùng cho biểu mẫu POST; tài liệu hướng dẫn của mã nguồn ghi hồ sơ nghiên cứu/resource reads chủ sở hữu-scoped và phản hồi dynamic dùng no-store. Tuy nhiên không có kiểm thử môi trường chạy trong bài, do đó đây là mô tả cơ chế mã chương trình, chưa phải đánh giá hiệu quả security. Cần một threat mô hình riêng cho lời nhắc injection trong văn bản nguồn, data exfiltration, bộ nhớ đệm poisoning, access control và log thời hạn lưu."
+    },
+    {
+      "section": "Đánh đổi kiến trúc",
+      "paragraph_index": 0,
+      "expected_text_sha256": "ff6923d1a43f8d9c9a2a9b22413942c7fc434ea12e8246c83a5010e18a19c66f",
+      "text": "Hai nhánh truy xuất cho phép thử nghiệm hệ thống phía sau và giới hạn phụ thuộc nhưng tăng chi phí cấu hình, observability và khả năng tái lập. Thay đổi một boolean có thể đổi embedding số chiều, chỉ mục, vector thưa path, bộ xếp hạng lại và nguồn nội dung. Mỗi lượt thực hiện cần lưu resolved configuration (đã loại secret), data bản chụp dữ liệu, mã chương trình revision, quy trình xử lý dấu nhận diện cấu hình, dataset/đáp án chuẩn mã băm và ứng viên truy xuất budget. Nếu thiếu các trường này, hai lượt thực hiện mang cùng tên baseline có thể không so sánh được."
+    },
+    {
+      "section": "Đánh đổi kiến trúc",
+      "paragraph_index": 1,
+      "expected_text_sha256": "d75fa34153fc4f604a8d30622984d67aa0ab2255b8f97a1d214966a2d6b4496e",
+      "text": "Tách tra cứu chính xác, toàn văn và semantic RAG thành các trải nghiệm riêng có lợi cho người dùng nhưng cần giải thích khác biệt. Số hiệu/title FTS không tương đương tìm body; phrase tìm kiếm toàn văn không phải semantic search; câu trả lời RAG không thay thế mở văn bản gốc. Các nhãn giao diện hiện có nói một phần điều đó; bộ usability review tương lai cần kiểm tra người dùng có hiểu phạm vi hay không."
+    },
+    {
+      "section": "Quy trình nạp dữ liệu và quản lý chất lượng tập văn bản",
+      "paragraph_index": 0,
+      "expected_text_sha256": "a7303ed4c9afd81d9817184489b023dcd8ccb4a5c6cdfe0e549f84f153952588",
+      "text": "Ingestion VietLex bắt đầu ở shard Parquet và revision pin trong cấu hình/runbook, không phải crawler được README của publisher mô tả. Quy trình xử lý kiểm manifest/checksum, chuẩn hóa thông tin mô tả, join body theo định danh văn bản, phát hiện thiếu/duplicate/mismatch, ghi kho nội dung rồi xây FTS/vector nhánh truy xuất theo đặc tả riêng. Phân biệt bước publisher với bước ingest VietLex để không gán crawler bên ngoài cho mã nguồn hiện tại."
+    },
+    {
+      "section": "Quy trình nạp dữ liệu và quản lý chất lượng tập văn bản",
+      "paragraph_index": 1,
+      "expected_text_sha256": "f24a582b82c5de592a4a9a695e81da7bd9ead3123e88e1c11a5d8c6a3a5ed45e",
+      "text": "SQLite kho nội dung tách thông tin mô tả và contents. Metadata giữ số hiệu, title, địa chỉ nguồn, type, sector, issuing căn cứ có thẩm quyền, date, signer, quality flags; contents giữ body Zstandard, byte count, SHA-256, mã nguồn shard/row, token count và flags. FTS5 số hiệu/title tách riêng; local body passage FTS có cấu trúc dữ liệu/độ bao phủ khác. Checkpoint, failure row và build report là artifact để resume/audit, không phải bộ nhớ đệm rác."
+    },
+    {
+      "section": "Quy trình nạp dữ liệu và quản lý chất lượng tập văn bản",
+      "paragraph_index": 2,
+      "expected_text_sha256": "485d355c04690259387bb464eb558adce4b3f1965b43e0536253774505414d57",
+      "text": "Quality flags gồm thiếu ID/number/title/địa chỉ nguồn, ngày sai, body rỗng, encoding damage, độ dài bất thường và duplicate mã băm. Flag giúp phân tầng/điều tra, không tự cho phép bỏ tài liệu. Hash trùng có thể là cùng byte content ở hai ID nhưng không chứng minh cùng ý nghĩa hoặc có thể gộp. Mỗi lần lọc phải nêu tiêu chí và số lượng theo lý do."
+    },
+    {
+      "section": "Quy trình nạp dữ liệu và quản lý chất lượng tập văn bản",
+      "paragraph_index": 3,
+      "expected_text_sha256": "dd2f317730ae012ef027a49ad309f05356507ade19064fdf5dadf70264d05ca8",
+      "text": "Thay đổi đầu vào version, normalizer, chunking, embedding, số chiều, vector thưa representation hoặc dữ liệu truyền cấu trúc dữ liệu cần build/cấu trúc dữ liệu dấu nhận diện cấu hình. Resume chỉ hợp lệ nếu đặc tả khớp; nếu không checkpoint cũ có thể làm lẫn dữ liệu. Ingestion biên bản kiểm tra cần mã nguồn revision, đầu vào manifest, count read/joined/failed/flagged, mã băm, mô hình/cấu hình, destination và readback. Bài không chạy ingestion hay ghi remote."
+    },
+    {
+      "section": "Quy trình nạp dữ liệu và quản lý chất lượng tập văn bản",
+      "paragraph_index": 4,
+      "expected_text_sha256": "a87dad688812b4c0c0c3f4002f47027b931b193bef77d2972d400212553cde3c",
+      "text": "Hình dưới đây phân biệt bước kiểm/join nguồn với các nhánh tạo kho nội dung, FTS và vector nhánh truy xuất; đây là flow mã nguồn-derived, không phải biên bản kiểm tra của một lần nạp mới."
+    },
+    {
+      "section": "Độ bao phủ và tính nhất quán giữa các chỉ mục",
+      "paragraph_index": 0,
+      "expected_text_sha256": "0735e1a27041402bf7d84f4e530b7627072ea0d155cace728771f10800ea705f",
+      "text": "Capacity audit read-only ngày 17/10/2026 đối chiếu Qdrant V3, Qdrant body-search và Supabase theo 14.962 văn bản IDs và cùng ID-set mã băm. Qdrant V3 có 141.798 structural points; thông tin mô tả dataset pinned có 518.255 records. Kết quả chứng minh tập được đối chiếu tại thời điểm đó, không chứng minh full-tập văn bản, luật hiện hành, mọi point đều truy vấn được hoặc mọi collection cùng nguồn."
+    },
+    {
+      "section": "Độ bao phủ và tính nhất quán giữa các chỉ mục",
+      "paragraph_index": 1,
+      "expected_text_sha256": "c7f929ba74b157d79f2e32932a9940c5dc8f0806ca0b9b3c7d23f81741e6fd2a",
+      "text": "Qdrant body-search là phrase chỉ mục dữ liệu truyền, không phải vector truy xuất. Supabase giữ thông tin mô tả/body trực tuyến trong tập audit; SQLite local FTS tìm số hiệu/title; Pinecone V1 là kho vector legacy với trực tiếp khi chạy độ bao phủ UNKNOWN. Vì thế search tuyến xử lý, chat RAG và reader có thể dùng nguồn/độ bao phủ khác nhau. Không thấy ở một nhánh truy xuất không đồng nghĩa mọi kho lưu trữ hoặc official sources đều không có văn bản."
+    },
+    {
+      "section": "Giao diện tra cứu đã khảo sát",
+      "paragraph_index": 0,
+      "expected_text_sha256": "e628c2ea63b9d4bc0f82cc176b59f80a1f9525b7faded491aeb3ddcf14218c10",
+      "text": "Ảnh chụp GET /search trong phiên ẩn danh hiển thị truy vấn 45/2019/QH14 và kết quả Bộ luật Lao động 2019. Ảnh ghi nhận trạng thái có kết quả thật trên bản triển khai tại thời điểm chụp; không chứng minh toàn bộ phạm vi tìm kiếm, chất lượng nội dung hay tình trạng hiệu lực pháp lý."
+    },
+    {
+      "section": "Các trạng thái giao diện đã quan sát",
+      "paragraph_index": 0,
+      "expected_text_sha256": "747b259d00df706b7c9cc49c432f19c62a49c7a453518cd1c6e5fd08cce1c0a7",
+      "text": "Bộ capture ngày 23/10/2026 được ghi trong tab trình duyệt hiển thị, phiên ẩn danh, viewport 1440 × 1000 CSS px. Manifest có 13 lần chụp trên 11 tuyến xử lý; từng trạng thái được chụp sau khi điều hướng qua giao diện, gồm trang chủ → thẻ Tra cứu → nhập số hiệu 45/2019/QH14 → gửi biểu mẫu GET → mở kết quả Bộ luật Lao động 2019. Manifest lưu địa chỉ nguồn cuối, click path, timestamp +07:00, HTTP/văn bản trạng thái, console, page_state_review và SHA-256. DOCX chỉ chọn ba ảnh chứng minh luồng chính: GET /, kết quả GET /search và GET /documents/333670. Không mở local giao diện/file hoặc tải tuyến xử lý đích trực tiếp. Không gửi POST/chat/AI, đăng nhập, gửi biểu mẫu tài khoản hoặc tạo hồ sơ nghiên cứu. Revision triển khai chưa được xác nhận độc lập."
+    },
+    {
+      "section": "Các trạng thái giao diện đã quan sát",
+      "paragraph_index": 1,
+      "expected_text_sha256": "61e3b13c3122797215c489853c99f0a0bbec2620140c76d9f4ea55ff1c8cebba",
+      "text": "Sơ đồ UML mô tả cấu trúc mã nguồn; ba ảnh môi trường chạy được đối chiếu với tuyến xử lý/mẫu giao diện và manifest ngày 23/10/2026. Chúng ghi nhận giao diện trong phiên ẩn danh tại thời điểm đó, không đại diện cho POST/API, quyền tài khoản, chất lượng câu trả lời hay toàn bộ trạng thái động."
+    },
+    {
+      "section": "Nhận xét về khả năng sử dụng",
+      "paragraph_index": 1,
+      "expected_text_sha256": "da2f28c05daf220e3702f327dbd0b3c7c589c3749489ac7d35c5ff5ad9f6319f",
+      "text": "Ba ảnh được chọn từ lượt clickthrough ngày 23/10/2026 tại viewport desktop 1440 × 1000 CSS px bằng tab trình duyệt hiển thị. Manifest đối chiếu từng ảnh với tuyến xử lý/mẫu giao diện và lưu địa chỉ nguồn cuối, bước giao diện, HTTP/văn bản trạng thái, tiêu đề trang, lỗi/cảnh báo console và SHA-256. Ảnh hỗ trợ nhận xét về bố cục, nhãn và nội dung nhìn thấy; không xác nhận khả năng responsive, khả năng truy cập hoặc trạng thái động sau thao tác khác. Revision triển khai chưa được xác nhận độc lập."
+    },
+    {
+      "section": "Tra cứu thông tin, toàn văn và đọc tài liệu",
+      "paragraph_index": 0,
+      "expected_text_sha256": "4576d133db9432e2bbc76b7b45839baf8b716e6fe28535314eeb7764a97d5021",
+      "text": "Metadata lookup ưu tiên văn bản number/title và filter type/căn cứ có thẩm quyền/date; kết quả dẫn tới `/documents/{document_id}`. Body search dùng phrase/content chỉ mục riêng và có thể chỉ hiện khi hàm xử lý nhận biết độ bao phủ. Hai đường cần nhãn khác nhau: thông tin mô tả FTS không tìm toàn thân, body phrase search không phải semantic search, chat RAG không phải truy vấn nguyên văn."
+    },
+    {
+      "section": "Tra cứu thông tin, toàn văn và đọc tài liệu",
+      "paragraph_index": 1,
+      "expected_text_sha256": "d8d4f58da48d71628b201716af03ef92c954f512e1f944cd3b5745037f618e56",
+      "text": "Mốc thời gian trên trang có thể hiển thị sự kiện sổ đăng ký đã review theo ngày. Ngày ban hành, ngày hiệu lực và ngày truy cập là khái niệm khác; một ngày trên card không thay cho timeline hợp nhất đã thẩm định. Nếu sổ đăng ký chưa có sự kiện, giao diện phải hiện thiếu dữ liệu/chưa xác minh, không suy luận còn hiệu lực."
+    },
+    {
+      "section": "Xử lý hồ sơ, đọc nguồn chính thức và phân tích",
+      "paragraph_index": 0,
+      "expected_text_sha256": "26fd9767cbcf6364821e81cb84103d0cb445d0ebf0261390141ad154bc4c26d2",
+      "text": "Workspace detail tổng hợp nguồn upload, nguồn chính thức đã đọc, đoạn căn cứ ghim và analysis. Mỗi bản ghi nguồn cần chủ sở hữu, mã băm, địa chỉ nguồn, extraction version, timestamp và page range. Muốn tái chạy, yêu cầu analysis phải tham chiếu đúng bản chụp dữ liệu nguồn chứ không chỉ filename/title."
+    },
+    {
+      "section": "Xử lý hồ sơ, đọc nguồn chính thức và phân tích",
+      "paragraph_index": 1,
+      "expected_text_sha256": "1e0af31bcb3047da8c4cab8ed715fefcacf8fc70e119e78d0b230f6934b5380e",
+      "text": "Official-mã nguồn reader có budget foreground 180 giây, tối đa 5 truy vấn, 2 yêu cầu đồng thời, 3 địa chỉ nguồn allowlist; PDF tối đa 10 trang kiểm tra/5 giữ lại. Cache 15 phút trong cùng chủ sở hữu/hồ sơ nghiên cứu có ngoại lệ refresh và câu hỏi hiện hành; PDF bộ nhớ đệm cần topic match. Run lưu NDJSON events, có thể phục hồi kết quả theo chủ sở hữu. `legal_effect_status` mặc định chưa xác minh nếu chưa có review đúng căn cứ."
+    },
+    {
+      "section": "Xử lý hồ sơ, đọc nguồn chính thức và phân tích",
+      "paragraph_index": 2,
+      "expected_text_sha256": "23eedf26650cc90c6b1c4e142534d2999ad1f1e82967eeddc096af0061df39d0",
+      "text": "Cancellation là giao thức browser-máy chủ: nút chỉ bật sau event started, client POST cancel, chờ xác nhận durable rồi mới abort stream. Response trễ phải khớp controller/lượt thực hiện ID hiện tại. Mongo update terminal giữ event/mã nguồn và gỡ lease; checkpoint chỉ áp dụng khi lượt thực hiện đang running; HTTP đang đọc có thể tiếp tục tới checkpoint. Điều này ảnh hưởng semantics, UX và kiểm thử concurrency."
+    },
+    {
+      "section": "Xử lý hồ sơ, đọc nguồn chính thức và phân tích",
+      "paragraph_index": 3,
+      "expected_text_sha256": "05b9dbec951dd741a21d7651c8f92c8f419dbd6e4076e1dec654e4bd07e899d9",
+      "text": "Structured analysis phụ thuộc nguồn được chọn và đầu ra cấu trúc dữ liệu; compare, obligations, claims/timeline/redline/full review là các thao tác riêng. Khi người dùng sửa báo cáo thủ công, bản chỉnh cần trạng thái review rõ ràng, không hiển thị như kết luận đã tự động xác minh. Export cần giữ trích dẫn, page/địa chỉ nguồn dấu vết nguồn gốc và dấu vết chỉnh sửa."
+    },
+    {
+      "section": "Xử lý hồ sơ, đọc nguồn chính thức và phân tích",
+      "paragraph_index": 4,
+      "expected_text_sha256": "5f79205ecd563bf0f10871da363e9018077663a090f6e56d29a800fdfdc3c262",
+      "text": "Sơ đồ sequence dưới đây làm rõ chủ sở hữu/CSRF, event khả năng lưu trữ trước NDJSON, giới hạn đọc PDF và semantics của cancel; đây là mô hình từ mã nguồn/tài liệu hướng dẫn, không phải dấu vết xử lý môi trường chạy mới."
+    },
+    {
+      "section": "Minh họa luồng tra cứu chính",
+      "paragraph_index": 0,
+      "expected_text_sha256": "735df4d333ee53045a68d0cdc9561e12b3b27ae25ed3eea245378a841d96215f",
+      "text": "DOCX giữ ba ảnh môi trường chạy đã chọn trong cùng một luồng: trang hỏi đáp tại GET /, kết quả tìm Bộ luật Lao động 2019 sau khi gửi biểu mẫu GET tại /search, và trang đọc văn bản sau khi bấm kết quả tại /documents/333670. Ảnh được chụp riêng sau clickthrough trong phiên ẩn danh ngày 23/10/2026; mỗi caption dùng trường SEQ Word và tuyến xử lý tương ứng. Các ảnh về trang hiệu lực, evaluation lab, hồ sơ nghiên cứu, tài khoản và chính sách không được chèn vì không bổ sung bằng chứng trực tiếp cho hành trình tìm và mở văn bản."
+    },
+    {
+      "section": "Minh họa luồng tra cứu chính",
+      "paragraph_index": 3,
+      "expected_text_sha256": "45b075898f23ddbf434484f9cdad2a71b5d44182aabdf64e1f25fd8ead57e57a",
+      "text": "Các capture chỉ ghi nhận giao diện tại thời điểm truy cập; không chứng minh API/POST, quyền tài khoản, chất lượng câu trả lời hay tính đúng hiện hành của luật. Manifest còn có ảnh /legal-status, /evaluation-lab, /workspaces và các trang tài khoản/chính sách; chúng được giữ làm bằng chứng lưu trữ nhưng không chèn vì không trực tiếp minh họa luồng tra cứu. /settings cần session, /admin cần vai trò quản trị viên, /verify-email và /reset-password cần token, chi tiết hồ sơ nghiên cứu cần hồ sơ nghiên cứu thuộc người dùng; /sessions là dữ liệu riêng nên không mở. Các trạng thái bảo vệ/token tiếp tục NOT_RUN."
+    },
+    {
+      "section": "Đánh giá giao diện theo khả năng tránh hiểu nhầm",
+      "paragraph_index": 1,
+      "expected_text_sha256": "8728fc48c3aced3d18d94fd7a5215a673b2f10c15a934968c8730bd63f1c6c59",
+      "text": "Câu trả lời chat cần nhóm trích dẫn theo nhận định, cho mở đoạn gốc và thể hiện đoạn căn cứ insufficient/partial. “Đang đọc nguồn” khác “đã đọc” và “đã được người review”; label/icon không nên khiến snippet trông như chứng cứ pháp lý đã xác nhận."
+    },
+    {
+      "section": "Đánh giá giao diện theo khả năng tránh hiểu nhầm",
+      "paragraph_index": 2,
+      "expected_text_sha256": "5063aaff2a3c0e205c184c59b0a92f6effd666b704f3e893c2e1b3a9e509a8e4",
+      "text": "Workspace cần nêu chủ sở hữu, file type/size limit, extraction progress, số trang đọc được, lỗi/partial và expiry. Khi hủy, giao diện chờ máy chủ confirmation và giữ nguồn đã lưu. Đây là đề xuất từ đặc tả mã nguồn, không phải UX kiểm thử đã hoàn tất."
+    },
+    {
+      "section": "Bằng chứng hiện có và phương pháp đọc",
+      "paragraph_index": 0,
+      "expected_text_sha256": "510e00230ce259e4eb231acac8cfb2dec03f7898b3731a3a9126582588e51ce5",
+      "text": "Tài liệu docs/evaluation/CURRENT_STATUS.md có hai lớp thông tin. Phần đầu là cập nhật vận hành ngày 19/10/2026; bên dưới là Golden-50 bản chụp dữ liệu lịch sử ngày 03/09/2026. Kết quả hai ngày không được gộp: bản chụp dữ liệu cũ có bộ đánh giá truy xuất/answer quy mô 50 case; cập nhật mới ghi hai câu hỏi tự nhiên exploratory, một partial và một failure, không hình thành bộ đánh giá đại diện mới. Mỗi chỉ số cần đọc cùng thời gian, mã nguồn revision, bộ dữ liệu, mẫu số và điều kiện lượt thực hiện."
+    },
+    {
+      "section": "Bằng chứng hiện có và phương pháp đọc",
+      "paragraph_index": 1,
+      "expected_text_sha256": "916aaa00ab65ab2f136f7a31834aaf9885c13a0f3e845b07d7f55202d6e0129b",
+      "text": "Với truy xuất, Recall@K phải gắn với đáp án chuẩn đoạn căn cứ hợp lệ. Tài liệu lịch sử ghi 40 case/53 đoạn căn cứ item dùng được, 10/50 skipped do thiếu nhãn verified. Document Recall@3 là 53/53, Article Recall@3 là 29/30, Clause Recall@3 là 13/14 và all-required độ bao phủ là 39/40. Các mẫu số khác nhau theo cấp tài liệu/điều/khoản nên không được rút thành 53/53 câu hỏi trả lời đúng. Đây là điểm truy xuất, không phải đáp án pháp lý."
+    },
+    {
+      "section": "Kết quả câu trả lời và giới hạn diễn giải",
+      "paragraph_index": 0,
+      "expected_text_sha256": "e5e9677d073274b51af87427063d99a72fc03619da2537d63a03aa275e3d01b4",
+      "text": "Answer lượt thực hiện Golden-50 ngày 03/09/2026 hoàn tất 50/50 lượt sinh câu trả lời, nhưng exact match là 0/50, F1 theo từ 0,2305, character F1 0,2230, độ chính xác trích dẫn 0,9183 và invalid trích dẫn rate 0,0817. RAGAs ghi faithfulness 0,8221, answer accuracy 0,9100, ngữ cảnh độ chính xác 0,8600 và ngữ cảnh độ bao phủ 0,9500. Đây là số liệu bản chụp dữ liệu lịch sử, không phải đo lại mã chương trình dirty hiện tại; chỉ số tự động cũng không xác nhận luật đúng hoặc còn hiệu lực."
+    },
+    {
+      "section": "Bảng tổng hợp chỉ số và mẫu số",
+      "paragraph_index": 0,
+      "expected_text_sha256": "326373079ea318f51348b886076d3fd75fa5a1bed3729823c35c910111b1bf5a",
+      "text": "Bảng dưới tách truy xuất, answer và thử nghiệm mới để tránh trộn phạm vi. Nhãn ngày/mẫu số phải được giữ khi trích số ra khỏi báo cáo."
+    },
+    {
+      "section": "Phân loại bằng chứng và mức diễn giải được phép",
+      "paragraph_index": 0,
+      "expected_text_sha256": "c4687c8b461da5d92a7020ac65a899a3d7526b3bdf69a15911f039ea62fa049d",
+      "text": "Bằng chứng nằm ở nhiều mức: mã nguồn và cấu hình cho thấy hàm xử lý hoặc cơ chế được khai báo; kiểm thử biên bản kiểm tra xác nhận bản chụp dữ liệu mã chương trình qua fixture đã chạy; thành phần dịch vụ kiểm tra quan sát một số yêu cầu; môi trường triển khai thực tế vai trò kiểm tra xác nhận một tập quyền/account; bộ đánh giá truy xuất/answer đo trên dataset/label cụ thể; human legal review mới xem xét áp dụng luật và độ đầy đủ. Các mức không thay thế lẫn nhau."
+    },
+    {
+      "section": "Phân tích chỉ số truy xuất và bộ đánh giá",
+      "paragraph_index": 0,
+      "expected_text_sha256": "353ad75a5bae8b617fbfcfee0af90de344bd67896d50de851b6e7cb0b1bdf436",
+      "text": "Golden-50 truy xuất bản chụp dữ liệu 03/09/2026 ghi Document Recall@3 53/53, Article Recall@3 29/30, Clause Recall@3 13/14 và all-required độ bao phủ 39/40 trên nhãn truy xuất dùng được; 10/50 case không có verified đáp án chuẩn phù hợp và bị skip. Denominator 53 đoạn căn cứ item ở văn bản-level không đồng nghĩa 53 câu hỏi độc lập; article/clause có mẫu số nhỏ hơn và khác nhau. Kết quả cho thấy retriever tìm được reference được gán trong các trường hợp có nhãn, không chứng minh ranking phù hợp cho câu hỏi đời thường hoặc tập văn bản đầy đủ."
+    },
+    {
+      "section": "Phân tích chỉ số truy xuất và bộ đánh giá",
+      "paragraph_index": 1,
+      "expected_text_sha256": "7a60e83e0cef83c09fd6151cf831a7f198886254f789743de3014b16a2c66017",
+      "text": "Answer lượt thực hiện ghi exact match 0/50, F1 theo từ 0,2305, character F1 0,2230, độ chính xác trích dẫn 0,9183 và tỷ lệ trích dẫn không hợp lệ 0,0817. RAGAs faithfulness 0,8221, answer accuracy 0,9100, ngữ cảnh độ chính xác 0,8600, ngữ cảnh độ bao phủ 0,9500 là bộ chấm tự động chỉ số trên bản chụp dữ liệu; không phải xác suất đúng luật. Exact match có thể phạt diễn đạt khác nhưng vẫn là tín hiệu phải đọc cùng các chiều khác."
+    },
+    {
+      "section": "Phân tích chỉ số truy xuất và bộ đánh giá",
+      "paragraph_index": 2,
+      "expected_text_sha256": "ac8aff8fa216d3d14216c118a26abc15a201cd97fd54950f48c82d559b1e6175",
+      "text": "Metric truy xuất/ngữ cảnh khá cao nhưng mức khớp câu trả lời thấp là tín hiệu không nên gộp thành một điểm. Nguyên nhân có thể là truy vấn/reference mismatch, answer formatting, thiếu/chọn sai đoạn căn cứ, sinh câu trả lời, trích dẫn mapping hay bộ chấm tự động; chỉ dấu vết xử lý per-case và thẩm định chuyên môn mới xác định. Summary hiện có không đủ để quy lỗi cho riêng một thành phần."
+    },
+    {
+      "section": "Bằng chứng vận hành và kiểm thử hiện có",
+      "paragraph_index": 0,
+      "expected_text_sha256": "0b2fb7e4f2ab692661328ca038b5b4fd693a820d773502638328b77e67eafc69",
+      "text": "Suite không gọi dịch vụ mô hình ngày 19/10/2026 ghi 1.715 passed, 1 skipped, 6 deselected, mã nguồn unchanged cho biên bản kiểm tra follow-up cancellation. Đây là kiểm thử đoạn căn cứ trong phạm vi đã ghi; không phải suite chạy lại cho report, không xác nhận bản triển khai hiện tại và không đo legal quality. Receipt khác (1.704 pass ngày 18/10; 941 pass/1 fail ở lượt lỗi trước) thuộc bản chụp dữ liệu/lượt khác, không cộng thành một tổng."
+    },
+    {
+      "section": "Bằng chứng vận hành và kiểm thử hiện có",
+      "paragraph_index": 1,
+      "expected_text_sha256": "490f1642a1196f8506a16ab848e0de35b4a2a910bb4387b32b959471d8875ba0",
+      "text": "Production release ngày 18/10 ghi bản triển khai Ready và vai trò kiểm tra 90/90 qua 74 requests cho hai account được tạo riêng; giữ lại hai synthetic hồ sơ nghiên cứu và một file. Ba câu hỏi chat môi trường triển khai thực tế không có full legal-quality pass. Free-reader tiếng Việt lưu/phát lại hai PDF khớp mã băm nhưng discovery timeout làm lượt thực hiện partial; có biên bản kiểm tra riêng cho chủ sở hữu/cancel. Đó là quan sát giới hạn, không nghiệm thu toàn tuyến xử lý hoặc luật hiện hành."
+    },
+    {
+      "section": "Bằng chứng vận hành và kiểm thử hiện có",
+      "paragraph_index": 2,
+      "expected_text_sha256": "1c32c73f5745955bf3ce997cc2b429c46007fe09b7750f183b844af24d9ca1cd",
+      "text": "Trong lượt làm báo cáo này không khởi chạy app cục bộ, truy vấn DB, gọi dịch vụ mô hình, chạy bộ đánh giá hay suite kiểm thử mới. Có mở bản triển khai công khai trong phiên ẩn danh bằng GET qua giao diện; một biểu mẫu GET tìm số hiệu 45/2019/QH14 được gửi để ghi nhận trang kết quả, sau đó mở trang chi tiết văn bản. DOCX giữ ba ảnh đại diện cho luồng đó. Không gửi POST/chat/câu hỏi AI, đăng nhập, gửi biểu mẫu tài khoản hoặc truy cập dữ liệu phiên riêng. Nguồn không kiểm môi trường chạy được ghi là bản chụp dữ liệu/mã nguồn đoạn căn cứ hoặc NOT_RUN."
+    },
+    {
+      "section": "Đánh giá theo từng lớp",
+      "paragraph_index": 0,
+      "expected_text_sha256": "3a7d4382a728c35a09c5606ed91d230b7c40a0e1f3ee5007ff44d4d7e2c7c13d",
+      "text": "Ở lớp chức năng, mã nguồn mô tả không chỉ một màn hình tra cứu mà gồm chat, thông tin mô tả/tìm kiếm toàn văn, reader, sổ đăng ký, hồ sơ nghiên cứu, structured analysis, official-mã nguồn research và quản trị viên. Ở lớp kiến trúc, đoạn căn cứ/ranking/trạng thái/dấu vết nguồn gốc có các kiểm soát hữu ích nhưng nhiều kho lưu trữ/nhánh truy xuất và độ bao phủ không đồng đều. Ở lớp chất lượng, truy xuất bản chụp dữ liệu tốt trên phần đáp án chuẩn có nhãn nhưng answer exact match thấp, trích dẫn có lỗi và sample tự nhiên nhỏ."
+    },
+    {
+      "section": "Đánh giá theo từng lớp",
+      "paragraph_index": 1,
+      "expected_text_sha256": "0c7e8eb81f284d217ef5f0437d5794b49b446bb9c53ff524098272d5232a58b0",
+      "text": "Kết luận phù hợp là report có thể mô tả/phân tích bản mã nguồn khảo sát; bằng chứng chưa đủ chứng nhận nghiệm thu chất lượng pháp lý, full-tập văn bản độ bao phủ hay môi trường triển khai thực tế readiness. Cần bộ đánh giá có nguồn/đáp án chuẩn, xác minh triển khai, đánh giá của người có chuyên môn theo bốn tiêu chí của hướng dẫn HCMUNRE và adjudication pháp lý hiện hành trong phạm vi được cấp phép."
+    },
+    {
+      "section": "HẠN CHẾ VÀ RỦI RO CẦN THEO DÕI",
+      "paragraph_index": 0,
+      "expected_text_sha256": "b57811c170b1658cb9f908ff0320b6105119e02c7ebb1ce67e3b93ad09f4ae49",
+      "text": "Bản phân tích dựa trên bản mã nguồn khảo sát dirty có ghi mã băm; hướng dẫn HCMUNRE cung cấp tiêu chí nhận xét chính thức nhưng không nêu thang điểm/trọng số, còn đề bài hoặc rubric riêng của học phần chưa có trong hồ sơ. Lượt này không khởi chạy app cục bộ, truy vấn database/chỉ mục, gọi dịch vụ mô hình, xác minh bản triển khai, chạy bộ đánh giá mới hoặc kiểm tra hiệu lực luật hiện hành; chỉ ghi nhận ba trang công khai qua GET clickthrough trong phiên ẩn danh ngày 23/10/2026. Các giới hạn này không cho phép xác nhận chất lượng pháp lý hay mức sẵn sàng nộp bài."
+    },
+    {
+      "section": "Phân tích lỗi và rủi ro",
+      "paragraph_index": 0,
+      "expected_text_sha256": "43e933cbb7b39e8c87b1ae0729b10715671553bf4f75bb899212a9dcbb29e21a",
+      "text": "Retrieval có thể tìm đúng văn bản nhưng sai điều/khoản; ranking tốt ở Document Recall chưa chắc giữ được đoạn căn cứ sau reranking hoặc cắt ngữ cảnh. Generation có thể tóm tắt quá mạnh, ghép hai đoạn khác nhau, gắn trích dẫn không hỗ trợ nhận định hoặc bỏ mất giới hạn thời gian. Citation có thể trỏ đúng số hiệu nhưng nguồn ngoài/thông tin mô tả chưa được kiểm tra đầy đủ. Cache có thể trả nội dung cũ nếu dấu nhận diện cấu hình/eligibility không phản ánh đủ khác biệt truy vấn. giao diện có thể khiến người dùng diễn giải search event như xác nhận hiệu lực."
+    },
+    {
+      "section": "Phân tích lỗi và rủi ro",
+      "paragraph_index": 2,
+      "expected_text_sha256": "fd5758c34c41f1953a10be56ec1587dcc65647e052282c9767ec41ad9c7c6cfa",
+      "text": "Rủi ro dữ liệu gồm độ bao phủ không đầy đủ (bản chụp dữ liệu V3 chỉ 14.962/518.255 định danh văn bản), freshness, lệch mã băm, OCR/chunking, và availability/quota remote. Rủi ro vận hành gồm dịch vụ mô hình/mô hình thay đổi, độ trễ, retry, bộ nhớ đệm, branch cấu hình và dirty worktree. Rủi ro người dùng gồm over-reliance, bỏ qua nguồn chính thức và lộ PII trong logs. Rủi ro này cần được theo dõi bằng dashboard/dấu vết xử lý và quy trình incident, không chỉ bằng điểm bộ đánh giá."
+    },
+    {
+      "section": "Kế hoạch kiểm chứng tiếp theo",
+      "paragraph_index": 0,
+      "expected_text_sha256": "56b6083613de22db5dfed685c54f6144735792084487dc3d7a262a1ff87d5a32",
+      "text": "Trước hết xác nhận học phần có đề bài hoặc rubric chấm điểm riêng hay không; hướng dẫn HCMUNRE đã cung cấp tiêu chí nhận xét nhưng không có thang điểm/trọng số. Sau đó đóng băng cấu hình, quy trình xử lý dấu nhận diện cấu hình, chỉ mục bản chụp dữ liệu, dataset và nhãn đáp án chuẩn. Chạy truy xuất-only eval có verified mẫu số, báo độ bao phủ ở văn bản/article/clause, MRR/nDCG nếu phù hợp, ứng viên truy xuất survival, technical error, độ trễ và độ bao phủ. Chạy answer eval trên cùng đoạn căn cứ với exact match/token chỉ số, mức độ bám sát căn cứ/trích dẫn check và human legal review tách biệt. Mọi lượt thực hiện lưu log không chứa secret/PII và mã nguồn mã băm."
+    },
+    {
+      "section": "Kế hoạch kiểm chứng tiếp theo",
+      "paragraph_index": 1,
+      "expected_text_sha256": "78430f1ac01b7705e4e729b85b6b46b244fdc4383d2381a3930a759ff23a7a3b",
+      "text": "Tiếp theo thực hiện browser QA theo tuyến xử lý/vai trò đã được cấp phép, dùng dữ liệu an toàn; kiểm tra screenshot, phản hồi headers, biểu mẫu CSRF, chủ sở hữu scoping, error states và trạng thái no-evidence. Kiểm thử tìm thấy trong bộ nhớ đệm/miss, câu hỏi về hiệu lực thời gian, văn bản phạm vi, cơ chế kiểm soát an toàn, truy xuất failure và nguồn bổ sung theo kiểm thử fixture. Chỉ sau khi dấu vết xử lý/đoạn căn cứ và đánh giá của người có chuyên môn ổn định mới cân nhắc thử nghiệm với người dùng. Kế hoạch này là đề xuất, không phải kết quả đã thực hiện."
+    },
+    {
+      "section": "Giao thức đánh giá kế tiếp có thể tái lập",
+      "paragraph_index": 0,
+      "expected_text_sha256": "38db98b4f830bc9dbc26a092cfb06b6bfeb4d7a570fa39938dfcece8bb9fb7d5",
+      "text": "Chuẩn bị cần xác nhận có rubric riêng của học phần hay không, đồng thời đóng băng mã nguồn và cấu hình/tập văn bản, lưu revision và dirty diff mã băm, tạo dataset manifest và chốt question/đáp án chuẩn với người chuyên môn. Hướng dẫn HCMUNRE cung cấp tiêu chí nhận xét nhưng không có scoring scale. Gold item nên có câu hỏi, task type, phạm vi, target văn bản/article/clause, trích dẫn nội dung, ngày áp dụng, ngoại lệ, supporting địa chỉ nguồn/mã băm/page và quyết định adjudication. Ghi skip khi nhãn chưa đủ; không lấp bằng đầu ra của mô hình."
+    },
+    {
+      "section": "Giao thức đánh giá kế tiếp có thể tái lập",
+      "paragraph_index": 1,
+      "expected_text_sha256": "3d155f910604c3bbe9a0c007e52c4a7cf6bcd8e6852a63d7dbfb75902f552d60",
+      "text": "Retrieval-only lượt thực hiện đo văn bản/article/clause Recall@K, MRR/nDCG nếu đáp án chuẩn đủ, exact reference hit, độ bao phủ/multihop, ứng viên truy xuất survival theo bước xử lý, wrong-văn bản rate, timeout/error, độ trễ và quota. Mỗi chỉ số cần numerator/mẫu số, truy vấn set, version/cấu hình, chỉ mục độ bao phủ và cách aggregation. Không trộn truy vấn có nhiều đáp án chuẩn passage với một đáp án chuẩn văn bản mà không nêu quy tắc."
+    },
+    {
+      "section": "Giao thức đánh giá kế tiếp có thể tái lập",
+      "paragraph_index": 2,
+      "expected_text_sha256": "4ff66d05a0689cbdd0ada85029ad21d81877715a7eaa3e6dbf05f3438401bcae",
+      "text": "Answer lượt thực hiện đóng băng ngữ cảnh hoặc lưu mã băm từng passage, đo answer/reference, nhận định-level trích dẫn hỗ trợ bởi căn cứ, invalid/missing trích dẫn, trích dẫn độ bao phủ, refusal appropriateness, entity/date/number độ đúng và exception độ bao phủ. Automated evaluation cần paired đánh giá của người có chuyên môn trên mẫu stratified; disagreement phải lưu. Groundedness không thay applicability/freshness."
+    },
+    {
+      "section": "Giao thức đánh giá kế tiếp có thể tái lập",
+      "paragraph_index": 3,
+      "expected_text_sha256": "1396e84c8e786e1aefc7580814dad63a339d354fe04f74de186581b8b2c32cee",
+      "text": "Security/UX lượt thực hiện dùng account và dataset an toàn, đo chủ sở hữu isolation, CSRF, bộ nhớ đệm tenancy, no-store, upload limits, mã nguồn/cancel lifecycle, phản hồi trạng thái, accessibility/mobile và PII leakage. Capacity lượt thực hiện chỉ đọc quota/size trước, lập write plan/rollback, rồi mới xin quyền mutation riêng; cấu hình hay dry-lượt thực hiện không phải remote biên bản kiểm tra."
+    },
+    {
+      "section": "Lộ trình cải tiến theo mức rủi ro",
+      "paragraph_index": 0,
+      "expected_text_sha256": "142b348af28c968a0c79c03315063ec6b8a9de75582f2a75dd386c86a60cffc3",
+      "text": "P0 là chốt tập văn bản bản chụp dữ liệu/độ bao phủ và legal-mã nguồn policy: map ID, missing văn bản, last updated, dấu vết nguồn gốc, review state, effective date và căn cứ có thẩm quyền. Đầu ra là versioned manifest và độ bao phủ gap list; không tăng chỉ mục trước khi biết quota/plan."
+    },
+    {
+      "section": "Lộ trình cải tiến theo mức rủi ro",
+      "paragraph_index": 1,
+      "expected_text_sha256": "c46b53c0132f8c8cf4c975f3d54e9d0162f0093d8a9cb539740d358e07833061",
+      "text": "P1 là xây đáp án chuẩn bộ đánh giá tiếng Việt do người có chuyên môn adjudicate, tách truy vấn theo số hiệu, điều khoản, mô tả tình huống, multihop và câu hỏi hiệu lực theo thời gian. Báo truy xuất, answer, trích dẫn riêng; chạy baseline cố định và error taxonomy. Mọi đổi chunking/truy xuất/reranking so cùng đáp án chuẩn set."
+    },
+    {
+      "section": "Lộ trình cải tiến theo mức rủi ro",
+      "paragraph_index": 2,
+      "expected_text_sha256": "4ad9e799f78de3e2ef61b4a0bd32eb800040d0de8195ab0101928db72ead2009",
+      "text": "P2 là cải thiện dấu vết xử lý/bộ nhớ đệm/giao diện: giữ định danh văn bản, passage mã băm, bước xử lý decision, phạm vi, freshness/trạng thái; báo tìm thấy trong bộ nhớ đệm với version/dấu nhận diện cấu hình; hiển thị partial/no-evidence/error riêng; nối trích dẫn tới nguồn. Hạn chế PII trong logs và thiết kế thời hạn lưu rõ."
+    },
+    {
+      "section": "Lộ trình cải tiến theo mức rủi ro",
+      "paragraph_index": 3,
+      "expected_text_sha256": "c076961c85c839f621105c14074224996058a387d2affbb262fa35741a00517d",
+      "text": "P3 là browser/security/dung lượng nghiệm thu trước mở rộng: kiểm thử tuyến xử lý/vai trò, chủ sở hữu, cancellation/TTL, responsive giao diện, storage quota, cost, backup và rollback. Chỉ sau human legal review và operational gates mới cân nhắc tuyên bố chất lượng. Đây là roadmap, chưa có yêu cầu sửa hay chạy thử hệ thống."
+    },
+    {
+      "section": "LỜI CẢM ƠN",
+      "paragraph_index": 0,
+      "expected_text_sha256": "cd587b9d87f542ee43b19e968c20494ad94b002a8581c040ab6a0dacc1a8f0db",
+      "text": "Em xin trân trọng cảm ơn ThS. Định Thị Hồng Loan, giảng viên hướng dẫn đồ án chuyên ngành với đề tài “Phân tích và đánh giá hệ thống VietLex hỗ trợ tra cứu pháp luật Việt Nam theo hướng RAG”. Sự hướng dẫn về mặt học thuật của cô là chỗ dựa để em xác định phạm vi đề tài và hoàn thiện báo cáo. Qua quá trình thực hiện, em có dịp nhìn lại kiến thức đã học và vận dụng vào việc tìm hiểu một hệ thống phần mềm cụ thể."
+    },
+    {
+      "section": "LỜI CẢM ƠN",
+      "paragraph_index": 1,
+      "expected_text_sha256": "b39b3d9a2d8661741f81ede9a3fa856e73915bbb5c7117b3c6b33fdf332778d4",
+      "text": "Đề tài đòi hỏi em vừa đọc hiểu cách tổ chức chương trình, vừa xem xét nhu cầu của người sử dụng. Khi chuyển từ việc mô tả chức năng sang phân tích các lựa chọn thiết kế, em nhận thấy có nhiều vấn đề cần được giải thích cẩn thận hơn so với hiểu biết ban đầu. Quá trình hoàn thiện báo cáo giúp em tập đặt câu hỏi, lựa chọn tài liệu và kiểm tra lại những nhận xét của mình trước khi trình bày."
+    },
+    {
+      "section": "LỜI CẢM ƠN",
+      "paragraph_index": 2,
+      "expected_text_sha256": "74fb6d9721d68ebb03114730001ea80d28e1735052317b54666c5369c8871d14",
+      "text": "Em cũng học được rằng một báo cáo rõ ràng cần có sự liên hệ giữa các phần. Mô hình phân tích phải giải thích được vấn đề thực tế; kết quả khảo sát cần có căn cứ; nhận xét và đề xuất phải xuất phát từ những gì đã tìm hiểu. Việc xây dựng sơ đồ, tổ chức nội dung và diễn giải kết quả giúp em rèn luyện cách trình bày có hệ thống, đồng thời nhận ra những phần kiến thức bản thân còn cần bổ sung."
+    },
+    {
+      "section": "LỜI CẢM ƠN",
+      "paragraph_index": 3,
+      "expected_text_sha256": "8ad74268d4cb11384c2a1bd85abfb4746278c0332fc71b71be6f75b38c26b555",
+      "text": "Do kinh nghiệm và thời gian thực hiện còn hạn chế, báo cáo khó tránh khỏi thiếu sót trong cách lựa chọn tư liệu, phân tích và diễn đạt. Em mong tiếp tục nhận được những góp ý để hiểu vấn đề đầy đủ hơn và cải thiện phương pháp học tập, nghiên cứu của mình. Em xin chịu trách nhiệm về nội dung đã trình bày, đồng thời ghi nhận rằng việc hoàn thành bản báo cáo là một bước trong quá trình học hỏi cần được tiếp tục."
+    },
+    {
+      "section": "LỜI CẢM ƠN",
+      "paragraph_index": 4,
+      "expected_text_sha256": "4ac4227c77deab200edee59595f5b7169981a8b761bc552167a96e0ab93e755e",
+      "text": "Một lần nữa, em xin chân thành cảm ơn ThS. Định Thị Hồng Loan đã nhận hướng dẫn đồ án. Em kính chúc cô sức khỏe, nhiều niềm vui và thuận lợi trong công tác giảng dạy, nghiên cứu. Những điều rút ra từ quá trình thực hiện đề tài sẽ là kinh nghiệm để em tiếp tục hoàn thiện năng lực phân tích, làm việc với tài liệu và trình bày kết quả trong các học phần cũng như công việc sau này."
+    },
+    {
+      "section": "TÓM TẮT ĐỒ ÁN",
+      "paragraph_index": 0,
+      "expected_text_sha256": "abc1cd93a68e5f0cb64dc678b5199d53c2140325dc5e307dcb7c81f17dd7b338",
+      "text": "Đồ án phân tích VietLex, một hệ thống hỗ trợ tra cứu và nghiên cứu pháp luật Việt Nam có sử dụng phương pháp tạo câu trả lời kết hợp truy xuất thông tin (RAG). Mục tiêu là làm rõ mối liên hệ giữa nhu cầu người dùng, cách tổ chức dữ liệu, quá trình xử lý câu hỏi và chất lượng kết quả. Phương pháp thực hiện gồm khảo sát mã nguồn, đối chiếu tài liệu thiết kế và đánh giá đã lưu, đồng thời xem xét các ảnh giao diện có địa chỉ và thời điểm ghi nhận."
+    },
+    {
+      "section": "TÓM TẮT ĐỒ ÁN",
+      "paragraph_index": 1,
+      "expected_text_sha256": "97aee2c29fb27c84ff46da932329f42313e90adbef77b52ef525519e0a910d22",
+      "text": "Kết quả khảo sát cho thấy hệ thống kết hợp tìm kiếm văn bản, đọc nội dung, hỏi đáp có căn cứ và quản lý hồ sơ nghiên cứu. Báo cáo xây dựng mô hình dữ liệu theo ký pháp lớp UML để giải thích quan hệ tài khoản, hội thoại và hồ sơ; các sơ đồ hoạt động, trạng thái, tuần tự và thành phần mô tả cách phối hợp xử lý. Hai phương án truy xuất được phân tích theo phạm vi dữ liệu và điều kiện vận hành. Phần giao diện xem xét khả năng phân biệt kết quả tìm kiếm, thông tin nguồn và những trạng thái cần thông báo rõ cho người dùng."
+    },
+    {
+      "section": "TÓM TẮT ĐỒ ÁN",
+      "paragraph_index": 2,
+      "expected_text_sha256": "2dc4ef7eb9395c5221a0928c36b4198d8ace22c08ec97834fda8c568b467a10e",
+      "text": "Đánh giá được giới hạn theo chứng cứ hiện có. Mốc Golden-50 ngày 03/09/2026 ghi nhận tỷ lệ khớp hoàn toàn 0/50 và F1 theo từ 0,2305; tài liệu ngày 19/10/2026 cho biết hai câu hỏi thử nghiệm mới chưa đạt đầy đủ tiêu chí. Báo cáo chưa thực hiện một bộ đánh giá đại diện mới, kiểm tra toàn bộ chức năng cần quyền riêng hay thẩm định hiệu lực pháp luật hiện hành. Từ các giới hạn đó, đồ án đề xuất ưu tiên kiểm soát tính nhất quán của dữ liệu, theo dõi căn cứ qua các bước xử lý và thiết kế kiểm thử có đáp án chuẩn để đánh giá lại chất lượng câu trả lời."
+    }
+  ],
+  "run_edits": [
+    {
+      "section": "Truy xuất thông tin trong tiếng Việt",
+      "paragraph_index": 0,
+      "expected_text_sha256": "f6b0d9d2095e93282defa9893e7688a301d4a0456dfca4ea6d471b6a9fc2904a",
+      "run_index": 0,
+      "expected_run_sha256": "6dfb88e810f1ab0c85c92a3d8a0094755139cc55d48def98a291b9f351092012",
+      "text": "Trong hệ thống hỏi đáp có truy xuất, truy xuất là bước chọn tài liệu/đoạn làm căn cứ đầu vào cho bước trả lời. Truy xuất theo vector dày thường biểu diễn truy vấn và đoạn văn thành vector để tìm nội dung gần về ngữ nghĩa; Karpukhin và cộng sự mô tả một kiến trúc truy xuất theo vector dày hai bộ mã hóa cho hỏi đáp trong miền mở. Đây là nền tảng khái niệm, không phải bằng chứng rằng VietLex dùng chính mô hình DPR hay tái tạo kết quả của bài báo. "
+    },
+    {
+      "section": "Truy xuất thông tin trong tiếng Việt",
+      "paragraph_index": 1,
+      "expected_text_sha256": "c793a1da0b3cd3f6d40adffbe7597dfcbf21fb720a6869c344f5610a459f473e",
+      "run_index": 0,
+      "expected_run_sha256": "3e1cc9c0bafc524ef26328676fbff19826ff82e103197e59335c8752a9c5fb3f",
+      "text": "Các cách tìm kiếm bằng từ khóa, tìm kiếm vector dày và kết hợp nhiều tín hiệu có thể cho kết quả khác nhau tùy ngôn ngữ, miền, cách chia dữ liệu và tiêu chí liên quan. Nguyen và Quan xây dựng bộ đánh giá Vietnamese IR nhiều miền với sáu miền và mười bộ dữ liệu, có miền pháp lý. Phạm vi này cho thấy cần đánh giá truy xuất tiếng Việt trên tác vụ/miền phù hợp; không thể chuyển kết quả tổng hợp của một bộ đánh giá khác thành kết luận trực tiếp về VietLex. "
+    },
+    {
+      "section": "Sai lệch cấp văn bản trong truy xuất pháp lý",
+      "paragraph_index": 0,
+      "expected_text_sha256": "092e63d34163069846d120ea83a00832c008b5c16a508a2936a92c4705d3ed4c",
+      "run_index": 0,
+      "expected_run_sha256": "092e63d34163069846d120ea83a00832c008b5c16a508a2936a92c4705d3ed4c",
+      "text": "Reuter và cộng sự mô tả Document-Level Retrieval Mismatch: hệ thống có thể lấy một đoạn có vẻ liên quan nhưng đoạn đó thuộc sai văn bản trong một tập văn bản pháp lý gồm nhiều văn bản có cấu trúc và câu chữ tương tự. Nhóm tác giả nghiên cứu Summary-Augmented Chunking, đưa tóm tắt toàn văn vào từng đoạn để thêm ngữ cảnh cấp văn bản; kết quả của bài báo thuộc bộ tác vụ LegalBench-RAG và không phải kết quả của VietLex. "
+    },
+    {
+      "section": "Đánh giá mức độ bám sát căn cứ trong hỏi đáp pháp lý",
+      "paragraph_index": 0,
+      "expected_text_sha256": "0e8cc7bf5225a04abe1eeb137d6823ba9739160ea54348fe7bec115dc667f890",
+      "run_index": 0,
+      "expected_run_sha256": "0e8cc7bf5225a04abe1eeb137d6823ba9739160ea54348fe7bec115dc667f890",
+      "text": "Trautmann và cộng sự khảo sát similarity chỉ số, mô hình suy luận ngôn ngữ tự nhiên và lời nhắc cho LLM để phân loại câu trả lời pháp lý có bám ngữ cảnh nguồn hay không. Bài báo báo cáo macro-F1 tốt nhất 0,8 trên phân loại mức độ bám sát căn cứ tập văn bản của chính nghiên cứu; con số này không thể dùng làm ngưỡng hay kết quả cho VietLex. "
+    },
+    {
+      "section": "Tổng hợp nghiên cứu và giới hạn suy luận",
+      "paragraph_index": 0,
+      "expected_text_sha256": "61f016e7e3b65e8dec617abdbb8a25effa3b4d1a56c1434d038e47689c7cde85",
+      "run_index": 0,
+      "expected_run_sha256": "61f016e7e3b65e8dec617abdbb8a25effa3b4d1a56c1434d038e47689c7cde85",
+      "text": "Các nguồn đã rà trong đồ án đóng vai trò khác nhau. DPR cung cấp ví dụ nền tảng truy xuất theo vector dày; bộ đánh giá Vietnamese IR so sánh các hướng truy xuất trên nhiều miền tiếng Việt; RAGAs cung cấp các chiều đánh giá tự động; nghiên cứu legal-RAG nêu rủi ro mismatch cấp văn bản và cách đo mức độ bám sát căn cứ. Không nguồn nào là đánh giá độc lập của VietLex. LexGLUE cung cấp bộ đánh giá tiếng Anh gồm nhiều tác vụ NLU pháp lý; do khác ngôn ngữ và mục tiêu, đây là tham chiếu về đánh giá theo miền chứ không phải bộ đánh giá truy xuất luật Việt Nam. "
+    },
+    {
+      "section": "Kết quả câu trả lời và giới hạn diễn giải",
+      "paragraph_index": 1,
+      "expected_text_sha256": "2ecdf95cbb4dbb547d1a42b66bff2a2cd18c0e08a130cd7a1f847c847e714125",
+      "run_index": 0,
+      "expected_run_sha256": "2ecdf95cbb4dbb547d1a42b66bff2a2cd18c0e08a130cd7a1f847c847e714125",
+      "text": "Faithfulness theo RAGAs hỏi mức độ câu trả lời bám ngữ cảnh. Đặt cạnh đó, exact match/F1 theo từ so sánh dạng đáp án với đáp án chuẩn nhưng có thể phạt câu trả lời diễn đạt khác; độ chính xác trích dẫn đo chất lượng dẫn chiếu theo quy tắc của lượt thực hiện. Không chỉ số đơn lẻ nào trả lời toàn bộ câu hỏi người dùng có thể dựa vào kết luận pháp lý này không. Cần rà thủ công các nhận định trọng yếu, thời điểm áp dụng, ngoại lệ và độ đầy đủ của mã nguồn. "
+    },
+    {
+      "section": "Phân tích lỗi và rủi ro",
+      "paragraph_index": 1,
+      "expected_text_sha256": "96346161b8f7a7960b5b01e6e0c52bbcbe02fe7b56083c0e45f195e573bdc585",
+      "run_index": 0,
+      "expected_run_sha256": "96346161b8f7a7960b5b01e6e0c52bbcbe02fe7b56083c0e45f195e573bdc585",
+      "text": "Một bộ đánh giá Vietnamese IR nhiều miền là căn cứ phù hợp để lưu ý về đánh giá theo ngôn ngữ/miền; paper Nguyen và Quan bao gồm legal trong 6 miền nhưng không đo VietLex. Do vậy bộ đáp án chuẩn cho VietLex nên chứa truy vấn tiếng Việt thật, nhiều cách gọi cùng điều, loại câu hỏi khác nhau, ngày cần đối chiếu, mã nguồn chính xác và ngoại lệ. Cần tách câu hỏi tìm văn bản khỏi câu hỏi áp dụng pháp luật; bộ dữ liệu cần người có chuyên môn adjudicate đáp án chuẩn và disagreement. "
+    }
+  ],
+  "insertions": [],
+  "headings": [
+    {
+      "text": "Cơ sở lý thuyết và khung phân tích",
+      "level": 2
+    },
+    {
+      "text": "Nghiên cứu liên quan",
+      "level": 2
+    },
+    {
+      "text": "Định hướng phân tích cho VietLex",
+      "level": 2
+    },
+    {
+      "text": "DANH MỤC ĐƯỜNG ĐI THEO VAI TRÒ",
+      "new_text": "Phạm vi tuyến xử lý phục vụ kiểm chứng",
+      "level": 3
+    },
+    {
+      "text": "Màn hình và điểm vào theo nhóm chức năng",
+      "remove_heading_only": true
+    }
+  ],
+  "caption_titles": [],
+  "skipped_complex_paragraphs": [
+    {
+      "section": "Truy xuất thông tin trong tiếng Việt",
+      "paragraph_index": 0
+    },
+    {
+      "section": "Truy xuất thông tin trong tiếng Việt",
+      "paragraph_index": 1
+    },
+    {
+      "section": "RAG, căn cứ và giới hạn của câu trả lời được sinh",
+      "paragraph_index": 1
+    },
+    {
+      "section": "RAG, căn cứ và giới hạn của câu trả lời được sinh",
+      "paragraph_index": 2
+    },
+    {
+      "section": "Khung phân tích dùng trong bài",
+      "paragraph_index": 0
+    },
+    {
+      "section": "Sai lệch cấp văn bản trong truy xuất pháp lý",
+      "paragraph_index": 0
+    },
+    {
+      "section": "Đánh giá mức độ bám sát căn cứ trong hỏi đáp pháp lý",
+      "paragraph_index": 0
+    },
+    {
+      "section": "Tổng hợp nghiên cứu và giới hạn suy luận",
+      "paragraph_index": 0
+    },
+    {
+      "section": "Kết quả câu trả lời và giới hạn diễn giải",
+      "paragraph_index": 1
+    },
+    {
+      "section": "Phân tích lỗi và rủi ro",
+      "paragraph_index": 1
+    }
+  ]
+}

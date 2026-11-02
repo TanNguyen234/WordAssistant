@@ -1,0 +1,527 @@
+{
+  "schema_version": 1,
+  "deployment": "https://vietlex-legal-rag.vercel.app",
+  "source_root": "D:\\Download\\ProfessionalLegalRAG",
+  "source_revision": "7519cd1aea4a3639140b9188de1843ebf0ddb1c0",
+  "capture_run_date": "2026-10-23",
+  "role": "anonymous",
+  "capture_method": "Direct route/headless screenshots; provisional reconnaissance only. User requires visible UI click-through capture; not accepted for final DOCX.",
+  "viewport_css_px": {
+    "width": 1440,
+    "height": 1000
+  },
+  "public_get_routes": 13,
+  "captured_routes": [
+    {
+      "capture_id": "runtime-home",
+      "method": "GET",
+      "requested_route": "/",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/",
+      "http_status": 200,
+      "page_title": "VietLex · Không gian nghiên cứu pháp luật",
+      "h1": [
+        "Hội thoại"
+      ],
+      "source_revision": "7519cd1aea4a3639140b9188de1843ebf0ddb1c0",
+      "source_files": [
+        "app/main.py",
+        "app/templates/index.html"
+      ],
+      "source_sha256": {
+        "app/main.py": "5868c8f169e3fa3d895cc047b2c3f7285bd1fde49553225972d369c1e94bd254",
+        "app/templates/index.html": "eef1ab9d2472d33ffe5b75f6dbb08f4ef9aa9f5d959f9c7903265d968cdbb15c"
+      },
+      "captured_at_utc": "2026-10-23T19:21:39.723501+07:00",
+      "role": "anonymous",
+      "browser": "Google Chrome 155.0.8059.86 headless; actual live deployment",
+      "viewport_css_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scroll_height_css_px": 1127,
+      "screenshot_path": "assets/runtime-captures-20261023/runtime-home.png",
+      "screenshot_dimensions_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_sha256": "f208a2c7fa2d73ad7a4917864c3c58d3f49e9b4bef0ac54c5fa4cbc885a7fb6c",
+      "state_note": "Anonymous public GET; ready state; no form submitted.",
+      "form_submitted": false,
+      "acceptance_status": "PROVISIONAL_NOT_ACCEPTED_BY_USER_REQUIREMENT"
+    },
+    {
+      "capture_id": "runtime-search",
+      "method": "GET",
+      "requested_route": "/search?q=45%2F2019%2FQH14",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/search?q=45%2F2019%2FQH14",
+      "http_status": 200,
+      "page_title": "Tìm văn bản · VietLex",
+      "h1": [
+        "Tìm văn bản pháp luật"
+      ],
+      "source_revision": "7519cd1aea4a3639140b9188de1843ebf0ddb1c0",
+      "source_files": [
+        "app/api/legal_routes.py",
+        "app/templates/legal_search.html"
+      ],
+      "source_sha256": {
+        "app/api/legal_routes.py": "dd8174fb644746f903419b022a62be05419b0ec1cd2718f6bb345c1dacc26f67",
+        "app/templates/legal_search.html": "7df991ce48351d050b83905e73544c28840b0e3bf01865abca4e036d8841918a"
+      },
+      "captured_at_utc": "2026-10-23T19:31:17.777431+07:00",
+      "role": "anonymous",
+      "browser": "Google Chrome 155.0.8059.86 headless; actual live deployment",
+      "viewport_css_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scroll_height_css_px": 1000,
+      "screenshot_path": "assets/runtime-captures-20261023/runtime-search.png",
+      "screenshot_dimensions_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_sha256": "3b9a6b160ae671d6cccd87c1c882f98f3bc4b062a5be6147f41b7f6130393a27",
+      "state_note": "Anonymous public GET with query 45/2019/QH14; no form submitted.",
+      "form_submitted": false,
+      "acceptance_status": "PROVISIONAL_NOT_ACCEPTED_BY_USER_REQUIREMENT"
+    },
+    {
+      "capture_id": "runtime-legal-document",
+      "method": "GET",
+      "requested_route": "/documents/333670",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/documents/333670",
+      "http_status": 200,
+      "page_title": "Bộ luật Lao động 2019 · VietLex",
+      "h1": [
+        "Bộ luật Lao động 2019"
+      ],
+      "source_revision": "7519cd1aea4a3639140b9188de1843ebf0ddb1c0",
+      "source_files": [
+        "app/api/legal_routes.py",
+        "app/templates/legal_document.html"
+      ],
+      "source_sha256": {
+        "app/api/legal_routes.py": "dd8174fb644746f903419b022a62be05419b0ec1cd2718f6bb345c1dacc26f67",
+        "app/templates/legal_document.html": "0dbb35da2ac9caa67e3b07f7aa2ddb1a4854d88aff2f919e23d63b374ba2558a"
+      },
+      "captured_at_utc": "2026-10-23T19:31:51.990908+07:00",
+      "role": "anonymous",
+      "browser": "Google Chrome 155.0.8059.86 headless; actual live deployment",
+      "viewport_css_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scroll_height_css_px": 134098,
+      "screenshot_path": "assets/runtime-captures-20261023/runtime-legal-document.png",
+      "screenshot_dimensions_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_sha256": "8f94bbc3a7c470a0bd1644c3665050db7f86740c93d7ab7c8e6a790aa34db1a7",
+      "state_note": "Anonymous public GET; screenshot covers the initial 1440×1000 viewport of this long document page.",
+      "form_submitted": false,
+      "acceptance_status": "PROVISIONAL_NOT_ACCEPTED_BY_USER_REQUIREMENT"
+    },
+    {
+      "capture_id": "runtime-legal-status",
+      "method": "GET",
+      "requested_route": "/legal-status",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/legal-status",
+      "http_status": 200,
+      "page_title": "Hiệu lực theo ngày · VietLex",
+      "h1": [
+        "Tra cứu sự kiện hiệu lực"
+      ],
+      "source_revision": "7519cd1aea4a3639140b9188de1843ebf0ddb1c0",
+      "source_files": [
+        "app/api/legal_registry_routes.py",
+        "app/templates/legal_status.html"
+      ],
+      "source_sha256": {
+        "app/api/legal_registry_routes.py": "6a274c68c2a757465538f38a4b765ca9e19e323d6aba98d4a5d9faa6b88928b3",
+        "app/templates/legal_status.html": "3cde8725e86034011035a9ecddc82412b0d27292224312863ddd26e85db215ba"
+      },
+      "captured_at_utc": "2026-10-23T19:32:17.945152+07:00",
+      "role": "anonymous",
+      "browser": "Google Chrome 155.0.8059.86 headless; actual live deployment",
+      "viewport_css_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scroll_height_css_px": 1000,
+      "screenshot_path": "assets/runtime-captures-20261023/runtime-legal-status.png",
+      "screenshot_dimensions_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_sha256": "5a977fb719983689c7e3a77933516958015ae89da597cdc4f8487e867433fd69",
+      "state_note": "Anonymous public GET; no action submitted.",
+      "form_submitted": false,
+      "acceptance_status": "PROVISIONAL_NOT_ACCEPTED_BY_USER_REQUIREMENT"
+    },
+    {
+      "capture_id": "runtime-evaluation-lab",
+      "method": "GET",
+      "requested_route": "/evaluation-lab",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/evaluation-lab",
+      "http_status": 200,
+      "page_title": "Chất lượng và kiểm chứng · VietLex",
+      "h1": [
+        "Chất lượng được kiểm chứng như thế nào?"
+      ],
+      "source_revision": "7519cd1aea4a3639140b9188de1843ebf0ddb1c0",
+      "source_files": [
+        "app/api/evaluation_lab_routes.py",
+        "app/templates/evaluation_lab.html"
+      ],
+      "source_sha256": {
+        "app/api/evaluation_lab_routes.py": "dfd5d15bebfdd16a6b743e6d1f10f6e15361c40c3dd0db12e8898a79f6282409",
+        "app/templates/evaluation_lab.html": "3c46f6e42298ae02ad9e4b1db8745a7f2f459efeca86d62d186d28c05830d40f"
+      },
+      "captured_at_utc": "2026-10-23T19:32:37.906421+07:00",
+      "role": "anonymous",
+      "browser": "Google Chrome 155.0.8059.86 headless; actual live deployment",
+      "viewport_css_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scroll_height_css_px": 4831,
+      "screenshot_path": "assets/runtime-captures-20261023/runtime-evaluation-lab.png",
+      "screenshot_dimensions_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_sha256": "054909e03ee90256b71252e80f9236e18a007baa3c594e60f04899744b9e9da2",
+      "state_note": "Anonymous public GET; screenshot covers the initial viewport; page has additional scroll content.",
+      "form_submitted": false,
+      "acceptance_status": "PROVISIONAL_NOT_ACCEPTED_BY_USER_REQUIREMENT"
+    },
+    {
+      "capture_id": "runtime-workspaces",
+      "method": "GET",
+      "requested_route": "/workspaces",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/workspaces",
+      "http_status": 200,
+      "page_title": "Hồ sơ nghiên cứu · VietLex",
+      "h1": [
+        "Hồ sơ nghiên cứu"
+      ],
+      "source_revision": "7519cd1aea4a3639140b9188de1843ebf0ddb1c0",
+      "source_files": [
+        "app/api/workspace_routes.py",
+        "app/templates/research_workspaces.html"
+      ],
+      "source_sha256": {
+        "app/api/workspace_routes.py": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c",
+        "app/templates/research_workspaces.html": "0b39d14346346c50813791217b6c31a7f372a864da27b8585188b4dbad22a3d7"
+      },
+      "captured_at_utc": "2026-10-23T19:32:57.254393+07:00",
+      "role": "anonymous",
+      "browser": "Google Chrome 155.0.8059.86 headless; actual live deployment",
+      "viewport_css_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scroll_height_css_px": 1000,
+      "screenshot_path": "assets/runtime-captures-20261023/runtime-workspaces.png",
+      "screenshot_dimensions_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_sha256": "26fbf65881e5947c9ce8a26b007f172232c83bfcdb309108d95667f0e3d9146f",
+      "state_note": "Anonymous public GET in isolated browser context; empty/demo state only; no workspace created.",
+      "form_submitted": false,
+      "acceptance_status": "PROVISIONAL_NOT_ACCEPTED_BY_USER_REQUIREMENT"
+    },
+    {
+      "capture_id": "runtime-login",
+      "method": "GET",
+      "requested_route": "/login",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/login",
+      "http_status": 200,
+      "page_title": "Tài khoản · VietLex",
+      "h1": [
+        "Đăng nhập"
+      ],
+      "source_revision": "7519cd1aea4a3639140b9188de1843ebf0ddb1c0",
+      "source_files": [
+        "app/api/account_routes.py",
+        "app/templates/account_form.html"
+      ],
+      "source_sha256": {
+        "app/api/account_routes.py": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+        "app/templates/account_form.html": "e6112144e4cecca26e23bb5a8931236b66a1f60d632d0925d3bf041469f5f143"
+      },
+      "captured_at_utc": "2026-10-23T19:33:15.675889+07:00",
+      "role": "anonymous",
+      "browser": "Google Chrome 155.0.8059.86 headless; actual live deployment",
+      "viewport_css_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scroll_height_css_px": 1000,
+      "screenshot_path": "assets/runtime-captures-20261023/runtime-login.png",
+      "screenshot_dimensions_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_sha256": "9969491cc25d3ddd011e7f5d158acfa19bd69d26d0461fcf947da374d98a24ce",
+      "state_note": "Anonymous public GET; no credentials entered.",
+      "form_submitted": false,
+      "acceptance_status": "PROVISIONAL_NOT_ACCEPTED_BY_USER_REQUIREMENT"
+    },
+    {
+      "capture_id": "runtime-register",
+      "method": "GET",
+      "requested_route": "/register",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/register",
+      "http_status": 200,
+      "page_title": "Tài khoản · VietLex",
+      "h1": [
+        "Đăng ký"
+      ],
+      "source_revision": "7519cd1aea4a3639140b9188de1843ebf0ddb1c0",
+      "source_files": [
+        "app/api/account_routes.py",
+        "app/templates/account_form.html"
+      ],
+      "source_sha256": {
+        "app/api/account_routes.py": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+        "app/templates/account_form.html": "e6112144e4cecca26e23bb5a8931236b66a1f60d632d0925d3bf041469f5f143"
+      },
+      "captured_at_utc": "2026-10-23T19:33:43.759905+07:00",
+      "role": "anonymous",
+      "browser": "Google Chrome 155.0.8059.86 headless; actual live deployment",
+      "viewport_css_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scroll_height_css_px": 1000,
+      "screenshot_path": "assets/runtime-captures-20261023/runtime-register.png",
+      "screenshot_dimensions_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_sha256": "4cd21dbee3c6719013bdb8e2b966c1bcaa2a55d688e2cb5e32532fa60d9b0857",
+      "state_note": "Anonymous public GET; no form submitted.",
+      "form_submitted": false,
+      "acceptance_status": "PROVISIONAL_NOT_ACCEPTED_BY_USER_REQUIREMENT"
+    },
+    {
+      "capture_id": "runtime-verify-email",
+      "method": "GET",
+      "requested_route": "/verify-email",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/verify-email",
+      "http_status": 200,
+      "page_title": "Tài khoản · VietLex",
+      "h1": [],
+      "source_revision": "7519cd1aea4a3639140b9188de1843ebf0ddb1c0",
+      "source_files": [
+        "app/api/account_routes.py",
+        "app/templates/account_form.html"
+      ],
+      "source_sha256": {
+        "app/api/account_routes.py": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+        "app/templates/account_form.html": "e6112144e4cecca26e23bb5a8931236b66a1f60d632d0925d3bf041469f5f143"
+      },
+      "captured_at_utc": "2026-10-23T19:34:07.463269+07:00",
+      "role": "anonymous",
+      "browser": "Google Chrome 155.0.8059.86 headless; actual live deployment",
+      "viewport_css_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scroll_height_css_px": 1000,
+      "screenshot_path": "assets/runtime-captures-20261023/runtime-verify-email.png",
+      "screenshot_dimensions_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_sha256": "1a224c12606d72d5af5ac2f1621bece7dd715c1338b5af4d5fca7b7ee070089c",
+      "state_note": "Anonymous public GET without a token; generic invalid/expired message; no token supplied.",
+      "form_submitted": false,
+      "acceptance_status": "PROVISIONAL_NOT_ACCEPTED_BY_USER_REQUIREMENT"
+    },
+    {
+      "capture_id": "runtime-forgot-password",
+      "method": "GET",
+      "requested_route": "/forgot-password",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/forgot-password",
+      "http_status": 200,
+      "page_title": "Tài khoản · VietLex",
+      "h1": [
+        "Khôi phục mật khẩu"
+      ],
+      "source_revision": "7519cd1aea4a3639140b9188de1843ebf0ddb1c0",
+      "source_files": [
+        "app/api/account_routes.py",
+        "app/templates/account_form.html"
+      ],
+      "source_sha256": {
+        "app/api/account_routes.py": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+        "app/templates/account_form.html": "e6112144e4cecca26e23bb5a8931236b66a1f60d632d0925d3bf041469f5f143"
+      },
+      "captured_at_utc": "2026-10-23T19:34:35.800151+07:00",
+      "role": "anonymous",
+      "browser": "Google Chrome 155.0.8059.86 headless; actual live deployment",
+      "viewport_css_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scroll_height_css_px": 1000,
+      "screenshot_path": "assets/runtime-captures-20261023/runtime-forgot-password.png",
+      "screenshot_dimensions_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_sha256": "3fad6bd033b33af844b7c18b2281add1b2da93da480725d00f86f63d8e188f08",
+      "state_note": "Anonymous public GET; no email entered and no form submitted.",
+      "form_submitted": false,
+      "acceptance_status": "PROVISIONAL_NOT_ACCEPTED_BY_USER_REQUIREMENT"
+    },
+    {
+      "capture_id": "runtime-reset-password",
+      "method": "GET",
+      "requested_route": "/reset-password",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/reset-password",
+      "http_status": 200,
+      "page_title": "Tài khoản · VietLex",
+      "h1": [
+        "Đặt lại mật khẩu"
+      ],
+      "source_revision": "7519cd1aea4a3639140b9188de1843ebf0ddb1c0",
+      "source_files": [
+        "app/api/account_routes.py",
+        "app/templates/account_form.html"
+      ],
+      "source_sha256": {
+        "app/api/account_routes.py": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+        "app/templates/account_form.html": "e6112144e4cecca26e23bb5a8931236b66a1f60d632d0925d3bf041469f5f143"
+      },
+      "captured_at_utc": "2026-10-23T19:35:03.054555+07:00",
+      "role": "anonymous",
+      "browser": "Google Chrome 155.0.8059.86 headless; actual live deployment",
+      "viewport_css_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scroll_height_css_px": 1000,
+      "screenshot_path": "assets/runtime-captures-20261023/runtime-reset-password.png",
+      "screenshot_dimensions_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_sha256": "2f1a66979a76a7cc3e78c53733fa2c08e38c146b39c193b28b00f6ba96e9f944",
+      "state_note": "Anonymous public GET without a token; no password entered and no form submitted.",
+      "form_submitted": false,
+      "acceptance_status": "PROVISIONAL_NOT_ACCEPTED_BY_USER_REQUIREMENT"
+    },
+    {
+      "capture_id": "runtime-privacy",
+      "method": "GET",
+      "requested_route": "/privacy",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/privacy",
+      "http_status": 200,
+      "page_title": "Quyền riêng tư · VietLex",
+      "h1": [
+        "Quyền riêng tư"
+      ],
+      "source_revision": "7519cd1aea4a3639140b9188de1843ebf0ddb1c0",
+      "source_files": [
+        "app/api/legal_routes.py",
+        "app/templates/privacy.html"
+      ],
+      "source_sha256": {
+        "app/api/legal_routes.py": "dd8174fb644746f903419b022a62be05419b0ec1cd2718f6bb345c1dacc26f67",
+        "app/templates/privacy.html": "14c210ee8b1ba01c69eb6182dd58e19461a94f00e7e0835ec101645625cb8ac3"
+      },
+      "captured_at_utc": "2026-10-23T19:35:26.244525+07:00",
+      "role": "anonymous",
+      "browser": "Google Chrome 155.0.8059.86 headless; actual live deployment",
+      "viewport_css_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scroll_height_css_px": 1000,
+      "screenshot_path": "assets/runtime-captures-20261023/runtime-privacy.png",
+      "screenshot_dimensions_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_sha256": "8da9768336d531ce78ce68c6219fd55e48b5a6aa172d806cd37bdea2d02d73b6",
+      "state_note": "Anonymous public GET.",
+      "form_submitted": false,
+      "acceptance_status": "PROVISIONAL_NOT_ACCEPTED_BY_USER_REQUIREMENT"
+    },
+    {
+      "capture_id": "runtime-terms",
+      "method": "GET",
+      "requested_route": "/terms",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/terms",
+      "http_status": 200,
+      "page_title": "Điều khoản · VietLex",
+      "h1": [
+        "Điều khoản sử dụng"
+      ],
+      "source_revision": "7519cd1aea4a3639140b9188de1843ebf0ddb1c0",
+      "source_files": [
+        "app/api/legal_routes.py",
+        "app/templates/terms.html"
+      ],
+      "source_sha256": {
+        "app/api/legal_routes.py": "dd8174fb644746f903419b022a62be05419b0ec1cd2718f6bb345c1dacc26f67",
+        "app/templates/terms.html": "fcdf67cf307e146340ea33a149ae7a6116ed1fe21a82af31d757ba9d39b07cd2"
+      },
+      "captured_at_utc": "2026-10-23T19:35:45.902569+07:00",
+      "role": "anonymous",
+      "browser": "Google Chrome 155.0.8059.86 headless; actual live deployment",
+      "viewport_css_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scroll_height_css_px": 1000,
+      "screenshot_path": "assets/runtime-captures-20261023/runtime-terms.png",
+      "screenshot_dimensions_px": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_sha256": "44504379652f90c9045a3f5311cda212cb258c5a89ac418a54213f3ef6c9beac",
+      "state_note": "Anonymous public GET.",
+      "form_submitted": false,
+      "acceptance_status": "PROVISIONAL_NOT_ACCEPTED_BY_USER_REQUIREMENT"
+    }
+  ],
+  "not_captured": [
+    {
+      "method": "GET",
+      "route": "/workspaces/{workspace_id}",
+      "reason": "Requires an authorized workspace ID/session; none was supplied."
+    },
+    {
+      "method": "GET",
+      "route": "/settings",
+      "reason": "Requires an authenticated user session."
+    },
+    {
+      "method": "GET",
+      "route": "/admin/*",
+      "reason": "Role-protected administrative pages; no admin access used."
+    }
+  ],
+  "excluded_non_screen_gets": [
+    {
+      "route": "/sessions",
+      "reason": "HTMX sidebar fragment, not a standalone page."
+    },
+    {
+      "route": "/sessions/{session_id}",
+      "reason": "User/client-owned message fragment; no private session ID was supplied."
+    },
+    {
+      "route": "/healthz and /readyz",
+      "reason": "Operational endpoints, not UI screens."
+    }
+  ],
+  "acceptance_status": "PROVISIONAL_NOT_ACCEPTED_BY_USER_REQUIREMENT"
+}

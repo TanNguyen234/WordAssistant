@@ -1,0 +1,34 @@
+@startuml
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName "Times New Roman"
+skinparam defaultFontSize 22
+left to right direction
+actor "Người tra cứu" as Reader
+actor "Người dùng đăng nhập" as Member
+actor "Quản trị viên" as Admin
+rectangle "VietLex" {
+  usecase "Hỏi câu hỏi pháp luật\ntrên kho VietLex" as UCChat
+  usecase "Tra cứu theo số hiệu /\ntiêu đề / toàn văn" as UCSearch
+  usecase "Mở và đọc\nvăn bản" as UCDoc
+  usecase "Xem sự kiện hiệu lực\ntheo mốc ngày" as UCStatus
+  usecase "Tạo hồ sơ nghiên cứu" as UCCreateWorkspace
+  usecase "Lưu nguồn, ghi chú\nvà xem hồ sơ" as UCWorkspace
+  usecase "Quản lý tài khoản\nvà yêu cầu" as UCAdmin
+}
+Reader -- UCChat
+Reader -- UCSearch
+Reader -- UCDoc
+Reader -- UCStatus
+Member -- UCCreateWorkspace
+Member -- UCWorkspace
+Admin -- UCAdmin
+UCSearch ..> UCDoc : mở kết quả
+note bottom of UCStatus
+Hiển thị sự kiện đã duyệt;
+không tự xác nhận tình trạng
+hiệu lực của toàn corpus.
+end note
+@enduml
+
+

@@ -1,0 +1,54 @@
+@startuml
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName "Times New Roman"
+skinparam defaultFontSize 20
+skinparam classAttributeIconSize 0
+skinparam nodesep 75
+skinparam ranksep 70
+hide methods
+top to bottom direction
+class "Người dùng" as User <<users>> {
+  _id : string
+  email : string
+  password_hash : string
+  role : string
+  status : string
+  email_verified : bool
+}
+class "Phiên đăng nhập" as Auth <<auth_sessions>> {
+  _id : string
+  user_id : string
+  token_hash : string
+  expires_at : datetime
+}
+class "Cuộc hội thoại" as Chat <<chat_sessions>> {
+  session_id : string
+  user_id : string?
+  client_id : string?
+  title : string
+  expires_at : datetime
+}
+class "Lượt trao đổi" as Log <<evaluation_logs>> {
+  trace_id : string
+  session_id : string?
+  user_id : string?
+  client_id : string?
+  user_query : string
+  bot_response : string
+  metrics : object
+  feedback : object
+}
+User "1" <-- "0..*" Auth : user_id
+User "0..1" <-- "0..*" Chat : user_id
+Chat "0..1" <-- "0..*" Log : session_id
+Auth -[hidden]right- Chat
+note bottom
+Mô hình dữ liệu logic theo ký pháp lớp UML.
+Mũi tên biểu thị tham chiếu qua định danh trong mã nguồn;
+MongoDB không tự tạo ràng buộc khóa ngoại như CSDL quan hệ.
+Khách chưa đăng nhập được nhận diện bằng client_id.
+Lượt trao đổi cũng lưu user_id để lọc theo chủ sở hữu.
+Chỉ thể hiện các thuộc tính phục vụ phân tích.
+end note
+@enduml

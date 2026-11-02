@@ -1,0 +1,13 @@
+{
+  "input_sha256": "aa6bae6a26b3d077d6d90d7282b0c724a09bec6ba0e5415ebff6f15082dd6c9b",
+  "scope_start": "Luồng xử lý câu hỏi",
+  "scope_end": "Giao diện hỏi đáp đã khảo sát",
+  "require_complete_hierarchy": false,
+  "rewrites": [
+    {
+      "section": "Luồng xử lý câu hỏi",
+      "paragraph_index": 1,
+      "text": "Ở bước xử lý mới, hệ thống lựa chọn phương án truy xuất theo cấu hình, tập hợp các đoạn làm căn cứ và giới hạn lượng nội dung chuyển cho mô hình ngôn ngữ. Một số nhánh có thể mở rộng nội dung theo điều khoản hoặc bổ sung nguồn chính thức khi đáp ứng điều kiện. Khi không có căn cứ phù hợp, hệ thống trả thông báo tương ứng thay vì coi việc sinh văn bản là đủ để trả lời. Nếu có kết quả, đầu ra tiếp tục được kiểm tra và chuyển đến phần hiển thị. Việc lưu thông tin xử lý và lịch sử phụ thuộc môi trường lưu trữ: chế độ phát triển cục bộ không lưu lịch sử hội thoại; chức năng lưu cần dịch vụ lưu trữ trực tuyến được cấu hình. Đây là nhận xét từ mã nguồn, chưa xác nhận trạng thái của bản triển khai."
+    }
+  ]
+}

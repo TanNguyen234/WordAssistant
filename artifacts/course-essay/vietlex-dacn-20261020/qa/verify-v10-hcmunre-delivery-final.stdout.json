@@ -1,0 +1,44 @@
+{
+  "overall_status": "FAIL",
+  "delivery_status": "FAIL",
+  "delivery_gates": {
+    "overall": "FAIL",
+    "render": "FAIL",
+    "visual": "FAIL",
+    "native_word": "PASS"
+  },
+  "structural_status": "PASS",
+  "format_status": "PASS",
+  "numbering_status": "PASS",
+  "table_geometry_status": "PASS",
+  "field_structure_status": "PASS",
+  "field_freshness_status": "PASS",
+  "field_evaluation_status": "PASS",
+  "render_status": "FAIL",
+  "native_word_status": "PASS",
+  "visual_status": "FAIL",
+  "manual_review_required": false,
+  "issues": [
+    {
+      "severity": "ERROR",
+      "code": "render_reuse_invalid",
+      "message": "PDF page-count verification requires pypdfium2."
+    }
+  ],
+  "inventory": {
+    "paragraphs": 566,
+    "tables": 15,
+    "sections": 3,
+    "images": 12,
+    "fields": {
+      "total_field_tags": 474,
+      "toc_field": true,
+      "page_field": true,
+      "page_fields": 132,
+      "toc_fields": 3,
+      "other_fields": 23
+    }
+  },
+  "report_path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\qa\\verify-v10-hcmunre-delivery-final.json",
+  "report_sha256": "db462cc3275940c9eb36dc287d9f53e04e210ccd8944410a95891d594984a5c9"
+}

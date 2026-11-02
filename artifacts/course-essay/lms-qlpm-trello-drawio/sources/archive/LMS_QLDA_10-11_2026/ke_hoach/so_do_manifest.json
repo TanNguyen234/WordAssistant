@@ -1,0 +1,92 @@
+[
+  {
+    "name": "01 — WBS dự án LMS (cấu trúc bàn giao)",
+    "drawio": "diagrams/LMS_01.drawio",
+    "png": "images/LMS_01.png",
+    "note": "WBS đề xuất, không phải danh mục bắt buộc do giảng viên ban hành."
+  },
+  {
+    "name": "02 — Chu trình quản lý dự án và cổng kiểm soát",
+    "drawio": "diagrams/LMS_02.drawio",
+    "png": "images/LMS_02.png",
+    "note": "Luồng minh họa phương pháp, không khẳng định đã được giảng viên phê duyệt."
+  },
+  {
+    "name": "03 — Use Case tổng thể LMS",
+    "drawio": "diagrams/LMS_03.drawio",
+    "png": "images/LMS_03.png",
+    "note": "Các actor và use case gắn với docs/02_ROLES_USE_CASES.md."
+  },
+  {
+    "name": "04 — Activity: Admin ghi danh sinh viên",
+    "drawio": "diagrams/LMS_04.drawio",
+    "png": "images/LMS_04.png",
+    "note": ""
+  },
+  {
+    "name": "05 — Activity: Sinh viên nộp bài",
+    "drawio": "diagrams/LMS_05.drawio",
+    "png": "images/LMS_05.png",
+    "note": "Submission MVP là văn bản; không giả định file upload đã hoạt động."
+  },
+  {
+    "name": "06 — Activity: Làm quiz và chấm tự động",
+    "drawio": "diagrams/LMS_06.drawio",
+    "png": "images/LMS_06.png",
+    "note": ""
+  },
+  {
+    "name": "07 — Sequence: sinh viên nộp bài",
+    "drawio": "diagrams/LMS_07.drawio",
+    "png": "images/LMS_07.png",
+    "note": "Đường gọi mô hình hóa theo logic repo, không phải log chạy end-to-end."
+  },
+  {
+    "name": "08 — Sequence: giảng viên chấm bài",
+    "drawio": "diagrams/LMS_08.drawio",
+    "png": "images/LMS_08.png",
+    "note": "Đường gọi mô hình hóa theo logic repo, không phải log chạy end-to-end."
+  },
+  {
+    "name": "09 — Sequence: sinh viên thực hiện quiz",
+    "drawio": "diagrams/LMS_09.drawio",
+    "png": "images/LMS_09.png",
+    "note": "Đường gọi mô hình hóa theo logic repo, không phải log chạy end-to-end."
+  },
+  {
+    "name": "10 — Class Diagram miền LMS",
+    "drawio": "diagrams/LMS_10.drawio",
+    "png": "images/LMS_10.png",
+    "note": "Mô hình khái niệm dựa trên SQL Server schema 12 bảng, không thể hiện phương thức chưa được mã hóa."
+  },
+  {
+    "name": "11 — State Diagram: nộp và chấm bài",
+    "drawio": "diagrams/LMS_11.drawio",
+    "png": "images/LMS_11.png",
+    "note": "Schema: SUBMITTED, LATE, GRADED. Một bản ghi/assignment/student; resubmit trước hạn là cập nhật bản ghi."
+  },
+  {
+    "name": "12 — ERD: 12 bảng LMS (PK/FK)",
+    "drawio": "diagrams/LMS_12.drawio",
+    "png": "images/LMS_12.png",
+    "note": "Dựa trên database/01_schema.sql; các FK GradedBy cũng trỏ Users, giản lược để tránh rối hình."
+  },
+  {
+    "name": "13 — Kiến trúc LMS (hiện có trong repo)",
+    "drawio": "diagrams/LMS_13.drawio",
+    "png": "images/LMS_13.png",
+    "note": ""
+  },
+  {
+    "name": "14 — Mạng công việc phụ thuộc (không gán ngày)",
+    "drawio": "diagrams/LMS_14.drawio",
+    "png": "images/LMS_14.png",
+    "note": "Không tính đường găng nếu không có duration và deadline được nhóm chốt."
+  },
+  {
+    "name": "15 — Requirements Traceability (RTM) từ yêu cầu đến evidence",
+    "drawio": "diagrams/LMS_15.drawio",
+    "png": "images/LMS_15.png",
+    "note": "Đường dẫn sơ đồ / link Trello / tình trạng xác minh phải là dữ liệu thật."
+  }
+]

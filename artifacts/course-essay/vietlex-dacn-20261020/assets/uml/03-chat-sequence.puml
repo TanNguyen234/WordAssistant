@@ -1,0 +1,41 @@
+@startuml
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName "Times New Roman"
+skinparam defaultFontSize 24
+autonumber
+control "POST /chat" as Route
+control "RAG pipeline" as RAG
+control "Configured retriever" as Retriever
+control "LLM generation" as LLM
+database "Semantic cache" as Cache
+database "Interaction store" as Store
+Route -> Route : redact PII; verify CSRF; input check
+Route -> Cache : lookup only for eligible query
+alt cache hit
+  Cache --> Route : saved answer + evidence
+else cache miss / ineligible
+  Route -> RAG : approved question
+  RAG -> Retriever : configured retrieval
+  Retriever --> RAG : evidence + diagnostics
+  opt V3 expansion required
+    RAG -> Retriever : load source; verify content hash
+    Retriever --> RAG : expanded evidence or skip status
+  end
+  alt no suitable evidence
+    RAG --> Route : no-evidence response
+  else evidence available
+    RAG -> LLM : bounded context + prompt
+    LLM --> RAG : answer + metadata
+    RAG --> Route : answer + context + latency
+  end
+end
+Route -> Route : output check; redact PII
+Route -> Store : persist status, response, metrics, trace
+Route --> Route : return chat_message.html
+note over Route,Cache
+Semantic cache is bypassed when the
+input guardrail is enabled and for
+ineligible queries.
+end note
+@enduml

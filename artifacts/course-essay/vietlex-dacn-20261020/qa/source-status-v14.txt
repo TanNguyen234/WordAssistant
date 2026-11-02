@@ -1,0 +1,307 @@
+ D .agents/skills/writing-plans/SKILL.md
+ D .agents/skills/writing-plans/plan-document-reviewer-prompt.md
+ M .gitignore
+ M FEATURE_STATUS.md
+ M README.en.md
+ M README.md
+ M app/api/account_routes.py
+ M app/api/dependencies.py
+ M app/api/routes.py
+ M app/api/trusted_source_routes.py
+ M app/config.py
+ M app/database.py
+ M app/evaluation/answer_metrics.py
+ M app/evaluation/reporting.py
+ M app/evaluation/retrieval_backends.py
+ M app/ingestion/legal_text.py
+ M app/main.py
+ M app/research_database.py
+ M app/services/email_delivery.py
+ M app/services/evaluator.py
+ M app/services/evidence_presenter.py
+ M app/services/federated_official_search.py
+ M app/services/guardrails.py
+ M app/services/http_security.py
+ M app/services/legal_browser.py
+ M app/services/official_document_reader.py
+ M app/services/rag_pipeline.py
+ M app/services/readiness.py
+ M app/services/research_analysis.py
+ M app/services/research_presenter.py
+ M app/services/retrieval.py
+ M app/services/reviewer_demo.py
+ M app/services/semantic_cache.py
+ M app/services/serverless_guardrails.py
+ M app/services/trusted_source_reader.py
+ M app/services/v3_article_expansion.py
+ M app/services/vertex_ai.py
+ M app/static/css/research-workflow.css
+ M app/static/js/research-workspace.js
+ M app/templates/account_form.html
+ M app/templates/chat_history_messages.html
+ M app/templates/chat_message.html
+ M app/templates/research_workspace.html
+ M docs/CURRENT_ARCHITECTURE.md
+ M docs/DOCUMENTATION_INDEX.md
+ M docs/PROJECT_CONTEXT.md
+ M docs/evaluation/CURRENT_STATUS.md
+ M docs/evaluation/PORTFOLIO_EVIDENCE.md
+ M scripts/audit_gold_distribution.py
+ M tests/conftest.py
+ M tests/evaluation/test_gold_distribution.py
+ M tests/evaluation/test_reporting_v3.py
+ M tests/evaluation/test_retrieval_backend_binding.py
+ M tests/evaluation/test_runtime_contracts.py
+ M tests/services/test_email_delivery.py
+ M tests/services/test_evidence_presenter.py
+ M tests/services/test_federated_official_search.py
+ M tests/services/test_guardrails.py
+ M tests/services/test_legal_browser.py
+ M tests/services/test_observability.py
+ M tests/services/test_official_document_reader.py
+ M tests/services/test_reviewer_demo.py
+ M tests/services/test_semantic_cache.py
+ M tests/services/test_serverless_guardrails.py
+ M tests/services/test_trusted_source_reader.py
+ M tests/services/test_v3_article_expansion.py
+ M tests/services/test_vertex_ai.py
+ M tests/test_account_routes.py
+ M tests/test_config.py
+ M tests/test_database.py
+ M tests/test_database_sessions.py
+ M tests/test_legal_registry_routes.py
+ M tests/test_local_stateless_runtime.py
+ M tests/test_product_quality.py
+ M tests/test_public_templates.py
+ M tests/test_public_web_routes.py
+ M tests/test_rag_pipeline.py
+ M tests/test_readiness.py
+ M tests/test_trusted_source_routes.py
+ M tests/test_web_security.py
+ M tests/test_workspace_routes.py
+?? .tmp-codex-window-inspect.png
+?? .tmp-redesign-home.png
+?? .tmp-redesign/
+?? app/api/free_web_research_routes.py
+?? app/evaluation/qwen_lora_embedder.py
+?? app/services/chat_official_supplement.py
+?? app/services/deep_official_search.py
+?? app/services/free_web_research.py
+?? app/services/legal_topic_terms.py
+?? app/services/official_discovered_corpus_rescue.py
+?? app/services/official_pdf_worker.py
+?? app/services/official_search_plan.py
+?? app/services/primary_law_rescue.py
+?? app/services/vbpl_search.py
+?? app/static/fonts/NotoSerif-Variable.ttf
+?? artifacts/
+?? benchmark_fixtures/
+?? data/
+?? docs/audits/feature-maturity-20260924/
+?? docs/audits/full-project-20261005/
+?? docs/audits/full-project-20261013/
+?? docs/audits/full-project-20261014-post-metrics/
+?? docs/audits/full-project-20261014-post-selfcheck/
+?? docs/audits/production-full-function-20260925/
+?? docs/evaluation/gold_labels/audit_runs/
+?? docs/evaluation/index-pilots/current-worktree-final-20261013/
+?? docs/evaluation/index-pilots/current-worktree-final2-20261013/
+?? docs/evaluation/index-pilots/current-worktree-final3-20261013/
+?? docs/evaluation/runs/dryrun_probe_case1/
+?? docs/evaluation/runs/fairplay_qwen_vs_gemini_20261005/
+?? docs/evaluation/runs/fairplay_vertex_golden50_20261004/
+?? docs/evaluation/runs/natural-rag-20261023T003938507837Z-751d9ace-a5fd86/
+?? docs/evaluation/runs/natural-rag-20261024T062849536800Z-60777348-e677f2/
+?? docs/evaluation/runs/natural-rag-20261024T065031457083Z-ba8447f6-512bb3/
+?? docs/evaluation/runs/natural-rag-20261024T132438879233Z-cd7b82b1-09cbea/
+?? docs/evaluation/runs/official-deep-reading-20261024T150956Z-e69c299c/
+?? docs/evaluation/runs/official-deep-reading-20261024T151728Z-9f24b2c5/
+?? docs/evaluation/runs/official-full-reading-20260913T101800Z/read_full_sources.py
+?? docs/evaluation/runs/official-full-reading-20260913T101800Z/results/agriculture/
+?? docs/evaluation/runs/official-full-reading-20260913T101800Z/results/aviation/
+?? docs/evaluation/runs/official-full-reading-20260913T101800Z/results/credit/
+?? docs/evaluation/runs/official-full-reading-20260913T101800Z/results/electricity/
+?? docs/evaluation/runs/official-full-reading-20260913T101800Z/results/health/
+?? docs/evaluation/runs/official-full-reading-20260913T101800Z/results/imports/
+?? docs/evaluation/runs/official-full-reading-20260913T101800Z/results/maritime/
+?? docs/evaluation/runs/official-full-reading-20260913T101800Z/results/procurement/
+?? docs/evaluation/runs/official-full-reading-20260913T101800Z/results/reserves/
+?? docs/evaluation/runs/official-full-reading-20260913T101800Z/results/resources_tax/
+?? docs/evaluation/runs/official-full-reading-20260913T101800Z/resume_full_sources.py
+?? docs/evaluation/runs/recovery-live-case001-20261011-01/
+?? docs/evaluation/runs/recovery-v3-article-expansion-golden50-20261011-01/
+?? docs/evaluation/runs/recovery-v3-case043-expansion-20261011-01/
+?? docs/evaluation/runs/recovery-v3-case043-expansion-20261011-02/
+?? docs/evaluation/runs/recovery-v3-golden50-rrf-dbsf-20261011-01/
+?? docs/evaluation/runs/retrieval-v3-case025-retry5-20260903/
+?? docs/evaluation/runs/retrieval-v3-case043-quota-retry-20260903/
+?? docs/evaluation/runs/retrieval-v3-golden50-expanded14962-20260903/
+?? docs/evaluation/runs/retrieval-v3-golden50-expanded14962-final-20260903/
+?? docs/evaluation/runs/source-temporal-ten-20260913T153643Z/agriculture.json
+?? docs/evaluation/runs/source-temporal-ten-20260913T153643Z/artifact-hashes.json
+?? docs/evaluation/runs/source-temporal-ten-20260913T153643Z/aviation.json
+?? docs/evaluation/runs/source-temporal-ten-20260913T153643Z/credit.json
+?? docs/evaluation/runs/source-temporal-ten-20260913T153643Z/electricity.json
+?? docs/evaluation/runs/source-temporal-ten-20260913T153643Z/health.json
+?? docs/evaluation/runs/source-temporal-ten-20260913T153643Z/imports.json
+?? docs/evaluation/runs/source-temporal-ten-20260913T153643Z/maritime.json
+?? docs/evaluation/runs/source-temporal-ten-20260913T153643Z/procurement.json
+?? docs/evaluation/runs/source-temporal-ten-20260913T153643Z/reserves.json
+?? docs/evaluation/runs/source-temporal-ten-20260913T153643Z/resources_tax.json
+?? docs/evaluation/runs/source-temporal-ten-20260913T153643Z/run.py
+?? docs/evaluation/runs/vertex-g0_20261004_121559_840576_07589319/
+?? docs/handbook/
+?? docs/history/
+?? docs/runtime_reality_audit.md
+?? docs/superpowers/plans/2026-09-09-website-redesign.md
+?? docs/superpowers/plans/2026-10-05-full-project-feature-gates.md
+?? docs/superpowers/plans/2026-10-11-project-recovery.md
+?? docs/superpowers/plans/2026-10-11-v3-article-evidence-expansion.md
+?? docs/superpowers/plans/2026-10-17-free-web-implementation.md
+?? docs/tasks/
+?? docs/verification/data-integrity-20260913/full-final-process.json
+?? docs/verification/data-integrity-20260913/full-final.log
+?? docs/verification/data-integrity-20260913/full-process.json
+?? docs/verification/data-integrity-20260913/full.log
+?? docs/verification/data-integrity-20260913/green.json
+?? docs/verification/data-integrity-20260913/mongo_probe.py
+?? docs/verification/data-integrity-20260913/red.json
+?? docs/verification/google-project-switch-20261019-01/
+?? docs/verification/live-api-af8c9f5-20260912/INTERIM_REPORT.md
+?? docs/verification/live-api-af8c9f5-20260912/account_anonymous_public.response.bin
+?? docs/verification/live-api-af8c9f5-20260912/admin_anonymous_public.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/admin_corpus_live.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/admin_evaluations_live.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/admin_feedback_live.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/admin_providers_live.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/admin_role_probe.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/admin_system_live.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/admin_usage_live.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/analysis_selected_live.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/chat_feedback_live.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/claims_live.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/comparison_live.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/corpus_chat_live.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/deployed_product_js.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/document_missing_public.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/document_scoped_chat.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/evaluation_actual_chat_live.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/evaluation_lab.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/evidence_readback.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/feedback_regression_draft_live.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/feedback_triage_live.response.bin
+?? docs/verification/live-api-af8c9f5-20260912/finding_board_live.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/finding_note_update_live.response.bin
+?? docs/verification/live-api-af8c9f5-20260912/finding_readback_live.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/finding_stale_revision_live.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/full_review_coverage_readback.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/full_review_live.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/full_review_plan_live.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/health.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/home.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/login_authenticated_1.response.bin
+?? docs/verification/live-api-af8c9f5-20260912/login_public.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/login_session_start_1.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/obligations_live.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/observations.jsonl
+?? docs/verification/live-api-af8c9f5-20260912/ocr_public_article_live.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/official_research_plan_live.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/official_research_run_live.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/original_download_three_articles.response.bin
+?? docs/verification/live-api-af8c9f5-20260912/pin_24.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/pin_25.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/pin_26.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/reader.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/readiness.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/redline_public_excerpts_live.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/report_editor_live.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/report_export_docx_live.response.bin
+?? docs/verification/live-api-af8c9f5-20260912/report_export_md_live.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/report_live.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/report_save_version_live.response.bin
+?? docs/verification/live-api-af8c9f5-20260912/requests.jsonl
+?? docs/verification/live-api-af8c9f5-20260912/scoped_chat_page.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/scoped_chat_retry_live.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/scoped_page_public.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/search.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/search_date_exclude_public.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/search_date_match_public.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/search_filters.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/search_invalid_date_public.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/selected_clause_review_live.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/session_create.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/timeline_live.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/trusted_official_portal_live.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/upload_public_law_txt.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/upload_public_three_articles_txt.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/upload_single_article_redline.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/workspace_create.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/workspace_create_authenticated_1.response.bin
+?? docs/verification/live-api-af8c9f5-20260912/workspace_options.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/workspace_readback.response.txt
+?? docs/verification/live-api-af8c9f5-20260912/workspace_update.response.bin
+?? docs/verification/live-api-af8c9f5-20260912/workspaces.response.txt
+?? docs/verification/local-storage-20261023-01/
+?? docs/verification/ocr-output-20260913/aviation-first-page.pdf
+?? docs/verification/ocr-output-20260913/before-ocr-fix-production-read_official_pdf.txt
+?? docs/verification/ocr-output-20260913/full-ocr-process.json
+?? docs/verification/ocr-output-20260913/full-ocr.log
+?? docs/verification/ocr-output-20260913/ocr-single-page-baseline.json
+?? docs/verification/ocr-output-20260913/ocr-single-page-treatment.json
+?? docs/verification/ocr-output-20260913/probe_ocr_single.py
+?? docs/verification/ocr-output-20260913/probe_ocr_treatment.py
+?? docs/verification/ocr-output-20260913/production-integrity.json
+?? docs/verification/ocr-output-20260913/production-read_official_pdf.txt
+?? docs/verification/production-release-20261018-01/
+?? docs/verification/production-role-audit-20261014/
+?? docs/verification/project-recovery-20261011/
+?? docs/verification/project-recovery-20261012/
+?? docs/verification/project-recovery-20261013/
+?? docs/verification/project-recovery-20261014/
+?? docs/verification/rag-reliability-20261024-01/
+?? docs/verification/rag-reliability-20261024-02/
+?? docs/verification/rag-reliability-20261024-03/
+?? docs/verification/rag-reliability-20261024-04/
+?? docs/verification/rag-web-capacity-20261019-01/
+?? docs/verification/source-temporal-20260913/full-temporal-final-process.json
+?? docs/verification/source-temporal-20260913/full-temporal-final.log
+?? docs/verification/source-temporal-20260913/full-temporal-process.json
+?? docs/verification/source-temporal-20260913/full-temporal.log
+?? docs/verification/source-temporal-20260913/production-temporal-analysis.json
+?? docs/verification/source-temporal-20260913/production-temporal-checks.json
+?? docs/verification/source-temporal-20260913/production_temporal.py
+?? docs/verification/source-temporal-20260913/temporal-baseline.json
+?? docs/verification/source-temporal-20260913/temporal-input.json
+?? docs/verification/source-temporal-20260913/temporal-treatment.json
+?? docs/verification/source-temporal-20260913/temporal_baseline.py
+?? docs/verification/source-temporal-20260913/temporal_treatment.py
+?? docs/verification/source-temporal-20260913/vbpl-discovery-probe.json
+?? docs/verification/system-handbook-free-web-20261017/
+?? docs/verification/website-redesign-20260910-smoke.json
+?? docs/verification/website-redesign-20260910-tests.xml
+?? docs/verification/website-redesign-20260910.md
+?? run_fairplay_qwen_vs_gemini.py
+?? run_zalo_mini_benchmark.py
+?? scratch/
+?? scripts/audit_online_capacity.py
+?? scripts/benchmark_document_readers.py
+?? scripts/probe_natural_rag.py
+?? tests/free_research_cancel_race.test.cjs
+?? tests/scripts/test_audit_online_capacity.py
+?? tests/scripts/test_benchmark_document_readers.py
+?? tests/scripts/test_probe_natural_rag.py
+?? tests/services/test_chat_official_supplement.py
+?? tests/services/test_deep_official_search.py
+?? tests/services/test_free_research_demo_admission.py
+?? tests/services/test_free_web_research.py
+?? tests/services/test_free_web_research_database.py
+?? tests/services/test_official_discovered_corpus_rescue.py
+?? tests/services/test_primary_law_rescue.py
+?? tests/services/test_rental_evidence_contract.py
+?? tests/services/test_runtime_complete_clauses.py
+?? tests/services/test_selected_source_provenance.py
+?? tests/test_free_web_research_routes.py
+?? tests/test_free_web_research_ui.py
+?? tests/test_qwen_lora_preflight.py
+?? tests/visual/
+?? uv.lock

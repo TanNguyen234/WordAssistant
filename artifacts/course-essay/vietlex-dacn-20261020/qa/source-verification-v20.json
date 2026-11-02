@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "full_suite": {
+    "command": ".venv/Scripts/python.exe -m pytest -q",
+    "exit_code": 0,
+    "stdout": "qa/wordassistant-suite-v20-stable.log",
+    "stderr": "qa/wordassistant-suite-v20-stable.stderr.log"
+  },
+  "focused_tests": "tests/test_style_alignment.py tests/test_draft_placeholders_rejected.py tests/test_academic_report_profile.py: PASS",
+  "package_sync": "PASS",
+  "skill_validation": "PASS",
+  "git_diff_check": "PASS (line-ending notices only)",
+  "review": "Stable source/diff review; CRG unavailable",
+  "level": [
+    "unit",
+    "integration",
+    "local Microsoft Word"
+  ]
+}

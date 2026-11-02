@@ -1,0 +1,44 @@
+{
+  "query": "THIẾT KẾ VÀ BIỂU ĐỒ DRAW.IO",
+  "sections": [
+    {
+      "id": "chuong-9-thiet-ke-va-bieu-o-draw-io",
+      "title": "CHƯƠNG 9. THIẾT KẾ VÀ BIỂU ĐỒ DRAW.IO",
+      "level": 1
+    },
+    {
+      "id": "chuong-9-thiet-ke-va-bieu-o-draw-io-25",
+      "title": "CHƯƠNG 9. THIẾT KẾ VÀ BIỂU ĐỒ DRAW.IO\t25",
+      "level": 1
+    },
+    {
+      "id": "phu-luc-a-danh-muc-so-o-draw-io",
+      "title": "Phụ lục A. Danh mục sơ đồ Draw.io",
+      "level": 2
+    },
+    {
+      "id": "phu-luc-b-checklist-anh-trello-draw-io-va-lms",
+      "title": "Phụ lục B. Checklist ảnh Trello, Draw.io và LMS",
+      "level": 2
+    },
+    {
+      "id": "quy-trinh-xuat-bieu-o",
+      "title": "Quy trình xuất biểu đồ",
+      "level": 2
+    },
+    {
+      "id": "ket-noi-trello-wbs-draw-io-word",
+      "title": "Kết nối Trello — WBS — Draw.io — Word",
+      "level": 2
+    },
+    {
+      "id": "chuong-4-quan-ly-tien-o-va-cpm",
+      "title": "CHƯƠNG 4. QUẢN LÝ TIẾN ĐỘ VÀ CPM",
+      "level": 1
+    }
+  ],
+  "text": "## CHƯƠNG 9. THIẾT KẾ VÀ BIỂU ĐỒ DRAW.IO\nThiết kế giúp đội dự án chuyển phạm vi thành các thành phần và quy tắc có thể kiểm tra. Kiến trúc trong repo tổ chức ba vai trò qua React/TypeScript/Vite, FastAPI/SQLAlchemy và SQL Server. Sơ đồ kiến trúc xác định ranh giới frontend, API và dữ liệu; hồ sơ này chưa cung cấp bằng chứng triển khai production.\n\nERD LMS_12 trình bày 12 bảng cùng các khóa chính và khóa ngoại; một số quan hệ được giản lược theo manifest. Phụ lục D bổ sung Use Case, luồng nộp bài, trình tự chấm bài, lớp miền và trạng thái bài nộp. Các góc nhìn này được đối chiếu với docs/02_ROLES_USE_CASES.md, database/01_schema.sql và backend/app/api/routes/assignments.py, nên có thể truy ngược từ hình về quy tắc trong project.\n\nDraw.io giữ source.drawio/XML có thể sửa và PNG để trình bày. Tài liệu chính thức phân biệt định dạng export với source , và mô tả tùy chọn PNG. Hình tĩnh không chứng minh UI editor đã được chụp.\n\n## CHƯƠNG 9. THIẾT KẾ VÀ BIỂU ĐỒ DRAW.IO\t25\n9.1. Kiến trúc và dữ liệu\t25\n\n9.2. Quy trình xuất biểu đồ\t27\n\n## PHỤ LỤC > Phụ lục A. Danh mục sơ đồ Draw.io\nHồ sơ gốc có 15 cặp nguồn Draw.io và PNG. Phần nội dung chính dùng WBS, chu trình quản lý, mạng phụ thuộc, kiến trúc và ERD. Phụ lục D đưa thêm năm góc nhìn nghiệp vụ; Use Case, Sequence chấm bài và lớp miền được bố trí lại để đọc trong Word, còn luồng nộp bài và trạng thái dùng hình gốc đã đối chiếu.\n\nBảng dưới ghi rõ hình được sử dụng và bản nguồn còn lưu. Mỗi bản bố cục gọn có PNG xuất từ Draw.io cùng nguồn chỉnh sửa được; chúng không được dùng làm ảnh chụp ứng dụng hay log kiểm thử.\n\nBẢNG 17. 15 sơ đồ trong ZIP\n\nID | Sơ đồ | Trong báo cáo\nLMS_01 | WBS | PNG chèn\nLMS_02 | Chu trình/cổng | PNG chèn\nLMS_03 | Use Case | Bản bố cục gọn; Phụ lục D\nLMS_04 | Activity ghi danh | Inventory\nLMS_05 | Activity nộp bài | PNG; Phụ lục D\nLMS_06 | Activity quiz | Inventory\nLMS_07 | Sequence nộp bài | Nguồn lưu; HTTP method cần đối chiếu trước khi dùng\nLMS_08 | Sequence chấm bài | Bản bố cục gọn; Phụ lục D\nLMS_09 | Sequence quiz | Modeled\nLMS_10 | Class Diagram | Bản trích luồng bài tập; Phụ lục D\nLMS_11 | State submission | PNG; Phụ lục D\nLMS_12 | ERD 12 tables | PNG chèn; compare SQL\nLMS_13 | Architecture | PNG chèn; design\nLMS_14 | Dependency no dates | PNG chèn\nLMS_15 | Requirements traceability | Inventory\n\nNguồn: Hồ sơ đề tài và hướng dẫn chụp ảnh do người dùng cung cấp; cập nhật quan sát ngày 26/10/2026.\n\n## PHỤ LỤC > Phụ lục B. Checklist ảnh Trello, Draw.io và LMS\nHướng dẫn yêu cầu các nhóm ảnh T01–T05, D01–D03 và L01–L07. Ngày 26/10/2026 đã bổ sung ảnh trực tiếp của board, thẻ WBS, mốc lịch, thẻ mô phỏng và website LMS theo ba vai trò tại Phụ lục E. Calendar/Timeline, ảnh thao tác editor Draw.io, API 403 và terminal kiểm thử vẫn cần bằng chứng riêng nếu giảng viên yêu cầu.\n\nBảng dưới đây phân biệt ảnh đã chụp với những minh chứng chưa thực hiện; ảnh tĩnh xuất từ Draw.io vẫn được quản lý riêng với ảnh giao diện editor.\n\nBẢNG 18. Checklist ảnh cần bổ sung\n\nID | Đối tượng | Evidence | Status\nT01 | Trello overview | UI thật, thấy lists | ĐÃ CHỤP; Phụ lục E\nT02 | Card/checklist | Card thật | ĐÃ CHỤP; checklist 0/7\nT03 | Schedule | Calendar/timeline thật | Đã chụp mốc; chưa Calendar\nT04 | Simulated UAT | Nhãn SIMULATED thật | ĐÃ CHỤP thẻ mô phỏng\nT05 | Done | Chỉ với evidence thật | Đã quan sát Done trống\nD01-D03 | Draw.io | Editor/export/review | CHƯA CHỤP editor\nL01-L07 | LMS runtime | UI thật; route/click path | L01–L05 đã chụp; L06–L07 chưa\n\nNguồn: Hồ sơ đề tài và hướng dẫn chụp ảnh do người dùng cung cấp; cập nhật quan sát ngày 26/10/2026.\n\n## CHƯƠNG 9. THIẾT KẾ VÀ BIỂU ĐỒ DRAW.IO > Quy trình xuất biểu đồ\nMỗi sơ đồ được xây dựng để trả lời một câu hỏi cụ thể về hệ thống. Khi rà soát, cần kiểm tra tên đối tượng, quan hệ, điều kiện rẽ nhánh và chú thích dựa trên hồ sơ nghiệp vụ hoặc mã nguồn. Tệp Draw.io được lưu cùng bản xuất ảnh để có thể sửa và kiểm tra lại khi phạm vi thay đổi. Cách làm này giúp phát hiện sự không thống nhất giữa kế hoạch quản lý và sản phẩm được mô tả.\n\n## CHƯƠNG 8. TRUYỀN THÔNG, THAY ĐỔI VÀ TRELLO > Kết nối Trello — WBS — Draw.io — Word\nMột đầu ra chỉ truy vết được khi tên và mã công việc giữ nhất quán giữa WBS, thẻ Trello, tệp sơ đồ và báo cáo. Chẳng hạn, thẻ thiết kế luồng nộp bài cần liên kết với sơ đồ và tiêu chí kiểm tra hạn nộp trong API. Lịch nhóm tháng 10–11 và ngân sách 27 triệu đồng trong kịch bản ZIP thuộc bối cảnh khác với đường cơ sở 20 tuần, 1,2 tỷ đồng; báo cáo không cộng gộp hoặc thay thế hai tập số liệu.\n\n## CHƯƠNG 4. QUẢN LÝ TIẾN ĐỘ VÀ CPM\nKế hoạch tiến độ gồm 19 hoạt động liên kết theo quan hệ kết thúc trước khi bắt đầu. Phương pháp đường găng (CPM) tính thời điểm bắt đầu và kết thúc sớm theo chiều thuận, sau đó tính thời điểm muộn từ mốc kết thúc dự kiến. Độ dự trữ toàn phần là chênh lệch giữa thời điểm bắt đầu muộn và sớm; chỉ số này cho biết khả năng dịch chuyển hoạt động mà chưa làm trễ dự án theo mạng lịch đã lập.\n\nKết quả đối soát cho thấy mốc kết thúc kế hoạch ở\n[… truncated to budget …]",
+  "estimated_tokens": 1663,
+  "max_tokens": 1700,
+  "truncated": true
+}

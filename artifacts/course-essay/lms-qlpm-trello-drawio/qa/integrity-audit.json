@@ -1,0 +1,341 @@
+{
+  "schema_version": "1.0",
+  "audit_kind": "ETHICAL_ACADEMIC_INTEGRITY",
+  "ai_detection_performed": false,
+  "detector_evasion_assistance": false,
+  "document": {
+    "path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final.docx",
+    "sha256": "defc36d4f73e2af8ba8bd86eb6c3bd721d42d7128e92a15bd9943746e96a0235",
+    "size_bytes": 748628
+  },
+  "profile": {
+    "profile_id": "generic-lms-project-report",
+    "profile_version": 1,
+    "minimum_references": 4,
+    "prefer_primary_source": true,
+    "require_reviewed_sources": true,
+    "long_quote_words": 40,
+    "quote_citation_words": 8,
+    "repeated_opening_words": 3,
+    "repeated_opening_minimum": 3,
+    "ngram_size": 5,
+    "repeated_ngram_minimum": 3,
+    "review_punctuation": [
+      "em_dash",
+      "en_dash",
+      "left_curly_double_quote",
+      "right_curly_double_quote",
+      "left_curly_single_quote",
+      "right_curly_single_quote",
+      "ellipsis",
+      "non_breaking_space"
+    ]
+  },
+  "coverage": {
+    "paragraph_records": 473,
+    "nonempty_story_counts": {
+      "body": 227,
+      "footer": 2,
+      "table": 224
+    },
+    "stories": [
+      "body",
+      "table",
+      "header",
+      "footer"
+    ]
+  },
+  "status": "WARN",
+  "summary": {
+    "PASS": 6,
+    "WARN": 4,
+    "FAIL": 0
+  },
+  "gates": {
+    "invisible_unicode": {
+      "status": "PASS",
+      "finding_count": 0,
+      "findings": [],
+      "classification": "DETERMINISTIC_INTEGRITY_CHECK"
+    },
+    "typography_punctuation_review": {
+      "status": "WARN",
+      "finding_count": 2,
+      "findings": [
+        {
+          "punctuation": "em_dash",
+          "codepoint": "U+2014",
+          "occurrences": 10
+        },
+        {
+          "punctuation": "en_dash",
+          "codepoint": "U+2013",
+          "occurrences": 14
+        }
+      ],
+      "classification": "STYLE_REVIEW_NOT_AI_EVIDENCE",
+      "configured": [
+        "em_dash",
+        "en_dash",
+        "left_curly_double_quote",
+        "right_curly_double_quote",
+        "left_curly_single_quote",
+        "right_curly_single_quote",
+        "ellipsis",
+        "non_breaking_space"
+      ]
+    },
+    "long_verbatim_quotes": {
+      "status": "PASS",
+      "finding_count": 0,
+      "findings": [],
+      "classification": "HUMAN_REVIEW_REQUIRED",
+      "word_threshold": 40
+    },
+    "quotes_lacking_adjacent_citation": {
+      "status": "PASS",
+      "finding_count": 0,
+      "findings": [],
+      "classification": "HUMAN_REVIEW_REQUIRED",
+      "word_threshold": 8,
+      "adjacency": "same, previous, or next paragraph in the same story"
+    },
+    "numeric_citation_bibliography_consistency": {
+      "status": "PASS",
+      "finding_count": 0,
+      "findings": [],
+      "classification": "DETERMINISTIC_CROSS_CHECK",
+      "citation_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "bibliography_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "source_evidence": {
+      "status": "PASS",
+      "finding_count": 0,
+      "findings": [],
+      "classification": "REGISTRY_AND_DOCUMENT_CROSS_CHECK",
+      "minimum_references": 4,
+      "document_reference_count": 5,
+      "registry": {
+        "path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\report-evidence.json",
+        "exists": true,
+        "sha256": "67de098c5851b4c8c0cda2a9a6bddb9f069f3d7b9c35c6c5b7e2ace028af4b10",
+        "record_count": 5,
+        "record_ids": [
+          "DRAWIO-FORMATS",
+          "DRAWIO-PNG",
+          "PMI-SCHED",
+          "TRELLO-CARDS",
+          "TRELLO-CHECKS"
+        ]
+      },
+      "verified_record_count": 5,
+      "primary_record_count": 5,
+      "synthetic_record_count": 0,
+      "linked_evidence_id_count": 5,
+      "require_reviewed_sources": true,
+      "primary_status": "EXPLICIT_TAG_ONLY"
+    },
+    "quantitative_claims_lacking_citation": {
+      "status": "WARN",
+      "finding_count": 7,
+      "findings": [
+        {
+          "story": "body",
+          "paragraph_index": 86,
+          "excerpt": "Phương pháp gồm đọc tài liệu quản lý dự án trong repo LMS, ưu tiên báo cáo tái hòa giải ngày 21/10/2026, đối chiếu snapshot Trello, manifest và tài sản trong ZIP, rồi biên soạn bằng WordAssistant với profile generic vì c"
+        },
+        {
+          "story": "body",
+          "paragraph_index": 89,
+          "excerpt": "PRJ-LMS-2026 dự kiến xây dựng LMS web theo ba vai trò quản trị viên, giảng viên và sinh viên. Business case trong charter là giảm thất lạc tài liệu, chậm bài nộp, tổng hợp điểm thủ công và thiếu thông tin quản trị. Phạm "
+        },
+        {
+          "story": "body",
+          "paragraph_index": 93,
+          "excerpt": "LMS dự kiến quản lý người dùng, khóa học, phân công giảng viên, ghi danh, modules/lessons, assignment/submission, quiz, grading, bảng điểm và thông báo. Mục tiêu chấp nhận được mô tả bằng 10 kịch bản AC-01–AC-10 và các c"
+        },
+        {
+          "story": "body",
+          "paragraph_index": 96,
+          "excerpt": "Baseline là 20 tuần/1,2 tỷ VNĐ/8,5 FTE. Các bên nghiệp vụ được giả định cung cấp yêu cầu, đội ngũ có kỹ năng và môi trường demo có thể chuẩn bị. 8,5 FTE là tổng phân bổ, không khóa số đầu người."
+        },
+        {
+          "story": "body",
+          "paragraph_index": 139,
+          "excerpt": "Kế hoạch dùng bottom-up kết hợp parametric costing. Nhân sự tổng 8,5 FTE; chín dòng vai trò không đồng nghĩa chín người. Labor 840M, hạ tầng 120M, công cụ 48M, đào tạo 40M, hành chính 32M và contingency 120M cộng đúng 1,"
+        },
+        {
+          "story": "body",
+          "paragraph_index": 159,
+          "excerpt": "Quality được kiểm qua tiêu chí đầu ra và gate. Definition of Done yêu cầu logic theo đặc tả, happy path/denial path được kiểm, API có tài liệu, UI xử lý loading/success/error/empty, không hard-code quyền phía client. Mục"
+        },
+        {
+          "story": "body",
+          "paragraph_index": 174,
+          "excerpt": "Snapshot 23/10/2026 có 9 danh sách/39 thẻ: To Do 25; yêu cầu 2; Blocked 1 (hỏi rubric); milestone đề xuất 8; mô phỏng 3; Backlog/Doing/Review/Done trống. Hình tổng hợp API không phải screenshot Trello; không chứng minh v"
+        }
+      ],
+      "classification": "HUMAN_REVIEW_HEURISTIC_NOT_PROOF",
+      "scope": "Explicit units, percentages, measurements, or count/performance context; structural labels, software versions, and database cells are excluded."
+    },
+    "repetitive_prose_review": {
+      "status": "WARN",
+      "finding_count": 5,
+      "findings": [
+        {
+          "kind": "repeated_ngram",
+          "text": "14 không gán ngày bảng",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 126,
+              "token_offset": 24
+            },
+            {
+              "story": "body",
+              "paragraph_index": 129,
+              "token_offset": 2
+            },
+            {
+              "story": "body",
+              "paragraph_index": 131,
+              "token_offset": 1
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "20 tuần 1 2 tỷ",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 96,
+              "token_offset": 2
+            },
+            {
+              "story": "body",
+              "paragraph_index": 188,
+              "token_offset": 40
+            },
+            {
+              "story": "body",
+              "paragraph_index": 216,
+              "token_offset": 4
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "lms 14 không gán ngày",
+          "occurrences": 4,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 126,
+              "token_offset": 23
+            },
+            {
+              "story": "body",
+              "paragraph_index": 129,
+              "token_offset": 1
+            },
+            {
+              "story": "body",
+              "paragraph_index": 131,
+              "token_offset": 0
+            },
+            {
+              "story": "body",
+              "paragraph_index": 204,
+              "token_offset": 62
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "t01 t05 d01 d03 l01",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 10,
+              "token_offset": 38
+            },
+            {
+              "story": "body",
+              "paragraph_index": 217,
+              "token_offset": 14
+            },
+            {
+              "story": "body",
+              "paragraph_index": 231,
+              "token_offset": 2
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "t05 d01 d03 l01 l07",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 10,
+              "token_offset": 39
+            },
+            {
+              "story": "body",
+              "paragraph_index": 217,
+              "token_offset": 15
+            },
+            {
+              "story": "body",
+              "paragraph_index": 231,
+              "token_offset": 3
+            }
+          ]
+        }
+      ],
+      "classification": "HUMAN_REVIEW_HEURISTIC_NOT_AI_DETECTION",
+      "finding_count_total": 5,
+      "ngram_size": 5,
+      "scope": "Sentence openings and content-bearing phrases repeated across distinct body paragraphs; headings, captions, and table cells are excluded."
+    },
+    "unresolved_placeholders": {
+      "status": "PASS",
+      "finding_count": 0,
+      "findings": [],
+      "classification": "DETERMINISTIC_COMPLETENESS_CHECK"
+    },
+    "ai_use_disclosure_provenance": {
+      "status": "WARN",
+      "finding_count": 1,
+      "findings": [
+        {
+          "kind": "ai_use_disclosure_not_found"
+        }
+      ],
+      "classification": "DISCLOSURE_CHECK_NOT_AI_DETECTION",
+      "declared": false
+    }
+  },
+  "limitations": [
+    "Similarity to external publications is not measured because no corpus or external provider is used.",
+    "Prose repetition and citation-adjacency findings are review heuristics, not proof of misconduct or AI authorship.",
+    "Primary-source status is accepted only from an explicit primary tag in the evidence registry."
+  ]
+}

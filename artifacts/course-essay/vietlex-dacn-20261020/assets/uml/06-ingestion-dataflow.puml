@@ -1,0 +1,40 @@
+@startuml
+title VietLex - Nạp dữ liệu và tạo chỉ mục
+top to bottom direction
+skinparam monochrome true
+skinparam shadowing false
+skinparam componentStyle rectangle
+skinparam packageStyle rectangle
+
+artifact "Shard Parquet đã pin\n+ manifest/revision" as source
+component "Kiểm nguồn + checksum" as validate
+component "Nối metadata/body\ntheo document_id" as join
+component "Cờ chất lượng\nthiếu / trùng / không hợp lệ" as quality
+database "SQLite content store\nmetadata + body Zstandard\nSHA-256 + shard/row" as content
+component "FTS metadata\nsố hiệu/tiêu đề" as fts
+component "FTS passage body cục bộ\ncoverage/build riêng" as bodyfts
+component "Các lane vector\ntheo hợp đồng" as lanes
+database "Qdrant V3\nchunk cấu trúc" as qdrant
+database "Pinecone V1\nvector theo văn bản" as pinecone
+component "Checkpoint + hàng lỗi\n+ báo cáo build" as receipt
+
+source --> validate
+validate --> join : hàng hợp lệ
+join --> quality
+quality --> content : hàng được giữ
+quality --> receipt : bị loại/có flag
+content --> fts
+content --> bodyfts
+content --> lanes
+lanes --> qdrant : hợp đồng V3
+lanes --> pinecone : hợp đồng legacy
+lanes --> receipt : trạng thái build
+note right of content
+  Hash xác nhận nội dung đọc lại khớp;
+  không xác nhận thẩm quyền hay độ mới.
+end note
+note right of qdrant
+  Độ phủ index khác độ phủ corpus đã pin.
+  Build thành công không chứng minh toàn corpus.
+end note
+@enduml

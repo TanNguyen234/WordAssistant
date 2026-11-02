@@ -1,0 +1,354 @@
+{
+  "schema_version": 1,
+  "project_dir": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio",
+  "output_docx": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\LMS_wbs_can_chinh_dang_kiem_tra.docx",
+  "document_sha256": "8c7f2242d1948a8776c043737d296515d4253c8b57416623de0e2a8551623694",
+  "status": "FAIL",
+  "gates": {
+    "word_delivery": {
+      "status": "FAIL",
+      "checks": [
+        {
+          "check": "output_docx",
+          "status": "PASS",
+          "detail": "Found DOCX with SHA-256 8c7f2242d1948a8776c043737d296515d4253c8b57416623de0e2a8551623694."
+        },
+        {
+          "check": "verify.delivery_status",
+          "status": "PASS",
+          "detail": "WordAssistant reports delivery PASS."
+        },
+        {
+          "check": "verify_status_consistency",
+          "status": "PASS",
+          "detail": "Verify overall and delivery statuses are consistent."
+        },
+        {
+          "check": "verify.render_status",
+          "status": "PASS",
+          "detail": "render_status passed."
+        },
+        {
+          "check": "verify.visual_status",
+          "status": "PASS",
+          "detail": "visual_status passed."
+        },
+        {
+          "check": "selected_profile_validation",
+          "status": "PASS",
+          "detail": "Selected profile validation passed."
+        },
+        {
+          "check": "validate.valid",
+          "status": "INCOMPLETE",
+          "detail": "Saved validate report does not match the selected profile, variant, or DOCX."
+        },
+        {
+          "check": "verify_document_hash",
+          "status": "FAIL",
+          "detail": "Verify report refers to a different DOCX hash."
+        }
+      ]
+    },
+    "content_and_sources": {
+      "status": "FAIL",
+      "checks": [
+        {
+          "check": "rubric",
+          "status": "PASS",
+          "detail": "Rubric is present: D:\\Download\\WordAssistant\\use_cases\\hcmunre_dacn_2026_2027\\assets\\huong_dan_trinh_bay_dacn_2026_2027.docx"
+        },
+        {
+          "check": "assignment",
+          "status": "PASS",
+          "detail": "A recorded assignment summary is present."
+        },
+        {
+          "check": "requirement_row_2",
+          "status": "PASS",
+          "detail": "Requirement has existing evidence files and a verification record."
+        },
+        {
+          "check": "requirement_row_3",
+          "status": "PASS",
+          "detail": "Requirement has existing evidence files and a verification record."
+        },
+        {
+          "check": "requirement_row_4",
+          "status": "INCOMPLETE",
+          "detail": "Requirement is NOT_RUN."
+        },
+        {
+          "check": "requirement_row_5",
+          "status": "INCOMPLETE",
+          "detail": "Requirement is NOT_RUN."
+        },
+        {
+          "check": "official_rubric_in_docx",
+          "status": "FAIL",
+          "detail": "Rubric inclusion review is not bound to the current output DOCX SHA-256."
+        },
+        {
+          "check": "cover_metadata",
+          "status": "PASS",
+          "detail": "All cover identity fields have a verified authority or an explicit placeholder/non-applicability record."
+        },
+        {
+          "check": "project_structure_inventory",
+          "status": "PASS",
+          "detail": "All 59 project-planned headings have reviewed, evidence-backed mappings."
+        },
+        {
+          "check": "project_structure_in_docx",
+          "status": "PASS",
+          "detail": "All 59 project-inventoried headings appear in the final DOCX at the planned levels and order."
+        },
+        {
+          "check": "project_toc_parity",
+          "status": "PASS",
+          "detail": "All 59 required TOC entries appear at the planned levels and order."
+        },
+        {
+          "check": "project_runtime_capture_provenance",
+          "status": "INCOMPLETE",
+          "detail": "Runtime screenshot provenance is incomplete: ['CAP-T01: HTTP response status was not recorded', 'CAP-T02: HTTP response status was not recorded', 'CAP-T03: HTTP response status was not recorded', 'CAP-T04: HTTP response status was not recorded', 'CAP-L01: HTTP response status was not recorded', 'CAP-L02: HTTP response status was not recorded', 'CAP-L03: HTTP response status was not recorded', 'CAP-L03b: HTTP response status was not recorded']."
+        },
+        {
+          "check": "project_visual_inventory",
+          "status": "INCOMPLETE",
+          "detail": "1 of 48 planned figures/tables lack complete, evidence-backed records; first IDs: ['TBL-05']."
+        },
+        {
+          "check": "claim_row_2",
+          "status": "PASS",
+          "detail": "Claim CL-01 maps to reviewed source docs/audit/06_PM_DOCUMENT_RECONCILIATION.md with a current hash."
+        },
+        {
+          "check": "claim_row_3",
+          "status": "PASS",
+          "detail": "Claim CL-02 maps to reviewed source docs/audit/06_PM_DOCUMENT_RECONCILIATION.md with a current hash."
+        },
+        {
+          "check": "claim_row_4",
+          "status": "PASS",
+          "detail": "Claim CL-03 maps to reviewed source docs/project-management/02_STAKEHOLDER_REGISTER.md with a current hash."
+        },
+        {
+          "check": "claim_row_5",
+          "status": "PASS",
+          "detail": "Claim CL-04 maps to reviewed source docs/project-management/04_SCOPE_BASELINE_WBS.md with a current hash."
+        },
+        {
+          "check": "claim_row_6",
+          "status": "PASS",
+          "detail": "Claim CL-05 maps to reviewed source docs/audit/06_PM_DOCUMENT_RECONCILIATION.md with a current hash."
+        },
+        {
+          "check": "claim_row_7",
+          "status": "PASS",
+          "detail": "Claim CL-06 maps to reviewed source docs/project-management/07_RESOURCE_AND_BUDGET_BASELINE.md with a current hash."
+        },
+        {
+          "check": "claim_row_8",
+          "status": "PASS",
+          "detail": "Claim CL-07 maps to reviewed source docs/project-management/08_RISK_REGISTER.md with a current hash."
+        },
+        {
+          "check": "claim_row_9",
+          "status": "PASS",
+          "detail": "Claim CL-08 maps to reviewed source docs/project-management/12_UAT_AND_ACCEPTANCE_EVIDENCE.md with a current hash."
+        },
+        {
+          "check": "claim_row_10",
+          "status": "PASS",
+          "detail": "Claim CL-09 maps to reviewed source docs/project-management/13_PROJECT_CLOSURE_AND_LESSONS_LEARNED.md with a current hash."
+        },
+        {
+          "check": "claim_row_11",
+          "status": "PASS",
+          "detail": "Claim CL-10 maps to reviewed source D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\sources\\archive\\LMS_QLDA_10-11_2026\\ke_hoach\\Trello_snapshot_23_10_2026.json with a current hash."
+        },
+        {
+          "check": "claim_row_12",
+          "status": "PASS",
+          "detail": "Claim CL-11 maps to reviewed source D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\sources\\archive\\LMS_QLDA_10-11_2026\\ke_hoach\\so_do_manifest.json with a current hash."
+        },
+        {
+          "check": "claim_row_13",
+          "status": "PASS",
+          "detail": "Claim CL-12 maps to reviewed source D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\sources\\Huong_dan_trinh_bay_chup_anh_Trello_Drawio_LMS.docx with a current hash."
+        },
+        {
+          "check": "claim_row_14",
+          "status": "PASS",
+          "detail": "Claim CL-13 maps to reviewed source docs/03_ARCHITECTURE.md with a current hash."
+        },
+        {
+          "check": "claim_row_15",
+          "status": "PASS",
+          "detail": "Claim CL-14 maps to reviewed source docs/02_ROLES_USE_CASES.md with a current hash."
+        },
+        {
+          "check": "claim_row_16",
+          "status": "PASS",
+          "detail": "Claim CL-15 maps to reviewed source database/01_schema.sql with a current hash."
+        },
+        {
+          "check": "claim_row_17",
+          "status": "PASS",
+          "detail": "Claim CL-16 maps to reviewed source backend/app/api/routes/assignments.py with a current hash."
+        },
+        {
+          "check": "claim_row_18",
+          "status": "PASS",
+          "detail": "Claim CL-17 maps to reviewed source docs/project-management/03_RACI_MATRIX.md with a current hash."
+        },
+        {
+          "check": "claim_row_19",
+          "status": "PASS",
+          "detail": "Claim VI-01 maps to reviewed source D:/Download/LMS/docs/03_ARCHITECTURE.md with a current hash."
+        },
+        {
+          "check": "claim_row_20",
+          "status": "PASS",
+          "detail": "Claim VI-02 maps to reviewed source D:/Download/LMS/database/01_schema.sql with a current hash."
+        },
+        {
+          "check": "claim_row_21",
+          "status": "PASS",
+          "detail": "Claim VI-03 maps to reviewed source D:/Download/LMS/frontend/package.json with a current hash."
+        },
+        {
+          "check": "claim_row_22",
+          "status": "PASS",
+          "detail": "Claim VI-04 maps to reviewed source D:/Download/LMS/docs/02_ROLES_USE_CASES.md with a current hash."
+        },
+        {
+          "check": "claim_row_23",
+          "status": "PASS",
+          "detail": "Claim VI-05 maps to reviewed source D:/Download/LMS/docs/audit/2026-10-26-vietnamese-ui/focused-green.log with a current hash."
+        },
+        {
+          "check": "claim_row_24",
+          "status": "PASS",
+          "detail": "Claim VI-06 maps to reviewed source D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\captures\\2026-10-26-vi\\capture-manifest.json with a current hash."
+        },
+        {
+          "check": "acceptance_assignment_and_rubric_checked",
+          "status": "INCOMPLETE",
+          "detail": "Required human review has not been recorded as complete."
+        },
+        {
+          "check": "acceptance_cover_metadata_fields_verified",
+          "status": "INCOMPLETE",
+          "detail": "Required human review has not been recorded as complete."
+        },
+        {
+          "check": "acceptance_project_structure_inventory_reviewed",
+          "status": "INCOMPLETE",
+          "detail": "Required human review has not been recorded as complete."
+        },
+        {
+          "check": "acceptance_project_visual_inventory_reviewed",
+          "status": "INCOMPLETE",
+          "detail": "Required human review has not been recorded as complete."
+        },
+        {
+          "check": "acceptance_all_required_claims_mapped_to_reviewed_evidence",
+          "status": "INCOMPLETE",
+          "detail": "Required human review has not been recorded as complete."
+        },
+        {
+          "check": "acceptance_all_integrity_warnings_reviewed_and_dispositioned",
+          "status": "INCOMPLETE",
+          "detail": "Required human review has not been recorded as complete."
+        },
+        {
+          "check": "acceptance_source_routes_and_templates_checked",
+          "status": "INCOMPLETE",
+          "detail": "Required human review has not been recorded as complete."
+        },
+        {
+          "check": "acceptance_wireframes_and_runtime_captures_distinguished",
+          "status": "INCOMPLETE",
+          "detail": "Required human review has not been recorded as complete."
+        },
+        {
+          "check": "acceptance_figure_list_rebuilt_from_captions",
+          "status": "INCOMPLETE",
+          "detail": "Required human review has not been recorded as complete."
+        },
+        {
+          "check": "acceptance_word_fields_updated_and_saved",
+          "status": "INCOMPLETE",
+          "detail": "Required human review has not been recorded as complete."
+        },
+        {
+          "check": "acceptance_all_rendered_pages_visually_reviewed",
+          "status": "INCOMPLETE",
+          "detail": "Required human review has not been recorded as complete."
+        },
+        {
+          "check": "acceptance_crosswalk",
+          "status": "FAIL",
+          "detail": "Crosswalk has duplicate IDs, unknown categories, failed criteria, or stale DOCX bindings: ['X01:stale-document-hash', 'X02:stale-document-hash', 'X03:stale-document-hash', 'X03:stale-evidence-hash', 'X04:stale-document-hash', 'X05:stale-document-hash', 'X06:stale-document-hash', 'X07:stale-document-hash']."
+        },
+        {
+          "check": "integrity_document_hash",
+          "status": "FAIL",
+          "detail": "Integrity audit refers to a different DOCX hash."
+        },
+        {
+          "check": "integrity_gate_statuses",
+          "status": "PASS",
+          "detail": "Every integrity gate has a recognized status."
+        },
+        {
+          "check": "integrity_registry_hash",
+          "status": "PASS",
+          "detail": "Integrity audit is bound to the current evidence registry."
+        },
+        {
+          "check": "integrity_source_evidence",
+          "status": "PASS",
+          "detail": "Integrity source_evidence passed and covers 15 unique in-text citation numbers."
+        },
+        {
+          "check": "integrity_hard_gates",
+          "status": "PASS",
+          "detail": "No integrity gate is marked FAIL."
+        },
+        {
+          "check": "integrity_report_consistency",
+          "status": "PASS",
+          "detail": "Overall audit status matches its warning gates."
+        },
+        {
+          "check": "integrity_warning_dispositions",
+          "status": "PASS",
+          "detail": "Every integrity warning has a recorded human disposition."
+        },
+        {
+          "check": "project_content_review",
+          "status": "FAIL",
+          "detail": "Content review is stale for the current DOCX."
+        }
+      ]
+    },
+    "submission_readiness": {
+      "status": "FAIL",
+      "checks": [
+        {
+          "check": "word_delivery",
+          "status": "FAIL",
+          "detail": "See word_delivery checks."
+        },
+        {
+          "check": "content_and_sources",
+          "status": "FAIL",
+          "detail": "See content_and_sources checks."
+        }
+      ]
+    }
+  }
+}

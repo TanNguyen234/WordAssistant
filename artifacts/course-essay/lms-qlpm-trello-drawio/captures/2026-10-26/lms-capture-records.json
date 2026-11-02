@@ -1,0 +1,210 @@
+[
+  {
+    "id": "L01",
+    "file": "L01-login.png",
+    "url": "http://127.0.0.1:5174/login",
+    "timestamp": "2026-10-25T17:19:40.508Z",
+    "steps": [
+      {
+        "action": "Open local LMS root and follow login redirect",
+        "timestamp": "2026-10-25T17:19:39.885Z",
+        "url": "http://127.0.0.1:5174/login"
+      }
+    ]
+  },
+  {
+    "id": "L02a",
+    "file": "L02a-admin-dashboard.png",
+    "url": "http://127.0.0.1:5174/dashboard",
+    "timestamp": "2026-10-25T17:20:57.842Z",
+    "steps": [
+      {
+        "action": "Open local LMS root and follow login redirect",
+        "timestamp": "2026-10-25T17:19:39.885Z",
+        "url": "http://127.0.0.1:5174/login"
+      },
+      {
+        "action": "Choose Admin demo account and press Login; dashboard loaded",
+        "url": "http://127.0.0.1:5174/dashboard",
+        "timestamp": "2026-10-25T17:20:57.839Z"
+      }
+    ]
+  },
+  {
+    "id": "L02",
+    "file": "L02-admin-users.png",
+    "url": "http://127.0.0.1:5174/users",
+    "timestamp": "2026-10-25T17:21:13.291Z",
+    "steps": [
+      {
+        "action": "Open local LMS root and follow login redirect",
+        "timestamp": "2026-10-25T17:19:39.885Z",
+        "url": "http://127.0.0.1:5174/login"
+      },
+      {
+        "action": "Choose Admin demo account and press Login; dashboard loaded",
+        "url": "http://127.0.0.1:5174/dashboard",
+        "timestamp": "2026-10-25T17:20:57.839Z"
+      },
+      {
+        "action": "Click Người dùng in sidebar",
+        "url": "http://127.0.0.1:5174/users",
+        "timestamp": "2026-10-25T17:21:13.288Z"
+      }
+    ]
+  },
+  {
+    "id": "L03",
+    "file": "L03-lecturer-assignments.png",
+    "url": "http://127.0.0.1:5174/assignments",
+    "timestamp": "2026-10-25T17:23:07.529Z",
+    "steps": [
+      {
+        "action": "Open local LMS root and follow login redirect",
+        "timestamp": "2026-10-25T17:19:39.885Z",
+        "url": "http://127.0.0.1:5174/login"
+      },
+      {
+        "action": "Choose Admin demo account and press Login; dashboard loaded",
+        "url": "http://127.0.0.1:5174/dashboard",
+        "timestamp": "2026-10-25T17:20:57.839Z"
+      },
+      {
+        "action": "Click Người dùng in sidebar",
+        "url": "http://127.0.0.1:5174/users",
+        "timestamp": "2026-10-25T17:21:13.288Z"
+      },
+      {
+        "action": "Logout, choose Lecturer demo account, click Login",
+        "timestamp": "2026-10-25T17:21:27.549Z"
+      },
+      {
+        "action": "Click Bài tập in Lecturer sidebar",
+        "timestamp": "2026-10-25T17:22:14.961Z",
+        "url": "http://127.0.0.1:5174/assignments"
+      }
+    ]
+  },
+  {
+    "id": "L03b",
+    "file": "L03b-lecturer-submissions.png",
+    "url": "http://127.0.0.1:5174/assignments",
+    "timestamp": "2026-10-25T17:23:24.816Z",
+    "steps": [
+      {
+        "action": "Open local LMS root and follow login redirect",
+        "timestamp": "2026-10-25T17:19:39.885Z",
+        "url": "http://127.0.0.1:5174/login"
+      },
+      {
+        "action": "Choose Admin demo account and press Login; dashboard loaded",
+        "url": "http://127.0.0.1:5174/dashboard",
+        "timestamp": "2026-10-25T17:20:57.839Z"
+      },
+      {
+        "action": "Click Người dùng in sidebar",
+        "url": "http://127.0.0.1:5174/users",
+        "timestamp": "2026-10-25T17:21:13.288Z"
+      },
+      {
+        "action": "Logout, choose Lecturer demo account, click Login",
+        "timestamp": "2026-10-25T17:21:27.549Z"
+      },
+      {
+        "action": "Click Bài tập in Lecturer sidebar",
+        "timestamp": "2026-10-25T17:22:14.961Z",
+        "url": "http://127.0.0.1:5174/assignments"
+      },
+      {
+        "action": "Click Xem & Chấm bài; read submitted text without grading"
+      }
+    ]
+  },
+  {
+    "id": "L04",
+    "file": "L04-student-assignment.png",
+    "url": "http://127.0.0.1:5174/assignments",
+    "timestamp": "2026-10-25T17:25:16.037Z",
+    "steps": [
+      {
+        "action": "Open local LMS root and follow login redirect",
+        "timestamp": "2026-10-25T17:19:39.885Z",
+        "url": "http://127.0.0.1:5174/login"
+      },
+      {
+        "action": "Choose Admin demo account and press Login; dashboard loaded",
+        "url": "http://127.0.0.1:5174/dashboard",
+        "timestamp": "2026-10-25T17:20:57.839Z"
+      },
+      {
+        "action": "Click Người dùng in sidebar",
+        "url": "http://127.0.0.1:5174/users",
+        "timestamp": "2026-10-25T17:21:13.288Z"
+      },
+      {
+        "action": "Logout, choose Lecturer demo account, click Login",
+        "timestamp": "2026-10-25T17:21:27.549Z"
+      },
+      {
+        "action": "Click Bài tập in Lecturer sidebar",
+        "timestamp": "2026-10-25T17:22:14.961Z",
+        "url": "http://127.0.0.1:5174/assignments"
+      },
+      {
+        "action": "Logout Lecturer, choose Student demo account and click Login",
+        "timestamp": "2026-10-25T17:23:52.822Z"
+      },
+      {
+        "action": "Student login returns to assignments; inspect current submission action",
+        "url": "http://127.0.0.1:5174/assignments",
+        "timestamp": "2026-10-25T17:25:16.034Z"
+      }
+    ]
+  },
+  {
+    "id": "L05",
+    "file": "L05-student-grades.png",
+    "url": "http://127.0.0.1:5174/grades",
+    "timestamp": "2026-10-25T17:25:53.369Z",
+    "steps": [
+      {
+        "action": "Open local LMS root and follow login redirect",
+        "timestamp": "2026-10-25T17:19:39.885Z",
+        "url": "http://127.0.0.1:5174/login"
+      },
+      {
+        "action": "Choose Admin demo account and press Login; dashboard loaded",
+        "url": "http://127.0.0.1:5174/dashboard",
+        "timestamp": "2026-10-25T17:20:57.839Z"
+      },
+      {
+        "action": "Click Người dùng in sidebar",
+        "url": "http://127.0.0.1:5174/users",
+        "timestamp": "2026-10-25T17:21:13.288Z"
+      },
+      {
+        "action": "Logout, choose Lecturer demo account, click Login",
+        "timestamp": "2026-10-25T17:21:27.549Z"
+      },
+      {
+        "action": "Click Bài tập in Lecturer sidebar",
+        "timestamp": "2026-10-25T17:22:14.961Z",
+        "url": "http://127.0.0.1:5174/assignments"
+      },
+      {
+        "action": "Logout Lecturer, choose Student demo account and click Login",
+        "timestamp": "2026-10-25T17:23:52.822Z"
+      },
+      {
+        "action": "Student login returns to assignments; inspect current submission action",
+        "url": "http://127.0.0.1:5174/assignments",
+        "timestamp": "2026-10-25T17:25:16.034Z"
+      },
+      {
+        "action": "Click Bảng điểm in Student sidebar",
+        "timestamp": "2026-10-25T17:25:16.674Z",
+        "url": "http://127.0.0.1:5174/grades"
+      }
+    ]
+  }
+]

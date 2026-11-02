@@ -1,0 +1,481 @@
+{
+  "version": 1,
+  "sections": [
+    {
+      "heading": "LỜI CẢM ƠN",
+      "paragraphs": [
+        "Phần này được dành để sinh viên ghi nhận sự hỗ trợ thực tế đã nhận. Bản thảo không tự nêu cá nhân hay tổ chức chưa được xác nhận."
+      ]
+    },
+    {
+      "heading": "LỜI CAM ĐOAN",
+      "paragraphs": [
+        "Đây là bản thảo hỗ trợ biên tập. Sinh viên cần tự rà soát nội dung, đối chiếu nguồn, xác nhận các tuyên bố về tác giả và ký tên theo yêu cầu của giảng viên trước khi sử dụng."
+      ]
+    },
+    {
+      "heading": "NHẬN XÉT CỦA GIẢNG VIÊN HƯỚNG DẪN",
+      "paragraphs": [
+        "Họ và tên giảng viên hướng dẫn: ThS. Đinh Thị Hồng Loan",
+        "Sinh viên thực hiện: Nguyễn Thành Duy Tân",
+        "MSSV: 1250080266",
+        "1. Nhận xét về tính cấp thiết và giá trị khoa học của đề tài:",
+        "........................................................................................................................................",
+        "........................................................................................................................................",
+        "2. Nhận xét về kết quả đạt được và độ chính xác của các mô hình phân tích:",
+        "........................................................................................................................................",
+        "........................................................................................................................................",
+        "3. Các câu hỏi cần làm rõ trong buổi bảo vệ:",
+        "- Câu hỏi 1: ................................................................",
+        "- Câu hỏi 2: ................................................................",
+        "4. Đánh giá chung:",
+        "........................................................................................................................................",
+        "........................................................................................................................................",
+        "TP. Hồ Chí Minh, ngày ..... tháng ..... năm 2026",
+        "GIẢNG VIÊN HƯỚNG DẪN",
+        "",
+        "(Ký và ghi rõ họ tên)"
+      ]
+    },
+    {
+      "heading": "NHẬN XÉT CỦA NGƯỜI PHẢN BIỆN",
+      "paragraphs": [
+        "Họ và tên giảng viên phản biện: ........................................",
+        "Sinh viên thực hiện: Nguyễn Thành Duy Tân",
+        "MSSV: 1250080266",
+        "1. Nhận xét về tính cấp thiết và giá trị khoa học của đề tài:",
+        "........................................................................................................................................",
+        "........................................................................................................................................",
+        "2. Nhận xét về kết quả đạt được và độ chính xác của các mô hình phân tích:",
+        "........................................................................................................................................",
+        "........................................................................................................................................",
+        "3. Các câu hỏi cần làm rõ trong buổi bảo vệ:",
+        "- Câu hỏi 1: ................................................................",
+        "- Câu hỏi 2: ................................................................",
+        "4. Đánh giá chung:",
+        "........................................................................................................................................",
+        "........................................................................................................................................",
+        "TP. Hồ Chí Minh, ngày ..... tháng ..... năm 2026",
+        "GIẢNG VIÊN PHẢN BIỆN",
+        "",
+        "(Ký và ghi rõ họ tên)"
+      ]
+    },
+    {
+      "heading": "LỊCH TRÌNH THỰC HIỆN ĐỒ ÁN",
+      "paragraphs": [
+        "Khung kế hoạch cần điền theo tiến độ được giảng viên duyệt. Thời gian thực tế chưa được cung cấp; các mốc trong bảng DOCX là placeholder, không xác nhận công việc đã hoàn thành."
+      ]
+    },
+    {
+      "heading": "TÓM TẮT",
+      "paragraphs": [
+        "Đồ án chuyên ngành phân tích VietLex như một hệ thống phần mềm hỗ trợ tra cứu và nghiên cứu pháp luật tiếng Việt theo hướng retrieval-augmented generation (RAG). Khảo sát dựa trên mã nguồn và tài liệu hiện có tại snapshot ngày 22/10/2026; repo ở trạng thái working tree dirty nên các mô tả được gắn với file và hash, không đồng nhất với một bản phát hành sạch hoặc cấu hình đang chạy trên production. Phạm vi gồm giao diện server-rendered, các route tra cứu, pipeline hỏi đáp, hai hợp đồng retrieval được chọn bởi cấu hình, đối tượng evidence và các số liệu đánh giá đã lưu.",
+        "Kết quả cho thấy VietLex không chỉ là một chatbot: hệ thống kết hợp tìm kiếm theo metadata/toàn văn, đọc văn bản, hồ sơ nghiên cứu, truy xuất evidence, sinh câu trả lời và kiểm tra một số điều kiện an toàn. Kiến trúc giữ hai tuyến retrieval khác nhau, có bước giới hạn evidence/context, tùy chọn mở rộng điều khoản có kiểm hash và cơ chế cache có điều kiện. Các sơ đồ lớp, use case, sequence và wireframe trong bài được dựng từ source; chúng không phải ảnh chụp phiên chạy.",
+        "Đánh giá cũng chỉ ra giới hạn quan trọng. Snapshot Golden-50 ngày 03/09/2026 là số liệu lịch sử với mẫu và mẫu số cụ thể; exact match của câu trả lời là 0/50 và token F1 là 0,2305. Báo cáo hiện hành ngày 19/10/2026 ghi nhận hai câu hỏi tự nhiên thử nghiệm chưa đạt full pass và không có benchmark câu trả lời đại diện mới. Vì vậy, các kết quả này không chứng minh độ đúng pháp lý hay mức sẵn sàng production. Chưa có đề cương/rubric chính thức; mức đáp ứng yêu cầu của đồ án và sẵn sàng nộp chưa được xác nhận.",
+        "Từ khóa: VietLex; retrieval-augmented generation; tra cứu pháp luật; hybrid retrieval; thiết kế hướng đối tượng; đánh giá hệ thống."
+      ]
+    },
+    {
+      "heading": "ABSTRACT",
+      "paragraphs": [
+        "This capstone examines VietLex, a Vietnamese legal research and retrieval system. The analysis is based on source code and project documents captured on 22 October 2026. Because the repository working tree was dirty, findings are tied to the observed files and hashes and do not represent a clean release or a verified production configuration. The scope covers server-rendered views, search routes, the question-answering pipeline, configuration-selected retrieval contracts, evidence objects, and existing evaluation records.",
+        "The analysis shows that the system combines metadata and full-text search, document reading, research workspaces, evidence retrieval, answer generation, and selected safety checks. Its architecture retains two distinct retrieval paths, limits evidence and context, supports optional hash-checked clause expansion, and uses conditional caching. The diagrams and wireframes are derived from source code and templates; they are not runtime captures.",
+        "The recorded Golden-50 snapshot from 3 September 2026 is historical: answer exact match was 0/50 and token F1 was 0.2305. A project status note dated 19 October 2026 reports two exploratory natural-language queries that did not achieve a full pass; no representative new answer benchmark is available. These records do not establish legal correctness or production readiness. No official assignment brief or rubric was supplied, so compliance and submission readiness remain unconfirmed.",
+        "Keywords: VietLex; retrieval-augmented generation (RAG); Vietnamese legal retrieval; hybrid retrieval; object-oriented analysis and design; system evaluation."
+      ]
+    },
+    {
+      "heading": "DANH MỤC TỪ VIẾT TẮT",
+      "paragraphs": [
+        "API — Application Programming Interface: giao diện lập trình ứng dụng.",
+        "CSRF — Cross-Site Request Forgery: giả mạo yêu cầu liên trang.",
+        "DBSF — Distribution-Based Score Fusion: kết hợp điểm dựa trên phân phối.",
+        "F1 — F1-score: chỉ số điều hòa precision và recall.",
+        "FTS — Full-Text Search: tìm kiếm toàn văn.",
+        "GET / POST — các phương thức HTTP dùng trong route; không phải tên màn hình.",
+        "HTML — HyperText Markup Language: ngôn ngữ đánh dấu siêu văn bản.",
+        "HTTP — Hypertext Transfer Protocol: giao thức truyền tải siêu văn bản.",
+        "IR — Information Retrieval: truy hồi thông tin.",
+        "JSON — JavaScript Object Notation: định dạng trao đổi dữ liệu.",
+        "LLM — Large Language Model: mô hình ngôn ngữ lớn.",
+        "PII — Personally Identifiable Information: thông tin nhận dạng cá nhân.",
+        "RAG — Retrieval-Augmented Generation: tạo sinh tăng cường bằng truy xuất.",
+        "RRF — Reciprocal Rank Fusion: hợp nhất theo thứ hạng nghịch đảo.",
+        "UI — User Interface: giao diện người dùng.",
+        "UML — Unified Modeling Language: ngôn ngữ mô hình hóa thống nhất."
+      ]
+    },
+    {
+      "heading": "MỞ ĐẦU",
+      "paragraphs": [
+        "Tra cứu pháp luật bằng ngôn ngữ tự nhiên đặt ra hai yêu cầu khác nhau: tìm được văn bản hoặc đoạn liên quan, và diễn đạt câu trả lời mà người đọc có thể kiểm tra lại căn cứ. Mô hình sinh ngôn ngữ có thể tạo câu trả lời liền mạch nhưng tính liền mạch không chứng minh nguồn được truy xuất phù hợp, trích dẫn đúng hay quy định còn hiệu lực. Với hệ thống hướng tới miền pháp lý, ranh giới giữa tra cứu, tóm lược và kết luận áp dụng cần được thiết kế rõ để tránh người dùng hiểu câu trả lời máy sinh như kết luận có thẩm quyền.",
+        "VietLex là một dự án FastAPI/Jinja có màn hình hỏi đáp, tra cứu văn bản, đọc nội dung, tra cứu sự kiện hiệu lực và tạo hồ sơ nghiên cứu. Pipeline hỏi đáp nối route web với truy xuất evidence và sinh câu trả lời; cấu hình retrieval cho phép chọn một trong hai hợp đồng triển khai. Đối tượng nghiên cứu của đồ án chuyên ngành vì vậy là sự kết hợp giữa yêu cầu nghiệp vụ, cấu trúc phần mềm, luồng dữ liệu và bằng chứng đánh giá hiện có, không phải việc xác nhận tính đúng của một quy định cụ thể.",
+        "Mục tiêu thứ nhất là mô tả chức năng và phạm vi người dùng từ route/template thật. Mục tiêu thứ hai là phân tích pipeline hỏi đáp, retrieval và đối tượng dữ liệu theo hướng phân tích-thiết kế hướng đối tượng. Mục tiêu thứ ba là đối chiếu bằng chứng đánh giá với giới hạn mẫu số, ngày chạy và trạng thái hiện hành. Mục tiêu cuối cùng là đề xuất một cách kiểm chứng tiếp theo có thể tái lập, ưu tiên đo chất lượng truy xuất và độ hỗ trợ của từng claim thay vì suy ra chất lượng pháp lý từ một điểm số tổng hợp.",
+        "Câu hỏi nghiên cứu gồm: (1) VietLex đang hỗ trợ những luồng người dùng nào và ranh giới giữa màn hình với thao tác POST/API được thể hiện ra sao? (2) Pipeline từ câu hỏi đến evidence và câu trả lời được chia thành những thành phần nào? (3) Bằng chứng đánh giá hiện có hỗ trợ được kết luận nào, và điều gì vẫn chưa biết? Bài trả lời các câu hỏi bằng khảo sát source hiện tại, tài liệu kiến trúc/đánh giá có ngày, và ba công trình học thuật đã tải, mở và kiểm tra đoạn hỗ trợ trước khi trích dẫn.",
+        "Phạm vi không bao gồm chạy lại ứng dụng, truy vấn database/index, gọi model/provider, xác minh deployment hoặc benchmark mới. Không đọc nội dung .env; không phân tích hiệu lực hiện hành của văn bản luật; không đưa ra tư vấn pháp lý. Các route/template là evidence về thiết kế và code path, không chứng minh route chạy thành công. Số liệu trong tài liệu được giữ nguyên ngày, mẫu số và nhãn lịch sử.",
+        "Bài gồm bảy chương. Chương 1 nêu cơ sở RAG, retrieval và đánh giá. Chương 2 mô tả hiện trạng cùng yêu cầu. Chương 3 phân tích nghiệp vụ/use case. Chương 4 trình bày mô hình hướng đối tượng rút gọn. Chương 5 mô tả kiến trúc và dữ liệu. Chương 6 giải thích luồng xử lý và giao diện. Chương 7 đánh giá bằng chứng, rủi ro và hướng kiểm chứng. Phụ lục ghi ma trận nguồn và danh mục sơ đồ."
+      ]
+    },
+    {
+      "heading": "CHƯƠNG 1: CƠ SỞ LÝ THUYẾT VÀ NGHIÊN CỨU LIÊN QUAN",
+      "paragraphs": [
+        "Chương này xác định các khái niệm cần thiết để đọc kiến trúc VietLex mà không đồng nhất retrieval với generation, hoặc một đánh giá tự động với xác nhận pháp lý."
+      ],
+      "subsections": [
+        {
+          "title": "Retrieval và truy xuất trong tiếng Việt",
+          "level": 2,
+          "paragraphs": [
+            {
+              "text": "Trong hệ thống hỏi đáp có truy xuất, retrieval là bước chọn tài liệu/đoạn làm căn cứ đầu vào cho bước trả lời. Dense retrieval thường biểu diễn truy vấn và đoạn văn thành vector để tìm nội dung gần về ngữ nghĩa; Karpukhin và cộng sự mô tả một kiến trúc dense retrieval hai encoder cho open-domain question answering. Đây là nền tảng khái niệm, không phải bằng chứng rằng VietLex dùng chính mô hình DPR hay tái tạo kết quả của bài báo.",
+              "citations": [
+                "doi-10-18653-v1-2020-emnlp-main-550"
+              ]
+            },
+            {
+              "text": "Các cách tìm kiếm bằng từ khóa, tìm kiếm dense và kết hợp nhiều tín hiệu có thể cho kết quả khác nhau tùy ngôn ngữ, miền, cách chia dữ liệu và tiêu chí liên quan. Nguyen và Quan xây dựng benchmark Vietnamese IR nhiều miền với sáu miền và mười bộ dữ liệu, có miền pháp lý. Phạm vi này cho thấy cần đánh giá retrieval tiếng Việt trên tác vụ/miền phù hợp; không thể chuyển kết quả tổng hợp của một benchmark khác thành kết luận trực tiếp về VietLex.",
+              "citations": [
+                "doi-10-18653-v1-2026-findings-eacl-110"
+              ]
+            },
+            "Trong miền pháp lý, số hiệu, tên văn bản, điều/khoản và cụm từ nội dung thường có vai trò khác nhau. Tìm chính xác 45/2019/QH14 không tương đương tìm ngữ nghĩa cho câu hỏi diễn đạt lại; tìm một đoạn chứa từ khóa cũng không xác nhận đoạn đó đang điều chỉnh đúng thời kỳ hoặc ngoại lệ. Do đó thiết kế tìm kiếm metadata, tìm toàn văn và hỏi đáp RAG cần được mô tả thành các luồng tách biệt, đồng thời cung cấp cho người dùng dấu hiệu về phạm vi đang tìm."
+          ]
+        },
+        {
+          "title": "RAG, evidence và giới hạn của câu trả lời sinh",
+          "level": 2,
+          "paragraphs": [
+            "RAG nối một bộ nhớ bên ngoài có thể truy xuất với mô hình sinh. Quy trình tổng quát gồm nhận câu hỏi, tìm ứng viên, chọn hoặc xếp hạng evidence, tạo context, rồi sinh văn bản. Việc đưa nội dung nguồn vào context giúp người đọc có thể kiểm tra đường dẫn bằng chứng, nhưng không loại bỏ lỗi truy xuất, thiếu ngoại lệ, cắt ngữ cảnh hoặc diễn giải sai. Những bước này cần được đo riêng thay vì gom vào một nhãn đã có RAG.",
+            {
+              "text": "RAGAs trình bày các chỉ số tự động cho hệ RAG và định nghĩa faithfulness theo việc câu trả lời được neo vào context cung cấp. Chỉ số này hữu ích để hỏi câu trả lời có được hỗ trợ bởi context hay không; nó không chứng minh context đúng luật, còn hiệu lực hay đủ bao quát, cũng không thay thế người có chuyên môn rà từng trích dẫn. Vì thế bài dùng RAGAs như khung phân biệt các chiều đánh giá, chứ không dùng một giá trị faithfulness làm chứng nhận pháp lý.",
+              "citations": [
+                "doi-10-18653-v1-2024-eacl-demo-16"
+              ]
+            },
+            "Để một câu trả lời có thể kiểm tra, evidence nên giữ metadata nhận diện nguồn, vị trí hoặc heading, nội dung trích xuất, và provenance/hash khi có. Hệ thống cần phản hồi riêng khi retrieval lỗi kỹ thuật, khi không tìm thấy evidence đủ dùng, khi guardrail từ chối và khi generation hoàn tất. Các trạng thái này không thể hoán đổi: lỗi kỹ thuật không phải câu trả lời âm tính; không có kết quả trong corpus không chứng minh ngoài corpus không có quy định."
+          ]
+        },
+        {
+          "title": "Đánh giá theo tầng và nguyên tắc hướng đối tượng",
+          "level": 2,
+          "paragraphs": [
+            "Đánh giá nên tách tối thiểu: chất lượng ứng viên truy xuất; độ bao phủ điều/khoản bắt buộc; độ chính xác và độ hỗ trợ của citation; nội dung câu trả lời; độ trễ/lỗi kỹ thuật; và trải nghiệm người dùng. Một hệ thống có Document Recall cao vẫn có thể bỏ sót khoản cần thiết hoặc tạo kết luận không được support. Tương tự, điểm đánh giá tự động cao không chứng minh benchmark đại diện hoặc nguồn law được cập nhật.",
+            "Trong phân tích-thiết kế hướng đối tượng, các lớp dữ liệu biểu diễn khái niệm ổn định; service điều phối nghiệp vụ; route chuyển đổi request/response HTTP; và template thể hiện trạng thái giao diện. Tính đóng gói giúp giới hạn trách nhiệm, nhưng các phụ thuộc giữa route, service, vector store, content store và provider vẫn cần được ghi nhận. Sơ đồ trong bài là mô hình rút gọn từ code snapshot; nó hỗ trợ trao đổi cấu trúc, không thay thế toàn bộ class inventory."
+          ]
+        },
+        {
+          "title": "Khung phân tích dùng trong bài",
+          "level": 2,
+          "paragraphs": [
+            "Bài áp dụng bốn lớp quan sát. Lớp giao diện xác định route GET trả HTML và các thao tác POST. Lớp nghiệp vụ xác định mục tiêu người dùng và điều kiện từ chối/không có evidence. Lớp thiết kế theo dõi service và đối tượng. Lớp đánh giá xem từng kết luận có nguồn, hash, mẫu số và thời điểm hay không. Cách phân lớp này ngăn việc lấy screenshot wireframe làm bằng chứng runtime hoặc lấy số liệu retrieval để suy ra correctness.",
+            "Các từ viết tắt sử dụng trong nội dung được tổng hợp tại danh mục từ viết tắt ở phần đầu đồ án."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "CHƯƠNG 2: KHẢO SÁT HIỆN TRẠNG VÀ XÁC ĐỊNH YÊU CẦU",
+      "paragraphs": [
+        "Các nhận định chương này phản ánh source và tài liệu hiện có tại ngày 22/10/2026. Source project có working tree dirty; manifest ghi HEAD, status hash và hash từng file để người đọc phân biệt snapshot này với trạng thái lịch sử khác."
+      ],
+      "subsections": [
+        {
+          "title": "Đối tượng và hiện trạng hệ thống",
+          "level": 2,
+          "paragraphs": [
+            "VietLex được tổ chức thành ứng dụng web FastAPI/Jinja. Trang chủ / trả template index.html với vùng hỏi đáp; /search hiển thị form tìm văn bản; /documents/{document_id} mở trang đọc; /legal-status trình bày sự kiện registry theo ngày; /workspaces và /workspaces/{workspace_id} phục vụ hồ sơ nghiên cứu. Nhóm /admin là giao diện quản trị. Route GET biểu diễn trang hoặc view; POST như /chat và POST tạo workspace là thao tác, không phải màn hình độc lập. Danh sách chi tiết nằm ở screen-inventory.json và Hình 3.1.",
+            "Màn hình /search có hai phạm vi logic: metadata (số hiệu/tiêu đề) và body search. Bộ chọn phạm vi chỉ xuất hiện nếu handler cung cấp body_coverage; vì vậy wireframe thể hiện một cấu hình có control này nhưng caption vẫn ghi rõ điều kiện. Route dùng phạm vi metadata hoặc body khác nhau, giới hạn kết quả và có thể trả thông báo unavailable khi backend chưa sẵn sàng. Mốc ngày dùng hiển thị sự kiện đã duyệt, không lọc danh sách thành văn bản còn hiệu lực. Các cảnh báo này là một phần quan trọng của yêu cầu hiểu đúng màn hình.",
+            "Trang chủ ghi rõ nguồn hỏi đáp là toàn bộ VietLex nếu chưa chọn văn bản, và template có nhánh chọn một văn bản cụ thể. Route /chat tiếp nhận form, redaction PII, input check, cache có điều kiện, pipeline RAG, output check và lưu trạng thái/trace. Trên code path có nhiều trạng thái kết thúc, gồm cache hit, blocked input/output, technical error, no evidence và ok. Không thể mô tả luồng này như gửi câu hỏi rồi trả lời nếu muốn phân tích đầy đủ."
+          ]
+        },
+        {
+          "title": "Phạm vi người dùng và ranh giới",
+          "level": 2,
+          "paragraphs": [
+            "Người tra cứu có thể tìm văn bản, mở nguồn và đặt câu hỏi. Người dùng đã đăng nhập có thể làm việc với hồ sơ của mình, lưu nguồn/ghi chú và quay lại phân tích. Quản trị viên có các view quản lý vận hành. Các ranh giới quyền sở hữu và CSRF được triển khai ở route/service liên quan, nhưng bài không chạy kiểm tra role hoặc truy cập live; do đó đây là mô tả code, không phải kết luận bảo mật runtime.",
+            "Các thành phần ngoài biên bao gồm chỉ mục/vector store, kho nội dung, cache, dịch vụ sinh ngôn ngữ, nguồn chính thức được đọc bổ sung trong một số luồng, và hệ lưu trữ trạng thái. Giao diện cho người dùng không nên trình bày những dịch vụ đó như một nguồn luật thống nhất đã được xác minh. Bài phân biệt văn bản được tìm thấy, đoạn được dùng làm context và sự kiện registry đã duyệt."
+          ]
+        },
+        {
+          "title": "Yêu cầu chức năng rút ra từ source",
+          "level": 2,
+          "paragraphs": [
+            "F1 — Hỏi đáp: hệ thống nhận câu hỏi qua form /chat, kiểm tra CSRF và áp dụng các bước xử lý được cấu hình; trả fragment HTML cho giao diện. F2 — Tra cứu: tìm theo số hiệu/tiêu đề; nếu index body khả dụng, cho phép tìm cụm từ trong nội dung. F3 — Đọc văn bản: mở một document cụ thể và thể hiện heading/nội dung nguồn. F4 — Đối chiếu sự kiện: hiển thị sự kiện đã review theo mốc ngày nhưng không suy diễn từ sự kiện trống rằng văn bản còn hiệu lực.",
+            "F5 — Hồ sơ nghiên cứu: tạo/xem hồ sơ, lưu bằng chứng, ghi chú và tổ chức các tài liệu được chọn. F6 — Quản trị: cung cấp các view để quản lý yêu cầu/tài khoản tùy quyền. F7 — Phản hồi/chẩn đoán: lưu status, latency, context/citation count hoặc trace để có thể phân tích lỗi sau phiên hỏi đáp. Đây là yêu cầu chức năng do phân tích source dựng lại; chưa được đối chiếu với đề bài hay phỏng vấn người dùng."
+          ]
+        },
+        {
+          "title": "Yêu cầu phi chức năng và rủi ro",
+          "level": 2,
+          "paragraphs": [
+            "Tính truy vết đòi hỏi câu trả lời gắn evidence và trace có thể kiểm tra; tính an toàn dữ liệu đòi redaction/CSRF/owner scope phù hợp; tính chịu lỗi đòi phân biệt lỗi retrieval và trạng thái không evidence; tính hiệu năng đòi giới hạn truy xuất/context; tính cập nhật đòi provenance cho nguồn ngoài và nội dung mở rộng. Những yêu cầu này được xem xét từ source, không phải kết quả kiểm thử NFR mới.",
+            "Rủi ro lớn nhất là người dùng suy luận quá mức từ câu trả lời có citation. Các rủi ro tiếp theo gồm thiếu coverage của corpus/index, evidence cũ hoặc thiếu hash, retriever xếp sai thứ tự, bộ trích xuất bỏ sót cấu trúc, và UI làm mờ giới hạn dữ liệu. Thiết kế cần đặt cảnh báo tại nơi người dùng ra quyết định, không chỉ trong tài liệu kỹ thuật."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "CHƯƠNG 3: PHÂN TÍCH NGHIỆP VỤ VÀ MÔ HÌNH CHỨC NĂNG",
+      "paragraphs": [
+        "Mô hình chức năng dưới đây ưu tiên những mục tiêu được nối tới handler/template hiện có. Những chức năng đề xuất nhưng chưa xác nhận bằng code không được thêm vào sơ đồ."
+      ],
+      "subsections": [
+        {
+          "title": "Phân rã chức năng và các màn hình",
+          "level": 2,
+          "paragraphs": [
+            "Ở mức cao, VietLex chia thành bốn nhóm: hỏi đáp, tra cứu văn bản, hồ sơ nghiên cứu và quản trị. Nhóm hỏi đáp dùng màn hình / và action POST /chat. Nhóm tra cứu gồm /search, /legal-status và /documents/{document_id}. Nhóm hồ sơ có danh sách và chi tiết workspace; các lệnh tạo/lưu là action. Nhóm quản trị có view tổng quan và tài khoản; POST cập nhật trạng thái tài khoản là action riêng. Cách phân cấp này tương ứng mẫu phân rã mà người dùng gửi, nhưng nhãn được lấy từ route thật. Sơ đồ không liệt kê mọi API endpoint."
+          ]
+        },
+        {
+          "title": "Use case chính",
+          "level": 2,
+          "paragraphs": [
+            "Người tra cứu tìm văn bản theo số hiệu/tiêu đề hoặc nội dung, mở văn bản, xem sự kiện hiệu lực và gửi câu hỏi. Use case mở và đọc văn bản nối tự nhiên từ kết quả tìm kiếm nhưng có route GET độc lập. Người dùng đăng nhập làm việc với workspace để lưu nguồn và xem lại. Quản trị viên sử dụng màn hình quản trị. Ranh giới đăng nhập/quyền của từng route chưa được xác minh bằng phiên runtime nên sơ đồ use case mô tả vai trò ở mức chức năng, không khẳng định anonymous/role cụ thể cho mọi deployment."
+          ]
+        },
+        {
+          "title": "Điều kiện và luồng thay thế",
+          "level": 2,
+          "paragraphs": [
+            "Luồng tìm kiếm có thể trả kết quả, không có kết quả hoặc không truy cập được backend. Kết quả không có trong corpus không có nghĩa là ngoài đời không tồn tại quy định. Luồng đọc văn bản có thể trả 404 khi document ID không hợp lệ hoặc không tồn tại; lỗi backend được chuyển thành trạng thái không tải được. Luồng hỏi đáp có thể kết thúc bằng cache, câu trả lời, thông báo thiếu evidence, guardrail chặn hoặc lỗi kỹ thuật. Thiết kế test nghiệp vụ nên bao gồm từng nhánh, thay vì chỉ kiểm tra đường đi thành công.",
+            "Sự kiện hiệu lực cần được hiểu như dữ liệu có phạm vi review. Template cảnh báo registry chưa đầy đủ và không suy ra hiệu lực chỉ từ việc không có sự kiện. Vì vậy use case đối chiếu sự kiện theo mốc ngày không được đặt tên là xác định văn bản còn hiệu lực. Tên use case phải giữ đúng khả năng đã được kiểm chứng trong source."
+          ]
+        },
+        {
+          "title": "Yêu cầu nghiệm thu nội bộ",
+          "level": 2,
+          "paragraphs": [
+            "Với tra cứu, nghiệm thu cần kiểm tra truy vấn metadata và body riêng, phân trang, trạng thái index unavailable, đường dẫn từ kết quả đến trang văn bản và nội dung cảnh báo. Với chat, cần kiểm tra scope toàn corpus và scope văn bản, cache hit/miss, input/output guardrail, retrieval failure, no-evidence và persistence/trace. Với workspace, cần kiểm tra quyền sở hữu, CSRF, lưu/đọc lại nguồn và hành vi hết hạn. Đây là danh sách đề xuất cho đợt QA tương lai; các kiểm tra đó không được chạy trong lượt viết báo cáo."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "CHƯƠNG 4: PHÂN TÍCH VÀ THIẾT KẾ HƯỚNG ĐỐI TƯỢNG",
+      "paragraphs": [
+        "Chương này đọc các lớp và đối tượng code có liên quan trực tiếp đến retrieval; sơ đồ chỉ chọn phần hỗ trợ giải thích luồng evidence, không phải toàn bộ domain model."
+      ],
+      "subsections": [
+        {
+          "title": "Đối tượng EvidenceChunk",
+          "level": 2,
+          "paragraphs": [
+            "EvidenceChunk là đối tượng dữ liệu bất biến được khai báo trong app/ingestion/legal_text.py. Các thuộc tính gồm document ID, số hiệu, tiêu đề, source URL, heading path, article, clause, citation, text, token count và content hash tùy chọn. Phương thức formatted_context() đóng gói citation, source URL, title và body thành phần có thể đưa vào context. Việc gom các thuộc tính này thành một value object làm rõ đơn vị evidence mà các bước retrieval và generation trao đổi.",
+            "Một điểm thiết kế đáng chú ý là cùng đối tượng chứa cả nội dung và dấu vết nguồn. Điều này thuận lợi cho việc tạo context, nhưng cần đảm bảo code path không đánh mất metadata khi xếp hạng, gộp hoặc cache. Hash không tự chứng minh nguồn hợp pháp hay nội dung đúng; nó chỉ giúp phát hiện một số dạng lệch nội dung so với giá trị đã kỳ vọng. Những khẳng định về hiệu lực, nguồn authority và ngày áp dụng đòi hỏi evidence riêng."
+          ]
+        },
+        {
+          "title": "RetrievalOutcome và trách nhiệm retriever",
+          "level": 2,
+          "paragraphs": [
+            "RetrievalOutcome gom danh sách evidence, độ trễ theo bước, status, diagnostics và error. Đây là một hợp đồng kết quả tốt hơn việc trả trần danh sách đoạn vì phía điều phối có thể phân biệt retrieval thành công, rỗng hoặc có lỗi, đồng thời giữ thông tin quan sát. LegalRetriever triển khai một tuyến tìm kiếm hybrid; VertexQdrantRetriever chuyển payload Qdrant sang EvidenceChunk/candidate cho tuyến V3. Hai lớp không nên được diễn giải như hai tên gọi của cùng backend; chúng nằm trong các hợp đồng cấu hình khác nhau.",
+            "V3ArticleExpansion biểu diễn kết quả lựa chọn và bổ sung evidence, cùng status/diagnostics/latency. Thiết kế có ranh giới riêng giữa candidate ban đầu với evidence sau khi mở rộng. Theo tài liệu kiến trúc, mở rộng V3 đọc source từ local store hoặc Supabase và so hash nội dung trước khi mở; đó là một kiểm tra provenance có ích, nhưng không đồng nghĩa mỗi đoạn đã được luật sư review."
+          ]
+        },
+        {
+          "title": "Quan hệ phụ thuộc và nguyên tắc thiết kế",
+          "level": 2,
+          "paragraphs": [
+            "Route /chat điều phối HTTP, guardrail, cache, gọi pipeline và dựng response. run_advanced_rag điều phối retrieval, chọn evidence, có thể gọi mở rộng và generation. Retriever biết cách làm việc với backend; đối tượng evidence là dữ liệu chung ở ranh giới giữa các bước. Cách phân lớp này giảm việc đưa logic vector store vào template, nhưng một thay đổi cấu hình retrieval vẫn có thể làm đổi behavior và số liệu; do đó pipeline fingerprint/source revision cần xuất hiện trong evaluation manifest.",
+            "Sơ đồ lớp rút gọn tập trung vào các quan hệ được khai báo trong source: outcome chứa evidence; retriever trả kết quả hoặc tạo evidence; article expansion chọn/thêm evidence. Sơ đồ không khẳng định quan hệ kế thừa chung nếu source không khai báo interface như vậy. Nó cũng không mô hình hóa collection/index như entity class vì đó là phần hạ tầng, không phải schema đối tượng nghiệp vụ hoàn chỉnh."
+          ]
+        },
+        {
+          "title": "Điểm cần cải thiện trong thiết kế",
+          "level": 2,
+          "paragraphs": [
+            "Các bước retrieval/generation trả diagnostics giàu thông tin; cần giữ hợp đồng typed xuyên suốt thay vì biến lỗi thành chuỗi khó phân tích. Nên chuẩn hóa một trace schema gồm query fingerprint, route/config revision, candidate stage, evidence ID/hash, status, reason, token budget và latency; loại bỏ dữ liệu cá nhân khỏi trace theo chính sách. Một trace đồng nhất sẽ giúp so sánh hai lane mà không đánh đồng số liệu hoặc lộ nội dung người dùng.",
+            "Để dễ kiểm thử, phần chọn lane nên được tiêm như dependency rõ ràng và từng lane có contract test về metadata/hash/denominator. Đề xuất này không khẳng định source hiện tại thiếu hoàn toàn dependency injection; nó nêu ra điều kiện kiểm soát cần giữ khi phát triển tiếp. Sơ đồ không thay cho code review đầy đủ, nhất là khi working tree dirty."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "CHƯƠNG 5: KIẾN TRÚC, DỮ LIỆU VÀ THIẾT KẾ THÀNH PHẦN",
+      "paragraphs": [
+        "Tài liệu kiến trúc được cập nhật 19/10/2026 ghi rõ các hợp đồng retrieval hiện hành, đồng thời cảnh báo tài liệu này không xác nhận config đang chạy trên production. Source/config là authority cho mô tả dưới đây."
+      ],
+      "subsections": [
+        {
+          "title": "Kiến trúc web và luồng tổng quát",
+          "level": 2,
+          "paragraphs": [
+            "FastAPI/Jinja phục vụ route HTML và API. Route chuyển request tới service nghiệp vụ; template kết xuất form, nguồn và trạng thái; service retrieval giao tiếp với index/content store; pipeline tạo context và gọi tầng generation. Cache semantic và interaction store phục vụ hai nhiệm vụ khác nhau: cache có thể trả kết quả đã được lưu theo điều kiện; interaction store lưu status/trace để theo dõi phiên. Sơ đồ kiến trúc thể hiện ranh giới này ở mức thành phần, không liệt kê mọi database collection hay provider.",
+            "Một boolean cấu hình chọn một trong hai retrieval contract; không có cross-fallback âm thầm giữa hai contract theo tài liệu hiện hành. Với USE_LEGACY_FREE_PIPELINE=false (giá trị mặc định trong config), tuyến V3 dùng Vertex gemini-embedding-2 vector 1024 chiều và Qdrant V3, trộn RRF/DBSF. Với true, tuyến legacy dùng Qdrant Cloud inference multilingual E5 384 chiều, Pinecone V1, SQLite FTS cho số hiệu/tiêu đề và local content resolution. Config mặc định không phải bằng chứng về deployment hiện tại."
+          ]
+        },
+        {
+          "title": "Hai hợp đồng retrieval",
+          "level": 2,
+          "paragraphs": [
+            "Tuyến V3 giữ dense và sparse IDF trong collection Qdrant; kết quả RRF và DBSF được trộn theo rank với trọng số bằng nhau theo tài liệu kiến trúc. Sau truy xuất có thể mở rộng evidence điều khoản bằng local/Supabase content, nhưng chỉ khi hash nguồn khớp candidate. Tài liệu ghi capacity snapshot ngày 17/10/2026 có 141.798 điểm trên 14.962 document ID, tương ứng khoảng 2,89% tập 518.255 document ID của dataset được nêu. Đây là coverage snapshot của một index, không phải corpus đầy đủ và không xác nhận trạng thái mới hơn.",
+            "Tuyến legacy được thiết kế như lane Pinecone full-corpus + SQLite FTS metadata và local content resolution/reranking. Cấu hình tên index không tự chứng minh count, quota hoặc coverage của remote index. Vì vậy bảng so sánh phía dưới mô tả contract và rủi ro provenance; nó không đưa ra kết luận lane nào cho kết quả tốt hơn ở production.",
+            "Để đối chiếu hai hợp đồng retrieval theo cấu hình, Bảng dưới đây tóm tắt thành phần và giới hạn được ghi nhận; bảng không so sánh hiệu năng."
+          ]
+        },
+        {
+          "title": "Giới hạn evidence và context",
+          "level": 2,
+          "paragraphs": [
+            "Theo tài liệu kiến trúc, câu trả lời giữ tối đa ba passage trong ngân sách 720 token. Giới hạn này hữu ích để kiểm soát context size và latency, nhưng tạo trade-off: nguồn thiết yếu có thể bị loại bởi ranking hoặc budget; đoạn ngắn có thể thiếu điều kiện/ngoại lệ; tokenization có thể khác với ước lượng whitespace. Vì thế recall ở candidate stage và evidence survival sau selection nên được đo song song.",
+            "Pipeline có thể tìm official-source supplement khi context được xem là chưa đủ, với timeout giới hạn; kết quả ngoài corpus được gắn provenance riêng. Official supplement không biến bất kỳ trang web nào thành nguồn đã xác minh. UI cần nói rõ nguồn nào là văn bản trong corpus, nguồn nào là bổ sung và thời điểm truy cập. Khi không có evidence đủ dùng, code có thể trả lời từ chối thay vì tự điền kết luận; đây là trạng thái có chủ đích chứ không phải lỗi nội dung."
+          ]
+        },
+        {
+          "title": "Ranh giới dữ liệu và an toàn",
+          "level": 2,
+          "paragraphs": [
+            "Evidence từ vector index, body search, cache, workspace lưu trữ và official supplement khác nhau về coverage, freshness và review state. Một định danh document_id không đảm bảo content source đồng nhất nếu pipeline không ràng buộc source hash. EvidenceChunk có source_content_sha256 tùy chọn; V3 expansion kiểm tra hash trước khi nối nội dung đầy đủ. Nên hiển thị nguồn, vị trí, trạng thái kiểm tra và ngày, đồng thời từ chối mở rộng khi provenance thiếu/thay đổi.",
+            "Route chat redacts PII trước khi tiếp tục; CSRF token dùng cho form POST; tài liệu hướng dẫn của source ghi workspace/resource reads owner-scoped và response dynamic dùng no-store. Tuy nhiên không có kiểm thử runtime trong bài, do đó đây là mô tả cơ chế code, chưa phải đánh giá hiệu quả security. Cần một threat model riêng cho prompt injection trong văn bản nguồn, data exfiltration, cache poisoning, access control và log retention."
+          ]
+        },
+        {
+          "title": "Đánh đổi kiến trúc",
+          "level": 2,
+          "paragraphs": [
+            "Hai lane cho phép thử nghiệm backend và giới hạn phụ thuộc nhưng tăng chi phí cấu hình, observability và khả năng tái lập. Thay đổi một boolean có thể đổi embedding dimension, index, sparse path, reranker và nguồn nội dung. Mỗi run cần lưu resolved configuration (đã loại secret), data snapshot, code revision, pipeline fingerprint, dataset/gold hash và candidate budget. Nếu thiếu các trường này, hai run mang cùng tên baseline có thể không so sánh được.",
+            "Tách tra cứu chính xác, toàn văn và semantic RAG thành các trải nghiệm riêng có lợi cho người dùng nhưng cần giải thích khác biệt. Số hiệu/title FTS không tương đương tìm body; phrase body search không phải semantic search; câu trả lời RAG không thay thế mở văn bản gốc. Các nhãn giao diện hiện có nói một phần điều đó; bộ usability review tương lai cần kiểm tra người dùng có hiểu phạm vi hay không."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "CHƯƠNG 6: CÀI ĐẶT, LUỒNG XỬ LÝ VÀ GIAO DIỆN",
+      "paragraphs": [
+        "Các hình trong chương được dựng từ template và handler code. Chúng có thể giúp đọc bố cục dự kiến, nhưng không chứng minh CSS/layout hiện tại khi chạy trong browser."
+      ],
+      "subsections": [
+        {
+          "title": "Luồng xử lý câu hỏi",
+          "level": 2,
+          "paragraphs": [
+            "Request POST /chat nhận message, CSRF, session, tùy chọn Nemo/document scope. Handler redacts PII; nếu có document ID thì lấy văn bản và tạo scoped evidence. Sau khi kiểm tra input, handler chỉ hỏi semantic cache nếu query đủ điều kiện và input guardrail không bật. Cache hit trả answer/context đã lưu. Cache miss gọi run_advanced_rag; lỗi retrieval được phân loại và trả trạng thái kỹ thuật, không giả thành kết luận pháp lý.",
+            "Pipeline gọi retriever theo contract đã cấu hình; có thể mở rộng evidence V3, lọc theo topic/situation và gọi official supplement khi điều kiện phù hợp. Nếu không có evidence, trả no-evidence message. Nếu có context, tạo response với metadata; handler thực hiện output check, redaction PII, tính request status, lưu interaction/metrics/trace, rồi render chat_message.html. Chi tiết tiến độ và nhiều nhánh lỗi khiến sequence diagram có điều kiện; sơ đồ không gán mọi request vào cùng một đường đi.",
+            "Hình dưới đây tóm tắt các nhánh cache, retrieval, không có evidence, generation và lưu trace; các nhánh là mô tả code, không phải trace của một lần chạy mới."
+          ]
+        },
+        {
+          "title": "Wireframe màn hình hỏi đáp",
+          "level": 2,
+          "paragraphs": [
+            "Wireframe / giữ vùng hội thoại bên trái, trạng thái chào mừng ở vùng chính, lối tắt đến tra cứu/hồ sơ, note Nguồn tìm kiếm: Toàn bộ VietLex, ô nhập câu hỏi và nút Gửi câu hỏi. Các nhãn chính được đối chiếu với index.html/product_nav.html. Không có câu trả lời, văn bản, số liệu, tài khoản hay nguồn giả. Bản wireframe không mô phỏng một câu trả lời thật và không được dùng làm ảnh chụp runtime."
+          ]
+        },
+        {
+          "title": "Wireframe tra cứu văn bản",
+          "level": 2,
+          "paragraphs": [
+            "Wireframe /search vẽ phạm vi tìm kiếm, trường truy vấn, mốc đối chiếu sự kiện, bộ lọc loại văn bản/cơ quan/ngày, thứ tự sắp xếp và nút áp dụng/xóa bộ lọc. Thông báo Ngày ban hành không phải ngày hiệu lực và VietLex chưa xác minh tình trạng hiệu lực được giữ lại vì chúng tác động cách hiểu kết quả. Vùng kết quả để trống thay vì tự tạo một văn bản minh họa. Scope body chỉ hiển thị khi body coverage có trong context handler; đây là điều kiện hiển thị được ghi ở caption."
+          ]
+        },
+        {
+          "title": "Trạng thái giao diện cần kiểm tra khi chạy",
+          "level": 2,
+          "paragraphs": [
+            "Lượt kiểm tra browser thực tế chưa được thực hiện. Khi có môi trường được phép, cần mở /, /search, một văn bản hợp lệ, /legal-status, workspace thuộc đúng owner và các route admin ở role được cấp phép. Chụp viewport desktop và mobile nếu rubric yêu cầu; kiểm tra trạng thái rỗng, lỗi backend, search scope, date note, source drawer, cache/guardrail status và no-evidence. Ảnh cần ghi route, role, state, viewport, thời điểm và revision; không chụp dữ liệu người dùng thật.",
+            "UML và wireframe không thay việc xem HTML/CSS đã render. Khi lấy runtime capture, đối chiếu screenshot với source route/template và hash source; ghi rõ image provenance. Nếu chạy không được, giữ nhãn source-backed wireframe. Không được đổi loại hình để khiến tài liệu trông hoàn chỉnh hơn."
+          ]
+        },
+        {
+          "title": "Nhận xét về khả năng sử dụng",
+          "level": 2,
+          "paragraphs": [
+            "Các lưu ý về mốc hiệu lực và phạm vi corpus là phần đúng hướng vì giúp ngăn suy luận sai. Cải thiện tiếp theo nên làm nổi bật trạng thái mốc ngày ngay cạnh kết quả, phân biệt nhãn đã duyệt sự kiện với kết luận, cho biết body index có khả dụng hay không, và đưa đường dẫn về nguồn gốc bên cạnh citation. Với câu trả lời chat, cần bố cục để người dùng mở đoạn evidence trước khi dựa vào câu chữ tổng hợp.",
+            "Wireframe là tối giản theo mẫu form đen trắng người dùng cung cấp; nó tập trung vào cấu trúc và nhãn, không tự đề xuất hệ thống thiết kế mới. Trước khi thay đổi UI thật, cần xác minh trên project hiện tại và yêu cầu rubric. Bài không yêu cầu thay đổi UI nên các nhận xét này chỉ là đề xuất."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "CHƯƠNG 7: KIỂM THỬ, ĐÁNH GIÁ VÀ GIỚI HẠN",
+      "paragraphs": [
+        "Chương này phân biệt bằng chứng lịch sử đã có với phần kiểm tra không chạy ở lượt hiện tại. Các số liệu được chép theo tài liệu đã lưu và không được trình bày như kết quả mới."
+      ],
+      "subsections": [
+        {
+          "title": "Bằng chứng hiện có và phương pháp đọc",
+          "level": 2,
+          "paragraphs": [
+            "Tài liệu docs/evaluation/CURRENT_STATUS.md có hai lớp thông tin. Phần đầu là cập nhật vận hành ngày 19/10/2026; bên dưới là Golden-50 snapshot lịch sử ngày 03/09/2026. Kết quả hai ngày không được gộp: snapshot cũ có benchmark retrieval/answer quy mô 50 case; cập nhật mới ghi hai câu hỏi tự nhiên exploratory, một partial và một failure, không hình thành benchmark đại diện mới. Mỗi chỉ số cần đọc cùng thời gian, source revision, bộ dữ liệu, denominator và điều kiện run.",
+            "Với retrieval, Recall@K phải gắn với gold evidence hợp lệ. Tài liệu lịch sử ghi 40 case/53 evidence item dùng được, 10/50 skipped do thiếu nhãn verified. Document Recall@3 là 53/53, Article Recall@3 là 29/30, Clause Recall@3 là 13/14 và all-required coverage là 39/40. Các mẫu số khác nhau theo cấp tài liệu/điều/khoản nên không được rút thành 53/53 câu hỏi trả lời đúng. Đây là điểm truy xuất, không phải đáp án pháp lý."
+          ]
+        },
+        {
+          "title": "Kết quả câu trả lời và giới hạn diễn giải",
+          "level": 2,
+          "paragraphs": [
+            "Answer run Golden-50 ngày 03/09/2026 hoàn tất 50/50 lượt generation, nhưng exact match là 0/50, token F1 0,2305, character F1 0,2230, citation precision 0,9183 và invalid citation rate 0,0817. RAGAs ghi faithfulness 0,8221, answer accuracy 0,9100, context precision 0,8600 và context recall 0,9500. Đây là số liệu snapshot lịch sử, không phải đo lại code dirty hiện tại; metric tự động cũng không xác nhận luật đúng hoặc còn hiệu lực.",
+            {
+              "text": "Faithfulness theo RAGAs hỏi mức độ câu trả lời bám context. Đặt cạnh đó, exact match/token F1 so sánh dạng đáp án với đáp án chuẩn nhưng có thể phạt câu trả lời diễn đạt khác; citation precision đo chất lượng dẫn chiếu theo quy tắc của run. Không metric đơn lẻ nào trả lời toàn bộ câu hỏi người dùng có thể dựa vào kết luận pháp lý này không. Cần rà thủ công các claim trọng yếu, thời điểm áp dụng, ngoại lệ và độ đầy đủ của source.",
+              "citations": [
+                "doi-10-18653-v1-2024-eacl-demo-16"
+              ]
+            },
+            "Cập nhật vận hành ngày 19/10 nói hai câu hỏi whole-corpus mới không có full pass: một câu trả lời partial và một câu trả lời fail; ví dụ môi trường có citation sai authority-clause. Tài liệu ghi rõ đây là mẫu exploratory rất nhỏ, không phải ước lượng chất lượng tổng thể. Không có benchmark đại diện mới hoặc bằng chứng production-readiness. Kết luận hợp lệ ở đây là tồn tại cảnh báo chất lượng cần xử lý và phải chạy một eval mới; không thể kết luận xác suất đúng/sai cho mọi câu hỏi."
+          ]
+        },
+        {
+          "title": "Bảng tổng hợp chỉ số và mẫu số",
+          "level": 2,
+          "paragraphs": [
+            "Bảng dưới tách retrieval, answer và thử nghiệm mới để tránh trộn scope. Nhãn ngày/denominator phải được giữ khi trích số ra khỏi báo cáo."
+          ]
+        },
+        {
+          "title": "Phân tích lỗi và rủi ro",
+          "level": 2,
+          "paragraphs": [
+            "Retrieval có thể tìm đúng văn bản nhưng sai điều/khoản; ranking tốt ở Document Recall chưa chắc giữ được evidence sau reranking hoặc cắt context. Generation có thể tóm tắt quá mạnh, ghép hai đoạn khác nhau, gắn citation không hỗ trợ claim hoặc bỏ mất giới hạn thời gian. Citation có thể trỏ đúng số hiệu nhưng nguồn ngoài/metadata chưa được kiểm tra đầy đủ. Cache có thể trả nội dung cũ nếu fingerprint/eligibility không phản ánh đủ khác biệt truy vấn. UI có thể khiến người dùng diễn giải search event như xác nhận hiệu lực.",
+            {
+              "text": "Một benchmark Vietnamese IR nhiều miền là căn cứ phù hợp để lưu ý về đánh giá theo ngôn ngữ/miền; paper Nguyen và Quan bao gồm legal trong 6 miền nhưng không đo VietLex. Do vậy bộ gold cho VietLex nên chứa query tiếng Việt thật, nhiều cách gọi cùng điều, loại câu hỏi khác nhau, ngày cần đối chiếu, source chính xác và ngoại lệ. Cần tách câu hỏi tìm văn bản khỏi câu hỏi áp dụng pháp luật; bộ dữ liệu cần người có chuyên môn adjudicate gold và disagreement.",
+              "citations": [
+                "doi-10-18653-v1-2026-findings-eacl-110"
+              ]
+            },
+            "Rủi ro dữ liệu gồm coverage không đầy đủ (snapshot V3 chỉ 14.962/518.255 document ID), freshness, lệch hash, OCR/chunking, và availability/quota remote. Rủi ro vận hành gồm provider/model thay đổi, latency, retry, cache, branch cấu hình và dirty worktree. Rủi ro người dùng gồm over-reliance, bỏ qua nguồn chính thức và lộ PII trong logs. Rủi ro này cần được theo dõi bằng dashboard/trace và quy trình incident, không chỉ bằng điểm benchmark."
+          ]
+        },
+        {
+          "title": "Kế hoạch kiểm chứng tiếp theo",
+          "level": 2,
+          "paragraphs": [
+            "Trước hết cần nhận đề bài/rubric chính thức và chốt phiên bản source sạch hoặc ghi nhận hash dirty. Sau đó đóng băng cấu hình, pipeline fingerprint, index snapshot, dataset và gold labels. Chạy retrieval-only eval có verified denominator, báo recall ở document/article/clause, MRR/nDCG nếu phù hợp, candidate survival, technical error, latency và coverage. Chạy answer eval trên cùng evidence với exact match/token metric, groundedness/citation check và human legal review tách biệt. Mọi run lưu log không chứa secret/PII và source hash.",
+            "Tiếp theo thực hiện browser QA theo route/role đã được cấp phép, dùng dữ liệu an toàn; kiểm tra screenshot, response headers, form CSRF, owner scoping, error states và trạng thái no-evidence. Kiểm thử cache hit/miss, câu hỏi về hiệu lực thời gian, document scope, guardrail, retrieval failure và nguồn bổ sung theo test fixture. Chỉ sau khi trace/evidence và human review ổn định mới cân nhắc thử nghiệm với người dùng. Kế hoạch này là đề xuất, không phải kết quả đã thực hiện."
+          ]
+        },
+        {
+          "title": "Kết luận đánh giá",
+          "level": 2,
+          "paragraphs": [
+            "VietLex có kiến trúc nhiều lớp và các cơ chế kiểm soát evidence hữu ích, nhưng bằng chứng hiện có chưa đủ để xác nhận chất lượng trả lời pháp luật ở production. Golden-50 có giá trị làm mốc lịch sử nhưng tỷ lệ match thấp; thử nghiệm hiện hành nhỏ và thất bại ở một số câu hỏi. Yêu cầu tiếp theo là benchmark có nguồn/gold xác thực và kiểm tra người chuyên môn, không phải tăng tuyên bố dựa trên một metric tự động."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN",
+      "paragraphs": [
+        "Đồ án chuyên ngành đã phân tích VietLex theo luồng người dùng, thiết kế hướng đối tượng, kiến trúc retrieval, giao diện và bằng chứng đánh giá. Source cho thấy hệ thống có tra cứu metadata/toàn văn, đọc văn bản, hỏi đáp RAG, hồ sơ nghiên cứu và các view quản trị. Pipeline chat bao gồm redaction, input check, cache có điều kiện, retrieval, chọn evidence, generation, output check và lưu trace. Hai retrieval contract có cấu hình/nguồn dữ liệu khác nhau; sơ đồ, class model và wireframe trong bài được giới hạn theo code snapshot, không giả làm bằng chứng runtime.",
+        "Bằng chứng đánh giá cần được diễn giải theo ngày và mẫu số. Snapshot Golden-50 03/09/2026 cho thấy retrieval recall cao trên một phần gold khả dụng, nhưng exact match 0/50, token F1 0,2305 và citation invalid 0,0817; cập nhật 19/10/2026 ghi nhận hai câu hỏi thử nghiệm mới chưa đạt full pass và chưa có benchmark đại diện mới. Những kết quả này cho thấy cần cải thiện và đo lại, nhưng không đủ để khẳng định toàn bộ hệ thống đúng hoặc sai theo mọi tình huống.",
+        "Hướng phát triển ưu tiên: (1) nhận rubric và xác định acceptance criteria với giảng viên; (2) đóng băng source/config/dataset và công bố manifest; (3) xây bộ gold Vietnamese legal QA có review chuyên môn; (4) đo retrieval và generation riêng theo đúng denominator; (5) kiểm tra citation ở mức claim, nguồn, thời gian, ngoại lệ; (6) kiểm browser/security bằng session và dữ liệu an toàn; (7) cải thiện trace, provenance, cache eligibility, error status và UI caveat. Mọi kết luận chất lượng cần gắn với run có thể tái lập.",
+        "Giới hạn của bản hiện tại là không có rubric, không chạy app, không gọi provider/database, không xác minh luật hiện hành và không chạy benchmark mới. Vì vậy đây là bản dự thảo phân tích dựa trên source đã ghi hash; chưa thể xem là xác nhận submission readiness. Sinh viên cần rà nội dung, kiểm tra thông tin bìa, bổ sung lời cam đoan/lời cảm ơn theo trải nghiệm thật và lấy duyệt của giảng viên trước khi nộp."
+      ]
+    },
+    {
+      "heading": "PHỤ LỤC A. MA TRẬN YÊU CẦU VÀ BẰNG CHỨNG",
+      "paragraphs": [
+        "Ma trận dưới đây là bản đồ evidence của báo cáo, không thay thế rubric. Các record src-vietlex-* là review nội bộ trên source snapshot dirty ngày 22/10/2026; chúng được lưu trong evidence.json cùng hash và vị trí. Các record doi-* trỏ tới PDF học thuật đã tải và review đoạn hỗ trợ. Claim code được kiểm bằng source; claim học thuật được citation trong Word. Không có record nào ở đây xác nhận luật hiện hành hoặc runtime.",
+        "Nguồn chủ chốt: app/main.py và app/templates/index.html cho màn hình hỏi đáp; app/api/legal_routes.py và legal_search.html cho tra cứu; app/api/routes.py cho POST /chat; app/services/rag_pipeline.py cho điều phối RAG; app/services/retrieval.py, vertex_qdrant_retrieval.py và v3_article_expansion.py cho hai lane/evidence; app/ingestion/legal_text.py cho EvidenceChunk; docs/CURRENT_ARCHITECTURE.md cho contract/config/capacity; docs/evaluation/CURRENT_STATUS.md cho số liệu có ngày. Hash từng file và vị trí chi tiết nằm trong claim-evidence.csv cùng source/source_manifest.json."
+      ]
+    },
+    {
+      "heading": "PHỤ LỤC B. ĐỊNH DANH SƠ ĐỒ VÀ NGUỒN KIỂM TRA",
+      "paragraphs": [
+        "Danh mục hình trong bài gồm phân cấp GET screens và POST actions, use case, mô hình lớp rút gọn, kiến trúc retrieval theo hai cấu hình, sequence POST /chat và hai wireframe source-backed cho / và /search. Danh mục bảng gồm so sánh retrieval contract và tổng hợp số liệu đã lưu. Caption dùng trường SEQ Word để sinh số tự động.",
+        "Source .puml được giữ trong assets/uml/; PlantUML 1.2026.8 được kiểm tra khả dụng và render PNG. Wireframe được vẽ từ nhãn/template thực, vùng kết quả để trống và không có browser chrome/dữ liệu giả. Route/template đã được đối chiếu trên working tree snapshot; không có ảnh chụp live. figure-plan.csv, diagram-plan.csv và screen-inventory.json giữ evidence, loại hình và trạng thái kiểm tra."
+      ]
+    }
+  ]
+}

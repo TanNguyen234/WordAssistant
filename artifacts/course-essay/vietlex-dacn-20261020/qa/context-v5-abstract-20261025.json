@@ -1,0 +1,14 @@
+{
+  "query": "Abstract summary conclusions Vietnamese",
+  "sections": [
+    {
+      "id": "tom-tat-o-an",
+      "title": "TÓM TẮT ĐỒ ÁN",
+      "level": 1
+    }
+  ],
+  "text": "## TÓM TẮT ĐỒ ÁN\nĐồ án chuyên ngành phân tích VietLex như một hệ thống phần mềm hỗ trợ tra cứu và nghiên cứu pháp luật tiếng Việt theo hướng retrieval-augmented generation (RAG). Khảo sát dựa trên mã nguồn và tài liệu hiện có tại snapshot ngày 22/10/2026; repo ở trạng thái working tree dirty nên các mô tả được gắn với file và hash, không đồng nhất với một bản phát hành sạch hoặc cấu hình đang chạy trên production. Phạm vi gồm giao diện server-rendered, các route tra cứu, pipeline hỏi đáp, hai hợp đồng retrieval được chọn bởi cấu hình, đối tượng evidence và các số liệu đánh giá đã lưu.\n\nKết quả cho thấy VietLex không chỉ là một chatbot: hệ thống kết hợp tìm kiếm theo metadata/toàn văn, đọc văn bản, hồ sơ nghiên cứu, truy xuất evidence, sinh câu trả lời và kiểm tra một số điều kiện an toàn. Kiến trúc giữ hai tuyến retrieval khác nhau, có bước giới hạn evidence/context, tùy chọn mở rộng điều khoản có kiểm hash và cơ chế cache có điều kiện. Các sơ đồ phân tích được dựng từ source; 11 ảnh giao diện là ảnh chụp các trang công khai an toàn truy cập được, ghi lại riêng từng route sau thao tác bấm trên giao diện trong phiên ẩn danh ngày 23/10/2026; revision triển khai chưa được xác nhận độc lập.\n\nĐánh giá cũng chỉ ra giới hạn quan trọng. Snapshot Golden-50 ngày 03/09/2026 là số liệu lịch sử với mẫu và mẫu số cụ thể; exact match của câu trả lời là 0/50 và token F1 là 0,2305. Báo cáo hiện hành ngày 19/10/2026 ghi nhận hai câu hỏi tự nhiên thử nghiệm chưa đạt full pass và không có benchmark câu trả lời đại diện mới. Vì vậy, các kết quả này không chứng minh độ đúng pháp lý hay mức sẵn sàng production. Chưa có đề cương/rubric chấm điểm riêng; hướng dẫn HCMUNRE đã cung cấp tiêu chí nhận xét chính thức nhưng không nêu thang điểm. Mức đáp ứng yêu cầu của đồ án và sẵn sàng nộp chưa được xác nhận.\n\nTừ khóa: VietLex; retrieval-augmented generation; tra cứu pháp luật; hybrid retrieval; thiết kế hướng đối tượng; đánh giá hệ thống.",
+  "estimated_tokens": 648,
+  "max_tokens": 3500,
+  "truncated": false
+}

@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" modified="2026-10-23T11:00:00.000Z" agent="LMS Course Work" version="24.7.17" type="device">
+  <diagram id="LMS_09" name="09 — Sequence: sinh viên thực hiện quiz">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="stu" value="Sinh viên" style="rounded=1whiteSpace=wrap;html=1;fillColor=#fff7ed;strokeColor=#f59e0b;strokeWidth=2;fontColor=#0f172a;fontSize=15;align=center;verticalAlign=middle;spacing=8;" parent="1" vertex="1">
+          <mxGeometry x="20" y="35" width="205" height="64" as="geometry"/>
+        </mxCell>
+        <mxCell id="ui" value="React / Vite" style="rounded=1whiteSpace=wrap;html=1;fillColor=#e0f2fe;strokeColor=#0284c7;strokeWidth=2;fontColor=#0f172a;fontSize=15;align=center;verticalAlign=middle;spacing=8;" parent="1" vertex="1">
+          <mxGeometry x="290" y="35" width="205" height="64" as="geometry"/>
+        </mxCell>
+        <mxCell id="api" value="FastAPI" style="rounded=1whiteSpace=wrap;html=1;fillColor=#e0f2fe;strokeColor=#0284c7;strokeWidth=2;fontColor=#0f172a;fontSize=15;align=center;verticalAlign=middle;spacing=8;" parent="1" vertex="1">
+          <mxGeometry x="560" y="35" width="205" height="64" as="geometry"/>
+        </mxCell>
+        <mxCell id="db" value="SQL Server" style="rounded=1whiteSpace=wrap;html=1;fillColor=#e0f2fe;strokeColor=#0284c7;strokeWidth=2;fontColor=#0f172a;fontSize=15;align=center;verticalAlign=middle;spacing=8;" parent="1" vertex="1">
+          <mxGeometry x="830" y="35" width="205" height="64" as="geometry"/>
+        </mxCell>
+        <mxCell id="msg0" value="1. Bắt đầu quiz" style="rounded=1whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#94a3b8;strokeWidth=2;fontColor=#0f172a;fontSize=15;align=center;verticalAlign=middle;spacing=8;" parent="1" vertex="1">
+          <mxGeometry x="1045" y="135" width="440" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="msg1" value="2. POST start attempt" style="rounded=1whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#94a3b8;strokeWidth=2;fontColor=#0f172a;fontSize=15;align=center;verticalAlign=middle;spacing=8;" parent="1" vertex="1">
+          <mxGeometry x="1045" y="221" width="440" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="msg2" value="3. Kiểm tra giờ/lượt &amp; ghi attempt" style="rounded=1whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#94a3b8;strokeWidth=2;fontColor=#0f172a;fontSize=15;align=center;verticalAlign=middle;spacing=8;" parent="1" vertex="1">
+          <mxGeometry x="1045" y="307" width="440" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="msg3" value="4. AttemptId / câu hỏi hợp lệ" style="rounded=1whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#94a3b8;strokeWidth=2;fontColor=#0f172a;fontSize=15;align=center;verticalAlign=middle;spacing=8;" parent="1" vertex="1">
+          <mxGeometry x="1045" y="393" width="440" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="msg4" value="5. Hiển thị quiz" style="rounded=1whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#94a3b8;strokeWidth=2;fontColor=#0f172a;fontSize=15;align=center;verticalAlign=middle;spacing=8;" parent="1" vertex="1">
+          <mxGeometry x="1045" y="479" width="440" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="msg5" value="6. Gửi đáp án" style="rounded=1whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#94a3b8;strokeWidth=2;fontColor=#0f172a;fontSize=15;align=center;verticalAlign=middle;spacing=8;" parent="1" vertex="1">
+          <mxGeometry x="1045" y="565" width="440" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="msg6" value="7. POST submit attempt" style="rounded=1whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#94a3b8;strokeWidth=2;fontColor=#0f172a;fontSize=15;align=center;verticalAlign=middle;spacing=8;" parent="1" vertex="1">
+          <mxGeometry x="1045" y="651" width="440" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="msg7" value="8. Chấm điểm, lưu Attempts + Grades" style="rounded=1whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#94a3b8;strokeWidth=2;fontColor=#0f172a;fontSize=15;align=center;verticalAlign=middle;spacing=8;" parent="1" vertex="1">
+          <mxGeometry x="1045" y="737" width="440" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="msg8" value="9. Điểm / trạng thái" style="rounded=1whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#94a3b8;strokeWidth=2;fontColor=#0f172a;fontSize=15;align=center;verticalAlign=middle;spacing=8;" parent="1" vertex="1">
+          <mxGeometry x="1045" y="823" width="440" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge0" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#64748b;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="stu" target="msg0" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#64748b;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="msg0" target="ui" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#64748b;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="ui" target="msg1" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#64748b;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="msg1" target="api" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#64748b;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="api" target="msg2" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#64748b;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="msg2" target="db" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#64748b;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="db" target="msg3" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#64748b;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="msg3" target="api" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#64748b;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="ui" target="msg4" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#64748b;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="msg4" target="stu" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#64748b;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="stu" target="msg5" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#64748b;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="msg5" target="ui" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#64748b;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="ui" target="msg6" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#64748b;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="msg6" target="api" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge14" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#64748b;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="api" target="msg7" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#64748b;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="msg7" target="db" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#64748b;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="api" target="msg8" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge17" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#64748b;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="msg8" target="ui" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

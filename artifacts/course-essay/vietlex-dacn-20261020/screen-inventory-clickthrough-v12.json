@@ -1,0 +1,323 @@
+{
+  "schema_version": 2,
+  "system_title": "VietLex — nghiên cứu/tra cứu pháp luật Việt Nam",
+  "source_revision": "7519cd1aea4a3639140b9188de1843ebf0ddb1c0 (dirty source worktree; status SHA-256 99998923e7c4e16ced532789c68d5e76d36fa72a8bde5e3970ea3a9653781e1d)",
+  "runtime_captured": true,
+  "captured_route_count": 11,
+  "capture_context": {
+    "browser_surface": "visible_browser_tab",
+    "headless": false,
+    "navigation_policy": "visible_ui_clickthrough"
+  },
+  "capture_manifest": "assets/runtime-captures-clickthrough-20261023/capture-manifest.json",
+  "document_path": "output/VietLex_DoAnChuyenNganh_Clickthrough_FinalQA_20261023.docx",
+  "document_sha256": "38e897511263eccbf6f9b0bf9173ea55e6cbe91fba4e01b9f33345a3cfeebe7e",
+  "screens": [
+    {
+      "asset_id": "F06",
+      "screen_id": "home-chat",
+      "method": "GET",
+      "route": "/",
+      "template": "app/templates/index.html",
+      "handler": "app/main.py:get_index",
+      "page_title": "VietLex · Không gian nghiên cứu pháp luật",
+      "state": "CAPTURED_UI_CLICKTHROUGH",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/",
+      "http_status": 200,
+      "document_status": 200,
+      "console_errors": [],
+      "console_warnings": [],
+      "ui_steps": [
+        "Mở trang VietLex",
+        "Bấm Hỏi đáp trên thanh điều hướng",
+        "Chờ /readyz trả 200 và trạng thái Hệ thống sẵn sàng"
+      ],
+      "arrived_via_visible_ui": true,
+      "screenshot_path": "assets/runtime-captures-clickthrough-20261023/clickthrough-home.png",
+      "screenshot_sha256": "451c3e43c0b4a178f32c817e5ffce3786bc370155bd7a21d6b75e90c7ac496c2",
+      "captured_at": "2026-10-23T19:50:02+07:00",
+      "included_in_final_docx": true
+    },
+    {
+      "asset_id": "F07",
+      "screen_id": "legal-search",
+      "method": "GET",
+      "route": "/search?scope=metadata&q=45%2F2019%2FQH14&as_of=2026-10-23&legal_type=&authority=&issued_from=&issued_to=&sort=default",
+      "template": "app/templates/legal_search.html",
+      "handler": "app/api/legal_routes.py:legal_search",
+      "page_title": "Tìm văn bản · VietLex",
+      "state": "CAPTURED_UI_CLICKTHROUGH",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/search?scope=metadata&q=45%2F2019%2FQH14&as_of=2026-10-23&legal_type=&authority=&issued_from=&issued_to=&sort=default",
+      "http_status": 200,
+      "document_status": 200,
+      "console_errors": [],
+      "console_warnings": [],
+      "ui_steps": [
+        "Nhập số hiệu công khai 45/2019/QH14",
+        "Bấm Tìm (GET; không tạo dữ liệu)"
+      ],
+      "arrived_via_visible_ui": true,
+      "screenshot_path": "assets/runtime-captures-clickthrough-20261023/search-results.png",
+      "screenshot_sha256": "a8d5f4787d026e39d99d4155ac3832b71a83a55f9c9d1e5cd4e3ff4969405a87",
+      "captured_at": "2026-10-23T19:46:13+07:00",
+      "included_in_final_docx": true
+    },
+    {
+      "asset_id": "R03",
+      "screen_id": "legal-document",
+      "method": "GET",
+      "route": "/documents/333670?as_of=2026-10-23",
+      "template": "",
+      "handler": "",
+      "page_title": "Bộ luật Lao động 2019 · VietLex",
+      "state": "CAPTURED_UI_CLICKTHROUGH",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/documents/333670?as_of=2026-10-23",
+      "http_status": 200,
+      "document_status": 200,
+      "console_errors": [],
+      "console_warnings": [],
+      "ui_steps": [
+        "Bấm kết quả Bộ luật Lao động 2019"
+      ],
+      "arrived_via_visible_ui": true,
+      "screenshot_path": "assets/runtime-captures-clickthrough-20261023/legal-document-top.png",
+      "screenshot_sha256": "50f866d068ed0c0d5f82f990cc0c70ffe056afd4b028d4b071ea76fdfbfb3407",
+      "captured_at": "2026-10-23T19:46:33+07:00",
+      "included_in_final_docx": true
+    },
+    {
+      "asset_id": "R04",
+      "screen_id": "legal-status",
+      "method": "GET",
+      "route": "/legal-status",
+      "template": "registry view",
+      "handler": "app/api/legal_registry_routes.py",
+      "page_title": "Hiệu lực theo ngày · VietLex",
+      "state": "CAPTURED_UI_CLICKTHROUGH",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/legal-status",
+      "http_status": 200,
+      "document_status": 200,
+      "console_errors": [],
+      "console_warnings": [],
+      "ui_steps": [
+        "Bấm Đối chiếu sự kiện hiệu lực theo ngày"
+      ],
+      "arrived_via_visible_ui": true,
+      "screenshot_path": "assets/runtime-captures-clickthrough-20261023/legal-status.png",
+      "screenshot_sha256": "dc170c2c2e28917578514fc6af9634b60255ecfe72d937238c45bc202400965b",
+      "captured_at": "2026-10-23T19:46:57+07:00",
+      "included_in_final_docx": true
+    },
+    {
+      "asset_id": "R05",
+      "screen_id": "evaluation-lab",
+      "method": "GET",
+      "route": "/evaluation-lab",
+      "template": "NOT_MAPPED_IN_SOURCE_SCREEN_INVENTORY",
+      "handler": "NOT_MAPPED",
+      "page_title": "Chất lượng và kiểm chứng · VietLex",
+      "state": "CAPTURED_UI_CLICKTHROUGH",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/evaluation-lab",
+      "http_status": 200,
+      "document_status": 200,
+      "console_errors": [],
+      "console_warnings": [],
+      "ui_steps": [
+        "Mở menu Tìm hiểu thêm",
+        "Bấm Chất lượng và kiểm chứng"
+      ],
+      "arrived_via_visible_ui": true,
+      "screenshot_path": "assets/runtime-captures-clickthrough-20261023/evaluation-lab-top.png",
+      "screenshot_sha256": "1f3443cd129b0037b1d799cf462ec42120dd3bd5de577b853bde30e5c217732d",
+      "captured_at": "2026-10-23T19:47:19+07:00",
+      "included_in_final_docx": true
+    },
+    {
+      "asset_id": "R06",
+      "screen_id": "workspace-list",
+      "method": "GET",
+      "route": "/workspaces",
+      "template": "workspace list view",
+      "handler": "app/api/workspace_routes.py",
+      "page_title": "Hồ sơ nghiên cứu · VietLex",
+      "state": "CAPTURED_UI_CLICKTHROUGH",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/workspaces",
+      "http_status": 200,
+      "document_status": 200,
+      "console_errors": [],
+      "console_warnings": [],
+      "ui_steps": [
+        "Bấm Hồ sơ nghiên cứu"
+      ],
+      "arrived_via_visible_ui": true,
+      "screenshot_path": "assets/runtime-captures-clickthrough-20261023/workspaces.png",
+      "screenshot_sha256": "d822b1f101f6fe1590fcc32dbe42bb2ced7182305c2a868edf4ec91f1e8df2a8",
+      "captured_at": "2026-10-23T19:47:33+07:00",
+      "included_in_final_docx": true
+    },
+    {
+      "asset_id": "R07",
+      "screen_id": "login",
+      "method": "GET",
+      "route": "/login",
+      "template": "NOT_MAPPED_IN_SOURCE_SCREEN_INVENTORY",
+      "handler": "NOT_MAPPED",
+      "page_title": "Tài khoản · VietLex",
+      "state": "CAPTURED_UI_CLICKTHROUGH",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/login",
+      "http_status": 200,
+      "document_status": 200,
+      "console_errors": [],
+      "console_warnings": [],
+      "ui_steps": [
+        "Bấm Đăng nhập; không nhập thông tin đăng nhập"
+      ],
+      "arrived_via_visible_ui": true,
+      "screenshot_path": "assets/runtime-captures-clickthrough-20261023/login.png",
+      "screenshot_sha256": "768e2bb66326c3c54ea54daeb8ff1d7f9c3d7ffe1ec73b749f5783d1c82666b1",
+      "captured_at": "2026-10-23T19:47:47+07:00",
+      "included_in_final_docx": true
+    },
+    {
+      "asset_id": "R08",
+      "screen_id": "register",
+      "method": "GET",
+      "route": "/register",
+      "template": "NOT_MAPPED_IN_SOURCE_SCREEN_INVENTORY",
+      "handler": "NOT_MAPPED",
+      "page_title": "Tài khoản · VietLex",
+      "state": "CAPTURED_UI_CLICKTHROUGH",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/register",
+      "http_status": 200,
+      "document_status": 200,
+      "console_errors": [],
+      "console_warnings": [],
+      "ui_steps": [
+        "Bấm Đăng ký; không tạo tài khoản, không gửi biểu mẫu"
+      ],
+      "arrived_via_visible_ui": true,
+      "screenshot_path": "assets/runtime-captures-clickthrough-20261023/register.png",
+      "screenshot_sha256": "ba3c30967064211fbaa3e848598bccd725f42bf4a149745c20ab830621f1e9df",
+      "captured_at": "2026-10-23T19:47:52+07:00",
+      "included_in_final_docx": true
+    },
+    {
+      "asset_id": "R09",
+      "screen_id": "forgot-password",
+      "method": "GET",
+      "route": "/forgot-password",
+      "template": "NOT_MAPPED_IN_SOURCE_SCREEN_INVENTORY",
+      "handler": "NOT_MAPPED",
+      "page_title": "Tài khoản · VietLex",
+      "state": "CAPTURED_UI_CLICKTHROUGH",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/forgot-password",
+      "http_status": 200,
+      "document_status": 200,
+      "console_errors": [],
+      "console_warnings": [],
+      "ui_steps": [
+        "Bấm Quên mật khẩu?; không nhập email và không gửi hướng dẫn"
+      ],
+      "arrived_via_visible_ui": true,
+      "screenshot_path": "assets/runtime-captures-clickthrough-20261023/forgot-password.png",
+      "screenshot_sha256": "988f1456d15a85f18448a7ca0e02d044a40dc9ac2de2eeaf51ef45361bb83bac",
+      "captured_at": "2026-10-23T19:48:01+07:00",
+      "included_in_final_docx": true
+    },
+    {
+      "asset_id": "R10",
+      "screen_id": "privacy",
+      "method": "GET",
+      "route": "/privacy",
+      "template": "NOT_MAPPED_IN_SOURCE_SCREEN_INVENTORY",
+      "handler": "NOT_MAPPED",
+      "page_title": "Quyền riêng tư · VietLex",
+      "state": "CAPTURED_UI_CLICKTHROUGH",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/privacy",
+      "http_status": 200,
+      "document_status": 200,
+      "console_errors": [],
+      "console_warnings": [],
+      "ui_steps": [
+        "Mở menu Tìm hiểu thêm",
+        "Bấm Quyền riêng tư"
+      ],
+      "arrived_via_visible_ui": true,
+      "screenshot_path": "assets/runtime-captures-clickthrough-20261023/privacy.png",
+      "screenshot_sha256": "2f2320d3754eab0344ff8034d05c56a89dead92fd72d3590be76d32c47ca666f",
+      "captured_at": "2026-10-23T19:48:09+07:00",
+      "included_in_final_docx": true
+    },
+    {
+      "asset_id": "R11",
+      "screen_id": "terms",
+      "method": "GET",
+      "route": "/terms",
+      "template": "NOT_MAPPED_IN_SOURCE_SCREEN_INVENTORY",
+      "handler": "NOT_MAPPED",
+      "page_title": "Điều khoản · VietLex",
+      "state": "CAPTURED_UI_CLICKTHROUGH",
+      "resolved_url": "https://vietlex-legal-rag.vercel.app/terms",
+      "http_status": 200,
+      "document_status": 200,
+      "console_errors": [],
+      "console_warnings": [],
+      "ui_steps": [
+        "Mở menu Tìm hiểu thêm",
+        "Bấm Điều khoản"
+      ],
+      "arrived_via_visible_ui": true,
+      "screenshot_path": "assets/runtime-captures-clickthrough-20261023/terms.png",
+      "screenshot_sha256": "3931624759b9489b79969b261a1a2326ae05ab4a612c9b99915f17f4996d4653",
+      "captured_at": "2026-10-23T19:48:21+07:00",
+      "included_in_final_docx": true
+    }
+  ],
+  "supplemental_captures": [
+    {
+      "capture_id": "legal-search",
+      "route": "/search",
+      "screenshot_path": "assets/runtime-captures-clickthrough-20261023/legal-search.png",
+      "screenshot_sha256": "048a2c77f613612126b396adb39fa9ae00a40a9516574e6a8cfcd536b7d6fe33",
+      "reason": "Captured through UI but not inserted; final report uses another representative state for this route."
+    },
+    {
+      "capture_id": "evaluation-lab-full",
+      "route": "/evaluation-lab",
+      "screenshot_path": "assets/runtime-captures-clickthrough-20261023/evaluation-lab-full.png",
+      "screenshot_sha256": "13fa59635463a41f7e8a459c27900e2b58c05120e2983030228df56c2a56b0d5",
+      "reason": "Captured through UI but not inserted; final report uses another representative state for this route."
+    }
+  ],
+  "not_captured": [
+    {
+      "route": "/verify-email",
+      "reason": "Requires an email verification token; reaching it through the UI requires account creation and email transmission, neither was performed."
+    },
+    {
+      "route": "/reset-password",
+      "reason": "Requires a reset token; forgot-password form was viewed but no email was entered or sent."
+    },
+    {
+      "route": "/settings",
+      "reason": "Requires an authenticated session."
+    },
+    {
+      "route": "/admin/*",
+      "reason": "Role-protected administrative pages; no admin role used."
+    },
+    {
+      "route": "/workspaces/{workspace_id}",
+      "reason": "Requires an owned workspace ID; no workspace was created."
+    },
+    {
+      "route": "/sessions and /sessions/{session_id}",
+      "reason": "HTMX/user-owned fragments, not standalone public screens; no private session was opened."
+    },
+    {
+      "route": "/healthz and /readyz",
+      "reason": "Operational endpoints, not UI pages."
+    }
+  ],
+  "live_deployment_revision_confirmation": "NOT_RUN: deployed source revision was not independently confirmed against the dirty source snapshot."
+}

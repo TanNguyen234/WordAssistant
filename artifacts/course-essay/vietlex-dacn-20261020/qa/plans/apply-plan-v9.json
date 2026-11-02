@@ -1,0 +1,1236 @@
+{
+  "version": 1,
+  "steps": [
+    {
+      "operation": "table.create",
+      "selector": {
+        "type": "text",
+        "text": "Để đối chiếu hai hợp đồng retrieval theo cấu hình, Bảng dưới đây tóm tắt thành phần và giới hạn được ghi nhận; bảng không so sánh hiệu năng."
+      },
+      "options": {
+        "rows": 3,
+        "columns": 3,
+        "data": [
+          [
+            "Hợp đồng",
+            "Thành phần ghi trong tài liệu",
+            "Giới hạn và bằng chứng"
+          ],
+          [
+            "V3 — USE_LEGACY_FREE_PIPELINE=false (mặc định config)",
+            "Vertex gemini-embedding-2 1024 chiều; Qdrant V3 dense + sparse IDF; trộn RRF/DBSF.",
+            "Snapshot 17/10/2026: 141.798 điểm / 14.962 document ID trên dataset 518.255 (~2,89%); không phải full corpus."
+          ],
+          [
+            "Legacy — USE_LEGACY_FREE_PIPELINE=true",
+            "Qdrant Cloud E5 384 chiều; Pinecone V1; SQLite FTS metadata; local content resolution/reranking.",
+            "Thiết kế lane full-corpus; count/quota/coverage remote chưa xác minh mới. Không có cross-fallback âm thầm."
+          ]
+        ],
+        "style": "Table Grid"
+      }
+    },
+    {
+      "operation": "caption.insert",
+      "selector": {
+        "type": "text",
+        "text": "Để đối chiếu hai hợp đồng retrieval theo cấu hình, Bảng dưới đây tóm tắt thành phần và giới hạn được ghi nhận; bảng không so sánh hiệu năng."
+      },
+      "options": {
+        "label": "BẢNG",
+        "title": "Hai hợp đồng retrieval và giới hạn snapshot được ghi nhận",
+        "sequence_id": "Bang",
+        "chapter_number": 5,
+        "caption_separator": "."
+      }
+    },
+    {
+      "operation": "table.create",
+      "selector": {
+        "type": "text",
+        "text": "Bảng dưới tách retrieval, answer và thử nghiệm mới để tránh trộn scope. Nhãn ngày/denominator phải được giữ khi trích số ra khỏi báo cáo."
+      },
+      "options": {
+        "rows": 8,
+        "columns": 3,
+        "data": [
+          [
+            "Chỉ số",
+            "Kết quả lưu",
+            "Phạm vi và giới hạn"
+          ],
+          [
+            "Document Recall@3",
+            "53/53",
+            "40 case / 53 evidence item có verified gold; snapshot 03/09/2026."
+          ],
+          [
+            "Article / Clause Recall@3",
+            "29/30; 13/14",
+            "Mẫu số theo cấp điều/khoản; không phải tỷ lệ câu trả lời đúng."
+          ],
+          [
+            "All-required coverage",
+            "39/40",
+            "10/50 case bị skip vì thiếu verified gold label."
+          ],
+          [
+            "Answer exact match / token F1",
+            "0/50; 0,2305",
+            "Golden-50 answer run ngày 03/09/2026; lịch sử, không chạy lại."
+          ],
+          [
+            "Citation precision / invalid rate",
+            "0,9183 / 0,0817",
+            "Quy tắc của answer run; không chứng minh citation hiện hành/đủ căn cứ."
+          ],
+          [
+            "RAGAs: faithfulness / accuracy / context precision / recall",
+            "0,8221 / 0,9100 / 0,8600 / 0,9500",
+            "Judge metrics trên answer run lịch sử; không phải human legal review."
+          ],
+          [
+            "Exploratory câu hỏi mới",
+            "0/2 full pass; 1 partial, 1 fail",
+            "Cập nhật 19/10/2026; mẫu rất nhỏ, không đại diện."
+          ]
+        ],
+        "style": "Table Grid"
+      }
+    },
+    {
+      "operation": "caption.insert",
+      "selector": {
+        "type": "text",
+        "text": "Bảng dưới tách retrieval, answer và thử nghiệm mới để tránh trộn scope. Nhãn ngày/denominator phải được giữ khi trích số ra khỏi báo cáo."
+      },
+      "options": {
+        "label": "BẢNG",
+        "title": "Chỉ số đánh giá đã lưu và phạm vi diễn giải",
+        "sequence_id": "Bang",
+        "chapter_number": 7,
+        "caption_separator": "."
+      }
+    },
+    {
+      "operation": "image.insert",
+      "selector": {
+        "type": "text",
+        "text": "Ở mức cao, VietLex chia thành bốn nhóm: hỏi đáp, tra cứu văn bản, hồ sơ nghiên cứu và quản trị. Nhóm hỏi đáp dùng màn hình / và action POST /chat. Nhóm tra cứu gồm /search, /legal-status và /documents/{document_id}. Nhóm hồ sơ có danh sách và chi tiết workspace; các lệnh tạo/lưu là action. Nhóm quản trị có view tổng quan và tài khoản; POST cập nhật trạng thái tài khoản là action riêng. Cách phân cấp này tương ứng mẫu phân rã mà người dùng gửi, nhưng nhãn được lấy từ route thật. Sơ đồ không liệt kê mọi API endpoint."
+      },
+      "options": {
+        "image_path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\assets\\uml\\01-screen-map.png",
+        "width_cm": 15.5,
+        "alt_text": "Sơ đồ phân cấp GET screen và POST action VietLex dựng từ route hiện tại; không phải runtime capture.",
+        "caption": "Phân cấp màn hình HTML và thao tác chính",
+        "caption_label": "HÌNH",
+        "caption_sequence": "Hinh",
+        "caption_chapter_number": 3,
+        "caption_separator": ".",
+        "alignment": "center",
+        "auto_shrink": true
+      }
+    },
+    {
+      "operation": "image.insert",
+      "selector": {
+        "type": "text",
+        "text": "Người tra cứu tìm văn bản theo số hiệu/tiêu đề hoặc nội dung, mở văn bản, xem sự kiện hiệu lực và gửi câu hỏi. Use case mở và đọc văn bản nối tự nhiên từ kết quả tìm kiếm nhưng có route GET độc lập. Người dùng đăng nhập làm việc với workspace để lưu nguồn và xem lại. Quản trị viên sử dụng màn hình quản trị. Ranh giới đăng nhập/quyền của từng route chưa được xác minh bằng phiên runtime nên sơ đồ use case mô tả vai trò ở mức chức năng, không khẳng định anonymous/role cụ thể cho mọi deployment."
+      },
+      "options": {
+        "image_path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\assets\\uml\\02-use-cases.png",
+        "width_cm": 13.5,
+        "alt_text": "Use case tra cứu, hỏi đáp, đọc văn bản, workspace và quản trị; mô hình từ route, không phải runtime capture.",
+        "caption": "Use case chính và ranh giới chức năng",
+        "caption_label": "HÌNH",
+        "caption_sequence": "Hinh",
+        "caption_chapter_number": 3,
+        "caption_separator": ".",
+        "alignment": "center",
+        "auto_shrink": true
+      }
+    },
+    {
+      "operation": "image.insert",
+      "selector": {
+        "type": "text",
+        "text": "Sơ đồ lớp rút gọn tập trung vào các quan hệ được khai báo trong source: outcome chứa evidence; retriever trả kết quả hoặc tạo evidence; article expansion chọn/thêm evidence. Sơ đồ không khẳng định quan hệ kế thừa chung nếu source không khai báo interface như vậy. Nó cũng không mô hình hóa collection/index như entity class vì đó là phần hạ tầng, không phải schema đối tượng nghiệp vụ hoàn chỉnh."
+      },
+      "options": {
+        "image_path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\assets\\uml\\05-retrieval-classes.png",
+        "width_cm": 15.0,
+        "alt_text": "Mô hình lớp rút gọn gồm EvidenceChunk, RetrievalOutcome, LegalRetriever, VertexQdrantRetriever và V3ArticleExpansion.",
+        "caption": "Mô hình lớp rút gọn của evidence retrieval",
+        "caption_label": "HÌNH",
+        "caption_sequence": "Hinh",
+        "caption_chapter_number": 4,
+        "caption_separator": ".",
+        "alignment": "center",
+        "auto_shrink": true
+      }
+    },
+    {
+      "operation": "image.insert",
+      "selector": {
+        "type": "text",
+        "text": "Một boolean cấu hình chọn một trong hai retrieval contract; không có cross-fallback âm thầm giữa hai contract theo tài liệu hiện hành. Với USE_LEGACY_FREE_PIPELINE=false (giá trị mặc định trong config), tuyến V3 dùng Vertex gemini-embedding-2 vector 1024 chiều và Qdrant V3, trộn RRF/DBSF. Với true, tuyến legacy dùng Qdrant Cloud inference multilingual E5 384 chiều, Pinecone V1, SQLite FTS cho số hiệu/tiêu đề và local content resolution. Config mặc định không phải bằng chứng về deployment hiện tại."
+      },
+      "options": {
+        "image_path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\assets\\uml\\04-retrieval-architecture.png",
+        "width_cm": 15.0,
+        "alt_text": "Sơ đồ thành phần cho hai contract retrieval được chọn bằng USE_LEGACY_FREE_PIPELINE; không khẳng định cấu hình production.",
+        "caption": "Kiến trúc retrieval theo hai cấu hình",
+        "caption_label": "HÌNH",
+        "caption_sequence": "Hinh",
+        "caption_chapter_number": 5,
+        "caption_separator": ".",
+        "alignment": "center",
+        "auto_shrink": true
+      }
+    },
+    {
+      "operation": "image.insert",
+      "selector": {
+        "type": "text",
+        "text": "Hình dưới đây tóm tắt các nhánh cache, retrieval, không có evidence, generation và lưu trace; các nhánh là mô tả code, không phải trace của một lần chạy mới."
+      },
+      "options": {
+        "image_path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\assets\\uml\\03-chat-sequence.png",
+        "width_cm": 15.0,
+        "alt_text": "Sequence diagram POST /chat với cache hit/miss, retrieval, nhánh no evidence, generation, output check và persistence.",
+        "caption": "Luồng POST /chat từ đầu vào đến trả HTML",
+        "caption_label": "HÌNH",
+        "caption_sequence": "Hinh",
+        "caption_chapter_number": 6,
+        "caption_separator": ".",
+        "alignment": "center",
+        "auto_shrink": true
+      }
+    },
+    {
+      "operation": "image.insert",
+      "selector": {
+        "type": "text",
+        "text": "Wireframe / giữ vùng hội thoại bên trái, trạng thái chào mừng ở vùng chính, lối tắt đến tra cứu/hồ sơ, note Nguồn tìm kiếm: Toàn bộ VietLex, ô nhập câu hỏi và nút Gửi câu hỏi. Các nhãn chính được đối chiếu với index.html/product_nav.html. Không có câu trả lời, văn bản, số liệu, tài khoản hay nguồn giả. Bản wireframe không mô phỏng một câu trả lời thật và không được dùng làm ảnh chụp runtime."
+      },
+      "options": {
+        "image_path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\assets\\wireframes\\wireframe-chat-home.png",
+        "width_cm": 15.0,
+        "alt_text": "Wireframe source-backed màn hình hỏi đáp GET /; không phải ảnh chụp runtime.",
+        "caption": "Wireframe màn hình hỏi đáp VietLex — dựng từ source",
+        "caption_label": "HÌNH",
+        "caption_sequence": "Hinh",
+        "caption_chapter_number": 6,
+        "caption_separator": ".",
+        "alignment": "center",
+        "auto_shrink": true
+      }
+    },
+    {
+      "operation": "image.insert",
+      "selector": {
+        "type": "text",
+        "text": "Wireframe /search vẽ phạm vi tìm kiếm, trường truy vấn, mốc đối chiếu sự kiện, bộ lọc loại văn bản/cơ quan/ngày, thứ tự sắp xếp và nút áp dụng/xóa bộ lọc. Thông báo Ngày ban hành không phải ngày hiệu lực và VietLex chưa xác minh tình trạng hiệu lực được giữ lại vì chúng tác động cách hiểu kết quả. Vùng kết quả để trống thay vì tự tạo một văn bản minh họa. Scope body chỉ hiển thị khi body coverage có trong context handler; đây là điều kiện hiển thị được ghi ở caption."
+      },
+      "options": {
+        "image_path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\assets\\wireframes\\wireframe-legal-search.png",
+        "width_cm": 15.0,
+        "alt_text": "Wireframe source-backed GET /search với filter; vùng kết quả để trống, không phải ảnh runtime.",
+        "caption": "Wireframe màn hình tìm văn bản — dựng từ source",
+        "caption_label": "HÌNH",
+        "caption_sequence": "Hinh",
+        "caption_chapter_number": 6,
+        "caption_separator": ".",
+        "alignment": "center",
+        "auto_shrink": true
+      }
+    },
+    {
+      "operation": "format.paragraph",
+      "selector": {
+        "type": "heading",
+        "text": "DANH MỤC HÌNH ẢNH"
+      },
+      "options": {
+        "page_break_before": false
+      }
+    },
+    {
+      "operation": "style.update",
+      "options": {
+        "name": "Heading 1",
+        "font_color": "000000",
+        "font_size_pt": 16,
+        "bold": true,
+        "font_family": "Times New Roman"
+      }
+    },
+    {
+      "operation": "style.update",
+      "options": {
+        "name": "Heading 2",
+        "font_color": "000000",
+        "font_size_pt": 14,
+        "bold": true,
+        "font_family": "Times New Roman"
+      }
+    },
+    {
+      "operation": "style.update",
+      "options": {
+        "name": "Heading 3",
+        "font_color": "000000",
+        "bold": true,
+        "font_family": "Times New Roman",
+        "font_size_pt": 13
+      }
+    },
+    {
+      "operation": "style.update",
+      "options": {
+        "name": "Caption",
+        "font_color": "000000",
+        "font_size_pt": 11,
+        "font_family": "Times New Roman",
+        "bold": true,
+        "italic": true
+      }
+    },
+    {
+      "operation": "table.create",
+      "selector": {
+        "type": "text",
+        "text": "Bảng capability và giới hạn dưới đây dựa trên route và handbook. “Source-defined” là đối chiếu tĩnh; quyền thực tế của từng vai trò và deployment cần runtime probe có tài khoản được cấp phép."
+      },
+      "options": {
+        "rows": 6,
+        "columns": 3,
+        "data": [
+          [
+            "Caller",
+            "Năng lực/identity được mô tả",
+            "Giới hạn và trạng thái"
+          ],
+          [
+            "Khách",
+            "Cookie client có chữ ký; tra cứu/đọc công khai theo giới hạn",
+            "Không suy ra workspace hoặc chat luôn khả dụng; tùy deployment"
+          ],
+          [
+            "Người dùng",
+            "Tài khoản/phiên; workspace và nguồn gắn owner",
+            "Mỗi thao tác cần đúng owner và chưa hết hạn"
+          ],
+          [
+            "Admin",
+            "Role admin; view và mutation quản trị",
+            "Mutation cần guard/CSRF/audit theo route"
+          ],
+          [
+            "Reviewer demo",
+            "Chế độ demo opt-in, có giới hạn",
+            "Không phải role reviewer hay quyền admin"
+          ],
+          [
+            "Người đánh giá nội bộ",
+            "CLI/offline harness; judge opt-in",
+            "Test/benchmark cần receipt riêng; không phải người dùng production"
+          ]
+        ],
+        "style": "Table Grid"
+      }
+    },
+    {
+      "operation": "caption.insert",
+      "selector": {
+        "type": "text",
+        "text": "Bảng capability và giới hạn dưới đây dựa trên route và handbook. “Source-defined” là đối chiếu tĩnh; quyền thực tế của từng vai trò và deployment cần runtime probe có tài khoản được cấp phép."
+      },
+      "options": {
+        "label": "BẢNG",
+        "title": "Vai trò và phạm vi năng lực trong source",
+        "sequence_id": "Bang",
+        "chapter_number": 2,
+        "caption_separator": "."
+      }
+    },
+    {
+      "operation": "table.create",
+      "selector": {
+        "type": "text",
+        "text": "Ma trận capability trình bày các nhóm quan trọng được nhận diện trong VietLex. “Có trong source” không có nghĩa đã nghiệm thu; luồng phụ thuộc Mongo, vector store, provider hoặc nguồn ngoài cần receipt ở đúng môi trường trước khi kết luận."
+      },
+      "options": {
+        "rows": 13,
+        "columns": 3,
+        "data": [
+          [
+            "ID",
+            "Năng lực/điểm vào",
+            "Bằng chứng source và giới hạn"
+          ],
+          [
+            "CAP-01",
+            "Hỏi đáp theo corpus hoặc document scope",
+            "POST /chat; retrieval/generation; runtime và legal quality NOT_RUN"
+          ],
+          [
+            "CAP-02",
+            "Tìm theo số hiệu/tiêu đề",
+            "GET /search metadata lane; không tìm body"
+          ],
+          [
+            "CAP-03",
+            "Tìm cụm từ trong body khi có coverage",
+            "GET /search body lane có điều kiện; không phải semantic retrieval"
+          ],
+          [
+            "CAP-04",
+            "Mở văn bản và section",
+            "GET /documents/{document_id}; backend/read availability chưa kiểm live"
+          ],
+          [
+            "CAP-05",
+            "Xem sự kiện registry theo mốc ngày",
+            "Không suy luận hiệu lực khi registry trống/chưa đủ"
+          ],
+          [
+            "CAP-06",
+            "Tạo/list/detail workspace",
+            "Owner scoped; persistence online-only tùy môi trường"
+          ],
+          [
+            "CAP-07",
+            "Upload, giữ original và đọc source",
+            "File/size/expiry guard; parse/OCR outcome cần kiểm riêng"
+          ],
+          [
+            "CAP-08",
+            "Ghim evidence và chạy analysis",
+            "Selected/compare/obligations/claim/timeline/redline; output chưa tự verified"
+          ],
+          [
+            "CAP-09",
+            "Đọc, replay và hủy nguồn chính thức",
+            "Tối đa 5 query/3 URL; PDF window; live sample partial"
+          ],
+          [
+            "CAP-10",
+            "Admin users, feedback, evaluation, registry",
+            "Role/CSRF/audit source; production role chưa chạy trong lượt này"
+          ],
+          [
+            "CAP-11",
+            "Session, trace và feedback",
+            "Record schema/route tồn tại; retention/completeness chưa runtime-verified"
+          ],
+          [
+            "CAP-12",
+            "Offline evaluation và metric report",
+            "Có historical receipts; không có benchmark mới trong lượt này"
+          ]
+        ],
+        "style": "Table Grid"
+      }
+    },
+    {
+      "operation": "caption.insert",
+      "selector": {
+        "type": "text",
+        "text": "Ma trận capability trình bày các nhóm quan trọng được nhận diện trong VietLex. “Có trong source” không có nghĩa đã nghiệm thu; luồng phụ thuộc Mongo, vector store, provider hoặc nguồn ngoài cần receipt ở đúng môi trường trước khi kết luận."
+      },
+      "options": {
+        "label": "BẢNG",
+        "title": "Capability nội bộ tái dựng từ source và giới hạn nghiệm thu",
+        "sequence_id": "Bang",
+        "chapter_number": 2,
+        "caption_separator": "."
+      }
+    },
+    {
+      "operation": "table.create",
+      "selector": {
+        "type": "text",
+        "text": "Bảng tóm tắt use case và kết quả thay thế dưới đây giúp thấy các nhánh cần kiểm thử trước khi đọc đặc tả từng luồng."
+      },
+      "options": {
+        "rows": 7,
+        "columns": 3,
+        "data": [
+          [
+            "Use case",
+            "Mục tiêu chính",
+            "Nhánh thay thế cần kiểm"
+          ],
+          [
+            "UC-01",
+            "Tìm metadata/body, mở văn bản",
+            "No result, body unavailable, reader 404/service error"
+          ],
+          [
+            "UC-02",
+            "Đặt câu hỏi với scope và citation",
+            "Cache, blocked input/output, no evidence, technical error"
+          ],
+          [
+            "UC-03",
+            "Tạo workspace và đưa tài liệu vào",
+            "Sai owner/expiry, file lỗi/quá giới hạn, persistence lỗi"
+          ],
+          [
+            "UC-04",
+            "Ghim nguồn và chạy structured analysis",
+            "Không có nguồn, output lỗi schema, nguồn partial/expired"
+          ],
+          [
+            "UC-05",
+            "Đọc official source, replay, cancel",
+            "Timeout, partial, foreign owner, terminal run, cancel ack"
+          ],
+          [
+            "UC-06",
+            "Admin review/registry",
+            "Unauthorized, CSRF fail, service/audit unavailable"
+          ]
+        ],
+        "style": "Table Grid"
+      }
+    },
+    {
+      "operation": "caption.insert",
+      "selector": {
+        "type": "text",
+        "text": "Bảng tóm tắt use case và kết quả thay thế dưới đây giúp thấy các nhánh cần kiểm thử trước khi đọc đặc tả từng luồng."
+      },
+      "options": {
+        "label": "BẢNG",
+        "title": "Use case chính, route và nhánh thay thế",
+        "sequence_id": "Bang",
+        "chapter_number": 3,
+        "caption_separator": "."
+      }
+    },
+    {
+      "operation": "table.create",
+      "selector": {
+        "type": "text",
+        "text": "Bảng trách nhiệm object sau phân biệt value object trong memory, stage trace, orchestration service và store; nó không xem collection/index như class nghiệp vụ nếu không có entity declaration tương ứng."
+      },
+      "options": {
+        "rows": 8,
+        "columns": 3,
+        "data": [
+          [
+            "Đối tượng/thành phần",
+            "Trách nhiệm trong luồng",
+            "Dữ liệu/ranh giới"
+          ],
+          [
+            "EvidenceChunk",
+            "Đơn vị evidence dùng cho context",
+            "ID, citation, text, heading/article/clause, hash tùy chọn"
+          ],
+          [
+            "StageCandidate",
+            "Ứng viên xếp hạng ở một stage",
+            "Document identity, text, score và source"
+          ],
+          [
+            "RetrievalStageTrace",
+            "Ghi candidate survival theo stage",
+            "Trace của retrieval; không phải ground truth"
+          ],
+          [
+            "RetrievalOutcome",
+            "Kết quả retrieval và diagnostics",
+            "Evidence, latency, status, diagnostics/error"
+          ],
+          [
+            "VertexQdrantRetriever",
+            "Query V3, validate payload, map evidence",
+            "Không khẳng định config live/production"
+          ],
+          [
+            "V3ArticleExpansion",
+            "Mở rộng evidence theo nội dung tài liệu",
+            "Hash check; phụ thuộc content source"
+          ],
+          [
+            "research_workspaces record",
+            "Record Mongo theo owner/expiry",
+            "Document schema; không phải lớp ORM/class diagram"
+          ]
+        ],
+        "style": "Table Grid"
+      }
+    },
+    {
+      "operation": "caption.insert",
+      "selector": {
+        "type": "text",
+        "text": "Bảng trách nhiệm object sau phân biệt value object trong memory, stage trace, orchestration service và store; nó không xem collection/index như class nghiệp vụ nếu không có entity declaration tương ứng."
+      },
+      "options": {
+        "label": "BẢNG",
+        "title": "Trách nhiệm các đối tượng và thành phần chính",
+        "sequence_id": "Bang",
+        "chapter_number": 4,
+        "caption_separator": "."
+      }
+    },
+    {
+      "operation": "table.create",
+      "selector": {
+        "type": "text",
+        "text": "VietLex dùng nhiều store vì mỗi nơi phục vụ loại dữ liệu và hợp đồng truy vấn khác nhau. Bảng dưới nêu vai trò, độ phủ biết được và điều không thể suy ra từ code/receipt, để tránh gọi một index là nguồn chân lý cho mọi tác vụ."
+      },
+      "options": {
+        "rows": 7,
+        "columns": 3,
+        "data": [
+          [
+            "Kho/lane",
+            "Vai trò và bằng chứng được ghi nhận",
+            "Giới hạn diễn giải"
+          ],
+          [
+            "Pinned metadata / Parquet",
+            "Danh mục nguồn 518.255 tài liệu trong snapshot.",
+            "Tồn tại trong inventory không chứng minh nội dung đã nạp vào từng index."
+          ],
+          [
+            "Supabase metadata và Qdrant body search",
+            "Receipt capacity-r2 ghi cùng tập 14.962 document ID; V3 có 141.798 điểm.",
+            "Khoảng 2,89% inventory; parity của tập ID không chứng minh đầy đủ/chính xác pháp lý."
+          ],
+          [
+            "Qdrant V3",
+            "Dense Vertex 1024 chiều + sparse IDF; hợp nhất RRF/DBSF theo contract.",
+            "Đây là cấu hình và receipt có ngày; không xác nhận config production hiện tại."
+          ],
+          [
+            "Pinecone V1 + SQLite FTS",
+            "Lane legacy: Pinecone semantic, SQLite FTS metadata và local content resolution.",
+            "Lane thiết kế không đồng nghĩa remote index hiện còn đúng coverage/quota."
+          ],
+          [
+            "SQLite/Zstd content store",
+            "Giải quyết nội dung cục bộ và phục vụ nhánh legacy/expansion theo hợp đồng.",
+            "Hash/khả dụng phải được kiểm tại đúng snapshot; không thay nguồn văn bản gốc."
+          ],
+          [
+            "Mongo workspace/run/event",
+            "Lưu hồ sơ, run và event theo owner; cấu hình retention/TTL.",
+            "TTL bất đồng bộ; cấu hình 30 ngày không phải bằng chứng mọi bản sao đã bị xóa đúng hạn."
+          ]
+        ],
+        "style": "Table Grid"
+      }
+    },
+    {
+      "operation": "caption.insert",
+      "selector": {
+        "type": "text",
+        "text": "VietLex dùng nhiều store vì mỗi nơi phục vụ loại dữ liệu và hợp đồng truy vấn khác nhau. Bảng dưới nêu vai trò, độ phủ biết được và điều không thể suy ra từ code/receipt, để tránh gọi một index là nguồn chân lý cho mọi tác vụ."
+      },
+      "options": {
+        "label": "BẢNG",
+        "title": "Vai trò kho dữ liệu, chỉ mục và giới hạn độ phủ",
+        "sequence_id": "Bang",
+        "chapter_number": 5,
+        "caption_separator": "."
+      }
+    },
+    {
+      "operation": "table.create",
+      "selector": {
+        "type": "text",
+        "text": "Bảng sau đối chiếu các GET view trong screen inventory với task và giới hạn diễn giải. Bảng không liệt kê toàn bộ API/POST; endpoint tạo/sửa dữ liệu là action riêng, không phải màn hình mới."
+      },
+      "options": {
+        "rows": 7,
+        "columns": 3,
+        "data": [
+          [
+            "Nhóm / màn hình",
+            "Route và view",
+            "Giới hạn/điều kiện"
+          ],
+          [
+            "Hỏi đáp",
+            "GET / → index.html",
+            "POST /chat là action; trạng thái hội thoại cần phiên runtime để chụp."
+          ],
+          [
+            "Tra cứu văn bản",
+            "GET /search → legal_search.html",
+            "Body scope chỉ hiện khi có coverage; metadata và body là hai lane."
+          ],
+          [
+            "Đọc văn bản",
+            "GET /documents/{document_id} → legal_document.html",
+            "Không đưa ID hay dữ liệu văn bản hiện hành giả vào wireframe."
+          ],
+          [
+            "Tra cứu hiệu lực",
+            "GET /legal-status → registry view",
+            "Sự kiện được review mới hiển thị; vắng sự kiện không chứng minh còn hiệu lực."
+          ],
+          [
+            "Hồ sơ nghiên cứu",
+            "GET /workspaces; GET /workspaces/{workspace_id}",
+            "View source-backed; quyền owner/persistence live chưa được kiểm trong lượt này."
+          ],
+          [
+            "Quản trị",
+            "GET /admin; GET /admin/users",
+            "Hai view; POST đổi trạng thái tài khoản là action, chưa kiểm quyền runtime."
+          ]
+        ],
+        "style": "Table Grid"
+      }
+    },
+    {
+      "operation": "caption.insert",
+      "selector": {
+        "type": "text",
+        "text": "Bảng sau đối chiếu các GET view trong screen inventory với task và giới hạn diễn giải. Bảng không liệt kê toàn bộ API/POST; endpoint tạo/sửa dữ liệu là action riêng, không phải màn hình mới."
+      },
+      "options": {
+        "label": "BẢNG",
+        "title": "Màn hình, route GET và ranh giới quan sát",
+        "sequence_id": "Bang",
+        "chapter_number": 6,
+        "caption_separator": "."
+      }
+    },
+    {
+      "operation": "table.create",
+      "selector": {
+        "type": "text",
+        "text": "Bảng dưới tổng hợp bằng chứng có ngày, kết luận hỗ trợ và giới hạn. Cột “không chứng minh” ngăn người đọc trích một PASS thành “VietLex đúng luật” hoặc “đã sẵn sàng nộp”."
+      },
+      "options": {
+        "rows": 8,
+        "columns": 3,
+        "data": [
+          [
+            "Receipt / thời điểm",
+            "Kết quả có thể trích",
+            "Không chứng minh"
+          ],
+          [
+            "Capacity-r2, 17/10/2026",
+            "141.798 điểm / 14.962 ID; Supabase và body-search cùng tập ID.",
+            "Không chứng minh full-corpus, freshness hay chất lượng câu trả lời."
+          ],
+          [
+            "Golden-50 retrieval, 03/09/2026",
+            "Recall@3: document 53/53, article 29/30, clause 13/14, all-required 39/40; 10/50 skip.",
+            "Mẫu lịch sử; mẫu số khác nhau; không đánh đồng với answer accuracy."
+          ],
+          [
+            "Golden-50 answer, 03/09/2026",
+            "EM 0/50; token F1 0,2305; citation precision 0,9183; invalid rate 0,0817.",
+            "Không phải human legal review; không xác nhận luật còn hiệu lực."
+          ],
+          [
+            "Production role probe, 18/10/2026",
+            "90/90 checks, 74 requests, hai tài khoản thử; ba chat tự nhiên không full legal-quality pass.",
+            "Không đại diện người dùng thật; có synthetic workspace/file."
+          ],
+          [
+            "Natural task sample, cập nhật trong handbook",
+            "0/2 full pass; một partial, một fail.",
+            "Cỡ mẫu nhỏ; không suy rộng thống kê."
+          ],
+          [
+            "Provider-free suite, follow-up 19/10/2026",
+            "1.715 passed, 1 skipped, 6 deselected; source unchanged trong receipt.",
+            "Không chạy lại trong lượt này; không chứng minh runtime production hay chất lượng luật."
+          ],
+          [
+            "Official PDF read/replay, 18/10/2026",
+            "Hai PDF được lưu/đọc lại theo hash; trạng thái partial, discovery timeout.",
+            "Không chứng minh nội dung luật hiện hành; cancel follow-up có receipt riêng."
+          ]
+        ],
+        "style": "Table Grid"
+      }
+    },
+    {
+      "operation": "caption.insert",
+      "selector": {
+        "type": "text",
+        "text": "Bảng dưới tổng hợp bằng chứng có ngày, kết luận hỗ trợ và giới hạn. Cột “không chứng minh” ngăn người đọc trích một PASS thành “VietLex đúng luật” hoặc “đã sẵn sàng nộp”."
+      },
+      "options": {
+        "label": "BẢNG",
+        "title": "Bằng chứng dự án đã lưu và giới hạn kết luận",
+        "sequence_id": "Bang",
+        "chapter_number": 7,
+        "caption_separator": "."
+      }
+    },
+    {
+      "operation": "table.create",
+      "selector": {
+        "type": "text",
+        "text": "Bảng rủi ro xếp mức theo hậu quả với người dùng và evidence hiện có, không phải FMEA định lượng. Ưu tiên cao phản ánh nguy cơ sai văn bản/điều, coverage thiếu, citation invalid và dùng dữ liệu chưa xác nhận hiện hành. Biện pháp là đề xuất, chưa có nghĩa đã triển khai."
+      },
+      "options": {
+        "rows": 8,
+        "columns": 3,
+        "data": [
+          [
+            "Rủi ro",
+            "Cơ sở hiện có",
+            "Biện pháp đề xuất / trạng thái"
+          ],
+          [
+            "Trích sai hoặc thiếu điều khoản",
+            "Answer EM 0/50; answer benchmark lịch sử có invalid citation 0,0817.",
+            "Đánh giá theo từng claim và nguồn; bắt buộc kiểm người trước khi dùng pháp lý."
+          ],
+          [
+            "Thiếu độ phủ corpus",
+            "V3 snapshot 14.962/518.255 tài liệu (~2,89%).",
+            "Đặt gate coverage có mẫu độc lập trước khi nới scope; hiện capacity mở rộng còn blocked."
+          ],
+          [
+            "Hiểu nhầm hiệu lực văn bản",
+            "Registry chỉ có event đã review; nguồn mới có thể thiếu amendment.",
+            "Hiển thị thời điểm/nguồn và trạng thái unknown; xác minh nguồn chính thức theo câu hỏi."
+          ],
+          [
+            "Mất provenance khi mở rộng evidence",
+            "Có hash-check trong expansion; retrieval còn nhiều lane và stage.",
+            "Giữ document ID, hash, citation anchor, revision và trace qua từng stage."
+          ],
+          [
+            "Rò rỉ hoặc truy cập chéo workspace",
+            "Source khai báo owner scope, CSRF và expiry; probe chỉ xác nhận lát hẹp.",
+            "Kiểm quyền theo role/owner ở mọi route và thao tác; theo dõi audit event."
+          ],
+          [
+            "Dữ liệu tồn tại lâu hơn kỳ vọng",
+            "TTL Mongo không đồng bộ; cấu hình retention là 30 ngày.",
+            "Đo thời điểm xóa vật lý ở từng store/backup; công bố retention theo loại dữ liệu."
+          ],
+          [
+            "Timeout official-source read",
+            "Probe PDF/nguồn công khai có partial và timeout.",
+            "Giữ partial/error rõ; bounded retries; đo latency và cancel riêng, không trả partial như kết quả đầy đủ."
+          ]
+        ],
+        "style": "Table Grid"
+      }
+    },
+    {
+      "operation": "caption.insert",
+      "selector": {
+        "type": "text",
+        "text": "Bảng rủi ro xếp mức theo hậu quả với người dùng và evidence hiện có, không phải FMEA định lượng. Ưu tiên cao phản ánh nguy cơ sai văn bản/điều, coverage thiếu, citation invalid và dùng dữ liệu chưa xác nhận hiện hành. Biện pháp là đề xuất, chưa có nghĩa đã triển khai."
+      },
+      "options": {
+        "label": "BẢNG",
+        "title": "Rủi ro trọng yếu, bằng chứng và biện pháp đề xuất",
+        "sequence_id": "Bang",
+        "chapter_number": 7,
+        "caption_separator": "."
+      }
+    },
+    {
+      "operation": "table.create",
+      "selector": {
+        "type": "text",
+        "text": "Bảng dưới gom claim trọng yếu, nguồn support và giới hạn. Claim khác được tra trong claim-evidence.csv và source manifest."
+      },
+      "options": {
+        "rows": 9,
+        "columns": 4,
+        "data": [
+          [
+            "Claim ID",
+            "Claim được hỗ trợ",
+            "Nguồn/định vị",
+            "Giới hạn"
+          ],
+          [
+            "PROJECT-HOME / SEARCH",
+            "Route GET phục vụ view và điều kiện scope được gắn ở handler.",
+            "app/main.py; app/api/legal_routes.py; source manifest.",
+            "Kiểm source tĩnh; chưa xác nhận deployment."
+          ],
+          [
+            "PROJECT-CHAT-ROUTE",
+            "POST /chat có kiểm input, cache có điều kiện, RAG, output check và persistence.",
+            "app/api/routes.py; source manifest.",
+            "Không phải trace của request mới."
+          ],
+          [
+            "PROJECT-RAG-PIPELINE",
+            "Pipeline điều phối retrieval/evidence/context và nhánh generation.",
+            "app/services/rag_pipeline.py; source manifest.",
+            "Code path không đo chất lượng thực tế."
+          ],
+          [
+            "PROJECT-RETRIEVAL / V3",
+            "Có hai contract retrieval và đường hợp nhất V3 theo source/config.",
+            "retrieval.py; vertex_qdrant_retrieval.py; CURRENT_ARCHITECTURE.md.",
+            "Config không xác nhận lane production đang chạy."
+          ],
+          [
+            "PROJECT-EVALUATION",
+            "Các metric có ngày, denominator và giới hạn được ghi trong status.",
+            "docs/evaluation/CURRENT_STATUS.md.",
+            "Kết quả lịch sử; không được gọi là đánh giá mới."
+          ],
+          [
+            "PROJECT-OPS-STATUS",
+            "Có receipt đã ngày cho reader PDF, production role, natural sample và suite.",
+            "docs/handbook/09-operations-and-evaluation.md:16-22,53,65,69.",
+            "Receipt có giới hạn; không đại diện mọi deployment/chất lượng luật."
+          ],
+          [
+            "doi-10-18653-v1-2025-nllp-1-3",
+            "Bài nghiên cứu mô tả lỗi retrieval legal RAG và chiến lược chunking trong corpus của tác giả.",
+            "Reuter et al. (2025), trang 1; bibliography entry generated from this evidence ID.",
+            "Không chuyển kết quả nghiên cứu sang VietLex."
+          ],
+          [
+            "doi-10-18653-v1-2024-nllp-1-14",
+            "Bài nghiên cứu khảo sát cách đo groundedness trong legal QA trên bộ dữ liệu của tác giả.",
+            "Trautmann et al. (2024), trang 1; bibliography entry generated from this evidence ID.",
+            "Không thay cho đánh giá pháp lý của VietLex."
+          ]
+        ],
+        "style": "Table Grid"
+      }
+    },
+    {
+      "operation": "caption.insert",
+      "selector": {
+        "type": "text",
+        "text": "Bảng dưới gom claim trọng yếu, nguồn support và giới hạn. Claim khác được tra trong claim-evidence.csv và source manifest."
+      },
+      "options": {
+        "label": "BẢNG",
+        "title": "Claim trọng yếu và đường truy vết evidence",
+        "sequence_id": "Bang",
+        "caption_separator": "."
+      }
+    },
+    {
+      "operation": "table.create",
+      "selector": {
+        "type": "text",
+        "text": "Ma trận asset sau lấy caption cuối của DOCX sau khi cập nhật Word fields. Đường dẫn là file nguồn; source-reviewed không đồng nghĩa runtime-tested."
+      },
+      "options": {
+        "rows": 7,
+        "columns": 3,
+        "data": [
+          [
+            "ID",
+            "Nội dung",
+            "Loại và trạng thái"
+          ],
+          [
+            "F01–F02",
+            "Phân cấp màn hình; use case",
+            "Mô hình source-derived; không phải runtime screenshot."
+          ],
+          [
+            "F03",
+            "Sequence POST /chat",
+            "Luồng theo route/service; không phải trace runtime."
+          ],
+          [
+            "F04–F05",
+            "Hai retrieval contract; mô hình lớp evidence",
+            "Sơ đồ UML rút gọn theo source/config."
+          ],
+          [
+            "F06–F07",
+            "Wireframe hỏi đáp và tìm văn bản",
+            "Wireframe cấu trúc theo template; không có dữ liệu giả."
+          ],
+          [
+            "F08",
+            "Pipeline nạp dữ liệu và tạo chỉ mục",
+            "Source-derived; phân biệt inventory, content và index coverage."
+          ],
+          [
+            "F09",
+            "Official-source read, persistence và cancel",
+            "Sequence theo handbook/source; không phải execution trace."
+          ]
+        ],
+        "style": "Table Grid"
+      }
+    },
+    {
+      "operation": "caption.insert",
+      "selector": {
+        "type": "text",
+        "text": "Ma trận asset sau lấy caption cuối của DOCX sau khi cập nhật Word fields. Đường dẫn là file nguồn; source-reviewed không đồng nghĩa runtime-tested."
+      },
+      "options": {
+        "label": "BẢNG",
+        "title": "Sơ đồ và wireframe được dùng trong báo cáo",
+        "sequence_id": "Bang",
+        "caption_separator": "."
+      }
+    },
+    {
+      "operation": "table.create",
+      "selector": {
+        "type": "text",
+        "text": "“Đã kiểm chứng” cần nêu loại evidence và thời điểm. Bảng này phân biệt code, test, probe, benchmark và human review để tránh kế thừa một PASS sang phạm vi chưa kiểm."
+      },
+      "options": {
+        "rows": 9,
+        "columns": 3,
+        "data": [
+          [
+            "Thuật ngữ",
+            "Ý nghĩa trong báo cáo",
+            "Không được diễn giải thành"
+          ],
+          [
+            "Recall@k",
+            "Tỷ lệ gold item xuất hiện trong top-k theo đơn vị được nêu.",
+            "Tỷ lệ câu trả lời đúng hoặc độ phủ toàn corpus."
+          ],
+          [
+            "All-required coverage",
+            "Tỷ lệ case có đủ evidence bắt buộc theo gold label.",
+            "Độ chính xác pháp lý của câu trả lời."
+          ],
+          [
+            "Exact match (EM)",
+            "So khớp chuỗi chuẩn hóa với câu trả lời tham chiếu.",
+            "Thước đo đầy đủ cho paraphrase/đúng luật."
+          ],
+          [
+            "Token F1",
+            "Chồng lấp token giữa response và reference.",
+            "Đánh giá thẩm định nội dung bởi luật sư."
+          ],
+          [
+            "Citation precision / invalid rate",
+            "Độ hợp lệ của citation theo validator của benchmark.",
+            "Hiệu lực văn bản hoặc mức đủ căn cứ cho mọi claim."
+          ],
+          [
+            "RAGAs faithfulness",
+            "Điểm judge về mức câu trả lời bám context được cung cấp.",
+            "Ground truth pháp lý hay human legal review."
+          ],
+          [
+            "Source-reviewed",
+            "Một excerpt cụ thể đã được đối chiếu với claim và người review ghi nhận.",
+            "Xác nhận mọi kết luận hay xác nhận không đạo văn."
+          ],
+          [
+            "Runtime-probed",
+            "Một môi trường/route/role cụ thể đã có probe receipt.",
+            "Đại diện mọi role, deployment hoặc chất lượng pháp lý."
+          ]
+        ],
+        "style": "Table Grid"
+      }
+    },
+    {
+      "operation": "caption.insert",
+      "selector": {
+        "type": "text",
+        "text": "“Đã kiểm chứng” cần nêu loại evidence và thời điểm. Bảng này phân biệt code, test, probe, benchmark và human review để tránh kế thừa một PASS sang phạm vi chưa kiểm."
+      },
+      "options": {
+        "label": "BẢNG",
+        "title": "Thuật ngữ chỉ số và trạng thái bằng chứng",
+        "sequence_id": "Bang",
+        "caption_separator": "."
+      }
+    },
+    {
+      "operation": "image.insert",
+      "selector": {
+        "type": "text",
+        "text": "Hình dưới đây phân biệt bước kiểm/join nguồn với các nhánh tạo content store, FTS và vector lane; đây là flow source-derived, không phải receipt của một lần nạp mới."
+      },
+      "options": {
+        "image_path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\assets\\uml\\06-ingestion-dataflow.png",
+        "width_cm": 13.0,
+        "alt_text": "Sơ đồ pipeline nguồn Parquet, validate/join, content store, FTS và các vector lane theo source VietLex.",
+        "caption": "Luồng nạp dữ liệu VietLex và tạo các chỉ mục",
+        "caption_label": "HÌNH",
+        "caption_sequence": "Hinh",
+        "caption_chapter_number": 5,
+        "caption_separator": ".",
+        "alignment": "center",
+        "auto_shrink": true
+      }
+    },
+    {
+      "operation": "image.insert",
+      "selector": {
+        "type": "text",
+        "text": "Sơ đồ sequence dưới đây làm rõ owner/CSRF, event persistence trước NDJSON, giới hạn đọc PDF và semantics của cancel; đây là mô hình từ source/handbook, không phải trace runtime mới."
+      },
+      "options": {
+        "image_path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\assets\\uml\\07-official-source-read-sequence.png",
+        "width_cm": 15.0,
+        "alt_text": "Sequence diagram đọc nguồn chính thức trong workspace, gồm owner/CSRF, giới hạn PDF, event trước NDJSON và cancel.",
+        "caption": "Luồng đọc nguồn chính thức và hủy run trong workspace",
+        "caption_label": "HÌNH",
+        "caption_sequence": "Hinh",
+        "caption_chapter_number": 6,
+        "caption_separator": ".",
+        "alignment": "center",
+        "auto_shrink": true
+      }
+    },
+    {
+      "operation": "table.layout",
+      "options": {
+        "table_index": 2,
+        "width_cm": 15.5,
+        "style": "Table Grid",
+        "repeat_header": true,
+        "keep_rows_together": true
+      }
+    },
+    {
+      "operation": "table.layout",
+      "options": {
+        "table_index": 3,
+        "width_cm": 15.5,
+        "style": "Table Grid",
+        "repeat_header": true,
+        "keep_rows_together": true
+      }
+    },
+    {
+      "operation": "table.layout",
+      "options": {
+        "table_index": 4,
+        "width_cm": 15.5,
+        "style": "Table Grid",
+        "repeat_header": true,
+        "keep_rows_together": true
+      }
+    },
+    {
+      "operation": "table.layout",
+      "options": {
+        "table_index": 5,
+        "width_cm": 15.5,
+        "style": "Table Grid",
+        "repeat_header": true,
+        "keep_rows_together": true
+      }
+    },
+    {
+      "operation": "table.layout",
+      "options": {
+        "table_index": 6,
+        "width_cm": 15.5,
+        "style": "Table Grid",
+        "repeat_header": true,
+        "keep_rows_together": true
+      }
+    },
+    {
+      "operation": "table.layout",
+      "options": {
+        "table_index": 7,
+        "width_cm": 15.5,
+        "style": "Table Grid",
+        "repeat_header": true,
+        "keep_rows_together": true
+      }
+    },
+    {
+      "operation": "table.layout",
+      "options": {
+        "table_index": 8,
+        "width_cm": 15.5,
+        "style": "Table Grid",
+        "repeat_header": true,
+        "keep_rows_together": true
+      }
+    },
+    {
+      "operation": "table.layout",
+      "options": {
+        "table_index": 9,
+        "width_cm": 15.5,
+        "style": "Table Grid",
+        "repeat_header": true,
+        "keep_rows_together": true
+      }
+    },
+    {
+      "operation": "table.layout",
+      "options": {
+        "table_index": 10,
+        "width_cm": 15.5,
+        "style": "Table Grid",
+        "repeat_header": true,
+        "keep_rows_together": true
+      }
+    },
+    {
+      "operation": "table.layout",
+      "options": {
+        "table_index": 11,
+        "width_cm": 15.5,
+        "style": "Table Grid",
+        "repeat_header": true,
+        "keep_rows_together": true
+      }
+    },
+    {
+      "operation": "table.layout",
+      "options": {
+        "table_index": 12,
+        "width_cm": 15.5,
+        "style": "Table Grid",
+        "repeat_header": true,
+        "keep_rows_together": true
+      }
+    },
+    {
+      "operation": "table.layout",
+      "options": {
+        "table_index": 13,
+        "width_cm": 15.5,
+        "style": "Table Grid",
+        "repeat_header": true,
+        "keep_rows_together": true
+      }
+    },
+    {
+      "operation": "table.layout",
+      "options": {
+        "table_index": 14,
+        "width_cm": 15.5,
+        "style": "Table Grid",
+        "repeat_header": true,
+        "keep_rows_together": true
+      }
+    },
+    {
+      "operation": "style.update",
+      "options": {
+        "name": "Normal",
+        "font_family": "Times New Roman",
+        "font_size_pt": 13,
+        "font_color": "000000"
+      }
+    }
+  ]
+}

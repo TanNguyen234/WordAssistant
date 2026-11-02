@@ -1,0 +1,1173 @@
+{
+  "schema_version": 1,
+  "input_sha256": "5bc0d4163e514a506056332b236e4605a60addd316990e04cec0e25a6c2322cb",
+  "scope_start": "MỞ ĐẦU",
+  "scope_end": "PHỤ LỤC A. MA TRẬN YÊU CẦU VÀ BẰNG CHỨNG",
+  "first_line_indent_cm": 1,
+  "glossary": [
+    {
+      "find": "official-source read",
+      "replace": "đọc nguồn chính thức"
+    },
+    {
+      "find": "official source",
+      "replace": "nguồn chính thức"
+    },
+    {
+      "find": "source URL",
+      "replace": "địa chỉ nguồn"
+    },
+    {
+      "find": "source snapshot",
+      "replace": "bản mã nguồn khảo sát"
+    },
+    {
+      "find": "code snapshot",
+      "replace": "bản mã nguồn khảo sát"
+    },
+    {
+      "find": "source-backed",
+      "replace": "được đối chiếu với mã nguồn"
+    },
+    {
+      "find": "source/config",
+      "replace": "mã nguồn và cấu hình"
+    },
+    {
+      "find": "source/receipt",
+      "replace": "mã nguồn và biên bản kiểm tra"
+    },
+    {
+      "find": "source/route",
+      "replace": "mã nguồn và tuyến xử lý"
+    },
+    {
+      "find": "code path",
+      "replace": "nhánh xử lý"
+    },
+    {
+      "find": "working tree dirty",
+      "replace": "cây mã nguồn có thay đổi chưa ghi nhận thành phiên bản"
+    },
+    {
+      "find": "working tree",
+      "replace": "cây mã nguồn đang khảo sát"
+    },
+    {
+      "find": "provider-free",
+      "replace": "không gọi dịch vụ mô hình"
+    },
+    {
+      "find": "cache hit",
+      "replace": "tìm thấy trong bộ nhớ đệm"
+    },
+    {
+      "find": "cache miss",
+      "replace": "không tìm thấy trong bộ nhớ đệm"
+    },
+    {
+      "find": "semantic cache",
+      "replace": "bộ nhớ đệm ngữ nghĩa"
+    },
+    {
+      "find": "human review",
+      "replace": "đánh giá của người có chuyên môn"
+    },
+    {
+      "find": "human rubric review",
+      "replace": "xác nhận tiêu chí của người phụ trách"
+    },
+    {
+      "find": "submission readiness",
+      "replace": "điều kiện nộp bài"
+    },
+    {
+      "find": "legal-quality acceptance",
+      "replace": "nghiệm thu chất lượng pháp lý"
+    },
+    {
+      "find": "value object",
+      "replace": "đối tượng giá trị"
+    },
+    {
+      "find": "evidence registry",
+      "replace": "danh mục chứng cứ"
+    },
+    {
+      "find": "source record",
+      "replace": "bản ghi nguồn"
+    },
+    {
+      "find": "source",
+      "replace": "mã nguồn"
+    },
+    {
+      "find": "Source",
+      "replace": "Mã nguồn"
+    },
+    {
+      "find": "code",
+      "replace": "mã chương trình"
+    },
+    {
+      "find": "evidence",
+      "replace": "đoạn căn cứ"
+    },
+    {
+      "find": "retrieval",
+      "replace": "truy xuất"
+    },
+    {
+      "find": "generation",
+      "replace": "sinh câu trả lời"
+    },
+    {
+      "find": "runtime",
+      "replace": "môi trường chạy"
+    },
+    {
+      "find": "receipt",
+      "replace": "biên bản kiểm tra"
+    },
+    {
+      "find": "stage",
+      "replace": "bước xử lý"
+    },
+    {
+      "find": "lane",
+      "replace": "nhánh truy xuất"
+    },
+    {
+      "find": "contract",
+      "replace": "đặc tả"
+    },
+    {
+      "find": "context",
+      "replace": "ngữ cảnh"
+    },
+    {
+      "find": "benchmark",
+      "replace": "bộ đánh giá"
+    },
+    {
+      "find": "coverage",
+      "replace": "độ bao phủ"
+    },
+    {
+      "find": "provider",
+      "replace": "dịch vụ mô hình"
+    },
+    {
+      "find": "guardrail",
+      "replace": "cơ chế kiểm soát an toàn"
+    },
+    {
+      "find": "redaction",
+      "replace": "che dữ liệu nhạy cảm"
+    },
+    {
+      "find": "citation",
+      "replace": "trích dẫn"
+    },
+    {
+      "find": "metadata",
+      "replace": "thông tin mô tả"
+    },
+    {
+      "find": "schema",
+      "replace": "cấu trúc dữ liệu"
+    },
+    {
+      "find": "invariant",
+      "replace": "điều kiện bất biến"
+    },
+    {
+      "find": "production",
+      "replace": "môi trường triển khai thực tế"
+    },
+    {
+      "find": "config",
+      "replace": "cấu hình"
+    },
+    {
+      "find": "trace",
+      "replace": "dấu vết xử lý"
+    },
+    {
+      "find": "replay",
+      "replace": "phục hồi kết quả"
+    },
+    {
+      "find": "cache",
+      "replace": "bộ nhớ đệm"
+    },
+    {
+      "find": "scope",
+      "replace": "phạm vi"
+    },
+    {
+      "find": "run",
+      "replace": "lượt thực hiện"
+    },
+    {
+      "find": "handler",
+      "replace": "hàm xử lý"
+    },
+    {
+      "find": "template",
+      "replace": "mẫu giao diện"
+    },
+    {
+      "find": "route",
+      "replace": "tuyến xử lý"
+    },
+    {
+      "find": "service",
+      "replace": "thành phần dịch vụ"
+    },
+    {
+      "find": "store",
+      "replace": "kho lưu trữ"
+    },
+    {
+      "find": "payload",
+      "replace": "dữ liệu truyền"
+    },
+    {
+      "find": "hash",
+      "replace": "mã băm"
+    },
+    {
+      "find": "fingerprint",
+      "replace": "dấu nhận diện cấu hình"
+    },
+    {
+      "find": "authority",
+      "replace": "căn cứ có thẩm quyền"
+    },
+    {
+      "find": "support",
+      "replace": "hỗ trợ bởi căn cứ"
+    },
+    {
+      "find": "view",
+      "replace": "trang giao diện"
+    },
+    {
+      "find": "capacity",
+      "replace": "dung lượng"
+    },
+    {
+      "find": "diagnostics",
+      "replace": "thông tin chẩn đoán"
+    },
+    {
+      "find": "latency",
+      "replace": "độ trễ"
+    },
+    {
+      "find": "candidate",
+      "replace": "ứng viên truy xuất"
+    },
+    {
+      "find": "ground truth",
+      "replace": "đáp án chuẩn"
+    },
+    {
+      "find": "groundedness",
+      "replace": "mức độ bám sát căn cứ"
+    },
+    {
+      "find": "online",
+      "replace": "trực tuyến"
+    },
+    {
+      "find": "full pass",
+      "replace": "đạt đầy đủ tiêu chí"
+    },
+    {
+      "find": "vector store",
+      "replace": "kho vector"
+    },
+    {
+      "find": "retrieval contracts",
+      "replace": "đặc tả truy xuất"
+    },
+    {
+      "find": "retrieval metrics",
+      "replace": "chỉ số truy xuất"
+    },
+    {
+      "find": "không evidence",
+      "replace": "không có căn cứ"
+    },
+    {
+      "find": "không có evidence",
+      "replace": "không có căn cứ"
+    },
+    {
+      "find": "query fingerprint",
+      "replace": "dấu nhận diện truy vấn"
+    },
+    {
+      "find": "document identity",
+      "replace": "định danh văn bản"
+    },
+    {
+      "find": "data retention",
+      "replace": "thời hạn lưu dữ liệu"
+    },
+    {
+      "find": "pipeline",
+      "replace": "quy trình xử lý"
+    },
+    {
+      "find": "Pipeline",
+      "replace": "Quy trình xử lý"
+    },
+    {
+      "find": "contracts",
+      "replace": "đặc tả"
+    },
+    {
+      "find": "corpus",
+      "replace": "tập văn bản"
+    },
+    {
+      "find": "index",
+      "replace": "chỉ mục"
+    },
+    {
+      "find": "backend",
+      "replace": "hệ thống phía sau"
+    },
+    {
+      "find": "model",
+      "replace": "mô hình"
+    },
+    {
+      "find": "query",
+      "replace": "truy vấn"
+    },
+    {
+      "find": "status",
+      "replace": "trạng thái"
+    },
+    {
+      "find": "score",
+      "replace": "điểm xếp hạng"
+    },
+    {
+      "find": "text",
+      "replace": "nội dung"
+    },
+    {
+      "find": "dimension",
+      "replace": "số chiều"
+    },
+    {
+      "find": "reranker",
+      "replace": "bộ xếp hạng lại"
+    },
+    {
+      "find": "interface",
+      "replace": "giao diện lập trình"
+    },
+    {
+      "find": "diagnostic",
+      "replace": "thông tin chẩn đoán"
+    },
+    {
+      "find": "grounded",
+      "replace": "bám sát căn cứ"
+    },
+    {
+      "find": "provenance",
+      "replace": "dấu vết nguồn gốc"
+    },
+    {
+      "find": "render",
+      "replace": "hiển thị"
+    },
+    {
+      "find": "guard",
+      "replace": "điều kiện kiểm soát"
+    },
+    {
+      "find": "owner",
+      "replace": "chủ sở hữu"
+    },
+    {
+      "find": "input",
+      "replace": "đầu vào"
+    },
+    {
+      "find": "output",
+      "replace": "đầu ra"
+    },
+    {
+      "find": "registry",
+      "replace": "sổ đăng ký"
+    },
+    {
+      "find": "endpoint",
+      "replace": "điểm truy cập"
+    },
+    {
+      "find": "persistence",
+      "replace": "khả năng lưu trữ"
+    },
+    {
+      "find": "prompt",
+      "replace": "lời nhắc"
+    },
+    {
+      "find": "token budget",
+      "replace": "giới hạn token"
+    },
+    {
+      "find": "retention",
+      "replace": "thời hạn lưu"
+    }
+  ],
+  "rewrites": [
+    {
+      "section": "Yêu cầu phi chức năng và rủi ro",
+      "paragraph_index": 0,
+      "text": "Bên cạnh chức năng tra cứu và hỏi đáp, hệ thống cần đáp ứng các yêu cầu về khả năng truy vết, an toàn dữ liệu, chịu lỗi và hiệu năng. Người đọc phải có cách quay lại đoạn căn cứ đã dùng; dữ liệu hồ sơ cần được giới hạn theo chủ sở hữu; sự cố truy cập kho dữ liệu cần được phân biệt với việc không tìm thấy thông tin. Các yêu cầu này liên hệ trực tiếp với cách người dùng hiểu và sử dụng kết quả, nên cần được xét cùng thiết kế giao diện và tổ chức dữ liệu."
+    },
+    {
+      "section": "Yêu cầu phi chức năng và rủi ro",
+      "paragraph_index": 1,
+      "text": "Rủi ro đáng chú ý là một câu trả lời có trích dẫn tạo cảm giác đã được xác nhận đầy đủ, trong khi đoạn được chọn có thể chưa đủ điều kiện hoặc thiếu ngoại lệ cần thiết. Việc giảm rủi ro đòi hỏi nhiều khâu phối hợp: quản lý phạm vi dữ liệu, giữ dấu vết nguồn khi truy xuất, kiểm soát cách sinh câu trả lời và trình bày giới hạn tại nơi người dùng đọc kết quả. Một cảnh báo chung ở cuối trang khó thay thế những thông tin cụ thể này."
+    },
+    {
+      "section": "StageCandidate và RetrievalStageTrace",
+      "paragraph_index": 0,
+      "text": "StageCandidate ghi lại một ứng viên tại từng bước truy xuất, gồm định danh văn bản, nội dung, thông tin trích dẫn và điểm xếp hạng. RetrievalStageTrace liên kết các danh sách ứng viên để có thể theo dõi một tài liệu được giữ lại hay bị loại ở bước nào. RetrievalOutcome tập hợp kết quả cuối với trạng thái, độ trễ và thông tin chẩn đoán. Ba đối tượng phục vụ những mức quan sát khác nhau, từ ứng viên đơn lẻ đến diễn biến và kết quả của cả quá trình."
+    },
+    {
+      "section": "StageCandidate và RetrievalStageTrace",
+      "paragraph_index": 1,
+      "text": "Trong nhánh V3, dữ liệu trả về được kiểm tra về dịch vụ tạo vector, mô hình, số chiều, phiên bản dữ liệu và các trường bắt buộc trước khi chuyển thành đối tượng căn cứ. Nếu dữ liệu không phù hợp với đặc tả, hệ thống báo lỗi truy xuất; nếu truy vấn hợp lệ nhưng không có ứng viên thì trả trạng thái rỗng tương ứng. Phân biệt này giúp người vận hành tìm đúng nguyên nhân và giúp giao diện đưa ra lời giải thích phù hợp."
+    },
+    {
+      "section": "StageCandidate và RetrievalStageTrace",
+      "paragraph_index": 2,
+      "text": "Điểm xếp hạng cho biết mức ưu tiên tương đối trong quá trình tìm kiếm. Khi một đoạn có điểm cao, điều có thể suy ra là nó được thuật toán ưu tiên trong điều kiện truy vấn đã chọn; vẫn cần xem nội dung để xác định đoạn đó có đủ hỗ trợ câu trả lời hay không. Dấu vết qua các bước vì thế hữu ích để tìm nơi một căn cứ quan trọng bị mất, còn kết luận về độ đúng pháp lý cần một cách đánh giá riêng."
+    },
+    {
+      "section": "Hợp đồng dữ liệu, invariant và tính toàn vẹn",
+      "paragraph_index": 0,
+      "text": "Tính toàn vẹn cần được giữ xuyên suốt từ bản ghi nguồn đến đoạn căn cứ cuối cùng. Định danh văn bản, số hiệu, địa chỉ nguồn, vị trí điều khoản và nội dung giúp người đọc nhận diện phần được sử dụng. Khi xếp hạng, gộp hoặc cắt ngắn nội dung, hệ thống cần bảo toàn mối liên hệ giữa các thành phần này. Nếu chỉ giữ lại phần văn bản mà mất thông tin nguồn, câu trả lời có thể khó kiểm tra dù nội dung thoạt nhìn vẫn hợp lý."
+    },
+    {
+      "section": "Hợp đồng dữ liệu, invariant và tính toàn vẹn",
+      "paragraph_index": 1,
+      "text": "Việc kiểm tra dữ liệu của nhánh V3 đặt các điều kiện tương thích trước khi tạo đối tượng căn cứ. Cách làm này giúp phát hiện sớm một chỉ mục được xây bằng mô hình hoặc phiên bản dữ liệu khác với cấu hình đang truy vấn. Lỗi tương thích vì vậy cần được xử lý rõ ràng, thay vì âm thầm chuyển sang một kho khác rồi giữ nguyên cách diễn giải kết quả. Điều kiện về cấu hình là một phần của tính toàn vẹn, bên cạnh bản thân nội dung văn bản."
+    },
+    {
+      "section": "Hợp đồng dữ liệu, invariant và tính toàn vẹn",
+      "paragraph_index": 2,
+      "text": "Khi mở rộng nội dung theo điều khoản, mã băm được dùng để đối chiếu phần lấy từ kho nội dung với giá trị đã kỳ vọng. Mã băm phù hợp hỗ trợ kiểm soát sự nhất quán giữa các nơi lưu; để xác định nguồn có thẩm quyền và văn bản còn hiệu lực vẫn cần thông tin khác. Do đó, báo cáo sử dụng kiểm tra mã băm cho mục đích truy vết và phát hiện lệch nội dung, đồng thời giữ việc thẩm định pháp lý thành một yêu cầu độc lập."
+    },
+    {
+      "section": "Phối hợp route, service, value object và repository",
+      "paragraph_index": 0,
+      "text": "Tuyến xử lý web tiếp nhận yêu cầu, kiểm tra thông tin phiên và quyền sở hữu, sau đó chuyển công việc đến thành phần dịch vụ. Thành phần dịch vụ điều phối tìm kiếm và xử lý nội dung; đối tượng dữ liệu mang kết quả qua các bước; lớp truy cập kho dữ liệu thực hiện việc đọc và ghi. Mẫu giao diện nhận dữ liệu đã được chuẩn bị để hiển thị. Cách phân công này tạo cơ sở để xem xét trách nhiệm thay vì đặt toàn bộ nghiệp vụ vào một hàm xử lý trang."
+    },
+    {
+      "section": "Phối hợp route, service, value object và repository",
+      "paragraph_index": 1,
+      "text": "Các lớp vẫn có những điểm phụ thuộc cần được quản lý, nhất là nơi chọn phương án truy xuất và chuyển kết quả sang giao diện. Một thay đổi ở cấu hình kho dữ liệu có thể tác động đến nội dung trả về, cách thông báo lỗi và kết quả đánh giá. Vì vậy, mức độ tách lớp nên được xem qua khả năng thay thế và kiểm thử một thành phần mà không phải sửa nhiều nơi. Chỉ chia mã nguồn thành nhiều tệp chưa đủ để khẳng định thiết kế đã đạt mức độc lập mong muốn."
+    },
+    {
+      "section": "Phối hợp route, service, value object và repository",
+      "paragraph_index": 2,
+      "text": "Các tập bản ghi hồ sơ, hội thoại và nhật ký được thao tác qua những hàm truy cập MongoDB. Trong sơ đồ dữ liệu, chúng được biểu diễn thành lớp khái niệm để làm rõ thuộc tính và quan hệ; trong phần cài đặt, báo cáo giữ đúng cách tổ chức bằng bản ghi của dự án. Việc dựng một hệ kế thừa hoặc một lớp ánh xạ cơ sở dữ liệu không có trong mã nguồn sẽ làm sai đối tượng khảo sát."
+    },
+    {
+      "section": "Bảo mật, quyền sở hữu và vòng đời workspace",
+      "paragraph_index": 0,
+      "text": "Tập văn bản pháp luật dùng chung và dữ liệu nghiên cứu của người dùng có mục đích lưu trữ khác nhau. Hồ sơ nghiên cứu gắn với user_id hoặc client_id và có thời điểm hết hạn; các thao tác đọc, sửa và xóa cần giới hạn theo chủ sở hữu. Điều kiện này phải được thực hiện ở truy vấn phía máy chủ, vì việc ẩn một nút trên giao diện không ngăn người dùng gửi trực tiếp một yêu cầu với định danh khác."
+    },
+    {
+      "section": "Bảo mật, quyền sở hữu và vòng đời workspace",
+      "paragraph_index": 1,
+      "text": "Bản ghi xác thực lưu mã băm của thẻ truy cập cùng thông tin thời hạn thay cho giá trị thẻ nguyên bản. Dữ liệu cần lưu trong lịch sử hội thoại lại thuộc một trách nhiệm khác và có thể chứa thông tin nhạy cảm của người hỏi. Vì vậy, cần xem đồng thời việc xác thực, lọc quyền sở hữu và giới hạn nội dung nhật ký. Chính sách hết hạn hỗ trợ quản lý vòng đời nhưng thời điểm dọn dữ liệu thực tế còn phụ thuộc cơ chế xử lý của hệ lưu trữ."
+    },
+    {
+      "section": "Bảo mật, quyền sở hữu và vòng đời workspace",
+      "paragraph_index": 2,
+      "text": "Tài liệu tải lên và nguồn đọc từ bên ngoài cần được giới hạn về dung lượng, số trang và thời gian xử lý. Việc giữ mã băm, số trang và phương pháp trích xuất giúp xác định nội dung đã được dùng để phân tích. Nếu quá trình chỉ đọc được một phần tài liệu, kết quả cần nêu phạm vi đó để người dùng không hiểu phần trích xuất là toàn bộ văn bản. Đây là yêu cầu về tính minh bạch của dữ liệu bên cạnh yêu cầu chống lạm dụng tài nguyên."
+    },
+    {
+      "section": "Bảo mật, quyền sở hữu và vòng đời workspace",
+      "paragraph_index": 3,
+      "text": "Các cơ chế như giới hạn tần suất, kiểm tra CSRF, chính sách truy cập chéo nguồn, tiêu đề an toàn và che dữ liệu nhạy cảm hỗ trợ giảm những nhóm rủi ro khác nhau. Khi đánh giá, cần kiểm tra từng cơ chế theo tình huống có thể xảy ra: nội dung tài liệu cố điều khiển mô hình, dữ liệu của người này xuất hiện trong kết quả của người khác, hoặc yêu cầu đọc nguồn hướng đến địa chỉ không được phép. Danh sách cơ chế có trong mã nguồn là điểm khởi đầu để lập kiểm thử bảo mật, chưa thay cho kết quả kiểm tra thực tế."
+    },
+    {
+      "section": "Lỗi, tính sẵn sàng và giới hạn capacity",
+      "paragraph_index": 0,
+      "text": "Một lỗi truy cập chỉ mục, dịch vụ sinh câu trả lời hay kho nội dung cần chỉ ra được nơi phát sinh và ảnh hưởng đến tác vụ. Nếu có thực hiện lại, số lần và thời gian chờ cần nằm trong giới hạn đã định. Với đọc nguồn chính thức, quá trình có thể dừng sau khi thu được một phần nội dung; kết quả nên giữ lý do dừng và phần đã đọc để người dùng quyết định bước tiếp theo. Cách xử lý này hữu ích hơn việc biến mọi sự cố thành một thông báo không tìm thấy căn cứ."
+    },
+    {
+      "section": "Lỗi, tính sẵn sàng và giới hạn capacity",
+      "paragraph_index": 1,
+      "text": "Biên bản Capacity-r2 ghi nhận năm tập dữ liệu Qdrant sử dụng khoảng 2,924 GB dung lượng đĩa, 343 MB bộ nhớ và 699 MB bộ nhớ đệm. Các con số phản ánh lượng sử dụng trong phạm vi đo, chưa cho biết dung lượng còn có thể mở rộng vì còn phụ thuộc gói dịch vụ, bản sao, chỉ mục và phần phát sinh trong vận hành. Hạn mức Qdrant và dung lượng cơ sở dữ liệu Supabase chưa được xác minh trong phạm vi báo cáo; do đó chưa thể dùng các số liệu này để chấp thuận một kế hoạch mở rộng."
+    },
+    {
+      "section": "Lỗi, tính sẵn sàng và giới hạn capacity",
+      "paragraph_index": 2,
+      "text": "Trước khi nạp thêm dữ liệu, cần ước lượng chi phí lưu trữ trên mẫu có cùng cấu trúc với dữ liệu sẽ sử dụng, bao gồm vector, thông tin mô tả và phần chỉ mục. Kế hoạch thay đổi còn cần khả năng quay lại cấu hình trước nếu phát hiện sai lệch. Đồ án giữ bước này ở mức đề xuất đánh giá và quản lý rủi ro; không thực hiện thao tác ghi lên các kho dữ liệu từ xa hoặc đưa ra dự báo hạn mức từ dữ liệu giả lập."
+    },
+    {
+      "section": "Lựa chọn kiến trúc và hệ quả bảo trì",
+      "paragraph_index": 0,
+      "text": "Giữ hai phương án truy xuất giúp dự án khảo sát các cách tổ chức khác nhau, đồng thời làm tăng số cấu hình và tập dữ liệu phải theo dõi. Khi một cờ lựa chọn thay đổi cả mô hình vector, kho dữ liệu và cách xếp hạng, người bảo trì cần biết kết quả đang thuộc phương án nào. Tài liệu kiến trúc của dự án nêu ranh giới giữa các phương án thay vì chuyển đổi âm thầm khi một nhánh gặp lỗi. Cách tổ chức này giúp giữ ý nghĩa của kết quả, nhưng đòi hỏi việc ghi cấu hình và phiên bản phải nhất quán."
+    },
+    {
+      "section": "Lựa chọn kiến trúc và hệ quả bảo trì",
+      "paragraph_index": 1,
+      "text": "Tra cứu thông tin mô tả, tìm theo toàn văn, tìm theo ngữ nghĩa và mở rộng nội dung theo điều khoản giải quyết các nhu cầu khác nhau. Việc tách chúng giúp nhận diện nơi cần cải thiện, song cũng đặt ra yêu cầu đồng bộ định danh và nội dung giữa các kho. Nếu giao diện trình bày các kết quả như cùng xuất phát từ một tập dữ liệu đầy đủ, người dùng có thể hiểu sai phạm vi tìm kiếm. Vì vậy, lựa chọn kiến trúc cần được nối với cách công bố phạm vi dữ liệu và cách đánh giá kết quả."
+    },
+    {
+      "section": "Lựa chọn kiến trúc và hệ quả bảo trì",
+      "paragraph_index": 2,
+      "text": "Mỗi quyết định thay kho văn bản, dịch vụ mô hình hoặc chỉ mục nên ghi lại bối cảnh, lựa chọn đã cân nhắc, chi phí và điều kiện kiểm tra sau thay đổi. Tài liệu quyết định giúp người bảo trì hiểu vì sao một phương án được chọn và khi nào cần xem xét lại. Đối với VietLex, các điều kiện quan trọng là sự tương thích của vector, tính nhất quán của nội dung và khả năng tái lập kết quả đánh giá sau khi chuyển đổi."
+    },
+    {
+      "section": "Phạm vi, phương pháp và bằng chứng",
+      "paragraph_index": 0,
+      "text": "Đồ án tập trung khảo sát mã nguồn, tài liệu thiết kế và các kết quả đánh giá đã lưu của VietLex. Phần giao diện sử dụng những ảnh chụp đã có từ quá trình truy cập các trang công khai, kèm địa chỉ và thời điểm ghi nhận. Phạm vi này chưa bao gồm kiểm tra các chức năng cần quyền riêng, chạy một bộ đánh giá mới hay xác minh hiệu lực hiện hành của từng văn bản pháp luật. Vì vậy, hình ảnh giao diện được dùng để phân tích cách tổ chức thao tác và thông tin; chúng không được dùng thay cho kết quả kiểm thử chất lượng câu trả lời."
+    },
+    {
+      "section": "Phạm vi, phương pháp và bằng chứng",
+      "paragraph_index": 1,
+      "text": "Quá trình thực hiện gồm ba bước có liên hệ với nhau. Trước hết, khảo sát các tuyến xử lý và mẫu giao diện để xác định người dùng có thể thực hiện việc gì. Tiếp theo, lần theo dữ liệu qua các thành phần xử lý để xây dựng mô hình nghiệp vụ, mô hình dữ liệu và sơ đồ tương tác. Cuối cùng, đối chiếu các nhận xét về thiết kế với tài liệu đánh giá và nguồn học thuật đã được kiểm tra. Mỗi loại chứng cứ được dùng đúng mục đích: mã nguồn giải thích cách tổ chức hệ thống, ảnh chụp phản ánh trạng thái đã quan sát, còn số liệu đánh giá chỉ có ý nghĩa trong tập câu hỏi và thời điểm đã nêu."
+    },
+    {
+      "section": "PHÂN TÍCH VÀ THIẾT KẾ HƯỚNG ĐỐI TƯỢNG",
+      "paragraph_index": 0,
+      "text": "Phân tích hướng đối tượng trong đồ án được thực hiện ở hai mức. Mức nghiệp vụ xác định những đối tượng cần được lưu giữ như người dùng, cuộc hội thoại, hồ sơ nghiên cứu, tài liệu và kết quả phân tích. Mức cài đặt xem xét cách các lớp và thành phần dịch vụ phối hợp để truy xuất căn cứ và tạo câu trả lời. Hai mức này bổ sung cho nhau: mô hình dữ liệu làm rõ hệ thống ghi nhớ điều gì và quan hệ giữa các bản ghi, còn sơ đồ lớp cài đặt giải thích thành phần nào chịu trách nhiệm xử lý các dữ liệu đó."
+    },
+    {
+      "section": "Mô hình trạng thái và phân loại ngoại lệ",
+      "paragraph_index": 0,
+      "text": "Một thao tác kéo dài cần được mô tả cả về các bước thực hiện lẫn trạng thái mà người dùng có thể quan sát. Sơ đồ hoạt động giúp nhận diện điểm rẽ nhánh của quá trình tra cứu; sơ đồ trạng thái giải thích một lượt đọc nguồn đang diễn ra, đã kết thúc hay bị gián đoạn. Cách phân biệt này tránh gom mọi tình huống không có câu trả lời vào cùng một loại lỗi. Chẳng hạn, không tìm thấy văn bản phù hợp có ý nghĩa khác với việc kho dữ liệu tạm thời không truy cập được."
+    },
+    {
+      "section": "Mô hình trạng thái và phân loại ngoại lệ",
+      "paragraph_index": 1,
+      "text": "Đối với đọc nguồn trong hồ sơ nghiên cứu, mã nguồn lưu trạng thái đang thực hiện và các kết quả kết thúc như hoàn tất, một phần, đã hủy, thất bại hoặc gián đoạn. Yêu cầu hủy được xử lý cùng các điểm lưu tiến độ, nhờ đó kết quả đã thu được có thể được giữ lại. Việc đóng trang, ngắt kết nối và máy chủ xác nhận hủy là những sự kiện khác nhau; giao diện cần phản ánh trạng thái được máy chủ ghi nhận để người dùng biết có nên tiếp tục chờ hay gửi lại yêu cầu."
+    },
+    {
+      "section": "Mô hình trạng thái và phân loại ngoại lệ",
+      "paragraph_index": 2,
+      "text": "Từ các trạng thái này có thể xác định những tình huống kiểm thử cần thiết: tra cứu không có kết quả, kho dữ liệu không sẵn sàng, yêu cầu không thuộc chủ sở hữu, hồ sơ hết hạn, hủy khi chưa có nguồn và hủy sau khi đã có kết quả một phần. Đây là các trường hợp được rút ra để thiết kế kiểm thử tiếp theo. Đồ án chưa coi sự hiện diện của nhánh xử lý trong mã nguồn là bằng chứng rằng mọi trường hợp đã được chạy thử thành công."
+    },
+    {
+      "section": "Điểm cần cải thiện trong thiết kế",
+      "paragraph_index": 0,
+      "text": "Một hướng cải thiện là thống nhất thông tin trả về của các bước truy xuất và sinh câu trả lời. Thông tin này nên cho biết câu hỏi đã đi qua cấu hình nào, căn cứ nào được chọn, vì sao một bước dừng lại và thời gian xử lý tương ứng. Khi lỗi chỉ được ghép thành một chuỗi thông báo, việc phân biệt thiếu dữ liệu với lỗi dịch vụ trở nên khó khăn. Một cấu trúc kết quả rõ ràng sẽ hỗ trợ cả giao diện, việc phân tích lỗi và so sánh giữa các phương án truy xuất, đồng thời cần giới hạn dữ liệu cá nhân được ghi lại."
+    },
+    {
+      "section": "Điểm cần cải thiện trong thiết kế",
+      "paragraph_index": 1,
+      "text": "Việc lựa chọn nhánh truy xuất cũng cần được thể hiện như một phụ thuộc rõ ràng để có thể thay thế trong kiểm thử. Mỗi phương án nên được kiểm tra bằng cùng yêu cầu về định danh văn bản, nội dung và thông tin nguồn trước khi so sánh chất lượng. Đề xuất này nhằm giữ khả năng kiểm soát khi hệ thống thay đổi, không hàm ý mọi cơ chế tương tự đều đang vắng mặt. Khi đánh giá lại, cần ghi phiên bản mã nguồn và cấu hình để kết quả không bị gán nhầm cho một phiên bản khác."
+    },
+    {
+      "section": "Luồng xử lý câu hỏi",
+      "paragraph_index": 0,
+      "text": "Khi người dùng gửi câu hỏi, tuyến POST /chat tiếp nhận nội dung, thông tin phiên làm việc và phạm vi văn bản được chọn. Trước khi tìm kiếm, hệ thống xử lý dữ liệu nhạy cảm và kiểm tra đầu vào. Trong những điều kiện cho phép, câu trả lời phù hợp đã lưu trong bộ nhớ đệm có thể được dùng lại. Nếu cần xử lý mới, yêu cầu được chuyển đến thành phần điều phối truy xuất. Trường hợp truy xuất gặp lỗi phải được phản ánh như một sự cố kỹ thuật để người dùng không nhầm đó là kết luận về nội dung pháp luật."
+    },
+    {
+      "section": "Luồng xử lý câu hỏi",
+      "paragraph_index": 1,
+      "text": "Ở bước xử lý mới, hệ thống lựa chọn phương án truy xuất theo cấu hình, tập hợp các đoạn làm căn cứ và giới hạn lượng nội dung chuyển cho mô hình ngôn ngữ. Một số nhánh có thể mở rộng nội dung theo điều khoản hoặc bổ sung nguồn chính thức khi đáp ứng điều kiện. Khi không có căn cứ phù hợp, hệ thống trả thông báo tương ứng thay vì coi việc sinh văn bản là đủ để trả lời. Nếu có kết quả, đầu ra tiếp tục được kiểm tra, lưu cùng thông tin xử lý và chuyển thành phần hiển thị trong cuộc hội thoại."
+    },
+    {
+      "section": "Luồng xử lý câu hỏi",
+      "paragraph_index": 2,
+      "text": "Sơ đồ tuần tự dưới đây cho thấy trách nhiệm của giao diện, tuyến xử lý, bộ nhớ đệm và thành phần truy xuất. Các nhánh lựa chọn được trình bày để giải thích vì sao hai câu hỏi có thể đi qua những bước khác nhau; sơ đồ được lập từ mã nguồn và không phải bản ghi của một lần chạy mới."
+    },
+    {
+      "section": "Tổng hợp đánh giá",
+      "paragraph_index": 0,
+      "text": "VietLex đã hình thành các thành phần cần thiết để kết nối tra cứu văn bản với hỏi đáp có căn cứ, nhưng mức độ hoàn chỉnh của kiến trúc cần được phân biệt với chất lượng của từng câu trả lời. Kết quả Golden-50 là một mốc lịch sử hữu ích để nhìn lại những điểm còn hạn chế; các thử nghiệm mới hơn có quy mô nhỏ nên chưa đủ thay thế một bộ đánh giá đại diện. Từ đó, ưu tiên tiếp theo là kiểm tra nơi thông tin bị mất trong quá trình truy xuất và chọn căn cứ, sau đó mới đánh giá cách mô hình diễn đạt câu trả lời. Trình tự này giúp việc cải tiến gắn với nguyên nhân cụ thể thay vì chỉ điều chỉnh lời nhắc hoặc tăng một chỉ số tổng hợp."
+    },
+    {
+      "section": "KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN",
+      "paragraph_index": 0,
+      "text": "Đồ án đã khảo sát VietLex từ nhu cầu tra cứu pháp luật đến cách tổ chức dữ liệu, xử lý yêu cầu và trình bày kết quả. Các chức năng được phân tích gồm tìm kiếm và đọc văn bản, hỏi đáp có căn cứ, quản lý hồ sơ nghiên cứu và các trang quản trị có trong mã nguồn. Mô hình dữ liệu theo ký pháp lớp UML làm rõ quan hệ giữa người dùng, hội thoại và hồ sơ; các sơ đồ hoạt động, trạng thái, tuần tự và thành phần giúp giải thích cách hệ thống phối hợp khi tra cứu, đọc nguồn và xử lý các tình huống thay thế. Qua đó, báo cáo chuyển từ mô tả danh sách chức năng sang xem xét trách nhiệm, dữ liệu và điều kiện hoạt động của từng thành phần."
+    },
+    {
+      "section": "KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN",
+      "paragraph_index": 1,
+      "text": "Về đánh giá, các số liệu đã lưu cần được đọc cùng ngày thực hiện, tập câu hỏi và phạm vi dữ liệu. Mốc Golden-50 ngày 03/09/2026 ghi nhận độ bao phủ truy xuất cao trên phần đáp án chuẩn khả dụng, nhưng tỷ lệ khớp hoàn toàn là 0/50, F1 theo từ là 0,2305 và tỷ lệ trích dẫn không hợp lệ là 0,0817. Tài liệu cập nhật ngày 19/10/2026 ghi nhận hai câu hỏi thử nghiệm mới chưa đạt đầy đủ tiêu chí và chưa có một bộ đánh giá đại diện mới. Những kết quả này cho thấy hướng cải thiện cần theo dõi, đồng thời chưa đủ để suy rộng chất lượng cho mọi loại câu hỏi pháp luật."
+    },
+    {
+      "section": "KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN",
+      "paragraph_index": 2,
+      "text": "Hướng phát triển nên ưu tiên sự nhất quán giữa kho văn bản, các chỉ mục và định danh căn cứ; tiếp theo là kiểm thử những nhánh dễ gây hiểu nhầm như thiếu nguồn, lỗi dịch vụ và kết quả một phần. Khi các điều kiện đó được kiểm soát, hệ thống mới có cơ sở để đánh giá sâu hơn chất lượng câu trả lời bằng tập câu hỏi có đáp án chuẩn và nhận xét của người có chuyên môn. Các chức năng cần quyền riêng, hiệu lực pháp luật hiện hành và tiêu chí chấm điểm riêng của học phần vẫn cần xác nhận theo phạm vi tương ứng. Đồ án vì thế cung cấp một bản phân tích thiết kế và định hướng kiểm chứng, chưa thay cho việc nghiệm thu chất lượng pháp lý hay phê duyệt của giảng viên."
+    }
+  ],
+  "insertions": [
+    {
+      "before_heading": "Đối tượng và hiện trạng hệ thống",
+      "blocks": [
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Khảo sát hiện trạng và xác định yêu cầu",
+          "numbering_from": "Đối tượng và hiện trạng hệ thống"
+        }
+      ]
+    },
+    {
+      "before_heading": "Luồng xử lý câu hỏi",
+      "blocks": [
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Cài đặt và khảo sát giao diện",
+          "numbering_from": "Luồng xử lý câu hỏi"
+        }
+      ]
+    },
+    {
+      "before_heading": "Đóng góp và cấu trúc báo cáo",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Mạch phân tích được tổ chức từ yêu cầu đến kết quả để mỗi phần trả lời một câu hỏi cụ thể. Phần khảo sát xác định nhiệm vụ của người dùng và giới hạn quyền truy cập. Phần thiết kế giải thích dữ liệu cần lưu, các quan hệ giữa đối tượng và cách thành phần xử lý phối hợp. Phần triển khai đối chiếu mô hình với tuyến xử lý và giao diện thực tế. Phần đánh giá xem xét những chứng cứ nào đủ hỗ trợ nhận xét, đồng thời chỉ ra các kiểm tra còn thiếu. Cách tổ chức này giúp tránh dùng một hình giao diện hay một chỉ số riêng lẻ để kết luận cho toàn hệ thống."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Trong từng phần, đồ án phân biệt điều quan sát được với điều được đề xuất. Một nhánh có trong mã nguồn là căn cứ để mô tả thiết kế; một thao tác đã được ghi nhận khi chạy mới là căn cứ cho trạng thái quan sát tại thời điểm đó. Các khuyến nghị về cấu trúc, kiểm thử và giao diện được trình bày như hướng cải thiện cần kiểm chứng. Việc giữ các ranh giới này không làm giảm mục tiêu của đồ án mà giúp người đọc đánh giá đúng mức độ chắc chắn của mỗi kết luận."
+        }
+      ]
+    },
+    {
+      "before_heading": "Từ use case đến tiêu chí nghiệm thu nội bộ",
+      "blocks": [
+        {
+          "kind": "heading",
+          "level": 3,
+          "text": "Sơ đồ hoạt động tra cứu văn bản",
+          "numbering_from": "UC-01. Tìm kiếm và mở văn bản"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Hoạt động tra cứu bắt đầu từ nhu cầu tìm một văn bản và kết thúc ở việc người dùng đọc được nội dung hoặc nhận biết lý do chưa thể đọc. Sơ đồ dưới đây khái quát hai cách tìm theo thông tin mô tả và theo toàn văn, sau đó nối kết quả tìm kiếm với trang đọc văn bản. Các bước được đối chiếu với legal_search và legal_document trong mã nguồn."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Điểm cần phân biệt là danh sách rỗng và lỗi truy cập kho dữ liệu. Với danh sách rỗng, người dùng có thể đổi từ khóa, khoảng thời gian hoặc loại văn bản. Với lỗi dịch vụ, việc tiếp tục thay từ khóa chưa chắc giải quyết được vấn đề, vì nguyên nhân nằm ở khả năng truy cập dữ liệu. Thiết kế giao diện vì vậy cần cung cấp thông báo phù hợp với từng nhánh thay vì chỉ hiển thị một trạng thái chung là không có kết quả."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Sơ đồ hoạt động còn làm rõ ranh giới giữa tìm đúng bản ghi và lấy được nội dung để đọc. Một định danh có thể xuất hiện trong kết quả tìm kiếm trong khi nội dung không khả dụng ở kho đang dùng. Tình huống này cần được kiểm tra riêng khi đối chiếu chỉ mục với kho nội dung; nó không nên được diễn giải thành việc văn bản pháp luật đó không tồn tại. Đây cũng là cơ sở để xây dựng trường hợp kiểm thử từ thao tác tìm kiếm đến mở trang đọc."
+        },
+        {
+          "kind": "heading",
+          "level": 3,
+          "text": "Sơ đồ trạng thái của lượt đọc nguồn",
+          "numbering_from": "UC-01. Tìm kiếm và mở văn bản"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Một lượt đọc nguồn trong hồ sơ có thể kéo dài qua nhiều yêu cầu mạng nên cần lưu được tiến độ và kết quả kết thúc. Sơ đồ trạng thái dưới đây thể hiện các trạng thái lưu trong cơ chế đọc nguồn: running, complete, partial, cancelled, interrupted và failed. Các nhãn tiếng Việt giải thích ý nghĩa nghiệp vụ; tên trong ngoặc giúp đối chiếu với mã nguồn."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Trạng thái có kết quả một phần cần được giữ riêng vì người dùng đã có tư liệu để xem xét, dù quá trình chưa hoàn tất đầy đủ. Khi hủy sau khi đã đọc được một số nguồn, hệ thống có thể giữ kết quả đó và ghi lý do dừng. Ngược lại, hủy trước khi có nguồn sẽ không tạo cùng mức thông tin. Phân biệt này giúp giao diện giải thích điều gì đã làm được, điều gì còn thiếu và có cần thực hiện lại hay không."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Cơ chế lưu tiến độ chỉ cập nhật lượt đang chạy, qua đó hạn chế một tác vụ cũ ghi đè kết quả đã kết thúc. Mã nguồn còn xử lý trường hợp lượt trước hết thời gian giữ quyền thực hiện và chuyển nó sang trạng thái gián đoạn khi nhận lượt mới phù hợp. Điểm thiết kế này hỗ trợ phục hồi sau sự cố, nhưng sự hiện diện của cơ chế chưa chứng minh mọi tình huống cạnh tranh đã được kiểm thử; các thử nghiệm về hủy, gửi lại và tiến độ đến muộn vẫn cần được tách thành từng trường hợp."
+        }
+      ]
+    },
+    {
+      "before_heading": "Đối tượng EvidenceChunk",
+      "blocks": [
+        {
+          "kind": "heading",
+          "level": 3,
+          "text": "Mô hình dữ liệu tài khoản và hội thoại",
+          "numbering_from": "UC-01. Tìm kiếm và mở văn bản"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Mô hình dữ liệu thứ nhất mô tả người dùng, phiên đăng nhập, cuộc hội thoại và lượt trao đổi. Hình sử dụng ký pháp lớp UML để biểu diễn các thực thể và số lượng quan hệ, đáp ứng mục đích của một sơ đồ dữ liệu logic. Tên trong dấu góc là tên tập bản ghi MongoDB; mũi tên cho biết cách các bản ghi liên hệ qua định danh, không phải khai báo khóa ngoại do cơ sở dữ liệu tự bảo đảm."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Người dùng và phiên đăng nhập phục vụ việc nhận diện tài khoản. Một tài khoản có thể có nhiều phiên đăng nhập, mỗi phiên lưu mã băm của thẻ xác thực và thời điểm hết hạn. Cuộc hội thoại lại phục vụ việc tổ chức nội dung trao đổi, do đó không được đồng nhất với phiên đăng nhập. Việc tách hai khái niệm này giúp giải thích vì sao thay đổi trạng thái xác thực và đổi tên cuộc hội thoại thuộc những trách nhiệm khác nhau."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Lượt trao đổi lưu câu hỏi, câu trả lời cùng thông tin xử lý và phản hồi. Liên hệ qua session_id cho phép tập hợp lịch sử của một cuộc hội thoại; liên hệ qua user_id hoặc client_id hỗ trợ xác định phạm vi dữ liệu thuộc người đang truy cập. Giá trị user_id có thể rỗng đối với khách chưa đăng nhập, nên mô hình thể hiện quan hệ tùy chọn thay vì buộc mọi cuộc hội thoại phải có một tài khoản. Khi lấy lịch sử, điều kiện sở hữu vẫn phải được kiểm tra ở lớp ứng dụng, vì chỉ biết định danh hội thoại chưa đủ để được đọc nội dung."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Từ mô hình này có thể rút ra hai yêu cầu kiểm thử dữ liệu. Thứ nhất, một phiên đăng nhập hợp lệ phải gắn được với tài khoản còn được phép sử dụng. Thứ hai, việc đổi định danh hội thoại trong yêu cầu không được làm lộ lịch sử của chủ sở hữu khác. Đây là các điều kiện kiểm soát suy ra từ quan hệ dữ liệu và cách truy vấn trong mã nguồn, chưa phải kết quả thử xâm nhập mới. Mô hình vì thế vừa hỗ trợ thiết kế lưu trữ vừa chỉ ra nơi cần kiểm chứng quyền truy cập."
+        },
+        {
+          "kind": "heading",
+          "level": 3,
+          "text": "Mô hình dữ liệu hồ sơ nghiên cứu",
+          "numbering_from": "UC-01. Tìm kiếm và mở văn bản"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Mô hình dữ liệu thứ hai tập trung vào hồ sơ nghiên cứu và các thành phần được lưu cùng hồ sơ. Hình thoi đen biểu thị tài liệu, nguồn được ghim và lần phân tích là các thành phần nhúng trong bản ghi research_workspaces. Với loại phân tích đọc nguồn, danh sách sự kiện được lưu trong kết quả để hỗ trợ theo dõi và phục hồi tiến độ."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Hồ sơ là đơn vị tổ chức một công việc nghiên cứu: người dùng đặt tên, ghi mô tả, đưa tài liệu vào và chọn căn cứ để phân tích. Tài liệu tải lên được phân biệt với nguồn được ghim. Tài liệu lưu nội dung do người dùng đưa vào; nguồn được ghim lưu một đoạn hoặc thông tin nguồn đã được chọn để phục vụ lập luận. Cùng xuất hiện trong một hồ sơ không có nghĩa hai loại bản ghi có thể thay thế nhau, vì mỗi loại có cách xác định nguồn và phạm vi sử dụng riêng."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Mỗi lần phân tích cần được nhận diện độc lập để người dùng có thể xem lại kết quả hoặc biết lượt nào đang chạy. Một số loại phân tích chọn nguồn qua danh sách định danh căn cứ; loại đọc nguồn có thêm trạng thái và sự kiện tiến độ. Vì cấu trúc kết quả phụ thuộc loại tác vụ, sơ đồ chỉ mô tả phần chung và ghi rõ quan hệ nào áp dụng có điều kiện. Việc vẽ một quan hệ bắt buộc giữa mọi lần phân tích và mọi tài liệu sẽ làm sai thiết kế thực tế."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Cách lưu nhúng thuận tiện khi đọc lại một hồ sơ cùng các thành phần liên quan, nhưng làm tăng nhu cầu kiểm soát kích thước và cập nhật đồng thời. Mã nguồn có điều kiện giới hạn dung lượng bản ghi, số lượng thành phần và thời hạn lưu. Các điều kiện đó cho thấy hệ thống đã có ranh giới lưu trữ ở lớp ứng dụng; chúng không bảo đảm dữ liệu được giữ vô hạn hoặc mọi bản sao biến mất đúng một thời điểm. Khi mở rộng, cần kiểm tra các tình huống hồ sơ gần đầy, thêm trùng nguồn và một lần phân tích hoàn thành trong lúc dữ liệu hồ sơ thay đổi."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Hai sơ đồ dữ liệu bổ sung cho sơ đồ lớp truy xuất ở phần sau. Mô hình dữ liệu trả lời câu hỏi đối tượng nào được lưu và liên hệ với nhau bằng cách nào; sơ đồ lớp truy xuất trả lời thành phần nào tạo, chuyển và sử dụng căn cứ. Việc dùng cùng ký pháp UML không làm hai mô hình trở thành một: bản ghi MongoDB được dựng thành lớp khái niệm để phân tích, còn EvidenceChunk và các lớp truy xuất là những khai báo có thật trong mã chương trình. Sự phân biệt này giữ được cách nhìn hướng đối tượng mà vẫn phản ánh đúng công nghệ lưu trữ của VietLex."
+        }
+      ]
+    },
+    {
+      "before_heading": "RetrievalOutcome và trách nhiệm retriever",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Ở góc độ nghiệp vụ, đơn vị làm căn cứ không chỉ là tên văn bản mà còn là đoạn nội dung liên quan đến câu hỏi. Khi một tài liệu chứa nhiều điều và khoản, tìm đúng tài liệu vẫn có thể chưa đưa đúng phần cần dùng vào câu trả lời. Vì vậy, việc giữ đường dẫn tiêu đề, điều, khoản và trích dẫn trong cùng đối tượng có ý nghĩa đối với khả năng kiểm tra lại lập luận. Đây là lý do mô hình dữ liệu truy xuất cần đi sâu hơn một danh sách định danh văn bản."
+        }
+      ]
+    },
+    {
+      "before_heading": "Giới hạn evidence và context",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Hai phương án truy xuất thể hiện những lựa chọn khác nhau về cách tìm thông tin và nơi giải quyết nội dung. Nhánh kết hợp kho ngữ nghĩa với chỉ mục từ khóa có thể tận dụng các thành phần sẵn có; nhánh tích hợp dữ liệu dày và thưa tạo một cách kết hợp khác trong cùng hợp đồng truy vấn. Việc chọn phương án cần dựa vào yêu cầu về dữ liệu, khả năng vận hành và kết quả đánh giá tương ứng, thay vì suy ra phương án tốt hơn chỉ từ tên công nghệ."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Một phép so sánh có ý nghĩa phải giữ được tập câu hỏi, phạm vi tài liệu và cách xác định đáp án chuẩn. Nếu hai nhánh làm việc trên các tập văn bản khác nhau, chênh lệch kết quả có thể đến từ dữ liệu chứ chưa hẳn từ phương pháp truy xuất. Đồ án vì vậy xem cấu hình và định danh tập dữ liệu là một phần của điều kiện thí nghiệm. Các số liệu lịch sử vẫn hữu ích để đặt giả thuyết cải tiến, nhưng cần một lượt đánh giá được thiết kế nhất quán trước khi kết luận về lợi thế của từng phương án."
+        }
+      ]
+    },
+    {
+      "before_heading": "Kết quả câu trả lời và giới hạn diễn giải",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Mạch đánh giá được bắt đầu từ căn cứ trước khi xem cách diễn đạt câu trả lời. Nếu đoạn cần thiết chưa được tìm thấy hoặc bị loại trong bước chọn nội dung, mô hình sinh khó có đủ dữ kiện để giải thích đúng vấn đề. Ngược lại, khi căn cứ phù hợp đã có, câu trả lời vẫn có thể sai do suy luận quá phạm vi hoặc gắn trích dẫn không đúng. Việc tách hai khâu giúp xác định hành động cải tiến: điều chỉnh truy xuất và chọn nội dung ở khâu đầu, hoặc kiểm soát cách suy luận và trình bày ở khâu sau."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Các mốc đánh giá khác ngày không được ghép thành một kết quả tổng hợp khi chưa chứng minh cùng tập câu hỏi và điều kiện thực hiện. Trong báo cáo này, số liệu đã lưu được dùng để chỉ ra dấu hiệu cần tìm hiểu tiếp; ảnh giao diện chỉ hỗ trợ nhận xét về thao tác và trạng thái quan sát. Nhận xét của người có chuyên môn vẫn cần thiết để xác định câu trả lời có lựa chọn đúng quy định, nêu đủ ngoại lệ và diễn giải phù hợp với tình huống hay không."
+        }
+      ]
+    }
+  ],
+  "headings": [
+    {
+      "text": "Yêu cầu chức năng rút ra từ source",
+      "new_text": "Khái quát yêu cầu của hệ thống",
+      "level": 3
+    },
+    {
+      "text": "Yêu cầu phi chức năng và rủi ro",
+      "remove_heading_only": true
+    },
+    {
+      "text": "Yêu cầu chức năng tái dựng từ source",
+      "new_text": "Đặc tả yêu cầu chức năng",
+      "level": 3
+    },
+    {
+      "text": "Yêu cầu phi chức năng và cách quan sát",
+      "new_text": "Yêu cầu chất lượng và cách đánh giá",
+      "level": 3
+    },
+    {
+      "text": "StageCandidate và RetrievalStageTrace",
+      "new_text": "Theo dõi ứng viên qua các bước truy xuất",
+      "level": 3
+    },
+    {
+      "text": "Hợp đồng dữ liệu, invariant và tính toàn vẹn",
+      "new_text": "Đặc tả dữ liệu và điều kiện toàn vẹn",
+      "level": 3
+    },
+    {
+      "text": "Phối hợp route, service, value object và repository",
+      "new_text": "Phối hợp tuyến xử lý, dịch vụ và đối tượng dữ liệu",
+      "level": 3
+    },
+    {
+      "text": "Hai hợp đồng retrieval",
+      "new_text": "Hai phương án truy xuất",
+      "level": 3
+    },
+    {
+      "text": "Giới hạn evidence và context",
+      "new_text": "Giới hạn căn cứ và ngữ cảnh trả lời",
+      "level": 3
+    },
+    {
+      "text": "Pipeline nạp dữ liệu và quản lý chất lượng corpus",
+      "new_text": "Quy trình nạp dữ liệu và quản lý chất lượng tập văn bản",
+      "level": 3
+    },
+    {
+      "text": "Ma trận kho dữ liệu, schema và vòng đời",
+      "new_text": "Vai trò kho dữ liệu, cấu trúc và vòng đời",
+      "level": 3
+    },
+    {
+      "text": "Coverage, đồng bộ và tính nhất quán giữa chỉ mục",
+      "new_text": "Độ bao phủ và tính nhất quán giữa các chỉ mục",
+      "level": 3
+    },
+    {
+      "text": "Bảo mật, quyền sở hữu và vòng đời workspace",
+      "new_text": "Bảo mật, quyền sở hữu và vòng đời hồ sơ",
+      "level": 3
+    },
+    {
+      "text": "Lỗi, tính sẵn sàng và giới hạn capacity",
+      "new_text": "Lỗi, tính sẵn sàng và giới hạn dung lượng",
+      "level": 3
+    },
+    {
+      "text": "Ảnh chụp runtime: màn hình hỏi đáp",
+      "new_text": "Giao diện hỏi đáp đã khảo sát",
+      "level": 3
+    },
+    {
+      "text": "Ảnh chụp runtime: tra cứu văn bản",
+      "new_text": "Giao diện tra cứu đã khảo sát",
+      "level": 3
+    },
+    {
+      "text": "Trạng thái giao diện đã kiểm tra trên runtime",
+      "new_text": "Các trạng thái giao diện đã quan sát",
+      "level": 3
+    },
+    {
+      "text": "Luồng tra cứu metadata, toàn văn và đọc tài liệu",
+      "new_text": "Tra cứu thông tin, toàn văn và đọc tài liệu",
+      "level": 3
+    },
+    {
+      "text": "Luồng workspace, official-source read và phân tích",
+      "new_text": "Xử lý hồ sơ, đọc nguồn chính thức và phân tích",
+      "level": 3
+    },
+    {
+      "text": "Ảnh chụp runtime: luồng tra cứu chính",
+      "new_text": "Minh họa luồng tra cứu chính",
+      "level": 3
+    },
+    {
+      "text": "Nhận xét UX theo khả năng tránh hiểu nhầm",
+      "new_text": "Đánh giá giao diện theo khả năng tránh hiểu nhầm",
+      "level": 3
+    },
+    {
+      "text": "Đọc sâu retrieval metrics và benchmark",
+      "new_text": "Phân tích chỉ số truy xuất và bộ đánh giá",
+      "level": 3
+    },
+    {
+      "text": "Retrieval và truy xuất trong tiếng Việt",
+      "new_text": "Truy xuất thông tin trong tiếng Việt",
+      "level": 3
+    },
+    {
+      "text": "RAG, evidence và giới hạn của câu trả lời sinh",
+      "new_text": "RAG, căn cứ và giới hạn của câu trả lời được sinh",
+      "level": 3
+    },
+    {
+      "text": "Sai lệch cấp văn bản trong retrieval pháp lý",
+      "new_text": "Sai lệch cấp văn bản trong truy xuất pháp lý",
+      "level": 3
+    },
+    {
+      "text": "Đánh giá groundedness trong hỏi đáp pháp lý",
+      "new_text": "Đánh giá mức độ bám sát căn cứ trong hỏi đáp pháp lý",
+      "level": 3
+    },
+    {
+      "text": "Mục tiêu, câu hỏi và phạm vi khảo sát",
+      "level": 3
+    },
+    {
+      "text": "Phạm vi, phương pháp và bằng chứng",
+      "level": 3
+    },
+    {
+      "text": "Đóng góp và cấu trúc báo cáo",
+      "level": 3
+    },
+    {
+      "text": "Cơ sở lý thuyết và khung phân tích",
+      "level": 3
+    },
+    {
+      "text": "Nghiên cứu liên quan",
+      "level": 3
+    },
+    {
+      "text": "Định hướng phân tích cho VietLex",
+      "level": 3
+    },
+    {
+      "text": "Đối tượng và hiện trạng hệ thống",
+      "level": 3
+    },
+    {
+      "text": "Phạm vi người dùng và ranh giới",
+      "level": 3
+    },
+    {
+      "text": "Vai trò, năng lực và ranh giới quyền",
+      "level": 3
+    },
+    {
+      "text": "Phạm vi dữ liệu, giả định và phần chưa được nghiệm thu",
+      "level": 3
+    },
+    {
+      "text": "Phân rã chức năng và các màn hình",
+      "level": 3
+    },
+    {
+      "text": "Use case chính",
+      "level": 3
+    },
+    {
+      "text": "Điều kiện và luồng thay thế",
+      "level": 3
+    },
+    {
+      "text": "Yêu cầu nghiệm thu nội bộ",
+      "level": 3
+    },
+    {
+      "text": "Tóm tắt use case và nhánh ngoại lệ",
+      "level": 3
+    },
+    {
+      "text": "Mô hình trạng thái và phân loại ngoại lệ",
+      "level": 3
+    },
+    {
+      "text": "Từ use case đến tiêu chí nghiệm thu nội bộ",
+      "level": 3
+    },
+    {
+      "text": "Đối tượng EvidenceChunk",
+      "level": 3
+    },
+    {
+      "text": "RetrievalOutcome và trách nhiệm retriever",
+      "level": 3
+    },
+    {
+      "text": "Quan hệ phụ thuộc và nguyên tắc thiết kế",
+      "level": 3
+    },
+    {
+      "text": "Điểm cần cải thiện trong thiết kế",
+      "level": 3
+    },
+    {
+      "text": "Bảng trách nhiệm đối tượng và thành phần",
+      "level": 3
+    },
+    {
+      "text": "Đánh giá thiết kế và cải tiến có thể kiểm chứng",
+      "level": 3
+    },
+    {
+      "text": "Kiến trúc web và luồng tổng quát",
+      "level": 3
+    },
+    {
+      "text": "Ranh giới dữ liệu và an toàn",
+      "level": 3
+    },
+    {
+      "text": "Đánh đổi kiến trúc",
+      "level": 3
+    },
+    {
+      "text": "Lựa chọn kiến trúc và hệ quả bảo trì",
+      "level": 3
+    },
+    {
+      "text": "Luồng xử lý câu hỏi",
+      "level": 3
+    },
+    {
+      "text": "Nhận xét về khả năng sử dụng",
+      "level": 3
+    },
+    {
+      "text": "Bằng chứng hiện có và phương pháp đọc",
+      "level": 3
+    },
+    {
+      "text": "Kết quả câu trả lời và giới hạn diễn giải",
+      "level": 3
+    },
+    {
+      "text": "Bảng tổng hợp chỉ số và mẫu số",
+      "level": 3
+    },
+    {
+      "text": "Tổng hợp đánh giá",
+      "level": 3
+    },
+    {
+      "text": "Phân loại bằng chứng và mức diễn giải được phép",
+      "level": 3
+    },
+    {
+      "text": "Bằng chứng vận hành và kiểm thử hiện có",
+      "level": 3
+    },
+    {
+      "text": "Đánh giá theo từng lớp",
+      "level": 3
+    },
+    {
+      "text": "Phân tích lỗi và rủi ro",
+      "level": 3
+    },
+    {
+      "text": "Ma trận rủi ro và biện pháp kiểm soát",
+      "level": 3
+    },
+    {
+      "text": "Kế hoạch kiểm chứng tiếp theo",
+      "level": 3
+    },
+    {
+      "text": "Giao thức đánh giá kế tiếp có thể tái lập",
+      "level": 3
+    },
+    {
+      "text": "Lộ trình cải tiến theo mức rủi ro",
+      "level": 3
+    },
+    {
+      "text": "DANH MỤC ĐƯỜNG ĐI THEO VAI TRÒ",
+      "level": 3
+    },
+    {
+      "text": "Màn hình và điểm vào theo nhóm chức năng",
+      "level": 3
+    }
+  ],
+  "figures": [
+    {
+      "anchor_prefix": "Hoạt động tra cứu bắt đầu từ nhu cầu",
+      "path": "assets/uml/10-search-activity.png",
+      "title": "Sơ đồ hoạt động tra cứu và mở văn bản",
+      "chapter": 2,
+      "sources": [
+        "app/api/legal_routes.py",
+        "app/services/legal_browser.py"
+      ]
+    },
+    {
+      "anchor_prefix": "Một lượt đọc nguồn trong hồ sơ có thể kéo dài",
+      "path": "assets/uml/11-research-state.png",
+      "title": "Sơ đồ trạng thái của lượt đọc nguồn trong hồ sơ",
+      "chapter": 2,
+      "sources": [
+        "app/research_database.py",
+        "app/services/free_web_research.py"
+      ]
+    },
+    {
+      "anchor_prefix": "Mô hình dữ liệu thứ nhất mô tả người dùng",
+      "path": "assets/uml/08-account-data-model.png",
+      "title": "Mô hình dữ liệu tài khoản và hội thoại theo ký pháp lớp UML",
+      "chapter": 2,
+      "sources": [
+        "app/account_database.py",
+        "app/database.py"
+      ]
+    },
+    {
+      "anchor_prefix": "Mô hình dữ liệu thứ hai tập trung vào hồ sơ",
+      "path": "assets/uml/09-workspace-data-model.png",
+      "title": "Mô hình dữ liệu hồ sơ nghiên cứu theo ký pháp lớp UML",
+      "chapter": 2,
+      "sources": [
+        "app/research_database.py",
+        "app/api/workspace_routes.py",
+        "app/services/workspace_documents.py"
+      ]
+    }
+  ],
+  "caption_titles": [
+    {
+      "old": "Mô hình lớp rút gọn của evidence retrieval",
+      "new": "Mô hình lớp cài đặt phục vụ truy xuất căn cứ"
+    },
+    {
+      "old": "Vai trò và phạm vi năng lực trong source",
+      "new": "Vai trò người dùng và phạm vi chức năng"
+    },
+    {
+      "old": "Capability nội bộ tái dựng từ source và giới hạn nghiệm thu",
+      "new": "Đặc tả chức năng và giới hạn kiểm chứng"
+    },
+    {
+      "old": "Kiến trúc retrieval theo hai cấu hình",
+      "new": "Kiến trúc truy xuất theo hai cấu hình"
+    },
+    {
+      "old": "Hai hợp đồng retrieval và giới hạn snapshot được ghi nhận",
+      "new": "Hai phương án truy xuất và giới hạn dữ liệu đã ghi nhận"
+    },
+    {
+      "old": "Ảnh chụp runtime giao diện hỏi đáp — GET /",
+      "new": "Giao diện hỏi đáp tại trang chủ"
+    },
+    {
+      "old": "Ảnh chụp runtime tra cứu văn bản — GET /search",
+      "new": "Giao diện tra cứu văn bản"
+    },
+    {
+      "old": "Luồng đọc nguồn chính thức và hủy run trong workspace",
+      "new": "Luồng đọc nguồn chính thức và hủy lượt thực hiện trong hồ sơ"
+    },
+    {
+      "old": "Màn hình, route GET và ranh giới quan sát",
+      "new": "Màn hình, địa chỉ truy cập và phạm vi khảo sát"
+    },
+    {
+      "old": "Claim trọng yếu và đường truy vết evidence",
+      "new": "Nhận định chính và chứng cứ đối chiếu"
+    },
+    {
+      "old": "Sơ đồ và ảnh chụp runtime được dùng trong báo cáo",
+      "new": "Sơ đồ và ảnh giao diện dùng trong báo cáo"
+    }
+  ]
+}

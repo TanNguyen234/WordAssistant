@@ -1,0 +1,185 @@
+{
+  "schema_version": 2,
+  "sections": [
+    {
+      "section_id": "__preamble__",
+      "title": "Document preamble",
+      "text": "TRƯỜNG ĐẠI HỌC TÀI NGUYÊN VÀ MÔI TRƯỜNG TP. HỒ CHÍ MINH\nKHOA CÔNG NGHỆ THÔNG TIN\n\nTIỂU LUẬN / BÁO CÁO ĐỒ ÁN\n\nQUẢN LÝ DỰ ÁN PHẦN MỀM\n\nHƯỚNG DẪN HOÀN THIỆN TIỂU LUẬN LMS, CHỤP ẢNH VÀ TRÌNH BÀY\n\nBản thao tác chi tiết dùng cùng báo cáo chính — Trello / draw.io / LMS\n\nGiảng viên hướng dẫn: ..................................................\n\nNhóm thực hiện: ..........................................................\n\nLớp / mã lớp học phần: ................................................\n\nThời gian dự án đề xuất: 01/10 – 30/11/2026\n\nCông cụ: Trello · draw.io · GitHub · Word\n\nTP. Hồ Chí Minh, tháng 10 năm 2026",
+      "level": 0,
+      "parent_id": null,
+      "source_index": 0,
+      "metadata": {}
+    },
+    {
+      "section_id": "phan-i-cach-chon-file-va-cau-truc-bai",
+      "title": "PHẦN I. CÁCH CHỌN FILE VÀ CẤU TRÚC BÀI",
+      "text": "Tài liệu StrongWine được dùng làm mẫu cách trình bày tiểu luận và nhóm UML, không phải file để đổi tên nội dung “StrongWine” thành “LMS”. Bạn nên dùng file tiểu luận LMS mới đi kèm, bổ sung tên giảng viên và thành viên thật rồi chỉnh tiếp theo rubric.\n\nMục bài LMS | Nội dung phải nói | Cần bằng chứng\nBìa / Tóm tắt | Tên đề tài + môn học, nhóm, cô | Thông tin thật, không tự nhận giảng viên StrongWine là GV đề tài này\nMở đầu | Bài toán quản lý học tập, lý do Trello/draw.io | Nguồn cô giao / mô tả yêu cầu\nChương 1: Scope LMS | Actor, FR, NFR, in/out scope | Use Case; hình LMS thật nếu có\nChương 2: Kế hoạch | Charter, WBS, Oct–Nov, RACI | WBS, timeline, Trello milestone\nChương 3: Trello | Board, lists, cards, checklist, due và review | Screenshot T01–T04\nChương 4: UML | Use Case, Activity, Sequence, Class, State, ERD | PNG từ draw.io; source .drawio\nChương 5: PM Control | Risk, cost model, change control, QA | Log/test/CR; không dùng số giả làm actual\nChương 6: Kịch bản thành công | UAT và EVM mô phỏng 30/11 | Bảng mô phỏng đóng nhãn rõ\nChương 7: Sản phẩm | Ảnh 3 vai trò, API, đối chiếu mã nguồn | Screenshot LMS thật L01–L04\nKết luận + PL | Đã kiểm chứng/đề xuất/chưa thực thi | Bảng tham chiếu file ảnh + đường dẫn",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 16,
+      "metadata": {}
+    },
+    {
+      "section_id": "phan-ii-chup-anh-trello-tu-trinh-duyet-ang-ang-nhap",
+      "title": "PHẦN II. CHỤP ẢNH TRELLO: TỪ TRÌNH DUYỆT ĐANG ĐĂNG NHẬP",
+      "text": "Link board: https://trello.com/b/sLfApXgV/qlda-x%C3%A2y-d%E1%BB%B1ng-h%E1%BB%87-th%E1%BB%91ng-lms-cho-tr%C6%B0%E1%BB%9Dng-%C4%91%E1%BA%A1i-h%E1%BB%8Dc",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 20,
+      "metadata": {}
+    },
+    {
+      "section_id": "t01-tong-quan-board",
+      "title": "T01 — Tổng quan board",
+      "text": "THAO TÁC: Mở link; cuộn ngang tới các danh sách chính. Chụp 1–2 ảnh bằng Win+Shift+S để thấy tên board, tiêu đề danh sách và thẻ. Nếu giao diện dài, chụp 2 phần và ghi “phần 1/2”.\n\nCAPTION MẪU: Hình T01. Cấu trúc bảng Trello quản lý dự án LMS ngày chụp thực tế.\n\nVỊ TRÍ CHÈN: Chương 3 §3.1",
+      "level": 2,
+      "parent_id": "phan-ii-chup-anh-trello-tu-trinh-duyet-ang-ang-nhap",
+      "source_index": 22,
+      "metadata": {}
+    },
+    {
+      "section_id": "t02-the-phan-cong-va-checklist",
+      "title": "T02 — Thẻ phân công và checklist",
+      "text": "THAO TÁC: Mở PM-04 hoặc DGM-12; để thấy tiêu đề, description, checklist, người phụ trách/due nếu đã khai báo. Chụp một ảnh vừa đủ đọc.\n\nCAPTION MẪU: Hình T02. Thẻ WBS/ERD và tiêu chí hoàn thành trên Trello.\n\nVỊ TRÍ CHÈN: Chương 3 §3.2",
+      "level": 2,
+      "parent_id": "phan-ii-chup-anh-trello-tu-trinh-duyet-ang-ang-nhap",
+      "source_index": 26,
+      "metadata": {}
+    },
+    {
+      "section_id": "t03-timeline-thang-1011",
+      "title": "T03 — Timeline tháng 10–11",
+      "text": "THAO TÁC: Mở danh sách 07 hoặc các thẻ M04–M08; để visible due date và nhãn “KẾ HOẠCH”.\n\nCAPTION MẪU: Hình T03. Các mốc kế hoạch dự án 10–11/2026 trên Trello.\n\nVỊ TRÍ CHÈN: Chương 2 §2.3",
+      "level": 2,
+      "parent_id": "phan-ii-chup-anh-trello-tu-trinh-duyet-ang-ang-nhap",
+      "source_index": 30,
+      "metadata": {}
+    },
+    {
+      "section_id": "t04-kich-ban-nghiem-thu",
+      "title": "T04 — Kịch bản nghiệm thu",
+      "text": "THAO TÁC: Mở danh sách 08; chụp các thẻ SIM-01, SIM-02, SIM-03 có chữ “MÔ PHỎNG”. Không đánh dấu Done để đánh lừa.\n\nCAPTION MẪU: Hình T04. Hồ sơ nghiệm thu mô phỏng, chưa phải UAT thực tế.\n\nVỊ TRÍ CHÈN: Chương 6",
+      "level": 2,
+      "parent_id": "phan-ii-chup-anh-trello-tu-trinh-duyet-ang-ang-nhap",
+      "source_index": 34,
+      "metadata": {}
+    },
+    {
+      "section_id": "t05-bang-chung-hoan-thanh-that",
+      "title": "T05 — Bằng chứng hoàn thành thật",
+      "text": "THAO TÁC: Sau khi công việc thực đã review, mở thẻ có attachment và checklist được đánh dấu. Chụp URL file, người review và ngày.\n\nCAPTION MẪU: Hình T05. Minh chứng một công việc được hoàn tất và kiểm tra chéo.\n\nVỊ TRÍ CHÈN: Chương 3/5\n\nLƯU Ý VỀ BẰNG CHỨNG: Ảnh thống kê Trello đi kèm ZIP được dựng lại từ dữ liệu API thật chứ không phải ảnh chụp giao diện. Nếu muốn chứng cứ trực quan khi bảo vệ, thay hoặc bổ sung bằng ảnh T01–T05 tự chụp.\n\nHình HD.1. Biểu đồ số liệu lấy từ Trello thực tế, không phải ảnh giao diện ứng dụng.",
+      "level": 2,
+      "parent_id": "phan-ii-chup-anh-trello-tu-trinh-duyet-ang-ang-nhap",
+      "source_index": 38,
+      "metadata": {}
+    },
+    {
+      "section_id": "phan-iii-xuat-anh-chinh-file-drawio",
+      "title": "PHẦN III. XUẤT ẢNH CHÍNH FILE .DRAWIO",
+      "text": "1. Mở https://app.diagrams.net/ và chọn Device/Thiết bị để lưu ở máy.\n\n2. File → Open From → Device → chọn LMS_03.drawio (Use Case), LMS_12.drawio (ERD) hoặc tệp còn lại trong thư mục drawio/.\n\n3. Kiểm tra các đường nối, tiêu đề, chú thích. Nếu bị lệch vị trí, sửa trực tiếp trong draw.io rồi Ctrl+S lưu nguồn.\n\n4. File → Export as → PNG; đặt Zoom khoảng 200%, bật Crop, có thể thêm Border Width 10–20; xuất bản không watermark, chữ đủ lớn.\n\n5. Đặt tên ảnh ví dụ D03_UseCase_LMS_chup_drawio.png và D12_ERD_LMS_chup_drawio.png; không đổi nội dung khi chụp.\n\n6. Mở Word → Insert → Pictures → This Device. Chọn ảnh; Layout Options → In Line with Text; canh giữa, chiều rộng tối đa khoảng 15,5 cm.\n\n7. References → Insert Caption: Hình 4.1... dưới hình; sau hình phải có 4–8 dòng phân tích tác nhân, luồng hoặc quan hệ.\n\n8. Giữ file .drawio trong phụ lục hoặc ZIP để cô có thể mở và chỉnh sửa bản gốc.",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 45,
+      "metadata": {}
+    },
+    {
+      "section_id": "phan-iv-chup-giao-dien-lms-that-tu-may",
+      "title": "PHẦN IV. CHỤP GIAO DIỆN LMS THẬT TỪ MÁY",
+      "text": "Mã | Ảnh chụp cần có | Mục đích / chú ý\nL01 | Màn hình login (URL web local / demo) | Chứng minh có giao diện xác thực, che mật khẩu\nL02 | Admin — trang user/course/enrollment | Mô tả quản trị đào tạo; dùng dữ liệu demo\nL03 | Lecturer — module/lesson/assignment/quiz | Chứng minh luồng nội dung và đánh giá\nL04 | Student — My courses/lesson/assignment | Chứng minh đọc nội dung và nộp văn bản\nL05 | Student — quiz/results/grades | Thể hiện trạng thái và kết quả đúng dữ liệu\nL06 | Swagger hoặc log API và HTTP 403 | Minh chứng phân quyền server, nếu có test thật\nL07 | Terminal pytest / build frontend + timestamp | Đính kèm lệnh đầy đủ và trạng thái; không cắt mất FAIL\n\nNếu LMS chạy localhost:5173: chụp thanh địa chỉ ở ít nhất một ảnh; dùng tài khoản demo không tiết lộ token, mật khẩu hoặc email cá nhân. Mỗi ảnh nên lưu YYYYMMDD_ROLE_CHUCNANG.png. Nếu trang chưa chạy được, ghi “CHƯA CHỤP — CHƯA CÓ BẰNG CHỨNG” thay vì lấy ảnh sản phẩm khác.",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 54,
+      "metadata": {}
+    },
+    {
+      "section_id": "phan-v-cach-chen-hinh-va-viet-loi-phan-tich",
+      "title": "PHẦN V. CÁCH CHÈN HÌNH VÀ VIẾT LỜI PHÂN TÍCH",
+      "text": "",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 58,
+      "metadata": {}
+    },
+    {
+      "section_id": "use-case",
+      "title": "Use Case",
+      "text": "Chèn DGM-03 vào Chương 4 §4.1. Mở đầu: “Biểu đồ mô tả ba nhóm người dùng...” Phân tích actor, trách nhiệm và quyền. Kết luận: “Dữ liệu cần được backend kiểm tra quyền”.",
+      "level": 2,
+      "parent_id": "phan-v-cach-chen-hinh-va-viet-loi-phan-tich",
+      "source_index": 59,
+      "metadata": {}
+    },
+    {
+      "section_id": "activity-nop-bai",
+      "title": "Activity nộp bài",
+      "text": "Chèn DGM-05 trong 4.1; giải thích Enrollment, DueAt, AllowLate, nhánh Có/Không và Submission.",
+      "level": 2,
+      "parent_id": "phan-v-cach-chen-hinh-va-viet-loi-phan-tich",
+      "source_index": 61,
+      "metadata": {}
+    },
+    {
+      "section_id": "sequence-cham-bai",
+      "title": "Sequence chấm bài",
+      "text": "Chèn DGM-08 trong 4.2; giải thích request, xác thực LecturerId, transaction cập nhật grade và feedback.",
+      "level": 2,
+      "parent_id": "phan-v-cach-chen-hinh-va-viet-loi-phan-tich",
+      "source_index": 63,
+      "metadata": {}
+    },
+    {
+      "section_id": "class-diagram",
+      "title": "Class Diagram",
+      "text": "Chèn DGM-10 trong 4.3; chọn 4 quan hệ quan trọng, không mô tả dài bằng việc đọc tên tất cả box.",
+      "level": 2,
+      "parent_id": "phan-v-cach-chen-hinh-va-viet-loi-phan-tich",
+      "source_index": 65,
+      "metadata": {}
+    },
+    {
+      "section_id": "erd",
+      "title": "ERD",
+      "text": "Chèn DGM-12 trong 4.4; nhấn mạnh 12 bảng và các FK, unique constraints, dữ liệu phải khớp schema.",
+      "level": 2,
+      "parent_id": "phan-v-cach-chen-hinh-va-viet-loi-phan-tich",
+      "source_index": 67,
+      "metadata": {}
+    },
+    {
+      "section_id": "trello",
+      "title": "Trello",
+      "text": "Chèn T01–T04 vào Chương 2/3/6; sau ảnh giải thích quyết định quản lý chứ không chỉ nói ảnh là cái gì.",
+      "level": 2,
+      "parent_id": "phan-v-cach-chen-hinh-va-viet-loi-phan-tich",
+      "source_index": 69,
+      "metadata": {}
+    },
+    {
+      "section_id": "san-pham-chay",
+      "title": "Sản phẩm chạy",
+      "text": "Chèn L01–L07 vào Chương 7; phân biệt ảnh giao diện với bằng chứng nghiệp vụ/DB.",
+      "level": 2,
+      "parent_id": "phan-v-cach-chen-hinh-va-viet-loi-phan-tich",
+      "source_index": 71,
+      "metadata": {}
+    },
+    {
+      "section_id": "phan-vi-ngon-ngu-e-trinh-bay-thanh-cong-ung-cach",
+      "title": "PHẦN VI. NGÔN NGỮ ĐỂ TRÌNH BÀY “THÀNH CÔNG” ĐÚNG CÁCH",
+      "text": "TRƯỜNG HỢP 1 — Đang là 23/10/2026: “Nhóm đã xây dựng được cấu trúc quản lý Trello, có bộ sơ đồ nguồn và code LMS nền tảng. Nhóm thiết kế kế hoạch nghiệm thu cho tháng 11/2026 và dự kiến hoàn tất báo cáo, kiểm thử, đóng gói trong thời hạn này.”\n\nTRƯỜNG HỢP 2 — Kịch bản mô phỏng trên slide: “Giả sử đến 30/11/2026, các kịch bản nghiệp vụ chính đều đạt, nhóm không còn lỗi P0/P1 và hoàn tất sản phẩm bàn giao. Phương pháp đo và minh chứng cần được điền lại khi nghiệm thu thật.”\n\nTRƯỜNG HỢP 3 — Sau khi thực sự có log: “Theo log pytest ngày..., số test đạt..., số lỗi..., commit..., ảnh màn hình... Đây mới là kết quả thực tế có thể kiểm tra lại.”\n\nKhông dùng: “cô đã nghiệm thu”, “đạt 100% thực tế”, “hoàn thành 30/11” khi chưa đến ngày hoặc chưa có người thực hiện, dữ liệu và phê duyệt. Không tự tạo ảnh chụp màn hình Trello giả làm bằng chứng.",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 73,
+      "metadata": {}
+    },
+    {
+      "section_id": "phan-vii-checklist-truoc-khi-nop",
+      "title": "PHẦN VII. CHECKLIST TRƯỚC KHI NỘP",
+      "text": "Bìa có đúng tên đề tài và giảng viên thật; xóa thông tin StrongWine không liên quan.\n\nCập nhật tên nhóm/lớp, không để placeholder trong bản nộp.\n\nCó mục lục Word tự động và Caption / số hình nhất quán.\n\nĐủ file .drawio có thể mở, ảnh xuất bản cuối từ draw.io.\n\nÍt nhất 3 ảnh Trello thật và 3–5 ảnh LMS thật nếu cô yêu cầu demo.\n\nĐọc lại từng “MÔ PHỎNG”; không trộn số liệu 20 tuần/1,2 tỷ với kịch bản hai tháng/27 triệu.\n\nẢnh minh chứng không làm lộ JWT, password, email thật, token hoặc dữ liệu sinh viên thật.\n\nTrello card có owner và due thật nếu nhóm đã phân công; thẻ Done phải có reviewer và evidence.\n\nNếu PDF được yêu cầu, xuất từ bản Word cuối và kiểm tra ảnh không vỡ / bị lệch trang.\n\nGói nộp gồm DOCX, PDF nếu yêu cầu, sơ đồ .drawio, ảnh và link Trello phù hợp quyền chia sẻ.",
+      "level": 1,
+      "parent_id": null,
+      "source_index": 78,
+      "metadata": {}
+    }
+  ]
+}

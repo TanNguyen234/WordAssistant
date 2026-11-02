@@ -1,0 +1,22 @@
+........................................................................ [  9%]
+........................................................................ [ 19%]
+........................................................................ [ 28%]
+........................................................................ [ 38%]
+........................................................................ [ 48%]
+........................................................................ [ 57%]
+........................................................................ [ 67%]
+........................................................................ [ 77%]
+........................................................................ [ 86%]
+........................................................................ [ 96%]
+..........................                                               [100%]
+============================== warnings summary ===============================
+tests/native_word/test_native_live_operations.py: 1 warning
+tests/test_academic_report_profile.py: 1 warning
+tests/test_cli.py: 4 warnings
+tests/test_draft_placeholders_rejected.py: 1 warning
+tests/test_inspect_field_structural.py: 1 warning
+tests/test_verify_exit_codes.py: 2 warnings
+  D:\Download\WordAssistant\src\wordassistant\document\structure.py:172: UserWarning: style lookup by style_id is deprecated. Use style name as key instead.
+    return document.styles[style_id].name
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html

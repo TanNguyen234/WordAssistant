@@ -1,0 +1,90 @@
+{
+  "overall_status": "FAIL",
+  "delivery_status": "FAIL",
+  "delivery_gates": {
+    "overall": "FAIL",
+    "render": "PASS",
+    "visual": "REVIEW_REQUIRED",
+    "native_word": "PASS"
+  },
+  "structural_status": "PASS",
+  "format_status": "FAIL",
+  "numbering_status": "PASS",
+  "table_geometry_status": "FAIL",
+  "field_structure_status": "PASS",
+  "field_freshness_status": "STALE_OR_UNKNOWN",
+  "field_evaluation_status": "NOT_REQUESTED",
+  "render_status": "PASS",
+  "native_word_status": "PASS",
+  "visual_status": "REVIEW_REQUIRED",
+  "manual_review_required": true,
+  "issues": [
+    {
+      "severity": "ERROR",
+      "code": "style_alignment_mismatch",
+      "message": "Style 'Heading 1' must align left; persistent style=CENTER (1), conflicting paragraph overrides=0."
+    },
+    {
+      "severity": "ERROR",
+      "code": "cover_border_inset",
+      "message": "Cover frame top inset is 4 pt; expected at least 24 pt from the page edge."
+    },
+    {
+      "severity": "ERROR",
+      "code": "cover_border_inset",
+      "message": "Cover frame left inset is 4 pt; expected at least 24 pt from the page edge."
+    },
+    {
+      "severity": "ERROR",
+      "code": "cover_border_inset",
+      "message": "Cover frame bottom inset is 4 pt; expected at least 24 pt from the page edge."
+    },
+    {
+      "severity": "ERROR",
+      "code": "cover_border_inset",
+      "message": "Cover frame right inset is 4 pt; expected at least 24 pt from the page edge."
+    },
+    {
+      "severity": "ERROR",
+      "code": "header_topic_mismatch",
+      "message": "Header text does not match document topic: 'TIỂU LUẬN QUẢN LÝ DỰ ÁN PHẦN MỀM\nGVHD: ThS. Định Thị Hồng Loan' vs expected 'QUẢN LÝ DỰ ÁN PHẦN MỀM QUẢN LÝ DỰ ÁN XÂY DỰNG HỆ THỐNG QUẢN LÝ HỌC TẬP TRỰC TUYẾN (LMS) CHO TRƯỜNG ĐẠI HỌC'."
+    },
+    {
+      "severity": "ERROR",
+      "code": "footer_student_mismatch",
+      "message": "Footer text does not contain cover student 'Nguyễn Thành Duy Tân'."
+    }
+  ],
+  "inventory": {
+    "paragraphs": 490,
+    "tables": 21,
+    "sections": 9,
+    "images": 29,
+    "fields": {
+      "total_field_tags": 474,
+      "toc_field": true,
+      "page_field": true,
+      "page_fields": 111,
+      "toc_fields": 3,
+      "other_fields": 44
+    }
+  },
+  "render": {
+    "engine": "word",
+    "pdf_path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\LMS_20261028_truong.pdf",
+    "file_size_bytes": 2785054,
+    "page_count": 75,
+    "verified_pdf_page_count": 75
+  },
+  "visual_review_challenge": {
+    "token": "ca1103f429ebfe11a4c073b58651000f5348198769520c33a8c1930109284b41",
+    "page_count": 75,
+    "token_scope": "document SHA-256 plus ordered page-image SHA-256 and size; PDF SHA-256 is provenance only"
+  },
+  "visual_review_reuse": {
+    "version": 1,
+    "token": "wa-visual-reuse-v1:3e6bd068a82532ab515d974907482010dbfb64cc4cf3a741d18441a19863a098"
+  },
+  "report_path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\qa\\verify-LMS_20261028_truong.json",
+  "report_sha256": "7bf1d703c98c12ce0710311f39da63c65311e61d314ec3a08583156961200c99"
+}

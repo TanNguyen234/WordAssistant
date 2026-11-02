@@ -1,0 +1,34 @@
+{
+  "candidate": "output/candidate-hcmunre-essay-unverified.docx",
+  "candidate_sha256": "45b5b7b27715ffdb7e3672b0b22c6f0a57284493d261002bcf5844ff5f7187ce",
+  "field_inventory_exit": 0,
+  "field_counts": {
+    "PAGEREF": 65,
+    "SEQ": 25,
+    "PAGE": 2,
+    "TOC": 0
+  },
+  "field_refresh": "NOT_RUN",
+  "native_word_backend": {
+    "status": "UNAVAILABLE",
+    "reason": "Bundled runtime reports Microsoft Word isolated COM probe failed: No module named pythoncom; advanced adapter probe also lacks docx_mcp"
+  },
+  "render": {
+    "status": "FAILED_ENVIRONMENT",
+    "renderer": "documents skill render_docx.py",
+    "reason": "LibreOffice soffice.exe was not found on PATH in the bundled runtime"
+  },
+  "visual_review": "NOT_RUN",
+  "computer_use": {
+    "status": "UNAVAILABLE",
+    "window_id": 721876,
+    "errors": [
+      "coordinate input geometry is unavailable",
+      "FrameArrived timed out: timed out waiting on channel",
+      "window capture timed out: timed out waiting on channel",
+      "Accessibility state unavailable for window 721876"
+    ]
+  },
+  "canonical_final_sha256": "defc36d4f73e2af8ba8bd86eb6c3bd721d42d7128e92a15bd9943746e96a0235",
+  "delivery": "INCOMPLETE_NOT_PROMOTED"
+}

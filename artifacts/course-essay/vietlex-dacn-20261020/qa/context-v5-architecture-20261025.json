@@ -1,0 +1,14 @@
+{
+  "query": "analysis evidence conclusions",
+  "sections": [
+    {
+      "id": "kien-truc-web-va-luong-tong-quat",
+      "title": "Kiến trúc web và luồng tổng quát",
+      "level": 2
+    }
+  ],
+  "text": "## CHƯƠNG 2: PHƯƠNG PHÁP THỰC HIỆN > Kiến trúc web và luồng tổng quát\nFastAPI/Jinja phục vụ route HTML và API. Route chuyển request tới service nghiệp vụ; template kết xuất form, nguồn và trạng thái; service retrieval giao tiếp với index/content store; pipeline tạo context và gọi tầng generation. Cache semantic và interaction store phục vụ hai nhiệm vụ khác nhau: cache có thể trả kết quả đã được lưu theo điều kiện; interaction store lưu status/trace để theo dõi phiên. Sơ đồ kiến trúc thể hiện ranh giới này ở mức thành phần, không liệt kê mọi database collection hay provider.\n\nMột boolean cấu hình chọn một trong hai retrieval contract; không có cross-fallback âm thầm giữa hai contract theo tài liệu hiện hành. Với USE_LEGACY_FREE_PIPELINE=false (giá trị mặc định trong config), tuyến V3 dùng Vertex gemini-embedding-2 vector 1024 chiều và Qdrant V3, trộn RRF/DBSF. Với true, tuyến legacy dùng Qdrant Cloud inference multilingual E5 384 chiều, Pinecone V1, SQLite FTS cho số hiệu/tiêu đề và local content resolution. Config mặc định không phải bằng chứng về deployment hiện tại.\n\nHÌNH 2.4. Kiến trúc retrieval theo hai cấu hình",
+  "estimated_tokens": 378,
+  "max_tokens": 1800,
+  "truncated": false
+}

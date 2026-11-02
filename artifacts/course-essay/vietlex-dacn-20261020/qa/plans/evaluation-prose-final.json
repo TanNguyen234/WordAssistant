@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "input_sha256": "96254eda2735c28bef4bf34e2f49e4364fff8c43104487b4bfbe90acd1520335",
+  "require_complete_hierarchy": true,
+  "edits": [
+    {
+      "section": "Bằng chứng hiện có và phương pháp đọc",
+      "paragraph_index": 0,
+      "expected_text_sha256": "a67ad3c4592d504a79529058ef9dc0be59872517670ac8374b66be2816cb962a",
+      "text": "Tài liệu docs/evaluation/CURRENT_STATUS.md gồm phần cập nhật vận hành ngày 19/10/2026 và kết quả Golden-50 đã lưu ngày 03/09/2026. Hai mốc có phạm vi khác nhau: Golden-50 đánh giá truy xuất và câu trả lời trên 50 trường hợp; cập nhật mới ghi hai câu hỏi thăm dò, trong đó một câu đạt một phần và một câu không đạt. Mẫu thăm dò này chưa tạo thành một bộ đánh giá đại diện. Vì vậy, mỗi chỉ số cần được đọc cùng ngày thực hiện, phiên bản mã nguồn, tập dữ liệu, mẫu số và điều kiện chạy."
+    },
+    {
+      "section": "Bằng chứng hiện có và phương pháp đọc",
+      "paragraph_index": 1,
+      "expected_text_sha256": "9b34dc268d1e2e208d508392f0482a74e40716f64b1aaa23f70d768e98abd60a",
+      "text": "Đối với truy xuất, Recall@K phải dựa trên nhãn căn cứ đã được kiểm tra. Tài liệu lịch sử ghi nhận 40 trường hợp với 53 đơn vị căn cứ dùng được; 10 trong 50 trường hợp được bỏ qua vì thiếu nhãn đã xác minh. Tỷ lệ thu hồi ở ba vị trí đầu đạt 53/53 ở cấp văn bản, 29/30 ở cấp điều và 13/14 ở cấp khoản; 39/40 trường hợp tìm đủ các căn cứ bắt buộc. Các mẫu số thể hiện những đơn vị khác nhau, nên 53/53 không có nghĩa là 53 câu hỏi được trả lời đúng. Đây là kết quả tìm nguồn trong phạm vi nhãn đã có."
+    },
+    {
+      "section": "Kết quả câu trả lời và giới hạn diễn giải",
+      "paragraph_index": 0,
+      "expected_text_sha256": "75e6f7f22fd7e429b14b603f17eaf9004e99972d46b5afa5e918623c5ee5cafd",
+      "text": "Lượt đánh giá câu trả lời Golden-50 ngày 03/09/2026 hoàn tất 50/50 trường hợp, nhưng không có câu nào khớp hoàn toàn với đáp án chuẩn. F1 theo từ đạt 0,2305; F1 theo ký tự đạt 0,2230; độ chính xác trích dẫn là 0,9183 và tỷ lệ trích dẫn không hợp lệ là 0,0817. Bộ chấm RAGAs ghi mức bám sát ngữ cảnh (faithfulness) 0,8221, độ chính xác câu trả lời 0,9100, độ chính xác ngữ cảnh 0,8600 và độ bao phủ ngữ cảnh 0,9500. Các giá trị thuộc lần đánh giá lịch sử, chưa phải kết quả chạy lại mã nguồn hiện tại; chúng cũng không xác nhận một quy định còn hiệu lực hoặc được áp dụng đúng."
+    },
+    {
+      "section": "Kết quả câu trả lời và giới hạn diễn giải",
+      "paragraph_index": 2,
+      "expected_text_sha256": "318f3922ab44036a22a150acc0fe5482c1f372d5534f0aaebd793b1709da88c8",
+      "text": "Cập nhật ngày 19/10 ghi nhận hai câu hỏi mới trong phạm vi tập văn bản chung đều chưa đạt đầy đủ tiêu chí: một câu chỉ đạt một phần, câu còn lại không đạt. Ví dụ được lưu cho thấy trích dẫn chưa đúng căn cứ điều, khoản có thẩm quyền. Tài liệu xác định đây là khảo sát thăm dò có quy mô rất nhỏ, chưa thể dùng để ước lượng chất lượng tổng thể hoặc xác nhận khả năng vận hành chính thức. Kết quả này cho thấy có vấn đề cần điều tra bằng một lượt đánh giá mới; nó chưa cho phép suy ra xác suất đúng hoặc sai cho mọi câu hỏi."
+    },
+    {
+      "section": "Bảng tổng hợp chỉ số và mẫu số",
+      "paragraph_index": 0,
+      "expected_text_sha256": "43cd25f27965c10b2709cfaf977d3650cc5819c7f5ba9711fc50630d20f086fe",
+      "text": "Bảng dưới trình bày riêng kết quả truy xuất, kết quả câu trả lời và các thử nghiệm mới hơn. Khi sử dụng lại số liệu, cần giữ ngày thực hiện, đơn vị đo và mẫu số để người đọc không hiểu chúng là kết quả của cùng một phép thử."
+    },
+    {
+      "section": "Phân tích chỉ số truy xuất và bộ đánh giá",
+      "paragraph_index": 0,
+      "expected_text_sha256": "7c74f773ca9a298b06cdcdf3de230c0ff73cc8aa5216ca751cc3da2f4f7490ef",
+      "text": "Kết quả Golden-50 ngày 03/09/2026 cần được hiểu theo từng đơn vị đánh giá. Tỷ lệ thu hồi ở ba vị trí đầu đạt 53/53 ở cấp văn bản, 29/30 ở cấp điều và 13/14 ở cấp khoản; 39/40 trường hợp tìm đủ các căn cứ bắt buộc. Mười trong 50 trường hợp bị bỏ qua vì chưa có đáp án chuẩn được xác minh. Mẫu số 53 là số đơn vị căn cứ ở cấp văn bản, không phải số câu hỏi độc lập. Kết quả cho thấy bộ truy xuất tìm được nguồn đã gán nhãn trong phạm vi được đánh giá, chưa chứng minh khả năng xếp hạng với mọi cách hỏi hoặc toàn bộ tập văn bản."
+    },
+    {
+      "section": "Phân tích chỉ số truy xuất và bộ đánh giá",
+      "paragraph_index": 1,
+      "expected_text_sha256": "0591bda5bd9738c1b6dca1bf79236b0edecd29ac51bf6f3bb406e6600367a3fc",
+      "text": "Kết quả câu trả lời cho thấy mức khớp hoàn toàn 0/50, F1 theo từ 0,2305 và F1 theo ký tự 0,2230. Độ chính xác trích dẫn đạt 0,9183, còn tỷ lệ trích dẫn không hợp lệ là 0,0817. Các điểm RAGAs về mức bám sát ngữ cảnh, độ chính xác câu trả lời, độ chính xác ngữ cảnh và độ bao phủ ngữ cảnh lần lượt là 0,8221; 0,9100; 0,8600; 0,9500. Đây là các phép đo tự động trên dữ liệu đã lưu. Mức khớp thấp có thể chịu ảnh hưởng của cách diễn đạt, nhưng vẫn là dấu hiệu cần đọc câu trả lời cụ thể; các điểm tự động cao hơn không thể được chuyển thành xác suất đúng pháp luật."
+    },
+    {
+      "section": "Phân tích chỉ số truy xuất và bộ đánh giá",
+      "paragraph_index": 2,
+      "expected_text_sha256": "10494317ca623f679ae036c1da918681566d3c949e9d07cd8ce77d8723345c8d",
+      "text": "Sự khác biệt giữa kết quả truy xuất và mức khớp câu trả lời cho thấy cần phân tích từng bước thay vì gộp thành một điểm chất lượng. Nguyên nhân có thể nằm ở việc câu hỏi và nhãn nguồn chưa tương ứng, thiếu đoạn căn cứ, chọn nội dung chưa phù hợp, cách sinh câu trả lời, gắn trích dẫn hoặc quy tắc chấm. Bản tổng hợp hiện có chưa đủ xác định nguyên nhân thuộc riêng thành phần nào. Cần xem dấu vết xử lý theo từng trường hợp và bổ sung nhận xét chuyên môn trước khi chọn biện pháp sửa."
+    }
+  ],
+  "run_edits": [
+    {
+      "section": "Kết quả câu trả lời và giới hạn diễn giải",
+      "paragraph_index": 1,
+      "expected_text_sha256": "80c99516a4e29bf192d83148f59930b4d6a8f7c38b4cb45de60a7de015613928",
+      "text": "Chỉ số faithfulness của RAGAs xem xét mức độ câu trả lời được hỗ trợ bởi ngữ cảnh đã cung cấp. Trong khi đó, mức khớp hoàn toàn và F1 theo từ so sánh câu trả lời với đáp án chuẩn, nên có thể đánh giá thấp cách diễn đạt khác nhưng tương đương. Độ chính xác trích dẫn lại phụ thuộc quy tắc đối chiếu nguồn của lần đánh giá. Không chỉ số riêng lẻ nào đủ cho biết người dùng có thể dựa vào kết luận pháp lý hay không. Việc rà soát vẫn phải xem từng nhận định trọng yếu, thời điểm áp dụng, ngoại lệ và độ đầy đủ của nguồn được sử dụng. ",
+      "run_index": 0,
+      "expected_run_sha256": "80c99516a4e29bf192d83148f59930b4d6a8f7c38b4cb45de60a7de015613928"
+    }
+  ]
+}

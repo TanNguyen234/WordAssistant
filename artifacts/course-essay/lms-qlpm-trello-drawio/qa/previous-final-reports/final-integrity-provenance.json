@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0",
+  "manifest_kind": "WORDASSISTANT_ACADEMIC_PROVENANCE",
+  "generated_at_utc": "2026-10-25T07:11:58.635913+00:00",
+  "document": {
+    "path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final.docx",
+    "sha256": "81bd50274bb0e7ee19ee3b57a20967755b3a73189530324cefad23ea52963ff5",
+    "size_bytes": 704978,
+    "modified_at_utc": "2026-10-25T07:03:45.680271+00:00"
+  },
+  "producer": {
+    "name": "wordassistant",
+    "version": "2.0.0",
+    "integrity_schema_version": "1.0"
+  },
+  "source_registry": {
+    "evidence": {
+      "path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\report-evidence.json",
+      "exists": true,
+      "sha256": "67de098c5851b4c8c0cda2a9a6bddb9f069f3d7b9c35c6c5b7e2ace028af4b10",
+      "record_count": 5,
+      "record_ids": [
+        "DRAWIO-FORMATS",
+        "DRAWIO-PNG",
+        "PMI-SCHED",
+        "TRELLO-CARDS",
+        "TRELLO-CHECKS"
+      ]
+    },
+    "record_count": 5,
+    "metadata": {}
+  },
+  "profile": {
+    "profile_id": "generic-lms-project-report",
+    "profile_version": 1,
+    "minimum_references": 4,
+    "prefer_primary_source": true,
+    "require_reviewed_sources": true,
+    "long_quote_words": 40,
+    "quote_citation_words": 8,
+    "repeated_opening_words": 3,
+    "repeated_opening_minimum": 3,
+    "ngram_size": 5,
+    "repeated_ngram_minimum": 3,
+    "review_punctuation": [
+      "em_dash",
+      "en_dash",
+      "left_curly_double_quote",
+      "right_curly_double_quote",
+      "left_curly_single_quote",
+      "right_curly_single_quote",
+      "ellipsis",
+      "non_breaking_space"
+    ]
+  },
+  "disclosure": {
+    "declared": false,
+    "source": "not_found",
+    "statement": null
+  },
+  "audit_summary": {
+    "status": "WARN",
+    "gate_counts": {
+      "PASS": 6,
+      "WARN": 4,
+      "FAIL": 0
+    },
+    "document_sha256": "81bd50274bb0e7ee19ee3b57a20967755b3a73189530324cefad23ea52963ff5",
+    "ai_detection_performed": false,
+    "detector_evasion_assistance": false
+  }
+}

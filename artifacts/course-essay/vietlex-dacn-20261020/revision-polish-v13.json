@@ -1,0 +1,348 @@
+{
+  "schema_version": 1,
+  "input_sha256": "48854031b23629249c68862b4d1c98e12ef37f18c20d453f195f849cc15e9629",
+  "scope_start": "MỞ ĐẦU",
+  "scope_end": "PHỤ LỤC A. MA TRẬN YÊU CẦU VÀ BẰNG CHỨNG",
+  "first_line_indent_cm": 1,
+  "glossary": [
+    {
+      "find": "Official mã nguồn",
+      "replace": "Nguồn chính thức"
+    },
+    {
+      "find": "content kho lưu trữ",
+      "replace": "kho nội dung"
+    },
+    {
+      "find": "local content kho lưu trữ",
+      "replace": "kho nội dung cục bộ"
+    },
+    {
+      "find": "body search",
+      "replace": "tìm kiếm toàn văn"
+    },
+    {
+      "find": "body-search chỉ mục",
+      "replace": "chỉ mục toàn văn"
+    },
+    {
+      "find": "thông tin mô tả records",
+      "replace": "bản ghi thông tin mô tả"
+    },
+    {
+      "find": "document ID",
+      "replace": "định danh văn bản"
+    },
+    {
+      "find": "query variants",
+      "replace": "các biến thể truy vấn"
+    },
+    {
+      "find": "gold labels",
+      "replace": "nhãn đáp án chuẩn"
+    },
+    {
+      "find": "manual adjudication",
+      "replace": "thẩm định thủ công"
+    },
+    {
+      "find": "human adjudication",
+      "replace": "thẩm định chuyên môn"
+    },
+    {
+      "find": "grounding classification",
+      "replace": "phân loại mức độ bám sát căn cứ"
+    },
+    {
+      "find": "natural-language inference",
+      "replace": "suy luận ngôn ngữ tự nhiên"
+    },
+    {
+      "find": "open-domain question answering",
+      "replace": "hỏi đáp trong miền mở"
+    },
+    {
+      "find": "Dense truy xuất",
+      "replace": "Truy xuất theo vector dày"
+    },
+    {
+      "find": "dense truy xuất",
+      "replace": "truy xuất theo vector dày"
+    },
+    {
+      "find": "failure mode",
+      "replace": "dạng lỗi"
+    },
+    {
+      "find": "class inventory",
+      "replace": "danh mục lớp"
+    },
+    {
+      "find": "request/response",
+      "replace": "yêu cầu và phản hồi"
+    },
+    {
+      "find": "truy xuất recall",
+      "replace": "độ bao phủ truy xuất"
+    },
+    {
+      "find": "trích dẫn precision",
+      "replace": "độ chính xác trích dẫn"
+    },
+    {
+      "find": "invalid-trích dẫn rate",
+      "replace": "tỷ lệ trích dẫn không hợp lệ"
+    },
+    {
+      "find": "answer match",
+      "replace": "mức khớp câu trả lời"
+    },
+    {
+      "find": "no đoạn căn cứ",
+      "replace": "không có căn cứ"
+    },
+    {
+      "find": "reviewer demo",
+      "replace": "chế độ đánh giá minh họa"
+    },
+    {
+      "find": "token F1",
+      "replace": "F1 theo từ"
+    },
+    {
+      "find": "Hình 2.3",
+      "replace": "Hình 2.7"
+    },
+    {
+      "find": "Hình 2.4",
+      "replace": "Hình 2.8"
+    },
+    {
+      "find": "Hình 2.5",
+      "replace": "Hình 2.9"
+    },
+    {
+      "find": "claim",
+      "replace": "nhận định"
+    },
+    {
+      "find": "document",
+      "replace": "văn bản"
+    },
+    {
+      "find": "snapshot",
+      "replace": "bản chụp dữ liệu"
+    },
+    {
+      "find": "denominator",
+      "replace": "mẫu số"
+    },
+    {
+      "find": "grounding",
+      "replace": "bám sát căn cứ"
+    },
+    {
+      "find": "correctness",
+      "replace": "độ đúng"
+    },
+    {
+      "find": "precision",
+      "replace": "độ chính xác"
+    },
+    {
+      "find": "recall",
+      "replace": "độ bao phủ"
+    },
+    {
+      "find": "gold",
+      "replace": "đáp án chuẩn"
+    },
+    {
+      "find": "summary",
+      "replace": "bản tóm tắt"
+    },
+    {
+      "find": "chunk",
+      "replace": "đoạn"
+    },
+    {
+      "find": "law",
+      "replace": "pháp luật"
+    },
+    {
+      "find": "request",
+      "replace": "yêu cầu"
+    },
+    {
+      "find": "response",
+      "replace": "phản hồi"
+    },
+    {
+      "find": "workspace",
+      "replace": "hồ sơ nghiên cứu"
+    },
+    {
+      "find": "workspaces",
+      "replace": "các hồ sơ nghiên cứu"
+    },
+    {
+      "find": "deployment",
+      "replace": "bản triển khai"
+    },
+    {
+      "find": "live",
+      "replace": "trực tiếp khi chạy"
+    },
+    {
+      "find": "judge",
+      "replace": "bộ chấm tự động"
+    },
+    {
+      "find": "reviewer",
+      "replace": "người đánh giá"
+    },
+    {
+      "find": "caller",
+      "replace": "nhóm truy cập"
+    },
+    {
+      "find": "role",
+      "replace": "vai trò"
+    },
+    {
+      "find": "admin",
+      "replace": "quản trị viên"
+    },
+    {
+      "find": "test",
+      "replace": "kiểm thử"
+    },
+    {
+      "find": "probe",
+      "replace": "kiểm tra"
+    },
+    {
+      "find": "server",
+      "replace": "máy chủ"
+    },
+    {
+      "find": "form",
+      "replace": "biểu mẫu"
+    },
+    {
+      "find": "dense",
+      "replace": "vector dày"
+    },
+    {
+      "find": "sparse",
+      "replace": "vector thưa"
+    },
+    {
+      "find": "encoder",
+      "replace": "bộ mã hóa"
+    },
+    {
+      "find": "UI",
+      "replace": "giao diện"
+    },
+    {
+      "find": "URL",
+      "replace": "địa chỉ nguồn"
+    },
+    {
+      "find": "metrics",
+      "replace": "chỉ số"
+    },
+    {
+      "find": "metric",
+      "replace": "chỉ số"
+    },
+    {
+      "find": "acceptance",
+      "replace": "nghiệm thu"
+    },
+    {
+      "find": "Acceptance",
+      "replace": "Nghiệm thu"
+    },
+    {
+      "find": "handbook",
+      "replace": "tài liệu hướng dẫn"
+    },
+    {
+      "find": "correlation ID",
+      "replace": "định danh liên kết yêu cầu"
+    },
+    {
+      "find": "reranker",
+      "replace": "bộ xếp hạng lại"
+    },
+    {
+      "find": "indexing",
+      "replace": "lập chỉ mục"
+    },
+    {
+      "find": "routing",
+      "replace": "định tuyến"
+    }
+  ],
+  "rewrites": [
+    {
+      "section": "Đóng góp và cấu trúc báo cáo",
+      "paragraph_index": 0,
+      "text": "Đóng góp của đồ án là hệ thống hóa mối liên hệ giữa nhu cầu tra cứu, dữ liệu được lưu, trách nhiệm của thành phần xử lý và cách đánh giá kết quả của VietLex. Mô hình dữ liệu nghiệp vụ bổ sung cho mô hình lớp cài đặt; các sơ đồ hành vi giải thích những tình huống thành công, thiếu thông tin và dừng tác vụ. Các nhận xét được đối chiếu với mã nguồn và chứng cứ đã lưu, từ đó đề xuất hướng kiểm tra tiếp theo. Giá trị của phần phân tích nằm ở việc làm rõ những liên hệ này, thay vì chỉ liệt kê công nghệ hay chức năng."
+    },
+    {
+      "section": "Đối tượng và hiện trạng hệ thống",
+      "paragraph_index": 0,
+      "text": "VietLex là ứng dụng web xây dựng bằng FastAPI và Jinja, cung cấp các trang hỏi đáp, tra cứu, đọc văn bản và quản lý hồ sơ nghiên cứu. Một nhóm trang khác phục vụ tài khoản và quản trị. Trong quá trình khảo sát, báo cáo phân biệt trang giao diện với thao tác gửi dữ liệu: một trang có thể hỗ trợ nhiều hành động nhưng các hành động đó không được đếm thành các màn hình riêng. Danh sách tuyến xử lý và mẫu giao diện được lưu trong kiểm kê dự án để đối chiếu với sơ đồ phân cấp màn hình ở phần nghiệp vụ."
+    },
+    {
+      "section": "Đối tượng và hiện trạng hệ thống",
+      "paragraph_index": 1,
+      "text": "Trang tra cứu hỗ trợ tìm theo thông tin mô tả và tìm theo nội dung khi chỉ mục tương ứng khả dụng. Ảnh đã ghi ngày 23/10/2026 cho thấy quá trình từ trang chủ đến trang tra cứu, gửi số hiệu 45/2019/QH14 và mở kết quả Bộ luật Lao động 2019. Quan sát này xác nhận trạng thái của luồng công khai tại thời điểm chụp; nó chưa bao phủ các bộ lọc, mọi kho dữ liệu hoặc các trường hợp lỗi. Thông tin sự kiện hiệu lực được trình bày riêng theo dữ liệu đã đăng ký, cần được phân biệt với kết luận thẩm định hiệu lực của văn bản."
+    },
+    {
+      "section": "Đối tượng và hiện trạng hệ thống",
+      "paragraph_index": 2,
+      "text": "Trang hỏi đáp cho phép đặt câu hỏi theo phạm vi tập văn bản chung hoặc gắn với một văn bản cụ thể. Yêu cầu đi qua kiểm tra đầu vào, lựa chọn căn cứ, sinh câu trả lời và kiểm tra đầu ra; một số trường hợp có thể dùng lại bộ nhớ đệm hoặc dừng trước bước sinh. Khảo sát hiện trạng vì vậy cần mô tả cả các nhánh thay thế, đặc biệt là thiếu căn cứ và sự cố kỹ thuật. Những khác biệt này ảnh hưởng trực tiếp đến cách người dùng hiểu thông báo trên giao diện."
+    }
+  ],
+  "headings": [
+    {
+      "text": "Cơ sở lý thuyết và khung phân tích",
+      "level": 2
+    },
+    {
+      "text": "Nghiên cứu liên quan",
+      "level": 2
+    },
+    {
+      "text": "Định hướng phân tích cho VietLex",
+      "level": 2
+    },
+    {
+      "text": "DANH MỤC ĐƯỜNG ĐI THEO VAI TRÒ",
+      "new_text": "Phạm vi tuyến xử lý phục vụ kiểm chứng",
+      "level": 3
+    },
+    {
+      "text": "Màn hình và điểm vào theo nhóm chức năng",
+      "remove_heading_only": true
+    }
+  ],
+  "front_matter_rewrites": {
+    "LỜI CẢM ƠN": [
+      "Em xin trân trọng cảm ơn ThS. Định Thị Hồng Loan, giảng viên hướng dẫn đồ án chuyên ngành với đề tài “Phân tích và đánh giá hệ thống VietLex hỗ trợ tra cứu pháp luật Việt Nam theo hướng RAG”. Sự hướng dẫn về mặt học thuật của cô là chỗ dựa để em xác định phạm vi đề tài và hoàn thiện báo cáo. Qua quá trình thực hiện, em có dịp nhìn lại kiến thức đã học và vận dụng vào việc tìm hiểu một hệ thống phần mềm cụ thể.",
+      "Đề tài đòi hỏi em vừa đọc hiểu cách tổ chức chương trình, vừa xem xét nhu cầu của người sử dụng. Khi chuyển từ việc mô tả chức năng sang phân tích các lựa chọn thiết kế, em nhận thấy có nhiều vấn đề cần được giải thích cẩn thận hơn so với hiểu biết ban đầu. Quá trình hoàn thiện báo cáo giúp em tập đặt câu hỏi, lựa chọn tài liệu và kiểm tra lại những nhận xét của mình trước khi trình bày.",
+      "Em cũng học được rằng một báo cáo rõ ràng cần có sự liên hệ giữa các phần. Mô hình phân tích phải giải thích được vấn đề thực tế; kết quả khảo sát cần có căn cứ; nhận xét và đề xuất phải xuất phát từ những gì đã tìm hiểu. Việc xây dựng sơ đồ, tổ chức nội dung và diễn giải kết quả giúp em rèn luyện cách trình bày có hệ thống, đồng thời nhận ra những phần kiến thức bản thân còn cần bổ sung.",
+      "Do kinh nghiệm và thời gian thực hiện còn hạn chế, báo cáo khó tránh khỏi thiếu sót trong cách lựa chọn tư liệu, phân tích và diễn đạt. Em mong tiếp tục nhận được những góp ý để hiểu vấn đề đầy đủ hơn và cải thiện phương pháp học tập, nghiên cứu của mình. Em xin chịu trách nhiệm về nội dung đã trình bày, đồng thời ghi nhận rằng việc hoàn thành bản báo cáo là một bước trong quá trình học hỏi cần được tiếp tục.",
+      "Một lần nữa, em xin chân thành cảm ơn ThS. Định Thị Hồng Loan đã nhận hướng dẫn đồ án. Em kính chúc cô sức khỏe, nhiều niềm vui và thuận lợi trong công tác giảng dạy, nghiên cứu. Những điều rút ra từ quá trình thực hiện đề tài sẽ là kinh nghiệm để em tiếp tục hoàn thiện năng lực phân tích, làm việc với tài liệu và trình bày kết quả trong các học phần cũng như công việc sau này."
+    ],
+    "TÓM TẮT ĐỒ ÁN": [
+      "Đồ án phân tích VietLex, một hệ thống hỗ trợ tra cứu và nghiên cứu pháp luật Việt Nam có sử dụng phương pháp tạo câu trả lời kết hợp truy xuất thông tin (RAG). Mục tiêu là làm rõ mối liên hệ giữa nhu cầu người dùng, cách tổ chức dữ liệu, quá trình xử lý câu hỏi và chất lượng kết quả. Phương pháp thực hiện gồm khảo sát mã nguồn, đối chiếu tài liệu thiết kế và đánh giá đã lưu, đồng thời xem xét các ảnh giao diện có địa chỉ và thời điểm ghi nhận.",
+      "Kết quả khảo sát cho thấy hệ thống kết hợp tìm kiếm văn bản, đọc nội dung, hỏi đáp có căn cứ và quản lý hồ sơ nghiên cứu. Báo cáo xây dựng mô hình dữ liệu theo ký pháp lớp UML để giải thích quan hệ tài khoản, hội thoại và hồ sơ; các sơ đồ hoạt động, trạng thái, tuần tự và thành phần mô tả cách phối hợp xử lý. Hai phương án truy xuất được phân tích theo phạm vi dữ liệu và điều kiện vận hành. Phần giao diện xem xét khả năng phân biệt kết quả tìm kiếm, thông tin nguồn và những trạng thái cần thông báo rõ cho người dùng.",
+      "Đánh giá được giới hạn theo chứng cứ hiện có. Mốc Golden-50 ngày 03/09/2026 ghi nhận tỷ lệ khớp hoàn toàn 0/50 và F1 theo từ 0,2305; tài liệu ngày 19/10/2026 cho biết hai câu hỏi thử nghiệm mới chưa đạt đầy đủ tiêu chí. Báo cáo chưa thực hiện một bộ đánh giá đại diện mới, kiểm tra toàn bộ chức năng cần quyền riêng hay thẩm định hiệu lực pháp luật hiện hành. Từ các giới hạn đó, đồ án đề xuất ưu tiên kiểm soát tính nhất quán của dữ liệu, theo dõi căn cứ qua các bước xử lý và thiết kế kiểm thử có đáp án chuẩn để đánh giá lại chất lượng câu trả lời."
+    ]
+  }
+}

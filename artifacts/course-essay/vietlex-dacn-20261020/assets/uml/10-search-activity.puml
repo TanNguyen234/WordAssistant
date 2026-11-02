@@ -1,0 +1,31 @@
+@startuml
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName "Times New Roman"
+skinparam defaultFontSize 22
+start
+:Người dùng nhập từ khóa\nvà chọn điều kiện tra cứu;
+:Hệ thống kiểm tra tham số\nvà xác định phạm vi tìm kiếm;
+if (Tìm theo toàn văn?) then (Có)
+  :Truy vấn chỉ mục nội dung;
+else (Không)
+  :Tra cứu thông tin mô tả văn bản;
+endif
+if (Dịch vụ truy vấn hoạt động?) then (Có)
+  if (Có kết quả phù hợp?) then (Có)
+    :Hiển thị danh sách và bộ lọc;
+    :Người dùng chọn một văn bản;
+    :Lấy thông tin và nội dung\ntheo document_id;
+    if (Có nội dung khả dụng?) then (Có)
+      :Hiển thị trang đọc văn bản;
+    else (Không)
+      :Thông báo thiếu nội dung\nhoặc không tìm thấy văn bản;
+    endif
+  else (Không)
+    :Hiển thị danh sách rỗng\nvà cho phép đổi điều kiện;
+  endif
+else (Không)
+  :Trả thông báo lỗi dịch vụ\ntheo nhánh xử lý của máy chủ;
+endif
+stop
+@enduml

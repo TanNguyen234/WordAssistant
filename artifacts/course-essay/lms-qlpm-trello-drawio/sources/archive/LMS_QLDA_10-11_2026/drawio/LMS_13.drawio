@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" modified="2026-10-23T11:00:00.000Z" agent="LMS Course Work" version="24.7.17" type="device">
+  <diagram id="LMS_13" name="13 — Kiến trúc LMS (hiện có trong repo)">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="client" value="Admin · Giảng viên · Sinh viên" style="rounded=1whiteSpace=wrap;html=1;fillColor=#fff7ed;strokeColor=#f59e0b;strokeWidth=2;fontColor=#0f172a;fontSize=15;align=center;verticalAlign=middle;spacing=8;" parent="1" vertex="1">
+          <mxGeometry x="440" y="65" width="430" height="90" as="geometry"/>
+        </mxCell>
+        <mxCell id="web" value="React 19 + TypeScript + Vite&amp;#xa;Trang web 3 vai trò" style="rounded=1whiteSpace=wrap;html=1;fillColor=#e0f2fe;strokeColor=#0284c7;strokeWidth=2;fontColor=#0f172a;fontSize=15;align=center;verticalAlign=middle;spacing=8;" parent="1" vertex="1">
+          <mxGeometry x="390" y="235" width="520" height="105" as="geometry"/>
+        </mxCell>
+        <mxCell id="api" value="FastAPI + SQLAlchemy&amp;#xa;JWT · RBAC · REST API · Business rules" style="rounded=1whiteSpace=wrap;html=1;fillColor=#e0f2fe;strokeColor=#0284c7;strokeWidth=2;fontColor=#0f172a;fontSize=15;align=center;verticalAlign=middle;spacing=8;" parent="1" vertex="1">
+          <mxGeometry x="390" y="430" width="520" height="105" as="geometry"/>
+        </mxCell>
+        <mxCell id="sql" value="Microsoft SQL Server&amp;#xa;12 bảng dữ liệu, PK/FK, seed" style="rounded=1whiteSpace=wrap;html=1;fillColor=#e0f2fe;strokeColor=#0284c7;strokeWidth=2;fontColor=#0f172a;fontSize=15;align=center;verticalAlign=middle;spacing=8;" parent="1" vertex="1">
+          <mxGeometry x="390" y="625" width="520" height="105" as="geometry"/>
+        </mxCell>
+        <mxCell id="trello" value="Trello: quản lý DỰ ÁN&amp;#xa;Không thuộc kiến trúc LMS" style="rounded=1whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#94a3b8;strokeWidth=2;fontColor=#0f172a;fontSize=15;align=center;verticalAlign=middle;spacing=8;" parent="1" vertex="1">
+          <mxGeometry x="25" y="440" width="300" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="drawio" value="draw.io: thiết kế sơ đồ&amp;#xa;Không thuộc runtime" style="rounded=1whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#94a3b8;strokeWidth=2;fontColor=#0f172a;fontSize=15;align=center;verticalAlign=middle;spacing=8;" parent="1" vertex="1">
+          <mxGeometry x="1030" y="440" width="310" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge0" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#64748b;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="client" target="web" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge1" value="HTTP / JSON / JWT" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#64748b;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="web" target="api" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge2" value="SQL / transaction" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#64748b;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="api" target="sql" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

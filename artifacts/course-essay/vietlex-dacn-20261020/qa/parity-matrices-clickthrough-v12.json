@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "document_path": "output/VietLex_DoAnChuyenNganh_Clickthrough_FinalQA_20261023.docx",
+  "document_sha256": "38e897511263eccbf6f9b0bf9173ea55e6cbe91fba4e01b9f33345a3cfeebe7e",
+  "structure": {
+    "matrix": "structure-parity-clickthrough-v12.csv",
+    "matrix_sha256": "b0179eb729a8f41532c7212a9ff9e82b371bea9434f6d74d2d29cf03aaf2d95f",
+    "rows": 105,
+    "actual_word_headings": 105,
+    "visible_toc_entries": 105,
+    "include_in_toc_rows": 105,
+    "outline_check": "PASS",
+    "toc_check": "PASS"
+  },
+  "visual_assets": {
+    "matrix": "asset-parity-clickthrough-v12.csv",
+    "matrix_sha256": "ae26cc0ea38c31e3697fad23b4cca55fd43486427d9c9c0e0c24059540d12262",
+    "asset_rows": 35,
+    "captioned_assets": 31,
+    "expected_embedded_images": 20,
+    "actual_embedded_images": 20,
+    "figure_captions": 18,
+    "formal_table_captions": 13,
+    "tables": 15,
+    "caption_inventory_check": "PASS",
+    "caption_bound_media_check": "PASS"
+  },
+  "runtime_screenshots": {
+    "manifest": "assets/runtime-captures-clickthrough-20261023/capture-manifest.json",
+    "manifest_sha256": "682c43cd6a5e423f79413b0ef32b5012eb5a7c865e5d90a12e9a73289ae45a73",
+    "embedded_screenshots": 11,
+    "browser_surface": "visible_browser_tab",
+    "headless": false,
+    "navigation_policy": "visible_ui_clickthrough",
+    "provenance_check": "PASS"
+  },
+  "claims_and_sources": {
+    "claim_matrix": "claim-evidence.csv",
+    "claim_matrix_sha256": "e7498508346c99d0b002d3f03344f8b1558b88e922e3d1acc700666bc02c6038",
+    "claim_rows": 17,
+    "stale_claim_check": "FAIL",
+    "stale_claim_detail": "Evidence source hash changed for app/services/rag_pipeline.py."
+  },
+  "qa_report": "qa/readiness-final-clickthrough-v12.json",
+  "qa_report_sha256": "bacef7c73e0238e5b4a073d4e6f6ce2519ae42c37748ed8a76abf2073ae36178"
+}

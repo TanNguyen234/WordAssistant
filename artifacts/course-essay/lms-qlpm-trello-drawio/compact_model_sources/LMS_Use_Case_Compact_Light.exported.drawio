@@ -1,0 +1,85 @@
+<mxfile host="app.diagrams.net" scale="2" border="0">
+  <diagram name="Page-1" id="wACvX8cb_MtiZch9dDWf">
+    <mxGraphModel dx="774" dy="586" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;align=center;fontSize=28;fontStyle=1;fontColor=#111827;" value="Use Case LMS theo vai trò" vertex="1">
+          <mxGeometry height="48" width="870" x="240" y="22" as="geometry" />
+        </mxCell>
+        <mxCell id="admin-lane" parent="1" style="rounded=0;html=1;fillColor=none;strokeColor=#cbd5e1;strokeWidth=2;dashed=1;" value="" vertex="1">
+          <mxGeometry height="565" width="415" x="25" y="98" as="geometry" />
+        </mxCell>
+        <mxCell id="admin-actor" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;strokeColor=#1d4ed8;fillColor=#eff6ff;fontSize=17;fontStyle=1;" value="ADMIN" vertex="1">
+          <mxGeometry height="110" width="82" x="47" y="335" as="geometry" />
+        </mxCell>
+        <mxCell id="admin-uc-1" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#eef2ff;strokeColor=#1d4ed8;strokeWidth=2;fontSize=16;fontColor=#111827;" value="Quản lý tài khoản" vertex="1">
+          <mxGeometry height="82" width="260" x="153" y="177" as="geometry" />
+        </mxCell>
+        <mxCell id="admin-uc-2" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#eef2ff;strokeColor=#1d4ed8;strokeWidth=2;fontSize=16;fontColor=#111827;" value="Tạo và quản lý khóa học" vertex="1">
+          <mxGeometry height="82" width="260" x="153" y="322" as="geometry" />
+        </mxCell>
+        <mxCell id="admin-uc-3" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#eef2ff;strokeColor=#1d4ed8;strokeWidth=2;fontSize=16;fontColor=#111827;" value="Ghi danh sinh viên" vertex="1">
+          <mxGeometry height="82" width="260" x="153" y="467" as="geometry" />
+        </mxCell>
+        <mxCell id="lecturer-lane" parent="1" style="rounded=0;html=1;fillColor=none;strokeColor=#cbd5e1;strokeWidth=2;dashed=1;" value="" vertex="1">
+          <mxGeometry height="565" width="415" x="470" y="98" as="geometry" />
+        </mxCell>
+        <mxCell id="lecturer-actor" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;strokeColor=#1d4ed8;fillColor=#eff6ff;fontSize=17;fontStyle=1;" value="GIẢNG VIÊN" vertex="1">
+          <mxGeometry height="110" width="82" x="492" y="335" as="geometry" />
+        </mxCell>
+        <mxCell id="lecturer-uc-1" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#eef2ff;strokeColor=#1d4ed8;strokeWidth=2;fontSize=16;fontColor=#111827;" value="Xuất bản bài giảng" vertex="1">
+          <mxGeometry height="82" width="260" x="598" y="177" as="geometry" />
+        </mxCell>
+        <mxCell id="lecturer-uc-2" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#eef2ff;strokeColor=#1d4ed8;strokeWidth=2;fontSize=16;fontColor=#111827;" value="Tạo bài tập và quiz" vertex="1">
+          <mxGeometry height="82" width="260" x="598" y="322" as="geometry" />
+        </mxCell>
+        <mxCell id="lecturer-uc-3" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#eef2ff;strokeColor=#1d4ed8;strokeWidth=2;fontSize=16;fontColor=#111827;" value="Chấm bài và phản hồi" vertex="1">
+          <mxGeometry height="82" width="260" x="598" y="467" as="geometry" />
+        </mxCell>
+        <mxCell id="student-lane" parent="1" style="rounded=0;html=1;fillColor=none;strokeColor=#cbd5e1;strokeWidth=2;dashed=1;" value="" vertex="1">
+          <mxGeometry height="565" width="415" x="915" y="98" as="geometry" />
+        </mxCell>
+        <mxCell id="student-actor" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;strokeColor=#1d4ed8;fillColor=#eff6ff;fontSize=17;fontStyle=1;" value="SINH VIÊN" vertex="1">
+          <mxGeometry height="110" width="82" x="937" y="335" as="geometry" />
+        </mxCell>
+        <mxCell id="student-uc-1" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#eef2ff;strokeColor=#1d4ed8;strokeWidth=2;fontSize=16;fontColor=#111827;" value="Xem bài giảng" vertex="1">
+          <mxGeometry height="82" width="260" x="1043" y="177" as="geometry" />
+        </mxCell>
+        <mxCell id="student-uc-2" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#eef2ff;strokeColor=#1d4ed8;strokeWidth=2;fontSize=16;fontColor=#111827;" value="Nộp bài văn bản và làm quiz" vertex="1">
+          <mxGeometry height="82" width="260" x="1043" y="322" as="geometry" />
+        </mxCell>
+        <mxCell id="student-uc-3" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#eef2ff;strokeColor=#1d4ed8;strokeWidth=2;fontSize=16;fontColor=#111827;" value="Xem điểm và phản hồi" vertex="1">
+          <mxGeometry height="82" width="260" x="1043" y="467" as="geometry" />
+        </mxCell>
+        <mxCell id="assoc-admin-0" edge="1" parent="1" source="admin-actor" style="endArrow=none;html=1;strokeColor=#64748b;strokeWidth=2;" target="admin-uc-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="assoc-admin-1" edge="1" parent="1" source="admin-actor" style="endArrow=none;html=1;strokeColor=#64748b;strokeWidth=2;" target="admin-uc-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="assoc-admin-2" edge="1" parent="1" source="admin-actor" style="endArrow=none;html=1;strokeColor=#64748b;strokeWidth=2;" target="admin-uc-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="assoc-lecturer-0" edge="1" parent="1" source="lecturer-actor" style="endArrow=none;html=1;strokeColor=#64748b;strokeWidth=2;" target="lecturer-uc-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="assoc-lecturer-1" edge="1" parent="1" source="lecturer-actor" style="endArrow=none;html=1;strokeColor=#64748b;strokeWidth=2;" target="lecturer-uc-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="assoc-lecturer-2" edge="1" parent="1" source="lecturer-actor" style="endArrow=none;html=1;strokeColor=#64748b;strokeWidth=2;" target="lecturer-uc-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="assoc-student-0" edge="1" parent="1" source="student-actor" style="endArrow=none;html=1;strokeColor=#64748b;strokeWidth=2;" target="student-uc-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="assoc-student-1" edge="1" parent="1" source="student-actor" style="endArrow=none;html=1;strokeColor=#64748b;strokeWidth=2;" target="student-uc-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="assoc-student-2" edge="1" parent="1" source="student-actor" style="endArrow=none;html=1;strokeColor=#64748b;strokeWidth=2;" target="student-uc-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

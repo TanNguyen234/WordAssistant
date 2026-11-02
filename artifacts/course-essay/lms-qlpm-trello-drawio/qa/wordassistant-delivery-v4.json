@@ -1,0 +1,1572 @@
+{
+  "overall_status": "PASS",
+  "structural_status": "PASS",
+  "format_status": "PASS",
+  "numbering_status": "PASS",
+  "table_geometry_status": "PASS",
+  "field_structure_status": "PASS",
+  "field_freshness_status": "PASS",
+  "field_evaluation_status": "PASS",
+  "field_status": "PASS",
+  "render_status": "PASS",
+  "native_word_status": "PASS",
+  "visual_status": "PASS",
+  "manual_review_required": false,
+  "issues": [
+    {
+      "severity": "WARNING",
+      "code": "unresolvable_formatting",
+      "message": "Could not resolve 149 expected text-formatting value(s). Examples (zero-based paragraph indexes): paragraph 16 [toc 1]: line spacing; paragraph 17 [toc 1]: line spacing; paragraph 18 [toc 2]: line spacing; paragraph 19 [toc 2]: line spacing; paragraph 20 [toc 1]: line spacing."
+    }
+  ],
+  "field_evidence": {
+    "version": 1,
+    "operation": "field.update_all",
+    "sha256": "8e6d85407110e8adbd20c886446865a58be259a077b99aa67a4134f66c8ab8a1",
+    "created_at": "2026-10-25T04:49:00.378916+00:00",
+    "backend": "word-native"
+  },
+  "field_evidence_status": "INFORMATIONAL_UNTRUSTED",
+  "native_field_results": [
+    {
+      "story": "document",
+      "type": 13,
+      "instruction": "TOC \\o \"1-3\" \\h \\z \\u",
+      "result": "TÓM TẮT\tiMỤC LỤC\tiiDANH MỤC HÌNH\tivDANH MỤC BẢNG\tvMỞ ĐẦU\t1CHƯƠNG 1. TỔNG QUAN VÀ KHỞI TẠO DỰ ÁN\t11.1 Business case và mục tiêu\t21.2 Giả định và ràng buộc\t2CHƯƠNG 2. CÁC BÊN LIÊN QUAN VÀ TỔ CHỨC DỰ ÁN\t32.1 Sổ stakeholder\t32.2 RACI và escalation\t3CHƯƠNG 3. QUẢN LÝ PHẠM VI VÀ WBS\t53.1 Ranh giới và acceptance\t53.2 Work breakdown\t5CHƯƠNG 4. QUẢN LÝ TIẾN ĐỘ VÀ CPM\t74.1 Danh sách hoạt động và phụ thuộc\t74.2 Theo dõi sai lệch\t8CHƯƠNG 5. QUẢN LÝ NGUỒN LỰC VÀ CHI PHÍ\t95.1 Resource breakdown\t95.2 Kiểm soát chi phí\t10CHƯƠNG 6. QUẢN LÝ RỦI RO\t116.1 Giám sát và ứng phó\t11CHƯƠNG 7. QUẢN LÝ CHẤT LƯỢNG VÀ KIỂM THỬ\t127.1 Gate và DoD\t127.2 UAT và triage\t12CHƯƠNG 8. TRUYỀN THÔNG, THAY ĐỔI VÀ TRELLO\t148.1 Luồng board và quy ước\t148.2 Kết nối Trello — WBS — Draw.io — Word\t17CHƯƠNG 9. THIẾT KẾ VÀ BIỂU ĐỒ DRAW.IO\t189.1 Kiến trúc và dữ liệu\t189.2 Quy trình xuất biểu đồ\t19CHƯƠNG 10. NGHIỆM THU VÀ ĐÓNG DỰ ÁN\t2010.1 Tiêu chí nghiệm thu\t2010.2 Lessons learned và hướng phát triển\t20KẾT LUẬN VÀ KIẾN NGHỊ\t21TÀI LIỆU THAM KHẢO\t22PHỤ LỤC\t23Phụ lục A. Danh mục sơ đồ Draw.io\t23Phụ lục B. Checklist ảnh Trello, Draw.io và LMS\t23Phụ lục C. Loại bằng chứng và giới hạn\t24",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821476\"",
+      "result": "TÓM TẮT\ti",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821476 \\h",
+      "result": "i",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821477\"",
+      "result": "MỤC LỤC\tii",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821477 \\h",
+      "result": "ii",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821478\"",
+      "result": "DANH MỤC HÌNH\tiv",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821478 \\h",
+      "result": "iv",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821479\"",
+      "result": "DANH MỤC BẢNG\tv",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821479 \\h",
+      "result": "v",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821480\"",
+      "result": "MỞ ĐẦU\t1",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821480 \\h",
+      "result": "1",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821481\"",
+      "result": "CHƯƠNG 1. TỔNG QUAN VÀ KHỞI TẠO DỰ ÁN\t1",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821481 \\h",
+      "result": "1",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821482\"",
+      "result": "1.1 Business case và mục tiêu\t2",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821482 \\h",
+      "result": "2",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821483\"",
+      "result": "1.2 Giả định và ràng buộc\t2",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821483 \\h",
+      "result": "2",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821484\"",
+      "result": "CHƯƠNG 2. CÁC BÊN LIÊN QUAN VÀ TỔ CHỨC DỰ ÁN\t3",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821484 \\h",
+      "result": "3",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821485\"",
+      "result": "2.1 Sổ stakeholder\t3",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821485 \\h",
+      "result": "3",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821486\"",
+      "result": "2.2 RACI và escalation\t3",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821486 \\h",
+      "result": "3",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821487\"",
+      "result": "CHƯƠNG 3. QUẢN LÝ PHẠM VI VÀ WBS\t5",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821487 \\h",
+      "result": "5",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821488\"",
+      "result": "3.1 Ranh giới và acceptance\t5",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821488 \\h",
+      "result": "5",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821489\"",
+      "result": "3.2 Work breakdown\t5",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821489 \\h",
+      "result": "5",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821490\"",
+      "result": "CHƯƠNG 4. QUẢN LÝ TIẾN ĐỘ VÀ CPM\t7",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821490 \\h",
+      "result": "7",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821491\"",
+      "result": "4.1 Danh sách hoạt động và phụ thuộc\t7",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821491 \\h",
+      "result": "7",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821492\"",
+      "result": "4.2 Theo dõi sai lệch\t8",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821492 \\h",
+      "result": "8",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821493\"",
+      "result": "CHƯƠNG 5. QUẢN LÝ NGUỒN LỰC VÀ CHI PHÍ\t9",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821493 \\h",
+      "result": "9",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821494\"",
+      "result": "5.1 Resource breakdown\t9",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821494 \\h",
+      "result": "9",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821495\"",
+      "result": "5.2 Kiểm soát chi phí\t10",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821495 \\h",
+      "result": "10",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821496\"",
+      "result": "CHƯƠNG 6. QUẢN LÝ RỦI RO\t11",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821496 \\h",
+      "result": "11",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821497\"",
+      "result": "6.1 Giám sát và ứng phó\t11",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821497 \\h",
+      "result": "11",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821498\"",
+      "result": "CHƯƠNG 7. QUẢN LÝ CHẤT LƯỢNG VÀ KIỂM THỬ\t12",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821498 \\h",
+      "result": "12",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821499\"",
+      "result": "7.1 Gate và DoD\t12",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821499 \\h",
+      "result": "12",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821500\"",
+      "result": "7.2 UAT và triage\t12",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821500 \\h",
+      "result": "12",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821501\"",
+      "result": "CHƯƠNG 8. TRUYỀN THÔNG, THAY ĐỔI VÀ TRELLO\t14",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821501 \\h",
+      "result": "14",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821502\"",
+      "result": "8.1 Luồng board và quy ước\t14",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821502 \\h",
+      "result": "14",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821503\"",
+      "result": "8.2 Kết nối Trello — WBS — Draw.io — Word\t17",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821503 \\h",
+      "result": "17",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821504\"",
+      "result": "CHƯƠNG 9. THIẾT KẾ VÀ BIỂU ĐỒ DRAW.IO\t18",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821504 \\h",
+      "result": "18",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821505\"",
+      "result": "9.1 Kiến trúc và dữ liệu\t18",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821505 \\h",
+      "result": "18",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821506\"",
+      "result": "9.2 Quy trình xuất biểu đồ\t19",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821506 \\h",
+      "result": "19",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821507\"",
+      "result": "CHƯƠNG 10. NGHIỆM THU VÀ ĐÓNG DỰ ÁN\t20",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821507 \\h",
+      "result": "20",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821508\"",
+      "result": "10.1 Tiêu chí nghiệm thu\t20",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821508 \\h",
+      "result": "20",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821509\"",
+      "result": "10.2 Lessons learned và hướng phát triển\t20",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821509 \\h",
+      "result": "20",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821510\"",
+      "result": "KẾT LUẬN VÀ KIẾN NGHỊ\t21",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821510 \\h",
+      "result": "21",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821511\"",
+      "result": "TÀI LIỆU THAM KHẢO\t22",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821511 \\h",
+      "result": "22",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821512\"",
+      "result": "PHỤ LỤC\t23",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821512 \\h",
+      "result": "23",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821513\"",
+      "result": "Phụ lục A. Danh mục sơ đồ Draw.io\t23",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821513 \\h",
+      "result": "23",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821514\"",
+      "result": "Phụ lục B. Checklist ảnh Trello, Draw.io và LMS\t23",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821514 \\h",
+      "result": "23",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821515\"",
+      "result": "Phụ lục C. Loại bằng chứng và giới hạn\t24",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821515 \\h",
+      "result": "24",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 13,
+      "instruction": "TOC \\h \\z \\c \"Hinh\"",
+      "result": "HÌNH 1. WBS dự án LMS, cấu trúc bàn giao đề xuất\t6HÌNH 2. Mạng phụ thuộc công việc, không gán ngày\t8HÌNH 3. Chu trình quản lý dự án và cổng kiểm soát\t16HÌNH 4. Trello LMS — thống kê API 23/10/2026, KHÔNG PHẢI SCREENSHOT\t17HÌNH 5. Kiến trúc LMS theo hồ sơ repo, không phải runtime\t18HÌNH 6. ERD 12 bảng LMS, một số quan hệ được giản lược\t19",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821516\"",
+      "result": "HÌNH 1. WBS dự án LMS, cấu trúc bàn giao đề xuất\t6",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821516 \\h",
+      "result": "6",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821517\"",
+      "result": "HÌNH 2. Mạng phụ thuộc công việc, không gán ngày\t8",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821517 \\h",
+      "result": "8",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821518\"",
+      "result": "HÌNH 3. Chu trình quản lý dự án và cổng kiểm soát\t16",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821518 \\h",
+      "result": "16",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821519\"",
+      "result": "HÌNH 4. Trello LMS — thống kê API 23/10/2026, KHÔNG PHẢI SCREENSHOT\t17",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821519 \\h",
+      "result": "17",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821520\"",
+      "result": "HÌNH 5. Kiến trúc LMS theo hồ sơ repo, không phải runtime\t18",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821520 \\h",
+      "result": "18",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821521\"",
+      "result": "HÌNH 6. ERD 12 bảng LMS, một số quan hệ được giản lược\t19",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821521 \\h",
+      "result": "19",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 13,
+      "instruction": "TOC \\h \\z \\c \"Bang\"",
+      "result": "BẢNG 1. Điều lệ dự án\t1BẢNG 2. Stakeholder register rút gọn\t3BẢNG 3. RACI cho các đầu ra chính\t3BẢNG 4. Ranh giới phạm vi\t5BẢNG 5. WBS cấp 2 và đầu ra\t5BẢNG 6. CPM 19 hoạt động, đơn vị tuần\t7BẢNG 7. Milestone baseline\t8BẢNG 8. Resource breakdown\t9BẢNG 9. Budget baseline\t10BẢNG 10. Rủi ro ưu tiên\t11BẢNG 11. Quality gates\t12BẢNG 12. UAT scenarios, SIMULATED/NOT RUN\t12BẢNG 13. Trello snapshot 23/10/2026, API aggregate\t14BẢNG 14. Quy ước card và Done\t15BẢNG 15. Kiến trúc LMS theo hồ sơ\t18BẢNG 16. EVM minh họa, không phải actuals\t20BẢNG 17. 15 sơ đồ trong ZIP\t23BẢNG 18. Checklist ảnh cần bổ sung\t24BẢNG 19. Phân loại bằng chứng\t24",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821522\"",
+      "result": "BẢNG 1. Điều lệ dự án\t1",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821522 \\h",
+      "result": "1",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821523\"",
+      "result": "BẢNG 2. Stakeholder register rút gọn\t3",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821523 \\h",
+      "result": "3",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821524\"",
+      "result": "BẢNG 3. RACI cho các đầu ra chính\t3",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821524 \\h",
+      "result": "3",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821525\"",
+      "result": "BẢNG 4. Ranh giới phạm vi\t5",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821525 \\h",
+      "result": "5",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821526\"",
+      "result": "BẢNG 5. WBS cấp 2 và đầu ra\t5",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821526 \\h",
+      "result": "5",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821527\"",
+      "result": "BẢNG 6. CPM 19 hoạt động, đơn vị tuần\t7",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821527 \\h",
+      "result": "7",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821528\"",
+      "result": "BẢNG 7. Milestone baseline\t8",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821528 \\h",
+      "result": "8",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821529\"",
+      "result": "BẢNG 8. Resource breakdown\t9",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821529 \\h",
+      "result": "9",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821530\"",
+      "result": "BẢNG 9. Budget baseline\t10",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821530 \\h",
+      "result": "10",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821531\"",
+      "result": "BẢNG 10. Rủi ro ưu tiên\t11",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821531 \\h",
+      "result": "11",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821532\"",
+      "result": "BẢNG 11. Quality gates\t12",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821532 \\h",
+      "result": "12",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821533\"",
+      "result": "BẢNG 12. UAT scenarios, SIMULATED/NOT RUN\t12",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821533 \\h",
+      "result": "12",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821534\"",
+      "result": "BẢNG 13. Trello snapshot 23/10/2026, API aggregate\t14",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821534 \\h",
+      "result": "14",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821535\"",
+      "result": "BẢNG 14. Quy ước card và Done\t15",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821535 \\h",
+      "result": "15",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821536\"",
+      "result": "BẢNG 15. Kiến trúc LMS theo hồ sơ\t18",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821536 \\h",
+      "result": "18",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821537\"",
+      "result": "BẢNG 16. EVM minh họa, không phải actuals\t20",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821537 \\h",
+      "result": "20",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821538\"",
+      "result": "BẢNG 17. 15 sơ đồ trong ZIP\t23",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821538 \\h",
+      "result": "23",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821539\"",
+      "result": "BẢNG 18. Checklist ảnh cần bổ sung\t24",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821539 \\h",
+      "result": "24",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 88,
+      "instruction": "HYPERLINK \\l \"_Toc243821540\"",
+      "result": "BẢNG 19. Phân loại bằng chứng\t24",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 37,
+      "instruction": "PAGEREF _Toc243821540 \\h",
+      "result": "24",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Bang \\* ARABIC",
+      "result": "1",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Bang \\* ARABIC",
+      "result": "2",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Bang \\* ARABIC",
+      "result": "3",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Bang \\* ARABIC",
+      "result": "4",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Bang \\* ARABIC",
+      "result": "5",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Hinh \\* ARABIC",
+      "result": "1",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Bang \\* ARABIC",
+      "result": "6",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Hinh \\* ARABIC",
+      "result": "2",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Bang \\* ARABIC",
+      "result": "7",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Bang \\* ARABIC",
+      "result": "8",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Bang \\* ARABIC",
+      "result": "9",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Bang \\* ARABIC",
+      "result": "10",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Bang \\* ARABIC",
+      "result": "11",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Bang \\* ARABIC",
+      "result": "12",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Bang \\* ARABIC",
+      "result": "13",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Bang \\* ARABIC",
+      "result": "14",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Hinh \\* ARABIC",
+      "result": "3",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Hinh \\* ARABIC",
+      "result": "4",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Bang \\* ARABIC",
+      "result": "15",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Hinh \\* ARABIC",
+      "result": "5",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Hinh \\* ARABIC",
+      "result": "6",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Bang \\* ARABIC",
+      "result": "16",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Bang \\* ARABIC",
+      "result": "17",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Bang \\* ARABIC",
+      "result": "18",
+      "locked": false
+    },
+    {
+      "story": "document",
+      "type": 12,
+      "instruction": "SEQ Bang \\* ARABIC",
+      "result": "19",
+      "locked": false
+    },
+    {
+      "story": "story:9:1",
+      "type": 33,
+      "instruction": "PAGE",
+      "result": "v",
+      "locked": false
+    }
+  ],
+  "field_result_basis": "EVALUATED_IN_ISOLATED_MICROSOFT_WORD_SESSION",
+  "render": {
+    "engine": "word",
+    "pdf_path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4.pdf",
+    "file_size_bytes": 928325,
+    "page_count": 30,
+    "page_images": [
+      "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-01.png",
+      "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-02.png",
+      "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-03.png",
+      "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-04.png",
+      "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-05.png",
+      "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-06.png",
+      "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-07.png",
+      "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-08.png",
+      "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-09.png",
+      "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-10.png",
+      "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-11.png",
+      "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-12.png",
+      "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-13.png",
+      "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-14.png",
+      "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-15.png",
+      "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-16.png",
+      "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-17.png",
+      "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-18.png",
+      "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-19.png",
+      "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-20.png",
+      "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-21.png",
+      "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-22.png",
+      "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-23.png",
+      "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-24.png",
+      "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-25.png",
+      "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-26.png",
+      "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-27.png",
+      "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-28.png",
+      "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-29.png",
+      "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-30.png"
+    ],
+    "verified_pdf_page_count": 30,
+    "page_content_audit": {
+      "status": "PASS",
+      "pages": [
+        {
+          "page": 1,
+          "alphanumeric_characters": 220,
+          "near_blank": false
+        },
+        {
+          "page": 2,
+          "alphanumeric_characters": 685,
+          "near_blank": false
+        },
+        {
+          "page": 3,
+          "alphanumeric_characters": 686,
+          "near_blank": false
+        },
+        {
+          "page": 4,
+          "alphanumeric_characters": 198,
+          "near_blank": false
+        },
+        {
+          "page": 5,
+          "alphanumeric_characters": 267,
+          "near_blank": false
+        },
+        {
+          "page": 6,
+          "alphanumeric_characters": 497,
+          "near_blank": false
+        },
+        {
+          "page": 7,
+          "alphanumeric_characters": 1515,
+          "near_blank": false
+        },
+        {
+          "page": 8,
+          "alphanumeric_characters": 803,
+          "near_blank": false
+        },
+        {
+          "page": 9,
+          "alphanumeric_characters": 1141,
+          "near_blank": false
+        },
+        {
+          "page": 10,
+          "alphanumeric_characters": 186,
+          "near_blank": false
+        },
+        {
+          "page": 11,
+          "alphanumeric_characters": 1381,
+          "near_blank": false
+        },
+        {
+          "page": 12,
+          "alphanumeric_characters": 353,
+          "near_blank": false
+        },
+        {
+          "page": 13,
+          "alphanumeric_characters": 978,
+          "near_blank": false
+        },
+        {
+          "page": 14,
+          "alphanumeric_characters": 658,
+          "near_blank": false
+        },
+        {
+          "page": 15,
+          "alphanumeric_characters": 958,
+          "near_blank": false
+        },
+        {
+          "page": 16,
+          "alphanumeric_characters": 516,
+          "near_blank": false
+        },
+        {
+          "page": 17,
+          "alphanumeric_characters": 1144,
+          "near_blank": false
+        },
+        {
+          "page": 18,
+          "alphanumeric_characters": 1271,
+          "near_blank": false
+        },
+        {
+          "page": 19,
+          "alphanumeric_characters": 435,
+          "near_blank": false
+        },
+        {
+          "page": 20,
+          "alphanumeric_characters": 1260,
+          "near_blank": false
+        },
+        {
+          "page": 21,
+          "alphanumeric_characters": 383,
+          "near_blank": false
+        },
+        {
+          "page": 22,
+          "alphanumeric_characters": 80,
+          "near_blank": false
+        },
+        {
+          "page": 23,
+          "alphanumeric_characters": 246,
+          "near_blank": false
+        },
+        {
+          "page": 24,
+          "alphanumeric_characters": 1027,
+          "near_blank": false
+        },
+        {
+          "page": 25,
+          "alphanumeric_characters": 342,
+          "near_blank": false
+        },
+        {
+          "page": 26,
+          "alphanumeric_characters": 1038,
+          "near_blank": false
+        },
+        {
+          "page": 27,
+          "alphanumeric_characters": 373,
+          "near_blank": false
+        },
+        {
+          "page": 28,
+          "alphanumeric_characters": 520,
+          "near_blank": false
+        },
+        {
+          "page": 29,
+          "alphanumeric_characters": 982,
+          "near_blank": false
+        },
+        {
+          "page": 30,
+          "alphanumeric_characters": 844,
+          "near_blank": false
+        }
+      ],
+      "near_blank_pages": [],
+      "minimum_alphanumeric": 20
+    }
+  },
+  "render_reuse_manifest": {
+    "version": 1,
+    "document_sha256": "8e6d85407110e8adbd20c886446865a58be259a077b99aa67a4134f66c8ab8a1",
+    "pdf_sha256": "8ad145dce54401c03da0a4a28f4ca92a603e50e8d864c4060871887bc513ccf0",
+    "renderer": {
+      "engine": "word",
+      "page_dpi": 120
+    },
+    "page_count": 30,
+    "pages": [
+      {
+        "page": 1,
+        "path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-01.png",
+        "size_bytes": 63487,
+        "sha256": "93a9b161e43698d616ab4c001ba52f38d87bf9b6b62bdff00da3fe35859ce0ce"
+      },
+      {
+        "page": 2,
+        "path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-02.png",
+        "size_bytes": 115796,
+        "sha256": "859ca27681a02405378c65b7a2bc1d158f2301889891cac9bb74f43e3ef305ac"
+      },
+      {
+        "page": 3,
+        "path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-03.png",
+        "size_bytes": 160366,
+        "sha256": "f2ee91c7e87c732219e7b182ca3899982afd0090102755c6fe02d579089b22ac"
+      },
+      {
+        "page": 4,
+        "path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-04.png",
+        "size_bytes": 44453,
+        "sha256": "0adcbf49820d7230e2ac8bbb2b4d6c408ee9a18f8944c1dc47771076daf6377c"
+      },
+      {
+        "page": 5,
+        "path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-05.png",
+        "size_bytes": 59863,
+        "sha256": "6a7d258d17abac5d3c5dbe716d83ed4190b5124e767970af5ca5c6cf42706ff2"
+      },
+      {
+        "page": 6,
+        "path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-06.png",
+        "size_bytes": 115517,
+        "sha256": "cdf90d293863b288a85ccf12f1cdc3c3873522dacae0bf5e6883e8c770da443c"
+      },
+      {
+        "page": 7,
+        "path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-07.png",
+        "size_bytes": 242270,
+        "sha256": "622a777ffcdef3ffaf94ce09adda2395b9bd9d71998b771d479e254dd5b971f9"
+      },
+      {
+        "page": 8,
+        "path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-08.png",
+        "size_bytes": 138487,
+        "sha256": "b20e7060618822531ca31ce6fda8d2f727ada2a6416f68ad3225c991511260e7"
+      },
+      {
+        "page": 9,
+        "path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-09.png",
+        "size_bytes": 208693,
+        "sha256": "97d7e245933f0375bc63dd4dbbec55f1930bdc379d63d735fa7d11e2fb7977f9"
+      },
+      {
+        "page": 10,
+        "path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-10.png",
+        "size_bytes": 49605,
+        "sha256": "a3e1586c0651b7d3670acdb6cf718fb1b6ef616f0215b151b8dd73da7267b965"
+      },
+      {
+        "page": 11,
+        "path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-11.png",
+        "size_bytes": 225552,
+        "sha256": "df79ff0623a707d708460c46d5ed4fc6a3fd7fc2ceb9525e40a34b862dc89345"
+      },
+      {
+        "page": 12,
+        "path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-12.png",
+        "size_bytes": 107691,
+        "sha256": "4097bb7150e3010cd3662fc20f444a9874206609fe90d0157ccdf5f70023765c"
+      },
+      {
+        "page": 13,
+        "path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-13.png",
+        "size_bytes": 172695,
+        "sha256": "0edb27f5c8c46175b36667237f42fc6df296ac232fcca60c192052b59a2d6b17"
+      },
+      {
+        "page": 14,
+        "path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-14.png",
+        "size_bytes": 139055,
+        "sha256": "b1786d36131d50d300f0200ebe011e5e0bd5ff118e2eda967a27c6919427051d"
+      },
+      {
+        "page": 15,
+        "path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-15.png",
+        "size_bytes": 187622,
+        "sha256": "9859786cde2d0049d027c8efe8ad28b271b7cfca55eeeb1ba9da67e9d1340d95"
+      },
+      {
+        "page": 16,
+        "path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-16.png",
+        "size_bytes": 96379,
+        "sha256": "51561c14ceeedc4739612c07b294dce40a0bc9fea1cbff360117d2592825bd96"
+      },
+      {
+        "page": 17,
+        "path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-17.png",
+        "size_bytes": 198566,
+        "sha256": "46fa0e84c37505afc40c75abdc805ea398d1ec8e0246627e1d1f363de193c666"
+      },
+      {
+        "page": 18,
+        "path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-18.png",
+        "size_bytes": 229146,
+        "sha256": "6a27de181d1369988efadfaa3480cf712836beb9597f386fbbf3c0664fdaee97"
+      },
+      {
+        "page": 19,
+        "path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-19.png",
+        "size_bytes": 97319,
+        "sha256": "f7e4882f792a13b84bf637f72b6cdb861344f21f6c0bdd5e824160eb71484f2d"
+      },
+      {
+        "page": 20,
+        "path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-20.png",
+        "size_bytes": 223311,
+        "sha256": "63a8101d03bd815ba9cdf989ceb1d07a0e8ebe79a9bbb772f694dab0050fc7aa"
+      },
+      {
+        "page": 21,
+        "path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-21.png",
+        "size_bytes": 75366,
+        "sha256": "26980bc83035414d141803821735a21773774324bbbe4b0e3fba8f76312b6869"
+      },
+      {
+        "page": 22,
+        "path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-22.png",
+        "size_bytes": 86188,
+        "sha256": "75a3e9278e843ded96bdd718b308e9a4bbaecc5c92ad934c01dd216b7c91e820"
+      },
+      {
+        "page": 23,
+        "path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-23.png",
+        "size_bytes": 80845,
+        "sha256": "6bef5d499ecad1b8429c23f99c685d0576d2499249fa9f37084f33e12880bd2c"
+      },
+      {
+        "page": 24,
+        "path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-24.png",
+        "size_bytes": 203364,
+        "sha256": "496bf39bb836d5668de4b773fa0a62d0663ab914327172fd18ccdd49e355dd56"
+      },
+      {
+        "page": 25,
+        "path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-25.png",
+        "size_bytes": 112397,
+        "sha256": "876b2dd1dd7bebd07827acfa4424200e434ae3b119c68180c5b5a4c9399eaa90"
+      },
+      {
+        "page": 26,
+        "path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-26.png",
+        "size_bytes": 184634,
+        "sha256": "066f059d6fe37be81a422e0b8432c1929b75d8cb3b8c378e0333e2985843e8ef"
+      },
+      {
+        "page": 27,
+        "path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-27.png",
+        "size_bytes": 68313,
+        "sha256": "3284fd8c9accb0384e687d6c079f22f8e5ad7fd3adac59ac3436bc4563cd9518"
+      },
+      {
+        "page": 28,
+        "path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-28.png",
+        "size_bytes": 87240,
+        "sha256": "300237a36db65cdb78bcb169e974209d9648b1c7bbd995f524537db7b8031da8"
+      },
+      {
+        "page": 29,
+        "path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-29.png",
+        "size_bytes": 181273,
+        "sha256": "8927ae0eb1c7db2b82696b6f957a26ddff536f62d2b15e7b65c3a977e30ff717"
+      },
+      {
+        "page": 30,
+        "path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4-pages\\set-2e20f6cd25e24e29854d8833b02168c1\\page-30.png",
+        "size_bytes": 158036,
+        "sha256": "db280c04945d3338962a548dc11a0b7d4421fb5f1bfe9d6dbb30c8b9e4615307"
+      }
+    ]
+  },
+  "visual_review_reuse": {
+    "version": 1,
+    "token": "wa-visual-reuse-v1:e31d0ed50a6173b807eeccdae32a1e285f3f0ebaa9743543f3192fa1c925c9b9",
+    "basis": "CURRENT_ARTIFACT_HASHES_REVALIDATED_WITHOUT_RERENDER"
+  },
+  "visual_review_attestation": {
+    "reviewed": true,
+    "page_count": 30,
+    "challenge_token": "wa-visual-reuse-v1:e31d0ed50a6173b807eeccdae32a1e285f3f0ebaa9743543f3192fa1c925c9b9",
+    "basis": "VERSIONED_RENDER_REPORT_REUSE"
+  },
+  "delivery_status": "PASS",
+  "delivery_gates": {
+    "overall": "PASS",
+    "render": "PASS",
+    "visual": "PASS",
+    "native_word": "PASS"
+  },
+  "file": "artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\final-v4.docx",
+  "profile": "generic-lms-project-report",
+  "variant": "default",
+  "validation_status": "PASS",
+  "valid": true,
+  "delivery_valid": true,
+  "inventory": {
+    "paragraphs": 239,
+    "tables": 19,
+    "sections": 3,
+    "images": 6,
+    "fields": {
+      "total_field_tags": 291,
+      "toc_field": true,
+      "page_field": true,
+      "page_fields": 69,
+      "toc_fields": 3,
+      "other_fields": 25
+    }
+  }
+}

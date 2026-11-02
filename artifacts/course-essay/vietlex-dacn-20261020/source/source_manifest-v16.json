@@ -1,0 +1,283 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-10-25T15:01:41.162947+07:00",
+  "project_root": "D:\\Download\\ProfessionalLegalRAG",
+  "git_head": "7519cd1aea4a3639140b9188de1843ebf0ddb1c0",
+  "git_worktree": "dirty",
+  "git_status_line_count": 307,
+  "git_status_sha256": "d42210bbeb4d931d83a52ee85e282fdaeea9839e92bc1ac3a918c93982ee744a",
+  "source_read_policy": "Read-only source review; manifest asset hashes refreshed, Git status includes generated report artifacts and is not a deployment identity.",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "c11ffe29f8cba8d372720d6b21a9c2c09d0641f05960aa9c8d7e8b7a59ac1c44",
+      "bytes": 7189,
+      "lines": 58
+    },
+    {
+      "path": "app/main.py",
+      "sha256": "5868c8f169e3fa3d895cc047b2c3f7285bd1fde49553225972d369c1e94bd254",
+      "bytes": 8035,
+      "lines": 216
+    },
+    {
+      "path": "app/api/routes.py",
+      "sha256": "20d667ab4d0cd4dfc4d55bbc8a36e6b4eafdf15a46620d30976791ae4a2610a4",
+      "bytes": 58194,
+      "lines": 1401
+    },
+    {
+      "path": "app/api/legal_routes.py",
+      "sha256": "dd8174fb644746f903419b022a62be05419b0ec1cd2718f6bb345c1dacc26f67",
+      "bytes": 9620,
+      "lines": 193
+    },
+    {
+      "path": "app/api/account_routes.py",
+      "sha256": "a41b20f7e129ea02051164e0f9692d82cd58ecf8e676cd4b2897cbff0d790fcb",
+      "bytes": 14785,
+      "lines": 431
+    },
+    {
+      "path": "app/api/workspace_routes.py",
+      "sha256": "742882e6f1b90477767acfe5ff5ffda7a9d39b5d197241ce0d2f99691f1a1d7c",
+      "bytes": 35600,
+      "lines": 895
+    },
+    {
+      "path": "app/api/legal_registry_routes.py",
+      "sha256": "6a274c68c2a757465538f38a4b765ca9e19e323d6aba98d4a5d9faa6b88928b3",
+      "bytes": 5236,
+      "lines": 149
+    },
+    {
+      "path": "app/api/product_quality_routes.py",
+      "sha256": "726e077eb4941d8e55e64dc1cba2c4a8cfe1f17d8e04fa2e468dc42aaf4c04ed",
+      "bytes": 5479,
+      "lines": 104
+    },
+    {
+      "path": "app/api/evaluation_lab_routes.py",
+      "sha256": "dfd5d15bebfdd16a6b743e6d1f10f6e15361c40c3dd0db12e8898a79f6282409",
+      "bytes": 3382,
+      "lines": 104
+    },
+    {
+      "path": "app/services/rag_pipeline.py",
+      "sha256": "c9a3a7cca1449962b684432a6cd3cc518a0d6262756941d9ef61d16d37c7ab21",
+      "bytes": 41612,
+      "lines": 1122
+    },
+    {
+      "path": "app/services/retrieval.py",
+      "sha256": "d03e94fa5dd7e09a291115317ed4dc57a98417212bc546c6a3c45f5909351411",
+      "bytes": 36204,
+      "lines": 946
+    },
+    {
+      "path": "app/services/v3_article_expansion.py",
+      "sha256": "8cf50b03ef4a1fda62a39552baba97723a8214206776d4c5d8f5bcfbc7070cfe",
+      "bytes": 23489,
+      "lines": 671
+    },
+    {
+      "path": "docs/CURRENT_ARCHITECTURE.md",
+      "sha256": "a7b2daa8605223f45afc0e16bcdf8f3b8b57a07b9700bbba9e0787ed2ab1ebab",
+      "bytes": 14230,
+      "lines": 70
+    },
+    {
+      "path": "docs/evaluation/CURRENT_STATUS.md",
+      "sha256": "d151a165a38eec1b7105bbb27594426bce3075a3cc8bfe40ecff7a535ff066b0",
+      "bytes": 30944,
+      "lines": 255
+    },
+    {
+      "path": "app/templates/index.html",
+      "sha256": "eef1ab9d2472d33ffe5b75f6dbb08f4ef9aa9f5d959f9c7903265d968cdbb15c",
+      "bytes": 8004,
+      "lines": 49
+    },
+    {
+      "path": "app/templates/legal_search.html",
+      "sha256": "7df991ce48351d050b83905e73544c28840b0e3bf01865abca4e036d8841918a",
+      "bytes": 6469,
+      "lines": 4
+    },
+    {
+      "path": "app/templates/legal_document.html",
+      "sha256": "0dbb35da2ac9caa67e3b07f7aa2ddb1a4854d88aff2f919e23d63b374ba2558a",
+      "bytes": 4947,
+      "lines": 5
+    },
+    {
+      "path": "app/templates/legal_data_unavailable.html",
+      "sha256": "cff53b021c5618147e19dc97dc962362c74467d22c9d0e2e53236f1b6d076da1",
+      "bytes": 2260,
+      "lines": 5
+    },
+    {
+      "path": "app/templates/legal_status.html",
+      "sha256": "3cde8725e86034011035a9ecddc82412b0d27292224312863ddd26e85db215ba",
+      "bytes": 3514,
+      "lines": 7
+    },
+    {
+      "path": "app/templates/privacy.html",
+      "sha256": "14c210ee8b1ba01c69eb6182dd58e19461a94f00e7e0835ec101645625cb8ac3",
+      "bytes": 1228,
+      "lines": 2
+    },
+    {
+      "path": "app/templates/terms.html",
+      "sha256": "fcdf67cf307e146340ea33a149ae7a6116ed1fe21a82af31d757ba9d39b07cd2",
+      "bytes": 1093,
+      "lines": 2
+    },
+    {
+      "path": "app/templates/evaluation_lab.html",
+      "sha256": "3c46f6e42298ae02ad9e4b1db8745a7f2f459efeca86d62d186d28c05830d40f",
+      "bytes": 9593,
+      "lines": 61
+    },
+    {
+      "path": "app/templates/research_workspaces.html",
+      "sha256": "0b39d14346346c50813791217b6c31a7f372a864da27b8585188b4dbad22a3d7",
+      "bytes": 2635,
+      "lines": 27
+    },
+    {
+      "path": "app/templates/research_workspace.html",
+      "sha256": "7f3bcc23afbab80b8448f9abd7668a49ea3ac10d69923b26175f6d56b0a9486e",
+      "bytes": 15866,
+      "lines": 43
+    },
+    {
+      "path": "app/templates/account_form.html",
+      "sha256": "e6112144e4cecca26e23bb5a8931236b66a1f60d632d0925d3bf041469f5f143",
+      "bytes": 3392,
+      "lines": 12
+    },
+    {
+      "path": "app/templates/settings.html",
+      "sha256": "c1af79e9c5dae04932cc8bfd6a2bc00999807da0aed6850ce172d49ed83d49cf",
+      "bytes": 2571,
+      "lines": 3
+    },
+    {
+      "path": "app/templates/admin.html",
+      "sha256": "1f826082bf0929867f1e7af83b4afe0e3a9cfe5160cf8985a14ae0ea4e589aea",
+      "bytes": 6540,
+      "lines": 32
+    },
+    {
+      "path": "app/templates/admin_requests_page.html",
+      "sha256": "1726addd9476d06228c0123ea9b47cc45278230a07d15446b98a7685bda5689f",
+      "bytes": 675,
+      "lines": 5
+    },
+    {
+      "path": "app/templates/admin_usage_page.html",
+      "sha256": "ec9807bbe1b533824232b34c8416f1835718c5489b718800499da79764528384",
+      "bytes": 643,
+      "lines": 5
+    },
+    {
+      "path": "app/templates/admin_providers_page.html",
+      "sha256": "d6bf8f85f9ae6171c191fe6459e5b46e196c77c1f42ef1ae7e704cbc7b368716",
+      "bytes": 1259,
+      "lines": 5
+    },
+    {
+      "path": "app/templates/admin_system_page.html",
+      "sha256": "7638dc4abb4ad67adced6daa3cbf5d76e2ece70ef495ae366f6e7c70b37c2fbb",
+      "bytes": 1994,
+      "lines": 6
+    },
+    {
+      "path": "app/templates/admin_legal_registry.html",
+      "sha256": "92a1d475a988aa86b9bde3dc4aef503e14c640f172ebd988fe033650e749a892",
+      "bytes": 3061,
+      "lines": 3
+    },
+    {
+      "path": "app/templates/admin_corpus_queue.html",
+      "sha256": "d9c4e09df3765c970fae570eea09c4434a8f60e6e19dca801e7115d57cef8bd0",
+      "bytes": 1876,
+      "lines": 5
+    },
+    {
+      "path": "app/templates/admin_feedback_queue.html",
+      "sha256": "41652a79413a78980e96e4db9a5ab7ecec0830382815971cda0bd0083b0df71c",
+      "bytes": 2431,
+      "lines": 3
+    },
+    {
+      "path": "app/templates/admin_users_page.html",
+      "sha256": "c5eeed334b75c37b72297af891506a697eb5e64fb7e64fd195b144947c3b2ba7",
+      "bytes": 1915,
+      "lines": 5
+    },
+    {
+      "path": "app/templates/admin_audit_page.html",
+      "sha256": "d0cc50f5eb5f9192eae64d01c798d1c184ec3a8f0c8fcc4504c5832f0a378fb2",
+      "bytes": 1061,
+      "lines": 5
+    },
+    {
+      "path": "app/templates/admin_sidebar.html",
+      "sha256": "bc2c5ab72cae6f0f6fda20a900992ff6715145c82941119c13e68661d82a7037",
+      "bytes": 1673,
+      "lines": 10
+    },
+    {
+      "path": "app/account_database.py",
+      "sha256": "ea45262418275dff6566f2a245bd1063c2623cc7e5130306eb15df690fb26010",
+      "bytes": 13852,
+      "lines": 396
+    },
+    {
+      "path": "app/database.py",
+      "sha256": "303d772d30fe86c5bce45310381dd069176dcac6f7791e74f359266c795fe693",
+      "bytes": 28609,
+      "lines": 714
+    },
+    {
+      "path": "app/research_database.py",
+      "sha256": "33deda2a3a274f763731e2297d80f0261eb413c1906118a7f3421f7b1fc6e3b1",
+      "bytes": 31917,
+      "lines": 840
+    },
+    {
+      "path": "app/services/free_web_research.py",
+      "sha256": "e55f4315786dc598102bcf55ef7c75b37823c8297298a67b4c3c246bbef1116f",
+      "bytes": 31303,
+      "lines": 776
+    },
+    {
+      "path": "app/services/legal_browser.py",
+      "sha256": "a6c42cb32494ec2019d0e63306fb3c6c010534729908af23dc24489602770a96",
+      "bytes": 20302,
+      "lines": 467
+    },
+    {
+      "path": "app/services/workspace_documents.py",
+      "sha256": "150499b525276c2c4e47add93fb08ddbb706160c807e84c1e63b658d4424c74e",
+      "bytes": 10309,
+      "lines": 277
+    }
+  ],
+  "source_hierarchy": [
+    "current source/config",
+    "current architecture and evaluation status documents",
+    "historical receipts with their dated labels",
+    "academic literature for general methods only"
+  ],
+  "inherited_git_snapshot": {
+    "git_head": "7519cd1aea4a3639140b9188de1843ebf0ddb1c0",
+    "git_worktree": "dirty",
+    "git_status_line_count": 866,
+    "git_status_sha256": "e1fabe1707999e3187f9c50af47c617168a4a93d5efa3f817fe42336089f8392"
+  },
+  "git_metadata_refreshed_at": "2026-10-25"
+}

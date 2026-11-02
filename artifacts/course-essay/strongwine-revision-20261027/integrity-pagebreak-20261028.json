@@ -1,0 +1,2644 @@
+{
+  "schema_version": "1.0",
+  "audit_kind": "ETHICAL_ACADEMIC_INTEGRITY",
+  "ai_detection_performed": false,
+  "detector_evasion_assistance": false,
+  "document": {
+    "path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\strongwine-revision-20261027\\StrongWine_20261027_pagebreak_final.docx",
+    "sha256": "ea7c4f45cdb4d8009a7184b57f6db2eee701f8589fe5bd1eb7e4dfa6e267f8bd",
+    "size_bytes": 5566929
+  },
+  "profile": {
+    "profile_id": "generic",
+    "profile_version": 1,
+    "minimum_references": 0,
+    "prefer_primary_source": false,
+    "require_reviewed_sources": false,
+    "long_quote_words": 40,
+    "quote_citation_words": 8,
+    "repeated_opening_words": 3,
+    "repeated_opening_minimum": 3,
+    "ngram_size": 5,
+    "repeated_ngram_minimum": 3,
+    "review_punctuation": [
+      "em_dash",
+      "en_dash",
+      "left_curly_double_quote",
+      "right_curly_double_quote",
+      "left_curly_single_quote",
+      "right_curly_single_quote",
+      "ellipsis",
+      "non_breaking_space"
+    ]
+  },
+  "coverage": {
+    "paragraph_records": 1990,
+    "nonempty_story_counts": {
+      "body": 1170,
+      "footer": 2,
+      "header": 2,
+      "table": 687
+    },
+    "stories": [
+      "body",
+      "table",
+      "header",
+      "footer"
+    ]
+  },
+  "status": "WARN",
+  "summary": {
+    "PASS": 5,
+    "WARN": 5,
+    "FAIL": 0
+  },
+  "gates": {
+    "invisible_unicode": {
+      "status": "PASS",
+      "finding_count": 0,
+      "findings": [],
+      "classification": "DETERMINISTIC_INTEGRITY_CHECK"
+    },
+    "typography_punctuation_review": {
+      "status": "WARN",
+      "finding_count": 4,
+      "findings": [
+        {
+          "punctuation": "em_dash",
+          "codepoint": "U+2014",
+          "occurrences": 39
+        },
+        {
+          "punctuation": "en_dash",
+          "codepoint": "U+2013",
+          "occurrences": 6
+        },
+        {
+          "punctuation": "left_curly_double_quote",
+          "codepoint": "U+201C",
+          "occurrences": 22
+        },
+        {
+          "punctuation": "right_curly_double_quote",
+          "codepoint": "U+201D",
+          "occurrences": 22
+        }
+      ],
+      "classification": "STYLE_REVIEW_NOT_AI_EVIDENCE",
+      "configured": [
+        "em_dash",
+        "en_dash",
+        "left_curly_double_quote",
+        "right_curly_double_quote",
+        "left_curly_single_quote",
+        "right_curly_single_quote",
+        "ellipsis",
+        "non_breaking_space"
+      ]
+    },
+    "long_verbatim_quotes": {
+      "status": "PASS",
+      "finding_count": 0,
+      "findings": [],
+      "classification": "HUMAN_REVIEW_REQUIRED",
+      "word_threshold": 40
+    },
+    "quotes_lacking_adjacent_citation": {
+      "status": "PASS",
+      "finding_count": 0,
+      "findings": [],
+      "classification": "HUMAN_REVIEW_REQUIRED",
+      "word_threshold": 8,
+      "adjacency": "same, previous, or next paragraph in the same story"
+    },
+    "numeric_citation_bibliography_consistency": {
+      "status": "WARN",
+      "finding_count": 4,
+      "findings": [
+        {
+          "kind": "bibliography_entry_not_cited",
+          "number": 9
+        },
+        {
+          "kind": "bibliography_entry_not_cited",
+          "number": 10
+        },
+        {
+          "kind": "bibliography_entry_not_cited",
+          "number": 11
+        },
+        {
+          "kind": "bibliography_entry_not_cited",
+          "number": 12
+        }
+      ],
+      "classification": "DETERMINISTIC_CROSS_CHECK",
+      "citation_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "bibliography_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    "source_evidence": {
+      "status": "WARN",
+      "finding_count": 1,
+      "findings": [
+        {
+          "kind": "evidence_registry_not_provided"
+        }
+      ],
+      "classification": "REGISTRY_AND_DOCUMENT_CROSS_CHECK",
+      "minimum_references": 0,
+      "document_reference_count": 12,
+      "registry": null,
+      "verified_record_count": 0,
+      "primary_record_count": 0,
+      "synthetic_record_count": 0,
+      "linked_evidence_id_count": 6,
+      "require_reviewed_sources": false,
+      "primary_status": "EXPLICIT_TAG_ONLY"
+    },
+    "quantitative_claims_lacking_citation": {
+      "status": "WARN",
+      "finding_count": 34,
+      "findings": [
+        {
+          "story": "body",
+          "paragraph_index": 408,
+          "excerpt": "Phạm vi nghiên cứu tập trung vào 5 phân hệ chức năng trọng yếu: cổng thông tin khách hàng (duyệt danh mục rượu, giỏ hàng, đặt hàng), quy trình quản trị kho vận (kiểm soát 20 thực thể dữ liệu quan hệ, cảnh báo mức tồn thấ"
+        },
+        {
+          "story": "body",
+          "paragraph_index": 429,
+          "excerpt": "Các biểu đồ lớp (Class Diagram) đặc tả chi tiết 20 thực thể miền, mối quan hệ kết tập, kế thừa và liên kết đa số giữa các bảng cơ sở dữ liệu như quan hệ 1-N giữa `Categories` và `Wines`, quan hệ N-N giữa `Wines` và `Ware"
+        },
+        {
+          "story": "body",
+          "paragraph_index": 439,
+          "excerpt": "Tính đa hình và kế thừa giao diện cho phép StrongWine cài đặt các cơ chế mở rộng như xử lý sự kiện bất đồng bộ qua `ApplicationEventPublisher`, định nghĩa các interceptor kiểm tra quyền truy cập và tùy biến các bộ chuyển"
+        },
+        {
+          "story": "body",
+          "paragraph_index": 467,
+          "excerpt": "Bộ công cụ tiêu chuẩn bao gồm IntelliJ IDEA Ultimate/VS Code làm môi trường phát triển tích hợp (IDE), kết hợp cùng tiện ích mở rộng Spring Boot Tools và Database Navigator. Máy tính phát triển được cài đặt bộ máy ảo Jav"
+        },
+        {
+          "story": "body",
+          "paragraph_index": 471,
+          "excerpt": "Trong lĩnh vực thương mại điện tử rượu vang, dữ liệu có độ ràng buộc liên kết rất cao: một đơn hàng liên kết chặt chẽ với khách hàng, thông tin địa chỉ giao nhận, danh sách chai rượu, kho xuất hàng và chứng từ thanh toán"
+        },
+        {
+          "story": "body",
+          "paragraph_index": 475,
+          "excerpt": "Hệ thống vận hành với cơ sở dữ liệu mang tên `StrongWineDB`, được cấu hình bộ mã ký tự quốc tế Unicode (`Vietnamese_CI_AS` hoặc `SQL_Latin1_General_CP1_CI_AS`) cho phép lưu trữ hoàn hảo tiếng Việt có dấu trong tên sản ph"
+        },
+        {
+          "story": "body",
+          "paragraph_index": 479,
+          "excerpt": "Thay vì phải triển khai tệp gói WAR phức tạp lên một máy chủ ứng dụng độc lập bên ngoài, toàn bộ ứng dụng StrongWine được đóng gói thành một tệp thực thi duy nhất (Fat JAR). Khi khởi động, Spring Boot tự động kích hoạt m"
+        },
+        {
+          "story": "body",
+          "paragraph_index": 487,
+          "excerpt": "Trong StrongWine, nguyên lý này được hiện thực hóa thông qua mô hình phân lớp nghiêm ngặt 3 tầng. Lớp `WineController` chỉ chịu trách nhiệm duy nhất về tiếp nhận tham số HTTP, gọi tầng dịch vụ và lựa chọn view hiển thị; "
+        },
+        {
+          "story": "body",
+          "paragraph_index": 528,
+          "excerpt": "OTP giao hàng là một kiểm soát tại điểm bàn giao: mã 6 chữ số, có TTL, cooldown gửi lại, số lần thử và khóa tạm thời được định nghĩa trong service. Cần ràng buộc OTP với shipment/người nhận, không hiển thị mã trong dashb"
+        },
+        {
+          "story": "body",
+          "paragraph_index": 580,
+          "excerpt": "Tiêu chí đo cần cụ thể hóa trước khi nghiệm thu: tỉ lệ checkout thành công; tỷ lệ order/payment mismatch; số lượng tồn âm; thời gian từ paid đến assigned; tỷ lệ OTP delivery; reconnect SSE và thời gian đồng bộ lại. Đưa m"
+        },
+        {
+          "story": "body",
+          "paragraph_index": 624,
+          "excerpt": "`ShipmentAutoDispatchScheduler` chạy sau delay ban đầu cấu hình 15 giây rồi mỗi 60 giây theo mặc định, nếu `app.shipment.dispatch.enabled` bật. Scheduler gọi `dispatchAutoShipmentQueue()` và chỉ log khi có shipment được "
+        },
+        {
+          "story": "body",
+          "paragraph_index": 628,
+          "excerpt": "`FileStorageService` là adapter cho filesystem; nó cần tạo tên an toàn, kiểm soát extension/content type, ngăn path traversal, tránh ghi đè và lưu đường dẫn có thể phục vụ bởi web. Upload giới hạn 5 MB trong cấu hình, nh"
+        },
+        {
+          "story": "body",
+          "paragraph_index": 636,
+          "excerpt": "JWT có thời hạn cấu hình mặc định 24 giờ; secret được lấy từ `APP_JWT_SECRET`. Token cần được ký bằng thuật toán mạnh, kiểm tra issuer/audience/expiry, không ghi log và xoay vòng key có kế hoạch. Nếu secret rỗng trong mô"
+        },
+        {
+          "story": "body",
+          "paragraph_index": 675,
+          "excerpt": "Sơ đồ cũ thể hiện form và lựa chọn ảnh nên giữ làm tư liệu đối chiếu nhưng caption nói rõ là chưa xác minh. Route hiện tại đọc được từ `WineController` là `/wines/admin/create` ở view và POST, ngoài ra API admin có endpo"
+        },
+        {
+          "story": "body",
+          "paragraph_index": 812,
+          "excerpt": "`PasswordResetToken` ánh xạ `password_reset_tokens`, liên kết User và lưu token, expiresAt, usedAt, createdAt. V11 bổ sung bảng này. Token là bí mật dùng một lần; cần tạo ngẫu nhiên đủ mạnh, chỉ lưu giá trị hash nếu thiế"
+        },
+        {
+          "story": "body",
+          "paragraph_index": 842,
+          "excerpt": "Service định nghĩa TTL 10 phút, tối đa 5 lần thử, khóa 15 phút và cooldown gửi lại 60 giây. Đây là ngưỡng trong mã trong mã nguồn được khảo sát, không phải khuyến nghị phổ quát. Thay đổi chính sách cần cân bằng giữa chốn"
+        },
+        {
+          "story": "body",
+          "paragraph_index": 843,
+          "excerpt": "Kiểm thử gồm mã sai, mã đã dùng/hết hạn, quá 5 lần, gửi lại trong cooldown, OTP gắn sai user/order, shipper giả danh, email delivery failure và admin override có reason. Cần đảm bảo response không phân biệt quá chi tiết "
+        },
+        {
+          "story": "body",
+          "paragraph_index": 874,
+          "excerpt": "Spring Data repository cung cấp CRUD, query theo naming convention và phương thức tùy chỉnh. Repository abstraction giảm coupling với SQL/JPA chi tiết nhưng không xóa N+1 query, pagination, locking hoặc transaction. Mỗi "
+        },
+        {
+          "story": "body",
+          "paragraph_index": 1011,
+          "excerpt": "Wireframe dưới đây minh họa form MVC tạo rượu tại GET/POST /wines/admin/create; file ảnh hỗ trợ JPG/JPEG/PNG, tối đa 5 MB. Giá trị trong form là ví dụ; đây không phải ảnh chụp runtime."
+        },
+        {
+          "story": "body",
+          "paragraph_index": 1078,
+          "excerpt": "Test: available bằng 0 khi reserved=current; low stock dưới/bằng/trên threshold; inventory missing; warehouse inactive; paging stable; stock negative prevented; import lock contention; filter product/category. Bài không "
+        },
+        {
+          "story": "body",
+          "paragraph_index": 1081,
+          "excerpt": "Người thực hiện được resolve từ username/userId và lưu createdBy; note cần mô tả lô/điều chỉnh. Số lượng nhập cần xác thực >0 và giới hạn theo nghiệp vụ; export cần >0 và ≤ available. Không cho admin chỉnh trực tiếp số c"
+        },
+        {
+          "story": "body",
+          "paragraph_index": 1088,
+          "excerpt": "Apache POI parse file XLS/XLSX; cần giới hạn row count/size, tránh formula evaluation không cần, bảo vệ chống ZIP bomb, xử lý cell type và close workbook/stream. File upload giới hạn 5 MB ở cấu hình request; giới hạn rec"
+        },
+        {
+          "story": "body",
+          "paragraph_index": 1140,
+          "excerpt": "Khi vận đơn chính thức chuyển sang trạng thái đang giao (`DELIVERING`), dịch vụ `ShipmentService` sử dụng bộ sinh số ngẫu nhiên an toàn mật mã `SecureRandom` để tạo chuỗi mã số 6 chữ số ngẫu nhiên. Mã số này được mã hóa "
+        },
+        {
+          "story": "body",
+          "paragraph_index": 1141,
+          "excerpt": "Hệ thống áp dụng khoảng đệm thời gian (Cooldown) 60 giây giữa các lần yêu cầu gửi lại mã để ngăn chặn hành vi lạm dụng dịch vụ gửi thư."
+        },
+        {
+          "story": "body",
+          "paragraph_index": 1144,
+          "excerpt": "Tại điểm giao, Shipper gửi OTP qua POST /shipper/shipments/{id}/complete. ShipmentService xác nhận shipper được giao shipment, trạng thái hiện tại là DELIVERING, mã đủ 6 chữ số, còn hạn và chưa bị khóa. Mã sai làm tăng b"
+        },
+        {
+          "story": "body",
+          "paragraph_index": 1163,
+          "excerpt": "Hình này là bản render desktop 1440 × 900 từ template Thymeleaf hiện tại bằng fixture demo đã xác định, không phải phiên đăng nhập live. Thẻ vận đơn cho shipper thấy tên và số điện thoại người nhận, địa chỉ giao đầy đủ, "
+        },
+        {
+          "story": "body",
+          "paragraph_index": 1176,
+          "excerpt": "Hệ thống định nghĩa một cây phân cấp các ngoại lệ nghiệp vụ tùy biến (như `WineNotFoundException`, `InsufficientInventoryException`, `InvalidOtpException`) kế thừa từ `RuntimeException`. Khi phát sinh sự cố, các ngoại lệ"
+        },
+        {
+          "story": "body",
+          "paragraph_index": 1179,
+          "excerpt": "Biên dịch `mvnw compile -DskipTests` đã thành công. Live QA rà giao diện ở desktop 1366 pixel và mobile 390 × 844 cho khách hàng, admin và shipper; kiểm tra điều hướng, bố cục, bộ lọc, trạng thái trống và hiển thị biểu đ"
+        },
+        {
+          "story": "body",
+          "paragraph_index": 1182,
+          "excerpt": "Theo yêu cầu của người dùng, SQL Server Express được bật và ứng dụng khởi động cục bộ để chụp giao diện. Database `winestore_2` đã có Flyway đến V14 trong khi checkout hiện hành có script V13; ứng dụng không chạy migrati"
+        },
+        {
+          "story": "body",
+          "paragraph_index": 1187,
+          "excerpt": "Phụ lục có 29 ảnh giao diện được nhúng trực tiếp: 12 màn hình khách hàng/khách truy cập, 16 màn hình quản trị và 1 màn hình shipper. Tất cả được lưu ở viewport desktop 1440 × 900; ảnh thể hiện nguyên viewport, không crop"
+        },
+        {
+          "story": "body",
+          "paragraph_index": 1194,
+          "excerpt": "Chạy `mvnw.cmd compile -DskipTests` để biên dịch mà không thực thi test; lệnh này đã thành công trong lượt sửa UI trước. Khởi chạy qua Spring Boot trên môi trường local và mở `http://localhost:8080`; ứng dụng dùng Thymel"
+        },
+        {
+          "story": "body",
+          "paragraph_index": 1200,
+          "excerpt": "Ảnh giao diện hiện hành minh họa các luồng khách hàng, quản trị và giao vận. Bảy ảnh được chụp lại là bản render desktop 1440 × 900; bảng công việc shipper hiển thị người nhận, số điện thoại, địa chỉ giao, tên rượu, số l"
+        },
+        {
+          "story": "body",
+          "paragraph_index": 1211,
+          "excerpt": "Kiểm tra trình duyệt cho bảy ảnh customer/admin/shipper dùng fixture demo và template Thymeleaf hiện tại ở viewport desktop 1440 × 900. Các ảnh đã thay cho thấy dữ liệu demo rõ ràng, không thêm lớp che; riêng màn shipper"
+        },
+        {
+          "story": "body",
+          "paragraph_index": 1251,
+          "excerpt": "Bằng chứng khảo sát gồm đọc mã nguồn StrongWine trong bản dự án được cung cấp, biên dịch ứng dụng thành công và chạy bộ kiểm thử Maven (49 kiểm thử đạt, không có lỗi theo kết quả ghi nhận). Giao diện được rà bằng bảy bản"
+        }
+      ],
+      "classification": "HUMAN_REVIEW_HEURISTIC_NOT_PROOF",
+      "scope": "Explicit units, percentages, measurements, or count/performance context; structural labels, software versions, and database cells are excluded."
+    },
+    "repetitive_prose_review": {
+      "status": "WARN",
+      "finding_count": 83,
+      "findings": [
+        {
+          "kind": "repeated_sentence_opening",
+          "text": "báo cáo không",
+          "occurrences": 4,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 539,
+              "sentence_index": 1
+            },
+            {
+              "story": "body",
+              "paragraph_index": 634,
+              "sentence_index": 2
+            },
+            {
+              "story": "body",
+              "paragraph_index": 849,
+              "sentence_index": 3
+            },
+            {
+              "story": "body",
+              "paragraph_index": 876,
+              "sentence_index": 3
+            }
+          ]
+        },
+        {
+          "kind": "repeated_sentence_opening",
+          "text": "các sơ đồ",
+          "occurrences": 4,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 430,
+              "sentence_index": 0
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1188,
+              "sentence_index": 1
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1200,
+              "sentence_index": 3
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1251,
+              "sentence_index": 4
+            }
+          ]
+        },
+        {
+          "kind": "repeated_sentence_opening",
+          "text": "các thao tác",
+          "occurrences": 5,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 999,
+              "sentence_index": 1
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1080,
+              "sentence_index": 3
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1104,
+              "sentence_index": 1
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1132,
+              "sentence_index": 3
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1240,
+              "sentence_index": 0
+            }
+          ]
+        },
+        {
+          "kind": "repeated_sentence_opening",
+          "text": "cần kiểm thử",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 699,
+              "sentence_index": 2
+            },
+            {
+              "story": "body",
+              "paragraph_index": 744,
+              "sentence_index": 1
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1221,
+              "sentence_index": 2
+            }
+          ]
+        },
+        {
+          "kind": "repeated_sentence_opening",
+          "text": "hình 4 2",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 889,
+              "sentence_index": 0
+            },
+            {
+              "story": "body",
+              "paragraph_index": 894,
+              "sentence_index": 0
+            },
+            {
+              "story": "body",
+              "paragraph_index": 931,
+              "sentence_index": 0
+            }
+          ]
+        },
+        {
+          "kind": "repeated_sentence_opening",
+          "text": "hình 4 4",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 914,
+              "sentence_index": 0
+            },
+            {
+              "story": "body",
+              "paragraph_index": 925,
+              "sentence_index": 0
+            },
+            {
+              "story": "body",
+              "paragraph_index": 942,
+              "sentence_index": 0
+            }
+          ]
+        },
+        {
+          "kind": "repeated_sentence_opening",
+          "text": "hình 4 5",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 863,
+              "sentence_index": 0
+            },
+            {
+              "story": "body",
+              "paragraph_index": 928,
+              "sentence_index": 0
+            },
+            {
+              "story": "body",
+              "paragraph_index": 945,
+              "sentence_index": 0
+            }
+          ]
+        },
+        {
+          "kind": "repeated_sentence_opening",
+          "text": "hồ chí minh",
+          "occurrences": 5,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 0,
+              "sentence_index": 1
+            },
+            {
+              "story": "body",
+              "paragraph_index": 23,
+              "sentence_index": 1
+            },
+            {
+              "story": "body",
+              "paragraph_index": 37,
+              "sentence_index": 1
+            },
+            {
+              "story": "body",
+              "paragraph_index": 53,
+              "sentence_index": 1
+            },
+            {
+              "story": "body",
+              "paragraph_index": 67,
+              "sentence_index": 1
+            }
+          ]
+        },
+        {
+          "kind": "repeated_sentence_opening",
+          "text": "ngô tân khai",
+          "occurrences": 4,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 10,
+              "sentence_index": 1
+            },
+            {
+              "story": "body",
+              "paragraph_index": 30,
+              "sentence_index": 1
+            },
+            {
+              "story": "body",
+              "paragraph_index": 43,
+              "sentence_index": 1
+            },
+            {
+              "story": "body",
+              "paragraph_index": 54,
+              "sentence_index": 1
+            }
+          ]
+        },
+        {
+          "kind": "repeated_sentence_opening",
+          "text": "nhận xét về",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 36,
+              "sentence_index": 1
+            },
+            {
+              "story": "body",
+              "paragraph_index": 59,
+              "sentence_index": 1
+            },
+            {
+              "story": "body",
+              "paragraph_index": 61,
+              "sentence_index": 1
+            }
+          ]
+        },
+        {
+          "kind": "repeated_sentence_opening",
+          "text": "nếu không có",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 625,
+              "sentence_index": 1
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1194,
+              "sentence_index": 2
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1203,
+              "sentence_index": 2
+            }
+          ]
+        },
+        {
+          "kind": "repeated_sentence_opening",
+          "text": "sinh viên thực",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 11,
+              "sentence_index": 0
+            },
+            {
+              "story": "body",
+              "paragraph_index": 44,
+              "sentence_index": 0
+            },
+            {
+              "story": "body",
+              "paragraph_index": 58,
+              "sentence_index": 0
+            }
+          ]
+        },
+        {
+          "kind": "repeated_sentence_opening",
+          "text": "sơ đồ use",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 506,
+              "sentence_index": 0
+            },
+            {
+              "story": "body",
+              "paragraph_index": 662,
+              "sentence_index": 0
+            },
+            {
+              "story": "body",
+              "paragraph_index": 985,
+              "sentence_index": 0
+            }
+          ]
+        },
+        {
+          "kind": "repeated_sentence_opening",
+          "text": "trang chi tiết",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 555,
+              "sentence_index": 1
+            },
+            {
+              "story": "body",
+              "paragraph_index": 890,
+              "sentence_index": 3
+            },
+            {
+              "story": "body",
+              "paragraph_index": 921,
+              "sentence_index": 1
+            }
+          ]
+        },
+        {
+          "kind": "repeated_sentence_opening",
+          "text": "tác nhân là",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 563,
+              "sentence_index": 0
+            },
+            {
+              "story": "body",
+              "paragraph_index": 567,
+              "sentence_index": 0
+            },
+            {
+              "story": "body",
+              "paragraph_index": 571,
+              "sentence_index": 0
+            }
+          ]
+        },
+        {
+          "kind": "repeated_sentence_opening",
+          "text": "đây là điểm",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 586,
+              "sentence_index": 2
+            },
+            {
+              "story": "body",
+              "paragraph_index": 679,
+              "sentence_index": 4
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1117,
+              "sentence_index": 1
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "0 sơ đồ phân rã",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 883,
+              "token_offset": 2
+            },
+            {
+              "story": "body",
+              "paragraph_index": 984,
+              "token_offset": 2
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1100,
+              "token_offset": 2
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "0b sơ đồ use case",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 886,
+              "token_offset": 2
+            },
+            {
+              "story": "body",
+              "paragraph_index": 987,
+              "token_offset": 2
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1103,
+              "token_offset": 2
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "10 bản ghi minh họa",
+          "occurrences": 20,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 713,
+              "token_offset": 9
+            },
+            {
+              "story": "body",
+              "paragraph_index": 720,
+              "token_offset": 9
+            },
+            {
+              "story": "body",
+              "paragraph_index": 727,
+              "token_offset": 9
+            },
+            {
+              "story": "body",
+              "paragraph_index": 734,
+              "token_offset": 9
+            },
+            {
+              "story": "body",
+              "paragraph_index": 741,
+              "token_offset": 9
+            },
+            {
+              "story": "body",
+              "paragraph_index": 748,
+              "token_offset": 10
+            },
+            {
+              "story": "body",
+              "paragraph_index": 755,
+              "token_offset": 10
+            },
+            {
+              "story": "body",
+              "paragraph_index": 762,
+              "token_offset": 9
+            },
+            {
+              "story": "body",
+              "paragraph_index": 769,
+              "token_offset": 10
+            },
+            {
+              "story": "body",
+              "paragraph_index": 776,
+              "token_offset": 9
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "a cấu trúc lược đồ",
+          "occurrences": 20,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 711,
+              "token_offset": 3
+            },
+            {
+              "story": "body",
+              "paragraph_index": 718,
+              "token_offset": 3
+            },
+            {
+              "story": "body",
+              "paragraph_index": 725,
+              "token_offset": 3
+            },
+            {
+              "story": "body",
+              "paragraph_index": 732,
+              "token_offset": 3
+            },
+            {
+              "story": "body",
+              "paragraph_index": 739,
+              "token_offset": 3
+            },
+            {
+              "story": "body",
+              "paragraph_index": 746,
+              "token_offset": 3
+            },
+            {
+              "story": "body",
+              "paragraph_index": 753,
+              "token_offset": 3
+            },
+            {
+              "story": "body",
+              "paragraph_index": 760,
+              "token_offset": 3
+            },
+            {
+              "story": "body",
+              "paragraph_index": 767,
+              "token_offset": 3
+            },
+            {
+              "story": "body",
+              "paragraph_index": 774,
+              "token_offset": 3
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "b dữ liệu mẫu bảng",
+          "occurrences": 20,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 713,
+              "token_offset": 3
+            },
+            {
+              "story": "body",
+              "paragraph_index": 720,
+              "token_offset": 3
+            },
+            {
+              "story": "body",
+              "paragraph_index": 727,
+              "token_offset": 3
+            },
+            {
+              "story": "body",
+              "paragraph_index": 734,
+              "token_offset": 3
+            },
+            {
+              "story": "body",
+              "paragraph_index": 741,
+              "token_offset": 3
+            },
+            {
+              "story": "body",
+              "paragraph_index": 748,
+              "token_offset": 3
+            },
+            {
+              "story": "body",
+              "paragraph_index": 755,
+              "token_offset": 3
+            },
+            {
+              "story": "body",
+              "paragraph_index": 762,
+              "token_offset": 3
+            },
+            {
+              "story": "body",
+              "paragraph_index": 769,
+              "token_offset": 3
+            },
+            {
+              "story": "body",
+              "paragraph_index": 776,
+              "token_offset": 3
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "bản ghi minh họa thực",
+          "occurrences": 20,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 713,
+              "token_offset": 10
+            },
+            {
+              "story": "body",
+              "paragraph_index": 720,
+              "token_offset": 10
+            },
+            {
+              "story": "body",
+              "paragraph_index": 727,
+              "token_offset": 10
+            },
+            {
+              "story": "body",
+              "paragraph_index": 734,
+              "token_offset": 10
+            },
+            {
+              "story": "body",
+              "paragraph_index": 741,
+              "token_offset": 10
+            },
+            {
+              "story": "body",
+              "paragraph_index": 748,
+              "token_offset": 11
+            },
+            {
+              "story": "body",
+              "paragraph_index": 755,
+              "token_offset": 11
+            },
+            {
+              "story": "body",
+              "paragraph_index": 762,
+              "token_offset": 10
+            },
+            {
+              "story": "body",
+              "paragraph_index": 769,
+              "token_offset": 11
+            },
+            {
+              "story": "body",
+              "paragraph_index": 776,
+              "token_offset": 10
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "bản render desktop 1440 900",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 1163,
+              "token_offset": 3
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1200,
+              "token_offset": 22
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1251,
+              "token_offset": 46
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "bảng điều khiển quản trị",
+          "occurrences": 5,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 451,
+              "token_offset": 38
+            },
+            {
+              "story": "body",
+              "paragraph_index": 990,
+              "token_offset": 0
+            },
+            {
+              "story": "body",
+              "paragraph_index": 992,
+              "token_offset": 4
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1024,
+              "token_offset": 3
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1032,
+              "token_offset": 0
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "bộ lọc đa tiêu chí",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 501,
+              "token_offset": 19
+            },
+            {
+              "story": "body",
+              "paragraph_index": 889,
+              "token_offset": 8
+            },
+            {
+              "story": "body",
+              "paragraph_index": 943,
+              "token_offset": 5
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "bộ tài liệu dự án",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 37,
+              "token_offset": 58
+            },
+            {
+              "story": "body",
+              "paragraph_index": 894,
+              "token_offset": 13
+            },
+            {
+              "story": "body",
+              "paragraph_index": 976,
+              "token_offset": 19
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "case chi tiết phân hệ",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 886,
+              "token_offset": 6
+            },
+            {
+              "story": "body",
+              "paragraph_index": 987,
+              "token_offset": 6
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1103,
+              "token_offset": 6
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "chi tiết sản phẩm rượu",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 895,
+              "token_offset": 2
+            },
+            {
+              "story": "body",
+              "paragraph_index": 897,
+              "token_offset": 4
+            },
+            {
+              "story": "body",
+              "paragraph_index": 937,
+              "token_offset": 3
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "chuyển trạng thái hợp lệ",
+          "occurrences": 4,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 429,
+              "token_offset": 116
+            },
+            {
+              "story": "body",
+              "paragraph_index": 577,
+              "token_offset": 16
+            },
+            {
+              "story": "body",
+              "paragraph_index": 595,
+              "token_offset": 17
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1228,
+              "token_offset": 34
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "cơ sở dữ liệu sql",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 411,
+              "token_offset": 40
+            },
+            {
+              "story": "body",
+              "paragraph_index": 459,
+              "token_offset": 34
+            },
+            {
+              "story": "body",
+              "paragraph_index": 497,
+              "token_offset": 86
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "cơ sở dữ liệu và",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 31,
+              "token_offset": 44
+            },
+            {
+              "story": "body",
+              "paragraph_index": 452,
+              "token_offset": 21
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1172,
+              "token_offset": 15
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "cấu trúc lược đồ bảng",
+          "occurrences": 20,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 711,
+              "token_offset": 4
+            },
+            {
+              "story": "body",
+              "paragraph_index": 718,
+              "token_offset": 4
+            },
+            {
+              "story": "body",
+              "paragraph_index": 725,
+              "token_offset": 4
+            },
+            {
+              "story": "body",
+              "paragraph_index": 732,
+              "token_offset": 4
+            },
+            {
+              "story": "body",
+              "paragraph_index": 739,
+              "token_offset": 4
+            },
+            {
+              "story": "body",
+              "paragraph_index": 746,
+              "token_offset": 4
+            },
+            {
+              "story": "body",
+              "paragraph_index": 753,
+              "token_offset": 4
+            },
+            {
+              "story": "body",
+              "paragraph_index": 760,
+              "token_offset": 4
+            },
+            {
+              "story": "body",
+              "paragraph_index": 767,
+              "token_offset": 4
+            },
+            {
+              "story": "body",
+              "paragraph_index": 774,
+              "token_offset": 4
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "cầu đặt lại mật khẩu",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 904,
+              "token_offset": 35
+            },
+            {
+              "story": "body",
+              "paragraph_index": 906,
+              "token_offset": 7
+            },
+            {
+              "story": "body",
+              "paragraph_index": 948,
+              "token_offset": 5
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "danh mục và sản phẩm",
+          "occurrences": 4,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 508,
+              "token_offset": 0
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1010,
+              "token_offset": 6
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1031,
+              "token_offset": 3
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1035,
+              "token_offset": 4
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "danh mục và trạng thái",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 508,
+              "token_offset": 23
+            },
+            {
+              "story": "body",
+              "paragraph_index": 585,
+              "token_offset": 13
+            },
+            {
+              "story": "body",
+              "paragraph_index": 890,
+              "token_offset": 31
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "dữ liệu đã được ghi",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 668,
+              "token_offset": 43
+            },
+            {
+              "story": "body",
+              "paragraph_index": 856,
+              "token_offset": 28
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1180,
+              "token_offset": 26
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "ghi minh họa thực tế",
+          "occurrences": 20,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 713,
+              "token_offset": 11
+            },
+            {
+              "story": "body",
+              "paragraph_index": 720,
+              "token_offset": 11
+            },
+            {
+              "story": "body",
+              "paragraph_index": 727,
+              "token_offset": 11
+            },
+            {
+              "story": "body",
+              "paragraph_index": 734,
+              "token_offset": 11
+            },
+            {
+              "story": "body",
+              "paragraph_index": 741,
+              "token_offset": 11
+            },
+            {
+              "story": "body",
+              "paragraph_index": 748,
+              "token_offset": 12
+            },
+            {
+              "story": "body",
+              "paragraph_index": 755,
+              "token_offset": 12
+            },
+            {
+              "story": "body",
+              "paragraph_index": 762,
+              "token_offset": 11
+            },
+            {
+              "story": "body",
+              "paragraph_index": 769,
+              "token_offset": 12
+            },
+            {
+              "story": "body",
+              "paragraph_index": 776,
+              "token_offset": 11
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "giao dịch nguồn hoàn tất",
+          "occurrences": 4,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 564,
+              "token_offset": 52
+            },
+            {
+              "story": "body",
+              "paragraph_index": 654,
+              "token_offset": 6
+            },
+            {
+              "story": "body",
+              "paragraph_index": 658,
+              "token_offset": 52
+            },
+            {
+              "story": "body",
+              "paragraph_index": 684,
+              "token_offset": 13
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "học phần phát triển phần",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 30,
+              "token_offset": 12
+            },
+            {
+              "story": "body",
+              "paragraph_index": 36,
+              "token_offset": 11
+            },
+            {
+              "story": "body",
+              "paragraph_index": 405,
+              "token_offset": 9
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "học tài nguyên và môi",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 0,
+              "token_offset": 2
+            },
+            {
+              "story": "body",
+              "paragraph_index": 29,
+              "token_offset": 7
+            },
+            {
+              "story": "body",
+              "paragraph_index": 37,
+              "token_offset": 5
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "khi giao dịch hoàn tất",
+          "occurrences": 9,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 622,
+              "token_offset": 5
+            },
+            {
+              "story": "body",
+              "paragraph_index": 629,
+              "token_offset": 50
+            },
+            {
+              "story": "body",
+              "paragraph_index": 682,
+              "token_offset": 52
+            },
+            {
+              "story": "body",
+              "paragraph_index": 683,
+              "token_offset": 30
+            },
+            {
+              "story": "body",
+              "paragraph_index": 778,
+              "token_offset": 36
+            },
+            {
+              "story": "body",
+              "paragraph_index": 827,
+              "token_offset": 18
+            },
+            {
+              "story": "body",
+              "paragraph_index": 916,
+              "token_offset": 4
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1223,
+              "token_offset": 3
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1250,
+              "token_offset": 65
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "khi giao dịch nguồn hoàn",
+          "occurrences": 4,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 564,
+              "token_offset": 51
+            },
+            {
+              "story": "body",
+              "paragraph_index": 654,
+              "token_offset": 5
+            },
+            {
+              "story": "body",
+              "paragraph_index": 658,
+              "token_offset": 51
+            },
+            {
+              "story": "body",
+              "paragraph_index": 684,
+              "token_offset": 12
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "khoa công nghệ thông tin",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 1,
+              "token_offset": 0
+            },
+            {
+              "story": "body",
+              "paragraph_index": 29,
+              "token_offset": 18
+            },
+            {
+              "story": "body",
+              "paragraph_index": 37,
+              "token_offset": 16
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "khách hàng quản trị viên",
+          "occurrences": 4,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 31,
+              "token_offset": 15
+            },
+            {
+              "story": "body",
+              "paragraph_index": 75,
+              "token_offset": 43
+            },
+            {
+              "story": "body",
+              "paragraph_index": 518,
+              "token_offset": 16
+            },
+            {
+              "story": "body",
+              "paragraph_index": 536,
+              "token_offset": 9
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "kiện sau khi giao dịch",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 654,
+              "token_offset": 3
+            },
+            {
+              "story": "body",
+              "paragraph_index": 658,
+              "token_offset": 49
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1223,
+              "token_offset": 1
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "lấy hàng bắt đầu giao",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 527,
+              "token_offset": 15
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1098,
+              "token_offset": 25
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1101,
+              "token_offset": 18
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "lỗi sau khi giao dịch",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 564,
+              "token_offset": 49
+            },
+            {
+              "story": "body",
+              "paragraph_index": 683,
+              "token_offset": 28
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1250,
+              "token_offset": 63
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "mục và sản phẩm rượu",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 1010,
+              "token_offset": 7
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1031,
+              "token_offset": 4
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1035,
+              "token_offset": 5
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "người dùng hồ sơ shipper",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 524,
+              "token_offset": 10
+            },
+            {
+              "story": "body",
+              "paragraph_index": 985,
+              "token_offset": 24
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1187,
+              "token_offset": 58
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "phát triển phần mềm hướng",
+          "occurrences": 7,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 6,
+              "token_offset": 0
+            },
+            {
+              "story": "body",
+              "paragraph_index": 30,
+              "token_offset": 14
+            },
+            {
+              "story": "body",
+              "paragraph_index": 36,
+              "token_offset": 13
+            },
+            {
+              "story": "body",
+              "paragraph_index": 45,
+              "token_offset": 20
+            },
+            {
+              "story": "body",
+              "paragraph_index": 75,
+              "token_offset": 16
+            },
+            {
+              "story": "body",
+              "paragraph_index": 76,
+              "token_offset": 2
+            },
+            {
+              "story": "body",
+              "paragraph_index": 405,
+              "token_offset": 11
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "phân rã màn hình phân",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 883,
+              "token_offset": 5
+            },
+            {
+              "story": "body",
+              "paragraph_index": 984,
+              "token_offset": 5
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1100,
+              "token_offset": 5
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "phân tích thiết kế và",
+          "occurrences": 4,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 8,
+              "token_offset": 0
+            },
+            {
+              "story": "body",
+              "paragraph_index": 30,
+              "token_offset": 72
+            },
+            {
+              "story": "body",
+              "paragraph_index": 36,
+              "token_offset": 23
+            },
+            {
+              "story": "body",
+              "paragraph_index": 45,
+              "token_offset": 3
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "phần mềm hướng đối tượng",
+          "occurrences": 7,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 6,
+              "token_offset": 2
+            },
+            {
+              "story": "body",
+              "paragraph_index": 30,
+              "token_offset": 16
+            },
+            {
+              "story": "body",
+              "paragraph_index": 36,
+              "token_offset": 15
+            },
+            {
+              "story": "body",
+              "paragraph_index": 45,
+              "token_offset": 22
+            },
+            {
+              "story": "body",
+              "paragraph_index": 75,
+              "token_offset": 18
+            },
+            {
+              "story": "body",
+              "paragraph_index": 76,
+              "token_offset": 4
+            },
+            {
+              "story": "body",
+              "paragraph_index": 405,
+              "token_offset": 13
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "phần phát triển phần mềm",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 30,
+              "token_offset": 13
+            },
+            {
+              "story": "body",
+              "paragraph_index": 36,
+              "token_offset": 12
+            },
+            {
+              "story": "body",
+              "paragraph_index": 405,
+              "token_offset": 10
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "retry có giới hạn và",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 544,
+              "token_offset": 29
+            },
+            {
+              "story": "body",
+              "paragraph_index": 855,
+              "token_offset": 56
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1223,
+              "token_offset": 22
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "rã màn hình phân hệ",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 883,
+              "token_offset": 6
+            },
+            {
+              "story": "body",
+              "paragraph_index": 984,
+              "token_offset": 6
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1100,
+              "token_offset": 6
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "sau khi giao dịch hoàn",
+          "occurrences": 9,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 622,
+              "token_offset": 4
+            },
+            {
+              "story": "body",
+              "paragraph_index": 629,
+              "token_offset": 49
+            },
+            {
+              "story": "body",
+              "paragraph_index": 682,
+              "token_offset": 51
+            },
+            {
+              "story": "body",
+              "paragraph_index": 683,
+              "token_offset": 29
+            },
+            {
+              "story": "body",
+              "paragraph_index": 778,
+              "token_offset": 35
+            },
+            {
+              "story": "body",
+              "paragraph_index": 827,
+              "token_offset": 17
+            },
+            {
+              "story": "body",
+              "paragraph_index": 916,
+              "token_offset": 3
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1223,
+              "token_offset": 2
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1250,
+              "token_offset": 64
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "sau khi giao dịch nguồn",
+          "occurrences": 4,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 564,
+              "token_offset": 50
+            },
+            {
+              "story": "body",
+              "paragraph_index": 654,
+              "token_offset": 4
+            },
+            {
+              "story": "body",
+              "paragraph_index": 658,
+              "token_offset": 50
+            },
+            {
+              "story": "body",
+              "paragraph_index": 684,
+              "token_offset": 11
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "sinh viên thực hiện nguyễn",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 11,
+              "token_offset": 0
+            },
+            {
+              "story": "body",
+              "paragraph_index": 44,
+              "token_offset": 0
+            },
+            {
+              "story": "body",
+              "paragraph_index": 58,
+              "token_offset": 0
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "sơ đồ phân rã màn",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 883,
+              "token_offset": 3
+            },
+            {
+              "story": "body",
+              "paragraph_index": 984,
+              "token_offset": 3
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1100,
+              "token_offset": 3
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "sơ đồ use case chi",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 886,
+              "token_offset": 3
+            },
+            {
+              "story": "body",
+              "paragraph_index": 987,
+              "token_offset": 3
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1103,
+              "token_offset": 3
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "sở dữ liệu sql server",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 411,
+              "token_offset": 41
+            },
+            {
+              "story": "body",
+              "paragraph_index": 459,
+              "token_offset": 35
+            },
+            {
+              "story": "body",
+              "paragraph_index": 497,
+              "token_offset": 87
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "sự kiện sau khi giao",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 654,
+              "token_offset": 2
+            },
+            {
+              "story": "body",
+              "paragraph_index": 658,
+              "token_offset": 48
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1223,
+              "token_offset": 0
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "th s ngô tân khai",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 10,
+              "token_offset": 4
+            },
+            {
+              "story": "body",
+              "paragraph_index": 30,
+              "token_offset": 5
+            },
+            {
+              "story": "body",
+              "paragraph_index": 43,
+              "token_offset": 7
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "thiết kế và đánh giá",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 8,
+              "token_offset": 2
+            },
+            {
+              "story": "body",
+              "paragraph_index": 36,
+              "token_offset": 25
+            },
+            {
+              "story": "body",
+              "paragraph_index": 45,
+              "token_offset": 5
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "thương mại điện tử strongwine",
+          "occurrences": 4,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 45,
+              "token_offset": 12
+            },
+            {
+              "story": "body",
+              "paragraph_index": 75,
+              "token_offset": 8
+            },
+            {
+              "story": "body",
+              "paragraph_index": 407,
+              "token_offset": 32
+            },
+            {
+              "story": "body",
+              "paragraph_index": 854,
+              "token_offset": 7
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "thực hiện nguyễn thành duy",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 11,
+              "token_offset": 2
+            },
+            {
+              "story": "body",
+              "paragraph_index": 44,
+              "token_offset": 2
+            },
+            {
+              "story": "body",
+              "paragraph_index": 58,
+              "token_offset": 2
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "triển phần mềm hướng đối",
+          "occurrences": 7,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 6,
+              "token_offset": 1
+            },
+            {
+              "story": "body",
+              "paragraph_index": 30,
+              "token_offset": 15
+            },
+            {
+              "story": "body",
+              "paragraph_index": 36,
+              "token_offset": 14
+            },
+            {
+              "story": "body",
+              "paragraph_index": 45,
+              "token_offset": 21
+            },
+            {
+              "story": "body",
+              "paragraph_index": 75,
+              "token_offset": 17
+            },
+            {
+              "story": "body",
+              "paragraph_index": 76,
+              "token_offset": 3
+            },
+            {
+              "story": "body",
+              "paragraph_index": 405,
+              "token_offset": 12
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "trong cơ sở dữ liệu",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 519,
+              "token_offset": 32
+            },
+            {
+              "story": "body",
+              "paragraph_index": 652,
+              "token_offset": 62
+            },
+            {
+              "story": "body",
+              "paragraph_index": 892,
+              "token_offset": 32
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "trường đại học tài nguyên",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 0,
+              "token_offset": 0
+            },
+            {
+              "story": "body",
+              "paragraph_index": 29,
+              "token_offset": 5
+            },
+            {
+              "story": "body",
+              "paragraph_index": 37,
+              "token_offset": 3
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "tài nguyên và môi trường",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 0,
+              "token_offset": 3
+            },
+            {
+              "story": "body",
+              "paragraph_index": 29,
+              "token_offset": 8
+            },
+            {
+              "story": "body",
+              "paragraph_index": 37,
+              "token_offset": 6
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "tích thiết kế và đánh",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 8,
+              "token_offset": 1
+            },
+            {
+              "story": "body",
+              "paragraph_index": 36,
+              "token_offset": 24
+            },
+            {
+              "story": "body",
+              "paragraph_index": 45,
+              "token_offset": 4
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "tạo đơn chờ thanh toán",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 521,
+              "token_offset": 29
+            },
+            {
+              "story": "body",
+              "paragraph_index": 538,
+              "token_offset": 40
+            },
+            {
+              "story": "body",
+              "paragraph_index": 656,
+              "token_offset": 58
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "từ tài liệu cũ được",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 1188,
+              "token_offset": 6
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1200,
+              "token_offset": 83
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1251,
+              "token_offset": 123
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "use case chi tiết phân",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 886,
+              "token_offset": 5
+            },
+            {
+              "story": "body",
+              "paragraph_index": 987,
+              "token_offset": 5
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1103,
+              "token_offset": 5
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "viên thực hiện nguyễn thành",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 11,
+              "token_offset": 1
+            },
+            {
+              "story": "body",
+              "paragraph_index": 44,
+              "token_offset": 1
+            },
+            {
+              "story": "body",
+              "paragraph_index": 58,
+              "token_offset": 1
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "và trạng thái thanh toán",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 522,
+              "token_offset": 43
+            },
+            {
+              "story": "body",
+              "paragraph_index": 571,
+              "token_offset": 74
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1020,
+              "token_offset": 10
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "yêu cầu đặt lại mật",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 904,
+              "token_offset": 34
+            },
+            {
+              "story": "body",
+              "paragraph_index": 906,
+              "token_offset": 6
+            },
+            {
+              "story": "body",
+              "paragraph_index": 948,
+              "token_offset": 4
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "được ghi nhận thành công",
+          "occurrences": 4,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 425,
+              "token_offset": 66
+            },
+            {
+              "story": "body",
+              "paragraph_index": 541,
+              "token_offset": 28
+            },
+            {
+              "story": "body",
+              "paragraph_index": 652,
+              "token_offset": 43
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1123,
+              "token_offset": 8
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "đại học tài nguyên và",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 0,
+              "token_offset": 1
+            },
+            {
+              "story": "body",
+              "paragraph_index": 29,
+              "token_offset": 6
+            },
+            {
+              "story": "body",
+              "paragraph_index": 37,
+              "token_offset": 4
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "đồ phân rã màn hình",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 883,
+              "token_offset": 4
+            },
+            {
+              "story": "body",
+              "paragraph_index": 984,
+              "token_offset": 4
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1100,
+              "token_offset": 4
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "đồ use case chi tiết",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 886,
+              "token_offset": 4
+            },
+            {
+              "story": "body",
+              "paragraph_index": 987,
+              "token_offset": 4
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1103,
+              "token_offset": 4
+            }
+          ]
+        },
+        {
+          "kind": "repeated_ngram",
+          "text": "ở viewport desktop 1440 900",
+          "occurrences": 3,
+          "locations": [
+            {
+              "story": "body",
+              "paragraph_index": 892,
+              "token_offset": 6
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1187,
+              "token_offset": 33
+            },
+            {
+              "story": "body",
+              "paragraph_index": 1211,
+              "token_offset": 18
+            }
+          ]
+        }
+      ],
+      "classification": "HUMAN_REVIEW_HEURISTIC_NOT_AI_DETECTION",
+      "finding_count_total": 83,
+      "ngram_size": 5,
+      "scope": "Sentence openings and content-bearing phrases repeated across distinct body paragraphs; headings, captions, and table cells are excluded."
+    },
+    "unresolved_placeholders": {
+      "status": "PASS",
+      "finding_count": 0,
+      "findings": [],
+      "classification": "DETERMINISTIC_COMPLETENESS_CHECK"
+    },
+    "ai_use_disclosure_provenance": {
+      "status": "PASS",
+      "finding_count": 2,
+      "findings": [
+        {
+          "story": "body",
+          "paragraph_index": 39,
+          "excerpt": "WordAssistant được dùng để hỗ trợ tổ chức nội dung, định dạng và kiểm tra cấu trúc DOCX; công cụ AI hỗ trợ soạn thảo, biên tập một số đoạn và rà soát cách diễn đạt. Em đã đọc lại, đối chiếu thông tin, chỉnh sửa nội dung và chịu trách nhiệm về bản tiểu luận nộp. Các công cụ hỗ trợ không thay thế nguồ"
+        },
+        {
+          "story": "body",
+          "paragraph_index": 1271,
+          "excerpt": "Em xin cam đoan rằng toàn bộ nội dung phân tích kiến trúc, sơ đồ lớp, quy trình nghiệp vụ và các minh chứng màn hình trong bài tiểu luận này đều được xây dựng dựa trên mã nguồn thực tế và cơ sở dữ liệu của dự án StrongWine đang vận hành. Các công cụ hỗ trợ như WordAssistant và mô hình trí tuệ nhân t"
+        }
+      ],
+      "classification": "DISCLOSURE_CHECK_NOT_AI_DETECTION",
+      "declared": true
+    }
+  },
+  "limitations": [
+    "Similarity to external publications is not measured because no corpus or external provider is used.",
+    "Prose repetition and citation-adjacency findings are review heuristics, not proof of misconduct or AI authorship.",
+    "Primary-source status is accepted only from an explicit primary tag in the evidence registry."
+  ]
+}

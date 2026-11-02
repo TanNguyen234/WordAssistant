@@ -1,0 +1,338 @@
+{
+  "version": 1,
+  "sections": [
+    {
+      "heading": "TÓM TẮT",
+      "paragraphs": [
+        "Báo cáo trình bày kế hoạch quản lý cho dự án học thuật xây dựng hệ thống quản lý học tập LMS của trường đại học. Nội dung thống nhất điều lệ, stakeholder, phạm vi, WBS, tiến độ, nguồn lực, ngân sách, rủi ro, chất lượng, truyền thông, thay đổi và đóng dự án; Trello và Draw.io được bổ sung để theo dõi công việc và minh họa sản phẩm bàn giao.",
+        "Baseline đã đối soát là 20 tuần, 1.200.000.000 VNĐ và 8,5 FTE. Mạng CPM có mốc kết thúc kế hoạch tuần 20; ACT-04 có float 1 tuần, ACT-16 có 2 tuần. Snapshot Trello ngày 23/10/2026 có 9 danh sách, 39 thẻ, 8 mốc đề xuất và 3 thẻ mô phỏng. Snapshot API không phải ảnh UI; Done chưa có xác nhận.",
+        "UAT, EVM, ký duyệt và trạng thái hoàn tất trong tài liệu kế hoạch là mô phỏng/chưa chạy. PNG Draw.io là hình tĩnh đi cùng source .drawio, không thay ảnh giao diện Draw.io/LMS. Checklist T01–T05, D01–D03, L01–L07 được đưa vào phụ lục; ảnh thật chưa có nên trạng thái là NOT RUN."
+      ],
+      "subsections": []
+    },
+    {
+      "heading": "MỞ ĐẦU",
+      "paragraphs": [
+        "Thông tin khóa học, tài liệu, bài tập, bài kiểm tra và điểm số có thể phân tán qua nhiều kênh. Điều lệ LMS mô hình hóa nhu cầu tập trung nội dung học phần, theo dõi bài nộp/chấm điểm và cung cấp góc nhìn nhất quán cho quản lý đào tạo. Quy mô 10.000 sinh viên, 500 giảng viên là giả định trong charter, không phải số liệu triển khai đã đo.",
+        "Mục tiêu là lập kế hoạch có thể kiểm soát: xác định sản phẩm, tổ chức, hoạt động và phụ thuộc, dự toán nguồn lực/chi phí, xử lý rủi ro, đặt cổng chất lượng, truyền thông quyết định và lưu dấu vết thay đổi. Trello theo dõi công việc; Draw.io giữ source sơ đồ chỉnh sửa được và PNG đưa vào báo cáo. Hai công cụ không ghi đè baseline LMS.",
+        "Phương pháp gồm đọc tài liệu quản lý dự án trong repo LMS, ưu tiên báo cáo tái hòa giải ngày 21/10/2026, đối chiếu snapshot Trello, manifest và tài sản trong ZIP, rồi biên soạn bằng WordAssistant với profile generic vì chưa có profile trường. Yêu cầu trực tiếp của người dùng là nguồn chỉ đạo; guide ảnh bổ sung cách ghi nhận bằng chứng. Không dùng n8n.",
+        "Phạm vi là kế hoạch và hồ sơ mô phỏng. Không tự nhận có sponsor, pilot, phê duyệt, ngày thực hiện, kết quả UAT, chi phí thực hoặc thông tin nhận dạng sinh viên. Trường/khoa/ngành/sinh viên/MSSV/lớp/GVHD để trống để bổ sung."
+      ],
+      "subsections": []
+    },
+    {
+      "heading": "CHƯƠNG 1. TỔNG QUAN VÀ KHỞI TẠO DỰ ÁN",
+      "paragraphs": [
+        "PRJ-LMS-2026 dự kiến xây dựng LMS web theo ba vai trò quản trị viên, giảng viên và sinh viên. Business case trong charter là giảm thất lạc tài liệu, chậm bài nộp, tổng hợp điểm thủ công và thiếu thông tin quản trị. Phạm vi sản phẩm tập trung luồng cốt lõi; tính năng mở rộng phải qua change control.",
+        "Bảng điều lệ dưới đây là baseline học thuật; vai trò đại diện, approvals và ngày ký vẫn cần xác nhận trước khi dùng như hồ sơ chính thức."
+      ],
+      "subsections": [
+        {
+          "title": "Business case và mục tiêu",
+          "level": 2,
+          "paragraphs": [
+            "LMS dự kiến quản lý người dùng, khóa học, phân công giảng viên, ghi danh, modules/lessons, assignment/submission, quiz, grading, bảng điểm và thông báo. Mục tiêu chấp nhận được mô tả bằng 10 kịch bản AC-01–AC-10 và các cổng chất lượng. Đây là tiêu chí kế hoạch; chưa có bằng chứng các kịch bản đã chạy.",
+            "Điều lệ giới hạn kiến trúc ở web frontend, API/backend và SQL Server. SSO, thanh toán, video conference, chat thời gian thực, AI tutoring, kiểm tra đạo văn, ứng dụng native và tự đăng ký môn nằm ngoài phạm vi."
+          ]
+        },
+        {
+          "title": "Giả định và ràng buộc",
+          "level": 2,
+          "paragraphs": [
+            "Baseline là 20 tuần/1,2 tỷ VNĐ/8,5 FTE. Các bên nghiệp vụ được giả định cung cấp yêu cầu, đội ngũ có kỹ năng và môi trường demo có thể chuẩn bị. 8,5 FTE là tổng phân bổ, không khóa số đầu người.",
+            "Kiến trúc trong hồ sơ là modular monolith với frontend React/TypeScript/Vite, backend FastAPI/SQLAlchemy và SQL Server. Đây là thiết kế, không phải bằng chứng uptime hay deployment production."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "CHƯƠNG 2. CÁC BÊN LIÊN QUAN VÀ TỔ CHỨC DỰ ÁN",
+      "paragraphs": [
+        "Stakeholder register là mô hình giả định để xác định ai cần tham gia và thời điểm. Phòng Đào tạo xác nhận quy trình học vụ; Phòng CNTT review kiến trúc, môi trường và backup; giảng viên/sinh viên góp ý luồng; PM tích hợp kế hoạch và escalation.",
+        "Stakeholder quyền lực và quan tâm cao được quản lý chặt bằng cập nhật mốc và tham vấn thay đổi. Người dùng trực tiếp được mời review demo, workshop và phản hồi. Thu thập ý kiến không đồng nghĩa với phê duyệt."
+      ],
+      "subsections": [
+        {
+          "title": "Sổ stakeholder",
+          "level": 2,
+          "paragraphs": [
+            "Bảng rút gọn giữ nguyên nhóm và chiến lược từ register nguồn. Tên riêng không được thêm vì hồ sơ mô tả vai trò giả định."
+          ]
+        },
+        {
+          "title": "RACI và escalation",
+          "level": 2,
+          "paragraphs": [
+            "RACI gồm Responsible, Accountable, Consulted, Informed; mỗi gói công việc cần một A duy nhất. PM quản lý tích hợp; BA làm yêu cầu; nhóm phát triển/QA chịu trách nhiệm kỹ thuật; sponsor giả định phê duyệt scope và nghiệm thu trong mô hình.",
+            "Mỗi gói việc cần một A duy nhất. Sponsor là vai trò giả định trong mô hình."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "CHƯƠNG 3. QUẢN LÝ PHẠM VI VÀ WBS",
+      "paragraphs": [
+        "Phạm vi sản phẩm mô tả khả năng LMS; phạm vi dự án mô tả công việc và hồ sơ để xây dựng, kiểm thử, bàn giao prototype. Trong phạm vi là 3 vai trò, khóa học/ghi danh, nội dung học, assignment/submission văn bản, quiz, điểm, thông báo, schema/seed, test và PM artifacts. Ngoài phạm vi là SSO, video, chat realtime, AI, plagiarism check, app native, thanh toán và tự đăng ký môn.",
+        "Yêu cầu phi chức năng tập trung bảo mật server-side/RBAC, toàn vẹn dữ liệu, trạng thái giao diện loading/success/error/empty, kiểm thử và traceability. Hiệu năng cần có tiêu chí và phép đo trong môi trường thử; hiện không có kết quả đo runtime.",
+        "WBS nhóm deliverable từ khởi tạo, requirements, thiết kế, prototype, QA, UAT/demo đến closure. Hình dưới là đề xuất WBS từ ZIP, không phải rubric chính thức."
+      ],
+      "subsections": [
+        {
+          "title": "Ranh giới và acceptance",
+          "level": 2,
+          "paragraphs": [
+            "Yêu cầu cần mã truy vết, tiêu chí kiểm được, vai trò review và bằng chứng. Thay đổi phải có CR, lý do, phân tích tác động WBS/CPM/cost/risk/quality/resource và quyết định có thẩm quyền. MVP submission là văn bản; không khẳng định upload tệp thật.",
+            "Trong phạm vi là LMS core; các khả năng mở rộng được đưa ngoài phạm vi."
+          ]
+        },
+        {
+          "title": "Work breakdown",
+          "level": 2,
+          "paragraphs": [
+            "WBS là cấu trúc phân chia công việc, không chứng minh gói việc đã hoàn tất. Mỗi work package cần deliverable, owner, đầu vào, tiêu chí Done và nguồn lực.",
+            "WBS là cấu trúc công việc, không chứng minh gói việc đã hoàn tất.",
+            "WBS được lấy từ ZIP, là cấu trúc bàn giao đề xuất chứ không phải rubric."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "CHƯƠNG 4. QUẢN LÝ TIẾN ĐỘ VÀ CPM",
+      "paragraphs": [
+        {
+          "text": "Lịch baseline có 19 hoạt động theo finish-to-start. ES/EF tính xuôi từ 0; backward pass tính từ tuần 20; total float = LS−ES. ACT-03 và ACT-05 phải xong trước ACT-06; ACT-14 và ACT-15 phải xong trước ACT-17. CPM thể hiện quan hệ và phân tích lịch; mô hình cần nhất quán giữa activity, duration, logic và mốc.",
+          "citations": [
+            "PMI-SCHED"
+          ]
+        },
+        "Đối soát cho kết thúc kế hoạch tuần 20, ACT-04 float 1 và ACT-16 float 2; hoạt động khác float 0. Đây không phải tiến độ thực tế vì chưa có actual start/finish cập nhật.",
+        "Mốc baseline: charter W2, scope W4, design W6, feature complete W12, system/integration test W15, UAT W16, demo W18, closure W20. Sơ đồ LMS_14 không gán ngày; bảng CPM là nguồn duration/float."
+      ],
+      "subsections": [
+        {
+          "title": "Danh sách hoạt động và phụ thuộc",
+          "level": 2,
+          "paragraphs": [
+            "Mạng lịch nối khởi tạo/phạm vi, thiết kế/môi trường, phát triển lát dọc, tích hợp, kiểm thử, UAT, demo và đóng. Hình mạng chỉ giải thích phụ thuộc, không thay bảng CPM.",
+            "Mạng LMS_14 không gán ngày; bảng này là nguồn duration/float baseline.",
+            "LMS_14 không gán ngày; bảng CPM mới là nguồn duration/float."
+          ]
+        },
+        {
+          "title": "Theo dõi sai lệch",
+          "level": 2,
+          "paragraphs": [
+            "PM cập nhật forecast finish, float và đường găng ở mỗi kỳ status; ghi nguyên nhân, phương án khôi phục, owner và tác động chi phí. Chỉ dùng actual khi có nhật ký tiến độ và quy tắc đo thống nhất.",
+            "Mốc tuần là baseline kế hoạch, không phải actual date."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "CHƯƠNG 5. QUẢN LÝ NGUỒN LỰC VÀ CHI PHÍ",
+      "paragraphs": [
+        "Kế hoạch dùng bottom-up kết hợp parametric costing. Nhân sự tổng 8,5 FTE; chín dòng vai trò không đồng nghĩa chín người. Labor 840M, hạ tầng 120M, công cụ 48M, đào tạo 40M, hành chính 32M và contingency 120M cộng đúng 1,2 tỷ VNĐ.",
+        "Cash flow dự kiến năm giai đoạn: 180M, 150M, 450M, 240M, 180M. Dự phòng cần quyết định giải ngân qua CR/issue; budget là ước lượng chứ không phải chứng từ đã chi.",
+        "EVM cần kỳ status, quy tắc PV/EV và actual cost. Ví dụ trong hồ sơ được giữ ở Chương 10 với cảnh báo minh họa."
+      ],
+      "subsections": [
+        {
+          "title": "Resource breakdown",
+          "level": 2,
+          "paragraphs": [
+            "PM/BA/UI-UX/Backend/Frontend/QA/DevOps được bố trí theo giai đoạn. QA tham gia sớm; DevOps chuẩn bị môi trường và demo. Cần cân bằng tải để tránh bottleneck và xung đột giữa thực hiện với phê duyệt.",
+            "Tổng phân bổ 8,5 FTE; không suy ra số đầu người."
+          ]
+        },
+        {
+          "title": "Kiểm soát chi phí",
+          "level": 2,
+          "paragraphs": [
+            "Theo dõi BAC, actual khi có chứng từ, forecast và variance. Trello không thay sổ chi phí; thẻ có thể trỏ mã WBS/CR và owner.",
+            "Sáu khoản mục cộng đúng 1,2 tỷ VNĐ; contingency không phải chi phí đã tiêu."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "CHƯƠNG 6. QUẢN LÝ RỦI RO",
+      "paragraphs": [
+        "Risk register là kế hoạch mô phỏng. P×I trên thang 1–5 hỗ trợ ưu tiên, không phải xác suất thống kê. Trigger báo hiệu hành động; rủi ro đã xảy ra chuyển thành issue có owner, hạn và escalation.",
+        "Ưu tiên scope creep, authorization breach, trễ phát triển, low adoption, bất nhất tài liệu, UAT feedback muộn và hiểu nhầm upload. Mỗi rủi ro cần phòng ngừa, contingency và cadence review. Dự phòng 120M chỉ được giải ngân theo kiểm soát.",
+        "Scope creep hạn chế bằng baseline và CR; quyền truy cập bằng RBAC/ownership server-side và denial tests; trễ lịch bằng vertical slices/float; kỳ vọng upload cần nêu rõ text-only MVP."
+      ],
+      "subsections": [
+        {
+          "title": "Giám sát và ứng phó",
+          "level": 2,
+          "paragraphs": [
+            "Register được rà hàng tuần theo kế hoạch. PM kiểm trigger, owner/response và escalate khi ảnh hưởng đường găng hoặc cost. Trạng thái nguồn không chứng minh rủi ro thực tế đã xảy ra hay xử lý xong.",
+            "Risk register là kế hoạch mô phỏng; score không chứng minh sự kiện."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "CHƯƠNG 7. QUẢN LÝ CHẤT LƯỢNG VÀ KIỂM THỬ",
+      "paragraphs": [
+        "Quality được kiểm qua tiêu chí đầu ra và gate. Definition of Done yêu cầu logic theo đặc tả, happy path/denial path được kiểm, API có tài liệu, UI xử lý loading/success/error/empty, không hard-code quyền phía client. Mục tiêu 0 lỗi P0/P1 là điều kiện kế hoạch.",
+        "QG1–QG5 kiểm scope freeze, design freeze, feature complete, UAT readiness và closure. Gate không đạt thì giữ trạng thái, ghi defect và lập kế hoạch khắc phục; chuyển thẻ Done không thay acceptance.",
+        "UAT được lên kế hoạch tuần 16 với 10 kịch bản AC-01–AC-10 cho Admin/Lecturer/Student. Mọi kết quả mẫu là SIMULATED — NOT RUN. Chỉ ghi kết quả sau khi chạy, kèm build, môi trường, người thực hiện, thời điểm, bằng chứng và defect."
+      ],
+      "subsections": [
+        {
+          "title": "Gate và DoD",
+          "level": 2,
+          "paragraphs": [
+            "QG1/W4 kiểm SRS/use cases/WBS/scope; QG2/W6 kiến trúc/ERD/API; QG3/W12 lát chức năng/RBAC; QG4/W15 UAT readiness/test/seed/defect; QG5/W20 UAT/docs/source/handover. Đây là tuần baseline.",
+            "Gate là điều kiện kế hoạch; trạng thái phê duyệt chưa được xác nhận."
+          ]
+        },
+        {
+          "title": "UAT và triage",
+          "level": 2,
+          "paragraphs": [
+            "Kịch bản phân quyền, nộp bài, grading, quiz, notification cần test data kiểm soát. Chưa chạy thì giữ NOT RUN; không biến kết quả mẫu thành evidence.",
+            "Mười AC được định nghĩa; số đã xác minh chạy là 0."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "CHƯƠNG 8. TRUYỀN THÔNG, THAY ĐỔI VÀ TRELLO",
+      "paragraphs": [
+        "Kế hoạch truyền thông: nhóm họp tuần; sponsor/đại diện nghiệp vụ nhận báo cáo mốc hai tuần; review theo đầu ra; UAT theo lịch xác nhận. Biên bản ghi quyết định, action, owner và due date. Blocker chuyển PM rồi sponsor theo ảnh hưởng.",
+        "Change control: ghi CR → phân tích scope/WBS/time/cost/risk/quality/resource → lựa chọn → quyết định → cập nhật baseline và thông báo. Trello phản ánh việc; chỉ quyết định có thẩm quyền mới thay baseline.",
+        {
+          "text": "Trello cards/lists hỗ trợ metadata công việc như nhãn, ngày, file đính kèm; checklist chia subtasks và đánh dấu hoàn thành. Mỗi thẻ nên có ID WBS/CR/AC, kết quả, owner, ngày nếu thống nhất, checklist, source.drawio/PNG, reviewer và evidence. Done cần acceptance/evidence.",
+          "citations": [
+            "TRELLO-CARDS",
+            "TRELLO-CHECKS"
+          ]
+        },
+        "Snapshot 23/10/2026 có 9 danh sách/39 thẻ: To Do 25; yêu cầu 2; Blocked 1 (hỏi rubric); milestone đề xuất 8; mô phỏng 3; Backlog/Doing/Review/Done trống. Hình tổng hợp API không phải screenshot Trello; không chứng minh việc hoàn tất."
+      ],
+      "subsections": [
+        {
+          "title": "Luồng board và quy ước",
+          "level": 2,
+          "paragraphs": [
+            "Luồng đề xuất Backlog → To Do → Doing → Review → Done; Blocked hiển thị vướng mắc. Milestone gắn deliverable/tuần baseline. SIM cần nhãn mô phỏng. Trước Done cần review, checklist, bằng chứng và quyết định cần thiết.",
+            "Dữ liệu API không phải ảnh UI và không chứng minh Done.",
+            "Cards/lists/checklists hỗ trợ công việc; approval/evidence vẫn riêng.",
+            "Sơ đồ Draw.io quy trình nối yêu cầu, Trello, review và thay đổi.",
+            "Snapshot không chứng minh phần việc đã hoàn thành."
+          ]
+        },
+        {
+          "title": "Kết nối Trello — WBS — Draw.io — Word",
+          "level": 2,
+          "paragraphs": [
+            "Mã WBS/CR nối kế hoạch, card, file sơ đồ và report. Card không thay tài liệu baseline hoặc nghiệm thu. Snapshot lịch nhóm Oct–Nov/27M trong ZIP là đề xuất riêng chưa phê duyệt, không trộn vào baseline 20 tuần/1,2 tỷ."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "CHƯƠNG 9. THIẾT KẾ VÀ BIỂU ĐỒ DRAW.IO",
+      "paragraphs": [
+        "Kiến trúc minh họa work package thiết kế, không thay đánh giá runtime. Sơ đồ repo thể hiện ba vai trò qua React/TypeScript/Vite, FastAPI/SQLAlchemy đến SQL Server. Đây là thiết kế theo hồ sơ, không khẳng định production deployment.",
+        "ERD LMS_12 thể hiện 12 bảng và PK/FK; manifest nói một số quan hệ được giản lược để dễ đọc. Sơ đồ cần được đối chiếu với schema SQL nguồn.",
+        {
+          "text": "Draw.io giữ source.drawio/XML có thể sửa và PNG để trình bày. Tài liệu chính thức phân biệt định dạng export với source , và mô tả tùy chọn PNG. Hình tĩnh không chứng minh UI editor đã được chụp.",
+          "citations": [
+            "DRAWIO-FORMATS",
+            "DRAWIO-PNG"
+          ]
+        }
+      ],
+      "subsections": [
+        {
+          "title": "Kiến trúc và dữ liệu",
+          "level": 2,
+          "paragraphs": [
+            "Frontend/API/database là lớp thiết kế. HTTP/JSON/JWT, RBAC và transaction cần đối chiếu code/API/test. ERD là góc nhìn; schema là nguồn chi tiết.",
+            "Kiến trúc là thiết kế trong repo, không phải runtime.",
+            "Sơ đồ architecture trong repo mô tả thiết kế, không phải runtime.",
+            "ERD có quan hệ giản lược; đọc cùng schema SQL nguồn."
+          ]
+        },
+        {
+          "title": "Quy trình xuất biểu đồ",
+          "level": 2,
+          "paragraphs": [
+            "Chọn câu hỏi; mở source; kiểm title/node/connector/arrow/note; lưu source; export PNG đủ biên/độ phân giải; xem ảnh; chèn inline/căn giữa/caption; giữ cặp source-output. Sau sửa phải review lại. Archive có 15 cặp; manifest path cũ sai thư mục, workspace dùng drawio/ và anh_so_do/. Sequence diagram là mô hình logic, không phải log end-to-end; LMS_14 không gán ngày."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "CHƯƠNG 10. NGHIỆM THU VÀ ĐÓNG DỰ ÁN",
+      "paragraphs": [
+        "Nghiệm thu đối chiếu từng acceptance criteria với kết quả chạy và evidence. Closure package cần baseline, source version, test/defect, UAT/sign-off thật, hướng dẫn vận hành, tồn đọng và lessons. Hồ sơ hiện có biểu mẫu mô phỏng, chưa chứng minh chữ ký/acceptance.",
+        "Ví dụ EVM dùng PV=1.200M, EV=1.200M, AC=1.175M; suy ra SV=0, SPI=1, CV=+25M, CPI≈1,021. Đây là ví dụ số học; không có invoice/timesheet xác nhận AC và không có kỳ đo ngày status.",
+        "Closure chỉ PASS khi gate được review và người có thẩm quyền xác nhận. Thiếu bằng chứng thì ghi kế hoạch/chưa nghiệm thu."
+      ],
+      "subsections": [
+        {
+          "title": "Tiêu chí nghiệm thu",
+          "level": 2,
+          "paragraphs": [
+            "Kiểm đủ 10 AC và Must-have, defect P0/P1, dữ liệu, hướng dẫn, known issues và tồn đọng được chấp nhận. Kịch bản chưa chạy vẫn NOT RUN.",
+            "Không có invoice/timesheet hoặc kỳ đo thực tế gắn EVM."
+          ]
+        },
+        {
+          "title": "Lessons learned và hướng phát triển",
+          "level": 2,
+          "paragraphs": [
+            "Giữ một baseline duy nhất; tách kế hoạch với actual; một A trong RACI; cần evidence trước Done; không suy diễn runtime từ sơ đồ. Upload an toàn, SSO và tích hợp lớp học là hướng phát triển cần CR và đánh giá nguồn lực."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "KẾT LUẬN VÀ KIẾN NGHỊ",
+      "paragraphs": [
+        "Báo cáo giữ baseline 20 tuần/1,2 tỷ VNĐ/8,5 FTE và tách kế hoạch, API snapshot, mô phỏng, runtime evidence. Trello hỗ trợ theo dõi và traceability; Draw.io giữ source cùng PNG. Không dùng n8n.",
+        "Trước khi nộp cần điền metadata thật, nhận rubric/đề cương chính thức, chụp T01–T05/D01–D03/L01–L07 từ ứng dụng thật và chạy/ghi UAT nếu yêu cầu. Chỉ cập nhật trạng thái khi có chứng cứ. DOCX có thể qua kiểm tra định dạng nhưng submission readiness vẫn INCOMPLETE."
+      ],
+      "subsections": []
+    },
+    {
+      "heading": "PHỤ LỤC",
+      "paragraphs": [
+        "Phụ lục ghi danh mục asset và checklist bằng chứng còn thiếu. Static diagram, API aggregate, runtime screenshot và test evidence là các loại khác nhau."
+      ],
+      "subsections": [
+        {
+          "title": "Phụ lục A. Danh mục sơ đồ Draw.io",
+          "level": 2,
+          "paragraphs": [
+            "ZIP có 15 sơ đồ. Năm PNG được chèn: WBS, workflow, network phụ thuộc, architecture và ERD; các sơ đồ còn lại được lưu trong archive và liệt kê bên dưới.",
+            "Năm PNG được chèn; các source khác giữ trong archive."
+          ]
+        },
+        {
+          "title": "Phụ lục B. Checklist ảnh Trello, Draw.io và LMS",
+          "level": 2,
+          "paragraphs": [
+            "Guide nêu T01–T05, D01–D03, L01–L07. Tất cả hiện CHƯA CHỤP — NOT RUN. Khi capture, lưu ảnh gốc, thời điểm, URL/route hoặc click path, trạng thái trang, hash và reviewer. Không dùng API aggregate thay T01, PNG thay UI Draw.io hay diagram thay LMS runtime.",
+            "Checklist hướng dẫn không thay ảnh; mọi capture hiện chưa thực hiện."
+          ]
+        },
+        {
+          "title": "Phụ lục C. Loại bằng chứng và giới hạn",
+          "level": 2,
+          "paragraphs": [
+            "Baseline là kế hoạch; snapshot chỉ đúng thời điểm trích; SIMULATED không phải test; NOT RUN không phải pass/fail.",
+            "Kế hoạch, snapshot, mô phỏng, runtime là loại chứng cứ khác nhau."
+          ]
+        }
+      ]
+    }
+  ],
+  "bibliography_heading": "TÀI LIỆU THAM KHẢO",
+  "citation_style": "numeric",
+  "bibliography_order": "citation_order"
+}

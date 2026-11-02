@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-27",
+  "kind": "static-source-review",
+  "scope": "Selected claims only; does not establish deployed behavior or current law",
+  "sources": {
+    "app/api/legal_routes.py": "7f4b0b48f1c77292247cbc4cf03fdf8ca6c7c6c4e428788ebe24dd7e36ee468f",
+    "app/templates/index.html": "b1e7f7256ec59a148450846e403e973e57d8eea35f619e2c01fbaf6eaa705a68",
+    "app/api/routes.py": "a02b63d37d78fc54405edd8953e6dff906579e872b698a77ce7658cdd177af46",
+    "app/services/rag_pipeline.py": "3d48ccbdbacf75b897540f50cc1d96f1df3ccbeebfb1458b8565bb352615d28e",
+    "app/services/retrieval.py": "b389a127dae0ab3fcad6a7d7be501152368f678da84f2dc5231ffbad8dd5abbc",
+    "app/services/v3_article_expansion.py": "6057198ae0ff73223b4d0ccc3c7ebb82e10e4679dc2d592eeee0e79ede5128ca",
+    "app/database.py": "4358f93d501f3361aad14fd2ea7441c1ee4440c5304c7fe9485bdb12520b20b0"
+  },
+  "claims": [
+    {
+      "id": "PROJECT-SEARCH",
+      "result": "SUPPORTED_IN_CURRENT_SOURCE",
+      "location": "app/api/legal_routes.py:82-127",
+      "finding": "Search routes choose body or metadata, construct filters, handle unavailable stores, and render legal_search.html."
+    },
+    {
+      "id": "PROJECT-DOCUMENT",
+      "result": "SUPPORTED_IN_CURRENT_SOURCE",
+      "location": "app/api/legal_routes.py:130-152",
+      "finding": "Route loads document by id and renders legal_document.html via workspace page wrapper; missing documents and backend errors have separate handling."
+    },
+    {
+      "id": "PROJECT-CHAT-TEMPLATE",
+      "result": "SUPPORTED_IN_CURRENT_SOURCE_WITH_CONDITIONS",
+      "location": "app/templates/index.html:12-48",
+      "finding": "Template provides session panel, prompt, optional scoped document and explicit limitation on legal currency; local stateless branch says history is unavailable."
+    },
+    {
+      "id": "PROJECT-CHAT-ROUTE",
+      "result": "SUPPORTED_WITH_RUNTIME_CONDITIONS",
+      "location": "app/api/routes.py:292-340, 479-493, 582-590, 748-760, 838-840, 888-931",
+      "finding": "Code redacts input/output, conditionally applies guardrails/cache, invokes RAG, logs and renders response. Persistence is online dependent; local stateless mode is not evidence of stored sessions."
+    },
+    {
+      "id": "PROJECT-RAG-PIPELINE",
+      "result": "SUPPORTED_IN_CURRENT_SOURCE",
+      "location": "app/services/rag_pipeline.py:531-580, 696-889, 930-946",
+      "finding": "Whole blocks are bounded by evidence count and approximate whitespace-token budget; optional expansion, filtering and rescue, no-context return, diagnostics and latency are present. Behavior depends on configuration and calls."
+    },
+    {
+      "id": "PROJECT-RETRIEVAL",
+      "result": "SUPPORTED_IN_CURRENT_SOURCE",
+      "location": "app/services/retrieval.py:36-42, 371-394, 629-886",
+      "finding": "RetrievalOutcome and LegalRetriever with detailed retrieval methods are present; runtime retrieval not tested."
+    },
+    {
+      "id": "PROJECT-EXPANSION",
+      "result": "SUPPORTED_IN_CURRENT_SOURCE",
+      "location": "app/services/v3_article_expansion.py:36-49,335-361,426-505",
+      "finding": "Expansion type and hash-checked document/candidate branch are present; runtime expansion not tested."
+    },
+    {
+      "id": "PROJECT-CHAT-DATA",
+      "result": "SUPPORTED_WITH_CONDITIONS",
+      "location": "app/database.py:90-145, 567-592, 626-645",
+      "finding": "Interaction/session records include session_id, client_id, user_id; reads constrain by user_id or client_id when supplied. Development mode returns no persisted history. The data-layer functions alone do not guarantee every caller supplies an owner identifier."
+    }
+  ],
+  "limits": "Current file hashes differ from historical evidence; no blanket re-binding, source snapshot, runtime or screenshot correspondence asserted. Remaining stale claims not reviewed."
+}

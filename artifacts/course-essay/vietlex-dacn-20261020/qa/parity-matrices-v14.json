@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "document_path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_RubricCriteria_FinalQA_20261025_v6.docx",
+  "document_sha256": "b750f252d9b1955d896f905e1045d7d80654d5432273d447b8dc0bbedf892c39",
+  "structure_parity": {
+    "file": "structure-parity-v14.csv",
+    "sha256": "7372e9599a41d93d63d3cc6c65827f659c86b92f8240cd1ae97b474eb5b9b8bf",
+    "rows": 105,
+    "all_pass": true
+  },
+  "asset_parity": {
+    "file": "asset-parity-v14.csv",
+    "sha256": "daa9bfb4220b94fff4c308d347bc65336aed735b45db2d30e62feff56534b483",
+    "rows": 27,
+    "asset_type_counts": {
+      "LOGO": 2,
+      "TABLE": 15,
+      "DIAGRAM": 7,
+      "RUNTIME_SCREENSHOT": 3
+    },
+    "expected_embedded_images": 12,
+    "caption_required_rows": 23,
+    "all_pass": true
+  },
+  "diagram_plan": {
+    "file": "diagram-plan-v14.csv",
+    "sha256": "7ab3fd83ab2a918074ff7a17aeb788b50c7cea1f14e53eb34f8a5363babbe951",
+    "rows": 7
+  },
+  "screen_inventory": {
+    "file": "screen-inventory-v14.json",
+    "sha256": "e5f5496244323ccd426fa3fdeb048ceeb6377638e1c6a091ebb32e49786d08c3",
+    "routes": 103,
+    "full_html_pages": 26,
+    "runtime_capture_instances": 13
+  },
+  "delivery_verification": {
+    "file": "qa/verify-v6-delivery.json",
+    "sha256": "1a37f740be788fecf2ef6a6e0a2a67b13c9637e6078fe6c86cd9faa3a24490b9",
+    "status": "PASS"
+  },
+  "body_indent_audit": {
+    "file": "qa/indent-v6-audit.json",
+    "sha256": "a68e81e7f4e35d588407b81db98d02ac0241a78d24b402269dd587c9db7482a7",
+    "status": "PASS",
+    "paragraphs": 208
+  }
+}

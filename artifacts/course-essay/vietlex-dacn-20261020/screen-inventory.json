@@ -1,0 +1,406 @@
+{
+  "schema_version": 1,
+  "system_title": "VietLex — nghiên cứu/tra cứu pháp luật Việt Nam",
+  "source_revision": "7519cd1aea4a3639140b9188de1843ebf0ddb1c0; dirty working tree, hash in source_manifest.json",
+  "runtime_captured": true,
+  "screens": [
+    {
+      "id": "home-chat",
+      "method": "GET",
+      "route": "/",
+      "template": "app/templates/index.html",
+      "handler": "app/main.py:get_index",
+      "source_hashes": [
+        "app/main.py",
+        "app/templates/index.html",
+        "app/templates/product_nav.html"
+      ],
+      "state": "Live anonymous GET captured; runtime evidence linked in capture-manifest.json",
+      "notes": "Chat form POST /chat is an action, not a screen.",
+      "diagram_group": "Hỏi đáp",
+      "diagram_label": "Màn hình hỏi đáp",
+      "runtime_capture": {
+        "manifest_id": "runtime-home",
+        "requested_route": "/",
+        "http_status": 200,
+        "capture_path": "assets/runtime-captures/runtime-home.jpg",
+        "capture_sha256": "85e80577caef0e8d9a721f2298be9b097c9ba5429e4740c5874ef45e9170c690",
+        "captured_at": "2026-10-22",
+        "viewport_css_px": {
+          "width": 1440,
+          "height": 1000
+        }
+      }
+    },
+    {
+      "id": "legal-search",
+      "method": "GET",
+      "route": "/search",
+      "template": "app/templates/legal_search.html",
+      "handler": "app/api/legal_routes.py:legal_search",
+      "source_hashes": [
+        "app/api/legal_routes.py",
+        "app/templates/legal_search.html"
+      ],
+      "state": "Live anonymous GET captured; runtime evidence linked in capture-manifest.json",
+      "notes": "Scope select is conditional on body_coverage. Metadata and full-text search are separate paths.",
+      "diagram_group": "Tra cứu văn bản",
+      "diagram_label": "Tìm văn bản",
+      "runtime_capture": {
+        "manifest_id": "runtime-search",
+        "requested_route": "/search?q=45%2F2019%2FQH14",
+        "http_status": 200,
+        "capture_path": "assets/runtime-captures/runtime-search.jpg",
+        "capture_sha256": "db095d725fa92b796fcd135bdb335e5d5ebd16961ae62cebedf1a602be95d81b",
+        "captured_at": "2026-10-22",
+        "viewport_css_px": {
+          "width": 1440,
+          "height": 1000
+        }
+      }
+    },
+    {
+      "id": "legal-document",
+      "method": "GET",
+      "route": "/documents/{document_id}",
+      "template": "app/templates/legal_document.html",
+      "handler": "app/api/legal_routes.py:legal_document",
+      "source_hashes": [
+        "app/api/legal_routes.py",
+        "app/templates/legal_document.html"
+      ],
+      "state": "Live anonymous GET captured; runtime evidence linked in capture-manifest.json",
+      "notes": "Document ID and current records are intentionally not fabricated.",
+      "diagram_group": "Tra cứu văn bản",
+      "diagram_label": "Đọc văn bản",
+      "runtime_capture": {
+        "manifest_id": "runtime-legal-document",
+        "requested_route": "/documents/333670",
+        "http_status": 200,
+        "capture_path": "assets/runtime-captures/runtime-legal-document.jpg",
+        "capture_sha256": "9cc5b7dd8ab3e8154067946c4ff385e3f1a20516877e4180f7973f346380e90b",
+        "captured_at": "2026-10-22",
+        "viewport_css_px": {
+          "width": 1440,
+          "height": 1000
+        }
+      }
+    },
+    {
+      "id": "legal-status",
+      "method": "GET",
+      "route": "/legal-status",
+      "template": "registry view",
+      "handler": "app/api/legal_registry_routes.py",
+      "source_hashes": [
+        "app/api/legal_registry_routes.py"
+      ],
+      "state": "Live anonymous GET captured; runtime evidence linked in capture-manifest.json",
+      "notes": "Only reviewed events are displayed; absence of event is not proof of validity.",
+      "diagram_group": "Tra cứu văn bản",
+      "diagram_label": "Tra cứu hiệu lực",
+      "runtime_capture": {
+        "manifest_id": "runtime-legal-status",
+        "requested_route": "/legal-status",
+        "http_status": 200,
+        "capture_path": "assets/runtime-captures/runtime-legal-status.jpg",
+        "capture_sha256": "3d8ccfb4876a472bda6895084611dfc48a826ce42bc4cc06688d8a9f54e74820",
+        "captured_at": "2026-10-22",
+        "viewport_css_px": {
+          "width": 1440,
+          "height": 1000
+        }
+      }
+    },
+    {
+      "id": "workspace-list",
+      "method": "GET",
+      "route": "/workspaces",
+      "template": "workspace list view",
+      "handler": "app/api/workspace_routes.py",
+      "source_hashes": [
+        "app/api/workspace_routes.py"
+      ],
+      "state": "Live anonymous GET captured; runtime evidence linked in capture-manifest.json",
+      "notes": "No user data displayed.",
+      "diagram_group": "Hồ sơ nghiên cứu",
+      "diagram_label": "Danh sách hồ sơ",
+      "runtime_capture": {
+        "manifest_id": "runtime-workspaces",
+        "requested_route": "/workspaces",
+        "http_status": 200,
+        "capture_path": "assets/runtime-captures/runtime-workspaces.jpg",
+        "capture_sha256": "f69af5f6f91a98824a645bb6449f55fb88abdd9e3757b438ef99627bb0c94f40",
+        "captured_at": "2026-10-22",
+        "viewport_css_px": {
+          "width": 1440,
+          "height": 1000
+        }
+      }
+    },
+    {
+      "id": "workspace-detail",
+      "method": "GET",
+      "route": "/workspaces/{workspace_id}",
+      "template": "workspace detail view",
+      "handler": "app/api/workspace_routes.py",
+      "source_hashes": [
+        "app/api/workspace_routes.py"
+      ],
+      "state": "NOT_OPENED: no authorized workspace ID/session; see capture-manifest.json:not_tested",
+      "notes": "Owner-scoped project function; no live session was used.",
+      "diagram_group": "Hồ sơ nghiên cứu",
+      "diagram_label": "Chi tiết hồ sơ"
+    },
+    {
+      "id": "admin-home",
+      "method": "GET",
+      "route": "/admin",
+      "template": "admin overview",
+      "handler": "app/api/routes.py",
+      "source_hashes": [
+        "app/api/routes.py"
+      ],
+      "state": "Anonymous GET returned 401; no screenshot; see capture-manifest.json:unavailable",
+      "notes": "Administrative screen; authorization/runtime was not tested.",
+      "diagram_group": "Quản trị",
+      "diagram_label": "Tổng quan quản trị"
+    },
+    {
+      "id": "admin-users",
+      "method": "GET",
+      "route": "/admin/users",
+      "template": "admin users",
+      "handler": "app/api/routes.py",
+      "source_hashes": [
+        "app/api/routes.py"
+      ],
+      "state": "Anonymous GET returned 401; no screenshot; see capture-manifest.json:unavailable",
+      "notes": "Administrative screen; POST status/session actions are not separate screens.",
+      "diagram_group": "Quản trị",
+      "diagram_label": "Quản lý tài khoản"
+    },
+    {
+      "id": "evaluation-lab",
+      "method": "GET",
+      "route": "/evaluation-lab",
+      "template": "NOT_MAPPED_IN_SOURCE_SCREEN_INVENTORY",
+      "handler": "NOT_MAPPED",
+      "source_hashes": [],
+      "state": "Live anonymous GET captured; runtime evidence linked in capture-manifest.json",
+      "notes": "Observed live rendered page only; no form submission, POST, AI request, or private data access.",
+      "diagram_group": "Runtime-only public pages",
+      "diagram_label": "Chất lượng và kiểm chứng",
+      "runtime_capture": {
+        "manifest_id": "runtime-evaluation-lab",
+        "requested_route": "/evaluation-lab",
+        "http_status": 200,
+        "capture_path": "assets/runtime-captures/runtime-evaluation-lab.jpg",
+        "capture_sha256": "5ab2dc95319f1cf2f82c6cc416caab6203ae96b5dfefd2aa3ae2d51583e2cc64",
+        "captured_at": "2026-10-22",
+        "viewport_css_px": {
+          "width": 1440,
+          "height": 1000
+        }
+      }
+    },
+    {
+      "id": "login",
+      "method": "GET",
+      "route": "/login",
+      "template": "NOT_MAPPED_IN_SOURCE_SCREEN_INVENTORY",
+      "handler": "NOT_MAPPED",
+      "source_hashes": [],
+      "state": "Live anonymous GET captured; runtime evidence linked in capture-manifest.json",
+      "notes": "Observed live rendered page only; no form submission, POST, AI request, or private data access.",
+      "diagram_group": "Runtime-only public pages",
+      "diagram_label": "Đăng nhập",
+      "runtime_capture": {
+        "manifest_id": "runtime-login",
+        "requested_route": "/login",
+        "http_status": 200,
+        "capture_path": "assets/runtime-captures/runtime-login.jpg",
+        "capture_sha256": "8b0edb3203e65012fa81d826c92a3be8cc21389c53105ce2b3cfa31f278dad54",
+        "captured_at": "2026-10-22",
+        "viewport_css_px": {
+          "width": 1440,
+          "height": 1000
+        }
+      }
+    },
+    {
+      "id": "register",
+      "method": "GET",
+      "route": "/register",
+      "template": "NOT_MAPPED_IN_SOURCE_SCREEN_INVENTORY",
+      "handler": "NOT_MAPPED",
+      "source_hashes": [],
+      "state": "Live anonymous GET captured; runtime evidence linked in capture-manifest.json",
+      "notes": "Observed live rendered page only; no form submission, POST, AI request, or private data access.",
+      "diagram_group": "Runtime-only public pages",
+      "diagram_label": "Đăng ký",
+      "runtime_capture": {
+        "manifest_id": "runtime-register",
+        "requested_route": "/register",
+        "http_status": 200,
+        "capture_path": "assets/runtime-captures/runtime-register.jpg",
+        "capture_sha256": "462414c9687ba78e49d5b49fd0c6b5fff781f860b77e5c96ac505b3dd57ef547",
+        "captured_at": "2026-10-22",
+        "viewport_css_px": {
+          "width": 1440,
+          "height": 1000
+        }
+      }
+    },
+    {
+      "id": "forgot-password",
+      "method": "GET",
+      "route": "/forgot-password",
+      "template": "NOT_MAPPED_IN_SOURCE_SCREEN_INVENTORY",
+      "handler": "NOT_MAPPED",
+      "source_hashes": [],
+      "state": "Live anonymous GET captured; runtime evidence linked in capture-manifest.json",
+      "notes": "Observed live rendered page only; no form submission, POST, AI request, or private data access.",
+      "diagram_group": "Runtime-only public pages",
+      "diagram_label": "Khôi phục mật khẩu",
+      "runtime_capture": {
+        "manifest_id": "runtime-forgot-password",
+        "requested_route": "/forgot-password",
+        "http_status": 200,
+        "capture_path": "assets/runtime-captures/runtime-forgot-password.jpg",
+        "capture_sha256": "208240eb4dd6a2beb58e2663af1e262a3470b1d96adf95e032ea3776adb85d08",
+        "captured_at": "2026-10-22",
+        "viewport_css_px": {
+          "width": 1440,
+          "height": 1000
+        }
+      }
+    },
+    {
+      "id": "privacy",
+      "method": "GET",
+      "route": "/privacy",
+      "template": "NOT_MAPPED_IN_SOURCE_SCREEN_INVENTORY",
+      "handler": "NOT_MAPPED",
+      "source_hashes": [],
+      "state": "Live anonymous GET captured; runtime evidence linked in capture-manifest.json",
+      "notes": "Observed live rendered page only; no form submission, POST, AI request, or private data access.",
+      "diagram_group": "Runtime-only public pages",
+      "diagram_label": "Quyền riêng tư",
+      "runtime_capture": {
+        "manifest_id": "runtime-privacy",
+        "requested_route": "/privacy",
+        "http_status": 200,
+        "capture_path": "assets/runtime-captures/runtime-privacy.jpg",
+        "capture_sha256": "d05b0a73b46856ce1a77f154ee9df663ea760981ae31e104a4596d1920984969",
+        "captured_at": "2026-10-22",
+        "viewport_css_px": {
+          "width": 1440,
+          "height": 1000
+        }
+      }
+    },
+    {
+      "id": "terms",
+      "method": "GET",
+      "route": "/terms",
+      "template": "NOT_MAPPED_IN_SOURCE_SCREEN_INVENTORY",
+      "handler": "NOT_MAPPED",
+      "source_hashes": [],
+      "state": "Live anonymous GET captured; runtime evidence linked in capture-manifest.json",
+      "notes": "Observed live rendered page only; no form submission, POST, AI request, or private data access.",
+      "diagram_group": "Runtime-only public pages",
+      "diagram_label": "Điều khoản sử dụng",
+      "runtime_capture": {
+        "manifest_id": "runtime-terms",
+        "requested_route": "/terms",
+        "http_status": 200,
+        "capture_path": "assets/runtime-captures/runtime-terms.jpg",
+        "capture_sha256": "0de331a3376dc7b1d926d7946b80e223aa5a7b63869f60998c125c96683e2a58",
+        "captured_at": "2026-10-22",
+        "viewport_css_px": {
+          "width": 1440,
+          "height": 1000
+        }
+      }
+    }
+  ],
+  "wireframes": [
+    {
+      "id": "wireframe-chat-home",
+      "path": "assets/wireframes/wireframe-chat-home.png",
+      "route": "GET /",
+      "template": "app/templates/index.html",
+      "kind": "source-backed wireframe",
+      "runtime_screenshot": false,
+      "source_hashes": [
+        "app/main.py",
+        "app/templates/index.html",
+        "app/templates/product_nav.html"
+      ]
+    },
+    {
+      "id": "wireframe-legal-search",
+      "path": "assets/wireframes/wireframe-legal-search.png",
+      "route": "GET /search",
+      "template": "app/templates/legal_search.html",
+      "kind": "source-backed wireframe",
+      "runtime_screenshot": false,
+      "source_hashes": [
+        "app/api/legal_routes.py",
+        "app/templates/legal_search.html"
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "id": "chat-submit",
+      "method": "POST",
+      "route": "/chat",
+      "diagram_group": "Hỏi đáp",
+      "diagram_label": "Gửi câu hỏi",
+      "handler": "app/api/routes.py:chat",
+      "source_hashes": [
+        "app/api/routes.py"
+      ],
+      "state": "Source-backed action; not a separate screen."
+    },
+    {
+      "id": "workspace-create",
+      "method": "POST",
+      "route": "/workspaces",
+      "diagram_group": "Hồ sơ nghiên cứu",
+      "diagram_label": "Tạo hồ sơ",
+      "handler": "app/api/workspace_routes.py:workspace_create",
+      "source_hashes": [
+        "app/api/workspace_routes.py"
+      ],
+      "state": "Source-backed action; not a separate screen."
+    },
+    {
+      "id": "admin-user-status",
+      "method": "POST",
+      "route": "/admin/users/{user_id}/status",
+      "diagram_group": "Quản trị",
+      "diagram_label": "Đổi trạng thái tài khoản",
+      "handler": "app/api/routes.py:admin_set_user_status",
+      "source_hashes": [
+        "app/api/routes.py"
+      ],
+      "state": "Source-backed action; not a separate screen."
+    }
+  ],
+  "runtime_capture_manifest": "assets/runtime-captures/capture-manifest.json",
+  "runtime_capture_summary": {
+    "deployment": "https://vietlex-legal-rag.vercel.app",
+    "role": "anonymous demo reviewer",
+    "captured_at": "2026-10-22",
+    "viewport_css_px": {
+      "width": 1440,
+      "height": 1000
+    },
+    "public_get_routes": 11,
+    "screenshots": 11,
+    "protected_or_private_routes_not_screenshot": 8
+  }
+}

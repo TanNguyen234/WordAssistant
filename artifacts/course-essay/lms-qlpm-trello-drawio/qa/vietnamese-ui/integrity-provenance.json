@@ -1,0 +1,82 @@
+{
+  "schema_version": "1.0",
+  "manifest_kind": "WORDASSISTANT_ACADEMIC_PROVENANCE",
+  "generated_at_utc": "2026-10-26T07:17:32.482904+00:00",
+  "document": {
+    "path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\LMS_HCMUNRE_Viet_hoa.docx",
+    "sha256": "6f68151f42380f8935737823c2a55f6cd37a55b5023ec7c707d4f7d4dffeaf5b",
+    "size_bytes": 2501901,
+    "modified_at_utc": "2026-10-26T04:23:17.709318+00:00"
+  },
+  "producer": {
+    "name": "wordassistant",
+    "version": "2.0.0",
+    "integrity_schema_version": "1.0"
+  },
+  "source_registry": {
+    "evidence": {
+      "path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\report-evidence-vietnamese-reviewed.json",
+      "exists": true,
+      "sha256": "6103552351670aab035d72252b6b1d24b8f1eddd7e1e44822d1e5f65a0b59ed2",
+      "record_count": 15,
+      "record_ids": [
+        "DRAWIO-FORMATS",
+        "DRAWIO-PNG",
+        "LMS-ARCH",
+        "LMS-CHARTER",
+        "LMS-QUALITY",
+        "LMS-RACI",
+        "LMS-RECON",
+        "LMS-RISK",
+        "LMS-ROLES",
+        "LMS-SCHEMA",
+        "LMS-SOURCE",
+        "LMS-UI-VI",
+        "PMI-SCHED",
+        "TRELLO-CARDS",
+        "TRELLO-CHECKS"
+      ]
+    },
+    "record_count": 15,
+    "metadata": {}
+  },
+  "profile": {
+    "profile_id": "generic-lms-project-report",
+    "profile_version": 1,
+    "minimum_references": 4,
+    "prefer_primary_source": true,
+    "require_reviewed_sources": true,
+    "long_quote_words": 40,
+    "quote_citation_words": 8,
+    "repeated_opening_words": 3,
+    "repeated_opening_minimum": 3,
+    "ngram_size": 5,
+    "repeated_ngram_minimum": 3,
+    "review_punctuation": [
+      "em_dash",
+      "en_dash",
+      "left_curly_double_quote",
+      "right_curly_double_quote",
+      "left_curly_single_quote",
+      "right_curly_single_quote",
+      "ellipsis",
+      "non_breaking_space"
+    ]
+  },
+  "disclosure": {
+    "declared": true,
+    "source": "caller",
+    "statement": "Codex assisted with Vietnamese frontend presentation, actual UI capture, primary-source review and scoped report revision. Original demo data retained. AI assistance does not establish UAT, approval or authorship of user-supplied material."
+  },
+  "audit_summary": {
+    "status": "WARN",
+    "gate_counts": {
+      "PASS": 7,
+      "WARN": 3,
+      "FAIL": 0
+    },
+    "document_sha256": "6f68151f42380f8935737823c2a55f6cd37a55b5023ec7c707d4f7d4dffeaf5b",
+    "ai_detection_performed": false,
+    "detector_evasion_assistance": false
+  }
+}

@@ -1,0 +1,1698 @@
+{
+  "version": 1,
+  "steps": [
+    {
+      "operation": "format.paragraph",
+      "selector": {
+        "type": "paragraph",
+        "index": 4
+      },
+      "options": {
+        "alignment": "left"
+      }
+    },
+    {
+      "operation": "heading.numbering_apply",
+      "options": {
+        "levels": 2,
+        "allow_literal_prefixes": false,
+        "suppress_first_level_label": true,
+        "start_text": "CHƯƠNG 1. TỔNG QUAN VÀ KHỞI TẠO DỰ ÁN",
+        "end_text": "KẾT LUẬN VÀ KIẾN NGHỊ"
+      }
+    },
+    {
+      "operation": "table.create",
+      "selector": {
+        "type": "text",
+        "text": "Bảng điều lệ dưới đây là baseline học thuật; vai trò đại diện, approvals và ngày ký vẫn cần xác nhận trước khi dùng như hồ sơ chính thức."
+      },
+      "options": {
+        "rows": 8,
+        "columns": 2,
+        "data": [
+          [
+            "Trường",
+            "Giá trị / lưu ý"
+          ],
+          [
+            "Tên dự án",
+            "University Learning Management System (LMS) Implementation"
+          ],
+          [
+            "Mã",
+            "PRJ-LMS-2026"
+          ],
+          [
+            "Môn học",
+            "Quản lý dự án phần mềm"
+          ],
+          [
+            "Thời lượng",
+            "20 tuần"
+          ],
+          [
+            "Ngân sách",
+            "1.200.000.000 VNĐ"
+          ],
+          [
+            "Nguồn lực",
+            "8,5 FTE; không khóa số đầu người"
+          ],
+          [
+            "Trạng thái",
+            "Kế hoạch học thuật; phê duyệt thực chưa được chứng minh"
+          ]
+        ],
+        "style": "Table Grid"
+      }
+    },
+    {
+      "operation": "caption.insert",
+      "selector": {
+        "type": "text",
+        "text": "Bảng điều lệ dưới đây là baseline học thuật; vai trò đại diện, approvals và ngày ký vẫn cần xác nhận trước khi dùng như hồ sơ chính thức."
+      },
+      "options": {
+        "label": "BẢNG",
+        "title": "Điều lệ dự án",
+        "sequence_id": "Bang",
+        "caption_separator": "."
+      }
+    },
+    {
+      "operation": "table.create",
+      "selector": {
+        "type": "text",
+        "text": "Bảng rút gọn giữ nguyên nhóm và chiến lược từ register nguồn. Tên riêng không được thêm vì hồ sơ mô tả vai trò giả định."
+      },
+      "options": {
+        "rows": 8,
+        "columns": 5,
+        "data": [
+          [
+            "Nhóm",
+            "Power",
+            "Interest",
+            "Chiến lược",
+            "Điểm tham gia"
+          ],
+          [
+            "Ban Giám hiệu / SH-01 (mô phỏng)",
+            "Cao",
+            "Cao",
+            "Quản lý chặt",
+            "Mốc, thay đổi"
+          ],
+          [
+            "Phòng Đào tạo / SH-02",
+            "Cao",
+            "Cao",
+            "Quản lý chặt",
+            "Yêu cầu, scope, UAT"
+          ],
+          [
+            "Phòng CNTT / SH-03",
+            "Cao",
+            "Cao",
+            "Quản lý chặt",
+            "Kiến trúc, backup"
+          ],
+          [
+            "Giảng viên / SH-04",
+            "Vừa",
+            "Cao",
+            "Tham vấn",
+            "Nhu cầu, demo"
+          ],
+          [
+            "Sinh viên / SH-05",
+            "Thấp",
+            "Cao",
+            "Cập nhật",
+            "Luồng học"
+          ],
+          [
+            "Nhóm dự án / SH-06",
+            "Vừa",
+            "Cao",
+            "Cộng tác",
+            "Họp tuần, blocker"
+          ],
+          [
+            "Giảng viên môn học / SH-07",
+            "Cao",
+            "Cao",
+            "Quản lý chặt",
+            "Đề cương/đánh giá"
+          ]
+        ],
+        "style": "Table Grid"
+      }
+    },
+    {
+      "operation": "caption.insert",
+      "selector": {
+        "type": "text",
+        "text": "Bảng rút gọn giữ nguyên nhóm và chiến lược từ register nguồn. Tên riêng không được thêm vì hồ sơ mô tả vai trò giả định."
+      },
+      "options": {
+        "label": "BẢNG",
+        "title": "Stakeholder register rút gọn",
+        "sequence_id": "Bang",
+        "caption_separator": "."
+      }
+    },
+    {
+      "operation": "table.create",
+      "selector": {
+        "type": "text",
+        "text": "Mỗi gói việc cần một A duy nhất. Sponsor là vai trò giả định trong mô hình."
+      },
+      "options": {
+        "rows": 9,
+        "columns": 5,
+        "data": [
+          [
+            "Deliverable",
+            "PM",
+            "BA",
+            "Dev/QA",
+            "Sponsor*"
+          ],
+          [
+            "Charter/governance",
+            "A/R",
+            "C",
+            "I",
+            "C"
+          ],
+          [
+            "Yêu cầu/scope/WBS",
+            "A",
+            "R",
+            "C",
+            "A (approve)"
+          ],
+          [
+            "CPM/cost/risk",
+            "A/R",
+            "C",
+            "C",
+            "I"
+          ],
+          [
+            "Architecture/API/DB",
+            "A",
+            "C",
+            "R",
+            "I"
+          ],
+          [
+            "Development/integration",
+            "A",
+            "I",
+            "R",
+            "I"
+          ],
+          [
+            "Test/triage",
+            "A",
+            "C",
+            "R",
+            "I"
+          ],
+          [
+            "UAT/sign-off",
+            "C",
+            "R",
+            "C",
+            "A"
+          ],
+          [
+            "Handover/lessons",
+            "A/R",
+            "R",
+            "R",
+            "A"
+          ]
+        ],
+        "style": "Table Grid"
+      }
+    },
+    {
+      "operation": "caption.insert",
+      "selector": {
+        "type": "text",
+        "text": "Mỗi gói việc cần một A duy nhất. Sponsor là vai trò giả định trong mô hình."
+      },
+      "options": {
+        "label": "BẢNG",
+        "title": "RACI cho các đầu ra chính",
+        "sequence_id": "Bang",
+        "caption_separator": "."
+      }
+    },
+    {
+      "operation": "table.create",
+      "selector": {
+        "type": "text",
+        "text": "Trong phạm vi là LMS core; các khả năng mở rộng được đưa ngoài phạm vi."
+      },
+      "options": {
+        "rows": 7,
+        "columns": 2,
+        "data": [
+          [
+            "In-scope",
+            "Out-of-scope"
+          ],
+          [
+            "Admin/Lecturer/Student; auth/RBAC",
+            "SSO"
+          ],
+          [
+            "Courses, lecturer assignment, enrollment",
+            "Student self-enrollment"
+          ],
+          [
+            "Modules/lessons",
+            "Realtime class/chat"
+          ],
+          [
+            "Assignment/submission text-only MVP",
+            "File upload in MVP"
+          ],
+          [
+            "Quiz, grading, grades, notification",
+            "AI/plagiarism"
+          ],
+          [
+            "Schema, seed, tests, demo, PM report",
+            "Payment/native app"
+          ]
+        ],
+        "style": "Table Grid"
+      }
+    },
+    {
+      "operation": "caption.insert",
+      "selector": {
+        "type": "text",
+        "text": "Trong phạm vi là LMS core; các khả năng mở rộng được đưa ngoài phạm vi."
+      },
+      "options": {
+        "label": "BẢNG",
+        "title": "Ranh giới phạm vi",
+        "sequence_id": "Bang",
+        "caption_separator": "."
+      }
+    },
+    {
+      "operation": "table.create",
+      "selector": {
+        "type": "text",
+        "text": "WBS là cấu trúc công việc, không chứng minh gói việc đã hoàn tất."
+      },
+      "options": {
+        "rows": 8,
+        "columns": 3,
+        "data": [
+          [
+            "WBS",
+            "Gói",
+            "Đầu ra"
+          ],
+          [
+            "1",
+            "Khởi tạo",
+            "Charter, stakeholders, kickoff"
+          ],
+          [
+            "2",
+            "Yêu cầu/phạm vi",
+            "SRS, use cases, scope, WBS"
+          ],
+          [
+            "3",
+            "Thiết kế/lập kế hoạch",
+            "Architecture, API, DB, CPM, budget, risk"
+          ],
+          [
+            "4",
+            "Prototype",
+            "Auth, course, content, assignment, quiz, grades"
+          ],
+          [
+            "5",
+            "Quality",
+            "Unit/API/system, triage"
+          ],
+          [
+            "6",
+            "UAT/demo",
+            "Test scenarios, evidence, demo"
+          ],
+          [
+            "7",
+            "Closure",
+            "Handover, lessons, closure"
+          ]
+        ],
+        "style": "Table Grid"
+      }
+    },
+    {
+      "operation": "caption.insert",
+      "selector": {
+        "type": "text",
+        "text": "WBS là cấu trúc công việc, không chứng minh gói việc đã hoàn tất."
+      },
+      "options": {
+        "label": "BẢNG",
+        "title": "WBS cấp 2 và đầu ra",
+        "sequence_id": "Bang",
+        "caption_separator": "."
+      }
+    },
+    {
+      "operation": "table.create",
+      "selector": {
+        "type": "text",
+        "text": "Mạng LMS_14 không gán ngày; bảng này là nguồn duration/float baseline."
+      },
+      "options": {
+        "rows": 20,
+        "columns": 6,
+        "data": [
+          [
+            "ID",
+            "Pred.",
+            "Dur.",
+            "ES-EF",
+            "LS-LF",
+            "TF"
+          ],
+          [
+            "ACT-01",
+            "—",
+            "2",
+            "0-2",
+            "0-2",
+            "0"
+          ],
+          [
+            "ACT-02",
+            "01",
+            "2",
+            "2-4",
+            "2-4",
+            "0"
+          ],
+          [
+            "ACT-03",
+            "02",
+            "2",
+            "4-6",
+            "4-6",
+            "0"
+          ],
+          [
+            "ACT-04",
+            "02",
+            "2",
+            "4-6",
+            "5-7",
+            "1"
+          ],
+          [
+            "ACT-05",
+            "02",
+            "2",
+            "4-6",
+            "4-6",
+            "0"
+          ],
+          [
+            "ACT-06",
+            "03,05",
+            "1",
+            "6-7",
+            "6-7",
+            "0"
+          ],
+          [
+            "ACT-07",
+            "04,06",
+            "1",
+            "7-8",
+            "7-8",
+            "0"
+          ],
+          [
+            "ACT-08",
+            "07",
+            "1",
+            "8-9",
+            "8-9",
+            "0"
+          ],
+          [
+            "ACT-09",
+            "08",
+            "1",
+            "9-10",
+            "9-10",
+            "0"
+          ],
+          [
+            "ACT-10",
+            "09",
+            "1",
+            "10-11",
+            "10-11",
+            "0"
+          ],
+          [
+            "ACT-11",
+            "10",
+            "1",
+            "11-12",
+            "11-12",
+            "0"
+          ],
+          [
+            "ACT-12",
+            "11",
+            "1",
+            "12-13",
+            "12-13",
+            "0"
+          ],
+          [
+            "ACT-13",
+            "12",
+            "2",
+            "13-15",
+            "13-15",
+            "0"
+          ],
+          [
+            "ACT-14",
+            "13",
+            "1",
+            "15-16",
+            "15-16",
+            "0"
+          ],
+          [
+            "ACT-15",
+            "13",
+            "1",
+            "15-16",
+            "15-16",
+            "0"
+          ],
+          [
+            "ACT-16",
+            "15",
+            "1",
+            "16-17",
+            "18-19",
+            "2"
+          ],
+          [
+            "ACT-17",
+            "14,15",
+            "2",
+            "16-18",
+            "16-18",
+            "0"
+          ],
+          [
+            "ACT-18",
+            "17",
+            "1",
+            "18-19",
+            "18-19",
+            "0"
+          ],
+          [
+            "ACT-19",
+            "16,18",
+            "1",
+            "19-20",
+            "19-20",
+            "0"
+          ]
+        ],
+        "style": "Table Grid"
+      }
+    },
+    {
+      "operation": "caption.insert",
+      "selector": {
+        "type": "text",
+        "text": "Mạng LMS_14 không gán ngày; bảng này là nguồn duration/float baseline."
+      },
+      "options": {
+        "label": "BẢNG",
+        "title": "CPM 19 hoạt động, đơn vị tuần",
+        "sequence_id": "Bang",
+        "caption_separator": "."
+      }
+    },
+    {
+      "operation": "table.create",
+      "selector": {
+        "type": "text",
+        "text": "Mốc tuần là baseline kế hoạch, không phải actual date."
+      },
+      "options": {
+        "rows": 9,
+        "columns": 3,
+        "data": [
+          [
+            "Mốc",
+            "Thời điểm",
+            "Bàn giao"
+          ],
+          [
+            "M1",
+            "Cuối W2",
+            "Charter"
+          ],
+          [
+            "M2",
+            "Cuối W4",
+            "Scope/requirements"
+          ],
+          [
+            "M3",
+            "Cuối W6",
+            "PM plan, UX, architecture/DB"
+          ],
+          [
+            "M4",
+            "Cuối W12",
+            "Prototype feature complete"
+          ],
+          [
+            "M5",
+            "Cuối W15",
+            "System/integration test"
+          ],
+          [
+            "M6",
+            "W16",
+            "UAT plan; chưa xác nhận"
+          ],
+          [
+            "M7",
+            "W18",
+            "Demo/go-live simulation"
+          ],
+          [
+            "M8",
+            "W20",
+            "Closure package"
+          ]
+        ],
+        "style": "Table Grid"
+      }
+    },
+    {
+      "operation": "caption.insert",
+      "selector": {
+        "type": "text",
+        "text": "Mốc tuần là baseline kế hoạch, không phải actual date."
+      },
+      "options": {
+        "label": "BẢNG",
+        "title": "Milestone baseline",
+        "sequence_id": "Bang",
+        "caption_separator": "."
+      }
+    },
+    {
+      "operation": "table.create",
+      "selector": {
+        "type": "text",
+        "text": "Tổng phân bổ 8,5 FTE; không suy ra số đầu người."
+      },
+      "options": {
+        "rows": 11,
+        "columns": 5,
+        "data": [
+          [
+            "Vai trò",
+            "FTE",
+            "Giai đoạn",
+            "Labor",
+            "Trọng tâm"
+          ],
+          [
+            "PM",
+            "1.0",
+            "20 tuần",
+            "150M",
+            "Tích hợp scope/time/cost/risk"
+          ],
+          [
+            "BA",
+            "1.0",
+            "20 tuần",
+            "110M",
+            "Yêu cầu/SRS/UAT"
+          ],
+          [
+            "UI/UX",
+            "1.0",
+            "W3-W14",
+            "60M",
+            "Wireframe/prototype"
+          ],
+          [
+            "Backend lead",
+            "1.0",
+            "20 tuần",
+            "125M",
+            "Architecture/DB/auth"
+          ],
+          [
+            "Backend dev",
+            "1.0",
+            "W5-W20",
+            "80M",
+            "API nghiệp vụ"
+          ],
+          [
+            "Frontend lead",
+            "1.0",
+            "20 tuần",
+            "125M",
+            "React/routing"
+          ],
+          [
+            "Frontend dev",
+            "1.0",
+            "W5-W20",
+            "80M",
+            "UI ba vai trò"
+          ],
+          [
+            "QA",
+            "1.0",
+            "W5-W20",
+            "72M",
+            "Test/UAT"
+          ],
+          [
+            "DevOps",
+            "0.5",
+            "20 tuần",
+            "38M",
+            "Môi trường/SQL/backup"
+          ],
+          [
+            "Tổng",
+            "8.5",
+            "—",
+            "840M",
+            "Headcount chưa chốt"
+          ]
+        ],
+        "style": "Table Grid"
+      }
+    },
+    {
+      "operation": "caption.insert",
+      "selector": {
+        "type": "text",
+        "text": "Tổng phân bổ 8,5 FTE; không suy ra số đầu người."
+      },
+      "options": {
+        "label": "BẢNG",
+        "title": "Resource breakdown",
+        "sequence_id": "Bang",
+        "caption_separator": "."
+      }
+    },
+    {
+      "operation": "table.create",
+      "selector": {
+        "type": "text",
+        "text": "Sáu khoản mục cộng đúng 1,2 tỷ VNĐ; contingency không phải chi phí đã tiêu."
+      },
+      "options": {
+        "rows": 8,
+        "columns": 4,
+        "data": [
+          [
+            "Khoản mục",
+            "VNĐ",
+            "Tỷ lệ",
+            "Kiểm soát"
+          ],
+          [
+            "Labor",
+            "840.000.000",
+            "70.00%",
+            "8.5 FTE planned"
+          ],
+          [
+            "Hạ tầng",
+            "120.000.000",
+            "10.00%",
+            "Dev/staging/demo"
+          ],
+          [
+            "Công cụ",
+            "48.000.000",
+            "4.00%",
+            "Licenses/collaboration"
+          ],
+          [
+            "Đào tạo",
+            "40.000.000",
+            "3.33%",
+            "Workshop/materials"
+          ],
+          [
+            "Hành chính",
+            "32.000.000",
+            "2.67%",
+            "Meetings/reviews"
+          ],
+          [
+            "Contingency",
+            "120.000.000",
+            "10.00%",
+            "CR/issue approval"
+          ],
+          [
+            "BAC tổng",
+            "1.200.000.000",
+            "100.00%",
+            "Estimate baseline"
+          ]
+        ],
+        "style": "Table Grid"
+      }
+    },
+    {
+      "operation": "caption.insert",
+      "selector": {
+        "type": "text",
+        "text": "Sáu khoản mục cộng đúng 1,2 tỷ VNĐ; contingency không phải chi phí đã tiêu."
+      },
+      "options": {
+        "label": "BẢNG",
+        "title": "Budget baseline",
+        "sequence_id": "Bang",
+        "caption_separator": "."
+      }
+    },
+    {
+      "operation": "table.create",
+      "selector": {
+        "type": "text",
+        "text": "Risk register là kế hoạch mô phỏng; score không chứng minh sự kiện."
+      },
+      "options": {
+        "rows": 8,
+        "columns": 5,
+        "data": [
+          [
+            "ID",
+            "Risk",
+            "P x I",
+            "Trigger",
+            "Response"
+          ],
+          [
+            "RSK-01",
+            "Scope creep",
+            "4x4=16",
+            "Yêu cầu ngoài core",
+            "Freeze; CR; defer"
+          ],
+          [
+            "RSK-02",
+            "Authorization breach",
+            "2x5=10",
+            "Thiếu token/role check",
+            "RBAC; denial test"
+          ],
+          [
+            "RSK-03",
+            "Late development",
+            "3x4=12",
+            "Burn-down lệch >3 ngày W10",
+            "Vertical slice; float"
+          ],
+          [
+            "RSK-04",
+            "Low adoption",
+            "3x4=12",
+            "Pilot usage thấp",
+            "Workshop; feedback"
+          ],
+          [
+            "RSK-05",
+            "PM docs inconsistency",
+            "3x4=12",
+            "Lệch WBS/CPM/budget",
+            "Reconcile docs"
+          ],
+          [
+            "RSK-07",
+            "Late UAT feedback",
+            "3x3=9",
+            "Reject sát W16",
+            "Demo sớm; triage"
+          ],
+          [
+            "RSK-09",
+            "Upload expectation",
+            "3x2=6",
+            "Kỳ vọng nộp file",
+            "Text-only; CR"
+          ]
+        ],
+        "style": "Table Grid"
+      }
+    },
+    {
+      "operation": "caption.insert",
+      "selector": {
+        "type": "text",
+        "text": "Risk register là kế hoạch mô phỏng; score không chứng minh sự kiện."
+      },
+      "options": {
+        "label": "BẢNG",
+        "title": "Rủi ro ưu tiên",
+        "sequence_id": "Bang",
+        "caption_separator": "."
+      }
+    },
+    {
+      "operation": "table.create",
+      "selector": {
+        "type": "text",
+        "text": "Gate là điều kiện kế hoạch; trạng thái phê duyệt chưa được xác nhận."
+      },
+      "options": {
+        "rows": 6,
+        "columns": 4,
+        "data": [
+          [
+            "Gate",
+            "Tuần",
+            "Điều kiện",
+            "Evidence"
+          ],
+          [
+            "QG1 Scope freeze",
+            "W4",
+            "SRS/use cases/WBS/scope",
+            "Plan; thiếu sign-off"
+          ],
+          [
+            "QG2 Design freeze",
+            "W6",
+            "Architecture/ERD/API",
+            "Plan; thiếu sign-off"
+          ],
+          [
+            "QG3 Feature complete",
+            "W12",
+            "Vertical slices/RBAC",
+            "Chưa xác nhận chạy"
+          ],
+          [
+            "QG4 UAT readiness",
+            "W15",
+            "10 AC, P0/P1=0, seed",
+            "UAT chưa chạy"
+          ],
+          [
+            "QG5 Closure",
+            "W20",
+            "UAT/docs/handover",
+            "Chưa có biên bản"
+          ]
+        ],
+        "style": "Table Grid"
+      }
+    },
+    {
+      "operation": "caption.insert",
+      "selector": {
+        "type": "text",
+        "text": "Gate là điều kiện kế hoạch; trạng thái phê duyệt chưa được xác nhận."
+      },
+      "options": {
+        "label": "BẢNG",
+        "title": "Quality gates",
+        "sequence_id": "Bang",
+        "caption_separator": "."
+      }
+    },
+    {
+      "operation": "table.create",
+      "selector": {
+        "type": "text",
+        "text": "Mười AC được định nghĩa; số đã xác minh chạy là 0."
+      },
+      "options": {
+        "rows": 11,
+        "columns": 4,
+        "data": [
+          [
+            "ID",
+            "Mục tiêu",
+            "Vai trò",
+            "Status"
+          ],
+          [
+            "AC-01",
+            "Authentication",
+            "All",
+            "SIMULATED / NOT RUN"
+          ],
+          [
+            "AC-02",
+            "Chặn API quản trị",
+            "Student",
+            "SIMULATED / NOT RUN"
+          ],
+          [
+            "AC-03",
+            "Cô lập course",
+            "Lecturer",
+            "SIMULATED / NOT RUN"
+          ],
+          [
+            "AC-04",
+            "Không enrollment trùng",
+            "Admin",
+            "SIMULATED / NOT RUN"
+          ],
+          [
+            "AC-05",
+            "Ẩn lesson draft",
+            "Student",
+            "SIMULATED / NOT RUN"
+          ],
+          [
+            "AC-06",
+            "Chặn nộp trễ",
+            "Student",
+            "SIMULATED / NOT RUN"
+          ],
+          [
+            "AC-07",
+            "Chấm và đồng bộ điểm",
+            "Lecturer/Student",
+            "SIMULATED / NOT RUN"
+          ],
+          [
+            "AC-08",
+            "Giới hạn quiz attempts",
+            "Student",
+            "SIMULATED / NOT RUN"
+          ],
+          [
+            "AC-09",
+            "Ẩn đáp án đúng",
+            "Student",
+            "SIMULATED / NOT RUN"
+          ],
+          [
+            "AC-10",
+            "Notification ownership",
+            "Student",
+            "SIMULATED / NOT RUN"
+          ]
+        ],
+        "style": "Table Grid"
+      }
+    },
+    {
+      "operation": "caption.insert",
+      "selector": {
+        "type": "text",
+        "text": "Mười AC được định nghĩa; số đã xác minh chạy là 0."
+      },
+      "options": {
+        "label": "BẢNG",
+        "title": "UAT scenarios, SIMULATED/NOT RUN",
+        "sequence_id": "Bang",
+        "caption_separator": "."
+      }
+    },
+    {
+      "operation": "table.create",
+      "selector": {
+        "type": "text",
+        "text": "Dữ liệu API không phải ảnh UI và không chứng minh Done."
+      },
+      "options": {
+        "rows": 11,
+        "columns": 3,
+        "data": [
+          [
+            "List",
+            "Cards",
+            "Note"
+          ],
+          [
+            "00 REQUIREMENT",
+            "2",
+            "REQ-01/REQ-02"
+          ],
+          [
+            "01 BACKLOG",
+            "0",
+            "Empty"
+          ],
+          [
+            "02 TO DO",
+            "25",
+            "PM-01..10; DGM-01..15"
+          ],
+          [
+            "03 DOING",
+            "0",
+            "Empty"
+          ],
+          [
+            "04 REVIEW",
+            "0",
+            "Empty"
+          ],
+          [
+            "05 DONE",
+            "0",
+            "No confirmed Done"
+          ],
+          [
+            "06 BLOCKED",
+            "1",
+            "REQ-03 asks rubric"
+          ],
+          [
+            "07 MILESTONES 10-11",
+            "8",
+            "Group proposal"
+          ],
+          [
+            "08 SIMULATED UAT",
+            "3",
+            "UAT/EVM/evidence mock"
+          ],
+          [
+            "TOTAL",
+            "39",
+            "Snapshot API"
+          ]
+        ],
+        "style": "Table Grid"
+      }
+    },
+    {
+      "operation": "caption.insert",
+      "selector": {
+        "type": "text",
+        "text": "Dữ liệu API không phải ảnh UI và không chứng minh Done."
+      },
+      "options": {
+        "label": "BẢNG",
+        "title": "Trello snapshot 23/10/2026, API aggregate",
+        "sequence_id": "Bang",
+        "caption_separator": "."
+      }
+    },
+    {
+      "operation": "table.create",
+      "selector": {
+        "type": "text",
+        "text": "Cards/lists/checklists hỗ trợ công việc; approval/evidence vẫn riêng."
+      },
+      "options": {
+        "rows": 9,
+        "columns": 2,
+        "data": [
+          [
+            "Field/step",
+            "Quy ước"
+          ],
+          [
+            "Title",
+            "[WBS/REQ/AC/CR] + deliverable"
+          ],
+          [
+            "Description",
+            "Kết quả, ranh giới, nguồn"
+          ],
+          [
+            "Owner/date",
+            "Owner rõ; date nếu thống nhất"
+          ],
+          [
+            "Checklist",
+            "Subtasks có thể review"
+          ],
+          [
+            "Attachment",
+            "Source .drawio, PNG, evidence"
+          ],
+          [
+            "Review",
+            "Reviewer, defect/CR, nhận xét"
+          ],
+          [
+            "Done",
+            "Acceptance + evidence + approval nếu cần"
+          ],
+          [
+            "Blocked/SIM",
+            "Lý do; nhãn mô phỏng"
+          ]
+        ],
+        "style": "Table Grid"
+      }
+    },
+    {
+      "operation": "caption.insert",
+      "selector": {
+        "type": "text",
+        "text": "Cards/lists/checklists hỗ trợ công việc; approval/evidence vẫn riêng."
+      },
+      "options": {
+        "label": "BẢNG",
+        "title": "Quy ước card và Done",
+        "sequence_id": "Bang",
+        "caption_separator": "."
+      }
+    },
+    {
+      "operation": "table.create",
+      "selector": {
+        "type": "text",
+        "text": "Kiến trúc là thiết kế trong repo, không phải runtime."
+      },
+      "options": {
+        "rows": 6,
+        "columns": 3,
+        "data": [
+          [
+            "Layer",
+            "Technology",
+            "Lưu ý"
+          ],
+          [
+            "Presentation",
+            "React 19, TypeScript, Vite",
+            "Ba vai trò UI"
+          ],
+          [
+            "API",
+            "FastAPI, REST, JSON, JWT",
+            "Auth/RBAC/rules"
+          ],
+          [
+            "Data access",
+            "SQLAlchemy",
+            "Mapping/transaction"
+          ],
+          [
+            "Database",
+            "SQL Server",
+            "12 tables, keys, seed"
+          ],
+          [
+            "Cross-cutting",
+            "Validation/logging/authorization",
+            "Cần test runtime"
+          ]
+        ],
+        "style": "Table Grid"
+      }
+    },
+    {
+      "operation": "caption.insert",
+      "selector": {
+        "type": "text",
+        "text": "Kiến trúc là thiết kế trong repo, không phải runtime."
+      },
+      "options": {
+        "label": "BẢNG",
+        "title": "Kiến trúc LMS theo hồ sơ",
+        "sequence_id": "Bang",
+        "caption_separator": "."
+      }
+    },
+    {
+      "operation": "table.create",
+      "selector": {
+        "type": "text",
+        "text": "Không có invoice/timesheet hoặc kỳ đo thực tế gắn EVM."
+      },
+      "options": {
+        "rows": 6,
+        "columns": 4,
+        "data": [
+          [
+            "Metric",
+            "Value",
+            "Formula",
+            "Limitation"
+          ],
+          [
+            "PV",
+            "1,200M",
+            "Planned Value",
+            "No status date"
+          ],
+          [
+            "EV",
+            "1,200M",
+            "Earned Value",
+            "Illustrative"
+          ],
+          [
+            "AC",
+            "1,175M",
+            "Actual Cost",
+            "No invoice/timesheet"
+          ],
+          [
+            "SV / SPI",
+            "0 / 1.00",
+            "EV-PV / EV÷PV",
+            "Not measured"
+          ],
+          [
+            "CV / CPI",
+            "+25M / ~1.021",
+            "EV-AC / EV÷AC",
+            "Not actual saving"
+          ]
+        ],
+        "style": "Table Grid"
+      }
+    },
+    {
+      "operation": "caption.insert",
+      "selector": {
+        "type": "text",
+        "text": "Không có invoice/timesheet hoặc kỳ đo thực tế gắn EVM."
+      },
+      "options": {
+        "label": "BẢNG",
+        "title": "EVM minh họa, không phải actuals",
+        "sequence_id": "Bang",
+        "caption_separator": "."
+      }
+    },
+    {
+      "operation": "table.create",
+      "selector": {
+        "type": "text",
+        "text": "Năm PNG được chèn; các source khác giữ trong archive."
+      },
+      "options": {
+        "rows": 16,
+        "columns": 3,
+        "data": [
+          [
+            "ID",
+            "Sơ đồ",
+            "Trong báo cáo"
+          ],
+          [
+            "LMS_01",
+            "WBS",
+            "PNG chèn"
+          ],
+          [
+            "LMS_02",
+            "Chu trình/cổng",
+            "PNG chèn"
+          ],
+          [
+            "LMS_03",
+            "Use Case",
+            "Inventory"
+          ],
+          [
+            "LMS_04",
+            "Activity ghi danh",
+            "Inventory"
+          ],
+          [
+            "LMS_05",
+            "Activity nộp bài",
+            "Text-only note"
+          ],
+          [
+            "LMS_06",
+            "Activity quiz",
+            "Inventory"
+          ],
+          [
+            "LMS_07",
+            "Sequence nộp bài",
+            "Modeled"
+          ],
+          [
+            "LMS_08",
+            "Sequence chấm bài",
+            "Modeled"
+          ],
+          [
+            "LMS_09",
+            "Sequence quiz",
+            "Modeled"
+          ],
+          [
+            "LMS_10",
+            "Class Diagram",
+            "Concept"
+          ],
+          [
+            "LMS_11",
+            "State submission",
+            "Inventory"
+          ],
+          [
+            "LMS_12",
+            "ERD 12 tables",
+            "PNG chèn; compare SQL"
+          ],
+          [
+            "LMS_13",
+            "Architecture",
+            "PNG chèn; design"
+          ],
+          [
+            "LMS_14",
+            "Dependency no dates",
+            "PNG chèn"
+          ],
+          [
+            "LMS_15",
+            "Requirements traceability",
+            "Inventory"
+          ]
+        ],
+        "style": "Table Grid"
+      }
+    },
+    {
+      "operation": "caption.insert",
+      "selector": {
+        "type": "text",
+        "text": "Năm PNG được chèn; các source khác giữ trong archive."
+      },
+      "options": {
+        "label": "BẢNG",
+        "title": "15 sơ đồ trong ZIP",
+        "sequence_id": "Bang",
+        "caption_separator": "."
+      }
+    },
+    {
+      "operation": "table.create",
+      "selector": {
+        "type": "text",
+        "text": "Checklist hướng dẫn không thay ảnh; mọi capture hiện chưa thực hiện."
+      },
+      "options": {
+        "rows": 8,
+        "columns": 4,
+        "data": [
+          [
+            "ID",
+            "Đối tượng",
+            "Evidence",
+            "Status"
+          ],
+          [
+            "T01",
+            "Trello overview",
+            "UI thật, thấy lists",
+            "NOT RUN"
+          ],
+          [
+            "T02",
+            "Card/checklist",
+            "Card thật",
+            "NOT RUN"
+          ],
+          [
+            "T03",
+            "Schedule",
+            "Calendar/timeline thật",
+            "NOT RUN"
+          ],
+          [
+            "T04",
+            "Simulated UAT",
+            "Nhãn SIMULATED thật",
+            "NOT RUN"
+          ],
+          [
+            "T05",
+            "Done",
+            "Chỉ với evidence thật",
+            "NOT RUN"
+          ],
+          [
+            "D01-D03",
+            "Draw.io",
+            "Editor/export/review",
+            "NOT RUN"
+          ],
+          [
+            "L01-L07",
+            "LMS runtime",
+            "UI thật; route/click path",
+            "NOT RUN"
+          ]
+        ],
+        "style": "Table Grid"
+      }
+    },
+    {
+      "operation": "caption.insert",
+      "selector": {
+        "type": "text",
+        "text": "Checklist hướng dẫn không thay ảnh; mọi capture hiện chưa thực hiện."
+      },
+      "options": {
+        "label": "BẢNG",
+        "title": "Checklist ảnh cần bổ sung",
+        "sequence_id": "Bang",
+        "caption_separator": "."
+      }
+    },
+    {
+      "operation": "table.create",
+      "selector": {
+        "type": "text",
+        "text": "Kế hoạch, snapshot, mô phỏng, runtime là loại chứng cứ khác nhau."
+      },
+      "options": {
+        "rows": 6,
+        "columns": 4,
+        "data": [
+          [
+            "Loại",
+            "Ví dụ",
+            "Có thể kết luận",
+            "Không thể kết luận"
+          ],
+          [
+            "Baseline",
+            "20 tuần, 1.2B, 8.5 FTE",
+            "Kế hoạch",
+            "Actual time/cost/headcount"
+          ],
+          [
+            "Trello API",
+            "9 lists, 39 cards",
+            "Số liệu snapshot",
+            "UI screenshot/Done"
+          ],
+          [
+            "Draw.io source/PNG",
+            "15 pairs",
+            "Có nguồn biểu đồ",
+            "Runtime/test log"
+          ],
+          [
+            "UAT/EVM simulated",
+            "10 AC, EVM",
+            "Kịch bản/số học mẫu",
+            "Test/actual cost"
+          ],
+          [
+            "Capture checklist",
+            "T01-T05/D01-D03/L01-L07",
+            "Việc còn thiếu",
+            "Ảnh thật"
+          ]
+        ],
+        "style": "Table Grid"
+      }
+    },
+    {
+      "operation": "caption.insert",
+      "selector": {
+        "type": "text",
+        "text": "Kế hoạch, snapshot, mô phỏng, runtime là loại chứng cứ khác nhau."
+      },
+      "options": {
+        "label": "BẢNG",
+        "title": "Phân loại bằng chứng",
+        "sequence_id": "Bang",
+        "caption_separator": "."
+      }
+    },
+    {
+      "operation": "image.insert",
+      "selector": {
+        "type": "text",
+        "text": "WBS được lấy từ ZIP, là cấu trúc bàn giao đề xuất chứ không phải rubric."
+      },
+      "options": {
+        "image_path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\sources\\archive\\LMS_QLDA_10-11_2026\\anh_so_do\\LMS_01.png",
+        "width_cm": 15.2,
+        "alt_text": "Các gói khởi tạo, yêu cầu, thiết kế, prototype, QA và bàn giao.",
+        "title": "WBS dự án LMS, cấu trúc bàn giao đề xuất",
+        "caption": "WBS dự án LMS, cấu trúc bàn giao đề xuất",
+        "caption_label": "HÌNH",
+        "caption_sequence": "Hinh",
+        "caption_separator": ".",
+        "placement": "after",
+        "alignment": "center",
+        "preserve_aspect_ratio": true,
+        "auto_shrink": true,
+        "inline": true
+      }
+    },
+    {
+      "operation": "image.insert",
+      "selector": {
+        "type": "text",
+        "text": "Sơ đồ Draw.io quy trình nối yêu cầu, Trello, review và thay đổi."
+      },
+      "options": {
+        "image_path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\sources\\archive\\LMS_QLDA_10-11_2026\\anh_so_do\\LMS_02.png",
+        "width_cm": 15.2,
+        "alt_text": "Yêu cầu, scope, Trello, Draw.io, review và thay đổi.",
+        "title": "Chu trình quản lý dự án và cổng kiểm soát",
+        "caption": "Chu trình quản lý dự án và cổng kiểm soát",
+        "caption_label": "HÌNH",
+        "caption_sequence": "Hinh",
+        "caption_separator": ".",
+        "placement": "after",
+        "alignment": "center",
+        "preserve_aspect_ratio": true,
+        "auto_shrink": true,
+        "inline": true
+      }
+    },
+    {
+      "operation": "image.insert",
+      "selector": {
+        "type": "text",
+        "text": "LMS_14 không gán ngày; bảng CPM mới là nguồn duration/float."
+      },
+      "options": {
+        "image_path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\sources\\archive\\LMS_QLDA_10-11_2026\\anh_so_do\\LMS_14.png",
+        "width_cm": 15.2,
+        "alt_text": "Mạng work package, không biểu diễn lịch ngày.",
+        "title": "Mạng phụ thuộc công việc, không gán ngày",
+        "caption": "Mạng phụ thuộc công việc, không gán ngày",
+        "caption_label": "HÌNH",
+        "caption_sequence": "Hinh",
+        "caption_separator": ".",
+        "placement": "after",
+        "alignment": "center",
+        "preserve_aspect_ratio": true,
+        "auto_shrink": true,
+        "inline": true
+      }
+    },
+    {
+      "operation": "image.insert",
+      "selector": {
+        "type": "text",
+        "text": "Sơ đồ architecture trong repo mô tả thiết kế, không phải runtime."
+      },
+      "options": {
+        "image_path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\sources\\archive\\LMS_QLDA_10-11_2026\\anh_so_do\\LMS_13.png",
+        "width_cm": 15.2,
+        "alt_text": "Ba vai trò qua React, FastAPI và SQL Server.",
+        "title": "Kiến trúc LMS theo hồ sơ repo, không phải runtime",
+        "caption": "Kiến trúc LMS theo hồ sơ repo, không phải runtime",
+        "caption_label": "HÌNH",
+        "caption_sequence": "Hinh",
+        "caption_separator": ".",
+        "placement": "after",
+        "alignment": "center",
+        "preserve_aspect_ratio": true,
+        "auto_shrink": true,
+        "inline": true
+      }
+    },
+    {
+      "operation": "image.insert",
+      "selector": {
+        "type": "text",
+        "text": "ERD có quan hệ giản lược; đọc cùng schema SQL nguồn."
+      },
+      "options": {
+        "image_path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\sources\\archive\\LMS_QLDA_10-11_2026\\anh_so_do\\LMS_12.png",
+        "width_cm": 15.2,
+        "alt_text": "Quan hệ PK/FK giữa 12 bảng.",
+        "title": "ERD 12 bảng LMS, một số quan hệ được giản lược",
+        "caption": "ERD 12 bảng LMS, một số quan hệ được giản lược",
+        "caption_label": "HÌNH",
+        "caption_sequence": "Hinh",
+        "caption_separator": ".",
+        "placement": "after",
+        "alignment": "center",
+        "preserve_aspect_ratio": true,
+        "auto_shrink": true,
+        "inline": true
+      }
+    },
+    {
+      "operation": "image.insert",
+      "selector": {
+        "type": "text",
+        "text": "Snapshot không chứng minh phần việc đã hoàn thành."
+      },
+      "options": {
+        "image_path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\sources\\archive\\LMS_QLDA_10-11_2026\\anh_minh_chung\\01_Trello_thong_ke_API_khong_phai_screenshot.png",
+        "width_cm": 15.2,
+        "alt_text": "Tổng hợp list, card, mốc và thẻ mô phỏng.",
+        "title": "Trello LMS — thống kê API 23/10/2026, KHÔNG PHẢI SCREENSHOT",
+        "caption": "Trello LMS — thống kê API 23/10/2026, KHÔNG PHẢI SCREENSHOT",
+        "caption_label": "HÌNH",
+        "caption_sequence": "Hinh",
+        "caption_separator": ".",
+        "placement": "after",
+        "alignment": "center",
+        "preserve_aspect_ratio": true,
+        "auto_shrink": true,
+        "inline": true
+      }
+    }
+  ]
+}

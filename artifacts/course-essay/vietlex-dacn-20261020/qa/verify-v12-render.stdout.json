@@ -1,0 +1,65 @@
+{
+  "overall_status": "FAIL",
+  "delivery_status": "FAIL",
+  "delivery_gates": {
+    "overall": "FAIL",
+    "render": "PASS",
+    "visual": "REVIEW_REQUIRED",
+    "native_word": "PASS"
+  },
+  "structural_status": "PASS",
+  "format_status": "PASS",
+  "numbering_status": "PASS",
+  "table_geometry_status": "PASS",
+  "field_structure_status": "FAIL",
+  "field_freshness_status": "STALE_OR_UNKNOWN",
+  "field_evaluation_status": "PASS",
+  "render_status": "PASS",
+  "native_word_status": "PASS",
+  "visual_status": "REVIEW_REQUIRED",
+  "manual_review_required": true,
+  "issues": [
+    {
+      "severity": "ERROR",
+      "code": "dangling_reference",
+      "message": "{'story': 'document', 'code': 'dangling_reference', 'instruction': 'PAGEREF _Toc243826492 \\\\h'}"
+    },
+    {
+      "severity": "WARNING",
+      "code": "native_evaluation_not_persisted",
+      "message": "Microsoft Word evaluated a temporary copy successfully, but its results differed from the cached results in the source. Run field update-all to a distinct output before delivery."
+    }
+  ],
+  "inventory": {
+    "paragraphs": 601,
+    "tables": 15,
+    "sections": 3,
+    "images": 16,
+    "fields": {
+      "total_field_tags": 478,
+      "toc_field": true,
+      "page_field": true,
+      "page_fields": 132,
+      "toc_fields": 3,
+      "other_fields": 27
+    }
+  },
+  "render": {
+    "engine": "word",
+    "pdf_path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\output\\VietLex_DoAnChuyenNganh_20261025_v12-UML-vanphong.pdf",
+    "file_size_bytes": 2038859,
+    "page_count": 91,
+    "verified_pdf_page_count": 91
+  },
+  "visual_review_challenge": {
+    "token": "9804caf7edc244b94a1aa48e0e7cbf85a7b2d5389989881d29bce0d0ee362bda",
+    "page_count": 91,
+    "token_scope": "document SHA-256 plus ordered page-image SHA-256 and size; PDF SHA-256 is provenance only"
+  },
+  "visual_review_reuse": {
+    "version": 1,
+    "token": "wa-visual-reuse-v1:46fe751afda88715a02d6de90ab5b0da2a0e3e043f5725b189aac37ae697627b"
+  },
+  "report_path": "D:\\Download\\ProfessionalLegalRAG\\artifacts\\course-essay-vietlex-20261020\\qa\\verify-v12-render.json",
+  "report_sha256": "ee6478e783a0cc05b09d29698517cce179443e3a679137956f1e8c116388f751"
+}

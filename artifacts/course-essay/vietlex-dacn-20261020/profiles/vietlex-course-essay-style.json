@@ -1,0 +1,260 @@
+{
+  "id": "vietlex-course-essay-style",
+  "name": "Course essay layout inspired by the supplied StrongWine sample (not an institutional compliance profile)",
+  "version": 1,
+  "source_policy": "visual-reference-only; assignment rubric not supplied",
+  "variants": {
+    "capstone": {
+      "page": {
+        "size": "A4",
+        "width_cm": 21.0,
+        "height_cm": 29.7,
+        "margins_cm": {
+          "top": 2.0,
+          "bottom": 2.0,
+          "left": 3.0,
+          "right": 2.0
+        },
+        "one_sided": true,
+        "allow_mixed_orientation": true
+      },
+      "typography": {
+        "body_font": "Times New Roman",
+        "body_size_pt": 13,
+        "line_spacing": 1.5,
+        "styles": {
+          "title": {
+            "size_pt": 18,
+            "bold": true,
+            "alignment": "center",
+            "font_color": "000000"
+          },
+          "heading1": {
+            "size_pt": 16,
+            "bold": true,
+            "font_color": "000000",
+            "alignment": "center"
+          },
+          "heading2": {
+            "size_pt": 14,
+            "bold": true,
+            "font_color": "000000",
+            "alignment": "left"
+          },
+          "heading3": {
+            "bold": true,
+            "font_color": "000000",
+            "alignment": "left"
+          },
+          "Caption": {
+            "font": "Times New Roman",
+            "size_pt": 12,
+            "font_color": "000000",
+            "alignment": "center"
+          }
+        }
+      },
+      "header_footer": {
+        "header_left": "topic",
+        "header_right": "supervisor",
+        "footer_left": "student",
+        "footer_right": "page_number",
+        "page_number_start": "introduction",
+        "front_matter_page_number_format": "lowerRoman"
+      },
+      "cover": {
+        "institution_lines": [
+          "TRƯỜNG ĐẠI HỌC TÀI NGUYÊN VÀ MÔI TRƯỜNG TP. HỒ CHÍ MINH",
+          "KHOA CÔNG NGHỆ THÔNG TIN"
+        ],
+        "document_type": "ĐỒ ÁN CHUYÊN NGÀNH",
+        "title_prefix": "ĐỀ TÀI:",
+        "metadata_fields": [
+          {
+            "label": "Sinh viên thực hiện",
+            "value_key": "student",
+            "default": "Nguyễn Thành Duy Tân"
+          },
+          {
+            "label": "MSSV",
+            "value_key": "student_id",
+            "default": "1250080266"
+          },
+          {
+            "label": "Lớp",
+            "value_key": "class",
+            "default": "12_ĐH_CNPM3"
+          },
+          {
+            "label": "Loại báo cáo",
+            "value_key": "document_type",
+            "default": "Đồ án chuyên ngành"
+          },
+          {
+            "label": "Giảng viên hướng dẫn",
+            "value_key": "supervisor",
+            "default": "ThS. Đinh Thị Hồng Loan"
+          }
+        ],
+        "location_year": "TP. HỒ CHÍ MINH, 2026",
+        "require_distinct_inner_cover": false,
+        "border": {
+          "display": "firstPage",
+          "offset_from": "page",
+          "edges": {
+            "top": {
+              "style": "single",
+              "size_eighth_points": 8,
+              "space_points": 31
+            },
+            "bottom": {
+              "style": "single",
+              "size_eighth_points": 8,
+              "space_points": 31
+            },
+            "left": {
+              "style": "single",
+              "size_eighth_points": 8,
+              "space_points": 31
+            },
+            "right": {
+              "style": "single",
+              "size_eighth_points": 8,
+              "space_points": 31
+            }
+          }
+        }
+      },
+      "front_matter": [
+        "cover",
+        "inner_cover",
+        "acknowledgements",
+        "declaration",
+        "supervisor_review",
+        "reviewer_review",
+        "schedule",
+        "abstract",
+        "abstract_english",
+        "abbreviations",
+        "table_of_contents",
+        "list_of_figures",
+        "list_of_tables"
+      ],
+      "front_matter_titles": {
+        "cover": "TRANG BÌA",
+        "inner_cover": "TRANG BÌA TRONG",
+        "acknowledgements": "LỜI CẢM ƠN",
+        "declaration": "LỜI CAM ĐOAN",
+        "supervisor_review": "NHẬN XÉT CỦA GIẢNG VIÊN HƯỚNG DẪN",
+        "reviewer_review": "NHẬN XÉT CỦA NGƯỜI PHẢN BIỆN",
+        "schedule": "LỊCH TRÌNH THỰC HIỆN ĐỒ ÁN",
+        "abstract": "TÓM TẮT",
+        "abstract_english": "ABSTRACT",
+        "abbreviations": "DANH MỤC TỪ VIẾT TẮT",
+        "table_of_contents": "MỤC LỤC",
+        "list_of_figures": "DANH MỤC HÌNH",
+        "list_of_tables": "DANH MỤC BẢNG"
+      },
+      "section_blueprint": [
+        {
+          "title": "MỞ ĐẦU",
+          "level": 1
+        },
+        {
+          "title": "CHƯƠNG 1: CƠ SỞ LÝ THUYẾT VÀ NGHIÊN CỨU LIÊN QUAN",
+          "level": 1,
+          "page_break_before": true
+        },
+        {
+          "title": "CHƯƠNG 2: KHẢO SÁT HIỆN TRẠNG VÀ XÁC ĐỊNH YÊU CẦU",
+          "level": 1,
+          "page_break_before": true
+        },
+        {
+          "title": "CHƯƠNG 3: PHÂN TÍCH NGHIỆP VỤ VÀ MÔ HÌNH CHỨC NĂNG",
+          "level": 1,
+          "page_break_before": true
+        },
+        {
+          "title": "CHƯƠNG 4: PHÂN TÍCH VÀ THIẾT KẾ HƯỚNG ĐỐI TƯỢNG",
+          "level": 1,
+          "page_break_before": true
+        },
+        {
+          "title": "CHƯƠNG 5: KIẾN TRÚC, DỮ LIỆU VÀ THIẾT KẾ THÀNH PHẦN",
+          "level": 1,
+          "page_break_before": true
+        },
+        {
+          "title": "CHƯƠNG 6: CÀI ĐẶT, LUỒNG XỬ LÝ VÀ GIAO DIỆN",
+          "level": 1,
+          "page_break_before": true
+        },
+        {
+          "title": "CHƯƠNG 7: KIỂM THỬ, ĐÁNH GIÁ VÀ GIỚI HẠN",
+          "level": 1,
+          "page_break_before": true
+        },
+        {
+          "title": "KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN",
+          "level": 1,
+          "page_break_before": true
+        },
+        {
+          "title": "PHỤ LỤC A. MA TRẬN YÊU CẦU VÀ BẰNG CHỨNG",
+          "level": 1,
+          "page_break_before": true
+        },
+        {
+          "title": "PHỤ LỤC B. ĐỊNH DANH SƠ ĐỒ VÀ NGUỒN KIỂM TRA",
+          "level": 1,
+          "page_break_before": true
+        },
+        {
+          "title": "PHỤ LỤC C. THUẬT NGỮ CHỈ SỐ VÀ TRẠNG THÁI BẰNG CHỨNG",
+          "level": 1,
+          "page_break_before": true
+        },
+        {
+          "title": "DANH MỤC TÀI LIỆU THAM KHẢO",
+          "level": 1,
+          "page_break_before": true
+        }
+      ],
+      "citations": {
+        "style": "numeric",
+        "in_text": "numeric_brackets",
+        "bibliography_order": "citation_order",
+        "prefer_primary_source": true,
+        "require_reviewed_sources": true
+      },
+      "captions": {
+        "figure_labels": [
+          {
+            "display": "HÌNH",
+            "sequence": "Hinh"
+          }
+        ],
+        "table_label": {
+          "display": "BẢNG",
+          "sequence": "Bang"
+        },
+        "numbering": {
+          "format": "chapter.sequence",
+          "mode": "verified_literal_chapter",
+          "heading_style": "Heading 1",
+          "heading_level": 1,
+          "separator": ".",
+          "chapter_option": "chapter_number",
+          "image_chapter_option": "caption_chapter_number"
+        }
+      },
+      "field_requirements": {
+        "table_of_contents": true,
+        "page_number": true,
+        "list_of_figures": true,
+        "list_of_tables": true
+      }
+    }
+  }
+}
