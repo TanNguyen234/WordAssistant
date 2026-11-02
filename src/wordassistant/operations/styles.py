@@ -6,6 +6,7 @@ from typing import Any
 
 from docx import Document
 from docx.enum.style import WD_STYLE_TYPE
+from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.shared import Pt, RGBColor
 
 from ..document.fonts import set_word_font
@@ -109,6 +110,13 @@ def update_style(input_path, *, output_path, name, dry_run=False, **properties):
     if name not in document.styles:
         raise ValueError(f"Style not found: {name}")
     style = document.styles[name]
+    if "alignment" in properties:
+        alignments = {"left": WD_ALIGN_PARAGRAPH.LEFT, "center": WD_ALIGN_PARAGRAPH.CENTER,
+                      "right": WD_ALIGN_PARAGRAPH.RIGHT, "justify": WD_ALIGN_PARAGRAPH.JUSTIFY}
+        value = str(properties["alignment"]).lower()
+        if value not in alignments:
+            raise ValueError("alignment must be left, center, right or justify")
+        style.paragraph_format.alignment = alignments[value]
     if "font_family" in properties:
         set_word_font(style.font, properties["font_family"])
     if "font_size_pt" in properties:

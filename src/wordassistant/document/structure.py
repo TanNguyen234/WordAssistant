@@ -458,7 +458,12 @@ def inspect_document(path: str | Path) -> dict[str, Any]:
         tbl_w = tbl_pr.find(qn("w:tblW"))
         tbl_ind = tbl_pr.find(qn("w:tblInd"))
         tbl_layout = tbl_pr.find(qn("w:tblLayout"))
-        grid = [int(col.get(qn("w:w"), "0")) for col in table._tbl.tblGrid.gridCol_lst]
+        grid = (
+            [int(col.get(qn("w:w"), "0")) for col in table._tbl.tblGrid.gridCol_lst]
+            if table._tbl.tblGrid is not None
+            else []
+        )
+        tbl_w_type = tbl_w.get(qn("w:type")) if tbl_w is not None else None
         width = int(tbl_w.get(qn("w:w"), "0")) if tbl_w is not None else 0
         row_widths = []
         for row in table._tbl.tr_lst:
@@ -466,19 +471,47 @@ def inspect_document(path: str | Path) -> dict[str, Any]:
                 sum(
                     int(cell.tcPr.tcW.get(qn("w:w"), "0"))
                     for cell in row.tc_lst
-                    if cell.tcPr.tcW is not None
+                    if cell.tcPr is not None and cell.tcPr.tcW is not None
                 )
             )
-        geometry_ok = (
-            tbl_w is not None
-            and tbl_w.get(qn("w:type")) == "dxa"
-            and width > 0
-            and sum(grid) == width
-            and all(value == width for value in row_widths)
-            and width
-            + (int(tbl_ind.get(qn("w:w"), "0")) if tbl_ind is not None else 0)
-            <= available_width
-        )
+
+        grid_sum = sum(grid) if grid else 0
+        has_positive_rows = any(v > 0 for v in row_widths)
+        indent = int(tbl_ind.get(qn("w:w"), "0")) if tbl_ind is not None else 0
+        TOLERANCE_TWIPS = 100
+
+        # Nested tables fail closed until recursive geometry calculation is formally verified
+        if depth > 0:
+            effective_width = width if width > 0 else grid_sum
+            geometry_ok = False
+        elif tbl_w_type == "dxa" and width > 0:
+            effective_width = width
+            grid_matches = (grid_sum == 0) or (abs(grid_sum - width) <= TOLERANCE_TWIPS)
+            rows_match = not has_positive_rows or all(
+                abs(val - width) <= TOLERANCE_TWIPS for val in row_widths if val > 0
+            )
+            within_bounds = (width + indent) <= (available_width + 20)
+            geometry_ok = (
+                available_width > 0
+                and grid_matches
+                and rows_match
+                and within_bounds
+            )
+        elif (tbl_w_type in ("auto", None) or width == 0) and (grid_sum > 0 or has_positive_rows):
+            effective_width = grid_sum if grid_sum > 0 else max(row_widths)
+            rows_match = not has_positive_rows or all(
+                abs(val - effective_width) <= TOLERANCE_TWIPS for val in row_widths if val > 0
+            )
+            within_bounds = (effective_width + indent) <= (available_width + 20)
+            geometry_ok = (
+                available_width > 0
+                and effective_width > 0
+                and rows_match
+                and within_bounds
+            )
+        else:
+            effective_width = width
+            geometry_ok = False
         tables_detail.append(
             {
                 "index": index,

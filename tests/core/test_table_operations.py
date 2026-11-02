@@ -64,6 +64,8 @@ def test_table_create_edit_layout_and_merge_roundtrip(tmp_path):
     assert table.cell(2, 2).text == "Final"
     assert "A" in table.cell(0, 0).text and "X" in table.cell(0, 0).text
     assert "w:tblHeader" in table.rows[0]._tr.xml
+    assert all(p.paragraph_format.keep_with_next is True for c in table.rows[0].cells for p in c.paragraphs)
+    assert table.cell(1, 0).paragraphs[0].paragraph_format.keep_with_next is not True
     assert "w:tblCaption" in table._tbl.tblPr.xml
     assert table.autofit is False
     geometry = _geometry(table)
@@ -145,3 +147,13 @@ def test_table_can_be_placed_after_heading_boundary(tmp_path):
     ]
     assert reopened.tables[0].cell(0, 0).text == "Placed"
     assert result.data["table_index"] == 0
+
+
+def test_repeating_header_keeps_preceding_caption_with_table(tmp_path):
+    doc = Document()
+    doc.add_paragraph("Table 1. Results", style="Caption")
+    doc.add_table(rows=2, cols=2)
+    source = tmp_path / "caption.docx"
+    doc.save(source)
+    result = set_table_layout(source, output_path=tmp_path / "kept.docx", table_index=0, repeat_header=True)
+    assert Document(result.output_path).paragraphs[0].paragraph_format.keep_with_next is True

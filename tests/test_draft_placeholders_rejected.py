@@ -99,3 +99,74 @@ def test_completed_synthetic_report_requires_materialized_dynamic_fields(tmp_pat
     assert val_final.valid is True
     errors = [i for i in val_final.issues if i.severity == "error"]
     assert len(errors) == 0
+
+
+def test_global_placeholder_review_detects_vietnamese_placeholders_in_body_and_tables(tmp_path: Path):
+    doc_path = tmp_path / "generic_placeholders.docx"
+    document = Document()
+    document.add_paragraph("LỜI CẢM ƠN")
+    document.add_paragraph("[sinh viên tự điền sau khi xác nhận]")
+    document.add_paragraph("Nguồn tham khảo được trích dẫn [1].")
+    table = document.add_table(rows=1, cols=1)
+    table.cell(0, 0).text = "[mô tả đóng góp thực tế]"
+    document.save(doc_path)
+
+    profile = resolve_profile("generic")
+    draft = validate_document(doc_path, profile, "default", verify_mode=False)
+    final = validate_document(doc_path, profile, "default", verify_mode=True)
+
+    assert any(issue.code == "draft_placeholder_detected" and issue.severity == "warning" for issue in draft.issues)
+    assert any(issue.code == "draft_placeholder_detected" and issue.severity == "error" for issue in final.issues)
+    assert not any("[1]" in issue.message for issue in draft.issues if issue.code == "draft_placeholder_detected")
+
+
+def test_global_numbering_review_is_scoped_to_chapter_style_outlines(tmp_path: Path):
+    from wordassistant.operations.lists import apply_heading_numbering
+
+    source = tmp_path / "numbering_source.docx"
+    document = Document()
+    document.add_heading("CHƯƠNG 1: TỔNG QUAN", level=1)
+    document.add_heading("Cơ sở", level=2)
+    document.add_heading("Khái niệm", level=3)
+    document.add_heading("Overview", level=1)
+    document.add_heading("Purpose", level=2)
+    document.save(source)
+
+    profile = resolve_profile("generic")
+    unnumbered = validate_document(source, profile, "default", verify_mode=False)
+    assert any(issue.code == "chapter_heading_numbering_missing" for issue in unnumbered.issues)
+
+    numbered_path = tmp_path / "numbered.docx"
+    apply_heading_numbering(
+        source,
+        output_path=numbered_path,
+        allow_literal_prefixes=True,
+        suppress_first_level_label=True,
+    )
+    numbered = validate_document(numbered_path, profile, "default", verify_mode=False)
+    assert not any(issue.code == "chapter_heading_numbering_missing" for issue in numbered.issues)
+
+    unnumbered_chapter_name = tmp_path / "unnumbered_chapter_name.docx"
+    simple = Document()
+    simple.add_heading("Overview", level=1)
+    simple.add_heading("Purpose", level=2)
+    simple.save(unnumbered_chapter_name)
+    not_applicable = validate_document(
+        unnumbered_chapter_name, profile, "default", verify_mode=False
+    )
+    assert not any(issue.code == "chapter_heading_numbering_missing" for issue in not_applicable.issues)
+
+
+def test_hcmunre_report_profile_requires_chapter_numbering_at_final_verify(tmp_path: Path):
+    doc_path = tmp_path / "hcmunre_unnumbered_chapter.docx"
+    document = Document()
+    document.add_heading("CHƯƠNG 1: TỔNG QUAN TÀI LIỆU", level=1)
+    document.add_heading("Cơ sở lý thuyết", level=2)
+    document.save(doc_path)
+
+    profile = resolve_profile("hcmunre_dacn_2026_2027")
+    report = validate_document(doc_path, profile, "report", verify_mode=True)
+
+    findings = [issue for issue in report.issues if issue.code == "chapter_heading_numbering_missing"]
+    assert len(findings) == 1
+    assert findings[0].severity == "error"

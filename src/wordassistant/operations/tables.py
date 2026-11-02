@@ -9,6 +9,7 @@ from docx.enum.table import WD_CELL_VERTICAL_ALIGNMENT, WD_TABLE_ALIGNMENT
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 from docx.shared import Cm, Pt
+from docx.text.paragraph import Paragraph
 
 from ..selectors import resolve_single_paragraph
 from .common import atomic_save
@@ -363,6 +364,16 @@ def set_table_layout(
             tr_pr.append(OxmlElement("w:tblHeader"))
         elif not repeat_header and existing is not None:
             tr_pr.remove(existing)
+        if repeat_header:
+            # A repeated header alone at the foot of a page is not useful.
+            for cell in table.rows[0].cells:
+                for paragraph in cell.paragraphs:
+                    paragraph.paragraph_format.keep_with_next = True
+            previous = table._tbl.getprevious()
+            if previous is not None and previous.tag == qn("w:p"):
+                caption = Paragraph(previous, table._parent)
+                if caption.style.name == "Caption":
+                    caption.paragraph_format.keep_with_next = True
     if keep_rows_together is not None:
         for row in table.rows:
             tr_pr = row._tr.get_or_add_trPr()

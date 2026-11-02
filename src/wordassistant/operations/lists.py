@@ -163,7 +163,7 @@ def _create_heading_numbering_definition(
             level_text = ""
         lvl_text.set(qn("w:val"), level_text)
         suffix = OxmlElement("w:suff")
-        suffix.set(qn("w:val"), "tab")
+        suffix.set(qn("w:val"), "space")
         justification = OxmlElement("w:lvlJc")
         justification.set(qn("w:val"), "left")
         p_pr = OxmlElement("w:pPr")
@@ -338,9 +338,40 @@ def inspect_heading_numbering(input_path: str | Path) -> dict:
         if paragraph.style is not None
         and paragraph.style.style_id.startswith("Heading")
     ]
+    paragraph_numbering = []
+    for index, paragraph in headings:
+        p_pr = paragraph._p.pPr
+        num_pr = p_pr.numPr if p_pr is not None else None
+        source = "paragraph"
+        if num_pr is None and paragraph.style is not None:
+            style_p_pr = paragraph.style._element.pPr
+            num_pr = style_p_pr.numPr if style_p_pr is not None else None
+            source = "style"
+        if num_pr is None or num_pr.numId is None:
+            continue
+        try:
+            number_id = int(num_pr.numId.val)
+            level = int(num_pr.ilvl.val) if num_pr.ilvl is not None else 0
+        except (TypeError, ValueError):
+            continue
+        if number_id == 0:
+            continue
+        paragraph_numbering.append(
+            {
+                "paragraph_index": index,
+                "text": paragraph.text,
+                "style": paragraph.style.name,
+                "num_id": number_id,
+                "level": level,
+                "source": source,
+            }
+        )
     return {
         "linked_levels": linked_levels,
         "heading_paragraphs": len(headings),
+        "numbered_heading_count": len(paragraph_numbering),
+        "unnumbered_heading_count": len(headings) - len(paragraph_numbering),
+        "paragraph_numbering": paragraph_numbering,
         "literal_prefixes": [
             {"paragraph_index": index, "text": paragraph.text}
             for index, paragraph in headings

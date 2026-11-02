@@ -55,6 +55,22 @@ class Variant:
     captions: Mapping[str, Any] = field(default_factory=dict)
     template_asset: str | None = None
     field_requirements: Mapping[str, Any] = field(default_factory=dict)
+    content_review: Mapping[str, Any] = field(default_factory=dict)
+
+@dataclass(frozen=True)
+class AssessmentCriteriaSection:
+    section_id: str
+    source_start: str
+    source_end: str
+    report_section: str
+
+@dataclass(frozen=True)
+class AssessmentCriteriaSource:
+    source_asset: str
+    source_sha256: str
+    scoring_levels_present: bool
+    scoring_weights_present: bool
+    sections: tuple[AssessmentCriteriaSection, ...]
 
 @dataclass(frozen=True)
 class DocumentProfile:
@@ -65,6 +81,7 @@ class DocumentProfile:
     source_policy: str = "unspecified"
     source_assets: tuple[str, ...] = ()
     source_conflicts: tuple[Mapping[str, Any], ...] = ()
+    assessment_criteria: AssessmentCriteriaSource | None = None
 
     def variant(self, name: str) -> Variant:
         try:
@@ -73,10 +90,10 @@ class DocumentProfile:
             raise ProfileError(f"Unknown variant {name!r}; choose one of {sorted(self.variants)}") from exc
 
 
-_ROOT_KEYS = {'id', 'name', 'version', 'variants', 'source_policy', 'source_assets', 'source_conflicts'}
+_ROOT_KEYS = {'id', 'name', 'version', 'variants', 'source_policy', 'source_assets', 'source_conflicts', 'assessment_criteria'}
 _VARIANT_KEYS = {
     'page', 'typography', 'front_matter', 'front_matter_titles', 'cover',
-    'section_blueprint', 'citations', 'integrity', 'header_footer', 'captions', 'template_asset', 'field_requirements'
+    'section_blueprint', 'citations', 'integrity', 'header_footer', 'captions', 'template_asset', 'field_requirements', 'content_review'
 }
 _PAGE_KEYS = {'size', 'width_cm', 'height_cm', 'margins_cm', 'one_sided', 'orientation', 'allow_mixed_orientation', 'provenance'}
 _MARGINS_KEYS = {'top', 'bottom', 'left', 'right'}
@@ -90,6 +107,7 @@ _BLUEPRINT_KEYS = {'title', 'level', 'required', 'numbered', 'restart_numbering'
 _COVER_KEYS = {
     'institution_lines', 'document_type', 'title_prefix', 'metadata_fields',
     'location_year', 'location_year_key', 'location_year_template', 'logo_asset',
+    'logo_width_cm', 'logo_height_cm',
     'border', 'styles', 'require_distinct_inner_cover',
 }
 _METADATA_FIELD_KEYS = {'key', 'label', 'value_key', 'default', 'value', 'required'}
@@ -113,7 +131,7 @@ _INTEGRITY_PUNCTUATION = {
     'non_breaking_space'
 }
 _HEADER_FOOTER_KEYS = {'header_left', 'header_right', 'footer_left', 'footer_right', 'page_number_start', 'front_matter_page_number_format'}
-_CAPTIONS_KEYS = {'figure_labels', 'table_label', 'numbering'}
+_CAPTIONS_KEYS = {'figure_labels', 'table_label', 'numbering', 'figure_alignment'}
 _CAPTION_NUMBERING_CONTRACT = {
     'format': 'chapter.sequence',
     'mode': 'verified_literal_chapter',
@@ -125,6 +143,11 @@ _CAPTION_NUMBERING_CONTRACT = {
 }
 _CAPTION_LABEL_KEYS = {'display', 'sequence'}
 _FIELD_REQS_KEYS = {'table_of_contents', 'page_number', 'list_of_figures', 'list_of_tables'}
+_CONTENT_REVIEW_KEYS = {'chapter_heading_numbering', 'unresolved_placeholders'}
+_CONTENT_REVIEW_VALUES = {
+    'chapter_heading_numbering': {'review', 'required'},
+    'unresolved_placeholders': {'review', 'strict_on_verify'},
+}
 _VALID_ALIGNMENTS = {'left', 'center', 'right', 'justify'}
 
 def _check_unknown_keys(d: Mapping[str, Any], allowed: set[str], context: str) -> None:
@@ -153,14 +176,82 @@ def validate_profile_dict(data: Any) -> DocumentProfile:
             raise ProfileError("Variant name must be a non-empty string")
         variants[v_name] = _parse_variant(v_name, v_data)
         
+    source_assets = _string_list(data.get('source_assets', []), 'source_assets')
+    assessment_criteria = _parse_assessment_criteria(
+        data.get('assessment_criteria'), source_assets
+    )
     return DocumentProfile(
         profile_id=p_id,
         name=p_name,
         version=version,
         variants=variants,
         source_policy=_optional_str(data.get('source_policy'), 'source_policy') or 'unspecified',
-        source_assets=_string_list(data.get('source_assets', []), 'source_assets'),
-        source_conflicts=_object_list(data.get('source_conflicts', []), 'source_conflicts')
+        source_assets=source_assets,
+        source_conflicts=_object_list(data.get('source_conflicts', []), 'source_conflicts'),
+        assessment_criteria=assessment_criteria,
+    )
+
+def _parse_assessment_criteria(
+    value: Any,
+    source_assets: tuple[str, ...],
+) -> AssessmentCriteriaSource | None:
+    if value is None:
+        return None
+    if not isinstance(value, dict):
+        raise ProfileError("assessment_criteria must be an object")
+    allowed_keys = {
+        'type', 'source_asset', 'source_sha256', 'scoring_levels_present',
+        'scoring_weights_present', 'sections',
+    }
+    _check_unknown_keys(value, allowed_keys, 'assessment_criteria')
+    if value.get('type') != 'official_assessment_criteria':
+        raise ProfileError("assessment_criteria.type must be 'official_assessment_criteria'")
+
+    source_asset = _str(value, 'source_asset')
+    if source_asset not in source_assets:
+        raise ProfileError("assessment_criteria.source_asset must be listed in source_assets")
+    source_sha256 = _str(value, 'source_sha256').casefold()
+    if not re.fullmatch(r'[0-9a-f]{64}', source_sha256):
+        raise ProfileError("assessment_criteria.source_sha256 must be a 64-character SHA-256 hex digest")
+
+    scoring_levels_present = value.get('scoring_levels_present')
+    scoring_weights_present = value.get('scoring_weights_present')
+    if type(scoring_levels_present) is not bool:
+        raise ProfileError("assessment_criteria.scoring_levels_present must be a boolean")
+    if type(scoring_weights_present) is not bool:
+        raise ProfileError("assessment_criteria.scoring_weights_present must be a boolean")
+
+    sections_raw = value.get('sections')
+    if not isinstance(sections_raw, list) or not sections_raw:
+        raise ProfileError("assessment_criteria.sections must be a non-empty array")
+    sections: list[AssessmentCriteriaSection] = []
+    section_ids: set[str] = set()
+    section_keys = {'id', 'source_start', 'source_end', 'report_section'}
+    for index, section in enumerate(sections_raw):
+        if not isinstance(section, dict):
+            raise ProfileError(f"assessment_criteria.sections[{index}] must be an object")
+        _check_unknown_keys(section, section_keys, f'assessment_criteria.sections[{index}]')
+        section_id = _str(section, 'id')
+        if section_id in section_ids:
+            raise ProfileError(f"assessment_criteria.sections contains duplicate id {section_id!r}")
+        section_ids.add(section_id)
+        source_start = _str(section, 'source_start')
+        source_end = _str(section, 'source_end')
+        if source_start == source_end:
+            raise ProfileError(f"assessment_criteria.sections[{index}] source markers must differ")
+        sections.append(AssessmentCriteriaSection(
+            section_id=section_id,
+            source_start=source_start,
+            source_end=source_end,
+            report_section=_str(section, 'report_section'),
+        ))
+
+    return AssessmentCriteriaSource(
+        source_asset=source_asset,
+        source_sha256=source_sha256,
+        scoring_levels_present=scoring_levels_present,
+        scoring_weights_present=scoring_weights_present,
+        sections=tuple(sections),
     )
 
 def load_profile(path: str | Path) -> DocumentProfile:
@@ -318,6 +409,10 @@ def _parse_variant(name: str, data: Any) -> Variant:
             logo_asset = cover_data['logo_asset']
             if not isinstance(logo_asset, str) or not logo_asset.strip() or Path(logo_asset).is_absolute() or '..' in Path(logo_asset).parts:
                 raise ProfileError(f"{name}.cover.logo_asset must be a safe relative path")
+        if 'logo_width_cm' in cover_data:
+            cover_data['logo_width_cm'] = _num(cover_data['logo_width_cm'], f"{name}.cover.logo_width_cm", positive=True)
+        if 'logo_height_cm' in cover_data:
+            cover_data['logo_height_cm'] = _num(cover_data['logo_height_cm'], f"{name}.cover.logo_height_cm", positive=True)
         if 'border' in cover_data:
             border = cover_data['border']
             if not isinstance(border, dict):
@@ -451,6 +546,10 @@ def _parse_variant(name: str, data: Any) -> Variant:
         raise ProfileError(f"{name}.captions must be an object")
     if captions:
         _check_unknown_keys(captions, _CAPTIONS_KEYS, f"{name}.captions")
+        if 'figure_alignment' in captions and (
+            not isinstance(captions['figure_alignment'], str) or captions['figure_alignment'] not in _VALID_ALIGNMENTS
+        ):
+            raise ProfileError(f"{name}.captions.figure_alignment must be one of {sorted(_VALID_ALIGNMENTS)}")
         if 'numbering' in captions:
             numbering = captions['numbering']
             context = f"{name}.captions.numbering"
@@ -507,6 +606,18 @@ def _parse_variant(name: str, data: Any) -> Variant:
         for fr_key, fr_val in field_reqs.items():
             if type(fr_val) is not bool:
                 raise ProfileError(f"{name}.field_requirements.{fr_key} must be a boolean, got {fr_val!r}")
+
+    content_review = data.get('content_review', {})
+    if not isinstance(content_review, dict):
+        raise ProfileError(f"{name}.content_review must be an object")
+    if content_review:
+        _check_unknown_keys(content_review, _CONTENT_REVIEW_KEYS, f"{name}.content_review")
+        for review_key, review_value in content_review.items():
+            if not isinstance(review_value, str) or review_value not in _CONTENT_REVIEW_VALUES[review_key]:
+                raise ProfileError(
+                    f"{name}.content_review.{review_key} must be one of "
+                    f"{sorted(_CONTENT_REVIEW_VALUES[review_key])}, got {review_value!r}"
+                )
         
     return Variant(
         name=name,
@@ -521,7 +632,8 @@ def _parse_variant(name: str, data: Any) -> Variant:
         header_footer=header_footer,
         captions=captions,
         template_asset=template,
-        field_requirements=field_reqs
+        field_requirements=field_reqs,
+        content_review=content_review,
     )
 
 def _str(d: Mapping[str, Any], k: str) -> str:

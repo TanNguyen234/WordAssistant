@@ -7,6 +7,27 @@
     "use_cases/hcmunre_dacn_2026_2027/assets/huong_dan_trinh_bay_dacn_2026_2027.docx",
     "use_cases/hcmunre_dacn_2026_2027/assets/mau_de_cuong_do_an_chuyen_nganh.docx"
   ],
+  "assessment_criteria": {
+    "type": "official_assessment_criteria",
+    "source_asset": "use_cases/hcmunre_dacn_2026_2027/assets/huong_dan_trinh_bay_dacn_2026_2027.docx",
+    "source_sha256": "0f3622dbcd74009fb0867e0d3fa4a1624a38983af502e55d48868edf33f74e78",
+    "scoring_levels_present": false,
+    "scoring_weights_present": false,
+    "sections": [
+      {
+        "id": "supervisor_review",
+        "source_start": "Trang “Nhận xét của giảng viên hướng dẫn” (không đánh số trang, xem mẫu kèm theo). Giảng viên hướng dẫn nhận xét các vấn đề:",
+        "source_end": "Trang “Nhận xét của người phản biện” (không đánh số trang, xem mẫu kèm theo)",
+        "report_section": "supervisor_review"
+      },
+      {
+        "id": "reviewer_review",
+        "source_start": "Trang “Nhận xét của người phản biện” (không đánh số trang, xem mẫu kèm theo)",
+        "source_end": "Trang Lịch làm việc (không đánh số trang, xem mẫu kèm theo)",
+        "report_section": "reviewer_review"
+      }
+    ]
+  },
   "source_conflicts": [
     {
       "field": "page_number_start",
@@ -14,6 +35,12 @@
       "sample_note": "chapter_1",
       "resolution": "introduction",
       "reason": "The written general rule is treated as normative."
+    },
+    {
+      "field": "report.heading_alignment_and_figure_caption_alignment",
+      "normative": "Official university guide specifies Heading 1 (CHƯƠNG...) is centered; figure captions centered",
+      "resolution": "heading1 center; heading2-3 left; figure captions center",
+      "reason": "Official HCMUNRE IT template and actual academic practice format major chapter headings (Heading 1) centered; sub-headings (Heading 2, Heading 3) left-aligned."
     }
   ],
   "variants": {
@@ -43,15 +70,28 @@
           },
           "heading1": {
             "size_pt": 16,
-            "bold": true
+            "bold": true,
+            "alignment": "center",
+            "left_indent_pt": 0,
+            "first_line_indent_pt": 0
           },
           "heading2": {
             "size_pt": 14,
-            "bold": true
+            "bold": true,
+            "alignment": "left",
+            "left_indent_pt": 0,
+            "first_line_indent_pt": 0
           },
           "heading3": {
             "size_pt": 13,
-            "bold": true
+            "bold": true,
+            "alignment": "left",
+            "left_indent_pt": 0,
+            "first_line_indent_pt": 0
+          },
+          "Caption": {
+            "font": "Times New Roman",
+            "size_pt": 13
           }
         }
       },
@@ -70,12 +110,29 @@
         "document_type": "BÁO CÁO ĐỒ ÁN CHUYÊN NGÀNH",
         "title_prefix": "ĐỀ TÀI:",
         "metadata_fields": [
-          {"label": "Sinh viên thực hiện", "value_key": "student", "default": "[Họ và tên sinh viên - MSSV]"},
-          {"label": "Giảng viên hướng dẫn", "value_key": "supervisor", "default": "[Họ và tên CBHD]"},
-          {"label": "Khóa học", "value": "2023 - 2027"},
-          {"label": "Ngành", "value": "Công nghệ thông tin"}
+          {
+            "label": "Sinh viên thực hiện",
+            "value_key": "student",
+            "default": "[Họ và tên sinh viên - MSSV]"
+          },
+          {
+            "label": "Giảng viên hướng dẫn",
+            "value_key": "supervisor",
+            "default": "[Họ và tên CBHD]"
+          },
+          {
+            "label": "Khóa học",
+            "value": "2023 - 2027"
+          },
+          {
+            "label": "Ngành",
+            "value": "Công nghệ thông tin"
+          }
         ],
-        "location_year": "TP. HỒ CHÍ MINH, 2027"
+        "location_year": "TP. HỒ CHÍ MINH, 2027",
+        "logo_asset": "use_cases/hcmunre_dacn_2026_2027/assets/university_logo.png",
+        "logo_width_cm": 3.59,
+        "logo_height_cm": 3.59
       },
       "front_matter": [
         "cover",
@@ -135,6 +192,10 @@
           "level": 1
         }
       ],
+      "content_review": {
+        "chapter_heading_numbering": "required",
+        "unresolved_placeholders": "strict_on_verify"
+      },
       "citations": {
         "style": "hcmunre_numeric",
         "in_text": "numeric_brackets",
@@ -158,6 +219,15 @@
           "ellipsis",
           "non_breaking_space"
         ]
+      },
+      "captions": {
+        "figure_labels": [
+          {
+            "display": "HÌNH",
+            "sequence": "Hinh"
+          }
+        ],
+        "figure_alignment": "center"
       }
     },
     "proposal": {
@@ -248,6 +318,46 @@
         "style": "hcmunre_numeric"
       },
       "template_asset": "use_cases/hcmunre_dacn_2026_2027/assets/mau_de_cuong_do_an_chuyen_nganh.docx"
+    },
+    "course_essay_style": {
+      "page": {
+        "size": "A4",
+        "width_cm": 21.0,
+        "height_cm": 29.7,
+        "allow_mixed_orientation": true,
+        "margins_cm": {
+          "top": 2.0,
+          "bottom": 2.0,
+          "left": 3.0,
+          "right": 2.0
+        },
+        "one_sided": true
+      },
+      "typography": {
+        "body_font": "Times New Roman",
+        "body_size_pt": 13,
+        "line_spacing": 1.5,
+        "styles": {
+          "title": {
+            "size_pt": 18,
+            "bold": true,
+            "alignment": "center"
+          },
+          "heading1": {
+            "size_pt": 16,
+            "bold": true,
+            "alignment": "center"
+          },
+          "heading2": {
+            "size_pt": 14,
+            "bold": true
+          },
+          "heading3": {
+            "size_pt": 13,
+            "bold": true
+          }
+        }
+      }
     }
   }
 }

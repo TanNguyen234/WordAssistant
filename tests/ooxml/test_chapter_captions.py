@@ -71,6 +71,38 @@ def test_automatically_numbered_heading_rejected(tmp_path):
     assert not output.exists()
 
 
+def test_literal_chapter_with_hidden_counter_accepts_image_caption(tmp_path):
+    source, numbered, output = (tmp_path / name for name in ('source.docx', 'numbered.docx', 'output.docx'))
+    image = tmp_path / 'model.png'
+    Image.new('RGB', (20, 20)).save(image)
+    doc = Document()
+    doc.add_heading('CHƯƠNG 1: TỔNG QUAN', 1)
+    doc.add_heading('Cơ sở', 2)
+    doc.add_heading('CHƯƠNG 2: THIẾT KẾ', 1)
+    doc.add_paragraph('Data model')
+    doc.save(source)
+    apply_heading_numbering(source, output_path=numbered, allow_literal_prefixes=True,
+                            suppress_first_level_label=True)
+    insert_image(numbered, output_path=output, image_path=image,
+                 selector={'type': 'text', 'text': 'Data model'}, caption='Mô hình dữ liệu',
+                 caption_label='HÌNH', caption_sequence='Hinh', caption_chapter_number=2)
+    assert inspect_fields(output)[0]['instruction'] == 'SEQ Hinh \\* ARABIC \\s 1'
+    assert any(''.join(p._p.xpath('.//w:t/text()')) == 'HÌNH 2.1. Mô hình dữ liệu'
+               for p in Document(output).paragraphs)
+
+
+def test_hidden_chapter_counter_must_match_literal_chapter(tmp_path):
+    source, numbered, output = (tmp_path / name for name in ('source.docx', 'numbered.docx', 'output.docx'))
+    doc = Document()
+    doc.add_heading('CHƯƠNG 2: THIẾT KẾ', 1)
+    doc.save(source)
+    apply_heading_numbering(source, output_path=numbered, allow_literal_prefixes=True,
+                            suppress_first_level_label=True)
+    with pytest.raises(ValueError, match='automatic|counter'):
+        insert_caption(numbered, output_path=output, label='HÌNH', title='Model', sequence_id='Hinh', chapter_number=2)
+    assert not output.exists()
+
+
 def test_image_uses_same_chapter_contract(tmp_path):
     source, output = tmp_path / 'source.docx', tmp_path / 'output.docx'
     image = tmp_path / 'image.png'

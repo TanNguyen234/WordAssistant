@@ -61,6 +61,9 @@ def test_insert_has_dedicated_paragraph_metadata_and_semantic_caption(tmp_path):
     assert image_paragraph.alignment == WD_ALIGN_PARAGRAPH.RIGHT
     assert len(image_paragraph._p.xpath(".//w:drawing")) == 1
     assert reopened.paragraphs[3].style.name == "Caption"
+    assert image_paragraph.paragraph_format.keep_with_next is True
+    assert reopened.paragraphs[3].paragraph_format.keep_together is True
+    assert reopened.paragraphs[3].paragraph_format.keep_with_next is False
 
     with ZipFile(output) as package:
         document_xml = package.read("word/document.xml").decode("utf-8")

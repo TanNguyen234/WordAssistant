@@ -4,6 +4,7 @@ from pathlib import Path
 import re
 import unicodedata
 from docx import Document
+from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml.ns import qn
 from wordassistant.profiles.loader import DocumentProfile, Variant
 
@@ -27,6 +28,24 @@ GENERIC_DRAFT_PLACEHOLDERS = (
     "untitled document",
 )
 
+_BRACKETED_TEXT = re.compile(r"\[([^\[\]\r\n]{2,120})\]")
+_PLACEHOLDER_HINT = re.compile(
+    r"\b(?:todo|tbd|tbc|tba|placeholder|insert|replace|fill(?:\s+in)?|"
+    r"to\s+be\s+(?:completed|filled|confirmed)|your\s+(?:name|title|date)|"
+    r"name|student\s+(?:name|id)|advisor|supervisor|signature|date|"
+    r"điền|tự\s*điền|bổ\s*sung|mô\s*tả|họ\s*tên|tên\s*(?:sinh\s*viên|giảng\s*viên|người)|"
+    r"ngày(?:\s*tháng)?|chữ\s*ký|người\s*/?\s*đơn\s*vị|nội\s*dung\s*hỗ\s*trợ)\b",
+    re.IGNORECASE,
+)
+_TEMPLATE_TOKEN = re.compile(
+    r"^(?:TODO|TBD|TBC|TBA|PLACEHOLDER|"
+    r"(?=[A-Z0-9_ -]*(?:STUDENT|AUTHOR|SUPERVISOR|ADVISOR|SIGNATURE|DATE|TITLE|TOPIC|NAME|CLASS|MSSV|GVHD))"
+    r"[A-Z0-9]+(?:[_ -][A-Z0-9]+)+)$",
+    re.IGNORECASE,
+)
+_CHAPTER_HEADING = re.compile(r"^\s*(?:chapter|chương)\s+(\d+)\b", re.IGNORECASE)
+_NUMBER_MARKER = re.compile(r"%([1-9])")
+
 def _normalize_text(s: str) -> str:
     if not s:
         return ""
@@ -34,8 +53,9 @@ def _normalize_text(s: str) -> str:
     return " ".join(norm.split()).casefold()
 
 def _find_draft_placeholders(d: Document, v: Variant) -> list[str]:
-    found = []
-    check_set = set(GENERIC_DRAFT_PLACEHOLDERS)
+    found: list[str] = []
+    seen: set[str] = set()
+    check_set = {_normalize_text(value) for value in GENERIC_DRAFT_PLACEHOLDERS}
     
     # Add defaults from profile metadata fields if they have draft brackets or angle brackets
     if 'metadata_fields' in v.cover:
@@ -44,29 +64,32 @@ def _find_draft_placeholders(d: Document, v: Variant) -> list[str]:
             if d_val and (d_val.startswith('[') or d_val.startswith('<')):
                 check_set.add(_normalize_text(d_val))
                 
-    # Check paragraphs
-    for p in d.paragraphs:
-        txt = p.text.strip()
-        if not txt:
-            continue
-        txt_norm = _normalize_text(txt)
-        for pl in check_set:
-            if pl in txt_norm:
-                found.append(txt[:80])
-                break
-                
-    # Check tables
-    for table in d.tables:
-        for row in table.rows:
-            for cell in row.cells:
-                c_txt = cell.text.strip()
-                if not c_txt:
-                    continue
-                c_norm = _normalize_text(c_txt)
-                for pl in check_set:
-                    if pl in c_norm:
-                        found.append(c_txt[:80])
-                        break
+    def contains_placeholder(text: str) -> bool:
+        normalized = _normalize_text(text)
+        if any(placeholder in normalized for placeholder in check_set):
+            return True
+        for match in _BRACKETED_TEXT.finditer(text):
+            candidate = match.group(1).strip()
+            if _PLACEHOLDER_HINT.search(candidate) or _TEMPLATE_TOKEN.fullmatch(candidate):
+                return True
+        return False
+
+    def table_texts(tables):
+        for table in tables:
+            for row in table.rows:
+                for cell in row.cells:
+                    yield cell.text
+                    yield from table_texts(cell.tables)
+
+    # Review body paragraphs and nested table cells without treating ordinary
+    # bracket citations such as [1] as draft placeholders.
+    for text in [p.text for p in d.paragraphs] + list(table_texts(d.tables)):
+        candidate = text.strip()
+        if candidate and contains_placeholder(candidate):
+            excerpt = candidate[:80]
+            if excerpt not in seen:
+                seen.add(excerpt)
+                found.append(excerpt)
     return found
 
 def _extract_cover_metadata(d: Document, v: Variant) -> dict[str, str]:
@@ -176,6 +199,32 @@ def _profile_style_name(style_key: str) -> str:
     return key
 
 
+def _effective_style_size(style) -> float | None:
+    # Word may remove a redundant size and inherit it through basedOn on save.
+    seen = set()
+    while style is not None and style.style_id not in seen:
+        seen.add(style.style_id)
+        if style.font.size is not None:
+            return style.font.size.pt
+        style = style.base_style
+    return None
+
+
+def _effective_style_alignment(style, document):
+    seen = set()
+    while style is not None and style.style_id not in seen:
+        seen.add(style.style_id)
+        if style.paragraph_format.alignment is not None:
+            return style.paragraph_format.alignment
+        style = style.base_style
+    defaults = document.styles.element.xpath('./w:docDefaults/w:pPrDefault/w:pPr/w:jc')
+    if defaults:
+        return {'left': WD_ALIGN_PARAGRAPH.LEFT, 'center': WD_ALIGN_PARAGRAPH.CENTER,
+                'right': WD_ALIGN_PARAGRAPH.RIGHT, 'both': WD_ALIGN_PARAGRAPH.JUSTIFY}.get(
+                    defaults[0].get(qn('w:val')))
+    return WD_ALIGN_PARAGRAPH.LEFT
+
+
 def _starts_new_page(document: Document, paragraph_index: int) -> bool:
     paragraph = document.paragraphs[paragraph_index]
     if paragraph.paragraph_format.page_break_before is True:
@@ -214,6 +263,184 @@ def _paragraph_numbering(paragraph) -> tuple[int, int] | None:
         return None
     return number_id, level
 
+
+def _heading_level(paragraph) -> int | None:
+    if paragraph.style is None:
+        return None
+    match = re.fullmatch(r"Heading\s+(\d+)", paragraph.style.name, re.IGNORECASE)
+    if not match:
+        return None
+    return int(match.group(1))
+
+
+def _automatic_heading_number_markers(document: Document, paragraph) -> set[int]:
+    number_info = _paragraph_numbering(paragraph)
+    if number_info is None:
+        return set()
+    number_id, level_index = number_info
+    numbering = document.part.numbering_part.element
+    num = next(
+        (item for item in numbering.findall(qn("w:num")) if item.get(qn("w:numId")) == str(number_id)),
+        None,
+    )
+    abstract_id = None
+    if num is not None:
+        reference = num.find(qn("w:abstractNumId"))
+        if reference is not None:
+            abstract_id = reference.get(qn("w:val"))
+    abstract = next(
+        (
+            item
+            for item in numbering.findall(qn("w:abstractNum"))
+            if item.get(qn("w:abstractNumId")) == abstract_id
+        ),
+        None,
+    )
+    level = None
+    if num is not None:
+        override = next(
+            (
+                item
+                for item in num.findall(qn("w:lvlOverride"))
+                if item.get(qn("w:ilvl")) == str(level_index)
+            ),
+            None,
+        )
+        if override is not None:
+            level = override.find(qn("w:lvl"))
+    if level is None and abstract is not None:
+        level = next(
+            (
+                item
+                for item in abstract.findall(qn("w:lvl"))
+                if item.get(qn("w:ilvl")) == str(level_index)
+            ),
+            None,
+        )
+    if level is None:
+        return set()
+    number_format = level.find(qn("w:numFmt"))
+    level_text = level.find(qn("w:lvlText"))
+    if (
+        number_format is None
+        or number_format.get(qn("w:val")) not in {"decimal", "decimalZero"}
+        or level_text is None
+        or not (level_text.get(qn("w:val")) or "").strip()
+    ):
+        return set()
+    return {int(marker) for marker in _NUMBER_MARKER.findall(level_text.get(qn("w:val")) or "")}
+
+
+def _chapter_heading_numbering_findings(document: Document) -> list[str]:
+    findings: list[str] = []
+    paragraphs = document.paragraphs
+    for index, chapter in enumerate(paragraphs):
+        if _heading_level(chapter) != 1:
+            continue
+        chapter_match = _CHAPTER_HEADING.match(chapter.text.strip())
+        if chapter_match is None:
+            continue
+        chapter_number = chapter_match.group(1)
+        missing: list[str] = []
+        for heading in paragraphs[index + 1 :]:
+            heading_level = _heading_level(heading)
+            if heading_level == 1:
+                break
+            if heading_level not in {2, 3}:
+                continue
+            visible_prefix = re.compile(
+                rf"^\s*{re.escape(chapter_number)}(?:\.\d+){{{heading_level - 1}}}[.)]?\s+"
+            )
+            automatic_markers = _automatic_heading_number_markers(document, heading)
+            if not visible_prefix.match(heading.text) and not set(range(1, heading_level + 1)).issubset(automatic_markers):
+                missing.append(f"Heading {heading_level}: {heading.text.strip()[:70]}")
+        if missing:
+            findings.append(
+                f"Chapter {chapter_number} has unnumbered child heading(s): {', '.join(missing[:5])}"
+            )
+    return findings
+
+
+def _check_cover_logo(
+    d: Document,
+    v: Variant,
+    issues: list[Issue],
+    verify_mode: bool,
+    is_template_clone: bool = False
+) -> None:
+    cover_data = v.cover if isinstance(v.cover, dict) else {}
+    logo_asset = cover_data.get('logo_asset')
+    
+    # Check if document has cover headers
+    has_cover_text = any(
+        any(k in p.text.casefold() for k in ('tài nguyên và môi trường', 'khoa công nghệ thông tin'))
+        for p in d.paragraphs[:30]
+    )
+    if not logo_asset and not has_cover_text:
+        return
+        
+    expected_w = cover_data.get('logo_width_cm', 3.59)
+    expected_h = cover_data.get('logo_height_cm', 3.59)
+    tolerance = 0.35  # Allow +/- 0.35 cm
+    
+    stop_markers = ['lời cảm ơn', 'lời cam đoan', 'mở đầu', 'chương 1', 'mục lục', 'tóm tắt']
+    cover_drawings = []
+    
+    for idx, p in enumerate(d.paragraphs[:50]):
+        txt = p.text.strip().casefold()
+        if any(marker in txt for marker in stop_markers):
+            break
+        drawings = p._p.findall('.//{http://schemas.openxmlformats.org/wordprocessingml/2006/main}drawing')
+        for drawing in drawings:
+            extents = drawing.findall('.//{http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing}extent')
+            cx = int(extents[0].get('cx')) if extents else None
+            cy = int(extents[0].get('cy')) if extents else None
+            jc = p._p.pPr.jc.get(qn('w:val')) if p._p.pPr is not None and p._p.pPr.jc is not None else None
+            cover_drawings.append({
+                'paragraph_index': idx,
+                'cx': cx,
+                'cy': cy,
+                'alignment': jc
+            })
+            
+    cover_inst_count = sum(
+        1 for p in d.paragraphs[:50]
+        if any(k in p.text.casefold() for k in ('tài nguyên và môi trường', 'khoa công nghệ thông tin'))
+        and not any(marker in p.text.strip().casefold() for marker in stop_markers)
+    )
+    has_inner_cover = ('inner_cover' in v.front_matter) or (cover_inst_count >= 2)
+    expected_logos = 2 if has_inner_cover else 1
+    
+    if len(cover_drawings) < expected_logos and not is_template_clone:
+        issues.append(
+            Issue(
+                'error' if verify_mode else 'warning',
+                'missing_cover_logo',
+                f"Document has {'both outer and inner covers' if has_inner_cover else 'a cover'}, expected {expected_logos} university logo(s), but found {len(cover_drawings)}."
+            )
+        )
+        
+    for item in cover_drawings:
+        if item['cx'] and item['cy']:
+            actual_w = item['cx'] / 360000
+            actual_h = item['cy'] / 360000
+            if abs(actual_w - expected_w) > tolerance or abs(actual_h - expected_h) > tolerance:
+                issues.append(
+                    Issue(
+                        'error' if verify_mode else 'warning',
+                        'cover_logo_dimension_mismatch',
+                        f"Cover logo at paragraph {item['paragraph_index']} dimensions ({actual_w:.2f} x {actual_h:.2f} cm) do not match expected standard ({expected_w:.2f} x {expected_h:.2f} cm, ~3.6 cm square) from presentation guide."
+                    )
+                )
+        if item['alignment'] not in ('center', None):
+            issues.append(
+                Issue(
+                    'warning',
+                    'cover_logo_alignment_mismatch',
+                    f"Cover logo at paragraph {item['paragraph_index']} must be centered (found alignment: '{item['alignment']}')."
+                )
+            )
+
 def validate_document(
     path: str | Path,
     profile: DocumentProfile,
@@ -236,12 +463,33 @@ def validate_document(
     # 0. Draft Placeholder Detection
     placeholders = _find_draft_placeholders(d, v)
     if placeholders:
-        sev = 'error' if verify_mode else 'warning'
+        placeholder_policy = v.content_review.get(
+            'unresolved_placeholders', 'strict_on_verify'
+        )
+        sev = (
+            'error'
+            if verify_mode and placeholder_policy == 'strict_on_verify'
+            else 'warning'
+        )
         issues.append(
             Issue(
                 sev,
                 'draft_placeholder_detected',
                 f"Unresolved draft placeholder(s) detected in document ({len(placeholders)} item(s)): {', '.join(placeholders[:3])}."
+            )
+        )
+
+    chapter_numbering_policy = v.content_review.get(
+        'chapter_heading_numbering', 'review'
+    )
+    for finding in _chapter_heading_numbering_findings(d):
+        issues.append(
+            Issue(
+                "error"
+                if verify_mode and chapter_numbering_policy == "required"
+                else "warning",
+                "chapter_heading_numbering_missing",
+                finding,
             )
         )
     
@@ -292,13 +540,15 @@ def validate_document(
     expected_ls = v.typography.line_spacing
     
     body_paragraphs: list[tuple[int, object]] = []
-    in_body = False or len(d.sections) == 1 or not any(x in v.front_matter for x in ('cover', 'inner_cover'))
+    in_body = len(d.sections) <= 1 and not any(x in v.front_matter for x in ('cover', 'inner_cover'))
     
     for paragraph_index, p in enumerate(d.paragraphs):
         txt = p.text.strip()
         if not txt:
             continue
-        if any(sec['title'].lower() in txt.lower() for sec in v.section_blueprint[:2]):
+        canonical_starts = [sec['title'].lower() for sec in v.section_blueprint[:2]]
+        canonical_starts.extend(['mở đầu', 'chương 1', 'chapter 1', 'introduction'])
+        if any(marker in txt.lower() for marker in canonical_starts):
             in_body = True
         if not in_body:
             continue
@@ -306,7 +556,13 @@ def validate_document(
         if (
             style_name.startswith('Heading')
             or style_name.startswith('TOC ')
-            or style_name in ('Title', 'Subtitle', 'Header', 'Footer', 'Caption', 'Bibliography')
+            or style_name.startswith('toc ')
+            or style_name in (
+                'Title', 'Subtitle', 'Header', 'Footer', 'Caption', 'Bibliography',
+                'FigureCaptionList', 'TableCaptionList',
+                'Form Prompt', 'Form Info', 'Signature Block',
+                'Cover Title', 'Cover Subtitle', 'Cover Organization', 'Cover Department'
+            )
         ):
             continue
         if txt.startswith('[') and txt.endswith(']'):
@@ -419,9 +675,19 @@ def validate_document(
             paragraph for paragraph in d.paragraphs
             if paragraph.style is not None and paragraph.style.style_id == style.style_id
         ]
+        expected_alignment = style_spec.get('alignment')
+        if expected_alignment is not None and styled_paragraphs:
+            expected = {'left': WD_ALIGN_PARAGRAPH.LEFT, 'center': WD_ALIGN_PARAGRAPH.CENTER,
+                        'right': WD_ALIGN_PARAGRAPH.RIGHT, 'justify': WD_ALIGN_PARAGRAPH.JUSTIFY}[expected_alignment]
+            persistent = _effective_style_alignment(style, d)
+            overrides = sum(p.alignment is not None and p.alignment != expected for p in styled_paragraphs)
+            if persistent != expected or overrides:
+                issues.append(Issue('error' if verify_mode else 'warning', 'style_alignment_mismatch',
+                    f"Style '{style_name}' must align {expected_alignment}; persistent style={persistent}, "
+                    f"conflicting paragraph overrides={overrides}."))
         expected_size = style_spec.get('size_pt')
         if expected_size is not None:
-            style_size = style.font.size.pt if style.font.size is not None else None
+            style_size = _effective_style_size(style)
             mismatch_count = int(style_size is None or abs(style_size - expected_size) > 0.6)
             for paragraph in styled_paragraphs:
                 for run in paragraph.runs:
@@ -483,6 +749,21 @@ def validate_document(
                     f"Style '{style_name}' indentation mismatch: {', '.join(indent_mismatches)}.",
                 )
             )
+
+    figure_alignment = v.captions.get('figure_alignment')
+    if figure_alignment:
+        expected = {'left': WD_ALIGN_PARAGRAPH.LEFT, 'center': WD_ALIGN_PARAGRAPH.CENTER,
+                    'right': WD_ALIGN_PARAGRAPH.RIGHT, 'justify': WD_ALIGN_PARAGRAPH.JUSTIFY}[figure_alignment]
+        labels = [item['display'] for item in v.captions.get('figure_labels', [])]
+        for p in d.paragraphs:
+            if p.style.name != 'Caption' or not any(
+                re.match(r'^\s*' + re.escape(label) + r'(?=\s|\d|$)', p.text, re.IGNORECASE) for label in labels
+            ):
+                continue
+            actual = p.alignment if p.alignment is not None else _effective_style_alignment(p.style, d)
+            if actual != expected:
+                issues.append(Issue('error' if verify_mode else 'warning', 'figure_caption_alignment_mismatch',
+                                    f"Figure caption must align {figure_alignment}: {p.text[:100]}"))
 
     # 3. Front Matter Presence & Sequential Order
     headings_in_doc: list[tuple[int, str]] = []
@@ -646,6 +927,9 @@ def validate_document(
                         )
                     )
             
+    # Cover Logo Validation
+    _check_cover_logo(d, v, issues, verify_mode, is_template_clone)
+
     non_cover_front = [x for x in v.front_matter if x not in ('cover', 'inner_cover', 'proposal_cover')]
     if non_cover_front and not is_template_clone:
         last_idx = -1

@@ -218,7 +218,7 @@ def _render_cover_page(
             raise FileNotFoundError(f"Profile cover logo is missing: {logo_path}")
         logo_paragraph = d.add_paragraph()
         logo_paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
-        logo_paragraph.add_run().add_picture(str(logo_path), width=Cm(2.5))
+        logo_paragraph.add_run().add_picture(str(logo_path), width=Cm(cover_spec.get('logo_width_cm', 3.59)))
         
     doc_type = cover_spec.get('document_type', '')
     if doc_type:
@@ -362,7 +362,13 @@ def _build_scaffold_document(
             h = d.add_heading(title_text, level=1)
             if 'WA Front Matter Title' in d.styles:
                 h.style = d.styles['WA Front Matter Title']
-            h.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            style_key = 'heading1' if h.style.name == 'Heading 1' else h.style.name
+            # Explicit profile styles control front headings too. Keep the old
+            # centered fallback only for profiles without an alignment choice.
+            h.alignment = (
+                None if 'alignment' in v.typography.styles.get(style_key, {})
+                else WD_ALIGN_PARAGRAPH.CENTER
+            )
             if idx > 0:
                 # Attach pagination to the destination heading. A standalone
                 # page-break paragraph after a dynamic TOC/LOF/LOT can spill

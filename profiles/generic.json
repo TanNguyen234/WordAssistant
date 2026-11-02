@@ -1,7 +1,7 @@
 {
   "id": "generic",
-  "name": "Generic Word document",
-  "version": 1,
+  "name": "Generic Standard Word document (A4, 2-2-3-2 cm)",
+  "version": 2,
   "source_policy": "user-profile-wins",
   "variants": {
     "default": {
@@ -9,28 +9,91 @@
         "size": "A4",
         "width_cm": 21.0,
         "height_cm": 29.7,
-        "margins_cm": {"top": 2.54, "bottom": 2.54, "left": 2.54, "right": 2.54},
+        "margins_cm": {
+          "top": 2.0,
+          "bottom": 2.0,
+          "left": 3.0,
+          "right": 2.0
+        },
         "one_sided": true,
         "allow_mixed_orientation": true
       },
       "typography": {
         "body_font": "Times New Roman",
-        "body_size_pt": 12,
-        "line_spacing": 1.15,
+        "body_size_pt": 13,
+        "line_spacing": 1.5,
         "styles": {
-          "title": {"size_pt": 20, "bold": true, "alignment": "center"},
-          "heading1": {"size_pt": 16, "bold": true},
-          "heading2": {"size_pt": 14, "bold": true},
-          "heading3": {"size_pt": 12, "bold": true}
+          "title": {
+            "size_pt": 18,
+            "bold": true,
+            "alignment": "center"
+          },
+          "heading1": {
+            "size_pt": 16,
+            "bold": true,
+            "alignment": "center"
+          },
+          "heading2": {
+            "size_pt": 14,
+            "bold": true,
+            "alignment": "left"
+          },
+          "heading3": {
+            "size_pt": 13,
+            "bold": true,
+            "alignment": "left"
+          },
+          "Caption": {
+            "font": "Times New Roman",
+            "size_pt": 13
+          }
         }
+      },
+      "content_review": {
+        "chapter_heading_numbering": "review",
+        "unresolved_placeholders": "strict_on_verify"
       },
       "front_matter": [],
       "section_blueprint": [
-        {"title": "Introduction", "level": 1, "required": false},
-        {"title": "Main content", "level": 1, "required": false},
-        {"title": "Conclusion", "level": 1, "required": false}
+        {
+          "title": "MỞ ĐẦU",
+          "level": 1,
+          "required": false
+        },
+        {
+          "title": "CHƯƠNG 1: TỔNG QUAN TÀI LIỆU",
+          "level": 1,
+          "required": false
+        },
+        {
+          "title": "CHƯƠNG 2: PHƯƠNG PHÁP THỰC HIỆN",
+          "level": 1,
+          "required": false
+        },
+        {
+          "title": "CHƯƠNG 3: CÀI ĐẶT THỬ NGHIỆM, KẾT QUẢ VÀ ĐÁNH GIÁ",
+          "level": 1,
+          "required": false
+        },
+        {
+          "title": "KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN",
+          "level": 1,
+          "required": false
+        },
+        {
+          "title": "PHỤ LỤC",
+          "level": 1,
+          "required": false
+        },
+        {
+          "title": "DANH MỤC TÀI LIỆU THAM KHẢO",
+          "level": 1,
+          "required": false
+        }
       ],
-      "citations": {"style": "unspecified"},
+      "citations": {
+        "style": "unspecified"
+      },
       "header_footer": {}
     }
   }

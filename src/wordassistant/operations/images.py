@@ -166,6 +166,10 @@ def _append_semantic_caption(
 ) -> str:
     sequence = sequence_id or label
     paragraph = insert_paragraph_after(image_paragraph, style="Caption")
+    # Keep a below-image caption with its figure, without chaining body text.
+    image_paragraph.paragraph_format.keep_with_next = True
+    paragraph.paragraph_format.keep_together = True
+    paragraph.paragraph_format.keep_with_next = False
     return append_caption_content(
         document, paragraph, label, title, sequence, chapter_number, caption_separator
     )

@@ -458,7 +458,7 @@ def _effective_heading_num_pr(paragraph):
     return None
 
 
-def _automatic_heading_number(document, heading):
+def _automatic_heading_number(document, heading, *, suppressed_label=False):
     num_pr = _effective_heading_num_pr(heading)
     if num_pr is None:
         return None
@@ -501,7 +501,11 @@ def _automatic_heading_number(document, heading):
         number_format is None
         or number_format.get(qn("w:val")) != "decimal"
         or level_text is None
-        or "%1" not in level_text.get(qn("w:val"), "")
+        or (
+            level_text.get(qn("w:val"), "") != ""
+            if suppressed_label
+            else "%1" not in level_text.get(qn("w:val"), "")
+        )
     ):
         return None
 
@@ -590,7 +594,10 @@ def append_caption_content(
             if literal_number != chapter_number:
                 raise ValueError("chapter_number does not match the nearest Heading 1 literal chapter number")
             if _effective_heading_num_pr(heading) is not None:
-                raise ValueError("literal chapter headings cannot also use automatic numbering")
+                # A suppressed first-level label keeps child counters working
+                # without adding a second visible number to CHƯƠNG N.
+                if _automatic_heading_number(document, heading, suppressed_label=True) != chapter_number:
+                    raise ValueError("literal chapter headings require a matching suppressed automatic counter")
         elif _automatic_heading_number(document, heading) != chapter_number:
             raise ValueError("chapter_number does not match the nearest Heading 1 automatic number")
         prefix = f"{chapter_number}."

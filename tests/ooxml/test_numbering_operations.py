@@ -117,6 +117,26 @@ def test_heading_numbering_links_real_heading_styles_without_literal_prefixes(tm
     assert inspect_heading_numbering(removed.output_path)["linked_levels"] == []
 
 
+def test_heading_numbering_uses_a_space_after_the_number(tmp_path):
+    source = tmp_path / "headings.docx"
+    document = Document()
+    document.add_heading("CHƯƠNG 1: TỔNG QUAN", level=1)
+    document.add_heading("Cơ sở", level=2)
+    document.add_heading("Khái niệm", level=3)
+    document.save(source)
+
+    result = apply_heading_numbering(
+        source,
+        output_path=tmp_path / "numbered.docx",
+        levels=3,
+        suppress_first_level_label=True,
+    )
+
+    with ZipFile(result.output_path) as package:
+        numbering = package.read("word/numbering.xml").decode("utf-8")
+    assert numbering.count('<w:suff w:val="space"/>') == 3
+
+
 def test_heading_numbering_rejects_existing_literal_numbers_by_default(tmp_path):
     source = tmp_path / "literal.docx"
     document = Document()
@@ -150,3 +170,33 @@ def test_heading_numbering_can_hide_level_one_label_for_literal_chapter_titles(t
     reopened = Document(result.output_path)
     assert reopened.paragraphs[0].style.name == "Heading 1"
     assert reopened.paragraphs[1].style.name == "Heading 2"
+
+
+def test_scoped_heading_numbering_inspection_reports_direct_paragraph_assignments(tmp_path):
+    source = tmp_path / "scoped-chapters.docx"
+    document = Document()
+    document.add_heading("CHƯƠNG 1: TỔNG QUAN", level=1)
+    document.add_heading("Cơ sở", level=2)
+    document.add_heading("Khái niệm", level=3)
+    document.add_heading("CHƯƠNG 2: PHƯƠNG PHÁP", level=1)
+    document.add_heading("Thiết kế", level=2)
+    document.save(source)
+
+    result = apply_heading_numbering(
+        source,
+        output_path=tmp_path / "scoped-numbered.docx",
+        levels=3,
+        allow_literal_prefixes=True,
+        suppress_first_level_label=True,
+        start_text="CHƯƠNG 1:",
+        end_text="CHƯƠNG 2:",
+    )
+
+    report = inspect_heading_numbering(result.output_path)
+    assert report["linked_levels"] == []
+    assert report["numbered_heading_count"] == 3
+    assert report["unnumbered_heading_count"] == 2
+    assignments = {item["text"]: item for item in report["paragraph_numbering"]}
+    assert assignments["Cơ sở"]["level"] == 1
+    assert assignments["Khái niệm"]["level"] == 2
+    assert assignments["Cơ sở"]["source"] == "paragraph"
