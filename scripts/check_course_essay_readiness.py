@@ -5,11 +5,13 @@ from __future__ import annotations
 
 import argparse
 import csv
-from datetime import date
+from datetime import date, datetime
 import hashlib
 import json
 from pathlib import Path
+import re
 from typing import Any
+from urllib.parse import urlsplit
 
 
 PASS = "PASS"
@@ -28,6 +30,18 @@ _REQUIRED_ACCEPTANCE_CHECKS = (
     "figure_list_rebuilt_from_captions",
     "word_fields_updated_and_saved",
     "all_rendered_pages_visually_reviewed",
+)
+_REQUIRED_ACCEPTANCE_CATEGORIES = (
+    "user_requirements",
+    "guide_requirements",
+    "assignment_rubric_requirements",
+    "heading_toc",
+    "abstract",
+    "screen_hierarchy",
+    "runtime_screenshots",
+    "diagrams",
+    "visual_content",
+    "argument_citations",
 )
 _STRUCTURE_DECISIONS = {"MATCHED", "ADAPTED"}
 _COVER_METADATA_FIELDS = {
@@ -302,6 +316,235 @@ def _check_requirements(project_dir: Path, project: dict[str, Any], checks: list
         _add(checks, "requirements_matrix", INCOMPLETE, "The matrix contains no usable requirement rows.")
 
 
+def _normalized_rubric_text(value: str) -> str:
+    return " ".join(value.replace("\u00a0", " ").replace("\u202f", " ").split())
+
+
+def _docx_body_text_and_media(path: Path) -> tuple[list[str], int]:
+    blocks = _docx_body_blocks_with_media(path)
+    return [text for text, _media_count in blocks], sum(media_count for _text, media_count in blocks)
+
+
+def _docx_body_blocks_with_media(path: Path) -> list[tuple[str, int]]:
+    from docx import Document
+    from docx.oxml.ns import qn
+    from docx.table import Table
+    from docx.text.paragraph import Paragraph
+
+    document = Document(path)
+    blocks: list[tuple[str, int]] = []
+    for element in document.element.body.iterchildren():
+        media_count = sum(
+            1 for blip in element.xpath(".//a:blip")
+            if blip.get("{http://schemas.openxmlformats.org/officeDocument/2006/relationships}embed")
+        )
+        if element.tag == qn("w:p"):
+            blocks.append((Paragraph(element, document).text, media_count))
+        elif element.tag == qn("w:tbl"):
+            table = Table(element, document)
+            cells = [cell for row in table.rows for cell in row.cells]
+            blocks.extend(
+                (cell.text, media_count if index == 0 else 0)
+                for index, cell in enumerate(cells)
+            )
+    return blocks
+
+
+def _docx_text_between_markers(
+    path: Path,
+    start_marker: str,
+    end_marker: str,
+    *,
+    reject_media: bool,
+) -> list[str]:
+    blocks = _docx_body_blocks_with_media(path)
+    normalized_start = _normalized_rubric_text(start_marker)
+    normalized_end = _normalized_rubric_text(end_marker)
+    start_indexes = [
+        index for index, (text, _media_count) in enumerate(blocks)
+        if _normalized_rubric_text(text) == normalized_start
+    ]
+    end_indexes = [
+        index for index, (text, _media_count) in enumerate(blocks)
+        if _normalized_rubric_text(text) == normalized_end
+    ]
+    if len(start_indexes) != 1 or len(end_indexes) != 1:
+        raise ValueError("source/output section markers must each occur exactly once")
+    start_index, end_index = start_indexes[0], end_indexes[0]
+    if end_index <= start_index:
+        raise ValueError("section end marker must follow its start marker")
+    section_blocks = blocks[start_index + 1:end_index]
+    if reject_media and any(media_count for _text, media_count in blocks[start_index:end_index]):
+        raise ValueError("selected source section contains embedded images; visual content cannot be verified by text parity")
+    return [text for text, _media_count in section_blocks if _normalized_rubric_text(text)]
+
+
+def _contains_exact_paragraph_sequence(actual: list[str], expected: list[str]) -> bool:
+    normalized_actual = [_normalized_rubric_text(text) for text in actual]
+    normalized_expected = [_normalized_rubric_text(text) for text in expected]
+    if not normalized_expected or len(normalized_expected) > len(normalized_actual):
+        return False
+    if any(normalized_actual.count(text) != 1 for text in normalized_expected):
+        return False
+    cursor = 0
+    for expected_text in normalized_expected:
+        while cursor < len(normalized_actual) and normalized_actual[cursor] != expected_text:
+            cursor += 1
+        if cursor == len(normalized_actual):
+            return False
+        cursor += 1
+    return True
+
+
+def _check_profile_section_inclusion(
+    rubric_path: Path,
+    output_path: Path,
+    inclusion: dict[str, Any],
+) -> tuple[str, str]:
+    if rubric_path.suffix.casefold() != ".docx":
+        return INCOMPLETE, "Profile-section inclusion currently requires a DOCX source with extractable paragraph boundaries."
+    source_sections = inclusion.get("source_sections")
+    if not isinstance(source_sections, list) or not source_sections:
+        return INCOMPLETE, "rubric_inclusion.source_sections must list each official source section and its Word review page."
+
+    try:
+        for index, section in enumerate(source_sections, start=1):
+            if not isinstance(section, dict):
+                return INCOMPLETE, f"Official source section {index} has invalid metadata."
+            source_text = _docx_text_between_markers(
+                rubric_path,
+                str(section.get("source_start", "")),
+                str(section.get("source_end", "")),
+                reject_media=True,
+            )
+            output_text = _docx_text_between_markers(
+                output_path,
+                str(section.get("output_start", "")),
+                str(section.get("output_end", "")),
+                reject_media=False,
+            )
+            if not source_text:
+                return INCOMPLETE, f"Official source section {index} contains no extractable text."
+            if not _contains_exact_paragraph_sequence(output_text, source_text):
+                return FAIL, f"Official source and Word review section {index} do not exactly match the complete official criteria text."
+    except Exception as exc:
+        return INCOMPLETE, f"Official source section cannot be verified safely: {exc}."
+    return PASS, "Each complete official criteria section exactly matches its corresponding Word review page and is bound to current source/output hashes."
+
+
+def _rubric_source_text(path: Path) -> str:
+    if path.suffix.casefold() == ".docx":
+        blocks, media_count = _docx_body_text_and_media(path)
+        if media_count:
+            raise ValueError("the source rubric contains embedded images; text parity cannot confirm image content")
+        return " ".join(blocks)
+
+    if path.suffix.casefold() == ".pdf":
+        import pypdfium2 as pdfium
+
+        page_text: list[str] = []
+        with pdfium.PdfDocument(path) as pdf:
+            if len(pdf) == 0:
+                raise ValueError("the source rubric PDF contains no pages")
+            for page in pdf:
+                text_page = page.get_textpage()
+                try:
+                    page_text.append(text_page.get_text_bounded())
+                finally:
+                    text_page.close()
+                    page.close()
+        if any(not _normalized_rubric_text(text) for text in page_text):
+            raise ValueError("the source rubric has a page with no extractable text; scanned/facsimile inclusion is not auto-verified")
+        return " ".join(page_text)
+
+    raise ValueError("supported official rubric sources are DOCX and text-readable PDF")
+
+
+def _check_official_rubric_in_docx(
+    project_dir: Path,
+    project: dict[str, Any],
+    output_path: Path | None,
+    document_hash: str | None,
+    checks: list[dict[str, str]],
+) -> None:
+    if project.get("include_official_rubric_in_docx") is not True:
+        _add(checks, "official_rubric_in_docx", PASS, "Official rubric appendix was not requested for this project.")
+        return
+
+    rubric_path = _resolve(project_dir, project.get("rubric_file"))
+    if rubric_path is None or not rubric_path.is_file():
+        _add(checks, "official_rubric_in_docx", INCOMPLETE, "The official rubric source is missing; no rubric content may be generated or inferred.")
+        return
+    if output_path is None or not output_path.is_file() or not document_hash:
+        _add(checks, "official_rubric_in_docx", INCOMPLETE, "A saved output DOCX is required before checking the rubric appendix.")
+        return
+    if not str(project.get("rubric_source_authority", "")).strip():
+        _add(checks, "official_rubric_in_docx", INCOMPLETE, "Record the official rubric authority or source URL in project.json.")
+        return
+
+    inclusion = project.get("rubric_inclusion")
+    if not isinstance(inclusion, dict):
+        _add(checks, "official_rubric_in_docx", INCOMPLETE, "rubric_inclusion review metadata is missing from project.json.")
+        return
+    try:
+        source_hash = _sha256(rubric_path)
+    except OSError as exc:
+        _add(checks, "official_rubric_in_docx", INCOMPLETE, f"Cannot read/hash the official rubric source: {exc}.")
+        return
+    recorded_source_hash = str(inclusion.get("source_sha256", "")).strip().casefold()
+    if not recorded_source_hash or recorded_source_hash != source_hash.casefold():
+        _add(checks, "official_rubric_in_docx", FAIL, "Recorded rubric source SHA-256 is missing or stale.")
+        return
+    recorded_output_hash = str(inclusion.get("output_docx_sha256", "")).strip().casefold()
+    if not recorded_output_hash or recorded_output_hash != document_hash.casefold():
+        _add(checks, "official_rubric_in_docx", FAIL, "Rubric inclusion review is not bound to the current output DOCX SHA-256.")
+        return
+    if str(inclusion.get("review_status", "")).strip().upper() != PASS:
+        _add(checks, "official_rubric_in_docx", INCOMPLETE, "Official rubric/assessment criteria inclusion has not passed review.")
+        return
+    review_method = str(inclusion.get("review_method", "")).strip()
+    if review_method not in {"verbatim_source_comparison", "verbatim_source_section_comparison"}:
+        _add(checks, "official_rubric_in_docx", INCOMPLETE, "Review method must be verbatim_source_comparison or verbatim_source_section_comparison.")
+        return
+    if not str(inclusion.get("reviewed_by", "")).strip() or not _valid_iso_date(
+        str(inclusion.get("reviewed_at", ""))[:10]
+    ):
+        _add(checks, "official_rubric_in_docx", INCOMPLETE, "Official criteria review requires reviewer and valid review date.")
+        return
+
+    if review_method == "verbatim_source_section_comparison":
+        status, detail = _check_profile_section_inclusion(rubric_path, output_path, inclusion)
+        _add(checks, "official_rubric_in_docx", status, detail)
+        return
+
+    appendix_heading = _normalized_rubric_text(str(inclusion.get("appendix_heading", "")))
+    if not appendix_heading:
+        _add(checks, "official_rubric_in_docx", INCOMPLETE, "The rubric appendix heading is missing.")
+        return
+    try:
+        source_text = _rubric_source_text(rubric_path)
+        output_blocks, _output_media_count = _docx_body_text_and_media(output_path)
+    except Exception as exc:
+        _add(checks, "official_rubric_in_docx", INCOMPLETE, f"Rubric source cannot be verified safely: {exc}.")
+        return
+
+    source_text = _normalized_rubric_text(source_text)
+    if not source_text:
+        _add(checks, "official_rubric_in_docx", INCOMPLETE, "The official rubric has no extractable text; no substitute rubric may be created.")
+        return
+    normalized_blocks = [_normalized_rubric_text(block) for block in output_blocks]
+    try:
+        heading_index = normalized_blocks.index(appendix_heading)
+    except ValueError:
+        _add(checks, "official_rubric_in_docx", FAIL, f"The declared rubric appendix heading is missing from the output DOCX: {appendix_heading!r}.")
+        return
+    appendix_text = _normalized_rubric_text(" ".join(output_blocks[heading_index + 1:]))
+    if appendix_text != source_text:
+        _add(checks, "official_rubric_in_docx", FAIL, "The rubric appendix text is not an exact full-text match to the official source; content may be missing, altered, or added.")
+        return
+    _add(checks, "official_rubric_in_docx", PASS, "The rubric appendix text exactly matches the complete extractable official source and is bound to the source and current DOCX hashes.")
+
+
 def _check_cover_metadata(project_dir: Path, project: dict[str, Any], checks: list[dict[str, str]]) -> None:
     metadata_path = _resolve(project_dir, project.get("cover_metadata_file", "cover-metadata.csv"))
     if metadata_path is None or not metadata_path.is_file():
@@ -418,6 +661,7 @@ def _check_structure_parity(
         target_heading = (row.get("target_heading") or "").strip()
         target_level_raw = (row.get("target_level") or "").strip()
         target_order_raw = (row.get("target_order") or "").strip()
+        include_in_toc_raw = (row.get("include_in_toc") or "").strip().casefold()
         coverage_note = (row.get("coverage_note") or "").strip()
         evidence_values = [item.strip() for item in (row.get("evidence_files") or "").split(";") if item.strip()]
         reviewer = (row.get("reviewed_by") or "").strip()
@@ -426,6 +670,9 @@ def _check_structure_parity(
             invalid.append(item_id)
             continue
         if not all((planned_heading, planned_level_raw, source_basis, source_location, target_heading, target_level_raw, target_order_raw)):
+            incomplete.append(item_id)
+            continue
+        if include_in_toc_raw not in {"true", "false"}:
             incomplete.append(item_id)
             continue
         try:
@@ -465,6 +712,8 @@ def _check_structure_parity(
             return
         try:
             from docx import Document
+            from docx.oxml.ns import qn
+            from docx.text.paragraph import Paragraph
             from wordassistant.selectors import _heading_level
 
             document = Document(output_path)
@@ -487,10 +736,449 @@ def _check_structure_parity(
             (" ".join(row["target_heading"].split()).casefold(), int(row["target_level"]))
             for row in rows
         ]
+        expected_toc = [
+            (" ".join(row["target_heading"].split()).casefold(), int(row["target_level"]))
+            for row in rows
+            if (row.get("include_in_toc") or "").strip().casefold() == "true"
+        ]
         if actual != expected:
             _add(checks, "project_structure_in_docx", FAIL, f"The DOCX outline does not exactly match the project inventory (planned {len(expected)}, found {len(actual)} headings; missing/reordered/extra headings must be reviewed).")
         else:
             _add(checks, "project_structure_in_docx", PASS, f"All {len(expected)} project-inventoried headings appear in the final DOCX at the planned levels and order.")
+
+        actual_toc = []
+        expected_toc_lookup = set(expected_toc)
+        for paragraph_element in document._element.xpath(".//w:p"):
+            paragraph = Paragraph(paragraph_element, document._body)
+            style_name = paragraph.style.name.casefold().replace(" ", "").replace("_", "")
+            if not style_name.startswith("toc") or not style_name[3:].isdigit():
+                continue
+            title_parts: list[str] = []
+            # A tab stop in w:pPr is layout metadata, not the tab that
+            # separates a visible TOC title from its page number. Only stop
+            # at a tab inside a run.
+            page_number_tab_found = False
+            for run in paragraph_element.xpath(".//w:r"):
+                for node in run.iter():
+                    if node.tag == qn("w:tab"):
+                        page_number_tab_found = True
+                        break
+                    if node.tag == qn("w:t"):
+                        title_parts.append(node.text or "")
+                if page_number_tab_found:
+                    break
+            title = "".join(title_parts).split("\t", 1)[0].strip()
+            if title:
+                level = int(style_name[3:])
+                normalized_title = _normalized_text(title)
+                # Word may render a multilevel heading prefix either with or
+                # without a terminal dot (for example, "1.1 Title" or
+                # "1.1. Title"). Strip it only when the unnumbered title is
+                # present in the reviewed outline at the same level.
+                numbered_title = re.match(r"^\d+(?:\.\d+)*\.?\s+(.+)$", title)
+                if numbered_title:
+                    unnumbered = _normalized_text(numbered_title.group(1))
+                    if (unnumbered, level) in expected_toc_lookup:
+                        normalized_title = unnumbered
+                actual_toc.append((normalized_title, level))
+        if actual_toc != expected_toc:
+            _add(checks, "project_toc_parity", FAIL, f"The visible Word TOC does not exactly match the headings marked include_in_toc=true (planned {len(expected_toc)}, found {len(actual_toc)} entries). Update the TOC and check its levels and order.")
+        else:
+            _add(checks, "project_toc_parity", PASS, f"All {len(expected_toc)} required TOC entries appear at the planned levels and order.")
+
+
+def _normalized_text(value: str) -> str:
+    normalized = " ".join(value.split()).casefold()
+    # Word may serialize a SEQ label and number as split runs, leaving spaces
+    # around the dots (for example, "HÌNH 2. 1 . title"). Normalize only
+    # numbering punctuation so those captions still match their visible text.
+    normalized = re.sub(r"(?<=[0-9a-z])\s*\.\s*(?=[0-9])", ".", normalized)
+    return re.sub(r"(?<=\d)\s+\.", ".", normalized)
+
+
+def _embedded_media_counts_by_caption(document: Any, rows: list[dict[str, str]]) -> tuple[int, list[int], list[str]]:
+    from docx.enum.style import WD_STYLE_TYPE
+
+    office_relationship_namespace = "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}embed"
+    caption_rows = [
+        row for row in rows
+        if (row.get("caption_required") or "").strip().casefold() == "true"
+    ]
+    uncaptioned_media_count = 0
+    anchored_rows: list[tuple[dict[str, str], int, str]] = []
+    for row in rows:
+        if (row.get("caption_required") or "").strip().casefold() != "false":
+            continue
+        try:
+            count = int((row.get("expected_media_count") or "0").strip() or "0")
+            anchor = _normalized_text((row.get("uncaptioned_anchor") or "").strip())
+            if anchor and count > 0:
+                anchored_rows.append((row, count, anchor))
+            else:
+                uncaptioned_media_count += count
+        except ValueError:
+            # The inventory check reports malformed counts; media inspection
+            # should still produce diagnostics instead of aborting assessment.
+            continue
+    targets = [_normalized_text((row.get("target_caption") or "").strip()) for row in caption_rows]
+    caption_style_ids = {
+        style.style_id
+        for style in document.styles
+        if style.type == WD_STYLE_TYPE.PARAGRAPH and style.name.strip().casefold() == "caption"
+    }
+    paragraphs: list[tuple[str, int, bool]] = []
+    for paragraph in document._element.xpath(".//w:p"):
+        media_count = sum(
+            1 for blip in paragraph.xpath(".//a:blip")
+            if blip.get(office_relationship_namespace)
+        )
+        visible_text = " ".join(node.text or "" for node in paragraph.xpath(".//w:t"))
+        style_nodes = paragraph.xpath("./w:pPr/w:pStyle")
+        paragraph_style_id = style_nodes[0].get("{http://schemas.openxmlformats.org/wordprocessingml/2006/main}val") if style_nodes else ""
+        paragraphs.append((_normalized_text(visible_text), media_count, paragraph_style_id in caption_style_ids))
+
+    total_media = sum(media_count for _text, media_count, _is_caption in paragraphs)
+    anchored_indices: set[int] = set()
+    anchor_errors: list[str] = []
+    for row, expected_count, anchor in anchored_rows:
+        matches = [index for index, (text, _count, _caption) in enumerate(paragraphs) if text == anchor]
+        if len(matches) != 1:
+            anchor_errors.append((row.get("asset_id") or "").strip())
+            continue
+        image_index = matches[0] + 1
+        if (image_index >= len(paragraphs) or image_index in anchored_indices
+                or paragraphs[image_index][1] != expected_count or paragraphs[image_index][2]):
+            anchor_errors.append((row.get("asset_id") or "").strip())
+            continue
+        anchored_indices.add(image_index)
+    # Anchored images are excluded at their actual locations. Legacy rows
+    # without anchors consume the first media items (normally cover logos).
+    # Captioned assets are counted between consecutive captions.
+    uncaptioned_remaining = uncaptioned_media_count
+    per_caption: list[int] = []
+    missing: list[str] = list(anchor_errors)
+    previous_caption_paragraph = -1
+    target_index = 0
+    for paragraph_index, (normalized_text, _media_count, is_caption) in enumerate(paragraphs):
+        if not is_caption:
+            continue
+        while target_index < len(targets) and targets[target_index] and targets[target_index] in normalized_text:
+            segment_count = sum(
+                paragraphs[index][1] for index in range(previous_caption_paragraph + 1, paragraph_index + 1)
+                if index not in anchored_indices
+            )
+            uncaptioned_in_segment = min(uncaptioned_remaining, segment_count)
+            per_caption.append(segment_count - uncaptioned_in_segment)
+            uncaptioned_remaining -= uncaptioned_in_segment
+            previous_caption_paragraph = paragraph_index
+            target_index += 1
+    for row in caption_rows[target_index:]:
+        missing.append((row.get("asset_id") or "").strip())
+    return total_media, per_caption, missing
+
+
+def _check_runtime_capture_provenance(
+    project_dir: Path,
+    project: dict[str, Any],
+    source_root: Path,
+    rows: list[dict[str, str]],
+    checks: list[dict[str, str]],
+) -> None:
+    runtime_rows = [
+        row for row in rows
+        if "runtime" in (row.get("asset_type") or "").casefold()
+        and "screenshot" in (row.get("asset_type") or "").casefold()
+    ]
+    if not runtime_rows:
+        _add(checks, "project_runtime_capture_provenance", PASS, "No runtime screenshots are planned in the visual inventory.")
+        return
+
+    manifest_path = _resolve(project_dir, project.get("runtime_capture_manifest_file"))
+    if manifest_path is None or not manifest_path.is_file():
+        _add(checks, "project_runtime_capture_provenance", INCOMPLETE, "Runtime screenshot assets require runtime_capture_manifest_file in project.json.")
+        return
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+        _add(checks, "project_runtime_capture_provenance", FAIL, f"Cannot read runtime capture manifest: {exc}.")
+        return
+
+    accepted_status = "ACCEPTED_UI_CLICKTHROUGH_CAPTURE"
+    manifest_status = str(manifest.get("acceptance_status", "")).strip().upper()
+    if manifest_status != accepted_status:
+        if "DIRECT" in manifest_status or "PROVISIONAL" in manifest_status or "NOT_ACCEPTED" in manifest_status:
+            _add(checks, "project_runtime_capture_provenance", FAIL, f"Runtime capture manifest is not accepted user-style click-through evidence ({manifest_status or 'status missing'}).")
+        else:
+            _add(checks, "project_runtime_capture_provenance", INCOMPLETE, "Runtime capture manifest must declare acceptance_status=ACCEPTED_UI_CLICKTHROUGH_CAPTURE.")
+        return
+
+    captures = manifest.get("captures")
+    if not isinstance(captures, list):
+        _add(checks, "project_runtime_capture_provenance", FAIL, "Runtime capture manifest must contain a captures list.")
+        return
+    capture_context = manifest.get("capture_context")
+    if not isinstance(capture_context, dict):
+        _add(checks, "project_runtime_capture_provenance", INCOMPLETE, "Runtime capture manifest must record capture_context for visible-browser and non-headless provenance.")
+        return
+    if capture_context.get("browser_surface") != "visible_browser_tab":
+        _add(checks, "project_runtime_capture_provenance", FAIL, "Runtime screenshots must be captured from a visible browser tab.")
+        return
+    if capture_context.get("headless") is not False:
+        _add(checks, "project_runtime_capture_provenance", FAIL, "Headless browser screenshots are not accepted as user-style runtime captures.")
+        return
+    if capture_context.get("navigation_policy") != "visible_ui_clickthrough":
+        _add(checks, "project_runtime_capture_provenance", INCOMPLETE, "Capture context must declare navigation_policy=visible_ui_clickthrough.")
+        return
+    by_id: dict[str, dict[str, Any]] = {}
+    duplicate_ids: set[str] = set()
+    for capture in captures:
+        if not isinstance(capture, dict):
+            continue
+        capture_id = str(capture.get("capture_id", "")).strip()
+        if not capture_id:
+            continue
+        if capture_id in by_id:
+            duplicate_ids.add(capture_id)
+        by_id[capture_id] = capture
+
+    failed: list[str] = []
+    incomplete: list[str] = []
+    accepted = 0
+    planned_capture_ids = {
+        (row.get("capture_id") or "").strip()
+        for row in runtime_rows
+        if (row.get("capture_id") or "").strip()
+    }
+    for capture in captures:
+        if not isinstance(capture, dict):
+            continue
+        capture_id = str(capture.get("capture_id", "")).strip() or "unnamed"
+        if capture_id in planned_capture_ids:
+            continue
+        network = capture.get("network")
+        document_status = network.get("document_status") if isinstance(network, dict) else None
+        http_status = capture.get("http_status")
+        console = capture.get("console")
+        console_errors = console.get("errors", []) if isinstance(console, dict) else []
+        page_review = capture.get("page_state_review")
+        review_failed = (
+            isinstance(page_review, dict)
+            and str(page_review.get("status", "")).strip().upper() == FAIL
+        )
+        response_failed = (
+            type(http_status) is int and not 200 <= http_status < 300
+        ) or (
+            type(document_status) is int and not 200 <= document_status < 300
+        )
+        if not (review_failed or response_failed or bool(console_errors)):
+            continue
+
+        screenshot_rel = str(capture.get("screenshot_path", "")).strip()
+        screenshot_sha = str(capture.get("screenshot_sha256", "")).strip().casefold()
+        review_summary = str(page_review.get("summary", "")).strip() if isinstance(page_review, dict) else ""
+        if not review_summary:
+            incomplete.append(f"unplanned capture {capture_id}: failed page state has no error summary")
+        if (
+            not isinstance(page_review, dict)
+            or str(page_review.get("status", "")).strip().upper() != FAIL
+            or str(page_review.get("screenshot_path", "")).strip() != screenshot_rel
+            or str(page_review.get("screenshot_sha256", "")).strip().casefold() != screenshot_sha
+        ):
+            failed.append(f"unplanned capture {capture_id}: observed error is not reviewed and bound to its screenshot")
+        if not screenshot_rel or len(screenshot_sha) != 64:
+            incomplete.append(f"unplanned capture {capture_id}: error screenshot path/hash is missing")
+            continue
+        screenshot_path = next(
+            (
+                candidate for candidate in (
+                    _resolve(project_dir, screenshot_rel),
+                    _resolve(source_root, screenshot_rel),
+                )
+                if candidate is not None and candidate.is_file()
+            ),
+            None,
+        )
+        if screenshot_path is None:
+            incomplete.append(f"unplanned capture {capture_id}: error screenshot file is missing")
+        elif _sha256(screenshot_path).casefold() != screenshot_sha:
+            failed.append(f"unplanned capture {capture_id}: error screenshot hash mismatch")
+        else:
+            failed.append(f"unplanned capture {capture_id}: failed page/error state was captured ({review_summary})")
+
+    for row in runtime_rows:
+        asset_id = (row.get("asset_id") or "").strip() or "unnamed asset"
+        capture_id = (row.get("capture_id") or "").strip()
+        expected_route = (row.get("runtime_route") or "").strip()
+        if not capture_id or not expected_route:
+            incomplete.append(f"{asset_id}: capture_id/runtime_route missing")
+            continue
+        if capture_id in duplicate_ids:
+            failed.append(f"{asset_id}: duplicate capture_id {capture_id}")
+            continue
+        capture = by_id.get(capture_id)
+        if capture is None:
+            incomplete.append(f"{asset_id}: capture_id {capture_id} absent from manifest")
+            continue
+
+        screenshot_rel = str(capture.get("screenshot_path", "")).strip()
+        screenshot_sha = str(capture.get("screenshot_sha256", "")).strip().casefold()
+        if not screenshot_rel or len(screenshot_sha) != 64:
+            incomplete.append(f"{asset_id}: screenshot path/hash missing")
+            continue
+        screenshot_path = next(
+            (
+                candidate for candidate in (
+                    _resolve(project_dir, screenshot_rel),
+                    _resolve(source_root, screenshot_rel),
+                )
+                if candidate is not None and candidate.is_file()
+            ),
+            None,
+        )
+        if screenshot_path is None:
+            incomplete.append(f"{asset_id}: screenshot file {screenshot_rel} is missing")
+            continue
+        if _sha256(screenshot_path).casefold() != screenshot_sha:
+            failed.append(f"{asset_id}: screenshot hash mismatch")
+            continue
+
+        route = str(capture.get("route", "")).strip()
+        if route != expected_route:
+            failed.append(f"{asset_id}: route mismatch ({expected_route} != {route or 'missing'})")
+            continue
+        capture_status = str(capture.get("acceptance_status", "")).strip().upper()
+        if capture_status != accepted_status:
+            failed.append(f"{asset_id}: capture is not accepted UI click-through evidence ({capture_status or 'status missing'})")
+            continue
+
+        arrival = capture.get("arrival")
+        arrival = arrival if isinstance(arrival, dict) else {}
+        if arrival.get("local_file_open_for_this_capture") is True:
+            failed.append(f"{asset_id}: local UI/file opening is not accepted as a runtime screenshot")
+            continue
+        if arrival.get("local_file_open_for_this_capture") is not False:
+            incomplete.append(f"{asset_id}: manifest does not confirm that no local UI/file was opened")
+            continue
+        if arrival.get("direct_route_load_for_this_capture") is True:
+            failed.append(f"{asset_id}: direct-route screenshot is not accepted")
+            continue
+        if arrival.get("direct_route_load_for_this_capture") is not False:
+            incomplete.append(f"{asset_id}: manifest does not confirm navigation without a direct route load")
+            continue
+        capture_method = " ".join(
+            str(value).strip()
+            for value in (manifest.get("capture_method"), capture.get("capture_method"))
+            if str(value or "").strip()
+        ).casefold()
+        arrival_from = str(arrival.get("from", "")).strip()
+        if not arrival_from or not any(token in capture_method for token in ("visible", "click", "interaction", "click-through", "clickthrough")):
+            incomplete.append(f"{asset_id}: visible UI arrival method/history is missing")
+            continue
+        ui_steps = arrival.get("ui_steps")
+        if not isinstance(ui_steps, list) or not ui_steps or any(not str(step).strip() for step in ui_steps):
+            incomplete.append(f"{asset_id}: visible UI navigation steps are missing")
+            continue
+        resolved_url = capture.get("resolved_url")
+        if not isinstance(resolved_url, str) or not resolved_url.strip():
+            incomplete.append(f"{asset_id}: final web URL is missing")
+            continue
+        try:
+            parsed_url = urlsplit(resolved_url.strip())
+            expected_url = urlsplit(expected_route)
+            is_web_url = parsed_url.scheme.casefold() in {"http", "https"} and bool(parsed_url.netloc)
+            route_matches = (parsed_url.path or "/") == (expected_url.path or "/") and parsed_url.query == expected_url.query
+        except ValueError:
+            is_web_url = False
+            route_matches = False
+        if not is_web_url:
+            failed.append(f"{asset_id}: screenshot URL must be a real HTTP(S) page, not a local file or non-web UI")
+            continue
+        if not route_matches:
+            failed.append(f"{asset_id}: resolved web URL does not match the inventoried page route")
+            continue
+        if capture.get("external_side_effect") is not False:
+            incomplete.append(f"{asset_id}: no-side-effect status is not confirmed")
+            continue
+
+        http_status = capture.get("http_status")
+        network = capture.get("network")
+        document_status = network.get("document_status") if isinstance(network, dict) else None
+        console = capture.get("console")
+        if type(http_status) is not int or not 100 <= http_status <= 599:
+            incomplete.append(f"{asset_id}: HTTP response status was not recorded")
+            continue
+        if type(document_status) is not int or not 100 <= document_status <= 599:
+            incomplete.append(f"{asset_id}: main document network status was not recorded")
+            continue
+        if not isinstance(console, dict) or any(
+            not isinstance(console.get(key), list)
+            for key in ("errors", "warnings")
+        ):
+            incomplete.append(f"{asset_id}: console error/warning state was not recorded")
+            continue
+        if not isinstance(capture.get("page_title"), str) or not capture["page_title"].strip():
+            incomplete.append(f"{asset_id}: visible page title/state was not recorded")
+            continue
+
+        captured_at = str(capture.get("captured_at_local", "")).strip()
+        try:
+            captured_at_value = datetime.fromisoformat(captured_at)
+        except ValueError:
+            incomplete.append(f"{asset_id}: capture timestamp is missing or invalid")
+            continue
+        if captured_at_value.tzinfo is None:
+            incomplete.append(f"{asset_id}: capture timestamp must include a timezone")
+            continue
+
+        page_review = capture.get("page_state_review")
+        if not isinstance(page_review, dict):
+            incomplete.append(f"{asset_id}: screenshot has no reviewed page/error state")
+            continue
+        page_review_status = str(page_review.get("status", "")).strip().upper()
+        page_review_summary = str(page_review.get("summary", "")).strip()
+        if page_review_status not in {PASS, FAIL}:
+            incomplete.append(f"{asset_id}: page_state_review.status must be PASS or FAIL")
+            continue
+        if not page_review_summary:
+            incomplete.append(f"{asset_id}: page/error state review summary is missing")
+            continue
+        if not str(page_review.get("reviewed_by", "")).strip() or not _valid_iso_date(
+            str(page_review.get("reviewed_at", ""))[:10]
+        ):
+            incomplete.append(f"{asset_id}: page/error state reviewer and date are required")
+            continue
+        if (
+            str(page_review.get("screenshot_path", "")).strip() != screenshot_rel
+            or str(page_review.get("screenshot_sha256", "")).strip().casefold()
+            != screenshot_sha
+        ):
+            failed.append(f"{asset_id}: page/error state review is not bound to this screenshot")
+            continue
+
+        has_http_error = not 200 <= http_status < 300 or not 200 <= document_status < 300
+        console_errors = console.get("errors", [])
+        has_console_error = bool(console_errors)
+        if page_review_status == FAIL:
+            failed.append(f"{asset_id}: captured page/error state was reviewed as failed ({page_review_summary})")
+            continue
+        if has_http_error or has_console_error:
+            observed = []
+            if has_http_error:
+                observed.append(f"HTTP/document status {http_status}/{document_status}")
+            if has_console_error:
+                observed.append(f"{len(console_errors)} console error(s)")
+            failed.append(
+                f"{asset_id}: observed {' and '.join(observed)} but page_state_review says PASS"
+            )
+            continue
+        accepted += 1
+
+    if failed:
+        _add(checks, "project_runtime_capture_provenance", FAIL, f"Runtime screenshot provenance failed: {failed[:8]}.")
+    elif incomplete:
+        _add(checks, "project_runtime_capture_provenance", INCOMPLETE, f"Runtime screenshot provenance is incomplete: {incomplete[:8]}.")
+    else:
+        _add(checks, "project_runtime_capture_provenance", PASS, f"All {accepted} runtime screenshots are route-matched, captured after visible UI click-through, and hash-bound to their image files.")
 
 
 def _check_asset_parity(project_dir: Path, project: dict[str, Any], checks: list[dict[str, str]]) -> None:
@@ -504,6 +1192,7 @@ def _check_asset_parity(project_dir: Path, project: dict[str, Any], checks: list
         _add(checks, "project_visual_inventory", FAIL, f"Cannot read asset-parity.csv: {exc}")
         return
     if not rows:
+        _check_runtime_capture_provenance(project_dir, project, _resolve(project_dir, project.get("source_project_root")) or project_dir, rows, checks)
         review = project.get("visual_inventory_review")
         if (
             isinstance(review, dict)
@@ -512,15 +1201,33 @@ def _check_asset_parity(project_dir: Path, project: dict[str, Any], checks: list
             and str(review.get("reviewed_by", "")).strip()
             and _valid_iso_date(str(review.get("review_date", "")))
         ):
-            _add(checks, "project_visual_inventory", PASS, "A reviewer recorded that this project requires no figures or tables.")
+            output_path = _resolve(project_dir, project.get("output_docx"))
+            if output_path is None or not output_path.is_file():
+                _add(checks, "project_visual_inventory", INCOMPLETE, "The final DOCX is missing; the no-visual decision cannot be checked against embedded media.")
+            else:
+                try:
+                    from docx import Document
+
+                    media_count, _per_caption, _missing = _embedded_media_counts_by_caption(Document(output_path), [])
+                except Exception as exc:
+                    _add(checks, "project_visual_inventory", FAIL, f"Cannot inspect embedded media in the final DOCX: {exc}")
+                else:
+                    if media_count:
+                        _add(checks, "project_visual_inventory", FAIL, f"The inventory says no visuals are required, but the DOCX contains {media_count} embedded images.")
+                        _add(checks, "project_visual_media", FAIL, "Embedded images are missing from the visual inventory.")
+                    else:
+                        _add(checks, "project_visual_inventory", PASS, "A reviewer recorded that this project requires no figures or tables, and the DOCX contains no embedded images.")
+                        _add(checks, "project_visual_media", PASS, "The DOCX contains no embedded images, matching the reviewed NONE_REQUIRED decision.")
         else:
             _add(checks, "project_visual_inventory", INCOMPLETE, "asset-parity.csv is empty; add the project-required assets or record a reviewed NONE_REQUIRED decision with its reason.")
         return
 
     source_root = _resolve(project_dir, project.get("source_project_root")) or project_dir
+    _check_runtime_capture_provenance(project_dir, project, source_root, rows, checks)
     incomplete: list[str] = []
     invalid: list[str] = []
     seen_ids: set[str] = set()
+    expected_media_counts: list[int] = []
     for row_index, row in enumerate(rows, start=2):
         asset_id = (row.get("asset_id") or "").strip()
         if not asset_id or asset_id in seen_ids:
@@ -534,14 +1241,31 @@ def _check_asset_parity(project_dir: Path, project: dict[str, Any], checks: list
         source_location = (row.get("source_location") or "").strip()
         target_section = (row.get("target_section") or "").strip()
         target_caption = (row.get("target_caption") or "").strip()
+        expected_media_raw = (row.get("expected_media_count") or "").strip()
+        caption_required_raw = (row.get("caption_required") or "").strip().casefold()
         coverage_note = (row.get("coverage_note") or "").strip()
         evidence_values = [item.strip() for item in (row.get("evidence_files") or "").split(";") if item.strip()]
         reviewer = (row.get("reviewed_by") or "").strip()
         review_date = (row.get("review_date") or "").strip()
+        try:
+            expected_media_count = int(expected_media_raw)
+            if expected_media_count < 0:
+                raise ValueError("negative media count")
+        except ValueError:
+            incomplete.append(asset_id)
+            continue
+        expected_media_counts.append(expected_media_count)
+        if caption_required_raw not in {"true", "false"}:
+            incomplete.append(asset_id)
+            continue
+        if asset_type.upper() not in {"TABLE", "TEXT_TABLE"} and expected_media_count < 1:
+            invalid.append(asset_id)
+            continue
         if status == FAIL or decision not in _STRUCTURE_DECISIONS:
             invalid.append(asset_id)
             continue
-        if not all((asset_type, source_basis, source_location, target_section, target_caption, coverage_note)) or status != PASS or not evidence_values or not reviewer or not _valid_iso_date(review_date):
+        caption_fields_valid = bool(target_caption) if caption_required_raw == "true" else not target_caption
+        if not all((asset_type, source_basis, source_location, target_section, coverage_note)) or not caption_fields_valid or status != PASS or not evidence_values or not reviewer or not _valid_iso_date(review_date):
             incomplete.append(asset_id)
             continue
         if any(
@@ -569,19 +1293,34 @@ def _check_asset_parity(project_dir: Path, project: dict[str, Any], checks: list
             from docx import Document
 
             document = Document(output_path)
-            visible_text = [" ".join(paragraph.text.split()).casefold() for paragraph in document.paragraphs]
+            total_media, media_by_caption, media_missing_captions = _embedded_media_counts_by_caption(document, rows)
         except Exception as exc:
-            _add(checks, "project_visual_inventory", FAIL, f"Cannot inspect the final DOCX captions: {exc}")
+            _add(checks, "project_visual_inventory", FAIL, f"Cannot inspect the final DOCX captions and embedded media: {exc}")
             return
-        missing_captions = [
-            (row.get("asset_id") or "").strip()
-            for row in rows
-            if " ".join((row.get("target_caption") or "").split()).casefold() not in visible_text
+        captioned_rows = [
+            row for row in rows
+            if (row.get("caption_required") or "").strip().casefold() == "true"
         ]
+        missing_captions = media_missing_captions
         if missing_captions:
-            _add(checks, "project_visual_inventory", FAIL, f"Planned captions are missing from the final DOCX: {missing_captions[:8]}.")
+            _add(checks, "project_visual_inventory", FAIL, f"Planned captions or uncaptioned asset anchors are missing or ambiguous: {missing_captions[:8]}.")
         else:
-            _add(checks, "project_visual_inventory", PASS, f"All {len(rows)} project-planned figure/table captions have reviewed evidence and appear in the final DOCX.")
+            _add(checks, "project_visual_inventory", PASS, f"All {len(captioned_rows)} required captions for the {len(rows)} planned visual assets appear in the final DOCX.")
+        captioned_expected_counts = [
+            int((row.get("expected_media_count") or "0").strip())
+            for row in captioned_rows
+            if (row.get("expected_media_count") or "").strip().isdigit()
+        ]
+        media_mismatches = [
+            (captioned_rows[index].get("asset_id") or "").strip()
+            for index, expected_count in enumerate(captioned_expected_counts)
+            if index >= len(media_by_caption) or media_by_caption[index] != expected_count
+        ]
+        expected_total = sum(expected_media_counts)
+        if total_media != expected_total or media_mismatches:
+            _add(checks, "project_visual_media", FAIL, f"Embedded image coverage differs from asset-parity.csv: expected {expected_total} images total, found {total_media}; caption-bound mismatches={media_mismatches[:8]}.")
+        else:
+            _add(checks, "project_visual_media", PASS, f"All {total_media} embedded images are accounted for by the planned assets and attached to the expected caption sequence.")
 
 
 def _check_claim_evidence(project_dir: Path, project: dict[str, Any], checks: list[dict[str, str]]) -> set[str]:
@@ -691,6 +1430,101 @@ def _check_acceptance(project: dict[str, Any], checks: list[dict[str, str]]) -> 
             _add(checks, f"acceptance_{name}", PASS, "Required human review is recorded as complete.")
         else:
             _add(checks, f"acceptance_{name}", INCOMPLETE, "Required human review has not been recorded as complete.")
+
+
+def _check_acceptance_crosswalk(
+    project_dir: Path,
+    project: dict[str, Any],
+    document_hash: str | None,
+    checks: list[dict[str, str]],
+) -> None:
+    matrix_path = _resolve(project_dir, project.get("acceptance_crosswalk_file", "acceptance-crosswalk.csv"))
+    if matrix_path is None or not matrix_path.is_file():
+        _add(checks, "acceptance_crosswalk", INCOMPLETE, "acceptance-crosswalk.csv is missing.")
+        return
+    try:
+        rows = _rows(matrix_path)
+    except (OSError, UnicodeError, csv.Error) as exc:
+        _add(checks, "acceptance_crosswalk", FAIL, f"Cannot read acceptance-crosswalk.csv: {exc}")
+        return
+    if not rows:
+        _add(checks, "acceptance_crosswalk", INCOMPLETE, "The acceptance crosswalk has no reviewed criteria.")
+        return
+
+    source_root = _resolve(project_dir, project.get("source_project_root")) or project_dir
+    seen_ids: set[str] = set()
+    categories: set[str] = set()
+    incomplete: list[str] = []
+    invalid: list[str] = []
+    required_fields = (
+        "check_id", "category", "authority", "source_location", "acceptance_criterion",
+        "report_location", "verification_method", "evidence_files", "evidence_sha256", "document_sha256",
+        "reviewed_by", "review_date",
+    )
+    for row_index, row in enumerate(rows, start=2):
+        check_id = (row.get("check_id") or "").strip()
+        category = (row.get("category") or "").strip().casefold()
+        if not check_id or check_id in seen_ids:
+            invalid.append(check_id or f"row-{row_index}:blank-id")
+        else:
+            seen_ids.add(check_id)
+        if category:
+            categories.add(category)
+        if category not in _REQUIRED_ACCEPTANCE_CATEGORIES:
+            invalid.append(check_id or f"row-{row_index}:unknown-category")
+        missing_fields = [field for field in required_fields if not (row.get(field) or "").strip()]
+        if missing_fields:
+            incomplete.append(check_id or f"row-{row_index}:missing-fields")
+            continue
+
+        status = (row.get("status") or "").strip().upper()
+        if status == FAIL:
+            invalid.append(check_id)
+        elif status not in {PASS, "WAIVED", "NOT_RUN", "BLOCKED"}:
+            incomplete.append(check_id)
+        elif status in {"NOT_RUN", "BLOCKED"}:
+            incomplete.append(check_id)
+        elif status == "WAIVED" and not (row.get("notes") or "").strip():
+            incomplete.append(check_id)
+
+        if not _valid_iso_date((row.get("review_date") or "").strip()):
+            incomplete.append(check_id)
+        if document_hash is None:
+            incomplete.append(check_id)
+        elif (row.get("document_sha256") or "").strip().casefold() != document_hash.casefold():
+            invalid.append(f"{check_id}:stale-document-hash")
+
+        evidence_values = [item.strip() for item in (row.get("evidence_files") or "").split(";") if item.strip()]
+        evidence_hashes = [item.strip().casefold() for item in (row.get("evidence_sha256") or "").split(";") if item.strip()]
+        if not evidence_values or len(evidence_values) != len(evidence_hashes):
+            incomplete.append(check_id)
+            continue
+        for evidence, expected_hash in zip(evidence_values, evidence_hashes):
+            evidence_path = next(
+                (
+                    candidate for candidate in (_resolve(project_dir, evidence), _resolve(source_root, evidence))
+                    if candidate is not None and candidate.is_file()
+                ),
+                None,
+            )
+            if evidence_path is None:
+                incomplete.append(check_id)
+                continue
+            try:
+                actual_hash = _sha256(evidence_path)
+            except OSError:
+                incomplete.append(check_id)
+                continue
+            if len(expected_hash) != 64 or actual_hash.casefold() != expected_hash:
+                invalid.append(f"{check_id}:stale-evidence-hash")
+
+    missing_categories = sorted(set(_REQUIRED_ACCEPTANCE_CATEGORIES) - categories)
+    if invalid:
+        _add(checks, "acceptance_crosswalk", FAIL, f"Crosswalk has duplicate IDs, unknown categories, failed criteria, or stale DOCX bindings: {sorted(set(invalid))[:8]}.")
+    elif incomplete or missing_categories:
+        _add(checks, "acceptance_crosswalk", INCOMPLETE, f"Acceptance rows need complete, evidence-backed review: rows={sorted(set(incomplete))[:8]}, missing_categories={missing_categories}.")
+    else:
+        _add(checks, "acceptance_crosswalk", PASS, f"All {len(rows)} acceptance criteria cover the required categories and are reviewed against DOCX SHA-256 {document_hash}.")
 
 
 def _check_integrity_audit(
@@ -919,12 +1753,20 @@ def assess(project_dir: str | Path) -> dict[str, Any]:
     word_gate, _output_path, document_hash = _check_word_delivery(directory, project)
     content_checks: list[dict[str, str]] = []
     _check_requirements(directory, project, content_checks)
+    _check_official_rubric_in_docx(directory, project, _output_path, document_hash, content_checks)
     _check_cover_metadata(directory, project, content_checks)
     _check_structure_parity(directory, project, content_checks, _output_path)
     _check_asset_parity(directory, project, content_checks)
     evidence_ids = _check_claim_evidence(directory, project, content_checks)
     _check_acceptance(project, content_checks)
+    _check_acceptance_crosswalk(directory, project, document_hash, content_checks)
     _check_integrity_audit(directory, project, document_hash, evidence_ids, content_checks)
+    if project.get("content_review_plan_file"):
+        from wordassistant.document.report_review import assess_content_review
+        content_review = assess_content_review(directory, project)
+        _add(content_checks, "project_content_review", content_review["status"],
+             "; ".join(item["detail"] for item in content_review["checks"] if item["status"] != PASS)
+             or "Subject-specific models and argument/prose reviews are bound to this DOCX.")
     content_status = _final_status(content_checks)
     content_gate = {"status": content_status, "checks": content_checks}
 
@@ -953,7 +1795,9 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("project_dir", type=Path, help="Course-essay workspace containing project.json")
     args = parser.parse_args(argv)
     report = assess(args.project_dir)
-    print(json.dumps(report, ensure_ascii=False, indent=2))
+    # Keep the CLI output safe for Windows consoles using legacy code pages.
+    # JSON consumers decode these escapes back to the original Unicode text.
+    print(json.dumps(report, ensure_ascii=True, indent=2))
     return {PASS: 0, INCOMPLETE: 1, FAIL: 2}[report["status"]]
 
 
