@@ -1,6 +1,6 @@
 # Academic report workflow for agents
 
-This guide shows how an agent can use WordAssistant to create an editable report from a selected institutional profile, inspect academic sources, and produce citations tied to downloaded evidence. The HCMUNRE profile is only for that school's ĐACN 2026–2027 report. For another institution, use its controlling guide and a matching profile.
+This guide shows how an agent can use WordAssistant to create an editable report from a selected institutional profile, inspect academic sources, and produce citations tied to downloaded evidence. The HCMUNRE `report` and `proposal` variants are for that school's ĐACN 2026–2027 work. The `course_essay_style` variant may be selected when the user explicitly asks to borrow HCMUNRE page geometry and typography for a course essay; it applies only those style rules and does not carry over the ĐACN cover, blueprint, review criteria, or reference minimum. For another institution, use its controlling guide and a matching profile.
 
 ## 1. Confirm the environment and profile
 

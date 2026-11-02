@@ -148,6 +148,7 @@ OPERATION_OPTION_OVERRIDES = {
     ],
     "style.update": [
         ("name", True, None, "string"),
+        ("alignment", False, None, "string"),
         ("font_family", False, None, "string"),
         ("font_size_pt", False, None, "number"),
         ("bold", False, None, "boolean"),

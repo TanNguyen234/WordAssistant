@@ -192,16 +192,19 @@ def _collect_paragraphs(document: DocxDocument) -> list[dict[str, Any]]:
             ("footer", "first", section.first_page_footer),
             ("footer", "even", section.even_page_footer),
         ):
-            part_name = str(container.part.partname)
-            if part_name in seen_parts:
+            try:
+                part_name = str(container.part.partname)
+                if part_name in seen_parts:
+                    continue
+                seen_parts.add(part_name)
+                story = f"{kind}[{section_index}].{suffix}"
+                for paragraph in container.paragraphs:
+                    append(story, paragraph)
+                for table in container.tables:
+                    for paragraph in _table_paragraphs(table):
+                        append(f"{story}.table", paragraph)
+            except Exception:
                 continue
-            seen_parts.add(part_name)
-            story = f"{kind}[{section_index}].{suffix}"
-            for paragraph in container.paragraphs:
-                append(story, paragraph)
-            for table in container.tables:
-                for paragraph in _table_paragraphs(table):
-                    append(f"{story}.table", paragraph)
     return records
 
 
@@ -855,6 +858,8 @@ def audit_integrity(
             "SKIPPED",
             [{"kind": "engine_unavailable", "message": "viet_text_audit is not installed"}],
             classification="EXTERNAL_CORPUS_SIMILARITY_CHECK",
+            corpus_size=0,
+            total_similarity_score=0.0,
         )
         gates["evidence_source_attribution_fidelity"] = _gate(
             "SKIPPED",

@@ -24,6 +24,8 @@ def test_agent_manifest_has_fail_closed_delivery_gates():
 
     assert gates["validation"] == "validate.valid == true"
     assert gates["verification"] == "verify.delivery_status == PASS"
+    assert "complete source rubric" in gates["official_rubric"].casefold()
+    assert "never infer or invent" in gates["official_rubric"].casefold()
     assert "content" in gates["visual_page_audit"].casefold()
     assert "dimensions" in gates["visual_page_audit"].casefold()
     assert "exact requested invariant" in gates["negative_tests"].casefold()

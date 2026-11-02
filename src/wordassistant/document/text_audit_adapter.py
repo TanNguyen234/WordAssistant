@@ -18,7 +18,20 @@ def is_text_audit_available() -> bool:
         import viet_text_audit.pipeline  # noqa: F401
         return True
     except (ImportError, Exception):
-        return False
+        import sys
+        candidate_paths = [
+            Path(__file__).resolve().parents[4] / "viet-text-audit" / "src",
+            Path(r"D:/Download/viet-text-audit/src"),
+            Path(r"D:/Projects/AI_Paper/pythonProject/.venv/Lib/site-packages"),
+        ]
+        for p in candidate_paths:
+            if p.exists() and str(p) not in sys.path:
+                sys.path.insert(0, str(p))
+        try:
+            import viet_text_audit.pipeline  # noqa: F401
+            return True
+        except (ImportError, Exception):
+            return False
 
 
 def _extract_text_from_file(file_path: Path) -> str:

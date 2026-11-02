@@ -129,6 +129,8 @@ The old mutable global `references.json` design is retired. A project workspace 
 
 Academic integrity is provenance-first, not detector-evasion. The `integrity` command cross-checks citations, bibliography, evidence, placeholders, invisible Unicode, AI-use disclosure, and review-only prose heuristics, then binds the final DOCX and registry hashes in an atomic provenance manifest. It does not claim to detect AI authorship. See `docs/ACADEMIC_INTEGRITY.md`.
 
+When an official rubric or evaluation criteria must appear in a Word deliverable, inspect the selected profile's bundled assets first and use `docs/official-rubric-workflow.md`. Include a standalone scoring rubric as a complete appendix or embedded official assessment criteria in the corresponding review page. Preserve exact source wording and distinguish criteria from any absent score levels or weights.
+
 ## Quality gates
 
 Before delivery:
