@@ -180,3 +180,52 @@ def test_audit_integrity_high_similarity_fails(temp_workspace):
     ext_gate = report["gates"]["external_corpus_similarity"]
     assert ext_gate["total_similarity_score"] > 30.0
     assert ext_gate["status"] == "FAIL"
+
+
+from wordassistant.cli import run
+
+
+def test_cli_integrity_audit_with_corpus_options(temp_workspace, capsys):
+    """Verify CLI execution of 'integrity audit' with --corpus-dir and --output-html."""
+    html_out = temp_workspace["tmp_path"] / "cli_audit_report.html"
+    exit_code = run([
+        "integrity",
+        "audit",
+        str(temp_workspace["query_docx"]),
+        "--evidence",
+        str(temp_workspace["evidence_registry"]),
+        "--corpus-dir",
+        str(temp_workspace["corpus_dir"]),
+        "--output-html",
+        str(html_out),
+        "--json",
+    ])
+    captured = capsys.readouterr()
+    payload = json.loads(captured.out)
+
+    assert "gates" in payload
+    assert "external_corpus_similarity" in payload["gates"]
+    assert html_out.is_file()
+
+
+def test_cli_integrity_similarity_command(temp_workspace, capsys):
+    """Verify CLI execution of new 'integrity similarity' action."""
+    html_out = temp_workspace["tmp_path"] / "cli_sim_report.html"
+    exit_code = run([
+        "integrity",
+        "similarity",
+        str(temp_workspace["query_docx"]),
+        "--evidence",
+        str(temp_workspace["evidence_registry"]),
+        "--corpus-dir",
+        str(temp_workspace["corpus_dir"]),
+        "--output-html",
+        str(html_out),
+        "--json",
+    ])
+    captured = capsys.readouterr()
+    payload = json.loads(captured.out)
+
+    assert "gates" in payload
+    assert payload["gates"]["external_corpus_similarity"]["total_similarity_score"] > 0.0
+    assert html_out.is_file()

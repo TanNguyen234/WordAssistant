@@ -293,10 +293,27 @@ def parser() -> argparse.ArgumentParser:
     )
     integrity_audit.add_argument('file')
     integrity_audit.add_argument('--evidence', default=None, help='Evidence registry JSON path')
+    integrity_audit.add_argument('--corpus-dir', '--corpus', dest='corpus_dir', default=None, help='Directory containing reference documents')
+    integrity_audit.add_argument('--output-html', default=None, help='Path to write 2-column interactive HTML similarity report')
+    integrity_audit.add_argument('--no-auto-evidence-corpus', action='store_true', help='Disable automatic inclusion of evidence registry as reference corpus')
     integrity_audit.add_argument('--profile', default=None)
     integrity_audit.add_argument('--variant', default=None)
     integrity_audit.add_argument('--fail-on-warn', action='store_true')
     integrity_audit.add_argument('--json', action='store_true')
+
+    integrity_sim = integrity_sp.add_parser(
+        'similarity',
+        help='Perform lexical overlap, semantic paraphrase, and stylometric audit using viet-text-audit',
+    )
+    integrity_sim.add_argument('file')
+    integrity_sim.add_argument('--corpus-dir', '--corpus', dest='corpus_dir', default=None, help='Directory containing reference documents')
+    integrity_sim.add_argument('--evidence', default=None, help='Evidence registry JSON path')
+    integrity_sim.add_argument('--output-html', default=None, help='Path to write 2-column interactive HTML similarity report')
+    integrity_sim.add_argument('--no-auto-evidence-corpus', action='store_true', help='Disable automatic inclusion of evidence registry as reference corpus')
+    integrity_sim.add_argument('--profile', default=None)
+    integrity_sim.add_argument('--variant', default=None)
+    integrity_sim.add_argument('--fail-on-warn', action='store_true')
+    integrity_sim.add_argument('--json', action='store_true')
 
     integrity_manifest = integrity_sp.add_parser(
         'provenance',
@@ -937,11 +954,43 @@ def run(args: list[str] | None = None) -> int:
                     evidence_registry_path=evidence_path,
                     profile=prof,
                     variant_name=eff_var,
+                    corpus_dir=getattr(a, 'corpus_dir', None),
+                    output_html=getattr(a, 'output_html', None),
+                    auto_evidence_corpus=not getattr(a, 'no_auto_evidence_corpus', False),
                 )
                 _print(report, a.json)
                 if report['status'] == 'FAIL':
                     return 2
                 if a.fail_on_warn and report['status'] == 'WARN':
+                    return 2
+                return 0
+
+            if a.integrity_action == 'similarity':
+                report = audit_integrity(
+                    a.file,
+                    evidence_registry_path=evidence_path,
+                    profile=prof,
+                    variant_name=eff_var,
+                    corpus_dir=getattr(a, 'corpus_dir', None),
+                    output_html=getattr(a, 'output_html', None),
+                    auto_evidence_corpus=not getattr(a, 'no_auto_evidence_corpus', False),
+                )
+                sim_gate = report.get('gates', {}).get('external_corpus_similarity', {})
+                fidelity_gate = report.get('gates', {}).get('evidence_source_attribution_fidelity', {})
+                style_gate = report.get('gates', {}).get('stylometric_profile_review', {})
+                result_payload = {
+                    'document': report.get('document'),
+                    'status': sim_gate.get('status', report['status']),
+                    'overall_status': report['status'],
+                    'external_corpus_similarity': sim_gate,
+                    'evidence_source_attribution_fidelity': fidelity_gate,
+                    'stylometric_profile_review': style_gate,
+                    'html_report_path': sim_gate.get('html_report_path'),
+                }
+                _print(report if a.json else result_payload, a.json)
+                if report['status'] == 'FAIL' or sim_gate.get('status') == 'FAIL':
+                    return 2
+                if a.fail_on_warn and (report['status'] == 'WARN' or sim_gate.get('status') == 'WARN'):
                     return 2
                 return 0
 
