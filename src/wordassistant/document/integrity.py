@@ -15,6 +15,10 @@ from docx.table import Table
 from docx.text.paragraph import Paragraph
 
 from wordassistant.evidence.registry import EvidenceError, EvidenceRegistry
+from wordassistant.document.text_audit_adapter import (
+    is_text_audit_available,
+    run_document_text_audit,
+)
 from wordassistant.profiles.loader import DocumentProfile, Variant, resolve_profile
 from wordassistant.selectors import _heading_level
 
@@ -405,6 +409,9 @@ def audit_integrity(
     evidence_registry_path: str | Path | None = None,
     profile: Any = None,
     variant_name: str | None = None,
+    corpus_dir: str | Path | None = None,
+    output_html: str | Path | None = None,
+    auto_evidence_corpus: bool = True,
 ) -> dict[str, Any]:
     """Audit a DOCX for academic-integrity risks without AI detection.
 
@@ -729,6 +736,137 @@ def audit_integrity(
         declared=bool(disclosure_findings),
     )
 
+    # 9. Text Audit Gates (External Corpus Similarity, Attribution Fidelity, Stylometric Review)
+    if is_text_audit_available():
+        audit_res = run_document_text_audit(
+            docx_path=source,
+            corpus_dir=corpus_dir,
+            evidence_registry_path=evidence_registry_path,
+            output_html=output_html,
+            auto_evidence_corpus=auto_evidence_corpus,
+        )
+        c_size = audit_res.get("corpus_size", 0)
+        s_total = audit_res.get("total_attributed_score", 0.0)
+        s_lex = audit_res.get("lexical_overlap_score", 0.0)
+        s_sem = audit_res.get("semantic_paraphrase_score", 0.0)
+
+        # 9a. External Corpus Similarity Gate
+        if c_size == 0:
+            gates["external_corpus_similarity"] = _gate(
+                "SKIPPED",
+                [{"kind": "no_reference_corpus", "message": "No external corpus or evidence sources provided for comparison"}],
+                classification="EXTERNAL_CORPUS_SIMILARITY_CHECK",
+                corpus_size=0,
+                total_similarity_score=0.0,
+            )
+        else:
+            sim_status = "FAIL" if s_total > 30.0 else ("WARN" if s_total > 15.0 else "PASS")
+            sim_findings = [
+                {
+                    "source_id": s["source_id"],
+                    "source_title": s["source_title"],
+                    "coverage_percentage": s["coverage_percentage"],
+                    "matched_chars_count": s["matched_chars_count"],
+                    "excerpts": s.get("excerpts", []),
+                }
+                for s in audit_res.get("source_attributions", [])
+                if s.get("coverage_percentage", 0.0) > 0.0
+            ]
+            gates["external_corpus_similarity"] = _gate(
+                sim_status,
+                sim_findings,
+                classification="EXTERNAL_CORPUS_SIMILARITY_CHECK",
+                total_similarity_score=s_total,
+                lexical_score=s_lex,
+                semantic_score=s_sem,
+                corpus_size=c_size,
+                html_report_path=audit_res.get("html_report_path"),
+            )
+
+        # 9b. Evidence Source Attribution Fidelity Gate
+        if not auto_evidence_corpus or not evidence_records:
+            gates["evidence_source_attribution_fidelity"] = _gate(
+                "SKIPPED",
+                [{"kind": "no_evidence_corpus", "message": "Evidence registry not provided or contains no records"}],
+                classification="EVIDENCE_SOURCE_FIDELITY_CHECK",
+            )
+        else:
+            ev_id_set = {str(item.get("id")) for item in evidence_records}
+            fidelity_findings = []
+            for attr in audit_res.get("source_attributions", []):
+                src_id = attr.get("source_id")
+                if src_id in ev_id_set and attr.get("matched_chars_count", 0) > 50:
+                    if src_id not in linked_evidence_ids:
+                        fidelity_findings.append({
+                            "kind": "evidence_passage_lacking_explicit_citation",
+                            "evidence_id": src_id,
+                            "matched_chars_count": attr.get("matched_chars_count"),
+                            "coverage_percentage": attr.get("coverage_percentage"),
+                            "excerpts": attr.get("excerpts", []),
+                        })
+            fidelity_status = "WARN" if fidelity_findings else "PASS"
+            gates["evidence_source_attribution_fidelity"] = _gate(
+                fidelity_status,
+                fidelity_findings,
+                classification="EVIDENCE_SOURCE_FIDELITY_CHECK",
+                cited_evidence_count=len(linked_evidence_ids),
+                evaluated_evidence_count=len(ev_id_set),
+            )
+
+        # 9c. Stylometric Profile Review Gate
+        ai_ass = audit_res.get("ai_assessment")
+        if ai_ass:
+            decision = ai_ass.get("decision", "INSUFFICIENT_TEXT")
+            metrics = ai_ass.get("metrics", {})
+            rationale = ai_ass.get("rationale", "")
+            style_findings = []
+            if decision == "INSUFFICIENT_TEXT":
+                style_findings.append({
+                    "kind": "insufficient_text_for_stylometry",
+                    "rationale": rationale,
+                    "word_count": ai_ass.get("word_count", 0),
+                })
+                style_status = "PASS"
+            elif decision == "AI_FLAGGED":
+                style_findings.append({
+                    "kind": "stylometric_profile_flags_detected",
+                    "rationale": rationale,
+                    "metrics": metrics,
+                })
+                style_status = "WARN"
+            else:
+                style_status = "PASS"
+
+            gates["stylometric_profile_review"] = _gate(
+                style_status,
+                style_findings,
+                classification="STYLE_REVIEW_NOT_AI_EVIDENCE",
+                decision=decision,
+                metrics=metrics,
+            )
+        else:
+            gates["stylometric_profile_review"] = _gate(
+                "SKIPPED",
+                [{"kind": "stylometry_not_evaluated"}],
+                classification="STYLE_REVIEW_NOT_AI_EVIDENCE",
+            )
+    else:
+        gates["external_corpus_similarity"] = _gate(
+            "SKIPPED",
+            [{"kind": "engine_unavailable", "message": "viet_text_audit is not installed"}],
+            classification="EXTERNAL_CORPUS_SIMILARITY_CHECK",
+        )
+        gates["evidence_source_attribution_fidelity"] = _gate(
+            "SKIPPED",
+            [{"kind": "engine_unavailable", "message": "viet_text_audit is not installed"}],
+            classification="EVIDENCE_SOURCE_FIDELITY_CHECK",
+        )
+        gates["stylometric_profile_review"] = _gate(
+            "SKIPPED",
+            [{"kind": "engine_unavailable", "message": "viet_text_audit is not installed"}],
+            classification="STYLE_REVIEW_NOT_AI_EVIDENCE",
+        )
+
     counts = Counter(gate["status"] for gate in gates.values())
     overall = "FAIL" if counts["FAIL"] else ("WARN" if counts["WARN"] else "PASS")
     story_counts = Counter(record["story"].split("[")[0].split(".")[0] for record in records if record["text"].strip())
@@ -749,11 +887,14 @@ def audit_integrity(
             "stories": ["body", "table", "header", "footer"],
         },
         "status": overall,
-        "summary": {name: counts[name] for name in ("PASS", "WARN", "FAIL")},
+        "summary": {name: counts[name] for name in ("PASS", "WARN", "FAIL", "SKIPPED")},
         "gates": gates,
         "limitations": [
-            "Similarity to external publications is not measured because no corpus or external provider is used.",
+            "Similarity to external publications is evaluated using local corpus and registered evidence sources with non-overlapping coverage."
+            if (corpus_dir or (auto_evidence_corpus and evidence_records))
+            else "Similarity to external publications is not measured because no corpus or external provider is used.",
             "Prose repetition and citation-adjacency findings are review heuristics, not proof of misconduct or AI authorship.",
+            "Stylometric profile flags are descriptive stylistic indicators for human review, never proof of AI authorship.",
             "Primary-source status is accepted only from an explicit primary tag in the evidence registry.",
         ],
     }
@@ -767,6 +908,9 @@ def build_provenance_manifest(
     audit_report: Mapping[str, Any] | None = None,
     source_registry: Mapping[str, Any] | None = None,
     variant_name: str | None = None,
+    corpus_dir: str | Path | None = None,
+    output_html: str | Path | None = None,
+    auto_evidence_corpus: bool = True,
 ) -> dict[str, Any]:
     """Build a JSON-ready provenance manifest without writing files."""
 
@@ -779,6 +923,9 @@ def build_provenance_manifest(
         evidence_registry_path=evidence_registry_path,
         profile=profile,
         variant_name=variant_name,
+        corpus_dir=corpus_dir,
+        output_html=output_html,
+        auto_evidence_corpus=auto_evidence_corpus,
     )
     if report.get("document", {}).get("sha256") != _hash_file(source):
         raise ValueError("audit_report does not match the current DOCX SHA-256")

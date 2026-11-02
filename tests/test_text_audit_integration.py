@@ -125,3 +125,58 @@ def test_run_document_text_audit(temp_workspace):
     assert html_output.is_file()
     assert html_output.stat().st_size > 500
     assert "Trí tuệ nhân tạo" in html_output.read_text(encoding="utf-8")
+
+
+from wordassistant.document.integrity import audit_integrity
+
+
+def test_audit_integrity_with_text_audit_gates(temp_workspace):
+    """Verify that audit_integrity runs text audit gates when corpus and evidence are provided."""
+    report = audit_integrity(
+        docx_path=temp_workspace["query_docx"],
+        evidence_registry_path=temp_workspace["evidence_registry"],
+        corpus_dir=temp_workspace["corpus_dir"],
+    )
+
+    assert "external_corpus_similarity" in report["gates"]
+    assert "evidence_source_attribution_fidelity" in report["gates"]
+    assert "stylometric_profile_review" in report["gates"]
+
+    ext_gate = report["gates"]["external_corpus_similarity"]
+    assert ext_gate["classification"] == "EXTERNAL_CORPUS_SIMILARITY_CHECK"
+    assert ext_gate["corpus_size"] >= 3
+    assert ext_gate["total_similarity_score"] > 0.0
+
+    style_gate = report["gates"]["stylometric_profile_review"]
+    assert style_gate["classification"] == "STYLE_REVIEW_NOT_AI_EVIDENCE"
+    assert style_gate["status"] == "PASS"
+
+
+def test_audit_integrity_without_corpus_skips_similarity(temp_workspace):
+    """Verify that external similarity gate is SKIPPED when no corpus or evidence is supplied."""
+    report = audit_integrity(
+        docx_path=temp_workspace["query_docx"],
+        auto_evidence_corpus=False,
+    )
+    assert report["gates"]["external_corpus_similarity"]["status"] == "SKIPPED"
+    assert report["gates"]["evidence_source_attribution_fidelity"]["status"] == "SKIPPED"
+
+
+def test_audit_integrity_high_similarity_fails(temp_workspace):
+    """Verify that a document heavily copied from corpus triggers FAIL status on similarity gate."""
+    heavy_copy_docx = temp_workspace["tmp_path"] / "plagiarized_copy.docx"
+    doc = Document()
+    doc.add_paragraph(
+        "Trí tuệ nhân tạo đang làm thay đổi toàn diện phương pháp nghiên cứu và đào tạo học thuật tại các trường đại học."
+    )
+    doc.save(heavy_copy_docx)
+
+    report = audit_integrity(
+        docx_path=heavy_copy_docx,
+        corpus_dir=temp_workspace["corpus_dir"],
+        auto_evidence_corpus=False,
+    )
+
+    ext_gate = report["gates"]["external_corpus_similarity"]
+    assert ext_gate["total_similarity_score"] > 30.0
+    assert ext_gate["status"] == "FAIL"
