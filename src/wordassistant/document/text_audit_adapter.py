@@ -200,8 +200,26 @@ def run_document_text_audit(
             orchestrator.add_to_corpus(doc["doc_id"], doc["text"], title=doc["title"], url=doc["url"])
 
     # Run analysis
-    report = orchestrator.analyze_file(d_path)
-    raw_text = orchestrator.parser.parse(d_path).raw_text
+    try:
+        report = orchestrator.analyze_file(d_path)
+        raw_text = orchestrator.parser.parse(d_path).raw_text
+    except Exception as exc:
+        return {
+            "available": True,
+            "document_id": d_path.name,
+            "total_raw_characters": 0,
+            "total_eval_characters": 0,
+            "excluded_characters_count": 0,
+            "lexical_overlap_score": 0.0,
+            "semantic_paraphrase_score": 0.0,
+            "total_attributed_score": 0.0,
+            "corpus_size": len(orchestrator.corpus),
+            "matched_intervals": [],
+            "source_attributions": [],
+            "ai_assessment": None,
+            "metadata": {"error": str(exc), "corpus_status": "EMPTY_OR_UNREADABLE_DOCUMENT"},
+            "html_report_path": None,
+        }
 
     # Generate HTML report if requested
     html_report_path: str | None = None
