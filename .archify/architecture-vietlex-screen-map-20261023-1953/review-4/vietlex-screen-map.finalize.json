@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "fail",
+  "type": "architecture",
+  "quality": "showcase",
+  "startedAt": "2026-10-23T13:00:24.313Z",
+  "specification": {
+    "path": "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\candidate.json",
+    "sha256": "20ca91b93d70a756b00276f3ed4c92aaa57600d13fae32c0afbedd10f4f31ad5",
+    "bytes": 13831
+  },
+  "artifact": {
+    "path": "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\vietlex-screen-map.html"
+  },
+  "stages": {
+    "validate": {
+      "status": "fail",
+      "exitCode": 1,
+      "durationMs": null,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "C:\\Users\\VI TINH THANH AN\\.codex\\skills\\archify\\bin\\archify.mjs",
+        "deliver",
+        "architecture",
+        "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\candidate.json",
+        "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\vietlex-screen-map.html",
+        "--quality",
+        "showcase",
+        "--repo-root",
+        "D:\\Download\\ProfessionalLegalRAG",
+        "--json"
+      ],
+      "receipt": {
+        "schemaVersion": 1,
+        "ok": false,
+        "command": "deliver",
+        "receiptId": "4a2ea92b-1b96-47f1-842b-c22a1b8e975a",
+        "stage": "render",
+        "type": "architecture",
+        "input": "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\candidate.json",
+        "output": "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\vietlex-screen-map.html",
+        "error": "Cannot read properties of undefined (reading '0')",
+        "diagnostics": [
+          {
+            "code": "internal/unclassified",
+            "severity": "error",
+            "message": "Cannot read properties of undefined (reading '0')",
+            "subject": {
+              "input": "\\\\?\\D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\.archify-delivery-N3kAqZ\\specification.snapshot.json"
+            },
+            "evidence": {
+              "errorName": "TypeError"
+            },
+            "supportedFixes": []
+          }
+        ],
+        "provenance": "absent",
+        "update": {
+          "status": "unavailable",
+          "installedVersion": null,
+          "availableVersion": null,
+          "releaseNotes": null,
+          "checkedAt": null,
+          "source": null,
+          "noticeRequired": false,
+          "noticeText": null,
+          "reason": "disabled"
+        }
+      },
+      "execution": "embedded-in-deliver"
+    },
+    "deliver": {
+      "status": "not-run",
+      "execution": "blocked-by-validate"
+    }
+  },
+  "diagnostics": [
+    {
+      "code": "internal/unclassified",
+      "severity": "error",
+      "message": "Cannot read properties of undefined (reading '0')",
+      "subject": {
+        "input": "\\\\?\\D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\.archify-delivery-N3kAqZ\\specification.snapshot.json"
+      },
+      "evidence": {
+        "errorName": "TypeError"
+      },
+      "supportedFixes": []
+    }
+  ],
+  "evidence": {
+    "receipt": "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\review-4\\vietlex-screen-map.finalize.json",
+    "summaryReceipt": "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\review-4\\vietlex-screen-map.finalize-summary.json"
+  },
+  "visualReview": "not-requested",
+  "failedStage": "validate",
+  "finishedAt": "2026-10-23T13:00:36.141Z",
+  "durationMs": 11827,
+  "update": {
+    "status": "unavailable",
+    "installedVersion": null,
+    "availableVersion": null,
+    "releaseNotes": null,
+    "checkedAt": null,
+    "source": null,
+    "noticeRequired": false,
+    "noticeText": null,
+    "reason": "timeout"
+  }
+}

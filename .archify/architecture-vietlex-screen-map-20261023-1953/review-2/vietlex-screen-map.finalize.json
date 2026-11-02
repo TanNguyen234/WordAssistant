@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "fail",
+  "type": "architecture",
+  "quality": "showcase",
+  "startedAt": "2026-10-23T12:58:36.036Z",
+  "specification": {
+    "path": "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\candidate.json",
+    "sha256": "eec83d0bc81b8c3c208cc820b2cf1c35d9a284bcc5e0143b5c1a7ae2ee6d211d",
+    "bytes": 13831
+  },
+  "artifact": {
+    "path": "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\vietlex-screen-map.html"
+  },
+  "stages": {
+    "validate": {
+      "status": "fail",
+      "exitCode": 1,
+      "durationMs": null,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "C:\\Users\\VI TINH THANH AN\\.codex\\skills\\archify\\bin\\archify.mjs",
+        "deliver",
+        "architecture",
+        "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\candidate.json",
+        "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\vietlex-screen-map.html",
+        "--quality",
+        "showcase",
+        "--repo-root",
+        "D:\\Download\\ProfessionalLegalRAG",
+        "--json"
+      ],
+      "receipt": {
+        "schemaVersion": 1,
+        "ok": false,
+        "command": "deliver",
+        "receiptId": "6af6d7dc-781a-4d89-acef-dec2f8867313",
+        "stage": "render",
+        "type": "architecture",
+        "input": "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\candidate.json",
+        "output": "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\vietlex-screen-map.html",
+        "error": "/components/6/sources/0 requests line 194, but app/api/legal_routes.py has 193 lines at revision 7519cd1aea4a3639140b9188de1843ebf0ddb1c0.",
+        "diagnostics": [
+          {
+            "code": "repository-evidence/line-out-of-range",
+            "severity": "error",
+            "message": "/components/6/sources/0 requests line 194, but app/api/legal_routes.py has 193 lines at revision 7519cd1aea4a3639140b9188de1843ebf0ddb1c0.",
+            "subject": {
+              "surface": "repository-evidence",
+              "path": "/components/6/sources/0",
+              "diagramType": "architecture",
+              "collection": "components",
+              "nodeId": "legal_info",
+              "componentId": "legal_info"
+            },
+            "evidence": {
+              "sourcePath": "app/api/legal_routes.py",
+              "requestedLine": 194,
+              "lineCount": 193,
+              "revision": "7519cd1aea4a3639140b9188de1843ebf0ddb1c0"
+            },
+            "supportedFixes": [
+              "use a line range that exists at the pinned revision"
+            ]
+          }
+        ],
+        "provenance": "absent",
+        "update": {
+          "status": "unavailable",
+          "installedVersion": null,
+          "availableVersion": null,
+          "releaseNotes": null,
+          "checkedAt": null,
+          "source": null,
+          "noticeRequired": false,
+          "noticeText": null,
+          "reason": "disabled"
+        }
+      },
+      "execution": "embedded-in-deliver"
+    },
+    "deliver": {
+      "status": "not-run",
+      "execution": "blocked-by-validate"
+    }
+  },
+  "diagnostics": [
+    {
+      "code": "repository-evidence/line-out-of-range",
+      "severity": "error",
+      "message": "/components/6/sources/0 requests line 194, but app/api/legal_routes.py has 193 lines at revision 7519cd1aea4a3639140b9188de1843ebf0ddb1c0.",
+      "subject": {
+        "surface": "repository-evidence",
+        "path": "/components/6/sources/0",
+        "diagramType": "architecture",
+        "collection": "components",
+        "nodeId": "legal_info",
+        "componentId": "legal_info"
+      },
+      "evidence": {
+        "sourcePath": "app/api/legal_routes.py",
+        "requestedLine": 194,
+        "lineCount": 193,
+        "revision": "7519cd1aea4a3639140b9188de1843ebf0ddb1c0"
+      },
+      "supportedFixes": [
+        "use a line range that exists at the pinned revision"
+      ]
+    }
+  ],
+  "evidence": {
+    "receipt": "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\review-2\\vietlex-screen-map.finalize.json",
+    "summaryReceipt": "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\review-2\\vietlex-screen-map.finalize-summary.json"
+  },
+  "visualReview": "not-requested",
+  "failedStage": "validate",
+  "finishedAt": "2026-10-23T12:58:46.291Z",
+  "durationMs": 10254,
+  "update": {
+    "status": "unavailable",
+    "installedVersion": null,
+    "availableVersion": null,
+    "releaseNotes": null,
+    "checkedAt": null,
+    "source": null,
+    "noticeRequired": false,
+    "noticeText": null,
+    "reason": "timeout"
+  }
+}

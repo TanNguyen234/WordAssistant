@@ -1,0 +1,203 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Kiến trúc đề xuất của LMS",
+    "output": ".archify/architecture-lms-readable-20261028/architecture.html",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/TanNguyen234/LMS.git",
+      "revision": "41935af1fe67d5dc79fcd92a9c9f95426e46d04a",
+      "provider": "github"
+    }
+  },
+  "components": [
+    {
+      "id": "browser",
+      "type": "external",
+      "label": "Trình duyệt",
+      "sublabel": "Quản trị viên • giảng viên • sinh viên",
+      "pos": [
+        50,
+        50
+      ],
+      "size": [
+        300,
+        80
+      ],
+      "sources": [
+        {
+          "path": "docs/03_ARCHITECTURE.md",
+          "line": 9,
+          "end_line": 14,
+          "label": "Thiết kế kiến trúc dự án"
+        }
+      ]
+    },
+    {
+      "id": "ui",
+      "type": "frontend",
+      "label": "Giao diện React",
+      "sublabel": "React + TypeScript",
+      "pos": [
+        50,
+        190
+      ],
+      "size": [
+        300,
+        80
+      ],
+      "sources": [
+        {
+          "path": "docs/03_ARCHITECTURE.md",
+          "line": 9,
+          "end_line": 14,
+          "label": "Thiết kế kiến trúc dự án"
+        }
+      ]
+    },
+    {
+      "id": "api",
+      "type": "backend",
+      "label": "FastAPI",
+      "sublabel": "API và xử lý yêu cầu",
+      "pos": [
+        50,
+        330
+      ],
+      "size": [
+        300,
+        80
+      ],
+      "sources": [
+        {
+          "path": "docs/03_ARCHITECTURE.md",
+          "line": 9,
+          "end_line": 14,
+          "label": "Thiết kế kiến trúc dự án"
+        }
+      ]
+    },
+    {
+      "id": "service",
+      "type": "backend",
+      "label": "Tầng nghiệp vụ",
+      "sublabel": "Xử lý nghiệp vụ LMS",
+      "pos": [
+        50,
+        470
+      ],
+      "size": [
+        300,
+        80
+      ],
+      "sources": [
+        {
+          "path": "docs/03_ARCHITECTURE.md",
+          "line": 9,
+          "end_line": 14,
+          "label": "Thiết kế kiến trúc dự án"
+        }
+      ]
+    },
+    {
+      "id": "orm",
+      "type": "backend",
+      "label": "SQLAlchemy",
+      "sublabel": "Ánh xạ dữ liệu",
+      "pos": [
+        50,
+        610
+      ],
+      "size": [
+        300,
+        80
+      ],
+      "sources": [
+        {
+          "path": "docs/03_ARCHITECTURE.md",
+          "line": 9,
+          "end_line": 14,
+          "label": "Thiết kế kiến trúc dự án"
+        }
+      ]
+    },
+    {
+      "id": "db",
+      "type": "database",
+      "label": "SQL Server",
+      "sublabel": "Lưu trữ dữ liệu",
+      "pos": [
+        50,
+        750
+      ],
+      "size": [
+        300,
+        80
+      ],
+      "sources": [
+        {
+          "path": "docs/03_ARCHITECTURE.md",
+          "line": 9,
+          "end_line": 14,
+          "label": "Thiết kế kiến trúc dự án"
+        }
+      ]
+    },
+    {
+      "id": "files",
+      "type": "database",
+      "label": "Tệp cục bộ",
+      "sublabel": "Đường dẫn có thể cấu hình",
+      "pos": [
+        450,
+        330
+      ],
+      "size": [
+        300,
+        80
+      ],
+      "sources": [
+        {
+          "path": "docs/03_ARCHITECTURE.md",
+          "line": 9,
+          "end_line": 14,
+          "label": "Thiết kế kiến trúc dự án"
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "u-f",
+      "from": "browser",
+      "to": "ui"
+    },
+    {
+      "id": "f-a",
+      "from": "ui",
+      "to": "api",
+      "label": "HTTPS / JSON"
+    },
+    {
+      "id": "a-s",
+      "from": "api",
+      "to": "service"
+    },
+    {
+      "id": "s-o",
+      "from": "service",
+      "to": "orm"
+    },
+    {
+      "id": "o-d",
+      "from": "orm",
+      "to": "db"
+    },
+    {
+      "id": "a-files",
+      "from": "api",
+      "to": "files"
+    }
+  ]
+}

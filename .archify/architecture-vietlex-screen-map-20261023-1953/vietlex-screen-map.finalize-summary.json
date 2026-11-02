@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "fail",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\candidate.json",
+    "sha256": "bd5bb5f31a5f1fea82de603e90b6746b3ac3d198602c5b49a1bf57cfc5a2eafe",
+    "bytes": 8880
+  },
+  "artifact": {
+    "path": "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\vietlex-screen-map.html"
+  },
+  "gates": {
+    "validate": "fail",
+    "deliver": "not-run",
+    "check": "not-run",
+    "browser-check": "not-run"
+  },
+  "failedStage": "validate",
+  "diagnostics": [
+    {
+      "code": "repository-evidence/line-out-of-range",
+      "severity": "error",
+      "message": "/components/5/sources/0 requests line 115, but app/api/evaluation_lab_routes.py has 104 lines at revision 7519cd1aea4a3639140b9188de1843ebf0ddb1c0.",
+      "subject": {
+        "surface": "repository-evidence",
+        "path": "/components/5/sources/0",
+        "diagramType": "architecture",
+        "collection": "components",
+        "nodeId": "evaluation",
+        "componentId": "evaluation"
+      },
+      "evidence": {
+        "sourcePath": "app/api/evaluation_lab_routes.py",
+        "requestedLine": 115,
+        "lineCount": 104,
+        "revision": "7519cd1aea4a3639140b9188de1843ebf0ddb1c0"
+      },
+      "supportedFixes": [
+        "use a line range that exists at the pinned revision"
+      ]
+    }
+  ],
+  "diagnosticSummary": {
+    "total": 1,
+    "shown": 1,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\vietlex-screen-map.finalize.json",
+    "summaryReceipt": "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\vietlex-screen-map.finalize-summary.json"
+  },
+  "update": {
+    "status": "unavailable",
+    "installedVersion": null,
+    "availableVersion": null,
+    "releaseNotes": null,
+    "checkedAt": null,
+    "source": null,
+    "noticeRequired": false,
+    "noticeText": null,
+    "reason": "timeout"
+  },
+  "visualReview": "not-requested",
+  "durationMs": 10151,
+  "nextAction": {
+    "action": "edit-in-place",
+    "candidate": "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\candidate.json",
+    "constraint": "Preserve all semantics and user-fixed geometry. Use references/architecture-layout-repair.md to choose a local repair or connected-scene reflow; edit the existing candidate.",
+    "then": "finalize-once"
+  }
+}

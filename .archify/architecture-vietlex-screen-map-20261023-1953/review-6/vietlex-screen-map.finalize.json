@@ -1,0 +1,518 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "fail",
+  "type": "architecture",
+  "quality": "showcase",
+  "startedAt": "2026-10-23T13:03:43.586Z",
+  "specification": {
+    "path": "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\candidate.json",
+    "sha256": "15744d2066071cf7eef02b4816e975807766cb3f918db712481248f8f93a2663",
+    "bytes": 15589
+  },
+  "artifact": {
+    "path": "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\review-6\\vietlex-screen-map.html"
+  },
+  "stages": {
+    "validate": {
+      "status": "fail",
+      "exitCode": 1,
+      "durationMs": null,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "C:\\Users\\VI TINH THANH AN\\.codex\\skills\\archify\\bin\\archify.mjs",
+        "deliver",
+        "architecture",
+        "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\candidate.json",
+        "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\review-6\\vietlex-screen-map.html",
+        "--quality",
+        "showcase",
+        "--repo-root",
+        "D:\\Download\\ProfessionalLegalRAG",
+        "--json"
+      ],
+      "receipt": {
+        "schemaVersion": 1,
+        "ok": false,
+        "command": "deliver",
+        "receiptId": "34da5b9d-60ff-414d-a7ed-5936564ac993",
+        "stage": "check",
+        "type": "architecture",
+        "input": "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\candidate.json",
+        "output": "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\review-6\\vietlex-screen-map.html",
+        "error": "Final artifact check failed; the previous artifact was preserved.",
+        "diagnostics": [
+          {
+            "code": "composition/desktop-readability",
+            "severity": "error",
+            "message": "Final artifact failed composition/desktop-readability.",
+            "subject": {
+              "check": "composition",
+              "nodeId": "admin_ops"
+            },
+            "evidence": {
+              "owner": {
+                "kind": "node",
+                "id": "admin_ops"
+              },
+              "viewportWidth": 1440,
+              "viewportHeight": 900,
+              "availableDiagramWidth": 930,
+              "budgetBasis": "legacy-930",
+              "readerContract": "declared-wide-v1",
+              "requestedTargetPx": 7.5,
+              "requestedTargetMet": false,
+              "budgetLimit": "legacy",
+              "viewBoxWidth": 1318,
+              "scale": 0.7056145675265554,
+              "text": "GET requests · usage · providers · logs · users · audit",
+              "detail": "context",
+              "sourceFontPx": 6.7,
+              "projectedFontPx": 4.727617602427921,
+              "minimumProjectedFontPx": 6
+            },
+            "supportedFixes": [
+              "Preserve the semantic text and any supplied coordinates, routes, sides, channels, and labels. Compactly reflow automatic spacing and empty corridors so the complete viewBox width is at most 1038px (current 1318px; 6.7px source text at 930px desktop budget). If supplied geometry fixes that width, use a renderer-supported semantic text-size setting or renderer-level fix instead. Position-only label controls cannot repair its projection."
+            ]
+          }
+        ],
+        "provenance": "absent",
+        "checker": {
+          "ok": false,
+          "file": "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\review-6\\vietlex-screen-map.html",
+          "artifact": {
+            "sha256": "ff8d3a46af686c91517d2f5134dd460a56603beed1d1244d703730f67012db0c",
+            "bytes": 798928
+          },
+          "checks": [
+            {
+              "name": "single_svg",
+              "ok": true,
+              "details": [
+                "found 1 <svg> block(s)"
+              ]
+            },
+            {
+              "name": "finite_svg",
+              "ok": true,
+              "details": []
+            },
+            {
+              "name": "orthogonal_arrows",
+              "ok": true,
+              "details": []
+            },
+            {
+              "name": "label_route_clearance",
+              "ok": true,
+              "details": []
+            },
+            {
+              "name": "relationship_crossings",
+              "ok": true,
+              "details": []
+            },
+            {
+              "name": "relationship_corridors",
+              "ok": true,
+              "details": []
+            },
+            {
+              "name": "container_border_runs",
+              "ok": true,
+              "details": []
+            },
+            {
+              "name": "route_rhythm",
+              "ok": true,
+              "details": []
+            },
+            {
+              "name": "legend_clearance",
+              "ok": true,
+              "details": []
+            }
+          ],
+          "composition": {
+            "schemaVersion": 1,
+            "profile": "showcase",
+            "status": "fail",
+            "summary": {
+              "errors": 1,
+              "warnings": 0
+            },
+            "metrics": {
+              "properCrossings": 0,
+              "resolvedCrossovers": 6,
+              "ambiguousCorridors": 0,
+              "arrowheadCollisions": 0,
+              "containerBorderRuns": 0,
+              "labelRouteClearanceIssues": 0,
+              "labelCanvasOverflowIssues": 0,
+              "minLabelRouteClearance": 5,
+              "desktopReadabilityIssues": 1,
+              "viewportHeightIssues": 0,
+              "minProjectedNodeTextPx": 4.727617602427921,
+              "maxBends": 3,
+              "routesOverSuggestedBends": 5,
+              "maxStretch": 1.146,
+              "routesOverSuggestedStretch": 0,
+              "minSegmentPx": 24,
+              "minInteriorSegmentPx": 25,
+              "shortSegmentCount": 0,
+              "shortEndpointSegmentCount": 0,
+              "shortInteriorSegmentCount": 0,
+              "microSegmentCount": 0
+            },
+            "suggestedLimits": {
+              "bendsPerRelationship": 2,
+              "stretch": 1.35,
+              "segmentPx": 16,
+              "microSegmentPx": 8
+            },
+            "routeReview": {
+              "crossings": [
+                {
+                  "left": {
+                    "id": "workspace-detail",
+                    "from": "workspace_list",
+                    "to": "workspace_detail",
+                    "label": "Mở hồ sơ của mình",
+                    "collectionIndex": 10,
+                    "artifactIndex": 11
+                  },
+                  "right": {
+                    "id": "gate-analysis",
+                    "from": "access_gate",
+                    "to": "analysis_views",
+                    "label": "owner-scoped",
+                    "collectionIndex": 15,
+                    "artifactIndex": 16
+                  },
+                  "point": [
+                    640,
+                    739
+                  ]
+                },
+                {
+                  "left": {
+                    "id": "gate-settings",
+                    "from": "access_gate",
+                    "to": "settings",
+                    "label": "require_user",
+                    "collectionIndex": 13,
+                    "artifactIndex": 14
+                  },
+                  "right": {
+                    "id": "gate-analysis",
+                    "from": "access_gate",
+                    "to": "analysis_views",
+                    "label": "owner-scoped",
+                    "collectionIndex": 15,
+                    "artifactIndex": 16
+                  },
+                  "point": [
+                    1105,
+                    739
+                  ],
+                  "sharedNode": "access_gate"
+                },
+                {
+                  "left": {
+                    "id": "gate-workspace",
+                    "from": "access_gate",
+                    "to": "workspace_detail",
+                    "label": "owner-scoped",
+                    "collectionIndex": 14,
+                    "artifactIndex": 15
+                  },
+                  "right": {
+                    "id": "gate-admin-ops",
+                    "from": "access_gate",
+                    "to": "admin_ops",
+                    "label": "require_admin",
+                    "collectionIndex": 20,
+                    "artifactIndex": 21
+                  },
+                  "point": [
+                    866.5999999999998,
+                    800
+                  ],
+                  "sharedNode": "access_gate"
+                },
+                {
+                  "left": {
+                    "id": "gate-sources",
+                    "from": "access_gate",
+                    "to": "source_views",
+                    "label": "owner-scoped",
+                    "collectionIndex": 16,
+                    "artifactIndex": 17
+                  },
+                  "right": {
+                    "id": "gate-admin",
+                    "from": "access_gate",
+                    "to": "admin_home",
+                    "label": "require_admin",
+                    "collectionIndex": 17,
+                    "artifactIndex": 18
+                  },
+                  "point": [
+                    1119,
+                    865
+                  ],
+                  "sharedNode": "access_gate"
+                },
+                {
+                  "left": {
+                    "id": "gate-sources",
+                    "from": "access_gate",
+                    "to": "source_views",
+                    "label": "owner-scoped",
+                    "collectionIndex": 16,
+                    "artifactIndex": 17
+                  },
+                  "right": {
+                    "id": "gate-admin-ops",
+                    "from": "access_gate",
+                    "to": "admin_ops",
+                    "label": "require_admin",
+                    "collectionIndex": 20,
+                    "artifactIndex": 21
+                  },
+                  "point": [
+                    866.5999999999998,
+                    865
+                  ],
+                  "sharedNode": "access_gate"
+                },
+                {
+                  "left": {
+                    "id": "gate-sources",
+                    "from": "access_gate",
+                    "to": "source_views",
+                    "label": "owner-scoped",
+                    "collectionIndex": 16,
+                    "artifactIndex": 17
+                  },
+                  "right": {
+                    "id": "gate-admin-quality",
+                    "from": "access_gate",
+                    "to": "admin_quality",
+                    "label": "require_admin",
+                    "collectionIndex": 21,
+                    "artifactIndex": 22
+                  },
+                  "point": [
+                    1134.2222222222222,
+                    865
+                  ],
+                  "sharedNode": "access_gate"
+                }
+              ],
+              "detours": [
+                {
+                  "relationship": {
+                    "id": "home-workspaces",
+                    "from": "home",
+                    "to": "workspace_list",
+                    "label": "Nghiên cứu",
+                    "collectionIndex": 7,
+                    "artifactIndex": 8
+                  },
+                  "bends": 3,
+                  "stretch": 1
+                },
+                {
+                  "relationship": {
+                    "id": "gate-analysis",
+                    "from": "access_gate",
+                    "to": "analysis_views",
+                    "label": "owner-scoped",
+                    "collectionIndex": 15,
+                    "artifactIndex": 16
+                  },
+                  "bends": 3,
+                  "stretch": 1.109
+                },
+                {
+                  "relationship": {
+                    "id": "gate-sources",
+                    "from": "access_gate",
+                    "to": "source_views",
+                    "label": "owner-scoped",
+                    "collectionIndex": 16,
+                    "artifactIndex": 17
+                  },
+                  "bends": 3,
+                  "stretch": 1.057
+                },
+                {
+                  "relationship": {
+                    "id": "gate-admin-ops",
+                    "from": "access_gate",
+                    "to": "admin_ops",
+                    "label": "require_admin",
+                    "collectionIndex": 20,
+                    "artifactIndex": 21
+                  },
+                  "bends": 3,
+                  "stretch": 1
+                },
+                {
+                  "relationship": {
+                    "id": "gate-admin-quality",
+                    "from": "access_gate",
+                    "to": "admin_quality",
+                    "label": "require_admin",
+                    "collectionIndex": 21,
+                    "artifactIndex": 22
+                  },
+                  "bends": 3,
+                  "stretch": 1.129,
+                  "directCorridorBlockers": [
+                    {
+                      "id": "admin_home",
+                      "label": "Tổng quan quản trị",
+                      "box": [
+                        990,
+                        910,
+                        230,
+                        102
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "leadingSpace": {
+              "measured": true,
+              "emptyTopPx": 70,
+              "emptyTopRatio": 0.056,
+              "occupiedTop": 70,
+              "viewBoxTop": 0,
+              "canvasHeight": 1248,
+              "typicalNodeHeight": 102,
+              "reviewSuggested": false
+            },
+            "desktopReadability": {
+              "budgetBasis": "legacy-930",
+              "readerContract": "declared-wide-v1",
+              "availableDiagramWidth": 930,
+              "actualBudgetPx": 930,
+              "limit": "legacy",
+              "requestedTargetPx": 7.5,
+              "requestedTargetMet": false,
+              "hardFloorPx": 6,
+              "hardFloorMet": false,
+              "minimumOwner": {
+                "kind": "node",
+                "id": "admin_ops"
+              },
+              "minimumSourceTextPx": 6.7,
+              "minimumProjectedTextPx": 4.727617602427921,
+              "semanticTextCount": 58
+            },
+            "issues": [
+              {
+                "severity": "error",
+                "code": "composition/desktop-readability",
+                "nodeId": "admin_ops",
+                "owner": {
+                  "kind": "node",
+                  "id": "admin_ops"
+                },
+                "viewportWidth": 1440,
+                "viewportHeight": 900,
+                "availableDiagramWidth": 930,
+                "budgetBasis": "legacy-930",
+                "readerContract": "declared-wide-v1",
+                "requestedTargetPx": 7.5,
+                "requestedTargetMet": false,
+                "budgetLimit": "legacy",
+                "viewBoxWidth": 1318,
+                "scale": 0.7056145675265554,
+                "text": "GET requests · usage · providers · logs · users · audit",
+                "detail": "context",
+                "sourceFontPx": 6.7,
+                "projectedFontPx": 4.727617602427921,
+                "minimumProjectedFontPx": 6
+              }
+            ]
+          }
+        },
+        "update": {
+          "status": "unavailable",
+          "installedVersion": null,
+          "availableVersion": null,
+          "releaseNotes": null,
+          "checkedAt": null,
+          "source": null,
+          "noticeRequired": false,
+          "noticeText": null,
+          "reason": "disabled"
+        }
+      },
+      "execution": "embedded-in-deliver"
+    },
+    "deliver": {
+      "status": "not-run",
+      "execution": "blocked-by-validate"
+    }
+  },
+  "diagnostics": [
+    {
+      "code": "composition/desktop-readability",
+      "severity": "error",
+      "message": "Final artifact failed composition/desktop-readability.",
+      "subject": {
+        "check": "composition",
+        "nodeId": "admin_ops"
+      },
+      "evidence": {
+        "owner": {
+          "kind": "node",
+          "id": "admin_ops"
+        },
+        "viewportWidth": 1440,
+        "viewportHeight": 900,
+        "availableDiagramWidth": 930,
+        "budgetBasis": "legacy-930",
+        "readerContract": "declared-wide-v1",
+        "requestedTargetPx": 7.5,
+        "requestedTargetMet": false,
+        "budgetLimit": "legacy",
+        "viewBoxWidth": 1318,
+        "scale": 0.7056145675265554,
+        "text": "GET requests · usage · providers · logs · users · audit",
+        "detail": "context",
+        "sourceFontPx": 6.7,
+        "projectedFontPx": 4.727617602427921,
+        "minimumProjectedFontPx": 6
+      },
+      "supportedFixes": [
+        "Preserve the semantic text and any supplied coordinates, routes, sides, channels, and labels. Compactly reflow automatic spacing and empty corridors so the complete viewBox width is at most 1038px (current 1318px; 6.7px source text at 930px desktop budget). If supplied geometry fixes that width, use a renderer-supported semantic text-size setting or renderer-level fix instead. Position-only label controls cannot repair its projection."
+      ]
+    }
+  ],
+  "evidence": {
+    "receipt": "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\review-6\\vietlex-screen-map.finalize.json",
+    "summaryReceipt": "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\review-6\\vietlex-screen-map.finalize-summary.json"
+  },
+  "visualReview": "not-requested",
+  "failedStage": "validate",
+  "finishedAt": "2026-10-23T13:03:48.527Z",
+  "durationMs": 4940,
+  "update": {
+    "status": "unavailable",
+    "installedVersion": null,
+    "availableVersion": null,
+    "releaseNotes": null,
+    "checkedAt": null,
+    "source": null,
+    "noticeRequired": false,
+    "noticeText": null,
+    "reason": "cache-valid"
+  }
+}

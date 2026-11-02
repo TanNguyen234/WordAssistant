@@ -1,0 +1,657 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Phân cấp màn hình VietLex",
+    "output": ".archify/architecture-vietlex-screen-map-20261023-1953/vietlex-screen-map.html",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/TanNguyen234/VietLex-Tech-Spec.git",
+      "provider": "github",
+      "link_mode": "web",
+      "revision": "7519cd1aea4a3639140b9188de1843ebf0ddb1c0"
+    }
+  },
+  "components": [
+    {
+      "id": "visitor",
+      "type": "external",
+      "label": "Người truy cập",
+      "sublabel": "Bắt đầu ở trang công khai",
+      "sources": [
+        {
+          "path": "app/main.py",
+          "line": 155,
+          "end_line": 180,
+          "label": "Trang chủ GET /"
+        }
+      ],
+      "row": 0,
+      "col": 1,
+      "size": [
+        180,
+        64
+      ]
+    },
+    {
+      "id": "home",
+      "type": "frontend",
+      "label": "Hỏi đáp",
+      "sublabel": "GET /",
+      "sources": [
+        {
+          "path": "app/main.py",
+          "line": 155,
+          "end_line": 180,
+          "label": "Root page"
+        },
+        {
+          "path": "app/templates/index.html",
+          "line": 13,
+          "end_line": 31,
+          "label": "Menu và thẻ điều hướng"
+        }
+      ],
+      "row": 1,
+      "col": 1,
+      "size": [
+        220,
+        84
+      ]
+    },
+    {
+      "id": "search",
+      "type": "frontend",
+      "label": "Tra cứu văn bản",
+      "sublabel": "GET /search · GET kết quả",
+      "sources": [
+        {
+          "path": "app/api/legal_routes.py",
+          "line": 81,
+          "end_line": 128,
+          "label": "Search page"
+        },
+        {
+          "path": "app/templates/legal_search.html",
+          "line": 3,
+          "end_line": 4,
+          "label": "Form và liên kết hiệu lực"
+        }
+      ],
+      "row": 2,
+      "col": 0,
+      "size": [
+        220,
+        84
+      ]
+    },
+    {
+      "id": "reader",
+      "type": "frontend",
+      "label": "Đọc văn bản",
+      "sublabel": "GET /documents/{document_id}",
+      "sources": [
+        {
+          "path": "app/api/legal_routes.py",
+          "line": 129,
+          "end_line": 181,
+          "label": "Document page"
+        }
+      ],
+      "row": 3,
+      "col": 0,
+      "size": [
+        220,
+        84
+      ]
+    },
+    {
+      "id": "legal_status",
+      "type": "frontend",
+      "label": "Tra cứu hiệu lực",
+      "sublabel": "GET /legal-status",
+      "sources": [
+        {
+          "path": "app/api/legal_registry_routes.py",
+          "line": 23,
+          "end_line": 58,
+          "label": "Public status view"
+        },
+        {
+          "path": "app/templates/legal_search.html",
+          "line": 3,
+          "end_line": 4,
+          "label": "Entry link"
+        }
+      ],
+      "row": 3,
+      "col": 1,
+      "size": [
+        220,
+        84
+      ]
+    },
+    {
+      "id": "evaluation",
+      "type": "frontend",
+      "label": "Chất lượng và kiểm chứng",
+      "sublabel": "GET /evaluation-lab",
+      "sources": [
+        {
+          "path": "app/api/evaluation_lab_routes.py",
+          "line": 95,
+          "end_line": 104,
+          "label": "Public evaluation view"
+        },
+        {
+          "path": "app/templates/product_nav.html",
+          "line": 5,
+          "end_line": 5,
+          "label": "Menu link"
+        }
+      ],
+      "row": 2,
+      "col": 1,
+      "size": [
+        220,
+        84
+      ]
+    },
+    {
+      "id": "legal_info",
+      "type": "frontend",
+      "label": "Quyền riêng tư và điều khoản",
+      "sublabel": "GET /privacy · GET /terms",
+      "sources": [
+        {
+          "path": "app/api/legal_routes.py",
+          "line": 186,
+          "end_line": 193,
+          "label": "Public policy views"
+        },
+        {
+          "path": "app/templates/index.html",
+          "line": 42,
+          "end_line": 42,
+          "label": "Footer links"
+        }
+      ],
+      "row": 4,
+      "col": 0,
+      "size": [
+        220,
+        84
+      ]
+    },
+    {
+      "id": "account",
+      "type": "frontend",
+      "label": "Tài khoản",
+      "sublabel": "GET /login · /register · /forgot-password",
+      "sources": [
+        {
+          "path": "app/api/account_routes.py",
+          "line": 92,
+          "end_line": 204,
+          "label": "Login and registration views"
+        },
+        {
+          "path": "app/templates/account_form.html",
+          "line": 4,
+          "end_line": 6,
+          "label": "Account form links"
+        },
+        {
+          "path": "app/templates/product_nav.html",
+          "line": 4,
+          "end_line": 4,
+          "label": "Account navigation"
+        }
+      ],
+      "row": 2,
+      "col": 2,
+      "size": [
+        220,
+        84
+      ]
+    },
+    {
+      "id": "token_pages",
+      "type": "security",
+      "label": "Xác minh và đặt lại mật khẩu",
+      "sublabel": "GET /verify-email · /reset-password · token required",
+      "sources": [
+        {
+          "path": "app/api/account_routes.py",
+          "line": 205,
+          "end_line": 260,
+          "label": "Token-bound views"
+        },
+        {
+          "path": "app/templates/account_form.html",
+          "line": 7,
+          "end_line": 10,
+          "label": "Account flow views"
+        }
+      ],
+      "row": 3,
+      "col": 2,
+      "size": [
+        220,
+        84
+      ]
+    },
+    {
+      "id": "settings",
+      "type": "security",
+      "label": "Cài đặt tài khoản",
+      "sublabel": "GET /settings · require_user",
+      "sources": [
+        {
+          "path": "app/api/account_routes.py",
+          "line": 276,
+          "end_line": 310,
+          "label": "Redirect and settings view"
+        },
+        {
+          "path": "app/templates/product_nav.html",
+          "line": 4,
+          "end_line": 4,
+          "label": "Account navigation"
+        }
+      ],
+      "row": 4,
+      "col": 1,
+      "size": [
+        220,
+        84
+      ]
+    },
+    {
+      "id": "workspace_list",
+      "type": "frontend",
+      "label": "Danh sách hồ sơ",
+      "sublabel": "GET /workspaces",
+      "sources": [
+        {
+          "path": "app/api/workspace_routes.py",
+          "line": 145,
+          "end_line": 155,
+          "label": "Workspace list view"
+        },
+        {
+          "path": "app/templates/index.html",
+          "line": 28,
+          "end_line": 31,
+          "label": "Research entry cards"
+        }
+      ],
+      "row": 4,
+      "col": 2,
+      "size": [
+        220,
+        84
+      ]
+    },
+    {
+      "id": "workspace_detail",
+      "type": "security",
+      "label": "Chi tiết hồ sơ",
+      "sublabel": "GET /workspaces/{workspace_id} · owner scope",
+      "sources": [
+        {
+          "path": "app/api/workspace_routes.py",
+          "line": 136,
+          "end_line": 152,
+          "label": "Owner lookup"
+        },
+        {
+          "path": "app/api/workspace_routes.py",
+          "line": 189,
+          "end_line": 206,
+          "label": "Workspace detail view"
+        }
+      ],
+      "row": 5,
+      "col": 2,
+      "size": [
+        220,
+        84
+      ]
+    },
+    {
+      "id": "analysis_views",
+      "type": "security",
+      "label": "Kết quả nghiên cứu",
+      "sublabel": "GET findings · legal-effect · reports",
+      "sources": [
+        {
+          "path": "app/api/finding_routes.py",
+          "line": 26,
+          "end_line": 35,
+          "label": "Finding board"
+        },
+        {
+          "path": "app/api/legal_effect_routes.py",
+          "line": 133,
+          "end_line": 148,
+          "label": "Legal effect history"
+        },
+        {
+          "path": "app/api/research_report_routes.py",
+          "line": 37,
+          "end_line": 45,
+          "label": "Report editor"
+        }
+      ],
+      "row": 6,
+      "col": 0,
+      "size": [
+        220,
+        84
+      ]
+    },
+    {
+      "id": "source_views",
+      "type": "security",
+      "label": "Nguồn đã đọc",
+      "sublabel": "GET source-analysis · sources",
+      "sources": [
+        {
+          "path": "app/api/retained_source_routes.py",
+          "line": 121,
+          "end_line": 140,
+          "label": "Retained source analysis"
+        },
+        {
+          "path": "app/api/trusted_source_routes.py",
+          "line": 27,
+          "end_line": 40,
+          "label": "Saved source reader"
+        },
+        {
+          "path": "app/api/workspace_routes.py",
+          "line": 136,
+          "end_line": 152,
+          "label": "Owner-scoped workspace"
+        }
+      ],
+      "row": 6,
+      "col": 1,
+      "size": [
+        220,
+        84
+      ]
+    },
+    {
+      "id": "access_gate",
+      "type": "security",
+      "label": "Cổng truy cập",
+      "sublabel": "require_user · owner scope · require_admin · token",
+      "sources": [
+        {
+          "path": "app/api/account_routes.py",
+          "line": 282,
+          "end_line": 288,
+          "label": "Authenticated settings"
+        },
+        {
+          "path": "app/api/workspace_routes.py",
+          "line": 136,
+          "end_line": 152,
+          "label": "Workspace ownership"
+        },
+        {
+          "path": "app/api/routes.py",
+          "line": 1167,
+          "end_line": 1174,
+          "label": "Admin role gate"
+        }
+      ],
+      "row": 5,
+      "col": 0,
+      "size": [
+        220,
+        84
+      ]
+    },
+    {
+      "id": "admin_home",
+      "type": "security",
+      "label": "Tổng quan quản trị",
+      "sublabel": "GET /admin · require_admin",
+      "sources": [
+        {
+          "path": "app/api/routes.py",
+          "line": 1167,
+          "end_line": 1183,
+          "label": "Admin overview"
+        },
+        {
+          "path": "app/templates/admin_base.html",
+          "line": 5,
+          "end_line": 7,
+          "label": "Admin navigation"
+        }
+      ],
+      "row": 6,
+      "col": 2,
+      "size": [
+        220,
+        84
+      ]
+    },
+    {
+      "id": "admin_ops",
+      "type": "security",
+      "label": "Vận hành quản trị",
+      "sublabel": "GET requests · usage · providers · logs · users · audit",
+      "sources": [
+        {
+          "path": "app/api/routes.py",
+          "line": 1185,
+          "end_line": 1381,
+          "label": "Admin operations pages"
+        },
+        {
+          "path": "app/templates/admin_base.html",
+          "line": 5,
+          "end_line": 7,
+          "label": "Admin navigation"
+        }
+      ],
+      "row": 7,
+      "col": 1,
+      "size": [
+        220,
+        84
+      ]
+    },
+    {
+      "id": "admin_quality",
+      "type": "security",
+      "label": "Kiểm chứng dữ liệu",
+      "sublabel": "GET evaluations · registry · corpus · feedback",
+      "sources": [
+        {
+          "path": "app/api/evaluation_lab_routes.py",
+          "line": 43,
+          "end_line": 90,
+          "label": "Admin evaluations"
+        },
+        {
+          "path": "app/api/legal_registry_routes.py",
+          "line": 60,
+          "end_line": 94,
+          "label": "Admin legal registry"
+        },
+        {
+          "path": "app/api/product_quality_routes.py",
+          "line": 20,
+          "end_line": 70,
+          "label": "Corpus and feedback queues"
+        }
+      ],
+      "row": 7,
+      "col": 2,
+      "size": [
+        220,
+        84
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "enter-home",
+      "from": "visitor",
+      "to": "home",
+      "label": "Mở website",
+      "variant": "emphasis"
+    },
+    {
+      "id": "home-search",
+      "from": "home",
+      "to": "search",
+      "label": "Thẻ Tra cứu"
+    },
+    {
+      "id": "search-reader",
+      "from": "search",
+      "to": "reader",
+      "label": "Mở kết quả"
+    },
+    {
+      "id": "search-status",
+      "from": "search",
+      "to": "legal_status",
+      "label": "Đối chiếu hiệu lực"
+    },
+    {
+      "id": "home-evaluation",
+      "from": "home",
+      "to": "evaluation",
+      "label": "Menu Tìm hiểu thêm"
+    },
+    {
+      "id": "home-policy",
+      "from": "home",
+      "to": "legal_info",
+      "label": "Liên kết chính sách"
+    },
+    {
+      "id": "home-account",
+      "from": "home",
+      "to": "account",
+      "label": "Đăng nhập"
+    },
+    {
+      "id": "home-workspaces",
+      "from": "home",
+      "to": "workspace_list",
+      "label": "Nghiên cứu"
+    },
+    {
+      "id": "account-token",
+      "from": "account",
+      "to": "token_pages",
+      "label": "Liên kết email có token",
+      "variant": "dashed"
+    },
+    {
+      "id": "account-settings",
+      "from": "account",
+      "to": "settings",
+      "label": "Phiên hợp lệ",
+      "variant": "security"
+    },
+    {
+      "id": "workspace-detail",
+      "from": "workspace_list",
+      "to": "workspace_detail",
+      "label": "Mở hồ sơ của mình",
+      "variant": "security"
+    },
+    {
+      "id": "workspace-analysis",
+      "from": "workspace_detail",
+      "to": "analysis_views",
+      "label": "Xem kết quả đã lưu"
+    },
+    {
+      "id": "workspace-sources",
+      "from": "workspace_detail",
+      "to": "source_views",
+      "label": "Mở nguồn đã đọc"
+    },
+    {
+      "id": "gate-settings",
+      "from": "access_gate",
+      "to": "settings",
+      "label": "require_user",
+      "variant": "security"
+    },
+    {
+      "id": "gate-workspace",
+      "from": "access_gate",
+      "to": "workspace_detail",
+      "label": "owner-scoped",
+      "variant": "security"
+    },
+    {
+      "id": "gate-analysis",
+      "from": "access_gate",
+      "to": "analysis_views",
+      "variant": "security"
+    },
+    {
+      "id": "gate-sources",
+      "from": "access_gate",
+      "to": "source_views",
+      "variant": "security"
+    },
+    {
+      "id": "gate-admin",
+      "from": "access_gate",
+      "to": "admin_home",
+      "label": "require_admin",
+      "variant": "security"
+    },
+    {
+      "id": "admin-ops",
+      "from": "admin_home",
+      "to": "admin_ops",
+      "label": "Menu quản trị",
+      "labelDx": 80
+    },
+    {
+      "id": "admin-quality",
+      "from": "admin_home",
+      "to": "admin_quality",
+      "label": "Menu kiểm chứng"
+    },
+    {
+      "id": "gate-admin-ops",
+      "from": "access_gate",
+      "to": "admin_ops",
+      "variant": "security"
+    },
+    {
+      "id": "gate-admin-quality",
+      "from": "access_gate",
+      "to": "admin_quality",
+      "variant": "security"
+    }
+  ],
+  "layout": {
+    "mode": "grid",
+    "origin": [
+      60,
+      60
+    ],
+    "cols": 3,
+    "gapX": 70,
+    "gapY": 43,
+    "cellW": 220,
+    "cellH": 84
+  }
+}

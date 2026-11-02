@@ -1,0 +1,313 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\candidate.json",
+    "sha256": "8f9039ec40273d0322c7479f8f808beee500aa7540c0608aab6211e6cccffffe",
+    "bytes": 15463
+  },
+  "artifact": {
+    "path": "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\review-7\\vietlex-screen-map.html",
+    "sha256": "4029ccbfad7c8db1300b649b7bbe735268dec32e3e3998c47ac88fb1e2e79e6f",
+    "bytes": 797791
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\review-7\\vietlex-screen-map.finalize.json",
+    "summaryReceipt": "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\review-7\\vietlex-screen-map.finalize-summary.json",
+    "browserCheckReceipt": "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\review-7\\vietlex-screen-map.browser-check.json"
+  },
+  "update": {
+    "status": "unavailable",
+    "installedVersion": null,
+    "availableVersion": null,
+    "releaseNotes": null,
+    "checkedAt": null,
+    "source": null,
+    "noticeRequired": false,
+    "noticeText": null,
+    "reason": "cache-valid"
+  },
+  "visualReview": "not-requested",
+  "durationMs": 19640,
+  "visualReviewRecommendation": {
+    "action": "inspect-route-readability",
+    "signals": {
+      "resolvedCrossovers": 14,
+      "routesOverSuggestedBends": 5,
+      "routesOverSuggestedStretch": 1
+    },
+    "reason": "Automated gates passed, but crossings or detours still need perceptual review before claiming visual quality.",
+    "affectedRoutes": {
+      "crossings": [
+        {
+          "left": {
+            "id": "home-search",
+            "from": "home",
+            "to": "search",
+            "label": "Thẻ Tra cứu",
+            "collectionIndex": 1,
+            "artifactIndex": 2
+          },
+          "right": {
+            "id": "home-policy",
+            "from": "home",
+            "to": "legal_info",
+            "label": "Liên kết chính sách",
+            "collectionIndex": 5,
+            "artifactIndex": 6
+          },
+          "point": [
+            326,
+            229
+          ],
+          "sharedNode": "home"
+        },
+        {
+          "left": {
+            "id": "search-status",
+            "from": "search",
+            "to": "legal_status",
+            "label": "Đối chiếu hiệu lực",
+            "collectionIndex": 3,
+            "artifactIndex": 4
+          },
+          "right": {
+            "id": "home-policy",
+            "from": "home",
+            "to": "legal_info",
+            "label": "Liên kết chính sách",
+            "collectionIndex": 5,
+            "artifactIndex": 6
+          },
+          "point": [
+            326,
+            483
+          ]
+        },
+        {
+          "left": {
+            "id": "workspace-analysis",
+            "from": "workspace_detail",
+            "to": "analysis_views",
+            "label": "Xem kết quả đã lưu",
+            "collectionIndex": 11,
+            "artifactIndex": 12
+          },
+          "right": {
+            "id": "gate-workspace",
+            "from": "access_gate",
+            "to": "workspace_detail",
+            "label": "owner-scoped",
+            "collectionIndex": 14,
+            "artifactIndex": 15
+          },
+          "point": [
+            615.9999999999999,
+            736.9999999999999
+          ],
+          "sharedNode": "workspace_detail"
+        },
+        {
+          "left": {
+            "id": "workspace-analysis",
+            "from": "workspace_detail",
+            "to": "analysis_views",
+            "label": "Xem kết quả đã lưu",
+            "collectionIndex": 11,
+            "artifactIndex": 12
+          },
+          "right": {
+            "id": "gate-sources",
+            "from": "access_gate",
+            "to": "source_views",
+            "label": "",
+            "collectionIndex": 16,
+            "artifactIndex": 17
+          },
+          "point": [
+            460.00000000000006,
+            818.9999999999999
+          ]
+        },
+        {
+          "left": {
+            "id": "workspace-analysis",
+            "from": "workspace_detail",
+            "to": "analysis_views",
+            "label": "Xem kết quả đã lưu",
+            "collectionIndex": 11,
+            "artifactIndex": 12
+          },
+          "right": {
+            "id": "gate-admin",
+            "from": "access_gate",
+            "to": "admin_home",
+            "label": "require_admin",
+            "collectionIndex": 17,
+            "artifactIndex": 18
+          },
+          "point": [
+            498.8000000000007,
+            803
+          ]
+        },
+        {
+          "left": {
+            "id": "workspace-analysis",
+            "from": "workspace_detail",
+            "to": "analysis_views",
+            "label": "Xem kết quả đã lưu",
+            "collectionIndex": 11,
+            "artifactIndex": 12
+          },
+          "right": {
+            "id": "gate-admin-ops",
+            "from": "access_gate",
+            "to": "admin_ops",
+            "label": "",
+            "collectionIndex": 20,
+            "artifactIndex": 21
+          },
+          "point": [
+            326,
+            818.9999999999999
+          ]
+        },
+        {
+          "left": {
+            "id": "workspace-analysis",
+            "from": "workspace_detail",
+            "to": "analysis_views",
+            "label": "Xem kết quả đã lưu",
+            "collectionIndex": 11,
+            "artifactIndex": 12
+          },
+          "right": {
+            "id": "gate-admin-quality",
+            "from": "access_gate",
+            "to": "admin_quality",
+            "label": "",
+            "collectionIndex": 21,
+            "artifactIndex": 22
+          },
+          "point": [
+            498.80000000000075,
+            758
+          ]
+        },
+        {
+          "left": {
+            "id": "workspace-sources",
+            "from": "workspace_detail",
+            "to": "source_views",
+            "label": "Mở nguồn đã đọc",
+            "collectionIndex": 12,
+            "artifactIndex": 13
+          },
+          "right": {
+            "id": "gate-admin",
+            "from": "access_gate",
+            "to": "admin_home",
+            "label": "require_admin",
+            "collectionIndex": 17,
+            "artifactIndex": 18
+          },
+          "point": [
+            605,
+            803
+          ]
+        }
+      ],
+      "detours": [
+        {
+          "relationship": {
+            "id": "home-policy",
+            "from": "home",
+            "to": "legal_info",
+            "label": "Liên kết chính sách",
+            "collectionIndex": 5,
+            "artifactIndex": 6
+          },
+          "bends": 3,
+          "stretch": 1
+        },
+        {
+          "relationship": {
+            "id": "home-workspaces",
+            "from": "home",
+            "to": "workspace_list",
+            "label": "Nghiên cứu",
+            "collectionIndex": 7,
+            "artifactIndex": 8
+          },
+          "bends": 3,
+          "stretch": 1.424
+        },
+        {
+          "relationship": {
+            "id": "workspace-analysis",
+            "from": "workspace_detail",
+            "to": "analysis_views",
+            "label": "Xem kết quả đã lưu",
+            "collectionIndex": 11,
+            "artifactIndex": 12
+          },
+          "bends": 4,
+          "stretch": 1
+        },
+        {
+          "relationship": {
+            "id": "gate-workspace",
+            "from": "access_gate",
+            "to": "workspace_detail",
+            "label": "owner-scoped",
+            "collectionIndex": 14,
+            "artifactIndex": 15
+          },
+          "bends": 4,
+          "stretch": 1.087
+        },
+        {
+          "relationship": {
+            "id": "gate-admin",
+            "from": "access_gate",
+            "to": "admin_home",
+            "label": "require_admin",
+            "collectionIndex": 17,
+            "artifactIndex": 18
+          },
+          "bends": 3,
+          "stretch": 1
+        }
+      ],
+      "truncated": true
+    },
+    "hints": [
+      "access_gate has 6 relationships facing its right side, which fits 4 ports: make that side at least 102px, or move some of those neighbours so they face another side of access_gate.",
+      "home → search and home → legal_info cross next to home: move node search or legal_info so the two reach home from different sides (for example one level with it, one directly above or below it).",
+      "search → legal_status crosses home → legal_info: move the node of whichever is a branch, return, or second entrance to the other side of the main path, so that relationship runs through an empty corridor.",
+      "workspace_detail → analysis_views and access_gate → workspace_detail cross next to workspace_detail: move node analysis_views or access_gate so the two reach workspace_detail from different sides (for example one level with it, one directly above or below it).",
+      "workspace_detail → analysis_views crosses access_gate → source_views: move the node of whichever is a branch, return, or second entrance to the other side of the main path, so that relationship runs through an empty corridor.",
+      "workspace_detail → analysis_views crosses access_gate → admin_home: move the node of whichever is a branch, return, or second entrance to the other side of the main path, so that relationship runs through an empty corridor.",
+      "workspace_detail → analysis_views crosses access_gate → admin_ops: move the node of whichever is a branch, return, or second entrance to the other side of the main path, so that relationship runs through an empty corridor.",
+      "workspace_detail → analysis_views crosses access_gate → admin_quality: move the node of whichever is a branch, return, or second entrance to the other side of the main path, so that relationship runs through an empty corridor."
+    ],
+    "repair": "Trace these relationships at the desktop viewport. For Architecture, use references/architecture-layout-repair.md: reflow a blocked main path or tangled connected scene, and repair an isolated defect locally only when the surrounding composition is accepted. Preserve all semantic content and user-fixed geometry. Rerun finalize once after the edit."
+  }
+}

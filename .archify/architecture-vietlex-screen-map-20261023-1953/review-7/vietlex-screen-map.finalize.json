@@ -1,0 +1,1377 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "architecture",
+  "quality": "showcase",
+  "startedAt": "2026-10-23T13:05:19.848Z",
+  "specification": {
+    "path": "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\candidate.json",
+    "sha256": "8f9039ec40273d0322c7479f8f808beee500aa7540c0608aab6211e6cccffffe",
+    "bytes": 15463
+  },
+  "artifact": {
+    "path": "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\review-7\\vietlex-screen-map.html",
+    "sha256": "4029ccbfad7c8db1300b649b7bbe735268dec32e3e3998c47ac88fb1e2e79e6f",
+    "bytes": 797791
+  },
+  "stages": {
+    "validate": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": null,
+      "execution": "embedded-in-deliver",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "C:\\Users\\VI TINH THANH AN\\.codex\\skills\\archify\\bin\\archify.mjs",
+        "deliver",
+        "architecture",
+        "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\candidate.json",
+        "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\review-7\\vietlex-screen-map.html",
+        "--quality",
+        "showcase",
+        "--repo-root",
+        "D:\\Download\\ProfessionalLegalRAG",
+        "--json"
+      ],
+      "receipt": {
+        "schemaVersion": 1,
+        "ok": true,
+        "command": "validate",
+        "specification": {
+          "sha256": "8f9039ec40273d0322c7479f8f808beee500aa7540c0608aab6211e6cccffffe",
+          "bytes": 15463
+        },
+        "validation": {
+          "checksPassed": 9,
+          "checkCount": 9,
+          "compositionProfile": "showcase",
+          "compositionStatus": "pass",
+          "errors": 0,
+          "warnings": 0
+        }
+      }
+    },
+    "deliver": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 4769,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "C:\\Users\\VI TINH THANH AN\\.codex\\skills\\archify\\bin\\archify.mjs",
+        "deliver",
+        "architecture",
+        "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\candidate.json",
+        "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\review-7\\vietlex-screen-map.html",
+        "--quality",
+        "showcase",
+        "--repo-root",
+        "D:\\Download\\ProfessionalLegalRAG",
+        "--json"
+      ],
+      "receipt": {
+        "schemaVersion": 1,
+        "receiptId": "de570853-11d8-4041-8bd1-d0d7200701a2",
+        "ok": true,
+        "command": "deliver",
+        "type": "architecture",
+        "input": "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\candidate.json",
+        "output": "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\review-7\\vietlex-screen-map.html",
+        "specification": {
+          "sha256": "8f9039ec40273d0322c7479f8f808beee500aa7540c0608aab6211e6cccffffe",
+          "bytes": 15463
+        },
+        "artifact": {
+          "sha256": "4029ccbfad7c8db1300b649b7bbe735268dec32e3e3998c47ac88fb1e2e79e6f",
+          "bytes": 797791
+        },
+        "validation": {
+          "checksPassed": 9,
+          "checkCount": 9,
+          "compositionProfile": "showcase",
+          "compositionStatus": "pass",
+          "errors": 0,
+          "warnings": 0
+        },
+        "evidence": {
+          "verified": true,
+          "repository": "https://github.com/TanNguyen234/VietLex-Tech-Spec",
+          "revision": "7519cd1aea4a3639140b9188de1843ebf0ddb1c0",
+          "references": 39
+        },
+        "update": {
+          "status": "unavailable",
+          "installedVersion": null,
+          "availableVersion": null,
+          "releaseNotes": null,
+          "checkedAt": null,
+          "source": null,
+          "noticeRequired": false,
+          "noticeText": null,
+          "reason": "disabled"
+        }
+      }
+    },
+    "check": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 1407,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "C:\\Users\\VI TINH THANH AN\\.codex\\skills\\archify\\bin\\archify.mjs",
+        "check",
+        "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\review-7\\vietlex-screen-map.html",
+        "--require-provenance"
+      ],
+      "receipt": {
+        "ok": true,
+        "file": "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\review-7\\vietlex-screen-map.html",
+        "artifact": {
+          "sha256": "4029ccbfad7c8db1300b649b7bbe735268dec32e3e3998c47ac88fb1e2e79e6f",
+          "bytes": 797791
+        },
+        "checks": [
+          {
+            "name": "single_svg",
+            "ok": true,
+            "details": [
+              "found 1 <svg> block(s)"
+            ]
+          },
+          {
+            "name": "finite_svg",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "orthogonal_arrows",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "label_route_clearance",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "relationship_crossings",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "relationship_corridors",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "container_border_runs",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "route_rhythm",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "legend_clearance",
+            "ok": true,
+            "details": []
+          }
+        ],
+        "composition": {
+          "schemaVersion": 1,
+          "profile": "showcase",
+          "status": "pass",
+          "summary": {
+            "errors": 0,
+            "warnings": 0
+          },
+          "metrics": {
+            "properCrossings": 0,
+            "resolvedCrossovers": 14,
+            "ambiguousCorridors": 0,
+            "arrowheadCollisions": 0,
+            "containerBorderRuns": 0,
+            "labelRouteClearanceIssues": 0,
+            "labelCanvasOverflowIssues": 0,
+            "minLabelRouteClearance": 5,
+            "desktopReadabilityIssues": 0,
+            "viewportHeightIssues": 0,
+            "minProjectedNodeTextPx": 6.386266094420601,
+            "maxBends": 4,
+            "routesOverSuggestedBends": 5,
+            "maxStretch": 1.424,
+            "routesOverSuggestedStretch": 1,
+            "minSegmentPx": 16,
+            "minInteriorSegmentPx": 16,
+            "shortSegmentCount": 0,
+            "shortEndpointSegmentCount": 0,
+            "shortInteriorSegmentCount": 0,
+            "microSegmentCount": 0
+          },
+          "suggestedLimits": {
+            "bendsPerRelationship": 2,
+            "stretch": 1.35,
+            "segmentPx": 16,
+            "microSegmentPx": 8
+          },
+          "routeReview": {
+            "crossings": [
+              {
+                "left": {
+                  "id": "home-search",
+                  "from": "home",
+                  "to": "search",
+                  "label": "Thẻ Tra cứu",
+                  "collectionIndex": 1,
+                  "artifactIndex": 2
+                },
+                "right": {
+                  "id": "home-policy",
+                  "from": "home",
+                  "to": "legal_info",
+                  "label": "Liên kết chính sách",
+                  "collectionIndex": 5,
+                  "artifactIndex": 6
+                },
+                "point": [
+                  326,
+                  229
+                ],
+                "sharedNode": "home"
+              },
+              {
+                "left": {
+                  "id": "search-status",
+                  "from": "search",
+                  "to": "legal_status",
+                  "label": "Đối chiếu hiệu lực",
+                  "collectionIndex": 3,
+                  "artifactIndex": 4
+                },
+                "right": {
+                  "id": "home-policy",
+                  "from": "home",
+                  "to": "legal_info",
+                  "label": "Liên kết chính sách",
+                  "collectionIndex": 5,
+                  "artifactIndex": 6
+                },
+                "point": [
+                  326,
+                  483
+                ]
+              },
+              {
+                "left": {
+                  "id": "workspace-analysis",
+                  "from": "workspace_detail",
+                  "to": "analysis_views",
+                  "label": "Xem kết quả đã lưu",
+                  "collectionIndex": 11,
+                  "artifactIndex": 12
+                },
+                "right": {
+                  "id": "gate-workspace",
+                  "from": "access_gate",
+                  "to": "workspace_detail",
+                  "label": "owner-scoped",
+                  "collectionIndex": 14,
+                  "artifactIndex": 15
+                },
+                "point": [
+                  615.9999999999999,
+                  736.9999999999999
+                ],
+                "sharedNode": "workspace_detail"
+              },
+              {
+                "left": {
+                  "id": "workspace-analysis",
+                  "from": "workspace_detail",
+                  "to": "analysis_views",
+                  "label": "Xem kết quả đã lưu",
+                  "collectionIndex": 11,
+                  "artifactIndex": 12
+                },
+                "right": {
+                  "id": "gate-sources",
+                  "from": "access_gate",
+                  "to": "source_views",
+                  "label": "",
+                  "collectionIndex": 16,
+                  "artifactIndex": 17
+                },
+                "point": [
+                  460.00000000000006,
+                  818.9999999999999
+                ]
+              },
+              {
+                "left": {
+                  "id": "workspace-analysis",
+                  "from": "workspace_detail",
+                  "to": "analysis_views",
+                  "label": "Xem kết quả đã lưu",
+                  "collectionIndex": 11,
+                  "artifactIndex": 12
+                },
+                "right": {
+                  "id": "gate-admin",
+                  "from": "access_gate",
+                  "to": "admin_home",
+                  "label": "require_admin",
+                  "collectionIndex": 17,
+                  "artifactIndex": 18
+                },
+                "point": [
+                  498.8000000000007,
+                  803
+                ]
+              },
+              {
+                "left": {
+                  "id": "workspace-analysis",
+                  "from": "workspace_detail",
+                  "to": "analysis_views",
+                  "label": "Xem kết quả đã lưu",
+                  "collectionIndex": 11,
+                  "artifactIndex": 12
+                },
+                "right": {
+                  "id": "gate-admin-ops",
+                  "from": "access_gate",
+                  "to": "admin_ops",
+                  "label": "",
+                  "collectionIndex": 20,
+                  "artifactIndex": 21
+                },
+                "point": [
+                  326,
+                  818.9999999999999
+                ]
+              },
+              {
+                "left": {
+                  "id": "workspace-analysis",
+                  "from": "workspace_detail",
+                  "to": "analysis_views",
+                  "label": "Xem kết quả đã lưu",
+                  "collectionIndex": 11,
+                  "artifactIndex": 12
+                },
+                "right": {
+                  "id": "gate-admin-quality",
+                  "from": "access_gate",
+                  "to": "admin_quality",
+                  "label": "",
+                  "collectionIndex": 21,
+                  "artifactIndex": 22
+                },
+                "point": [
+                  498.80000000000075,
+                  758
+                ]
+              },
+              {
+                "left": {
+                  "id": "workspace-sources",
+                  "from": "workspace_detail",
+                  "to": "source_views",
+                  "label": "Mở nguồn đã đọc",
+                  "collectionIndex": 12,
+                  "artifactIndex": 13
+                },
+                "right": {
+                  "id": "gate-admin",
+                  "from": "access_gate",
+                  "to": "admin_home",
+                  "label": "require_admin",
+                  "collectionIndex": 17,
+                  "artifactIndex": 18
+                },
+                "point": [
+                  605,
+                  803
+                ]
+              },
+              {
+                "left": {
+                  "id": "workspace-sources",
+                  "from": "workspace_detail",
+                  "to": "source_views",
+                  "label": "Mở nguồn đã đọc",
+                  "collectionIndex": 12,
+                  "artifactIndex": 13
+                },
+                "right": {
+                  "id": "gate-admin-quality",
+                  "from": "access_gate",
+                  "to": "admin_quality",
+                  "label": "",
+                  "collectionIndex": 21,
+                  "artifactIndex": 22
+                },
+                "point": [
+                  604,
+                  860.6
+                ]
+              },
+              {
+                "left": {
+                  "id": "gate-sources",
+                  "from": "access_gate",
+                  "to": "source_views",
+                  "label": "",
+                  "collectionIndex": 16,
+                  "artifactIndex": 17
+                },
+                "right": {
+                  "id": "gate-admin",
+                  "from": "access_gate",
+                  "to": "admin_home",
+                  "label": "require_admin",
+                  "collectionIndex": 17,
+                  "artifactIndex": 18
+                },
+                "point": [
+                  185.61111111111111,
+                  800.5
+                ],
+                "sharedNode": "access_gate"
+              },
+              {
+                "left": {
+                  "id": "gate-sources",
+                  "from": "access_gate",
+                  "to": "source_views",
+                  "label": "",
+                  "collectionIndex": 16,
+                  "artifactIndex": 17
+                },
+                "right": {
+                  "id": "gate-admin-ops",
+                  "from": "access_gate",
+                  "to": "admin_ops",
+                  "label": "",
+                  "collectionIndex": 20,
+                  "artifactIndex": 21
+                },
+                "point": [
+                  326,
+                  800.5
+                ],
+                "sharedNode": "access_gate"
+              },
+              {
+                "left": {
+                  "id": "gate-admin",
+                  "from": "access_gate",
+                  "to": "admin_home",
+                  "label": "require_admin",
+                  "collectionIndex": 17,
+                  "artifactIndex": 18
+                },
+                "right": {
+                  "id": "gate-admin-ops",
+                  "from": "access_gate",
+                  "to": "admin_ops",
+                  "label": "",
+                  "collectionIndex": 20,
+                  "artifactIndex": 21
+                },
+                "point": [
+                  326,
+                  803
+                ],
+                "sharedNode": "access_gate"
+              },
+              {
+                "left": {
+                  "id": "gate-admin",
+                  "from": "access_gate",
+                  "to": "admin_home",
+                  "label": "require_admin",
+                  "collectionIndex": 17,
+                  "artifactIndex": 18
+                },
+                "right": {
+                  "id": "gate-admin-quality",
+                  "from": "access_gate",
+                  "to": "admin_quality",
+                  "label": "",
+                  "collectionIndex": 21,
+                  "artifactIndex": 22
+                },
+                "point": [
+                  604,
+                  803
+                ],
+                "sharedNode": "access_gate"
+              },
+              {
+                "left": {
+                  "id": "gate-admin-ops",
+                  "from": "access_gate",
+                  "to": "admin_ops",
+                  "label": "",
+                  "collectionIndex": 20,
+                  "artifactIndex": 21
+                },
+                "right": {
+                  "id": "gate-admin-quality",
+                  "from": "access_gate",
+                  "to": "admin_quality",
+                  "label": "",
+                  "collectionIndex": 21,
+                  "artifactIndex": 22
+                },
+                "point": [
+                  326,
+                  758
+                ],
+                "sharedNode": "access_gate"
+              }
+            ],
+            "crowdedSides": [
+              {
+                "node": "access_gate",
+                "label": "Cổng truy cập",
+                "side": "right",
+                "relationships": 6,
+                "sidePx": 84,
+                "neededPx": 102
+              }
+            ],
+            "detours": [
+              {
+                "relationship": {
+                  "id": "home-policy",
+                  "from": "home",
+                  "to": "legal_info",
+                  "label": "Liên kết chính sách",
+                  "collectionIndex": 5,
+                  "artifactIndex": 6
+                },
+                "bends": 3,
+                "stretch": 1
+              },
+              {
+                "relationship": {
+                  "id": "home-workspaces",
+                  "from": "home",
+                  "to": "workspace_list",
+                  "label": "Nghiên cứu",
+                  "collectionIndex": 7,
+                  "artifactIndex": 8
+                },
+                "bends": 3,
+                "stretch": 1.424
+              },
+              {
+                "relationship": {
+                  "id": "workspace-analysis",
+                  "from": "workspace_detail",
+                  "to": "analysis_views",
+                  "label": "Xem kết quả đã lưu",
+                  "collectionIndex": 11,
+                  "artifactIndex": 12
+                },
+                "bends": 4,
+                "stretch": 1
+              },
+              {
+                "relationship": {
+                  "id": "gate-workspace",
+                  "from": "access_gate",
+                  "to": "workspace_detail",
+                  "label": "owner-scoped",
+                  "collectionIndex": 14,
+                  "artifactIndex": 15
+                },
+                "bends": 4,
+                "stretch": 1.087
+              },
+              {
+                "relationship": {
+                  "id": "gate-admin",
+                  "from": "access_gate",
+                  "to": "admin_home",
+                  "label": "require_admin",
+                  "collectionIndex": 17,
+                  "artifactIndex": 18
+                },
+                "bends": 3,
+                "stretch": 1
+              }
+            ]
+          },
+          "leadingSpace": {
+            "measured": true,
+            "emptyTopPx": 60,
+            "emptyTopRatio": 0.054,
+            "occupiedTop": 60,
+            "viewBoxTop": 0,
+            "canvasHeight": 1101,
+            "typicalNodeHeight": 84,
+            "reviewSuggested": false
+          },
+          "desktopReadability": {
+            "budgetBasis": "legacy-930",
+            "readerContract": "declared-wide-v1",
+            "availableDiagramWidth": 930,
+            "actualBudgetPx": 930,
+            "limit": "legacy",
+            "requestedTargetPx": 7.5,
+            "requestedTargetMet": false,
+            "hardFloorPx": 6,
+            "hardFloorMet": true,
+            "minimumOwner": {
+              "kind": "node",
+              "id": "admin_ops"
+            },
+            "minimumSourceTextPx": 6.4,
+            "minimumProjectedTextPx": 6.386266094420601,
+            "semanticTextCount": 54
+          },
+          "issues": []
+        },
+        "provenance": "current",
+        "deliveryReceiptId": "de570853-11d8-4041-8bd1-d0d7200701a2"
+      }
+    },
+    "browser-check": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 8203,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "C:\\Users\\VI TINH THANH AN\\.codex\\skills\\archify\\bin\\archify.mjs",
+        "browser-check",
+        "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\review-7\\vietlex-screen-map.html",
+        "--json",
+        "--require-provenance"
+      ],
+      "execution": "in-process",
+      "receipt": {
+        "schemaVersion": 1,
+        "ok": true,
+        "command": "browser-check",
+        "evidenceKind": "automated-browser",
+        "status": "pass",
+        "visualReview": "not-requested",
+        "provenance": "current",
+        "deliveryReceiptId": "de570853-11d8-4041-8bd1-d0d7200701a2",
+        "artifact": {
+          "path": "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\review-7\\vietlex-screen-map.html",
+          "sha256": "4029ccbfad7c8db1300b649b7bbe735268dec32e3e3998c47ac88fb1e2e79e6f",
+          "bytes": 797791
+        },
+        "state": {
+          "detail": "read",
+          "motion": "still"
+        },
+        "chrome": {
+          "status": "available",
+          "executable": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+        },
+        "diagnostics": [],
+        "containment": {
+          "status": "pass",
+          "policy": "fit-or-reader-declared-readable-vertical-scroll",
+          "viewports": [
+            {
+              "width": 1440,
+              "height": 900,
+              "theme": "light",
+              "innerWidth": 1440,
+              "innerHeight": 900,
+              "scrollWidth": 1440,
+              "scrollHeight": 1243,
+              "overflowX": false,
+              "overflowY": true,
+              "verticalScrollAccepted": true,
+              "overflowDisposition": "readable-vertical-scroll",
+              "readerLayout": "adaptive",
+              "readerOverflow": "authored",
+              "readerFit": "intrinsic-height",
+              "ok": true,
+              "readerWidth": 962,
+              "diagramWidth": 932,
+              "pageComposition": {
+                "bodyPaddingPx": 12,
+                "headerPx": 52,
+                "diagramChromePx": 78,
+                "svgPx": 1101,
+                "cardsPx": 0,
+                "viewBoxHeight": 1101
+              },
+              "viewBoxWidth": 932,
+              "minimumProjectedNodeTextPx": 6.4,
+              "minimumProjectedNonEdgeTextPx": 6.4,
+              "minimumProjectedEdgeTextPx": 8,
+              "minimumProjectedNodeText": "GET requests · usage · providers · logs · users · audit",
+              "minimumProjectedNodeTextDetail": "context",
+              "minimumProjectedNodeTextOwner": {
+                "kind": "node",
+                "id": "admin_ops"
+              },
+              "minimumRequiredNodeTextPx": 6,
+              "readabilityOk": true,
+              "hasLegend": true,
+              "hasNavigationDock": true,
+              "legendDockIntersectionArea": 0,
+              "dockStageIntersectionArea": 0,
+              "dockStageGap": 10,
+              "requiredDockStageGap": 10,
+              "viewerChromeStageOk": true,
+              "viewerChromeReserve": 54,
+              "viewerChromeActive": true,
+              "viewerChromeOk": true,
+              "resolvedTheme": "light"
+            },
+            {
+              "width": 1600,
+              "height": 1000,
+              "theme": "light",
+              "innerWidth": 1600,
+              "innerHeight": 1000,
+              "scrollWidth": 1600,
+              "scrollHeight": 1309,
+              "overflowX": false,
+              "overflowY": true,
+              "verticalScrollAccepted": true,
+              "overflowDisposition": "readable-vertical-scroll",
+              "readerLayout": "adaptive",
+              "readerOverflow": "authored",
+              "readerFit": "intrinsic-height",
+              "ok": true,
+              "readerWidth": 962,
+              "diagramWidth": 932,
+              "pageComposition": {
+                "bodyPaddingPx": 64,
+                "headerPx": 60,
+                "diagramChromePx": 84,
+                "svgPx": 1101,
+                "cardsPx": 0,
+                "viewBoxHeight": 1101
+              },
+              "viewBoxWidth": 932,
+              "minimumProjectedNodeTextPx": 6.4,
+              "minimumProjectedNonEdgeTextPx": 6.4,
+              "minimumProjectedEdgeTextPx": 8,
+              "minimumProjectedNodeText": "GET requests · usage · providers · logs · users · audit",
+              "minimumProjectedNodeTextDetail": "context",
+              "minimumProjectedNodeTextOwner": {
+                "kind": "node",
+                "id": "admin_ops"
+              },
+              "minimumRequiredNodeTextPx": 6,
+              "readabilityOk": true,
+              "hasLegend": true,
+              "hasNavigationDock": true,
+              "legendDockIntersectionArea": 0,
+              "dockStageIntersectionArea": 0,
+              "dockStageGap": 10,
+              "requiredDockStageGap": 10,
+              "viewerChromeStageOk": true,
+              "viewerChromeReserve": 54,
+              "viewerChromeActive": true,
+              "viewerChromeOk": true,
+              "resolvedTheme": "light"
+            },
+            {
+              "width": 1920,
+              "height": 1080,
+              "theme": "light",
+              "innerWidth": 1920,
+              "innerHeight": 1080,
+              "scrollWidth": 1920,
+              "scrollHeight": 1309,
+              "overflowX": false,
+              "overflowY": true,
+              "verticalScrollAccepted": true,
+              "overflowDisposition": "readable-vertical-scroll",
+              "readerLayout": "adaptive",
+              "readerOverflow": "authored",
+              "readerFit": "intrinsic-height",
+              "ok": true,
+              "readerWidth": 962,
+              "diagramWidth": 932,
+              "pageComposition": {
+                "bodyPaddingPx": 64,
+                "headerPx": 60,
+                "diagramChromePx": 84,
+                "svgPx": 1101,
+                "cardsPx": 0,
+                "viewBoxHeight": 1101
+              },
+              "viewBoxWidth": 932,
+              "minimumProjectedNodeTextPx": 6.4,
+              "minimumProjectedNonEdgeTextPx": 6.4,
+              "minimumProjectedEdgeTextPx": 8,
+              "minimumProjectedNodeText": "GET requests · usage · providers · logs · users · audit",
+              "minimumProjectedNodeTextDetail": "context",
+              "minimumProjectedNodeTextOwner": {
+                "kind": "node",
+                "id": "admin_ops"
+              },
+              "minimumRequiredNodeTextPx": 6,
+              "readabilityOk": true,
+              "hasLegend": true,
+              "hasNavigationDock": true,
+              "legendDockIntersectionArea": 0,
+              "dockStageIntersectionArea": 0,
+              "dockStageGap": 10,
+              "requiredDockStageGap": 10,
+              "viewerChromeStageOk": true,
+              "viewerChromeReserve": 54,
+              "viewerChromeActive": true,
+              "viewerChromeOk": true,
+              "resolvedTheme": "light"
+            },
+            {
+              "width": 2048,
+              "height": 1320,
+              "theme": "light",
+              "innerWidth": 2048,
+              "innerHeight": 1320,
+              "scrollWidth": 2048,
+              "scrollHeight": 1327,
+              "overflowX": false,
+              "overflowY": true,
+              "verticalScrollAccepted": true,
+              "overflowDisposition": "readable-vertical-scroll",
+              "readerLayout": "adaptive",
+              "readerOverflow": "authored",
+              "readerFit": "intrinsic-height",
+              "ok": true,
+              "readerWidth": 982,
+              "diagramWidth": 932,
+              "pageComposition": {
+                "bodyPaddingPx": 64,
+                "headerPx": 68,
+                "diagramChromePx": 94,
+                "svgPx": 1101,
+                "cardsPx": 0,
+                "viewBoxHeight": 1101
+              },
+              "viewBoxWidth": 932,
+              "minimumProjectedNodeTextPx": 6.4,
+              "minimumProjectedNonEdgeTextPx": 6.4,
+              "minimumProjectedEdgeTextPx": 8,
+              "minimumProjectedNodeText": "GET requests · usage · providers · logs · users · audit",
+              "minimumProjectedNodeTextDetail": "context",
+              "minimumProjectedNodeTextOwner": {
+                "kind": "node",
+                "id": "admin_ops"
+              },
+              "minimumRequiredNodeTextPx": 6,
+              "readabilityOk": true,
+              "hasLegend": true,
+              "hasNavigationDock": true,
+              "legendDockIntersectionArea": 0,
+              "dockStageIntersectionArea": 0,
+              "dockStageGap": 10,
+              "requiredDockStageGap": 10,
+              "viewerChromeStageOk": true,
+              "viewerChromeReserve": 44,
+              "viewerChromeActive": true,
+              "viewerChromeOk": true,
+              "resolvedTheme": "light"
+            }
+          ]
+        },
+        "themeStates": {
+          "status": "pass",
+          "viewports": [
+            {
+              "width": 1440,
+              "height": 900,
+              "requestedTheme": "light",
+              "resolvedTheme": "light",
+              "ok": true
+            },
+            {
+              "width": 1600,
+              "height": 1000,
+              "requestedTheme": "light",
+              "resolvedTheme": "light",
+              "ok": true
+            },
+            {
+              "width": 1920,
+              "height": 1080,
+              "requestedTheme": "light",
+              "resolvedTheme": "light",
+              "ok": true
+            },
+            {
+              "width": 2048,
+              "height": 1320,
+              "requestedTheme": "light",
+              "resolvedTheme": "light",
+              "ok": true
+            },
+            {
+              "width": 1440,
+              "height": 900,
+              "requestedTheme": "dark",
+              "resolvedTheme": "dark",
+              "ok": true
+            },
+            {
+              "width": 2048,
+              "height": 1320,
+              "requestedTheme": "dark",
+              "resolvedTheme": "dark",
+              "ok": true
+            }
+          ]
+        },
+        "readability": {
+          "status": "pass",
+          "minimumProjectedNodeTextPx": 6,
+          "viewports": [
+            {
+              "width": 1440,
+              "height": 900,
+              "theme": "light",
+              "innerWidth": 1440,
+              "innerHeight": 900,
+              "scrollWidth": 1440,
+              "scrollHeight": 1243,
+              "overflowX": false,
+              "overflowY": true,
+              "verticalScrollAccepted": true,
+              "overflowDisposition": "readable-vertical-scroll",
+              "readerLayout": "adaptive",
+              "readerOverflow": "authored",
+              "readerFit": "intrinsic-height",
+              "ok": true,
+              "readerWidth": 962,
+              "diagramWidth": 932,
+              "pageComposition": {
+                "bodyPaddingPx": 12,
+                "headerPx": 52,
+                "diagramChromePx": 78,
+                "svgPx": 1101,
+                "cardsPx": 0,
+                "viewBoxHeight": 1101
+              },
+              "viewBoxWidth": 932,
+              "minimumProjectedNodeTextPx": 6.4,
+              "minimumProjectedNonEdgeTextPx": 6.4,
+              "minimumProjectedEdgeTextPx": 8,
+              "minimumProjectedNodeText": "GET requests · usage · providers · logs · users · audit",
+              "minimumProjectedNodeTextDetail": "context",
+              "minimumProjectedNodeTextOwner": {
+                "kind": "node",
+                "id": "admin_ops"
+              },
+              "minimumRequiredNodeTextPx": 6,
+              "readabilityOk": true,
+              "hasLegend": true,
+              "hasNavigationDock": true,
+              "legendDockIntersectionArea": 0,
+              "dockStageIntersectionArea": 0,
+              "dockStageGap": 10,
+              "requiredDockStageGap": 10,
+              "viewerChromeStageOk": true,
+              "viewerChromeReserve": 54,
+              "viewerChromeActive": true,
+              "viewerChromeOk": true,
+              "resolvedTheme": "light"
+            },
+            {
+              "width": 1600,
+              "height": 1000,
+              "theme": "light",
+              "innerWidth": 1600,
+              "innerHeight": 1000,
+              "scrollWidth": 1600,
+              "scrollHeight": 1309,
+              "overflowX": false,
+              "overflowY": true,
+              "verticalScrollAccepted": true,
+              "overflowDisposition": "readable-vertical-scroll",
+              "readerLayout": "adaptive",
+              "readerOverflow": "authored",
+              "readerFit": "intrinsic-height",
+              "ok": true,
+              "readerWidth": 962,
+              "diagramWidth": 932,
+              "pageComposition": {
+                "bodyPaddingPx": 64,
+                "headerPx": 60,
+                "diagramChromePx": 84,
+                "svgPx": 1101,
+                "cardsPx": 0,
+                "viewBoxHeight": 1101
+              },
+              "viewBoxWidth": 932,
+              "minimumProjectedNodeTextPx": 6.4,
+              "minimumProjectedNonEdgeTextPx": 6.4,
+              "minimumProjectedEdgeTextPx": 8,
+              "minimumProjectedNodeText": "GET requests · usage · providers · logs · users · audit",
+              "minimumProjectedNodeTextDetail": "context",
+              "minimumProjectedNodeTextOwner": {
+                "kind": "node",
+                "id": "admin_ops"
+              },
+              "minimumRequiredNodeTextPx": 6,
+              "readabilityOk": true,
+              "hasLegend": true,
+              "hasNavigationDock": true,
+              "legendDockIntersectionArea": 0,
+              "dockStageIntersectionArea": 0,
+              "dockStageGap": 10,
+              "requiredDockStageGap": 10,
+              "viewerChromeStageOk": true,
+              "viewerChromeReserve": 54,
+              "viewerChromeActive": true,
+              "viewerChromeOk": true,
+              "resolvedTheme": "light"
+            },
+            {
+              "width": 1920,
+              "height": 1080,
+              "theme": "light",
+              "innerWidth": 1920,
+              "innerHeight": 1080,
+              "scrollWidth": 1920,
+              "scrollHeight": 1309,
+              "overflowX": false,
+              "overflowY": true,
+              "verticalScrollAccepted": true,
+              "overflowDisposition": "readable-vertical-scroll",
+              "readerLayout": "adaptive",
+              "readerOverflow": "authored",
+              "readerFit": "intrinsic-height",
+              "ok": true,
+              "readerWidth": 962,
+              "diagramWidth": 932,
+              "pageComposition": {
+                "bodyPaddingPx": 64,
+                "headerPx": 60,
+                "diagramChromePx": 84,
+                "svgPx": 1101,
+                "cardsPx": 0,
+                "viewBoxHeight": 1101
+              },
+              "viewBoxWidth": 932,
+              "minimumProjectedNodeTextPx": 6.4,
+              "minimumProjectedNonEdgeTextPx": 6.4,
+              "minimumProjectedEdgeTextPx": 8,
+              "minimumProjectedNodeText": "GET requests · usage · providers · logs · users · audit",
+              "minimumProjectedNodeTextDetail": "context",
+              "minimumProjectedNodeTextOwner": {
+                "kind": "node",
+                "id": "admin_ops"
+              },
+              "minimumRequiredNodeTextPx": 6,
+              "readabilityOk": true,
+              "hasLegend": true,
+              "hasNavigationDock": true,
+              "legendDockIntersectionArea": 0,
+              "dockStageIntersectionArea": 0,
+              "dockStageGap": 10,
+              "requiredDockStageGap": 10,
+              "viewerChromeStageOk": true,
+              "viewerChromeReserve": 54,
+              "viewerChromeActive": true,
+              "viewerChromeOk": true,
+              "resolvedTheme": "light"
+            },
+            {
+              "width": 2048,
+              "height": 1320,
+              "theme": "light",
+              "innerWidth": 2048,
+              "innerHeight": 1320,
+              "scrollWidth": 2048,
+              "scrollHeight": 1327,
+              "overflowX": false,
+              "overflowY": true,
+              "verticalScrollAccepted": true,
+              "overflowDisposition": "readable-vertical-scroll",
+              "readerLayout": "adaptive",
+              "readerOverflow": "authored",
+              "readerFit": "intrinsic-height",
+              "ok": true,
+              "readerWidth": 982,
+              "diagramWidth": 932,
+              "pageComposition": {
+                "bodyPaddingPx": 64,
+                "headerPx": 68,
+                "diagramChromePx": 94,
+                "svgPx": 1101,
+                "cardsPx": 0,
+                "viewBoxHeight": 1101
+              },
+              "viewBoxWidth": 932,
+              "minimumProjectedNodeTextPx": 6.4,
+              "minimumProjectedNonEdgeTextPx": 6.4,
+              "minimumProjectedEdgeTextPx": 8,
+              "minimumProjectedNodeText": "GET requests · usage · providers · logs · users · audit",
+              "minimumProjectedNodeTextDetail": "context",
+              "minimumProjectedNodeTextOwner": {
+                "kind": "node",
+                "id": "admin_ops"
+              },
+              "minimumRequiredNodeTextPx": 6,
+              "readabilityOk": true,
+              "hasLegend": true,
+              "hasNavigationDock": true,
+              "legendDockIntersectionArea": 0,
+              "dockStageIntersectionArea": 0,
+              "dockStageGap": 10,
+              "requiredDockStageGap": 10,
+              "viewerChromeStageOk": true,
+              "viewerChromeReserve": 44,
+              "viewerChromeActive": true,
+              "viewerChromeOk": true,
+              "resolvedTheme": "light"
+            }
+          ]
+        },
+        "viewerChrome": {
+          "status": "pass",
+          "viewports": [
+            {
+              "width": 1440,
+              "height": 900,
+              "theme": "light",
+              "innerWidth": 1440,
+              "innerHeight": 900,
+              "scrollWidth": 1440,
+              "scrollHeight": 1243,
+              "overflowX": false,
+              "overflowY": true,
+              "verticalScrollAccepted": true,
+              "overflowDisposition": "readable-vertical-scroll",
+              "readerLayout": "adaptive",
+              "readerOverflow": "authored",
+              "readerFit": "intrinsic-height",
+              "ok": true,
+              "readerWidth": 962,
+              "diagramWidth": 932,
+              "pageComposition": {
+                "bodyPaddingPx": 12,
+                "headerPx": 52,
+                "diagramChromePx": 78,
+                "svgPx": 1101,
+                "cardsPx": 0,
+                "viewBoxHeight": 1101
+              },
+              "viewBoxWidth": 932,
+              "minimumProjectedNodeTextPx": 6.4,
+              "minimumProjectedNonEdgeTextPx": 6.4,
+              "minimumProjectedEdgeTextPx": 8,
+              "minimumProjectedNodeText": "GET requests · usage · providers · logs · users · audit",
+              "minimumProjectedNodeTextDetail": "context",
+              "minimumProjectedNodeTextOwner": {
+                "kind": "node",
+                "id": "admin_ops"
+              },
+              "minimumRequiredNodeTextPx": 6,
+              "readabilityOk": true,
+              "hasLegend": true,
+              "hasNavigationDock": true,
+              "legendDockIntersectionArea": 0,
+              "dockStageIntersectionArea": 0,
+              "dockStageGap": 10,
+              "requiredDockStageGap": 10,
+              "viewerChromeStageOk": true,
+              "viewerChromeReserve": 54,
+              "viewerChromeActive": true,
+              "viewerChromeOk": true,
+              "resolvedTheme": "light"
+            },
+            {
+              "width": 1600,
+              "height": 1000,
+              "theme": "light",
+              "innerWidth": 1600,
+              "innerHeight": 1000,
+              "scrollWidth": 1600,
+              "scrollHeight": 1309,
+              "overflowX": false,
+              "overflowY": true,
+              "verticalScrollAccepted": true,
+              "overflowDisposition": "readable-vertical-scroll",
+              "readerLayout": "adaptive",
+              "readerOverflow": "authored",
+              "readerFit": "intrinsic-height",
+              "ok": true,
+              "readerWidth": 962,
+              "diagramWidth": 932,
+              "pageComposition": {
+                "bodyPaddingPx": 64,
+                "headerPx": 60,
+                "diagramChromePx": 84,
+                "svgPx": 1101,
+                "cardsPx": 0,
+                "viewBoxHeight": 1101
+              },
+              "viewBoxWidth": 932,
+              "minimumProjectedNodeTextPx": 6.4,
+              "minimumProjectedNonEdgeTextPx": 6.4,
+              "minimumProjectedEdgeTextPx": 8,
+              "minimumProjectedNodeText": "GET requests · usage · providers · logs · users · audit",
+              "minimumProjectedNodeTextDetail": "context",
+              "minimumProjectedNodeTextOwner": {
+                "kind": "node",
+                "id": "admin_ops"
+              },
+              "minimumRequiredNodeTextPx": 6,
+              "readabilityOk": true,
+              "hasLegend": true,
+              "hasNavigationDock": true,
+              "legendDockIntersectionArea": 0,
+              "dockStageIntersectionArea": 0,
+              "dockStageGap": 10,
+              "requiredDockStageGap": 10,
+              "viewerChromeStageOk": true,
+              "viewerChromeReserve": 54,
+              "viewerChromeActive": true,
+              "viewerChromeOk": true,
+              "resolvedTheme": "light"
+            },
+            {
+              "width": 1920,
+              "height": 1080,
+              "theme": "light",
+              "innerWidth": 1920,
+              "innerHeight": 1080,
+              "scrollWidth": 1920,
+              "scrollHeight": 1309,
+              "overflowX": false,
+              "overflowY": true,
+              "verticalScrollAccepted": true,
+              "overflowDisposition": "readable-vertical-scroll",
+              "readerLayout": "adaptive",
+              "readerOverflow": "authored",
+              "readerFit": "intrinsic-height",
+              "ok": true,
+              "readerWidth": 962,
+              "diagramWidth": 932,
+              "pageComposition": {
+                "bodyPaddingPx": 64,
+                "headerPx": 60,
+                "diagramChromePx": 84,
+                "svgPx": 1101,
+                "cardsPx": 0,
+                "viewBoxHeight": 1101
+              },
+              "viewBoxWidth": 932,
+              "minimumProjectedNodeTextPx": 6.4,
+              "minimumProjectedNonEdgeTextPx": 6.4,
+              "minimumProjectedEdgeTextPx": 8,
+              "minimumProjectedNodeText": "GET requests · usage · providers · logs · users · audit",
+              "minimumProjectedNodeTextDetail": "context",
+              "minimumProjectedNodeTextOwner": {
+                "kind": "node",
+                "id": "admin_ops"
+              },
+              "minimumRequiredNodeTextPx": 6,
+              "readabilityOk": true,
+              "hasLegend": true,
+              "hasNavigationDock": true,
+              "legendDockIntersectionArea": 0,
+              "dockStageIntersectionArea": 0,
+              "dockStageGap": 10,
+              "requiredDockStageGap": 10,
+              "viewerChromeStageOk": true,
+              "viewerChromeReserve": 54,
+              "viewerChromeActive": true,
+              "viewerChromeOk": true,
+              "resolvedTheme": "light"
+            },
+            {
+              "width": 2048,
+              "height": 1320,
+              "theme": "light",
+              "innerWidth": 2048,
+              "innerHeight": 1320,
+              "scrollWidth": 2048,
+              "scrollHeight": 1327,
+              "overflowX": false,
+              "overflowY": true,
+              "verticalScrollAccepted": true,
+              "overflowDisposition": "readable-vertical-scroll",
+              "readerLayout": "adaptive",
+              "readerOverflow": "authored",
+              "readerFit": "intrinsic-height",
+              "ok": true,
+              "readerWidth": 982,
+              "diagramWidth": 932,
+              "pageComposition": {
+                "bodyPaddingPx": 64,
+                "headerPx": 68,
+                "diagramChromePx": 94,
+                "svgPx": 1101,
+                "cardsPx": 0,
+                "viewBoxHeight": 1101
+              },
+              "viewBoxWidth": 932,
+              "minimumProjectedNodeTextPx": 6.4,
+              "minimumProjectedNonEdgeTextPx": 6.4,
+              "minimumProjectedEdgeTextPx": 8,
+              "minimumProjectedNodeText": "GET requests · usage · providers · logs · users · audit",
+              "minimumProjectedNodeTextDetail": "context",
+              "minimumProjectedNodeTextOwner": {
+                "kind": "node",
+                "id": "admin_ops"
+              },
+              "minimumRequiredNodeTextPx": 6,
+              "readabilityOk": true,
+              "hasLegend": true,
+              "hasNavigationDock": true,
+              "legendDockIntersectionArea": 0,
+              "dockStageIntersectionArea": 0,
+              "dockStageGap": 10,
+              "requiredDockStageGap": 10,
+              "viewerChromeStageOk": true,
+              "viewerChromeReserve": 44,
+              "viewerChromeActive": true,
+              "viewerChromeOk": true,
+              "resolvedTheme": "light"
+            }
+          ]
+        },
+        "captures": {
+          "status": "not-requested",
+          "screenshots": [],
+          "contactSheet": null
+        },
+        "sidecars": {
+          "receipt": "vietlex-screen-map.browser-check.json",
+          "files": []
+        }
+      }
+    }
+  },
+  "diagnostics": [],
+  "evidence": {
+    "receipt": "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\review-7\\vietlex-screen-map.finalize.json",
+    "summaryReceipt": "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\review-7\\vietlex-screen-map.finalize-summary.json",
+    "browserCheckReceipt": "D:\\Download\\WordAssistant\\.archify\\architecture-vietlex-screen-map-20261023-1953\\review-7\\vietlex-screen-map.browser-check.json"
+  },
+  "visualReview": "not-requested",
+  "finishedAt": "2026-10-23T13:05:39.488Z",
+  "durationMs": 19640,
+  "update": {
+    "status": "unavailable",
+    "installedVersion": null,
+    "availableVersion": null,
+    "releaseNotes": null,
+    "checkedAt": null,
+    "source": null,
+    "noticeRequired": false,
+    "noticeText": null,
+    "reason": "cache-valid"
+  }
+}

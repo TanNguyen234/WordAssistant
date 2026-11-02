@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "LMS – quan hệ dữ liệu kiểm tra và điểm",
+    "output": ".archify/architecture-lms-erd-panels-20261028/kiem-tra-diem.html",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/TanNguyen234/LMS.git",
+      "revision": "41935af1fe67d5dc79fcd92a9c9f95426e46d04a",
+      "provider": "github"
+    }
+  },
+  "components": [
+    {
+      "id": "users",
+      "type": "database",
+      "label": "Users",
+      "sublabel": "UserId PK",
+      "pos": [
+        40,
+        40
+      ],
+      "size": [
+        220,
+        75
+      ],
+      "sources": [
+        {
+          "path": "database/01_schema.sql",
+          "line": 4,
+          "end_line": 18,
+          "label": "Lược đồ SQL"
+        }
+      ]
+    },
+    {
+      "id": "courses",
+      "type": "database",
+      "label": "Courses",
+      "sublabel": "CourseId PK",
+      "pos": [
+        350,
+        40
+      ],
+      "size": [
+        220,
+        75
+      ],
+      "sources": [
+        {
+          "path": "database/01_schema.sql",
+          "line": 19,
+          "end_line": 33,
+          "label": "Lược đồ SQL"
+        }
+      ]
+    },
+    {
+      "id": "quizzes",
+      "type": "database",
+      "label": "Quizzes",
+      "sublabel": "CourseId FK",
+      "pos": [
+        350,
+        190
+      ],
+      "size": [
+        220,
+        75
+      ],
+      "sources": [
+        {
+          "path": "database/01_schema.sql",
+          "line": 117,
+          "end_line": 133,
+          "label": "Lược đồ SQL"
+        }
+      ]
+    },
+    {
+      "id": "questions",
+      "type": "database",
+      "label": "QuizQuestions",
+      "sublabel": "QuizId FK",
+      "pos": [
+        350,
+        340
+      ],
+      "size": [
+        220,
+        75
+      ],
+      "sources": [
+        {
+          "path": "database/01_schema.sql",
+          "line": 137,
+          "end_line": 149,
+          "label": "Lược đồ SQL"
+        }
+      ]
+    },
+    {
+      "id": "attempts",
+      "type": "database",
+      "label": "QuizAttempts",
+      "sublabel": "QuizId, StudentId FK",
+      "pos": [
+        40,
+        340
+      ],
+      "size": [
+        220,
+        75
+      ],
+      "sources": [
+        {
+          "path": "database/01_schema.sql",
+          "line": 153,
+          "end_line": 168,
+          "label": "Lược đồ SQL"
+        }
+      ]
+    },
+    {
+      "id": "grades",
+      "type": "database",
+      "label": "Grades",
+      "sublabel": "CourseId, StudentId, GradedBy FK",
+      "pos": [
+        350,
+        490
+      ],
+      "size": [
+        220,
+        75
+      ],
+      "sources": [
+        {
+          "path": "database/01_schema.sql",
+          "line": 172,
+          "end_line": 189,
+          "label": "Lược đồ SQL"
+        }
+      ]
+    },
+    {
+      "id": "notify",
+      "type": "database",
+      "label": "Notifications",
+      "sublabel": "UserId FK",
+      "pos": [
+        40,
+        490
+      ],
+      "size": [
+        220,
+        75
+      ],
+      "sources": [
+        {
+          "path": "database/01_schema.sql",
+          "line": 193,
+          "end_line": 203,
+          "label": "Lược đồ SQL"
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "courses-quizzes",
+      "from": "courses",
+      "to": "quizzes"
+    },
+    {
+      "id": "quizzes-questions",
+      "from": "quizzes",
+      "to": "questions"
+    },
+    {
+      "id": "quizzes-attempts",
+      "from": "quizzes",
+      "to": "attempts"
+    },
+    {
+      "id": "users-attempts",
+      "from": "users",
+      "to": "attempts"
+    },
+    {
+      "id": "courses-grades",
+      "from": "courses",
+      "to": "grades"
+    },
+    {
+      "id": "users-grades",
+      "from": "users",
+      "to": "grades"
+    },
+    {
+      "id": "users-notify",
+      "from": "users",
+      "to": "notify"
+    }
+  ]
+}

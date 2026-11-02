@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Quan hệ phụ thuộc giữa các nhóm công việc",
+    "output": ".archify/architecture-lms-dependencies-20261028/dependencies.html",
+    "quality_profile": "showcase"
+  },
+  "components": [
+    {
+      "id": "a",
+      "type": "backend",
+      "label": "Xác nhận rubric",
+      "pos": [
+        250,
+        40
+      ],
+      "size": [
+        320,
+        85
+      ]
+    },
+    {
+      "id": "b",
+      "type": "backend",
+      "label": "Phạm vi và mục tiêu",
+      "pos": [
+        250,
+        185
+      ],
+      "size": [
+        320,
+        85
+      ]
+    },
+    {
+      "id": "c",
+      "type": "backend",
+      "label": "WBS và phân công Trello",
+      "pos": [
+        250,
+        330
+      ],
+      "size": [
+        320,
+        85
+      ]
+    },
+    {
+      "id": "d",
+      "type": "backend",
+      "label": "UML / ERD trên Draw.io",
+      "pos": [
+        40,
+        490
+      ],
+      "size": [
+        320,
+        85
+      ]
+    },
+    {
+      "id": "e",
+      "type": "backend",
+      "label": "Thời gian và nguồn lực",
+      "pos": [
+        460,
+        490
+      ],
+      "size": [
+        320,
+        85
+      ]
+    },
+    {
+      "id": "f",
+      "type": "backend",
+      "label": "Kiểm tra sơ đồ và nội dung",
+      "pos": [
+        250,
+        650
+      ],
+      "size": [
+        320,
+        85
+      ]
+    },
+    {
+      "id": "g",
+      "type": "backend",
+      "label": "Word và tài liệu đính kèm",
+      "pos": [
+        250,
+        795
+      ],
+      "size": [
+        320,
+        85
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "a-b",
+      "from": "a",
+      "to": "b"
+    },
+    {
+      "id": "b-c",
+      "from": "b",
+      "to": "c"
+    },
+    {
+      "id": "c-d",
+      "from": "c",
+      "to": "d"
+    },
+    {
+      "id": "c-e",
+      "from": "c",
+      "to": "e"
+    },
+    {
+      "id": "d-f",
+      "from": "d",
+      "to": "f"
+    },
+    {
+      "id": "e-f",
+      "from": "e",
+      "to": "f"
+    },
+    {
+      "id": "f-g",
+      "from": "f",
+      "to": "g"
+    }
+  ]
+}

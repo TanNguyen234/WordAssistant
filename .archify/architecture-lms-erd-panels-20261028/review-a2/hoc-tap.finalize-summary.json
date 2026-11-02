@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "D:\\Download\\WordAssistant\\.archify\\architecture-lms-erd-panels-20261028\\hoc-tap.json",
+    "sha256": "d5417fcb901d34e3dc3c5e8b838ae1064cb95b4edab2604ee0f4f74a547c4d44",
+    "bytes": 4194
+  },
+  "artifact": {
+    "path": "D:\\Download\\WordAssistant\\.archify\\architecture-lms-erd-panels-20261028\\hoc-tap.html",
+    "sha256": "c4fae0644b44b789f25781786c8ac1c0ddcd3b2ef4e9888ad920dc38f25d290d",
+    "bytes": 754796
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "D:\\Download\\WordAssistant\\.archify\\architecture-lms-erd-panels-20261028\\review-a2\\hoc-tap.finalize.json",
+    "summaryReceipt": "D:\\Download\\WordAssistant\\.archify\\architecture-lms-erd-panels-20261028\\review-a2\\hoc-tap.finalize-summary.json",
+    "browserCheckReceipt": "D:\\Download\\WordAssistant\\.archify\\architecture-lms-erd-panels-20261028\\review-a2\\hoc-tap.browser-check.json"
+  },
+  "update": {
+    "status": "unavailable",
+    "installedVersion": null,
+    "availableVersion": null,
+    "releaseNotes": null,
+    "checkedAt": null,
+    "source": null,
+    "noticeRequired": false,
+    "noticeText": null,
+    "reason": "cache-valid"
+  },
+  "visualReview": "not-requested",
+  "durationMs": 18629,
+  "visualReviewRecommendation": {
+    "action": "inspect-route-readability",
+    "signals": {
+      "resolvedCrossovers": 1,
+      "routesOverSuggestedBends": 3,
+      "routesOverSuggestedStretch": 2
+    },
+    "reason": "Automated gates passed, but crossings or detours still need perceptual review before claiming visual quality.",
+    "affectedRoutes": {
+      "crossings": [
+        {
+          "left": {
+            "id": "courses-enroll",
+            "from": "courses",
+            "to": "enroll",
+            "label": "",
+            "collectionIndex": 2,
+            "artifactIndex": 3
+          },
+          "right": {
+            "id": "assign-submit",
+            "from": "assign",
+            "to": "submit",
+            "label": "",
+            "collectionIndex": 6,
+            "artifactIndex": 7
+          },
+          "point": [
+            284,
+            227.5
+          ]
+        }
+      ],
+      "detours": [
+        {
+          "relationship": {
+            "id": "users-enroll",
+            "from": "users",
+            "to": "enroll",
+            "label": "",
+            "collectionIndex": 1,
+            "artifactIndex": 2
+          },
+          "bends": 4,
+          "stretch": 1.565,
+          "directCorridorBlockers": [
+            {
+              "id": "submit",
+              "label": "Submissions",
+              "box": [
+                40,
+                190,
+                220,
+                75
+              ]
+            }
+          ]
+        },
+        {
+          "relationship": {
+            "id": "courses-enroll",
+            "from": "courses",
+            "to": "enroll",
+            "label": "",
+            "collectionIndex": 2,
+            "artifactIndex": 3
+          },
+          "bends": 3,
+          "stretch": 1
+        },
+        {
+          "relationship": {
+            "id": "courses-modules",
+            "from": "courses",
+            "to": "modules",
+            "label": "",
+            "collectionIndex": 3,
+            "artifactIndex": 4
+          },
+          "bends": 4,
+          "stretch": 1.828,
+          "directCorridorBlockers": [
+            {
+              "id": "assign",
+              "label": "Assignments",
+              "box": [
+                350,
+                190,
+                220,
+                75
+              ]
+            }
+          ]
+        }
+      ],
+      "truncated": false
+    },
+    "hints": [
+      "courses → enroll crosses assign → submit: move the node of whichever is a branch, return, or second entrance to the other side of the main path, so that relationship runs through an empty corridor.",
+      "courses → enroll needs 3 bends: move node courses or enroll so they share a row or column with matching centers, or sit diagonally with a clear corner."
+    ],
+    "repair": "Trace these relationships at the desktop viewport. For Architecture, use references/architecture-layout-repair.md: reflow a blocked main path or tangled connected scene, and repair an isolated defect locally only when the surrounding composition is accepted. Preserve all semantic content and user-fixed geometry. Rerun finalize once after the edit."
+  }
+}

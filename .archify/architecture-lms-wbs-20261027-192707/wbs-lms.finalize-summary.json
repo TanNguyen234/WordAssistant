@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "fail",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "D:\\Download\\WordAssistant\\.archify\\architecture-lms-wbs-20261027-192707\\candidate.json",
+    "sha256": "d185d64f99287f04325ff42932964a78ee2c4a38b46926e0e57c74b3680d48a2",
+    "bytes": 5421
+  },
+  "artifact": {
+    "path": "D:\\Download\\WordAssistant\\.archify\\architecture-lms-wbs-20261027-192707\\wbs-lms.html",
+    "sha256": "1ad9865ae1c79fe02479207423351f454d95261c1c9c19c263259a3bdc9278ea",
+    "bytes": 755040
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "fail"
+  },
+  "failedStage": "browser-check",
+  "diagnostics": [
+    {
+      "code": "viewer/evidence-path-conflict",
+      "severity": "error",
+      "message": "browser-check will not replace the existing unowned evidence path \"D:\\Download\\WordAssistant\\.archify\\architecture-lms-wbs-20261027-192707\\wbs-lms.browser-check.json\".",
+      "subject": {
+        "artifact": "D:\\Download\\WordAssistant\\.archify\\architecture-lms-wbs-20261027-192707\\wbs-lms.html",
+        "evidencePath": "D:\\Download\\WordAssistant\\.archify\\architecture-lms-wbs-20261027-192707\\wbs-lms.browser-check.json"
+      },
+      "evidence": {
+        "reason": {
+          "code": "ownership-artifact-mismatch"
+        }
+      },
+      "supportedFixes": [
+        "move the conflicting file aside, or choose a separate --out-dir, then rerun browser-check"
+      ]
+    }
+  ],
+  "diagnosticSummary": {
+    "total": 1,
+    "shown": 1,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "D:\\Download\\WordAssistant\\.archify\\architecture-lms-wbs-20261027-192707\\wbs-lms.finalize.json",
+    "summaryReceipt": "D:\\Download\\WordAssistant\\.archify\\architecture-lms-wbs-20261027-192707\\wbs-lms.finalize-summary.json",
+    "browserCheckReceipt": "D:\\Download\\WordAssistant\\.archify\\architecture-lms-wbs-20261027-192707\\wbs-lms.browser-check.json"
+  },
+  "update": {
+    "status": "unavailable",
+    "installedVersion": null,
+    "availableVersion": null,
+    "releaseNotes": null,
+    "checkedAt": null,
+    "source": null,
+    "noticeRequired": false,
+    "noticeText": null,
+    "reason": "cache-valid"
+  },
+  "visualReview": "not-requested",
+  "durationMs": 5580
+}

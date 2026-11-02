@@ -1,0 +1,184 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "D:\\Download\\WordAssistant\\.archify\\architecture-lms-erd-panels-20261028\\kiem-tra-diem.json",
+    "sha256": "dca4e9d9013f798d8b5dfc66ccc28a18919be5b4a7eb420484d5533547c97106",
+    "bytes": 4131
+  },
+  "artifact": {
+    "path": "D:\\Download\\WordAssistant\\.archify\\architecture-lms-erd-panels-20261028\\kiem-tra-diem.html",
+    "sha256": "59095e1526c7531562e854ded27623e02db55ba8284ec85dc7690d0cf3d28112",
+    "bytes": 754233
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "D:\\Download\\WordAssistant\\.archify\\architecture-lms-erd-panels-20261028\\kiem-tra-diem.finalize.json",
+    "summaryReceipt": "D:\\Download\\WordAssistant\\.archify\\architecture-lms-erd-panels-20261028\\kiem-tra-diem.finalize-summary.json",
+    "browserCheckReceipt": "D:\\Download\\WordAssistant\\.archify\\architecture-lms-erd-panels-20261028\\kiem-tra-diem.browser-check.json"
+  },
+  "update": {
+    "status": "unavailable",
+    "installedVersion": null,
+    "availableVersion": null,
+    "releaseNotes": null,
+    "checkedAt": null,
+    "source": null,
+    "noticeRequired": false,
+    "noticeText": null,
+    "reason": "cache-valid"
+  },
+  "visualReview": "not-requested",
+  "durationMs": 18922,
+  "visualReviewRecommendation": {
+    "action": "inspect-route-readability",
+    "signals": {
+      "resolvedCrossovers": 4,
+      "routesOverSuggestedBends": 1,
+      "routesOverSuggestedStretch": 1
+    },
+    "reason": "Automated gates passed, but crossings or detours still need perceptual review before claiming visual quality.",
+    "affectedRoutes": {
+      "crossings": [
+        {
+          "left": {
+            "id": "quizzes-attempts",
+            "from": "quizzes",
+            "to": "attempts",
+            "label": "",
+            "collectionIndex": 2,
+            "artifactIndex": 3
+          },
+          "right": {
+            "id": "courses-grades",
+            "from": "courses",
+            "to": "grades",
+            "label": "",
+            "collectionIndex": 4,
+            "artifactIndex": 5
+          },
+          "point": [
+            326,
+            227.5
+          ]
+        },
+        {
+          "left": {
+            "id": "quizzes-attempts",
+            "from": "quizzes",
+            "to": "attempts",
+            "label": "",
+            "collectionIndex": 2,
+            "artifactIndex": 3
+          },
+          "right": {
+            "id": "users-grades",
+            "from": "users",
+            "to": "grades",
+            "label": "",
+            "collectionIndex": 5,
+            "artifactIndex": 6
+          },
+          "point": [
+            305,
+            227.5
+          ]
+        },
+        {
+          "left": {
+            "id": "quizzes-attempts",
+            "from": "quizzes",
+            "to": "attempts",
+            "label": "",
+            "collectionIndex": 2,
+            "artifactIndex": 3
+          },
+          "right": {
+            "id": "users-notify",
+            "from": "users",
+            "to": "notify",
+            "label": "",
+            "collectionIndex": 6,
+            "artifactIndex": 7
+          },
+          "point": [
+            263,
+            377.5
+          ]
+        },
+        {
+          "left": {
+            "id": "courses-grades",
+            "from": "courses",
+            "to": "grades",
+            "label": "",
+            "collectionIndex": 4,
+            "artifactIndex": 5
+          },
+          "right": {
+            "id": "users-grades",
+            "from": "users",
+            "to": "grades",
+            "label": "",
+            "collectionIndex": 5,
+            "artifactIndex": 6
+          },
+          "point": [
+            326,
+            513.5
+          ],
+          "sharedNode": "grades"
+        }
+      ],
+      "detours": [
+        {
+          "relationship": {
+            "id": "users-notify",
+            "from": "users",
+            "to": "notify",
+            "label": "",
+            "collectionIndex": 6,
+            "artifactIndex": 7
+          },
+          "bends": 4,
+          "stretch": 1.603,
+          "directCorridorBlockers": [
+            {
+              "id": "attempts",
+              "label": "QuizAttempts",
+              "box": [
+                40,
+                340,
+                220,
+                75
+              ]
+            }
+          ]
+        }
+      ],
+      "truncated": false
+    },
+    "hints": [
+      "quizzes → attempts crosses courses → grades: move the node of whichever is a branch, return, or second entrance to the other side of the main path, so that relationship runs through an empty corridor.",
+      "quizzes → attempts crosses users → grades: move the node of whichever is a branch, return, or second entrance to the other side of the main path, so that relationship runs through an empty corridor.",
+      "quizzes → attempts crosses users → notify: move the node of whichever is a branch, return, or second entrance to the other side of the main path, so that relationship runs through an empty corridor.",
+      "courses → grades and users → grades cross next to grades: move node courses or users so the two reach grades from different sides (for example one level with it, one directly above or below it)."
+    ],
+    "repair": "Trace these relationships at the desktop viewport. For Architecture, use references/architecture-layout-repair.md: reflow a blocked main path or tangled connected scene, and repair an isolated defect locally only when the surrounding composition is accepted. Preserve all semantic content and user-fixed geometry. Rerun finalize once after the edit."
+  }
+}
