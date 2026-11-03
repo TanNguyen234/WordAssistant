@@ -243,6 +243,28 @@ def run_document_text_audit(
         out_p.write_text(html_content, encoding="utf-8")
         html_report_path = str(out_p)
 
+    ai_dict = None
+    if report.ai_assessment:
+        ai_data = asdict(report.ai_assessment)
+        st = ai_data.get("status", "INSUFFICIENT_TEXT")
+        sty = ai_data.get("stylometry", {})
+        decision_val = "INSUFFICIENT_TEXT" if st == "INSUFFICIENT_TEXT" else ("AI_FLAGGED" if st in ("AI_FLAGGED", "CLASSIFIED") else "HUMAN_ADVISORY")
+        metrics_dict = {
+            "transition_entropy": ai_data.get("transition_entropy", 0.0),
+            "ngram_uniformity_score": ai_data.get("ngram_uniformity_score", 0.0),
+            "sentence_length_variance": sty.get("sentence_length_variance", 0.0) if isinstance(sty, dict) else 0.0,
+            "burstiness": sty.get("burstiness", 0.0) if isinstance(sty, dict) else 0.0,
+            "repetition_ratio": sty.get("repetition_ratio", 0.0) if isinstance(sty, dict) else 0.0,
+            "ttr": sty.get("ttr", 0.0) if isinstance(sty, dict) else 0.0,
+            "avg_sentence_len": sty.get("avg_sentence_len", 0.0) if isinstance(sty, dict) else 0.0,
+        }
+        ai_dict = {
+            **ai_data,
+            "decision": ai_data.get("decision", decision_val),
+            "metrics": metrics_dict,
+            "word_count": sty.get("word_count", 0) if isinstance(sty, dict) else 0,
+        }
+
     return {
         "available": True,
         "document_id": report.document_id,
@@ -255,7 +277,7 @@ def run_document_text_audit(
         "corpus_size": len(orchestrator.corpus),
         "matched_intervals": [asdict(m) for m in report.matched_intervals],
         "source_attributions": [asdict(s) for s in report.source_attributions],
-        "ai_assessment": asdict(report.ai_assessment) if report.ai_assessment else None,
+        "ai_assessment": ai_dict,
         "metadata": report.metadata,
         "html_report_path": html_report_path,
     }
