@@ -54,6 +54,31 @@ def _extract_text_from_file(file_path: Path) -> str:
             return file_path.read_text(encoding="utf-8", errors="ignore")
         except Exception:
             return ""
+    elif ext in {".html", ".htm"}:
+        try:
+            from html.parser import HTMLParser
+            class _HClean(HTMLParser):
+                def __init__(self):
+                    super().__init__()
+                    self.fed = []
+                    self._ignore = False
+                def handle_starttag(self, tag, attrs):
+                    if tag.lower() in ("script", "style", "noscript"):
+                        self._ignore = True
+                def handle_endtag(self, tag):
+                    if tag.lower() in ("script", "style", "noscript"):
+                        self._ignore = False
+                def handle_data(self, d):
+                    if not self._ignore:
+                        self.fed.append(d)
+                def get_text(self):
+                    return "".join(self.fed)
+            p_obj = _HClean()
+            p_obj.feed(file_path.read_text(encoding="utf-8", errors="ignore"))
+            lines = [line.strip() for line in p_obj.get_text().splitlines() if line.strip()]
+            return "\n".join(lines)
+        except Exception:
+            return ""
     elif ext == ".docx":
         try:
             from docx import Document
@@ -156,7 +181,7 @@ def load_external_corpus(corpus_dir: Path | str | None = None) -> list[dict[str,
     if not c_dir.is_dir():
         return []
 
-    supported_exts = {".txt", ".docx", ".pdf", ".md"}
+    supported_exts = {".txt", ".docx", ".pdf", ".md", ".html", ".htm"}
     corpus_docs: list[dict[str, str]] = []
 
     for file_path in sorted(c_dir.rglob("*")):
