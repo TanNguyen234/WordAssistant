@@ -181,6 +181,10 @@ def run_document_text_audit(
     evidence_registry_path: str | Path | None = None,
     output_html: str | Path | None = None,
     auto_evidence_corpus: bool = True,
+    exclude_quotes: bool = True,
+    exclude_bib: bool = True,
+    include_semantic: bool = True,
+    include_ai_assessment: bool = True,
 ) -> dict[str, Any]:
     """Runs lexical, semantic, and stylometric audit on a DOCX document."""
     if not is_text_audit_available():
@@ -214,7 +218,13 @@ def run_document_text_audit(
 
     # Run analysis
     try:
-        report = orchestrator.analyze_file(d_path)
+        report = orchestrator.analyze_file(
+            d_path,
+            include_semantic=include_semantic,
+            include_ai_assessment=include_ai_assessment,
+            exclude_quotes=exclude_quotes,
+            exclude_bib=exclude_bib,
+        )
         raw_text = orchestrator.parser.parse(d_path).raw_text
     except Exception as exc:
         return {
@@ -248,21 +258,34 @@ def run_document_text_audit(
         ai_data = asdict(report.ai_assessment)
         st = ai_data.get("status", "INSUFFICIENT_TEXT")
         sty = ai_data.get("stylometry", {})
-        decision_val = "INSUFFICIENT_TEXT" if st == "INSUFFICIENT_TEXT" else ("AI_FLAGGED" if st in ("AI_FLAGGED", "CLASSIFIED") else "HUMAN_ADVISORY")
+        existing_metrics = ai_data.get("metrics") if isinstance(ai_data.get("metrics"), dict) else {}
+
+        decision_val = ai_data.get("decision")
+        if not decision_val:
+            decision_val = "INSUFFICIENT_TEXT" if st == "INSUFFICIENT_TEXT" else ("AI_FLAGGED" if st in ("AI_FLAGGED", "CLASSIFIED") else "HUMAN_ADVISORY")
+
         metrics_dict = {
-            "transition_entropy": ai_data.get("transition_entropy", 0.0),
-            "ngram_uniformity_score": ai_data.get("ngram_uniformity_score", 0.0),
-            "sentence_length_variance": sty.get("sentence_length_variance", 0.0) if isinstance(sty, dict) else 0.0,
-            "burstiness": sty.get("burstiness", 0.0) if isinstance(sty, dict) else 0.0,
-            "repetition_ratio": sty.get("repetition_ratio", 0.0) if isinstance(sty, dict) else 0.0,
-            "ttr": sty.get("ttr", 0.0) if isinstance(sty, dict) else 0.0,
-            "avg_sentence_len": sty.get("avg_sentence_len", 0.0) if isinstance(sty, dict) else 0.0,
+            "transition_entropy": existing_metrics.get("transition_entropy", ai_data.get("transition_entropy", 0.0)),
+            "ngram_uniformity_score": existing_metrics.get("ngram_uniformity_score", ai_data.get("ngram_uniformity_score", 0.0)),
+            "sentence_length_variance": existing_metrics.get("sentence_length_variance", sty.get("sentence_length_variance", 0.0) if isinstance(sty, dict) else 0.0),
+            "burstiness": existing_metrics.get("burstiness", sty.get("burstiness", 0.0) if isinstance(sty, dict) else 0.0),
+            "repetition_ratio": existing_metrics.get("repetition_ratio", sty.get("repetition_ratio", 0.0) if isinstance(sty, dict) else 0.0),
+            "ttr": existing_metrics.get("ttr", sty.get("ttr", 0.0) if isinstance(sty, dict) else 0.0),
+            "root_ttr": existing_metrics.get("root_ttr", 0.0),
+            "entropy": existing_metrics.get("entropy", 0.0),
+            "avg_sentence_len": existing_metrics.get("avg_sentence_len", sty.get("avg_sentence_len", 0.0) if isinstance(sty, dict) else 0.0),
+            **existing_metrics,
         }
+        word_count = (
+            existing_metrics.get("word_count")
+            or (sty.get("word_count") if isinstance(sty, dict) else 0)
+            or ai_data.get("word_count", 0)
+        )
         ai_dict = {
             **ai_data,
-            "decision": ai_data.get("decision", decision_val),
+            "decision": decision_val,
             "metrics": metrics_dict,
-            "word_count": sty.get("word_count", 0) if isinstance(sty, dict) else 0,
+            "word_count": word_count,
         }
 
     return {
