@@ -5,7 +5,7 @@
     "docx": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\strongwine-revision-20261027\\output\\StrongWine_20261102_academic_standardized.docx",
     "html_report": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\strongwine-revision-20261027\\qa\\text_audit_strongwine_v2.html",
     "json_report": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\strongwine-revision-20261027\\qa\\text_audit_strongwine_v2.json",
-    "elapsed_seconds": 114.71,
+    "elapsed_seconds": 135.39,
     "overall_status": "WARN",
     "summary": {
       "PASS": 10,
@@ -18,7 +18,7 @@
       "total_similarity_score": 0.0,
       "lexical_score": 0.0,
       "semantic_score": 0.0,
-      "corpus_size": 17,
+      "corpus_size": 24,
       "findings_count": 0,
       "findings": []
     },
@@ -35,10 +35,23 @@
         "transition_entropy": 13.611,
         "ngram_uniformity_score": 0.874,
         "sentence_length_variance": 128.94,
-        "burstiness": 0.0,
+        "burstiness": -0.17,
         "repetition_ratio": 0.0,
-        "ttr": 0.0,
-        "avg_sentence_len": 0.0
+        "ttr": 0.065,
+        "root_ttr": 14.316,
+        "entropy": 5.13,
+        "avg_sentence_len": 15.99,
+        "root_type_token_ratio": 14.316,
+        "sentence_length_entropy": 5.13,
+        "avg_sentence_length": 15.99,
+        "type_token_ratio": 0.065,
+        "hapax_legomena_ratio": 0.022,
+        "burstiness_score": -0.17,
+        "stopword_ratio": 0.117,
+        "punctuation_density": 12.57,
+        "empirical_sample_perplexity": 12509.98,
+        "word_count": 48659,
+        "sentence_count": 3021
       }
     },
     "numeric_citation_bibliography_consistency": {
@@ -95,7 +108,7 @@
     "docx": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\vietlex-dacn-20261020\\output\\VietLex_20261102_academic_standardized.docx",
     "html_report": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\vietlex-dacn-20261020\\qa\\text_audit_vietlex_v2.html",
     "json_report": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\vietlex-dacn-20261020\\qa\\text_audit_vietlex_v2.json",
-    "elapsed_seconds": 212.95,
+    "elapsed_seconds": 269.57,
     "overall_status": "WARN",
     "summary": {
       "PASS": 9,
@@ -125,10 +138,23 @@
         "transition_entropy": 12.685,
         "ngram_uniformity_score": 0.857,
         "sentence_length_variance": 142.93,
-        "burstiness": 0.0,
+        "burstiness": -0.203,
         "repetition_ratio": 0.0,
-        "ttr": 0.0,
-        "avg_sentence_len": 0.0
+        "ttr": 0.059,
+        "root_ttr": 9.91,
+        "entropy": 5.32,
+        "avg_sentence_len": 18.04,
+        "root_type_token_ratio": 9.91,
+        "sentence_length_entropy": 5.32,
+        "avg_sentence_length": 18.04,
+        "type_token_ratio": 0.059,
+        "hapax_legomena_ratio": 0.017,
+        "burstiness_score": -0.203,
+        "stopword_ratio": 0.148,
+        "punctuation_density": 6.49,
+        "empirical_sample_perplexity": 6585.47,
+        "word_count": 28570,
+        "sentence_count": 1550
       }
     },
     "numeric_citation_bibliography_consistency": {
@@ -181,7 +207,7 @@
     "docx": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\output\\LMS_20261102_standardized.docx",
     "html_report": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\qa\\text_audit_lms_v2.html",
     "json_report": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\lms-qlpm-trello-drawio\\qa\\text_audit_lms_v2.json",
-    "elapsed_seconds": 180.0,
+    "elapsed_seconds": 141.04,
     "overall_status": "FAIL",
     "summary": {
       "PASS": 8,
@@ -191,16 +217,16 @@
     },
     "external_corpus_similarity": {
       "status": "PASS",
-      "total_similarity_score": 10.47,
-      "lexical_score": 10.47,
+      "total_similarity_score": 10.48,
+      "lexical_score": 10.48,
       "semantic_score": 0.0,
-      "corpus_size": 19,
+      "corpus_size": 23,
       "findings_count": 6,
       "findings": [
         {
           "source_id": "EV-VI-CAPTURES",
           "source_title": "EV-VI-CAPTURES",
-          "coverage_percentage": 8.24,
+          "coverage_percentage": 8.25,
           "matched_chars_count": 4990,
           "excerpts": [
             "Các cột công việc trên bảng Trello LMS"
@@ -209,10 +235,10 @@
         {
           "source_id": "project_06_PM_DOCUMENT_RECONCILIATION",
           "source_title": "project_06_PM_DOCUMENT_RECONCILIATION.md",
-          "coverage_percentage": 1.21,
+          "coverage_percentage": 1.22,
           "matched_chars_count": 735,
           "excerpts": [
-            "tuần 20 ACT 04 có float 1 tuần ACT 16 có 2 tuần"
+            "tuần 20; ACT-04 có float 1 tuần, ACT-16 có 2 tuần"
           ]
         },
         {
@@ -221,7 +247,7 @@
           "coverage_percentage": 0.82,
           "matched_chars_count": 494,
           "excerpts": [
-            "TRƯỜNG ĐẠI HỌC TÀI NGUYÊN VÀ MÔI TRƯỜNG TP HCM KHOA CÔNG NGHỆ THÔNG TIN TIỂU LUẬN MÔN HỌC QUẢN LÝ DỰ ÁN PHẦN MỀM QUẢN LÝ"
+            "TRƯỜNG ĐẠI HỌC TÀI NGUYÊN VÀ MÔI TRƯỜNG TP.HCM\nKHOA CÔNG NGHỆ THÔNG TIN\nTIỂU LUẬN MÔN HỌC\nQUẢN LÝ DỰ ÁN PHẦN MỀM\nQUẢN LÝ"
           ]
         },
         {
@@ -230,7 +256,7 @@
           "coverage_percentage": 0.42,
           "matched_chars_count": 252,
           "excerpts": [
-            "TRƯỜNG ĐẠI HỌC TÀI NGUYÊN VÀ MÔI TRƯỜNG TP HCM KHOA CÔNG NGHỆ THÔNG TIN TIỂU LUẬN MÔN HỌC QUẢN LÝ DỰ ÁN PHẦN MỀM QUẢN LÝ"
+            "TRƯỜNG ĐẠI HỌC TÀI NGUYÊN VÀ MÔI TRƯỜNG TP.HCM\nKHOA CÔNG NGHỆ THÔNG TIN\nTIỂU LUẬN MÔN HỌC\nQUẢN LÝ DỰ ÁN PHẦN MỀM\nQUẢN LÝ"
           ]
         },
         {
@@ -239,7 +265,7 @@
           "coverage_percentage": 0.42,
           "matched_chars_count": 252,
           "excerpts": [
-            "TRƯỜNG ĐẠI HỌC TÀI NGUYÊN VÀ MÔI TRƯỜNG TP HCM KHOA CÔNG NGHỆ THÔNG TIN TIỂU LUẬN MÔN HỌC QUẢN LÝ DỰ ÁN PHẦN MỀM QUẢN LÝ"
+            "TRƯỜNG ĐẠI HỌC TÀI NGUYÊN VÀ MÔI TRƯỜNG TP.HCM\nKHOA CÔNG NGHỆ THÔNG TIN\nTIỂU LUẬN MÔN HỌC\nQUẢN LÝ DỰ ÁN PHẦN MỀM\nQUẢN LÝ"
           ]
         }
       ]
@@ -257,10 +283,23 @@
         "transition_entropy": 12.02,
         "ngram_uniformity_score": 0.878,
         "sentence_length_variance": 81.29,
-        "burstiness": 0.0,
+        "burstiness": -0.146,
         "repetition_ratio": 0.0,
-        "ttr": 0.0,
-        "avg_sentence_len": 0.0
+        "ttr": 0.096,
+        "root_ttr": 11.044,
+        "entropy": 4.74,
+        "avg_sentence_len": 12.11,
+        "root_type_token_ratio": 11.044,
+        "sentence_length_entropy": 4.74,
+        "avg_sentence_length": 12.11,
+        "type_token_ratio": 0.096,
+        "hapax_legomena_ratio": 0.028,
+        "burstiness_score": -0.146,
+        "stopword_ratio": 0.121,
+        "punctuation_density": 7.41,
+        "empirical_sample_perplexity": 4153.72,
+        "word_count": 13287,
+        "sentence_count": 1093
       }
     },
     "numeric_citation_bibliography_consistency": {

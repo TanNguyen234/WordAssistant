@@ -32,12 +32,12 @@
     ]
   },
   "coverage": {
-    "paragraph_records": 2005,
+    "paragraph_records": 2010,
     "nonempty_story_counts": {
       "body": 1180,
       "footer": 2,
       "header": 2,
-      "table": 683
+      "table": 688
     },
     "stories": [
       "body",
@@ -2924,7 +2924,7 @@
       "total_similarity_score": 0.0,
       "lexical_score": 0.0,
       "semantic_score": 0.0,
-      "corpus_size": 17,
+      "corpus_size": 24,
       "html_report_path": "D:\\Download\\WordAssistant\\artifacts\\course-essay\\strongwine-revision-20261027\\qa\\text_audit_strongwine_v2.html"
     },
     "evidence_source_attribution_fidelity": {
@@ -2945,10 +2945,23 @@
         "transition_entropy": 13.611,
         "ngram_uniformity_score": 0.874,
         "sentence_length_variance": 128.94,
-        "burstiness": 0.0,
+        "burstiness": -0.17,
         "repetition_ratio": 0.0,
-        "ttr": 0.0,
-        "avg_sentence_len": 0.0
+        "ttr": 0.065,
+        "root_ttr": 14.316,
+        "entropy": 5.13,
+        "avg_sentence_len": 15.99,
+        "root_type_token_ratio": 14.316,
+        "sentence_length_entropy": 5.13,
+        "avg_sentence_length": 15.99,
+        "type_token_ratio": 0.065,
+        "hapax_legomena_ratio": 0.022,
+        "burstiness_score": -0.17,
+        "stopword_ratio": 0.117,
+        "punctuation_density": 12.57,
+        "empirical_sample_perplexity": 12509.98,
+        "word_count": 48659,
+        "sentence_count": 3021
       }
     }
   },
@@ -2958,7 +2971,7 @@
     "Stylometric profile flags are descriptive stylistic indicators for human review, never proof of AI authorship.",
     "Primary-source status is accepted only from an explicit primary tag in the evidence registry."
   ],
-  "elapsed_seconds": 114.71,
+  "elapsed_seconds": 135.39,
   "project_name": "StrongWine",
   "project_description": "Báo cáo Tiểu luận Hệ thống Bán rượu Vang StrongWine (Spring Boot)"
 }
