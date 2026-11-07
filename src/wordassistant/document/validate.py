@@ -6,6 +6,7 @@ import unicodedata
 from docx import Document
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml.ns import qn
+from wordassistant.document.code_blocks import is_code_paragraph
 from wordassistant.profiles.loader import DocumentProfile, Variant
 
 @dataclass(frozen=True)
@@ -83,7 +84,9 @@ def _find_draft_placeholders(d: Document, v: Variant) -> list[str]:
 
     # Review body paragraphs and nested table cells without treating ordinary
     # bracket citations such as [1] as draft placeholders.
-    for text in [p.text for p in d.paragraphs] + list(table_texts(d.tables)):
+    # Verbatim code listings may contain bracket subscripts or Jinja markers; skip them.
+    prose_texts = [p.text for p in d.paragraphs if not is_code_paragraph(p)]
+    for text in prose_texts + list(table_texts(d.tables)):
         candidate = text.strip()
         if candidate and contains_placeholder(candidate):
             excerpt = candidate[:80]
@@ -566,6 +569,9 @@ def validate_document(
         ):
             continue
         if txt.startswith('[') and txt.endswith(']'):
+            continue
+        # Code listings follow their own (monospace) face and size; they are not body prose.
+        if is_code_paragraph(p):
             continue
         body_paragraphs.append((paragraph_index, p))
         

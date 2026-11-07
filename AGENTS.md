@@ -40,6 +40,35 @@ Regardless of context compaction, multi-turn conversational history, or fallback
    - **AI Fluff Elimination**: Strictly ban generic filler intros ("Trong bối cảnh bùng nổ công nghệ 4.0...", "Như chúng ta đã biết...", "Chèn nội dung tại đây...").
    - **Readiness Verification**: Never claim completion or deliver a DOCX without running `python scripts/check_course_essay_readiness.py <workspace>` and confirming `delivery_status: PASS`, `content_and_sources: PASS`, and `submission_readiness: PASS`.
 
+5. **Anti-Carelessness & Framework Limitation Invariants (Chống làm ẩu & Khắc phục triệt để hạn chế WordAssistant)**:
+   - **Zero-Residual Template Cleanup Gate (Dọn sạch 100% rác và bảng mẫu của template)**:
+     * Cấm tuyệt đối việc để sót bảng mẫu rỗng (placeholder tables), đoạn văn mẫu giữ chỗ (placeholder paragraphs), hoặc ngắt trang tạo trang trắng (orphan breaks/blank pages) từ template gốc trong file đầu ra.
+     * Khi dùng template ĐACN HCMUNRE cho Tiểu luận môn học (Course Essay), PHẢI xóa bỏ hoàn toàn: `doc.tables[0]` (bảng lịch làm việc 7x4 thừa) và `doc.tables[1]` (bảng viết tắt mẫu 7x3 thừa nếu chèn bảng mới).
+     * Phải duyệt kiểm tra tự động trước khi lưu: không còn bất kỳ bảng rỗng, không còn trang trắng vô nghĩa (như lỗi Trang 8 và Trang 14).
+   - **Dynamic Image Aspect Ratio Scaling & Anti-Ragged Pagination (Co giãn ảnh động theo tỷ lệ & Chống ngắt trang rác)**:
+     * Cấm gán cứng một kích thước ảnh cố định (ví dụ ép rộng 14.5 cm đồng loạt).
+     * Mọi hình ảnh chèn vào bắt buộc phải được đọc kích thước pixel thực tế bằng thư viện xử lý ảnh (`Pillow`) để tính tỷ lệ khung hình (Aspect Ratio R = width / height):
+       - Ảnh khổ ngang rộng (R >= 1.3): Chiều rộng cho phép 12.5 cm - 13.5 cm, chiều cao tối đa không vượt quá 9.0 cm.
+       - Ảnh khổ dọc, hình vuông, hoặc ảnh bảng giao diện cao (R < 1.3): Bắt buộc thu nhỏ chiều rộng về 9.5 cm - 11.0 cm, hoặc khống chế chiều cao tối đa h <= 8.5 cm để không bao giờ làm tràn trang đột ngột.
+     * Bắt buộc bật thuộc tính `keep_with_next = True` cho: đoạn văn dẫn nhập ngay trước ảnh, đoạn văn chứa chính hình ảnh, và đoạn văn Caption ngay dưới ảnh để triệt tiêu hoàn toàn hiện tượng "nửa trang trắng" (trang chỉ có 3–6 dòng chữ rồi ngắt trang vì ảnh sau quá to).
+   - **Academic Rigor & Anti-Summarization Protocol (Kỷ luật học thuật - Cấm tóm tắt sơ sài)**:
+     * Cấm tự ý tóm tắt, cắt xén, rút gọn các kịch bản kiểm thử, cấu hình CLI, log terminal, hoặc bảng đối chiếu thành các gạch đầu dòng hời hợt.
+     * Bắt buộc phục hồi và trình bày 100% đầy đủ: toàn bộ mã lệnh Cisco IOS (`configure terminal`, `ip route`, `router ospf`, `vlan`...), log Netmiko/Django terminal khi thực thi tự động, bảng đối chiếu thông số giữa Giao diện Web vs Terminal CLI, và phân tích chuyên môn quản trị mạng sâu từ tài liệu nguồn.
+   - **Hybrid Static + Dynamic TOC/LOF/LOT Gate (Khắc phục hạn chế WordAssistant)**:
+     * Khắc phục hạn chế `python-docx` không có layout engine và Word COM bị treo modal dialog khi cập nhật trường ngầm:
+     * Mọi khối Mục lục (TOC), Danh mục hình (LOF), Danh mục bảng (LOT) PHẢI được xuất theo kiến trúc Lai (Hybrid):
+       1. Tự động tính toán số trang thực tế và điền sẵn danh mục có chữ, dấu chấm dẫn tab leader (`w:tab w:leader="dot"`), và số trang tĩnh hiển thị ngay lập tức khi mở file ở bất kỳ môi trường nào (không bao giờ hiển thị chữ giữ chỗ thô `"Update field in Word"`).
+       2. Bọc các mục đó bên trong mã trường Word dynamic (`w:fldSimple w:instr="TOC ..."` hoặc `w:r` tương thích) để khi người dùng mở trong Microsoft Word vẫn có thể bấm `F9` cập nhật tự động.
+   - **Headless COM Automation Safety (An toàn tự động hóa Word COM)**:
+     * Khi gọi Microsoft Word qua COM: Bắt buộc thiết lập `word.DisplayAlerts = 0` (wdAlertsNone) và `word.Visible = False`.
+     * Tuyệt đối không gọi các hàm kích hoạt popup modal tương tác người dùng (như `tof.Update()`) trong môi trường headless.
+     * Luôn bọc trong khối `try...finally` để đảm bảo `doc.Close(SaveChanges=False)` và `word.Quit()` giải phóng hoàn toàn tiến trình `WINWORD.EXE`.
+   - **Mandatory Independent Visual Inspection Gate (Cổng kiểm tra trực quan từng trang)**:
+     * Không bao giờ được phép tuyên bố hoàn thành hoặc bàn giao chỉ dựa vào kết quả lệnh script.
+     * Bắt buộc phải render toàn bộ tài liệu sang PDF và xuất 100% các trang thành ảnh PNG độc lập (150 DPI).
+     * Agent phải duyệt kiểm tra trực quan toàn bộ các trang để xác nhận: không có trang trắng thừa, không có bảng rác template, Mục lục hiển thị chữ và số trang đầy đủ, không có hình ảnh bị cắt hay ngắt trang dị dạng trước khi bàn giao.
+
+
 ## Repository and CLI workflow
 
 1. Use the WordAssistant CLI as the control plane. In a new environment, run `wordassistant doctor --json` once, then use `capabilities --json` before selecting optional Word-native operations.

@@ -174,6 +174,37 @@ def parser() -> argparse.ArgumentParser:
     cap = sp.add_parser('capabilities', help='List core and optional backend capabilities')
     cap.add_argument('--json', action='store_true')
 
+    # ooxml: bounded package operations (document-skills DOCX workflow)
+    oo = sp.add_parser(
+        'ooxml',
+        help='Safe OOXML package operations: unpack, pack, merge runs, accept changes, validate',
+    )
+    oo_sp = oo.add_subparsers(dest='ooxml_action', required=True)
+    oo_unpack = oo_sp.add_parser('unpack', help='Extract a DOCX into an empty directory')
+    oo_unpack.add_argument('file')
+    oo_unpack.add_argument('--dest', required=True)
+    oo_unpack.add_argument('--json', action='store_true')
+    oo_pack = oo_sp.add_parser('pack', help='Zip an unpacked directory into a DOCX; XML must be well formed')
+    oo_pack.add_argument('directory')
+    oo_pack.add_argument('--output', required=True)
+    oo_pack.add_argument('--json', action='store_true')
+    oo_merge = oo_sp.add_parser('merge-runs', help='Write a copy whose adjacent identically formatted runs are merged')
+    oo_merge.add_argument('file')
+    oo_merge.add_argument('--output', required=True)
+    oo_merge.add_argument('--json', action='store_true')
+    oo_accept = oo_sp.add_parser('accept-changes', help='Write a copy with tracked changes accepted (XML level)')
+    oo_accept.add_argument('file')
+    oo_accept.add_argument('--output', required=True)
+    oo_accept.add_argument('--json', action='store_true')
+    oo_validate = oo_sp.add_parser(
+        'validate',
+        help='Check package structure, relationships and XML; optional tracked-text drift and schema checks',
+    )
+    oo_validate.add_argument('file')
+    oo_validate.add_argument('--original', default=None, help='Baseline DOCX; flags text changed without w:ins/w:del')
+    oo_validate.add_argument('--schema-dir', default=None, help='Directory containing wml.xsd for schema validation')
+    oo_validate.add_argument('--json', action='store_true')
+
     # advanced
     adv = sp.add_parser('advanced', help='Query advanced Word backend status')
     adv_sp = adv.add_subparsers(dest='advanced_action', required=True)
@@ -530,6 +561,46 @@ def run(args: list[str] | None = None) -> int:
         if a.cmd == 'capabilities':
             _print(capabilities(), a.json)
             return 0
+
+        if a.cmd == 'ooxml':
+            from .ooxml import (
+                accept_changes_docx,
+                merge_runs_docx,
+                pack_directory,
+                unpack_docx,
+                validate_docx,
+            )
+
+            if a.ooxml_action == 'unpack':
+                parts = unpack_docx(a.file, a.dest)
+                _print({
+                    'status': 'SUCCESS',
+                    'operation': 'ooxml.unpack',
+                    'destination': str(Path(a.dest).resolve()),
+                    'part_count': len(parts),
+                    'parts': [asdict(p) for p in parts],
+                }, a.json)
+                return 0
+            if a.ooxml_action == 'pack':
+                packed = pack_directory(a.directory, a.output)
+                _print({'status': 'SUCCESS', 'operation': 'ooxml.pack', **packed}, a.json)
+                return 0
+            if a.ooxml_action == 'merge-runs':
+                result = merge_runs_docx(a.file, a.output)
+                _print({'status': 'SUCCESS', 'operation': 'ooxml.merge-runs', **result}, a.json)
+                return 0
+            if a.ooxml_action == 'accept-changes':
+                result = accept_changes_docx(a.file, a.output)
+                _print({'status': 'SUCCESS', 'operation': 'ooxml.accept-changes', **result}, a.json)
+                return 0
+            if a.ooxml_action == 'validate':
+                report = validate_docx(a.file, original=a.original, schema_dir=a.schema_dir)
+                _print({
+                    'status': 'SUCCESS' if report['valid'] else 'FAILED',
+                    'operation': 'ooxml.validate',
+                    **report,
+                }, a.json)
+                return 0 if report['valid'] else 1
 
         if a.cmd == 'advanced':
             if a.advanced_action == 'status':
@@ -1179,6 +1250,23 @@ def run(args: list[str] | None = None) -> int:
             {
                 'status': 'ERROR',
                 'error': exc.error.to_dict(),
+            },
+            getattr(a, 'json', False),
+        )
+        return 1
+    except PermissionError as exc:
+        # Windows reports a file open in Word or another program as a permission error.
+        _print(
+            {
+                'status': 'ERROR',
+                'error': {
+                    'code': 'FILE_ACCESS_DENIED',
+                    'message': str(exc),
+                    'backend_required': None,
+                    'suggested_action': (
+                        'Close the file in Word or another program, or pass a different --output path, then rerun.'
+                    ),
+                },
             },
             getattr(a, 'json', False),
         )

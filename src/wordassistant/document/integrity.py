@@ -14,6 +14,7 @@ from docx.oxml.ns import qn
 from docx.table import Table
 from docx.text.paragraph import Paragraph
 
+from wordassistant.document.code_blocks import is_code_style_name
 from wordassistant.evidence.registry import EvidenceError, EvidenceRegistry
 from wordassistant.document.text_audit_adapter import (
     is_text_audit_available,
@@ -154,6 +155,18 @@ def _body_paragraphs(document: DocxDocument) -> Iterable[tuple[str, Paragraph]]:
             table = Table(child, document)
             for paragraph in _table_paragraphs(table):
                 yield "table", paragraph
+
+
+def _unresolved_placeholder_findings(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Placeholder tokens in prose. Verbatim code listings are skipped: Jinja2 markers
+    such as ``{{ vlan_id }}`` belong to the reproduced source, not to an unfinished draft."""
+    findings: list[dict[str, Any]] = []
+    for record in records:
+        if is_code_style_name(record.get("style")):
+            continue
+        for match in _PLACEHOLDER.finditer(record["text"]):
+            findings.append(_location(record, text=match.group(0), offset=match.start()))
+    return findings
 
 
 def _collect_paragraphs(document: DocxDocument) -> list[dict[str, Any]]:
@@ -718,10 +731,7 @@ def audit_integrity(
         scope="Sentence openings and content-bearing phrases repeated across distinct body paragraphs; headings, captions, and table cells are excluded.",
     )
 
-    placeholder_findings: list[dict[str, Any]] = []
-    for record in records:
-        for match in _PLACEHOLDER.finditer(record["text"]):
-            placeholder_findings.append(_location(record, text=match.group(0), offset=match.start()))
+    placeholder_findings = _unresolved_placeholder_findings(records)
     gates["unresolved_placeholders"] = _gate(
         "FAIL" if placeholder_findings else "PASS",
         placeholder_findings,
@@ -752,6 +762,12 @@ def audit_integrity(
         s_total = audit_res.get("total_attributed_score", 0.0)
         s_lex = audit_res.get("lexical_overlap_score", 0.0)
         s_sem = audit_res.get("semantic_paraphrase_score", 0.0)
+        audit_metadata = audit_res.get("metadata")
+        analysis_error = (
+            audit_metadata.get("error")
+            if isinstance(audit_metadata, dict)
+            else None
+        )
 
         # 9a. External Corpus Similarity Gate
         if c_size == 0:
@@ -761,6 +777,18 @@ def audit_integrity(
                 classification="EXTERNAL_CORPUS_SIMILARITY_CHECK",
                 corpus_size=0,
                 total_similarity_score=0.0,
+            )
+        elif analysis_error:
+            gates["external_corpus_similarity"] = _gate(
+                "FAIL",
+                [{
+                    "kind": "text_audit_analysis_error",
+                    "message": str(analysis_error),
+                    "corpus_status": audit_metadata.get("corpus_status"),
+                }],
+                classification="EXTERNAL_CORPUS_SIMILARITY_CHECK",
+                corpus_size=c_size,
+                analysis_completed=False,
             )
         else:
             sim_status = "FAIL" if s_total > 30.0 else ("WARN" if s_total > 15.0 else "PASS")
@@ -792,6 +820,16 @@ def audit_integrity(
                 "SKIPPED",
                 [{"kind": "no_evidence_corpus", "message": "Evidence registry not provided or contains no records"}],
                 classification="EVIDENCE_SOURCE_FIDELITY_CHECK",
+            )
+        elif analysis_error:
+            gates["evidence_source_attribution_fidelity"] = _gate(
+                "SKIPPED",
+                [{
+                    "kind": "text_audit_analysis_error",
+                    "message": str(analysis_error),
+                }],
+                classification="EVIDENCE_SOURCE_FIDELITY_CHECK",
+                evaluated_evidence_count=len(evidence_records),
             )
         else:
             ev_id_set = {str(item.get("id")) for item in evidence_records}

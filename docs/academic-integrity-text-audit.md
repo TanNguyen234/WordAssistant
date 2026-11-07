@@ -46,6 +46,8 @@ The text audit workflow is exposed through `audit_integrity()` and CLI actions (
 | `evidence_source_attribution_fidelity` | `EVIDENCE_SOURCE_FIDELITY_CHECK` | Verifies whether text matching registered evidence entries in `.wordassistant/evidence.json` has explicit adjacent citations or quotation tags. | **PASS**: All evidence matches cited<br>**WARN**: High-overlap match lacking citation |
 | `stylometric_profile_review` | `STYLE_REVIEW_NOT_AI_EVIDENCE` | Evaluates descriptive stylometry: Root TTR, sentence entropy, burstiness, transition entropy. | **PASS**: Normal variation or $< 150$ words (`INSUFFICIENT_TEXT`)<br>**WARN**: Stylometric flags (human review only) |
 
+If text analysis reports an execution error, a non-empty comparison corpus produces `FAIL` for external similarity and includes the error in the gate findings. A zero score is accepted only when analysis completed successfully; a missing comparison corpus remains `SKIPPED`.
+
 ---
 
 ## 3. Evidence Registry Cross-Auditing
