@@ -52,6 +52,11 @@ wordassistant table create revised.docx --output tabled.docx --options '{"rows":
 wordassistant page-number apply tabled.docx --output numbered.docx --options '{"section_index":0,"number_format":"decimal","start":1}' --json
 wordassistant validate file.docx --profile generic --variant default --json
 wordassistant render file.docx --json
+wordassistant ooxml unpack file.docx --dest work/pkg --json
+wordassistant ooxml merge-runs file.docx --output merged.docx --json
+wordassistant ooxml accept-changes file.docx --output accepted.docx --json
+wordassistant ooxml pack work/pkg --output repacked.docx --json
+wordassistant ooxml validate repacked.docx --original file.docx --json
 wordassistant evidence list .wordassistant/evidence.json --json
 wordassistant integrity audit authored.docx --evidence .wordassistant/evidence.json --profile generic --variant default --json
 wordassistant integrity provenance authored.docx --evidence .wordassistant/evidence.json --output authored.provenance.json --json
