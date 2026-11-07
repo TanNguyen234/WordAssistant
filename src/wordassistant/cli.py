@@ -1254,6 +1254,23 @@ def run(args: list[str] | None = None) -> int:
             getattr(a, 'json', False),
         )
         return 1
+    except PermissionError as exc:
+        # Windows reports a file open in Word or another program as a permission error.
+        _print(
+            {
+                'status': 'ERROR',
+                'error': {
+                    'code': 'FILE_ACCESS_DENIED',
+                    'message': str(exc),
+                    'backend_required': None,
+                    'suggested_action': (
+                        'Close the file in Word or another program, or pass a different --output path, then rerun.'
+                    ),
+                },
+            },
+            getattr(a, 'json', False),
+        )
+        return 1
     except Exception as exc:
         _print(
             {
