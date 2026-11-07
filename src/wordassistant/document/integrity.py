@@ -14,6 +14,7 @@ from docx.oxml.ns import qn
 from docx.table import Table
 from docx.text.paragraph import Paragraph
 
+from wordassistant.document.code_blocks import is_code_style_name
 from wordassistant.evidence.registry import EvidenceError, EvidenceRegistry
 from wordassistant.document.text_audit_adapter import (
     is_text_audit_available,
@@ -154,6 +155,18 @@ def _body_paragraphs(document: DocxDocument) -> Iterable[tuple[str, Paragraph]]:
             table = Table(child, document)
             for paragraph in _table_paragraphs(table):
                 yield "table", paragraph
+
+
+def _unresolved_placeholder_findings(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Placeholder tokens in prose. Verbatim code listings are skipped: Jinja2 markers
+    such as ``{{ vlan_id }}`` belong to the reproduced source, not to an unfinished draft."""
+    findings: list[dict[str, Any]] = []
+    for record in records:
+        if is_code_style_name(record.get("style")):
+            continue
+        for match in _PLACEHOLDER.finditer(record["text"]):
+            findings.append(_location(record, text=match.group(0), offset=match.start()))
+    return findings
 
 
 def _collect_paragraphs(document: DocxDocument) -> list[dict[str, Any]]:
@@ -718,10 +731,7 @@ def audit_integrity(
         scope="Sentence openings and content-bearing phrases repeated across distinct body paragraphs; headings, captions, and table cells are excluded.",
     )
 
-    placeholder_findings: list[dict[str, Any]] = []
-    for record in records:
-        for match in _PLACEHOLDER.finditer(record["text"]):
-            placeholder_findings.append(_location(record, text=match.group(0), offset=match.start()))
+    placeholder_findings = _unresolved_placeholder_findings(records)
     gates["unresolved_placeholders"] = _gate(
         "FAIL" if placeholder_findings else "PASS",
         placeholder_findings,
