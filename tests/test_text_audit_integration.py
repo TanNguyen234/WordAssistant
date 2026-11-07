@@ -182,6 +182,115 @@ def test_audit_integrity_high_similarity_fails(temp_workspace):
     assert ext_gate["status"] == "FAIL"
 
 
+def test_audit_integrity_fails_closed_when_text_analysis_errors_with_corpus(
+    temp_workspace, monkeypatch
+):
+    """An analyzer error must not become a zero-similarity PASS with a loaded corpus."""
+    from wordassistant.document import integrity as integrity_module
+
+    monkeypatch.setattr(integrity_module, "is_text_audit_available", lambda: True)
+    monkeypatch.setattr(
+        integrity_module,
+        "run_document_text_audit",
+        lambda **_kwargs: {
+            "available": True,
+            "corpus_size": 1,
+            "total_attributed_score": 0.0,
+            "lexical_overlap_score": 0.0,
+            "semantic_paraphrase_score": 0.0,
+            "source_attributions": [],
+            "ai_assessment": None,
+            "metadata": {
+                "error": "synthetic parser failure",
+                "corpus_status": "EMPTY_OR_UNREADABLE_DOCUMENT",
+            },
+        },
+    )
+
+    report = integrity_module.audit_integrity(
+        docx_path=temp_workspace["query_docx"],
+        evidence_registry_path=temp_workspace["evidence_registry"],
+    )
+
+    gate = report["gates"]["external_corpus_similarity"]
+    assert gate["status"] == "FAIL"
+    assert report["status"] == "FAIL"
+    assert "synthetic parser failure" in str(gate)
+
+
+def test_cli_integrity_similarity_returns_nonzero_when_similarity_gate_fails(
+    temp_workspace, monkeypatch, capsys
+):
+    """The CLI must honor an external-similarity FAIL even if other gates pass."""
+    import wordassistant.cli as cli_module
+
+    monkeypatch.setattr(
+        cli_module,
+        "audit_integrity",
+        lambda *_args, **_kwargs: {
+            "status": "PASS",
+            "document": {"sha256": "synthetic"},
+            "gates": {
+                "external_corpus_similarity": {
+                    "status": "FAIL",
+                    "classification": "EXTERNAL_CORPUS_SIMILARITY_CHECK",
+                    "findings": [{"kind": "text_audit_analysis_error"}],
+                },
+                "evidence_source_attribution_fidelity": {"status": "SKIPPED"},
+                "stylometric_profile_review": {"status": "SKIPPED"},
+            },
+        },
+    )
+
+    exit_code = run(
+        [
+            "integrity",
+            "similarity",
+            str(temp_workspace["query_docx"]),
+            "--evidence",
+            str(temp_workspace["evidence_registry"]),
+            "--json",
+        ]
+    )
+    payload = json.loads(capsys.readouterr().out)
+
+    assert exit_code == 2
+    assert payload["status"] == "PASS"
+    assert payload["gates"]["external_corpus_similarity"]["status"] == "FAIL"
+
+
+def test_successful_zero_similarity_with_corpus_remains_pass(
+    temp_workspace, monkeypatch
+):
+    """A genuine completed scan with no matches may still report zero and PASS."""
+    from wordassistant.document import integrity as integrity_module
+
+    monkeypatch.setattr(integrity_module, "is_text_audit_available", lambda: True)
+    monkeypatch.setattr(
+        integrity_module,
+        "run_document_text_audit",
+        lambda **_kwargs: {
+            "available": True,
+            "corpus_size": 1,
+            "total_attributed_score": 0.0,
+            "lexical_overlap_score": 0.0,
+            "semantic_paraphrase_score": 0.0,
+            "source_attributions": [],
+            "ai_assessment": None,
+            "metadata": {"analysis_completed": True},
+        },
+    )
+
+    report = integrity_module.audit_integrity(
+        docx_path=temp_workspace["query_docx"],
+        evidence_registry_path=temp_workspace["evidence_registry"],
+    )
+
+    gate = report["gates"]["external_corpus_similarity"]
+    assert gate["status"] == "PASS"
+    assert gate["total_similarity_score"] == 0.0
+
+
 from wordassistant.cli import run
 
 
