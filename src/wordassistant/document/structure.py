@@ -168,10 +168,12 @@ def _paragraph_style_name(document, paragraph_element) -> str | None:
     if not style_values:
         return None
     style_id = style_values[0]
-    try:
-        return document.styles[style_id].name
-    except (KeyError, TypeError):
-        return style_id
+    # python-docx deprecates lookup by style_id (it warns on every call). Resolve
+    # the id through the styles collection instead; unknown ids keep the raw id.
+    for style in document.styles:
+        if style.style_id == style_id:
+            return style.name or style_id
+    return style_id
 
 
 def _field_evidence(paragraph_element) -> list[dict[str, str]]:
